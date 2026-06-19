@@ -1,0 +1,23 @@
+bankname,pd_source,n_periodos,desde,hasta,nombre_sbs
+alfin_peru,book,196,2010-01-31,2026-04-30,Alfin Banco
+ripley_peru,book,196,2010-01-31,2026-04-30,Banco Ripley
+pichincha,book,196,2010-01-31,2026-04-30,Banco Pichincha
+mibanco,book,196,2010-01-31,2026-04-30,Mibanco
+interbank,market,196,2010-01-31,2026-04-30,Interbank
+hsbc_peru,book,45,2010-01-31,2013-09-30,HSBC Bank Perú
+falabella_peru,book,196,2010-01-31,2026-04-30,Banco Falabella Perú
+santander_peru,book,196,2010-01-31,2026-04-30,Banco Santander Perú
+deutsche_peru,book,78,2010-01-31,2016-06-30,Deutsche Bank Perù
+bcp,market,196,2010-01-31,2026-04-30,Banco de Crédito del Perú
+bbva_peru,book,196,2010-01-31,2026-04-30,Banco BBVA Perú
+banco_comercio,book,196,2010-01-31,2026-04-30,BANCOM
+banbif,book,196,2010-01-31,2026-04-30,Banco Interamericano de Finanzas
+citibank_peru,book,196,2010-01-31,2026-04-30,Citibank
+scotiabank_peru,book,196,2010-01-31,2026-04-30,Scotiabank Perú
+cencosud_peru,book,79,2012-08-31,2019-02-28,Banco Cencosud
+gnb_peru,book,151,2013-10-31,2026-04-30,Banco GNB
+icbc_peru,book,147,2014-02-28,2026-04-30,Banco ICBC
+bank_of_china,book,70,2020-07-31,2026-04-30,Bank of China
+bci_peru,book,46,2022-07-31,2026-04-30,Banco BCI Perú
+compartamos,book,16,2025-01-31,2026-04-30,Compartamos Banco
+santander_consumer,book,11,2025-06-30,2026-04-30,Santander Consumer Bank*
