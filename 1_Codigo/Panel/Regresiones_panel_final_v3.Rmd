@@ -1,0 +1,324 @@
+---
+title: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano"
+subtitle: "Base final v3 — Panel_final_all17.csv (5 países LatAm, GaR entrenado con 17 economías)"
+author: "Mauricio Valenzuela"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
+                      fig.align = "center", fig.width = 8, fig.height = 5)
+options(scipen = 999)
+```
+
+# Objetivo
+
+Análisis de regresión de **una sola base** — `Panel_final_all17.csv` — sin comparaciones
+multi-base ni intervenciones intermedias. Es la reconstrucción final del panel LatAm-5
+(Brasil, Chile, Colombia, México, Perú, 2007Q4–2022Q2) con el GaR estimado sobre el
+conjunto de 17 economías. Se replica exactamente la batería de la versión previa
+(`Regresiones_panel_v2`), pero aplicada de forma independiente a esta base.
+
+La hipótesis central es la **complementariedad supra-aditiva**: el efecto de la fragilidad
+bancaria (`JLoss`) sobre el spread soberano (`EMBI_bps`) se intensifica cuando el riesgo de
+cola del crecimiento es más severo (`GaR` más negativo). El parámetro de interés es
+θ, el coeficiente de la interacción `JLoss × GaR`.
+
+```{r libs}
+# install.packages(c("plm","lmtest","sandwich","modelsummary","ggplot2",
+#                    "dplyr","tidyr","car","kableExtra"))
+library(plm)
+library(lmtest)
+library(sandwich)
+library(modelsummary)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(car)
+library(kableExtra)
+
+BASE_FILE <- "Panel_final_all17.csv"   # <-- única base que lee este documento
+
+prep <- function(path) {
+  d <- read.csv(path, stringsAsFactors = FALSE)
+  d$year <- as.integer(substr(d$quarter, 1, 4))
+  d$q    <- as.integer(substr(d$quarter, 6, 6))
+  d$tnum <- d$year + (d$q - 1) / 4
+  d <- d[order(d$country, d$tnum), ]
+  d$GaR_pp <- d$GaR * 100                       # GaR en puntos porcentuales
+  d$ES_pp  <- if ("ES" %in% names(d)) d$ES * 100 else NA
+  center   <- function(x) x - mean(x, na.rm = TRUE)
+  d$JLoss_c <- center(d$JLoss)                  # centrado -> efectos principales interpretables en la media
+  d$GaR_c   <- center(d$GaR_pp)
+  d$JxG_c   <- d$JLoss_c * d$GaR_c              # interacción centrada
+  d$lnEMBI  <- log(d$EMBI_bps)
+  d$post2020 <- as.integer(d$year >= 2020)
+  d
+}
+
+dat <- prep(BASE_FILE)
+pan <- pdata.frame(dat, index = c("country", "tnum"))
+
+# Errores estándar Driscoll-Kraay (robustos a dependencia transversal y autocorrelación)
+DK <- function(m) vcovSCC(m, type = "HC1", maxlag = NULL)
+
+CTRL <- "debt_gdp + fisc_bal + res_gdp + ca_gdp + infl_yoy + reer"
+
+cat("Base:", BASE_FILE, "| países:", length(unique(dat$country)),
+    "| obs:", nrow(dat), "| rango:", min(dat$quarter), "-", max(dat$quarter), "\n")
+```
+
+# Cobertura del panel
+
+```{r cobertura}
+cov <- dat %>%
+  group_by(country) %>%
+  summarise(n = n(), desde = min(quarter), hasta = max(quarter), .groups = "drop")
+kable(cov, caption = "Cobertura por país") %>%
+  kable_styling(full_width = FALSE, font_size = 12)
+```
+
+```{r cobertura-efectiva}
+# El GaR viene NA en los primeros trimestres de entrenamiento de cada país
+# (n_train insuficiente) y sale de las regresiones vía na.omit. Reportamos la
+# cobertura EFECTIVA (GaR no-NA), no solo las filas del CSV.
+eff <- dat %>%
+  group_by(country) %>%
+  summarise(n_filas = n(), n_GaR_valido = sum(!is.na(GaR)), .groups = "drop") %>%
+  filter(n_filas != n_GaR_valido)
+if (nrow(eff) > 0) {
+  kable(eff, caption = "Filas con GaR faltante (excluidas de las regresiones vía na.omit)") %>%
+    kable_styling(full_width = FALSE, font_size = 12)
+} else cat("Sin filas con GaR faltante.\n")
+```
+
+```{r cobertura-fig, fig.height=4}
+ggplot(dat, aes(x = tnum, y = country)) +
+  geom_point(size = 1.6, alpha = .8, color = "#1f3b73") +
+  labs(x = "Tiempo", y = NULL, title = "Cobertura temporal por país") +
+  theme_minimal(base_size = 11)
+```
+
+# Núcleo del modelo (M1–M5)
+
+`M1`: fragilidad y cola sin interacción. `M2`: agrega la interacción (FE país+tiempo).
+`M3`: agrega controles domésticos. `M4`: dependiente en log. `M5`: FE país con `VIX` explícito.
+
+```{r main-models}
+run_main <- function(pdat) {
+  list(
+    M1 = plm(EMBI_bps ~ JLoss_c + GaR_c,                               data = pdat, model = "within", effect = "twoways"),
+    M2 = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c,                       data = pdat, model = "within", effect = "twoways"),
+    M3 = plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c +", CTRL)),
+             data = pdat, model = "within", effect = "twoways"),
+    M4 = plm(as.formula(paste("lnEMBI  ~ JLoss_c + GaR_c + JxG_c +", CTRL)),
+             data = pdat, model = "within", effect = "twoways"),
+    M5 = plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c + VIX +", CTRL)),
+             data = pdat, model = "within", effect = "individual")
+  )
+}
+mods <- run_main(pan)
+
+cmap <- c("JLoss_c"="JLoss", "GaR_c"="GaR (pp)", "JxG_c"="JLoss × GaR", "VIX"="VIX",
+          "debt_gdp"="Deuda/PIB", "fisc_bal"="Balance fiscal/PIB",
+          "res_gdp"="Reservas/PIB", "ca_gdp"="Cuenta corriente/PIB",
+          "infl_yoy"="Inflación YoY", "reer"="REER")
+
+modelsummary(mods,
+  vcov = lapply(mods, DK),
+  coef_map = cmap,
+  stars = c('*'=.1,'**'=.05,'***'=.01),
+  gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
+  notes = "SE Driscoll-Kraay. M1-M4: FE país+tiempo. M5: FE país + VIX explícito.",
+  title = "Tabla 1. Núcleo — base final all17 (5 países, 2007Q4-2022Q2)")
+```
+
+# Efecto marginal de JLoss según el riesgo de cola
+
+```{r marginal}
+marginal_df <- function(m, d) {
+  V  <- DK(m); b <- coef(m)
+  bJ <- b["JLoss_c"]; bI <- b["JxG_c"]
+  vJ <- V["JLoss_c","JLoss_c"]; vI <- V["JxG_c","JxG_c"]; cJI <- V["JLoss_c","JxG_c"]
+  mu <- mean(d$GaR_pp, na.rm = TRUE)
+  grid <- seq(quantile(d$GaR_pp, .05, na.rm = TRUE), quantile(d$GaR_pp, .95, na.rm = TRUE), length.out = 100)
+  dev <- grid - mu
+  me  <- bJ + bI * dev
+  se  <- sqrt(vJ + dev^2 * vI + 2 * dev * cJI)
+  data.frame(GaR = grid, me = me, lo = me - 1.96*se, hi = me + 1.96*se)
+}
+mdf <- marginal_df(mods$M3, dat)
+
+ggplot(mdf, aes(GaR, me)) +
+  geom_hline(yintercept = 0, color = "grey50") +
+  geom_ribbon(aes(ymin = lo, ymax = hi), alpha = .15, fill = "#1f3b73") +
+  geom_line(linewidth = 1, color = "#1f3b73") +
+  scale_x_reverse() +
+  labs(x = "GaR (pp) — izquierda = mayor riesgo de cola",
+       y = "∂EMBI/∂JLoss (pb por unidad de JLoss)",
+       title = "Amplificación supra-aditiva del riesgo soberano (M3)",
+       subtitle = "Cuanto más severa la cola (izquierda), mayor el efecto de la fragilidad") +
+  theme_minimal(base_size = 12)
+```
+
+# Diagnósticos del panel
+
+```{r diagnostics}
+diag_table <- function(m2, pdat) {
+  cd <- pcdtest(m2, test = "cd")                                  # dependencia transversal
+  bg <- pbgtest(m2)                                               # autocorrelación
+  re <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pdat, model = "random", effect = "twoways")
+  ha <- phtest(m2, re)                                            # Hausman FE vs RE
+  data.frame(
+    test = c("Pesaran CD (dep. transversal)", "Wooldridge (autocorr.)", "Hausman (FE vs RE)"),
+    estadistico = round(c(cd$statistic, bg$statistic, ha$statistic), 3),
+    p_valor = round(c(cd$p.value, bg$p.value, ha$p.value), 4)
+  )
+}
+kable(diag_table(mods$M2, pan), caption = "Diagnósticos del panel (sobre M2)") %>%
+  kable_styling(full_width = FALSE)
+```
+
+```{r vif}
+aux <- lm(EMBI_bps ~ JLoss + GaR_pp + debt_gdp + fisc_bal + res_gdp + ca_gdp + infl_yoy + reer + VIX, data = dat)
+cat("VIF (regla práctica: >10 problemático):\n"); print(round(vif(aux), 2))
+```
+
+# Robustez de θ (interacción JLoss × GaR)
+
+## Variantes de error estándar
+
+```{r se-compare}
+se_compare <- function(m) {
+  variants <- list(
+    "Driscoll-Kraay" = DK(m),
+    "Cluster país"   = vcovHC(m, type = "HC1", cluster = "group"),
+    "Cluster tiempo" = vcovHC(m, type = "HC1", cluster = "time"),
+    "Arellano (HAC)" = vcovHC(m, method = "arellano", type = "HC1")
+  )
+  sapply(variants, function(v) {
+    ct <- coeftest(m, vcov = v)["JxG_c", ]
+    c(coef = round(ct[1],3), se = round(ct[2],3), t = round(ct[3],2), p = round(ct[4],4))
+  })
+}
+kable(t(se_compare(mods$M3)), caption = "θ bajo distintas matrices de varianza (M3)") %>%
+  kable_styling(full_width = FALSE)
+```
+
+## Excluyendo COVID (≤ 2019)
+
+```{r no-covid}
+pan_nc <- pdata.frame(subset(dat, post2020 == 0), index = c("country","tnum"))
+m_nc <- plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c +", CTRL)),
+            data = pan_nc, model = "within", effect = "twoways")
+printCoefmat(coeftest(m_nc, vcov = DK(m_nc)))
+```
+
+## Especificación dinámica (EMBI rezagado)
+
+```{r dynamic}
+dat$EMBI_lag <- ave(dat$EMBI_bps, dat$country, FUN = function(x) c(NA, head(x, -1)))
+pan_dyn <- pdata.frame(dat, index = c("country","tnum"))
+m_dyn <- plm(as.formula(paste("EMBI_bps ~ EMBI_lag + JLoss_c + GaR_c + JxG_c +", CTRL)),
+             data = pan_dyn, model = "within", effect = "twoways")
+printCoefmat(coeftest(m_dyn, vcov = DK(m_dyn)))
+```
+
+## Cola medida con Expected Shortfall (ES)
+
+```{r es-interaction}
+dat$ES_pp_c <- dat$ES_pp - mean(dat$ES_pp, na.rm = TRUE)
+dat$JxES_c  <- dat$JLoss_c * dat$ES_pp_c
+pan_es <- pdata.frame(dat, index = c("country","tnum"))
+m_es <- plm(as.formula(paste("EMBI_bps ~ JLoss_c + ES_pp_c + JxES_c +", CTRL)),
+            data = pan_es, model = "within", effect = "twoways")
+printCoefmat(coeftest(m_es, vcov = DK(m_es)))
+```
+
+# Del modelo agrupado a los efectos fijos
+
+```{r battery}
+run_battery <- function(pdat) {
+  list(
+    "(1) Solo JLoss"          = plm(EMBI_bps ~ JLoss_c,                 pdat, model = "pooling"),
+    "(2) Solo GaR"            = plm(EMBI_bps ~ GaR_c,                   pdat, model = "pooling"),
+    "(3) JLoss + GaR"         = plm(EMBI_bps ~ JLoss_c + GaR_c,         pdat, model = "pooling"),
+    "(4) + interac. (sin FE)" = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, pdat, model = "pooling"),
+    "(5) FE país"             = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, pdat, model = "within", effect = "individual"),
+    "(6) FE tiempo"           = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, pdat, model = "within", effect = "time"),
+    "(7) FE país + tiempo"    = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, pdat, model = "within", effect = "twoways")
+  )
+}
+bat <- run_battery(pan)
+modelsummary(bat, vcov = lapply(bat, DK),
+  coef_map = c("JLoss_c"="JLoss","GaR_c"="GaR (pp)","JxG_c"="JLoss × GaR"),
+  stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
+  title = "Tabla 2. Del modelo agrupado a los efectos fijos")
+```
+
+# Controles del paper de JLoss como índices agregados
+
+```{r indices}
+mods_idx <- list(
+  "X_dom (FE país+tiempo)" = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + X_dom_idx,
+                                 data = pdata.frame(subset(dat, !is.na(X_dom_idx)), index = c("country","tnum")),
+                                 model = "within", effect = "twoways"),
+  "X_global (FE país)"     = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + X_global_idx,
+                                 data = pdata.frame(subset(dat, !is.na(X_global_idx)), index = c("country","tnum")),
+                                 model = "within", effect = "individual")
+)
+modelsummary(mods_idx, vcov = lapply(mods_idx, DK),
+  coef_map = c("JLoss_c"="JLoss", "GaR_c"="GaR (pp)", "JxG_c"="JLoss × GaR",
+               "X_dom_idx"="Índice doméstico (paper)", "X_global_idx"="Índice global (paper)"),
+  stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
+  notes = "SE Driscoll-Kraay. X_dom: FE país+tiempo. X_global: FE país.",
+  title = "Tabla 3. θ con los controles del paper de JLoss como índice agregado")
+```
+
+# Síntesis: triangulación de θ
+
+```{r synthesis, fig.height=5}
+get_theta <- function(m, label) {
+  ct <- coeftest(m, vcov = DK(m))
+  data.frame(modelo = label,
+             theta = ct["JxG_c","Estimate"],
+             se = ct["JxG_c","Std. Error"],
+             p = ct["JxG_c","Pr(>|t|)"])
+}
+synth <- bind_rows(
+  get_theta(mods$M2,        "M2 — FE país+tiempo"),
+  get_theta(mods$M3,        "M3 — + controles"),
+  get_theta(mods$M5,        "M5 — FE país + VIX"),
+  get_theta(m_nc,           "Sin COVID (≤2019)"),
+  get_theta(m_dyn,          "Dinámico (EMBI rezagado)"),
+  get_theta(mods_idx[[1]],  "X_dom_idx (FE2)"),
+  get_theta(mods_idx[[2]],  "X_global_idx (FE país)")
+) %>% mutate(lo = theta - 1.96*se, hi = theta + 1.96*se)
+
+kable(synth %>% mutate(across(c(theta, se, p), ~round(., 4))),
+      caption = "Coeficiente θ de JLoss × GaR a través de las especificaciones") %>%
+  kable_styling(full_width = FALSE)
+
+ggplot(synth, aes(x = theta, y = reorder(modelo, theta))) +
+  geom_vline(xintercept = 0, color = "grey50") +
+  geom_pointrange(aes(xmin = lo, xmax = hi), color = "#1f3b73") +
+  labs(x = expression(theta ~ "(JLoss" %*% "GaR)"), y = NULL,
+       title = "Triangulación del término de interacción — base final all17",
+       subtitle = "Barras = IC 95% (Driscoll-Kraay)") +
+  theme_minimal(base_size = 12)
+```
+
+# Notas
+
+- **Base:** `Panel_final_all17.csv` únicamente. No se cargan otras bases.
+- **Escala:** `GaR_pp = GaR × 100` (puntos porcentuales); `EMBI_bps` en puntos base.
+- **Identificación:** efectos fijos de país y tiempo; los efectos principales se interpretan
+  en la media porque `JLoss` y `GaR` están centrados.
+- **Inferencia:** errores Driscoll-Kraay por defecto (robustos a dependencia transversal
+  y autocorrelación), con variantes de robustez reportadas.

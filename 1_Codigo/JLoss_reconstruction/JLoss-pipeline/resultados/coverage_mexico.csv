@@ -1,0 +1,101 @@
+bankname,pd_source,n_periodos,desde,hasta,nombre_cnbv
+walmart_banco,book,40,2011-01-31,2015-08-31,Banco Wal-Mart
+banco_regional,book,1,2011-01-31,2011-01-31,Banco Regional
+ixe,book,15,2011-01-31,2013-04-30,Ixe
+invex,book,167,2011-01-31,2026-04-30,Invex
+bancoppel,book,167,2011-01-31,2026-04-30,BanCoppel
+interacciones,book,71,2011-01-31,2018-06-30,Interacciones
+bank_of_america,book,168,2011-01-31,2026-04-30,Bank of America
+ing,book,14,2011-01-31,2013-02-28,ING
+inbursa,market,168,2011-01-31,2026-04-30,Inbursa
+j_p_morgan,book,151,2011-01-31,2026-04-30,J.P. Morgan
+bank_of_tokyo_mitsubishi_ufj,book,53,2011-01-31,2018-04-30,Bank of Tokyo-Mitsubishi UFJ
+banorte,market,168,2011-01-31,2026-04-30,Banorte
+banregio,market,168,2011-01-31,2026-04-30,Banregio
+bansi,book,168,2011-01-31,2026-04-30,Bansí
+barclays,book,168,2011-01-31,2026-04-30,Barclays
+gentera,market,168,2011-01-31,2026-04-30,Compartamos
+bbva_mexico,book,168,2011-01-31,2026-04-30,BBVA México
+famsa,book,97,2011-01-31,2020-05-31,Banco Ahorro Famsa
+deutsche_bank,book,136,2011-01-31,2023-08-31,Deutsche Bank
+hsbc_mexico,book,168,2011-01-31,2026-04-30,HSBC
+volkswagen_bank,book,168,2011-01-31,2026-04-30,Volkswagen Bank
+mifel,book,167,2011-01-31,2026-04-30,Banca Mifel
+banco_facil,book,16,2011-01-31,2013-08-31,Banco Fácil
+ve_por_mas,book,168,2011-01-31,2026-04-30,Ve por Más
+actinver,book,167,2011-01-31,2026-04-30,Actinver
+afirme,book,168,2011-01-31,2026-04-30,BIAfirme
+ubs,book,73,2011-01-31,2018-06-30,UBS
+american_express,book,133,2011-01-31,2023-06-30,American Express
+autofin,book,158,2011-01-31,2025-12-31,Kapital (antes Autofin)
+banamex,book,169,2011-01-31,2026-04-30,Banamex
+banco_amigo,book,1,2011-01-31,2011-01-31,Banco Amigo
+monex,book,168,2011-01-31,2026-04-30,Monex
+banco_azteca,book,168,2011-01-31,2026-04-30,Banco Azteca
+the_royal_bank_of_scotland,book,23,2011-01-31,2014-12-31,The Royal Bank Of Scotland
+the_bank_of_new_york_mellon,book,24,2011-01-31,2014-06-30,The Bank Of New York Mellon
+scotiabank_mexico,book,168,2011-01-31,2026-04-30,Scotiabank
+santander_mexico,book,168,2011-01-31,2026-04-30,Santander
+banco_credit_suisse,book,72,2011-01-31,2018-04-30,Banco Credit Suisse
+multiva,book,168,2011-01-31,2026-04-30,Multiva
+banco_bajio,market,168,2011-01-31,2026-04-30,Banco del Bajío
+cibanco,book,160,2011-01-31,2025-09-30,CIBanco
+inter_banco,book,68,2011-12-31,2018-03-31,Inter Banco
+banco_base,book,150,2011-12-31,2026-04-30,Banco Base
+abc_capital,book,149,2011-12-31,2024-12-31,ABC Capital
+abc_capital_antes_banco_amigo,book,2,2012-01-31,2012-02-29,ABC Capital (antes Banco Amigo)
+jp_morgan,book,17,2012-02-29,2013-11-30,JP Morgan
+15,book,1,2012-12-31,2012-12-31,15
+agrofinanzas,book,12,2012-12-31,2014-12-31,Agrofinanzas
+consubanco,book,151,2013-01-31,2026-04-30,Consubanco
+forjadores,book,148,2013-02-28,2025-11-30,Forjadores
+sumatoria_de_los_ef_de_subsidiarias,book,1,2013-03-31,2013-03-31,Sumatoria de los EF de Subsidiarias
+ef_del_bco_consolidado_con_subsidiarias,book,1,2013-03-31,2013-03-31,EF del Bco. Consolidado con Subsidiarias
+ef_del_banco,book,1,2013-03-31,2013-03-31,EF del Banco
+soriana,book,1,2013-03-31,2013-03-31,Soriana
+bicentenrio,book,3,2013-04-30,2013-10-31,Bicentenrio
+bicentenario,book,4,2013-05-31,2013-12-31,Bicentenario
+base,book,16,2013-06-30,2018-03-31,Base
+bank_of_tokio_mitsubishi_ufj,book,19,2013-06-30,2018-03-31,Bank Of Tokio-Mitsubishi UFJ
+donde,book,16,2013-10-31,2018-03-31,Dondé
+inmobiliario_mexicano,book,132,2013-10-31,2026-04-30,Inmobiliario Mexicano
+inmobiliario,book,15,2013-12-31,2018-03-31,Inmobiliario
+bancrea,book,111,2013-12-31,2026-04-30,Bancrea
+banco_bancrea,book,35,2014-03-31,2018-04-30,Banco Bancrea
+banco_donde,book,2,2014-03-31,2014-06-30,Banco Dondé
+investa_bank,book,48,2014-03-31,2018-03-31,Investa Bank
+banco_forjadores,book,2,2014-03-31,2014-06-30,Banco Forjadores
+banco_inmobiliario,book,2,2014-03-31,2014-06-30,Banco Inmobiliario
+banco_bicentenario,book,4,2014-03-31,2014-06-30,Banco Bicentenario
+bankaool,book,145,2014-03-31,2026-04-30,Bankaool
+donde_banco,book,130,2014-04-30,2026-04-30,Dondé Banco
+pagatodo,book,139,2014-09-30,2026-04-30,Pagatodo
+intercam,book,97,2014-09-30,2026-04-30,Intercam Banco
+sabadell,book,124,2016-01-31,2026-04-30,Sabadell
+finterra,book,73,2016-01-31,2022-02-28,Finterra
+icbc,book,119,2016-06-30,2026-04-30,ICBC
+mizuho_bank,book,110,2017-03-31,2026-04-30,Mizuho Bank
+shinhan,book,100,2018-01-31,2026-04-30,Shinhan
+banco_s3,book,98,2018-03-31,2026-04-30,Banco S3
+ubs_bank,book,1,2018-04-30,2018-04-30,UBS Bank
+banco_finterra,book,1,2018-04-30,2018-04-30,Banco Finterra
+accendo_banco,book,41,2018-04-30,2021-08-31,Accendo Banco
+mufg_bank,book,96,2018-05-31,2026-04-30,MUFG Bank
+credit_suisse,book,96,2018-05-31,2026-04-30,Credit Suisse
+bank_of_china,book,94,2018-07-31,2026-04-30,Bank of China
+keb_hana_bank,book,3,2019-02-28,2019-04-30,Keb Hana Bank
+keb_hana_mexico,book,84,2019-05-31,2026-04-30,KEB Hana México
+bnp_paribas_mexico,book,60,2021-05-31,2026-04-30,BNP Paribas México
+banco_covalto,book,45,2022-03-31,2025-11-30,Banco Covalto
+cbm_banco,book,15,2023-09-30,2024-11-30,CBM Banco
+banco_bineo,book,28,2024-01-31,2026-04-30,Banco Bineo
+openbank,book,18,2024-11-30,2026-04-30,Openbank
+citi_mexico,book,17,2024-12-31,2026-04-30,Citi México
+banco_uala,book,11,2025-01-31,2025-11-30,Banco Ualá
+hey_banco,book,15,2025-02-28,2026-04-30,Hey Banco
+kapital,book,6,2025-10-31,2026-04-30,Kapital
+revolut_bank,book,6,2025-11-30,2026-04-30,Revolut Bank
+covalto,book,5,2025-12-31,2026-04-30,Covalto
+banfeliz_antes_forjadores,book,5,2025-12-31,2026-04-30,Banfeliz (antes Forjadores)
+uala,book,5,2025-12-31,2026-04-30,Ualá
+banco_plata,book,2,2026-03-31,2026-04-30,Banco Plata

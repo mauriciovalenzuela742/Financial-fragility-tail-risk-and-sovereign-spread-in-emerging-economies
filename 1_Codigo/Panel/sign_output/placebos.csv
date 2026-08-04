@@ -1,0 +1,8 @@
+base,placebo,θ_interac
+all17 (5 países),prob_neg (cola invertida) → se espera POS,1.8099764202403605
+all17 (5 países),JLoss × VIX (no-cola),-0.7991428953828503
+all17 (5 países),JLoss × reer (no-cola),-0.008180408002210537
+all17 (5 países),JLoss × infl_yoy (no-cola),0.1527798369919352
+all17 (5 países),JLoss × g_GDP (no-cola),-1.5153481501939203
+extendido (11 países),prob_neg (cola invertida) → se espera POS,1.8416219377019871
+extendido (11 países),JLoss × VIX_cboe (no-cola),-0.16026773917734433

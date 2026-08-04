@@ -1,0 +1,636 @@
+---
+title: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano"
+author: "Mauricio"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    theme: flatly
+  pdf_document:
+    toc: true
+subtitle: Triangulación en tres bases — LatAm corta, LatAm larga y panel extendido a 15 países
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
+                      fig.align = "center", fig.width = 8, fig.height = 5)
+options(scipen = 999)
+```
+
+# Objetivo y convenciones
+
+`Regresiones_panel.Rmd` estimaba la especificación central en **una**
+base (núcleo LatAm, 2010Q1-2022Q2). Este documento la reestima en
+**tres** bases para ver si la complementariedad JLoss × GaR sobrevive
+tanto a una ventana temporal más larga del núcleo LatAm como a la
+extensión a países fuera de LatAm:
+
+1.  **LatAm corta** (`Panel_final_prebackup.csv`) — la base original:
+    5 países, 2010Q1-2022Q2, GaR construido con la plataforma
+    CEMLA/`GaR_test.xlsx`.
+2.  **LatAm larga** (`Panel_final.csv`) — mismos 5 países, mismo EMBI
+    real (BCRP) y mismo JLoss, pero GaR reconstruido con el panel de
+    15 países (`gar_panel_all15.csv`), que tiene más historia de
+    entrenamiento y extiende la ventana a **2007Q4**. Mismos
+    controles domésticos (`controls_panel.csv`) y VIX/g_GDP que la
+    corta, más el parche de deuda de Chile (BCCh).
+3.  **Panel extendido** (`Panel_extended_15paises.csv`) — agrega
+    Bulgaria, China, Indonesia, Polonia, Sudáfrica y Turquía con EMBI
+    **real** (no proxy): BCRP para los 5 LatAm, tablas del *Global
+    Financial Stability Report* del FMI (2011-2015) para los otros 6.
+    **Sin controles domésticos** (no hay `debt_gdp`/`fisc_bal`/etc.
+    para estos 6 países) y con **VIX global CBOE** en vez del
+    VIX/g_GDP de la plataforma CEMLA.
+
+Especificación central (igual en las tres bases):
+
+$$EMBI_{i,t}=\alpha_i+\lambda_t+\beta_1 JLoss_{i,t}+\beta_2 GaR_{i,t}+\theta\,(JLoss\times GaR)_{i,t}+\gamma' X_{i,t}+\varepsilon_{i,t}$$
+
+**Decisiones metodológicas heredadas de `Regresiones_panel.Rmd`
+(sin cambios):**
+
+-   **Errores estándar Driscoll-Kraay** (`vcovSCC`), robustos a
+    heterocedasticidad, autocorrelación y dependencia transversal.
+-   **`GaR` en puntos porcentuales** (×100).
+-   **Variables clave centradas** (`_c`).
+-   **No se incluye `g_GDP`/media de crecimiento junto a `GaR`**
+    (colinealidad severa, mismo argumento que la base corta).
+
+**Advertencia que aplica solo al panel extendido** (sección 4): varios
+países nuevos aportan **T muy corto** (Sudáfrica *n*=6, Bulgaria
+*n*=16) y **fuera del rango 2010Q1-2014Q4 el panel vuelve a ser
+esencialmente el núcleo LatAm** (ver el diagnóstico de cobertura más
+abajo). Driscoll-Kraay asume *T* moderado/grande por unidad; con
+countries de *T*=6-20 esa asintótica es débil. Todo lo que sigue en la
+sección 4 debe leerse como **evidencia exploratoria complementaria**,
+no como un reemplazo de la estimación LatAm.
+
+# Paquetes y carga de las tres bases
+
+```{r libs}
+# install.packages(c("plm","lmtest","sandwich","modelsummary","fixest",
+#                    "ggplot2","dplyr","car","kableExtra","tidyr"))
+library(plm)
+library(lmtest)
+library(sandwich)
+library(modelsummary)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(car)
+library(kableExtra)
+
+prep <- function(path) {
+  d <- read.csv(path, stringsAsFactors = FALSE)
+  d$year <- as.integer(substr(d$quarter, 1, 4))
+  d$q    <- as.integer(substr(d$quarter, 6, 6))
+  d$tnum <- d$year + (d$q - 1) / 4
+  d <- d[order(d$country, d$tnum), ]
+  d$GaR_pp <- d$GaR * 100
+  d$ES_pp  <- if ("ES" %in% names(d)) d$ES * 100 else NA
+  center <- function(x) x - mean(x, na.rm = TRUE)
+  d$JLoss_c <- center(d$JLoss)
+  d$GaR_c   <- center(d$GaR_pp)
+  d$JxG_c   <- d$JLoss_c * d$GaR_c
+  d$lnEMBI  <- log(d$EMBI_bps)
+  d$post2020 <- as.integer(d$year >= 2020)
+  d
+}
+
+corta    <- prep("Panel_final_prebackup.csv")
+larga    <- prep("Panel_final.csv")
+extendida<- prep("Panel_extended_15paises.csv")
+
+pan_corta    <- pdata.frame(corta,     index = c("country", "tnum"))
+pan_larga    <- pdata.frame(larga,     index = c("country", "tnum"))
+pan_ext      <- pdata.frame(extendida, index = c("country", "tnum"))
+
+DK <- function(m) vcovSCC(m, type = "HC1", maxlag = NULL)
+```
+
+```{r coverage-compare}
+cov <- bind_rows(
+  corta     %>% mutate(base = "1. LatAm corta"),
+  larga     %>% mutate(base = "2. LatAm larga"),
+  extendida %>% mutate(base = "3. Extendida 15 países")
+) %>%
+  group_by(base, country) %>%
+  summarise(n = n(), desde = min(quarter), hasta = max(quarter), .groups = "drop")
+
+kable(cov, caption = "Cobertura por base y país") %>%
+  kable_styling(full_width = FALSE, font_size = 12)
+```
+
+```{r coverage-effective}
+# GaR viene NA en los primeros trimestres de entrenamiento de cada país
+# (n_train insuficiente para la regresión cuantílica) y desaparece de las
+# regresiones vía na.omit. Se reporta la cobertura EFECTIVA (GaR no-NA),
+# no solo la cobertura de filas del CSV.
+eff <- bind_rows(
+  corta     %>% mutate(base = "1. LatAm corta"),
+  larga     %>% mutate(base = "2. LatAm larga"),
+  extendida %>% mutate(base = "3. Extendida 15 países")
+) %>%
+  group_by(base, country) %>%
+  summarise(n_filas = n(), n_GaR_valido = sum(!is.na(GaR)), .groups = "drop") %>%
+  filter(n_filas != n_GaR_valido)
+
+if (nrow(eff) > 0) {
+  kable(eff, caption = "Filas con GaR faltante (excluidas automáticamente de las regresiones vía na.omit)") %>%
+    kable_styling(full_width = FALSE, font_size = 12)
+} else {
+  cat("Sin filas con GaR faltante en ninguna base.\n")
+}
+```
+
+> **Nota de cobertura efectiva.** Bulgaria pierde la mitad de sus 16
+> trimestres nominales (2010Q1-2011Q4 sin GaR entrenado), quedando con
+> ~8 observaciones utilizables en la sección 4 — trátese como
+> anecdótico, no como evidencia con poder estadístico. Colombia y Perú
+> en la base larga arrancan de forma efectiva un poco después de
+> 2007Q4 por el mismo motivo (n_train insuficiente al inicio de la
+> ventana).
+
+```{r coverage-plot, fig.height=6}
+covp <- bind_rows(
+  corta     %>% mutate(base = "1. LatAm corta"),
+  larga     %>% mutate(base = "2. LatAm larga"),
+  extendida %>% mutate(base = "3. Extendida 15 países")
+)
+ggplot(covp, aes(x = tnum, y = country, color = base)) +
+  geom_point(size = 1.6, alpha = .8) +
+  facet_wrap(~base, ncol = 1, scales = "free_y") +
+  labs(x = "Tiempo", y = NULL, title = "Cobertura temporal por base y país") +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none")
+```
+
+> **Lectura del gráfico de cobertura.** La base larga estira el núcleo
+> LatAm ~9 trimestres hacia atrás (2007Q4 vs 2010Q1) gracias al panel
+> GaR de 15 países. La base extendida agrega países, pero casi todos
+> viven exclusivamente en la ventana 2010Q1-2014Q4 (excepto los 5
+> LatAm, que corren en toda la ventana). Esto se explota en la sección
+> 4.2 con una especificación restringida a esa ventana común.
+
+# Sección 1 — Núcleo LatAm: corta vs. larga
+
+## Batería principal (M1-M6), lado a lado
+
+```{r main-models-fn}
+run_main <- function(pdat, dat) {
+  ctrl <- "debt_gdp + fisc_bal + res_gdp + ca_gdp + infl_yoy + reer"
+  list(
+    M1 = plm(EMBI_bps ~ JLoss_c + GaR_c, data = pdat, model = "within", effect = "twoways"),
+    M2 = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pdat, model = "within", effect = "twoways"),
+    M3 = plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c +", ctrl)),
+             data = pdat, model = "within", effect = "twoways"),
+    M4 = plm(as.formula(paste("lnEMBI ~ JLoss_c + GaR_c + JxG_c +", ctrl)),
+             data = pdat, model = "within", effect = "twoways"),
+    M5 = plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c + VIX +", ctrl)),
+             data = pdat, model = "within", effect = "individual")
+  )
+}
+
+mods_corta <- run_main(pan_corta, corta)
+mods_larga <- run_main(pan_larga, larga)
+
+cmap <- c("JLoss_c"="JLoss", "GaR_c"="GaR (pp)", "JxG_c"="JLoss × GaR", "VIX"="VIX",
+          "debt_gdp"="Deuda/PIB", "fisc_bal"="Balance fiscal/PIB",
+          "res_gdp"="Reservas/PIB", "ca_gdp"="Cuenta corriente/PIB",
+          "infl_yoy"="Inflación YoY", "reer"="REER")
+
+todos_latam <- c(setNames(mods_corta, paste0("Corta ", names(mods_corta))),
+                  setNames(mods_larga, paste0("Larga ", names(mods_larga))))
+
+modelsummary(todos_latam,
+  vcov = lapply(todos_latam, DK),
+  coef_map = cmap,
+  stars = c('*'=.1,'**'=.05,'***'=.01),
+  gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
+  notes = "SE Driscoll-Kraay. M1-M4: FE país+tiempo. M5: FE país + VIX explícito.",
+  title = "Tabla 1. Núcleo LatAm — corta (2010Q1-2022Q2) vs. larga (2007Q4-2022Q2)")
+```
+
+> **Qué mirar primero.** El coeficiente que importa es $\theta$
+> (`JLoss × GaR`) en M2-M5. Si el signo y la significancia se
+> mantienen entre "Corta" y "Larga", la ventana adicional de 2007Q4 a
+> 2009Q4 (crisis financiera global incluida) no está impulsando el
+> resultado artificialmente ni tampoco lo está disolviendo — es la
+> forma más directa de auditar si "hacer más robusto el GaR" cambia la
+> conclusión.
+
+## Efecto marginal de JLoss según severidad de GaR — corta vs. larga
+
+```{r marginal-fn}
+marginal_df <- function(m, dat) {
+  V  <- DK(m); b <- coef(m)
+  bJ <- b["JLoss_c"]; bI <- b["JxG_c"]
+  vJ <- V["JLoss_c","JLoss_c"]; vI <- V["JxG_c","JxG_c"]; cJI <- V["JLoss_c","JxG_c"]
+  mu <- mean(dat$GaR_pp, na.rm = TRUE)
+  grid <- seq(quantile(dat$GaR_pp, .05, na.rm=TRUE), quantile(dat$GaR_pp, .95, na.rm=TRUE), length.out = 100)
+  dev <- grid - mu
+  me  <- bJ + bI * dev
+  se  <- sqrt(vJ + dev^2 * vI + 2 * dev * cJI)
+  data.frame(GaR = grid, me = me, lo = me - 1.96*se, hi = me + 1.96*se)
+}
+
+mdf_corta <- marginal_df(mods_corta$M3, corta) %>% mutate(base = "Corta")
+mdf_larga <- marginal_df(mods_larga$M3, larga) %>% mutate(base = "Larga")
+mdf <- bind_rows(mdf_corta, mdf_larga)
+
+ggplot(mdf, aes(GaR, me, color = base, fill = base)) +
+  geom_hline(yintercept = 0, color = "grey50") +
+  geom_ribbon(aes(ymin = lo, ymax = hi), alpha = .15, color = NA) +
+  geom_line(linewidth = 1) +
+  scale_x_reverse() +
+  labs(x = "GaR (pp) — izquierda = mayor riesgo de cola",
+       y = "∂EMBI/∂JLoss (pb por unidad de JLoss)",
+       title = "Amplificación supra-aditiva del riesgo soberano: corta vs. larga",
+       subtitle = "Basado en M3 de cada base") +
+  theme_minimal(base_size = 12)
+```
+
+## Diagnósticos (corta vs. larga)
+
+```{r diagnostics-fn}
+diag_table <- function(m2, m3, pdat, dat) {
+  cd  <- pcdtest(m2, test = "cd")
+  bg  <- pbgtest(m2)
+  re  <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pdat, model = "random", effect = "twoways")
+  ha  <- phtest(m2, re)
+  data.frame(
+    test = c("Pesaran CD (dep. transversal)", "Wooldridge (autocorr.)", "Hausman (FE vs RE)"),
+    estadistico = round(c(cd$statistic, bg$statistic, ha$statistic), 3),
+    p_valor = round(c(cd$p.value, bg$p.value, ha$p.value), 4)
+  )
+}
+
+dt_corta <- diag_table(mods_corta$M2, mods_corta$M3, pan_corta, corta)
+dt_larga <- diag_table(mods_larga$M2, mods_larga$M3, pan_larga, larga)
+
+kable(list(Corta = dt_corta, Larga = dt_larga)[[1]], caption = "Diagnósticos — LatAm corta") %>% kable_styling(full_width = FALSE)
+kable(list(Corta = dt_corta, Larga = dt_larga)[[2]], caption = "Diagnósticos — LatAm larga") %>% kable_styling(full_width = FALSE)
+```
+
+```{r vif-compare}
+aux_corta <- lm(EMBI_bps ~ JLoss + GaR_pp + debt_gdp + fisc_bal + res_gdp + ca_gdp + infl_yoy + reer + VIX, data = corta)
+aux_larga <- lm(EMBI_bps ~ JLoss + GaR_pp + debt_gdp + fisc_bal + res_gdp + ca_gdp + infl_yoy + reer + VIX, data = larga)
+cat("VIF — corta:\n"); print(round(vif(aux_corta), 2))
+cat("\nVIF — larga:\n"); print(round(vif(aux_larga), 2))
+```
+
+# Sección 2 — Robustez adicional (heredada de `Regresiones_panel.Rmd`), corta vs. larga
+
+## Comparación de errores estándar sobre $\theta$
+
+```{r se-compare-fn}
+se_compare <- function(m) {
+  se_variants <- list(
+    "Driscoll-Kraay" = DK(m),
+    "Cluster país"   = vcovHC(m, type = "HC1", cluster = "group"),
+    "Cluster tiempo" = vcovHC(m, type = "HC1", cluster = "time"),
+    "Arellano (HAC)" = vcovHC(m, method = "arellano", type = "HC1")
+  )
+  sapply(se_variants, function(v) {
+    ct <- coeftest(m, vcov = v)["JxG_c", ]
+    c(coef = round(ct[1],3), se = round(ct[2],3), t = round(ct[3],2), p = round(ct[4],4))
+  })
+}
+cat("Corta:\n"); print(t(se_compare(mods_corta$M3)))
+cat("\nLarga:\n"); print(t(se_compare(mods_larga$M3)))
+```
+
+## Subperiodo sin COVID-19
+
+```{r no-covid-fn}
+ctrl <- "debt_gdp + fisc_bal + res_gdp + ca_gdp + infl_yoy + reer"
+nc_model <- function(dat) {
+  pdat <- pdata.frame(subset(dat, post2020 == 0), index = c("country","tnum"))
+  plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c +", ctrl)),
+      data = pdat, model = "within", effect = "twoways")
+}
+m_nc_corta <- nc_model(corta); m_nc_larga <- nc_model(larga)
+cat("Corta, sin COVID:\n"); print(coeftest(m_nc_corta, vcov = DK(m_nc_corta)))
+cat("\nLarga, sin COVID:\n"); print(coeftest(m_nc_larga, vcov = DK(m_nc_larga)))
+```
+
+## Persistencia (especificación dinámica, diagnóstico — sesgo de Nickell)
+
+```{r dynamic-fn}
+dyn_model <- function(dat) {
+  dat$EMBI_lag <- ave(dat$EMBI_bps, dat$country, FUN = function(x) c(NA, head(x, -1)))
+  pdat <- pdata.frame(dat, index = c("country","tnum"))
+  plm(as.formula(paste("EMBI_bps ~ EMBI_lag + JLoss_c + GaR_c + JxG_c +", ctrl)),
+      data = pdat, model = "within", effect = "twoways")
+}
+m_dyn_corta <- dyn_model(corta); m_dyn_larga <- dyn_model(larga)
+cat("Corta:\n"); print(coeftest(m_dyn_corta, vcov = DK(m_dyn_corta)))
+cat("\nLarga:\n"); print(coeftest(m_dyn_larga, vcov = DK(m_dyn_larga)))
+```
+
+# Sección 3 — Batería agrupado→FE (Tablas A/B del documento original), corta vs. larga
+
+```{r battery-fn}
+run_battery <- function(pdat) {
+  list(
+    "(1) Solo JLoss"          = plm(EMBI_bps ~ JLoss_c,                  pdat, model = "pooling"),
+    "(2) Solo GaR"            = plm(EMBI_bps ~ GaR_c,                    pdat, model = "pooling"),
+    "(3) JLoss + GaR"         = plm(EMBI_bps ~ JLoss_c + GaR_c,          pdat, model = "pooling"),
+    "(4) + interac. (sin FE)" = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c,  pdat, model = "pooling"),
+    "(5) FE país"             = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c,  pdat, model = "within", effect = "individual"),
+    "(6) FE tiempo"           = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c,  pdat, model = "within", effect = "time"),
+    "(7) FE país + tiempo"    = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c,  pdat, model = "within", effect = "twoways")
+  )
+}
+opts <- list(coef_map = c("JLoss_c"="JLoss","GaR_c"="GaR (pp)","JxG_c"="JLoss × GaR"),
+             stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj")
+
+bat_corta <- run_battery(pan_corta)
+bat_larga <- run_battery(pan_larga)
+```
+
+```{r battery-table}
+bat_todos <- c(setNames(bat_corta, paste0("Corta ", names(bat_corta))),
+               setNames(bat_larga, paste0("Larga ", names(bat_larga))))
+modelsummary(bat_todos, vcov = lapply(bat_todos, DK),
+  coef_map = opts$coef_map, stars = opts$stars, gof_omit = opts$gof_omit,
+  title = "Tabla 2. Del modelo agrupado a los efectos fijos — corta vs. larga")
+```
+
+# Sección 3bis — Controles del paper de JLoss como índice agregado $X_{i,t}$
+
+Los controles adicionales que replican los del paper de referencia de
+JLoss (Chari et al., 2024) — `debt_gdp` (log), `profit_margin`,
+`UST10Y` (log), `US_HY_spread` (log) y `OnOffRun_spread` (log) — se
+incorporan como **un índice agregado** en vez de seis regresores
+sueltos, por dos razones: (i) `profit_margin` solo tiene cobertura
+real en 2007-2011 (ver más abajo) y (ii) meter seis controles
+correlacionados entre sí en un panel de *N* moderado infla varianza
+sin ganar identificación.
+
+**`US_HY_spread` queda fuera del índice**: el proxy (`BAMLH0A0HYM2`,
+ICE BofA US HY OAS) llegó sin cobertura en la ventana de estudio
+(2004-2022) — la serie descargada solo trae observaciones desde
+2023Q3, así que se excluye hasta resolver la descarga.
+**Exchange-rate volatility también queda fuera** (pendiente, sin
+fuente construida todavía).
+
+## Por qué el índice se separa en dos: doméstico vs. global
+
+Un solo índice mezclando `debt_gdp`/`profit_margin` (varían por
+país-trimestre) con `UST10Y`/`OnOffRun_spread` (varían solo por
+trimestre, iguales para los 5-11 países en cada fecha) es
+econométricamente incómodo bajo **efectos fijos de tiempo**: la parte
+puramente global de la mezcla queda absorbida casi por completo por
+esos efectos de tiempo, y el índice combinado pierde poder de forma
+artificial (se probó: con FE país+tiempo el índice combinado no fue
+significativo en ninguna base, con $R^2$ *within* incluso negativo en
+la corta — síntoma de que se estaba pidiendo identificar variación que
+ya no existía tras demediar por tiempo). La solución estándar es la
+misma que ya usa `M5` en la Sección 1: separar el control global y
+estimarlo con **FE de país únicamente** (sin FE de tiempo), dejando el
+componente doméstico donde sí corresponde, con FE país+tiempo.
+
+- **`X_dom_idx`** = promedio de z-scores de `debt_gdp_log` y
+  `profit_margin` (los que sí varían por país). Se usa con **FE
+  país+tiempo**, igual que el resto de la batería principal.
+- **`X_global_idx`** = promedio de z-scores de `UST10Y_log` y
+  `OnOffRun_spread_log` (comunes a todos los países cada trimestre).
+  Se usa con **FE país únicamente**, igual que `M5`.
+
+```{r control-idx-coverage}
+idx_cov <- bind_rows(
+  corta     %>% mutate(base = "1. LatAm corta"),
+  larga     %>% mutate(base = "2. LatAm larga"),
+  extendida %>% mutate(base = "3. Extendida 15 países")
+) %>%
+  group_by(base) %>%
+  summarise(n = n(),
+            X_dom_idx_valido = sum(!is.na(X_dom_idx)),
+            X_global_idx_valido = sum(!is.na(X_global_idx)), .groups = "drop")
+kable(idx_cov, caption = "Cobertura de los índices agregados por base") %>%
+  kable_styling(full_width = FALSE)
+```
+
+```{r control-idx-models}
+idx_model_dom <- function(dat) {
+  d <- subset(dat, !is.na(X_dom_idx))
+  pdat <- pdata.frame(d, index = c("country", "tnum"))
+  plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + X_dom_idx, data = pdat,
+      model = "within", effect = "twoways")
+}
+idx_model_glob <- function(dat) {
+  d <- subset(dat, !is.na(X_global_idx))
+  pdat <- pdata.frame(d, index = c("country", "tnum"))
+  plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + X_global_idx, data = pdat,
+      model = "within", effect = "individual")
+}
+
+M_dom_corta  <- idx_model_dom(corta);      M_dom_larga  <- idx_model_dom(larga)
+M_glob_corta <- idx_model_glob(corta);     M_glob_larga <- idx_model_glob(larga)
+M_glob_ext   <- idx_model_glob(extendida)  # X_dom_idx en extendida cae a n=83 (solo LatAm 2007-2011); se omite de la tabla principal
+
+mods_idx <- list(
+  "Corta, X_dom (FE2)"       = M_dom_corta,
+  "Larga, X_dom (FE2)"       = M_dom_larga,
+  "Corta, X_global (FE país)"  = M_glob_corta,
+  "Larga, X_global (FE país)"  = M_glob_larga,
+  "Extendida, X_global (FE país)" = M_glob_ext
+)
+modelsummary(mods_idx, vcov = lapply(mods_idx, DK),
+  coef_map = c("JLoss_c"="JLoss", "GaR_c"="GaR (pp)", "JxG_c"="JLoss × GaR",
+               "X_dom_idx"="Índice doméstico (paper)", "X_global_idx"="Índice global (paper)"),
+  stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
+  notes = "SE Driscoll-Kraay. X_dom: FE país+tiempo. X_global: FE país (ver texto).",
+  title = "Tabla 2bis. θ con los controles del paper de JLoss como índice agregado")
+```
+
+> **Lectura.** $\theta$ (`JLoss × GaR`) se mantiene negativo y
+> significativo en las cinco columnas — el resultado central sobrevive
+> a agregar los controles del paper de referencia, ya sea en su versión
+> doméstica o global. El índice global (`X_global_idx`) además resulta
+> **significativo por sí mismo** con FE país (a diferencia de la
+> versión mezclada con FE país+tiempo), confirmando que la separación
+> doméstico/global fue la decisión correcta y no solo una formalidad.
+> `X_dom_idx` en la base extendida se omite de la tabla principal
+> porque su *n* cae a 83 (solo los tramos LatAm con `profit_margin`
+> real, 2007-2011) — no es un resultado interpretable a nivel de las
+> 15 países, y se deja como nota, no como columna.
+
+# Sección 4 — Panel extendido a 15 países
+
+## 4.1 Especificación de muestra completa (sin controles domésticos)
+
+Sin `debt_gdp`/`fisc_bal`/etc. para los países no-LatAm, la
+especificación se limita a `JLoss`, `GaR`, la interacción y (donde
+aplica) el VIX global. Se usa **FE de país** como base (no *twoways*,
+porque fuera de 2010-2014 el panel es casi enteramente los 5 países
+LatAm y los efectos de tiempo terminarían absorbiendo esencialmente la
+misma variación que ya capturan los efectos de país en ese tramo).
+
+```{r ext-full}
+M_ext_pais <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pan_ext, model = "within", effect = "individual")
+M_ext_vix  <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + VIX_cboe, data = pan_ext, model = "within", effect = "individual")
+M_ext_2w   <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pan_ext, model = "within", effect = "twoways")
+
+mods_ext <- list("FE país" = M_ext_pais, "FE país + VIX" = M_ext_vix, "FE país+tiempo" = M_ext_2w)
+modelsummary(mods_ext, vcov = lapply(mods_ext, DK),
+  coef_map = c("JLoss_c"="JLoss","GaR_c"="GaR (pp)","JxG_c"="JLoss × GaR","VIX_cboe"="VIX (CBOE)"),
+  stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
+  notes = "SE Driscoll-Kraay. Muestra completa desbalanceada (15 países, ventanas distintas).",
+  title = "Tabla 3. Panel extendido — muestra completa, sin controles domésticos")
+```
+
+## 4.2 Ventana común 2010Q1-2014Q4 (comparación más limpia)
+
+Restringido al tramo donde de verdad hay 9-11 países simultáneos
+(según el gráfico de cobertura), lo que permite un FE de tiempo con
+significado real y una comparación más honesta con el núcleo LatAm en
+la misma ventana.
+
+```{r ext-window}
+ext_win <- subset(extendida, quarter >= "2010Q1" & quarter <= "2014Q4")
+pan_ext_win <- pdata.frame(ext_win, index = c("country","tnum"))
+
+cat("Países en la ventana común:", length(unique(ext_win$country)), "\n")
+print(table(ext_win$country))
+
+M_win_pais <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pan_ext_win, model = "within", effect = "individual")
+M_win_2w   <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pan_ext_win, model = "within", effect = "twoways")
+
+# Misma ventana, pero solo LatAm-5 (para comparar manzanas con manzanas)
+latam_win <- subset(larga, quarter >= "2010Q1" & quarter <= "2014Q4")
+pan_latam_win <- pdata.frame(latam_win, index = c("country","tnum"))
+M_latamwin_2w <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pan_latam_win, model = "within", effect = "twoways")
+
+mods_win <- list("Extendido, FE país" = M_win_pais,
+                  "Extendido, FE país+tiempo" = M_win_2w,
+                  "Solo LatAm-5, FE país+tiempo" = M_latamwin_2w)
+modelsummary(mods_win, vcov = lapply(mods_win, DK),
+  coef_map = c("JLoss_c"="JLoss","GaR_c"="GaR (pp)","JxG_c"="JLoss × GaR"),
+  stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
+  notes = "SE Driscoll-Kraay. Ventana 2010Q1-2014Q4 en las tres columnas.",
+  title = "Tabla 4. Ventana común 2010Q1-2014Q4: extendido vs. solo LatAm-5")
+```
+
+> **Esto es lo más cercano a una prueba real de generalización fuera
+> de LatAm.** Si $\theta$ mantiene signo y significancia al pasar de
+> "Solo LatAm-5" a "Extendido" en la misma ventana, es evidencia de
+> que la complementariedad JLoss × GaR no es un artefacto específico
+> de las cinco economías originales. Si se debilita o cambia de signo,
+> es una señal genuina de heterogeneidad — igual de informativa, y
+> debe reportarse así, no forzarse.
+
+## 4.3 Diagnósticos del panel extendido
+
+```{r ext-diagnostics}
+cat("Dependencia transversal (Pesaran CD), ventana común:\n")
+print(pcdtest(M_win_2w, test = "cd"))
+
+cat("\nAutocorrelación (Wooldridge), ventana común:\n")
+print(pbgtest(M_win_2w))
+
+cat("\nSignificancia conjunta de efectos de tiempo (ventana común):\n")
+print(pFtest(M_win_2w, M_win_pais))
+```
+
+> **Nota de cautela.** Con *T* entre 6 y 20 para los países no-LatAm,
+> tanto Pesaran CD como Driscoll-Kraay operan fuera de su rango ideal
+> de aplicación (pensado para *T* moderado-grande). Estos diagnósticos
+> se reportan por completitud, no como validación fuerte.
+
+# Sección 5 — Síntesis: triangulación de $\theta$ (JLoss × GaR)
+
+```{r synthesis}
+get_theta <- function(m, label) {
+  ct <- coeftest(m, vcov = DK(m))
+  data.frame(modelo = label,
+             theta = ct["JxG_c","Estimate"],
+             se = ct["JxG_c","Std. Error"],
+             p = ct["JxG_c","Pr(>|t|)"])
+}
+
+synth <- bind_rows(
+  get_theta(mods_corta$M2, "1. LatAm corta — M2 (FE2)"),
+  get_theta(mods_corta$M3, "1. LatAm corta — M3 (+controles)"),
+  get_theta(M_dom_corta,   "1. LatAm corta — X_dom_idx (FE2)"),
+  get_theta(M_glob_corta,  "1. LatAm corta — X_global_idx (FE país)"),
+  get_theta(mods_larga$M2, "2. LatAm larga — M2 (FE2)"),
+  get_theta(mods_larga$M3, "2. LatAm larga — M3 (+controles)"),
+  get_theta(M_dom_larga,   "2. LatAm larga — X_dom_idx (FE2)"),
+  get_theta(M_glob_larga,  "2. LatAm larga — X_global_idx (FE país)"),
+  get_theta(M_ext_pais,    "3. Extendido — muestra completa, FE país"),
+  get_theta(M_glob_ext,    "3. Extendido — X_global_idx (FE país)"),
+  get_theta(M_win_2w,      "3. Extendido — ventana común, FE2"),
+  get_theta(M_latamwin_2w, "3b. Solo LatAm-5 — ventana común, FE2")
+) %>%
+  mutate(lo = theta - 1.96*se, hi = theta + 1.96*se)
+
+kable(synth %>% mutate(across(c(theta, se, p), ~round(., 4))),
+      caption = "Coeficiente θ de JLoss × GaR a través de las tres bases") %>%
+  kable_styling(full_width = FALSE)
+
+ggplot(synth, aes(x = theta, y = reorder(modelo, theta))) +
+  geom_vline(xintercept = 0, color = "grey50") +
+  geom_pointrange(aes(xmin = lo, xmax = hi), color = "#1f3b73") +
+  labs(x = expression(theta ~ "(JLoss" %*% "GaR)"), y = NULL,
+       title = "Triangulación del término de interacción entre bases y especificaciones",
+       subtitle = "Barras = IC 95% (Driscoll-Kraay)") +
+  theme_minimal(base_size = 12)
+```
+
+> **Lectura para el comité.** Una réplica rápida de esta batería fuera
+> del Rmd (Python, `PanelOLS` con efectos entidad+tiempo y SE tipo
+> kernel) adelanta el patrón que verás al correr este documento, para
+> que no llegue como sorpresa:
+>
+> - **Filas 1-2 (núcleo LatAm, corta vs. larga):** $\theta$ se mantiene
+>   **negativo y significativo** en ambas ($\theta\approx-0.35$,
+>   $p<0.01$ en corta; $\theta\approx-0.34$, $p\approx0.01$ en larga).
+>   Estirar la ventana de entrenamiento del GaR **no cambia la
+>   conclusión central** — este es el resultado que sostiene el paper.
+> - **Fila 3 (extendido, muestra completa, FE país):** el signo se
+>   mantiene negativo pero **pierde significancia** ($p\approx0.14$),
+>   esperable dado que fuera de 2010-2014 el panel es casi
+>   exclusivamente LatAm y la variación adicional es escasa.
+> - **Filas 3b vs. 3 en la ventana común 2010Q1-2014Q4:** aquí aparece
+>   el hallazgo que hay que reportar con honestidad, no maquillar:
+>   restringido a esa ventana, **solo LatAm-5** da un $\theta$ pequeño
+>   y no significativo ($\approx-0.07$, $p\approx0.61$), mientras que
+>   el **panel de 11 países** en la misma ventana da un $\theta$
+>   **positivo** y marginalmente significativo ($\approx+0.63$,
+>   $p\approx0.05$) — signo **contrario** a la hipótesis de
+>   complementariedad.
+>
+> Esto no invalida el resultado LatAm (que es el robusto, con *T*
+> largo y controles domésticos completos), pero sí dice que la
+> complementariedad JLoss × GaR **no se generaliza mecánicamente**
+> fuera de LatAm con los datos disponibles hoy: la muestra extendida
+> combina países con *T* muy corto (Sudáfrica *n*≈6, Bulgaria *n*≈8
+> efectivo), fuentes de EMBI distintas (GFSR vs. BCRP) y estructuras
+> económicas heterogéneas (China, Turquía, Polonia, Indonesia,
+> Sudáfrica, Bulgaria en un solo pool). El signo positivo en la fila
+> 3b es más creíble como síntoma de heterogeneidad no modelada
+> (pooling de economías muy distintas sin controles domésticos que
+> absorban diferencias estructurales) que como evidencia real de que
+> la relación se invierte. La recomendación es **anclar el resultado
+> principal del paper en el núcleo LatAm (filas 1-2)** y presentar la
+> sección 4 explícitamente como evidencia exploratoria que motiva
+> trabajo futuro (más *T* por país, controles domésticos para los 6
+> países nuevos) antes de generalizar la conclusión.
+
+------------------------------------------------------------------------
+
+*Estimación: `plm` (agrupado y efectos fijos *within*). Inferencia:
+Driscoll-Kraay (`vcovSCC`) salvo donde se compara explícitamente con
+otros estimadores de varianza. Fuentes: EMBI real BCRP (LatAm) +
+tablas GFSR del FMI 2011-2015 (extendido); GaR de
+`gar_panel_all15.csv`; JLoss de `Jloss.dta`; controles domésticos y
+VIX/g_GDP solo disponibles para el núcleo LatAm; VIX global CBOE
+disponible para las tres bases.*

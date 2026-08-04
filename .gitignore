@@ -1,0 +1,26 @@
+# Entornos virtuales de Python (pesados, no forman parte del material de tesis)
+.venv/
+1_Codigo/JLoss_reconstruction/JLoss-pipeline/venv/
+__pycache__/
+*.pyc
+
+# Datos MATLAB legado, en su mayoría fragmentos redundantes (825MB)
+1_Codigo/JLoss_reconstruction/matlab/*.mat
+1_Codigo/JLoss_reconstruction/matlab/*.asv
+
+# Artefactos de compilación LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Historial de sesión R
+.Rhistory
+
+# Checkpoints/backups intermedios de cómputo (se regeneran)
+_ckpt_*.csv

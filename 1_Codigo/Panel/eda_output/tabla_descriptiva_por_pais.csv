@@ -1,0 +1,6 @@
+country,Spread EMBI (pb) (mean),Spread EMBI (pb) (std),Fragilidad bancaria JLoss (mean),Fragilidad bancaria JLoss (std),Growth-at-Risk (q05) (mean),Growth-at-Risk (q05) (std),Expected Shortfall (mean),Expected Shortfall (std),Prob. crecim. negativo (mean),Prob. crecim. negativo (std)
+brazil,268.024,78.364,16.096,13.651,-0.004,0.036,-0.01,0.037,0.214,0.309
+chile,161.661,47.909,2.902,2.086,0.006,0.035,0.001,0.035,0.098,0.225
+colombia,224.356,81.218,4.563,3.442,0.006,0.041,0.0,0.04,0.111,0.264
+mexico,267.683,94.39,3.208,2.184,-0.014,0.037,-0.021,0.036,0.225,0.306
+peru,183.691,64.484,2.455,0.711,0.024,0.037,0.018,0.037,0.048,0.171

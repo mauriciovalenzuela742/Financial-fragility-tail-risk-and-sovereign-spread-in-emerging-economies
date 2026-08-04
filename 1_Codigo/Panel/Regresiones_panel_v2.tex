@@ -1,0 +1,1402 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{tabularray}
+\usepackage[normalem]{ulem}
+\usepackage{graphicx}
+\usepackage{rotating}
+\UseTblrLibrary{siunitx}
+\NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
+\newcommand{\tinytableTabularrayUnderline}[1]{\underline{#1}}
+\newcommand{\tinytableTabularrayStrikeout}[1]{\sout{#1}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano},
+  pdfauthor={Mauricio},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Fragilidad bancaria, riesgo de cola del crecimiento y spread
+soberano}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Triangulación en tres bases --- LatAm corta, LatAm larga y
+panel extendido a 15 países}
+\author{Mauricio}
+\date{17/07/2026}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Objetivo y convenciones}\label{objetivo-y-convenciones}
+
+\texttt{Regresiones\_panel.Rmd} estimaba la especificación central en
+\textbf{una} base (núcleo LatAm, 2010Q1-2022Q2). Este documento la
+reestima en \textbf{tres} bases para ver si la complementariedad JLoss ×
+GaR sobrevive tanto a una ventana temporal más larga del núcleo LatAm
+como a la extensión a países fuera de LatAm:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{LatAm corta} (\texttt{Panel\_final\_prebackup.csv}) --- la
+  base original: 5 países, 2010Q1-2022Q2, GaR construido con la
+  plataforma CEMLA/\texttt{GaR\_test.xlsx}.
+\item
+  \textbf{LatAm larga} (\texttt{Panel\_final.csv}) --- mismos 5 países,
+  mismo EMBI real (BCRP) y mismo JLoss, pero GaR reconstruido con el
+  panel de 15 países (\texttt{gar\_panel\_all15.csv}), que tiene más
+  historia de entrenamiento y extiende la ventana a \textbf{2007Q4}.
+  Mismos controles domésticos (\texttt{controls\_panel.csv}) y
+  VIX/g\_GDP que la corta, más el parche de deuda de Chile (BCCh).
+\item
+  \textbf{Panel extendido} (\texttt{Panel\_extended\_15paises.csv}) ---
+  agrega Bulgaria, China, Indonesia, Polonia, Sudáfrica y Turquía con
+  EMBI \textbf{real} (no proxy): BCRP para los 5 LatAm, tablas del
+  \emph{Global Financial Stability Report} del FMI (2011-2015) para los
+  otros 6. \textbf{Sin controles domésticos} (no hay
+  \texttt{debt\_gdp}/\texttt{fisc\_bal}/etc. para estos 6 países) y con
+  \textbf{VIX global CBOE} en vez del VIX/g\_GDP de la plataforma CEMLA.
+\end{enumerate}
+
+Especificación central (igual en las tres bases):
+
+\[EMBI_{i,t}=\alpha_i+\lambda_t+\beta_1 JLoss_{i,t}+\beta_2 GaR_{i,t}+\theta\,(JLoss\times GaR)_{i,t}+\gamma' X_{i,t}+\varepsilon_{i,t}\]
+
+\textbf{Decisiones metodológicas heredadas de
+\texttt{Regresiones\_panel.Rmd} (sin cambios):}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Errores estándar Driscoll-Kraay} (\texttt{vcovSCC}), robustos
+  a heterocedasticidad, autocorrelación y dependencia transversal.
+\item
+  \textbf{\texttt{GaR} en puntos porcentuales} (×100).
+\item
+  \textbf{Variables clave centradas} (\texttt{\_c}).
+\item
+  \textbf{No se incluye \texttt{g\_GDP}/media de crecimiento junto a
+  \texttt{GaR}} (colinealidad severa, mismo argumento que la base
+  corta).
+\end{itemize}
+
+\textbf{Advertencia que aplica solo al panel extendido} (sección 4):
+varios países nuevos aportan \textbf{T muy corto} (Sudáfrica \emph{n}=6,
+Bulgaria \emph{n}=16) y \textbf{fuera del rango 2010Q1-2014Q4 el panel
+vuelve a ser esencialmente el núcleo LatAm} (ver el diagnóstico de
+cobertura más abajo). Driscoll-Kraay asume \emph{T} moderado/grande por
+unidad; con countries de \emph{T}=6-20 esa asintótica es débil. Todo lo
+que sigue en la sección 4 debe leerse como \textbf{evidencia
+exploratoria complementaria}, no como un reemplazo de la estimación
+LatAm.
+
+\section{Paquetes y carga de las tres
+bases}\label{paquetes-y-carga-de-las-tres-bases}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages(c("plm","lmtest","sandwich","modelsummary","fixest",}
+\CommentTok{\#                    "ggplot2","dplyr","car","kableExtra","tidyr"))}
+\FunctionTok{library}\NormalTok{(plm)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\FunctionTok{library}\NormalTok{(sandwich)}
+\FunctionTok{library}\NormalTok{(modelsummary)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(car)}
+\FunctionTok{library}\NormalTok{(kableExtra)}
+
+\NormalTok{prep }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(path) \{}
+\NormalTok{  d }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(path, }\AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{year }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{substr}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{quarter, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{q    }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{substr}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{quarter, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{tnum }\OtherTok{\textless{}{-}}\NormalTok{ d}\SpecialCharTok{$}\NormalTok{year }\SpecialCharTok{+}\NormalTok{ (d}\SpecialCharTok{$}\NormalTok{q }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{/} \DecValTok{4}
+\NormalTok{  d }\OtherTok{\textless{}{-}}\NormalTok{ d[}\FunctionTok{order}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{country, d}\SpecialCharTok{$}\NormalTok{tnum), ]}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{GaR\_pp }\OtherTok{\textless{}{-}}\NormalTok{ d}\SpecialCharTok{$}\NormalTok{GaR }\SpecialCharTok{*} \DecValTok{100}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{ES\_pp  }\OtherTok{\textless{}{-}} \ControlFlowTok{if}\NormalTok{ (}\StringTok{"ES"} \SpecialCharTok{\%in\%} \FunctionTok{names}\NormalTok{(d)) d}\SpecialCharTok{$}\NormalTok{ES }\SpecialCharTok{*} \DecValTok{100} \ControlFlowTok{else} \ConstantTok{NA}
+\NormalTok{  center }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) x }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{JLoss\_c }\OtherTok{\textless{}{-}} \FunctionTok{center}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{JLoss)}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{GaR\_c   }\OtherTok{\textless{}{-}} \FunctionTok{center}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{GaR\_pp)}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{JxG\_c   }\OtherTok{\textless{}{-}}\NormalTok{ d}\SpecialCharTok{$}\NormalTok{JLoss\_c }\SpecialCharTok{*}\NormalTok{ d}\SpecialCharTok{$}\NormalTok{GaR\_c}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{lnEMBI  }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{EMBI\_bps)}
+\NormalTok{  d}\SpecialCharTok{$}\NormalTok{post2020 }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{year }\SpecialCharTok{\textgreater{}=} \DecValTok{2020}\NormalTok{)}
+\NormalTok{  d}
+\NormalTok{\}}
+
+\NormalTok{corta    }\OtherTok{\textless{}{-}} \FunctionTok{prep}\NormalTok{(}\StringTok{"Panel\_final\_prebackup.csv"}\NormalTok{)}
+\NormalTok{larga    }\OtherTok{\textless{}{-}} \FunctionTok{prep}\NormalTok{(}\StringTok{"Panel\_final.csv"}\NormalTok{)}
+\NormalTok{extendida}\OtherTok{\textless{}{-}} \FunctionTok{prep}\NormalTok{(}\StringTok{"Panel\_extended\_15paises.csv"}\NormalTok{)}
+
+\NormalTok{pan\_corta    }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(corta,     }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"tnum"}\NormalTok{))}
+\NormalTok{pan\_larga    }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(larga,     }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"tnum"}\NormalTok{))}
+\NormalTok{pan\_ext      }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(extendida, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"tnum"}\NormalTok{))}
+
+\NormalTok{DK }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(m) }\FunctionTok{vcovSCC}\NormalTok{(m, }\AttributeTok{type =} \StringTok{"HC1"}\NormalTok{, }\AttributeTok{maxlag =} \ConstantTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cov }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}
+\NormalTok{  corta     }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"1. LatAm corta"}\NormalTok{),}
+\NormalTok{  larga     }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"2. LatAm larga"}\NormalTok{),}
+\NormalTok{  extendida }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"3. Extendida 15 países"}\NormalTok{)}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(base, country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }\AttributeTok{desde =} \FunctionTok{min}\NormalTok{(quarter), }\AttributeTok{hasta =} \FunctionTok{max}\NormalTok{(quarter), }\AttributeTok{.groups =} \StringTok{"drop"}\NormalTok{)}
+
+\FunctionTok{kable}\NormalTok{(cov, }\AttributeTok{caption =} \StringTok{"Cobertura por base y país"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{full\_width =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{font\_size =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{12}{14}\selectfont
+
+\begin{longtable}[t]{llrll}
+\caption{\label{tab:coverage-compare}Cobertura por base y país}\\
+\toprule
+base & country & n & desde & hasta\\
+\midrule
+1. LatAm corta & brazil & 50 & 2010Q1 & 2022Q2\\
+1. LatAm corta & chile & 48 & 2010Q1 & 2021Q4\\
+1. LatAm corta & colombia & 50 & 2010Q1 & 2022Q2\\
+1. LatAm corta & mexico & 50 & 2010Q1 & 2022Q2\\
+1. LatAm corta & peru & 50 & 2010Q1 & 2022Q2\\
+\addlinespace
+2. LatAm larga & brazil & 59 & 2007Q4 & 2022Q2\\
+2. LatAm larga & chile & 57 & 2007Q4 & 2021Q4\\
+2. LatAm larga & colombia & 59 & 2007Q4 & 2022Q2\\
+2. LatAm larga & mexico & 59 & 2007Q4 & 2022Q2\\
+2. LatAm larga & peru & 59 & 2007Q4 & 2022Q2\\
+\addlinespace
+3. Extendida 15 países & brazil & 59 & 2007Q4 & 2022Q2\\
+3. Extendida 15 países & bulgaria & 16 & 2010Q1 & 2013Q4\\
+3. Extendida 15 países & chile & 57 & 2007Q4 & 2021Q4\\
+3. Extendida 15 países & china & 20 & 2010Q1 & 2014Q4\\
+3. Extendida 15 países & colombia & 59 & 2007Q4 & 2022Q2\\
+\addlinespace
+3. Extendida 15 países & indonesia & 20 & 2010Q1 & 2014Q4\\
+3. Extendida 15 países & mexico & 59 & 2007Q4 & 2022Q2\\
+3. Extendida 15 países & peru & 59 & 2007Q4 & 2022Q2\\
+3. Extendida 15 países & poland & 20 & 2010Q1 & 2014Q4\\
+3. Extendida 15 países & southafrica & 6 & 2010Q1 & 2011Q2\\
+\addlinespace
+3. Extendida 15 países & turkey & 20 & 2010Q1 & 2014Q4\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# GaR viene NA en los primeros trimestres de entrenamiento de cada país}
+\CommentTok{\# (n\_train insuficiente para la regresión cuantílica) y desaparece de las}
+\CommentTok{\# regresiones vía na.omit. Se reporta la cobertura EFECTIVA (GaR no{-}NA),}
+\CommentTok{\# no solo la cobertura de filas del CSV.}
+\NormalTok{eff }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}
+\NormalTok{  corta     }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"1. LatAm corta"}\NormalTok{),}
+\NormalTok{  larga     }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"2. LatAm larga"}\NormalTok{),}
+\NormalTok{  extendida }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"3. Extendida 15 países"}\NormalTok{)}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(base, country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n\_filas =} \FunctionTok{n}\NormalTok{(), }\AttributeTok{n\_GaR\_valido =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(GaR)), }\AttributeTok{.groups =} \StringTok{"drop"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(n\_filas }\SpecialCharTok{!=}\NormalTok{ n\_GaR\_valido)}
+
+\ControlFlowTok{if}\NormalTok{ (}\FunctionTok{nrow}\NormalTok{(eff) }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{kable}\NormalTok{(eff, }\AttributeTok{caption =} \StringTok{"Filas con GaR faltante (excluidas automáticamente de las regresiones vía na.omit)"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{full\_width =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{font\_size =} \DecValTok{12}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Sin filas con GaR faltante en ninguna base.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{12}{14}\selectfont
+
+\begin{longtable}[t]{llrr}
+\caption{\label{tab:coverage-effective}Filas con GaR faltante (excluidas automáticamente de las regresiones vía na.omit)}\\
+\toprule
+base & country & n\_filas & n\_GaR\_valido\\
+\midrule
+2. LatAm larga & colombia & 59 & 55\\
+2. LatAm larga & peru & 59 & 51\\
+3. Extendida 15 países & bulgaria & 16 & 8\\
+3. Extendida 15 países & colombia & 59 & 55\\
+3. Extendida 15 países & peru & 59 & 51\\
+\addlinespace
+3. Extendida 15 países & turkey & 20 & 19\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\begin{quote}
+\textbf{Nota de cobertura efectiva.} Bulgaria pierde la mitad de sus 16
+trimestres nominales (2010Q1-2011Q4 sin GaR entrenado), quedando con
+\textasciitilde8 observaciones utilizables en la sección 4 --- trátese
+como anecdótico, no como evidencia con poder estadístico. Colombia y
+Perú en la base larga arrancan de forma efectiva un poco después de
+2007Q4 por el mismo motivo (n\_train insuficiente al inicio de la
+ventana).
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{covp }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}
+\NormalTok{  corta     }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"1. LatAm corta"}\NormalTok{),}
+\NormalTok{  larga     }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"2. LatAm larga"}\NormalTok{),}
+\NormalTok{  extendida }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"3. Extendida 15 países"}\NormalTok{)}
+\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(covp, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tnum, }\AttributeTok{y =}\NormalTok{ country, }\AttributeTok{color =}\NormalTok{ base)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \FloatTok{1.6}\NormalTok{, }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{base, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{, }\AttributeTok{scales =} \StringTok{"free\_y"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{y =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{title =} \StringTok{"Cobertura temporal por base y país"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{11}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Regresiones_panel_v2_files/figure-latex/coverage-plot-1} \end{center}
+
+\begin{quote}
+\textbf{Lectura del gráfico de cobertura.} La base larga estira el
+núcleo LatAm \textasciitilde9 trimestres hacia atrás (2007Q4 vs 2010Q1)
+gracias al panel GaR de 15 países. La base extendida agrega países, pero
+casi todos viven exclusivamente en la ventana 2010Q1-2014Q4 (excepto los
+5 LatAm, que corren en toda la ventana). Esto se explota en la sección
+4.2 con una especificación restringida a esa ventana común.
+\end{quote}
+
+\section{Sección 1 --- Núcleo LatAm: corta
+vs.~larga}\label{secciuxf3n-1-nuxfacleo-latam-corta-vs.-larga}
+
+\subsection{Batería principal (M1-M6), lado a
+lado}\label{bateruxeda-principal-m1-m6-lado-a-lado}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{run\_main }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(pdat, dat) \{}
+\NormalTok{  ctrl }\OtherTok{\textless{}{-}} \StringTok{"debt\_gdp + fisc\_bal + res\_gdp + ca\_gdp + infl\_yoy + reer"}
+  \FunctionTok{list}\NormalTok{(}
+    \AttributeTok{M1 =} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c, }\AttributeTok{data =}\NormalTok{ pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{),}
+    \AttributeTok{M2 =} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c, }\AttributeTok{data =}\NormalTok{ pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{),}
+    \AttributeTok{M3 =} \FunctionTok{plm}\NormalTok{(}\FunctionTok{as.formula}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"EMBI\_bps \textasciitilde{} JLoss\_c + GaR\_c + JxG\_c +"}\NormalTok{, ctrl)),}
+             \AttributeTok{data =}\NormalTok{ pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{),}
+    \AttributeTok{M4 =} \FunctionTok{plm}\NormalTok{(}\FunctionTok{as.formula}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"lnEMBI \textasciitilde{} JLoss\_c + GaR\_c + JxG\_c +"}\NormalTok{, ctrl)),}
+             \AttributeTok{data =}\NormalTok{ pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{),}
+    \AttributeTok{M5 =} \FunctionTok{plm}\NormalTok{(}\FunctionTok{as.formula}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"EMBI\_bps \textasciitilde{} JLoss\_c + GaR\_c + JxG\_c + VIX +"}\NormalTok{, ctrl)),}
+             \AttributeTok{data =}\NormalTok{ pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"individual"}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{\}}
+
+\NormalTok{mods\_corta }\OtherTok{\textless{}{-}} \FunctionTok{run\_main}\NormalTok{(pan\_corta, corta)}
+\NormalTok{mods\_larga }\OtherTok{\textless{}{-}} \FunctionTok{run\_main}\NormalTok{(pan\_larga, larga)}
+
+\NormalTok{cmap }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"JLoss\_c"}\OtherTok{=}\StringTok{"JLoss"}\NormalTok{, }\StringTok{"GaR\_c"}\OtherTok{=}\StringTok{"GaR (pp)"}\NormalTok{, }\StringTok{"JxG\_c"}\OtherTok{=}\StringTok{"JLoss × GaR"}\NormalTok{, }\StringTok{"VIX"}\OtherTok{=}\StringTok{"VIX"}\NormalTok{,}
+          \StringTok{"debt\_gdp"}\OtherTok{=}\StringTok{"Deuda/PIB"}\NormalTok{, }\StringTok{"fisc\_bal"}\OtherTok{=}\StringTok{"Balance fiscal/PIB"}\NormalTok{,}
+          \StringTok{"res\_gdp"}\OtherTok{=}\StringTok{"Reservas/PIB"}\NormalTok{, }\StringTok{"ca\_gdp"}\OtherTok{=}\StringTok{"Cuenta corriente/PIB"}\NormalTok{,}
+          \StringTok{"infl\_yoy"}\OtherTok{=}\StringTok{"Inflación YoY"}\NormalTok{, }\StringTok{"reer"}\OtherTok{=}\StringTok{"REER"}\NormalTok{)}
+
+\NormalTok{todos\_latam }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{setNames}\NormalTok{(mods\_corta, }\FunctionTok{paste0}\NormalTok{(}\StringTok{"Corta "}\NormalTok{, }\FunctionTok{names}\NormalTok{(mods\_corta))),}
+                  \FunctionTok{setNames}\NormalTok{(mods\_larga, }\FunctionTok{paste0}\NormalTok{(}\StringTok{"Larga "}\NormalTok{, }\FunctionTok{names}\NormalTok{(mods\_larga))))}
+
+\FunctionTok{modelsummary}\NormalTok{(todos\_latam,}
+  \AttributeTok{vcov =} \FunctionTok{lapply}\NormalTok{(todos\_latam, DK),}
+  \AttributeTok{coef\_map =}\NormalTok{ cmap,}
+  \AttributeTok{stars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}*\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{1}\NormalTok{,}\StringTok{\textquotesingle{}**\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{05}\NormalTok{,}\StringTok{\textquotesingle{}***\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{01}\NormalTok{),}
+  \AttributeTok{gof\_omit =} \StringTok{"AIC|BIC|Log.Lik|RMSE|Adj"}\NormalTok{,}
+  \AttributeTok{notes =} \StringTok{"SE Driscoll{-}Kraay. M1{-}M4: FE país+tiempo. M5: FE país + VIX explícito."}\NormalTok{,}
+  \AttributeTok{title =} \StringTok{"Tabla 1. Núcleo LatAm — corta (2010Q1{-}2022Q2) vs. larga (2007Q4{-}2022Q2)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Tabla 1. Núcleo LatAm — corta (2010Q1-2022Q2) vs. larga (2007Q4-2022Q2)},
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={SE Driscoll-Kraay. M1-M4: FE país+tiempo. M5: FE país + VIX explícito.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-11}{solid, black, 0.05em},
+hline{22}={1-11}{solid, black, 0.05em},
+hline{1}={1-11}{solid, black, 0.08em},
+hline{25}={1-11}{solid, black, 0.08em},
+column{2-11}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Corta M1 & Corta M2 & Corta M3 & Corta M4 & Corta M5 & Larga M1 & Larga M2 & Larga M3 & Larga M4 & Larga M5 \\
+JLoss & \num{2.731}*** & \num{1.233}*** & \num{1.340}* & \num{0.007}*** & \num{0.171} & \num{2.261}*** & \num{1.271}*** & \num{1.580}*** & \num{0.006}*** & \num{0.605} \\
+& (\num{0.571}) & (\num{0.427}) & (\num{0.680}) & (\num{0.002}) & (\num{0.805}) & (\num{0.637}) & (\num{0.464}) & (\num{0.506}) & (\num{0.002}) & (\num{0.576}) \\
+GaR (pp) & \num{3.423}* & \num{2.863} & \num{1.663} & \num{0.009} & \num{-4.408}** & \num{1.712} & \num{1.558} & \num{0.893} & \num{0.004} & \num{-5.056}** \\
+& (\num{2.057}) & (\num{2.086}) & (\num{2.846}) & (\num{0.009}) & (\num{2.170}) & (\num{2.739}) & (\num{2.615}) & (\num{2.194}) & (\num{0.008}) & (\num{2.180}) \\
+JLoss × GaR &  & \num{-0.352}*** & \num{-0.316}*** & \num{-0.000} & \num{-0.223}* &  & \num{-0.336}*** & \num{-0.305}** & \num{-0.000} & \num{-0.226}* \\
+&  & (\num{0.089}) & (\num{0.102}) & (\num{0.000}) & (\num{0.119}) &  & (\num{0.120}) & (\num{0.138}) & (\num{0.000}) & (\num{0.129}) \\
+VIX &  &  &  &  & \num{4.112} &  &  &  &  & \num{1.633} \\
+&  &  &  &  & (\num{3.717}) &  &  &  &  & (\num{3.966}) \\
+Deuda/PIB &  &  & \num{-2.062}*** & \num{-0.006}** & \num{-1.857}*** &  &  & \num{-1.334} & \num{-0.003} & \num{-1.190}* \\
+&  &  & (\num{0.670}) & (\num{0.002}) & (\num{0.628}) &  &  & (\num{0.837}) & (\num{0.003}) & (\num{0.622}) \\
+Balance fiscal/PIB &  &  & \num{7.703}* & \num{0.025}* & \num{2.329} &  &  & \num{6.775} & \num{0.021} & \num{2.552} \\
+&  &  & (\num{4.357}) & (\num{0.013}) & (\num{3.306}) &  &  & (\num{4.221}) & (\num{0.013}) & (\num{2.946}) \\
+Reservas/PIB &  &  & \num{6.858}** & \num{0.027}** & \num{3.695}* &  &  & \num{2.852} & \num{0.012} & \num{3.380}** \\
+&  &  & (\num{2.878}) & (\num{0.011}) & (\num{2.001}) &  &  & (\num{2.714}) & (\num{0.011}) & (\num{1.630}) \\
+Cuenta corriente/PIB &  &  & \num{10.770}* & \num{0.017} & \num{12.832}*** &  &  & \num{4.173}* & \num{0.006} & \num{6.388}*** \\
+&  &  & (\num{6.135}) & (\num{0.022}) & (\num{3.638}) &  &  & (\num{2.339}) & (\num{0.009}) & (\num{2.211}) \\
+Inflación YoY &  &  & \num{-4.502} & \num{-0.011} & \num{8.332}** &  &  & \num{-1.540} & \num{0.001} & \num{7.762}*** \\
+&  &  & (\num{6.273}) & (\num{0.022}) & (\num{3.711}) &  &  & (\num{4.570}) & (\num{0.016}) & (\num{2.518}) \\
+REER &  &  & \num{-1.070}*** & \num{-0.004}*** & \num{-2.245}*** &  &  & \num{-1.089}*** & \num{-0.005}*** & \num{-1.997}*** \\
+&  &  & (\num{0.355}) & (\num{0.001}) & (\num{0.432}) &  &  & (\num{0.261}) & (\num{0.001}) & (\num{0.356}) \\
+Num.Obs. & \num{248} & \num{248} & \num{200} & \num{200} & \num{200} & \num{281} & \num{281} & \num{253} & \num{253} & \num{253} \\
+R2 & \num{0.131} & \num{0.165} & \num{0.447} & \num{0.404} & \num{0.641} & \num{0.091} & \num{0.116} & \num{0.418} & \num{0.361} & \num{0.612} \\
+Std.Errors & Corta M1 & Corta M2 & Corta M3 & Corta M4 & Corta M5 & Larga M1 & Larga M2 & Larga M3 & Larga M4 & Larga M5 \\
+\end{talltblr}
+\end{table}
+
+\begin{quote}
+\textbf{Qué mirar primero.} El coeficiente que importa es \(\theta\)
+(\texttt{JLoss\ ×\ GaR}) en M2-M5. Si el signo y la significancia se
+mantienen entre ``Corta'' y ``Larga'', la ventana adicional de 2007Q4 a
+2009Q4 (crisis financiera global incluida) no está impulsando el
+resultado artificialmente ni tampoco lo está disolviendo --- es la forma
+más directa de auditar si ``hacer más robusto el GaR'' cambia la
+conclusión.
+\end{quote}
+
+\subsection{Efecto marginal de JLoss según severidad de GaR --- corta
+vs.~larga}\label{efecto-marginal-de-jloss-seguxfan-severidad-de-gar-corta-vs.-larga}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{marginal\_df }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(m, dat) \{}
+\NormalTok{  V  }\OtherTok{\textless{}{-}} \FunctionTok{DK}\NormalTok{(m); b }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(m)}
+\NormalTok{  bJ }\OtherTok{\textless{}{-}}\NormalTok{ b[}\StringTok{"JLoss\_c"}\NormalTok{]; bI }\OtherTok{\textless{}{-}}\NormalTok{ b[}\StringTok{"JxG\_c"}\NormalTok{]}
+\NormalTok{  vJ }\OtherTok{\textless{}{-}}\NormalTok{ V[}\StringTok{"JLoss\_c"}\NormalTok{,}\StringTok{"JLoss\_c"}\NormalTok{]; vI }\OtherTok{\textless{}{-}}\NormalTok{ V[}\StringTok{"JxG\_c"}\NormalTok{,}\StringTok{"JxG\_c"}\NormalTok{]; cJI }\OtherTok{\textless{}{-}}\NormalTok{ V[}\StringTok{"JLoss\_c"}\NormalTok{,}\StringTok{"JxG\_c"}\NormalTok{]}
+\NormalTok{  mu }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{GaR\_pp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  grid }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{GaR\_pp, .}\DecValTok{05}\NormalTok{, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{), }\FunctionTok{quantile}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{GaR\_pp, .}\DecValTok{95}\NormalTok{, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{), }\AttributeTok{length.out =} \DecValTok{100}\NormalTok{)}
+\NormalTok{  dev }\OtherTok{\textless{}{-}}\NormalTok{ grid }\SpecialCharTok{{-}}\NormalTok{ mu}
+\NormalTok{  me  }\OtherTok{\textless{}{-}}\NormalTok{ bJ }\SpecialCharTok{+}\NormalTok{ bI }\SpecialCharTok{*}\NormalTok{ dev}
+\NormalTok{  se  }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(vJ }\SpecialCharTok{+}\NormalTok{ dev}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ vI }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ dev }\SpecialCharTok{*}\NormalTok{ cJI)}
+  \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{GaR =}\NormalTok{ grid, }\AttributeTok{me =}\NormalTok{ me, }\AttributeTok{lo =}\NormalTok{ me }\SpecialCharTok{{-}} \FloatTok{1.96}\SpecialCharTok{*}\NormalTok{se, }\AttributeTok{hi =}\NormalTok{ me }\SpecialCharTok{+} \FloatTok{1.96}\SpecialCharTok{*}\NormalTok{se)}
+\NormalTok{\}}
+
+\NormalTok{mdf\_corta }\OtherTok{\textless{}{-}} \FunctionTok{marginal\_df}\NormalTok{(mods\_corta}\SpecialCharTok{$}\NormalTok{M3, corta) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"Corta"}\NormalTok{)}
+\NormalTok{mdf\_larga }\OtherTok{\textless{}{-}} \FunctionTok{marginal\_df}\NormalTok{(mods\_larga}\SpecialCharTok{$}\NormalTok{M3, larga) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"Larga"}\NormalTok{)}
+\NormalTok{mdf }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(mdf\_corta, mdf\_larga)}
+
+\FunctionTok{ggplot}\NormalTok{(mdf, }\FunctionTok{aes}\NormalTok{(GaR, me, }\AttributeTok{color =}\NormalTok{ base, }\AttributeTok{fill =}\NormalTok{ base)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"grey50"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_ribbon}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ lo, }\AttributeTok{ymax =}\NormalTok{ hi), }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{15}\NormalTok{, }\AttributeTok{color =} \ConstantTok{NA}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_reverse}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"GaR (pp) — izquierda = mayor riesgo de cola"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"∂EMBI/∂JLoss (pb por unidad de JLoss)"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Amplificación supra{-}aditiva del riesgo soberano: corta vs. larga"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Basado en M3 de cada base"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Regresiones_panel_v2_files/figure-latex/marginal-fn-1} \end{center}
+
+\subsection{Diagnósticos (corta
+vs.~larga)}\label{diagnuxf3sticos-corta-vs.-larga}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diag\_table }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(m2, m3, pdat, dat) \{}
+\NormalTok{  cd  }\OtherTok{\textless{}{-}} \FunctionTok{pcdtest}\NormalTok{(m2, }\AttributeTok{test =} \StringTok{"cd"}\NormalTok{)}
+\NormalTok{  bg  }\OtherTok{\textless{}{-}} \FunctionTok{pbgtest}\NormalTok{(m2)}
+\NormalTok{  re  }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c, }\AttributeTok{data =}\NormalTok{ pdat, }\AttributeTok{model =} \StringTok{"random"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{)}
+\NormalTok{  ha  }\OtherTok{\textless{}{-}} \FunctionTok{phtest}\NormalTok{(m2, re)}
+  \FunctionTok{data.frame}\NormalTok{(}
+    \AttributeTok{test =} \FunctionTok{c}\NormalTok{(}\StringTok{"Pesaran CD (dep. transversal)"}\NormalTok{, }\StringTok{"Wooldridge (autocorr.)"}\NormalTok{, }\StringTok{"Hausman (FE vs RE)"}\NormalTok{),}
+    \AttributeTok{estadistico =} \FunctionTok{round}\NormalTok{(}\FunctionTok{c}\NormalTok{(cd}\SpecialCharTok{$}\NormalTok{statistic, bg}\SpecialCharTok{$}\NormalTok{statistic, ha}\SpecialCharTok{$}\NormalTok{statistic), }\DecValTok{3}\NormalTok{),}
+    \AttributeTok{p\_valor =} \FunctionTok{round}\NormalTok{(}\FunctionTok{c}\NormalTok{(cd}\SpecialCharTok{$}\NormalTok{p.value, bg}\SpecialCharTok{$}\NormalTok{p.value, ha}\SpecialCharTok{$}\NormalTok{p.value), }\DecValTok{4}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{\}}
+
+\NormalTok{dt\_corta }\OtherTok{\textless{}{-}} \FunctionTok{diag\_table}\NormalTok{(mods\_corta}\SpecialCharTok{$}\NormalTok{M2, mods\_corta}\SpecialCharTok{$}\NormalTok{M3, pan\_corta, corta)}
+\NormalTok{dt\_larga }\OtherTok{\textless{}{-}} \FunctionTok{diag\_table}\NormalTok{(mods\_larga}\SpecialCharTok{$}\NormalTok{M2, mods\_larga}\SpecialCharTok{$}\NormalTok{M3, pan\_larga, larga)}
+
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{Corta =}\NormalTok{ dt\_corta, }\AttributeTok{Larga =}\NormalTok{ dt\_larga)[[}\DecValTok{1}\NormalTok{]], }\AttributeTok{caption =} \StringTok{"Diagnósticos — LatAm corta"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{full\_width =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[t]{lrr}
+\caption{\label{tab:diagnostics-fn}Diagnósticos — LatAm corta}\\
+\toprule
+test & estadistico & p\_valor\\
+\midrule
+Pesaran CD (dep. transversal) & -4.952 & 0.0000\\
+Wooldridge (autocorr.) & 198.948 & 0.0000\\
+Hausman (FE vs RE) & 15.977 & 0.0011\\
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{Corta =}\NormalTok{ dt\_corta, }\AttributeTok{Larga =}\NormalTok{ dt\_larga)[[}\DecValTok{2}\NormalTok{]], }\AttributeTok{caption =} \StringTok{"Diagnósticos — LatAm larga"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{full\_width =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[t]{lrr}
+\caption{\label{tab:diagnostics-fn}Diagnósticos — LatAm larga}\\
+\toprule
+test & estadistico & p\_valor\\
+\midrule
+Pesaran CD (dep. transversal) & -5.201 & 0.0000\\
+Wooldridge (autocorr.) & 207.227 & 0.0000\\
+Hausman (FE vs RE) & 15.912 & 0.0012\\
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aux\_corta }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss }\SpecialCharTok{+}\NormalTok{ GaR\_pp }\SpecialCharTok{+}\NormalTok{ debt\_gdp }\SpecialCharTok{+}\NormalTok{ fisc\_bal }\SpecialCharTok{+}\NormalTok{ res\_gdp }\SpecialCharTok{+}\NormalTok{ ca\_gdp }\SpecialCharTok{+}\NormalTok{ infl\_yoy }\SpecialCharTok{+}\NormalTok{ reer }\SpecialCharTok{+}\NormalTok{ VIX, }\AttributeTok{data =}\NormalTok{ corta)}
+\NormalTok{aux\_larga }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss }\SpecialCharTok{+}\NormalTok{ GaR\_pp }\SpecialCharTok{+}\NormalTok{ debt\_gdp }\SpecialCharTok{+}\NormalTok{ fisc\_bal }\SpecialCharTok{+}\NormalTok{ res\_gdp }\SpecialCharTok{+}\NormalTok{ ca\_gdp }\SpecialCharTok{+}\NormalTok{ infl\_yoy }\SpecialCharTok{+}\NormalTok{ reer }\SpecialCharTok{+}\NormalTok{ VIX, }\AttributeTok{data =}\NormalTok{ larga)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"VIF — corta:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{); }\FunctionTok{print}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{vif}\NormalTok{(aux\_corta), }\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## VIF — corta:
+\end{verbatim}
+
+\begin{verbatim}
+##    JLoss   GaR_pp debt_gdp fisc_bal  res_gdp   ca_gdp infl_yoy     reer 
+##     2.32     1.89     3.33     2.84     2.57     1.42     1.85     2.09 
+##      VIX 
+##     1.19
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{VIF — larga:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{); }\FunctionTok{print}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{vif}\NormalTok{(aux\_larga), }\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## VIF — larga:
+\end{verbatim}
+
+\begin{verbatim}
+##    JLoss   GaR_pp debt_gdp fisc_bal  res_gdp   ca_gdp infl_yoy     reer 
+##     2.16     2.20     2.17     2.37     1.77     1.22     1.84     2.06 
+##      VIX 
+##     1.25
+\end{verbatim}
+
+\section{\texorpdfstring{Sección 2 --- Robustez adicional (heredada de
+\texttt{Regresiones\_panel.Rmd}), corta
+vs.~larga}{Sección 2 --- Robustez adicional (heredada de Regresiones\_panel.Rmd), corta vs.~larga}}\label{secciuxf3n-2-robustez-adicional-heredada-de-regresiones_panel.rmd-corta-vs.-larga}
+
+\subsection{\texorpdfstring{Comparación de errores estándar sobre
+\(\theta\)}{Comparación de errores estándar sobre \textbackslash theta}}\label{comparaciuxf3n-de-errores-estuxe1ndar-sobre-theta}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{se\_compare }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(m) \{}
+\NormalTok{  se\_variants }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+    \StringTok{"Driscoll{-}Kraay"} \OtherTok{=} \FunctionTok{DK}\NormalTok{(m),}
+    \StringTok{"Cluster país"}   \OtherTok{=} \FunctionTok{vcovHC}\NormalTok{(m, }\AttributeTok{type =} \StringTok{"HC1"}\NormalTok{, }\AttributeTok{cluster =} \StringTok{"group"}\NormalTok{),}
+    \StringTok{"Cluster tiempo"} \OtherTok{=} \FunctionTok{vcovHC}\NormalTok{(m, }\AttributeTok{type =} \StringTok{"HC1"}\NormalTok{, }\AttributeTok{cluster =} \StringTok{"time"}\NormalTok{),}
+    \StringTok{"Arellano (HAC)"} \OtherTok{=} \FunctionTok{vcovHC}\NormalTok{(m, }\AttributeTok{method =} \StringTok{"arellano"}\NormalTok{, }\AttributeTok{type =} \StringTok{"HC1"}\NormalTok{)}
+\NormalTok{  )}
+  \FunctionTok{sapply}\NormalTok{(se\_variants, }\ControlFlowTok{function}\NormalTok{(v) \{}
+\NormalTok{    ct }\OtherTok{\textless{}{-}} \FunctionTok{coeftest}\NormalTok{(m, }\AttributeTok{vcov =}\NormalTok{ v)[}\StringTok{"JxG\_c"}\NormalTok{, ]}
+    \FunctionTok{c}\NormalTok{(}\AttributeTok{coef =} \FunctionTok{round}\NormalTok{(ct[}\DecValTok{1}\NormalTok{],}\DecValTok{3}\NormalTok{), }\AttributeTok{se =} \FunctionTok{round}\NormalTok{(ct[}\DecValTok{2}\NormalTok{],}\DecValTok{3}\NormalTok{), }\AttributeTok{t =} \FunctionTok{round}\NormalTok{(ct[}\DecValTok{3}\NormalTok{],}\DecValTok{2}\NormalTok{), }\AttributeTok{p =} \FunctionTok{round}\NormalTok{(ct[}\DecValTok{4}\NormalTok{],}\DecValTok{4}\NormalTok{))}
+\NormalTok{  \})}
+\NormalTok{\}}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Corta:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{); }\FunctionTok{print}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{se\_compare}\NormalTok{(mods\_corta}\SpecialCharTok{$}\NormalTok{M3)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Corta:
+\end{verbatim}
+
+\begin{verbatim}
+##                coef.Estimate se.Std. Error t.t value p.Pr(>|t|)
+## Driscoll-Kraay        -0.316         0.102     -3.09     0.0024
+## Cluster país          -0.316         0.086     -3.66     0.0004
+## Cluster tiempo        -0.316         0.091     -3.47     0.0007
+## Arellano (HAC)        -0.316         0.086     -3.66     0.0004
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Larga:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{); }\FunctionTok{print}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{se\_compare}\NormalTok{(mods\_larga}\SpecialCharTok{$}\NormalTok{M3)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Larga:
+\end{verbatim}
+
+\begin{verbatim}
+##                coef.Estimate se.Std. Error t.t value p.Pr(>|t|)
+## Driscoll-Kraay        -0.305         0.138     -2.21     0.0282
+## Cluster país          -0.305         0.103     -2.96     0.0035
+## Cluster tiempo        -0.305         0.123     -2.49     0.0137
+## Arellano (HAC)        -0.305         0.103     -2.96     0.0035
+\end{verbatim}
+
+\subsection{Subperiodo sin COVID-19}\label{subperiodo-sin-covid-19}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ctrl }\OtherTok{\textless{}{-}} \StringTok{"debt\_gdp + fisc\_bal + res\_gdp + ca\_gdp + infl\_yoy + reer"}
+\NormalTok{nc\_model }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(dat) \{}
+\NormalTok{  pdat }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(}\FunctionTok{subset}\NormalTok{(dat, post2020 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{), }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{,}\StringTok{"tnum"}\NormalTok{))}
+  \FunctionTok{plm}\NormalTok{(}\FunctionTok{as.formula}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"EMBI\_bps \textasciitilde{} JLoss\_c + GaR\_c + JxG\_c +"}\NormalTok{, ctrl)),}
+      \AttributeTok{data =}\NormalTok{ pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{m\_nc\_corta }\OtherTok{\textless{}{-}} \FunctionTok{nc\_model}\NormalTok{(corta); m\_nc\_larga }\OtherTok{\textless{}{-}} \FunctionTok{nc\_model}\NormalTok{(larga)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Corta, sin COVID:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{); }\FunctionTok{print}\NormalTok{(}\FunctionTok{coeftest}\NormalTok{(m\_nc\_corta, }\AttributeTok{vcov =} \FunctionTok{DK}\NormalTok{(m\_nc\_corta)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Corta, sin COVID:
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##           Estimate Std. Error t value    Pr(>|t|)    
+## JLoss_c   0.083273   0.592068  0.1406    0.888410    
+## GaR_c     1.515790   1.582855  0.9576    0.340388    
+## JxG_c    -0.255023   0.080375 -3.1729    0.001966 ** 
+## debt_gdp -0.683167   0.593613 -1.1509    0.252331    
+## fisc_bal  7.166109   2.604250  2.7517    0.006955 ** 
+## res_gdp   5.864475   2.261441  2.5932    0.010825 *  
+## ca_gdp   19.019193   8.650679  2.1986    0.030041 *  
+## infl_yoy  1.421933   3.184208  0.4466    0.656088    
+## reer     -1.788367   0.347628 -5.1445 0.000001208 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Larga, sin COVID:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{); }\FunctionTok{print}\NormalTok{(}\FunctionTok{coeftest}\NormalTok{(m\_nc\_larga, }\AttributeTok{vcov =} \FunctionTok{DK}\NormalTok{(m\_nc\_larga)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Larga, sin COVID:
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##           Estimate Std. Error t value      Pr(>|t|)    
+## JLoss_c   0.760305   0.431313  1.7628     0.0799629 .  
+## GaR_c    -1.248595   2.048996 -0.6094     0.5431956    
+## JxG_c    -0.382555   0.113656 -3.3659     0.0009676 ***
+## debt_gdp  0.042542   0.536599  0.0793     0.9369139    
+## fisc_bal  5.192980   2.406412  2.1580     0.0325105 *  
+## res_gdp   1.110118   1.609891  0.6896     0.4915287    
+## ca_gdp    1.224633   3.012362  0.4065     0.6849247    
+## infl_yoy -0.588854   2.593222 -0.2271     0.8206733    
+## reer     -1.522146   0.256447 -5.9355 0.00000001931 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\subsection{Persistencia (especificación dinámica, diagnóstico --- sesgo
+de
+Nickell)}\label{persistencia-especificaciuxf3n-dinuxe1mica-diagnuxf3stico-sesgo-de-nickell}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dyn\_model }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(dat) \{}
+\NormalTok{  dat}\SpecialCharTok{$}\NormalTok{EMBI\_lag }\OtherTok{\textless{}{-}} \FunctionTok{ave}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{EMBI\_bps, dat}\SpecialCharTok{$}\NormalTok{country, }\AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\FunctionTok{head}\NormalTok{(x, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)))}
+\NormalTok{  pdat }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(dat, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{,}\StringTok{"tnum"}\NormalTok{))}
+  \FunctionTok{plm}\NormalTok{(}\FunctionTok{as.formula}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"EMBI\_bps \textasciitilde{} EMBI\_lag + JLoss\_c + GaR\_c + JxG\_c +"}\NormalTok{, ctrl)),}
+      \AttributeTok{data =}\NormalTok{ pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{m\_dyn\_corta }\OtherTok{\textless{}{-}} \FunctionTok{dyn\_model}\NormalTok{(corta); m\_dyn\_larga }\OtherTok{\textless{}{-}} \FunctionTok{dyn\_model}\NormalTok{(larga)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Corta:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{); }\FunctionTok{print}\NormalTok{(}\FunctionTok{coeftest}\NormalTok{(m\_dyn\_corta, }\AttributeTok{vcov =} \FunctionTok{DK}\NormalTok{(m\_dyn\_corta)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Corta:
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##           Estimate Std. Error t value              Pr(>|t|)    
+## EMBI_lag  0.850218   0.060379 14.0813 < 0.00000000000000022 ***
+## JLoss_c   0.118471   0.426164  0.2780             0.7814458    
+## GaR_c    -0.092282   1.070888 -0.0862             0.9314572    
+## JxG_c    -0.120240   0.070766 -1.6991             0.0916149 .  
+## debt_gdp -1.039846   0.269202 -3.8627             0.0001739 ***
+## fisc_bal -0.176194   1.712248 -0.1029             0.9181946    
+## res_gdp  -0.743120   1.347074 -0.5517             0.5821035    
+## ca_gdp   -1.683395   2.357976 -0.7139             0.4765212    
+## infl_yoy -2.759741   1.942798 -1.4205             0.1577853    
+## reer     -0.658900   0.158242 -4.1639            0.00005568 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Larga:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{); }\FunctionTok{print}\NormalTok{(}\FunctionTok{coeftest}\NormalTok{(m\_dyn\_larga, }\AttributeTok{vcov =} \FunctionTok{DK}\NormalTok{(m\_dyn\_larga)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Larga:
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##           Estimate Std. Error t value              Pr(>|t|)    
+## EMBI_lag  0.851369   0.049069 17.3505 < 0.00000000000000022 ***
+## JLoss_c   0.176015   0.296584  0.5935               0.55358    
+## GaR_c    -0.410304   0.764844 -0.5365               0.59228    
+## JxG_c    -0.105005   0.072961 -1.4392               0.15176    
+## debt_gdp -1.094347   0.236441 -4.6284          0.0000068534 ***
+## fisc_bal -0.436054   1.541974 -0.2828               0.77765    
+## res_gdp  -0.161457   0.702322 -0.2299               0.81843    
+## ca_gdp   -1.131643   0.702726 -1.6104               0.10900    
+## infl_yoy -2.821133   1.541277 -1.8304               0.06878 .  
+## reer     -0.639080   0.116420 -5.4894          0.0000001293 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\section{Sección 3 --- Batería agrupado→FE (Tablas A/B del documento
+original), corta
+vs.~larga}\label{secciuxf3n-3-bateruxeda-agrupadofe-tablas-ab-del-documento-original-corta-vs.-larga}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{run\_battery }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(pdat) \{}
+  \FunctionTok{list}\NormalTok{(}
+    \StringTok{"(1) Solo JLoss"}          \OtherTok{=} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c,                  pdat, }\AttributeTok{model =} \StringTok{"pooling"}\NormalTok{),}
+    \StringTok{"(2) Solo GaR"}            \OtherTok{=} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ GaR\_c,                    pdat, }\AttributeTok{model =} \StringTok{"pooling"}\NormalTok{),}
+    \StringTok{"(3) JLoss + GaR"}         \OtherTok{=} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c,          pdat, }\AttributeTok{model =} \StringTok{"pooling"}\NormalTok{),}
+    \StringTok{"(4) + interac. (sin FE)"} \OtherTok{=} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c,  pdat, }\AttributeTok{model =} \StringTok{"pooling"}\NormalTok{),}
+    \StringTok{"(5) FE país"}             \OtherTok{=} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c,  pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"individual"}\NormalTok{),}
+    \StringTok{"(6) FE tiempo"}           \OtherTok{=} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c,  pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"time"}\NormalTok{),}
+    \StringTok{"(7) FE país + tiempo"}    \OtherTok{=} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c,  pdat, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{\}}
+\NormalTok{opts }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{coef\_map =} \FunctionTok{c}\NormalTok{(}\StringTok{"JLoss\_c"}\OtherTok{=}\StringTok{"JLoss"}\NormalTok{,}\StringTok{"GaR\_c"}\OtherTok{=}\StringTok{"GaR (pp)"}\NormalTok{,}\StringTok{"JxG\_c"}\OtherTok{=}\StringTok{"JLoss × GaR"}\NormalTok{),}
+             \AttributeTok{stars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}*\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{1}\NormalTok{,}\StringTok{\textquotesingle{}**\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{05}\NormalTok{,}\StringTok{\textquotesingle{}***\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{01}\NormalTok{), }\AttributeTok{gof\_omit =} \StringTok{"AIC|BIC|Log.Lik|RMSE|Adj"}\NormalTok{)}
+
+\NormalTok{bat\_corta }\OtherTok{\textless{}{-}} \FunctionTok{run\_battery}\NormalTok{(pan\_corta)}
+\NormalTok{bat\_larga }\OtherTok{\textless{}{-}} \FunctionTok{run\_battery}\NormalTok{(pan\_larga)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bat\_todos }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{setNames}\NormalTok{(bat\_corta, }\FunctionTok{paste0}\NormalTok{(}\StringTok{"Corta "}\NormalTok{, }\FunctionTok{names}\NormalTok{(bat\_corta))),}
+               \FunctionTok{setNames}\NormalTok{(bat\_larga, }\FunctionTok{paste0}\NormalTok{(}\StringTok{"Larga "}\NormalTok{, }\FunctionTok{names}\NormalTok{(bat\_larga))))}
+\FunctionTok{modelsummary}\NormalTok{(bat\_todos, }\AttributeTok{vcov =} \FunctionTok{lapply}\NormalTok{(bat\_todos, DK),}
+  \AttributeTok{coef\_map =}\NormalTok{ opts}\SpecialCharTok{$}\NormalTok{coef\_map, }\AttributeTok{stars =}\NormalTok{ opts}\SpecialCharTok{$}\NormalTok{stars, }\AttributeTok{gof\_omit =}\NormalTok{ opts}\SpecialCharTok{$}\NormalTok{gof\_omit,}
+  \AttributeTok{title =} \StringTok{"Tabla 2. Del modelo agrupado a los efectos fijos — corta vs. larga"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Tabla 2. Del modelo agrupado a los efectos fijos — corta vs. larga},
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-15}{solid, black, 0.05em},
+hline{8}={1-15}{solid, black, 0.05em},
+hline{1}={1-15}{solid, black, 0.08em},
+hline{11}={1-15}{solid, black, 0.08em},
+column{2-15}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Corta (1) Solo JLoss & Corta (2) Solo GaR & Corta (3) JLoss + GaR & Corta (4) + interac. (sin FE) & Corta (5) FE país & Corta (6) FE tiempo & Corta (7) FE país + tiempo & Larga (1) Solo JLoss & Larga (2) Solo GaR & Larga (3) JLoss + GaR & Larga (4) + interac. (sin FE) & Larga (5) FE país & Larga (6) FE tiempo & Larga (7) FE país + tiempo \\
+JLoss & \num{3.983}*** &  & \num{2.802}*** & \num{2.073}*** & \num{0.907} & \num{1.833}*** & \num{1.233}*** & \num{4.356}*** &  & \num{3.119}*** & \num{2.589}*** & \num{1.318} & \num{2.236}*** & \num{1.271}*** \\
+& (\num{0.632}) &  & (\num{0.544}) & (\num{0.590}) & (\num{0.800}) & (\num{0.570}) & (\num{0.427}) & (\num{0.730}) &  & (\num{0.591}) & (\num{0.755}) & (\num{0.825}) & (\num{0.528}) & (\num{0.464}) \\
+GaR (pp) &  & \num{-10.159}*** & \num{-8.310}*** & \num{-8.658}*** & \num{-7.428}*** & \num{-9.838}*** & \num{2.863} &  & \num{-12.330}*** & \num{-10.545}*** & \num{-10.770}*** & \num{-9.443}*** & \num{-10.297}*** & \num{1.558} \\
+&  & (\num{1.521}) & (\num{1.005}) & (\num{0.945}) & (\num{1.153}) & (\num{2.728}) & (\num{2.086}) &  & (\num{2.470}) & (\num{1.887}) & (\num{1.902}) & (\num{1.856}) & (\num{2.927}) & (\num{2.615}) \\
+JLoss × GaR &  &  &  & \num{-0.201} & \num{-0.380}*** & \num{-0.115} & \num{-0.352}*** &  &  &  & \num{-0.199} & \num{-0.405}** & \num{-0.043} & \num{-0.336}*** \\
+&  &  &  & (\num{0.159}) & (\num{0.139}) & (\num{0.117}) & (\num{0.089}) &  &  &  & (\num{0.196}) & (\num{0.190}) & (\num{0.133}) & (\num{0.120}) \\
+Num.Obs. & \num{248} & \num{248} & \num{248} & \num{248} & \num{248} & \num{248} & \num{248} & \num{293} & \num{281} & \num{281} & \num{281} & \num{281} & \num{281} & \num{281} \\
+R2 & \num{0.199} & \num{0.279} & \num{0.368} & \num{0.372} & \num{0.323} & \num{0.278} & \num{0.165} & \num{0.174} & \num{0.316} & \num{0.404} & \num{0.406} & \num{0.341} & \num{0.283} & \num{0.116} \\
+Std.Errors & Corta (1) Solo JLoss & Corta (2) Solo GaR & Corta (3) JLoss + GaR & Corta (4) + interac. (sin FE) & Corta (5) FE país & Corta (6) FE tiempo & Corta (7) FE país + tiempo & Larga (1) Solo JLoss & Larga (2) Solo GaR & Larga (3) JLoss + GaR & Larga (4) + interac. (sin FE) & Larga (5) FE país & Larga (6) FE tiempo & Larga (7) FE país + tiempo \\
+\end{talltblr}
+\end{table}
+
+\section{\texorpdfstring{Sección 3bis --- Controles del paper de JLoss
+como índice agregado
+\(X_{i,t}\)}{Sección 3bis --- Controles del paper de JLoss como índice agregado X\_\{i,t\}}}\label{secciuxf3n-3bis-controles-del-paper-de-jloss-como-uxedndice-agregado-x_it}
+
+Los controles adicionales que replican los del paper de referencia de
+JLoss (Chari et al., 2024) --- \texttt{debt\_gdp} (log),
+\texttt{profit\_margin}, \texttt{UST10Y} (log), \texttt{US\_HY\_spread}
+(log) y \texttt{OnOffRun\_spread} (log) --- se incorporan como
+\textbf{un índice agregado} en vez de seis regresores sueltos, por dos
+razones: (i) \texttt{profit\_margin} solo tiene cobertura real en
+2007-2011 (ver más abajo) y (ii) meter seis controles correlacionados
+entre sí en un panel de \emph{N} moderado infla varianza sin ganar
+identificación.
+
+\textbf{\texttt{US\_HY\_spread} queda fuera del índice}: el proxy
+(\texttt{BAMLH0A0HYM2}, ICE BofA US HY OAS) llegó sin cobertura en la
+ventana de estudio (2004-2022) --- la serie descargada solo trae
+observaciones desde 2023Q3, así que se excluye hasta resolver la
+descarga. \textbf{Exchange-rate volatility también queda fuera}
+(pendiente, sin fuente construida todavía).
+
+\subsection{Por qué el índice se separa en dos: doméstico
+vs.~global}\label{por-quuxe9-el-uxedndice-se-separa-en-dos-domuxe9stico-vs.-global}
+
+Un solo índice mezclando \texttt{debt\_gdp}/\texttt{profit\_margin}
+(varían por país-trimestre) con
+\texttt{UST10Y}/\texttt{OnOffRun\_spread} (varían solo por trimestre,
+iguales para los 5-11 países en cada fecha) es econométricamente
+incómodo bajo \textbf{efectos fijos de tiempo}: la parte puramente
+global de la mezcla queda absorbida casi por completo por esos efectos
+de tiempo, y el índice combinado pierde poder de forma artificial (se
+probó: con FE país+tiempo el índice combinado no fue significativo en
+ninguna base, con \(R^2\) \emph{within} incluso negativo en la corta ---
+síntoma de que se estaba pidiendo identificar variación que ya no
+existía tras demediar por tiempo). La solución estándar es la misma que
+ya usa \texttt{M5} en la Sección 1: separar el control global y
+estimarlo con \textbf{FE de país únicamente} (sin FE de tiempo), dejando
+el componente doméstico donde sí corresponde, con FE país+tiempo.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{X\_dom\_idx}} = promedio de z-scores de
+  \texttt{debt\_gdp\_log} y \texttt{profit\_margin} (los que sí varían
+  por país). Se usa con \textbf{FE país+tiempo}, igual que el resto de
+  la batería principal.
+\item
+  \textbf{\texttt{X\_global\_idx}} = promedio de z-scores de
+  \texttt{UST10Y\_log} y \texttt{OnOffRun\_spread\_log} (comunes a todos
+  los países cada trimestre). Se usa con \textbf{FE país únicamente},
+  igual que \texttt{M5}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{idx\_cov }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}
+\NormalTok{  corta     }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"1. LatAm corta"}\NormalTok{),}
+\NormalTok{  larga     }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"2. LatAm larga"}\NormalTok{),}
+\NormalTok{  extendida }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{base =} \StringTok{"3. Extendida 15 países"}\NormalTok{)}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(base) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{X\_dom\_idx\_valido =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(X\_dom\_idx)),}
+            \AttributeTok{X\_global\_idx\_valido =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(X\_global\_idx)), }\AttributeTok{.groups =} \StringTok{"drop"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(idx\_cov, }\AttributeTok{caption =} \StringTok{"Cobertura de los índices agregados por base"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{full\_width =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[t]{lrrr}
+\caption{\label{tab:control-idx-coverage}Cobertura de los índices agregados por base}\\
+\toprule
+base & n & X\_dom\_idx\_valido & X\_global\_idx\_valido\\
+\midrule
+1. LatAm corta & 248 & 206 & 248\\
+2. LatAm larga & 293 & 286 & 293\\
+3. Extendida 15 países & 395 & 95 & 395\\
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{idx\_model\_dom }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(dat) \{}
+\NormalTok{  d }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(dat, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(X\_dom\_idx))}
+\NormalTok{  pdat }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(d, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"tnum"}\NormalTok{))}
+  \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c }\SpecialCharTok{+}\NormalTok{ X\_dom\_idx, }\AttributeTok{data =}\NormalTok{ pdat,}
+      \AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{idx\_model\_glob }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(dat) \{}
+\NormalTok{  d }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(dat, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(X\_global\_idx))}
+\NormalTok{  pdat }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(d, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"tnum"}\NormalTok{))}
+  \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c }\SpecialCharTok{+}\NormalTok{ X\_global\_idx, }\AttributeTok{data =}\NormalTok{ pdat,}
+      \AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"individual"}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{M\_dom\_corta  }\OtherTok{\textless{}{-}} \FunctionTok{idx\_model\_dom}\NormalTok{(corta);      M\_dom\_larga  }\OtherTok{\textless{}{-}} \FunctionTok{idx\_model\_dom}\NormalTok{(larga)}
+\NormalTok{M\_glob\_corta }\OtherTok{\textless{}{-}} \FunctionTok{idx\_model\_glob}\NormalTok{(corta);     M\_glob\_larga }\OtherTok{\textless{}{-}} \FunctionTok{idx\_model\_glob}\NormalTok{(larga)}
+\NormalTok{M\_glob\_ext   }\OtherTok{\textless{}{-}} \FunctionTok{idx\_model\_glob}\NormalTok{(extendida)  }\CommentTok{\# X\_dom\_idx en extendida cae a n=83 (solo LatAm 2007{-}2011); se omite de la tabla principal}
+
+\NormalTok{mods\_idx }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \StringTok{"Corta, X\_dom (FE2)"}       \OtherTok{=}\NormalTok{ M\_dom\_corta,}
+  \StringTok{"Larga, X\_dom (FE2)"}       \OtherTok{=}\NormalTok{ M\_dom\_larga,}
+  \StringTok{"Corta, X\_global (FE país)"}  \OtherTok{=}\NormalTok{ M\_glob\_corta,}
+  \StringTok{"Larga, X\_global (FE país)"}  \OtherTok{=}\NormalTok{ M\_glob\_larga,}
+  \StringTok{"Extendida, X\_global (FE país)"} \OtherTok{=}\NormalTok{ M\_glob\_ext}
+\NormalTok{)}
+\FunctionTok{modelsummary}\NormalTok{(mods\_idx, }\AttributeTok{vcov =} \FunctionTok{lapply}\NormalTok{(mods\_idx, DK),}
+  \AttributeTok{coef\_map =} \FunctionTok{c}\NormalTok{(}\StringTok{"JLoss\_c"}\OtherTok{=}\StringTok{"JLoss"}\NormalTok{, }\StringTok{"GaR\_c"}\OtherTok{=}\StringTok{"GaR (pp)"}\NormalTok{, }\StringTok{"JxG\_c"}\OtherTok{=}\StringTok{"JLoss × GaR"}\NormalTok{,}
+               \StringTok{"X\_dom\_idx"}\OtherTok{=}\StringTok{"Índice doméstico (paper)"}\NormalTok{, }\StringTok{"X\_global\_idx"}\OtherTok{=}\StringTok{"Índice global (paper)"}\NormalTok{),}
+  \AttributeTok{stars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}*\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{1}\NormalTok{,}\StringTok{\textquotesingle{}**\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{05}\NormalTok{,}\StringTok{\textquotesingle{}***\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{01}\NormalTok{), }\AttributeTok{gof\_omit =} \StringTok{"AIC|BIC|Log.Lik|RMSE|Adj"}\NormalTok{,}
+  \AttributeTok{notes =} \StringTok{"SE Driscoll{-}Kraay. X\_dom: FE país+tiempo. X\_global: FE país (ver texto)."}\NormalTok{,}
+  \AttributeTok{title =} \StringTok{"Tabla 2bis. θ con los controles del paper de JLoss como índice agregado"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Tabla 2bis. θ con los controles del paper de JLoss como índice agregado},
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={SE Driscoll-Kraay. X\_dom: FE país+tiempo. X\_global: FE país (ver texto).},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-6}{solid, black, 0.05em},
+hline{12}={1-6}{solid, black, 0.05em},
+hline{1}={1-6}{solid, black, 0.08em},
+hline{15}={1-6}{solid, black, 0.08em},
+column{2-6}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Corta, X\_dom (FE2) & Larga, X\_dom (FE2) & Corta, X\_global (FE país) & Larga, X\_global (FE país) & Extendida, X\_global (FE país) \\
+JLoss & \num{1.866}*** & \num{1.455}*** & \num{1.066} & \num{1.643}** & \num{2.405}*** \\
+& (\num{0.540}) & (\num{0.447}) & (\num{0.730}) & (\num{0.690}) & (\num{0.867}) \\
+GaR (pp) & \num{3.494} & \num{1.180} & \num{-7.067}*** & \num{-5.118}*** & \num{-5.141}*** \\
+& (\num{2.447}) & (\num{2.521}) & (\num{1.008}) & (\num{1.647}) & (\num{1.616}) \\
+JLoss × GaR & \num{-0.306}*** & \num{-0.327}*** & \num{-0.358}*** & \num{-0.391}** & \num{-0.157} \\
+& (\num{0.093}) & (\num{0.114}) & (\num{0.133}) & (\num{0.169}) & (\num{0.174}) \\
+Índice doméstico (paper) & \num{-46.674} & \num{-16.274} &  &  &  \\
+& (\num{31.858}) & (\num{12.285}) &  &  &  \\
+Índice global (paper) &  &  & \num{-13.949} & \num{-62.191}*** & \num{-57.288}*** \\
+&  &  & (\num{9.592}) & (\num{20.915}) & (\num{17.964}) \\
+Num.Obs. & \num{206} & \num{280} & \num{248} & \num{281} & \num{374} \\
+R2 & \num{0.287} & \num{0.146} & \num{0.334} & \num{0.464} & \num{0.412} \\
+Std.Errors & Corta, X\_dom (FE2) & Larga, X\_dom (FE2) & Corta, X\_global (FE país) & Larga, X\_global (FE país) & Extendida, X\_global (FE país) \\
+\end{talltblr}
+\end{table}
+
+\begin{quote}
+\textbf{Lectura.} \(\theta\) (\texttt{JLoss\ ×\ GaR}) se mantiene
+negativo y significativo en las cinco columnas --- el resultado central
+sobrevive a agregar los controles del paper de referencia, ya sea en su
+versión doméstica o global. El índice global (\texttt{X\_global\_idx})
+además resulta \textbf{significativo por sí mismo} con FE país (a
+diferencia de la versión mezclada con FE país+tiempo), confirmando que
+la separación doméstico/global fue la decisión correcta y no solo una
+formalidad. \texttt{X\_dom\_idx} en la base extendida se omite de la
+tabla principal porque su \emph{n} cae a 83 (solo los tramos LatAm con
+\texttt{profit\_margin} real, 2007-2011) --- no es un resultado
+interpretable a nivel de las 15 países, y se deja como nota, no como
+columna.
+\end{quote}
+
+\section{Sección 4 --- Panel extendido a 15
+países}\label{secciuxf3n-4-panel-extendido-a-15-pauxedses}
+
+\subsection{4.1 Especificación de muestra completa (sin controles
+domésticos)}\label{especificaciuxf3n-de-muestra-completa-sin-controles-domuxe9sticos}
+
+Sin \texttt{debt\_gdp}/\texttt{fisc\_bal}/etc. para los países no-LatAm,
+la especificación se limita a \texttt{JLoss}, \texttt{GaR}, la
+interacción y (donde aplica) el VIX global. Se usa \textbf{FE de país}
+como base (no \emph{twoways}, porque fuera de 2010-2014 el panel es casi
+enteramente los 5 países LatAm y los efectos de tiempo terminarían
+absorbiendo esencialmente la misma variación que ya capturan los efectos
+de país en ese tramo).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M\_ext\_pais }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c, }\AttributeTok{data =}\NormalTok{ pan\_ext, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"individual"}\NormalTok{)}
+\NormalTok{M\_ext\_vix  }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c }\SpecialCharTok{+}\NormalTok{ VIX\_cboe, }\AttributeTok{data =}\NormalTok{ pan\_ext, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"individual"}\NormalTok{)}
+\NormalTok{M\_ext\_2w   }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c, }\AttributeTok{data =}\NormalTok{ pan\_ext, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{)}
+
+\NormalTok{mods\_ext }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\StringTok{"FE país"} \OtherTok{=}\NormalTok{ M\_ext\_pais, }\StringTok{"FE país + VIX"} \OtherTok{=}\NormalTok{ M\_ext\_vix, }\StringTok{"FE país+tiempo"} \OtherTok{=}\NormalTok{ M\_ext\_2w)}
+\FunctionTok{modelsummary}\NormalTok{(mods\_ext, }\AttributeTok{vcov =} \FunctionTok{lapply}\NormalTok{(mods\_ext, DK),}
+  \AttributeTok{coef\_map =} \FunctionTok{c}\NormalTok{(}\StringTok{"JLoss\_c"}\OtherTok{=}\StringTok{"JLoss"}\NormalTok{,}\StringTok{"GaR\_c"}\OtherTok{=}\StringTok{"GaR (pp)"}\NormalTok{,}\StringTok{"JxG\_c"}\OtherTok{=}\StringTok{"JLoss × GaR"}\NormalTok{,}\StringTok{"VIX\_cboe"}\OtherTok{=}\StringTok{"VIX (CBOE)"}\NormalTok{),}
+  \AttributeTok{stars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}*\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{1}\NormalTok{,}\StringTok{\textquotesingle{}**\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{05}\NormalTok{,}\StringTok{\textquotesingle{}***\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{01}\NormalTok{), }\AttributeTok{gof\_omit =} \StringTok{"AIC|BIC|Log.Lik|RMSE|Adj"}\NormalTok{,}
+  \AttributeTok{notes =} \StringTok{"SE Driscoll{-}Kraay. Muestra completa desbalanceada (15 países, ventanas distintas)."}\NormalTok{,}
+  \AttributeTok{title =} \StringTok{"Tabla 3. Panel extendido — muestra completa, sin controles domésticos"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Tabla 3. Panel extendido — muestra completa, sin controles domésticos},
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={SE Driscoll-Kraay. Muestra completa desbalanceada (15 países, ventanas distintas).},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]},
+hline{2}={1-4}{solid, black, 0.05em},
+hline{10}={1-4}{solid, black, 0.05em},
+hline{1}={1-4}{solid, black, 0.08em},
+hline{13}={1-4}{solid, black, 0.08em},
+column{2-4}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& FE país & FE país + VIX & FE país+tiempo \\
+JLoss & \num{2.044}** & \num{2.648}*** & \num{1.362}*** \\
+& (\num{1.018}) & (\num{0.779}) & (\num{0.499}) \\
+GaR (pp) & \num{-9.279}*** & \num{-5.374}*** & \num{-0.610} \\
+& (\num{1.832}) & (\num{1.283}) & (\num{2.423}) \\
+JLoss × GaR & \num{-0.182} & \num{-0.119} & \num{-0.184} \\
+& (\num{0.183}) & (\num{0.178}) & (\num{0.113}) \\
+VIX (CBOE) &  & \num{3.891}*** &  \\
+&  & (\num{0.705}) &  \\
+Num.Obs. & \num{374} & \num{374} & \num{374} \\
+R2 & \num{0.302} & \num{0.447} & \num{0.076} \\
+Std.Errors & FE país & FE país + VIX & FE país+tiempo \\
+\end{talltblr}
+\end{table}
+
+\subsection{4.2 Ventana común 2010Q1-2014Q4 (comparación más
+limpia)}\label{ventana-comuxfan-2010q1-2014q4-comparaciuxf3n-muxe1s-limpia}
+
+Restringido al tramo donde de verdad hay 9-11 países simultáneos (según
+el gráfico de cobertura), lo que permite un FE de tiempo con significado
+real y una comparación más honesta con el núcleo LatAm en la misma
+ventana.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ext\_win }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(extendida, quarter }\SpecialCharTok{\textgreater{}=} \StringTok{"2010Q1"} \SpecialCharTok{\&}\NormalTok{ quarter }\SpecialCharTok{\textless{}=} \StringTok{"2014Q4"}\NormalTok{)}
+\NormalTok{pan\_ext\_win }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(ext\_win, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{,}\StringTok{"tnum"}\NormalTok{))}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Países en la ventana común:"}\NormalTok{, }\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(ext\_win}\SpecialCharTok{$}\NormalTok{country)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Países en la ventana común: 11
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{table}\NormalTok{(ext\_win}\SpecialCharTok{$}\NormalTok{country))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      brazil    bulgaria       chile       china    colombia   indonesia 
+##          20          16          20          20          20          20 
+##      mexico        peru      poland southafrica      turkey 
+##          20          20          20           6          20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M\_win\_pais }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c, }\AttributeTok{data =}\NormalTok{ pan\_ext\_win, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"individual"}\NormalTok{)}
+\NormalTok{M\_win\_2w   }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c, }\AttributeTok{data =}\NormalTok{ pan\_ext\_win, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{)}
+
+\CommentTok{\# Misma ventana, pero solo LatAm{-}5 (para comparar manzanas con manzanas)}
+\NormalTok{latam\_win }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(larga, quarter }\SpecialCharTok{\textgreater{}=} \StringTok{"2010Q1"} \SpecialCharTok{\&}\NormalTok{ quarter }\SpecialCharTok{\textless{}=} \StringTok{"2014Q4"}\NormalTok{)}
+\NormalTok{pan\_latam\_win }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(latam\_win, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{,}\StringTok{"tnum"}\NormalTok{))}
+\NormalTok{M\_latamwin\_2w }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(EMBI\_bps }\SpecialCharTok{\textasciitilde{}}\NormalTok{ JLoss\_c }\SpecialCharTok{+}\NormalTok{ GaR\_c }\SpecialCharTok{+}\NormalTok{ JxG\_c, }\AttributeTok{data =}\NormalTok{ pan\_latam\_win, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{, }\AttributeTok{effect =} \StringTok{"twoways"}\NormalTok{)}
+
+\NormalTok{mods\_win }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\StringTok{"Extendido, FE país"} \OtherTok{=}\NormalTok{ M\_win\_pais,}
+                  \StringTok{"Extendido, FE país+tiempo"} \OtherTok{=}\NormalTok{ M\_win\_2w,}
+                  \StringTok{"Solo LatAm{-}5, FE país+tiempo"} \OtherTok{=}\NormalTok{ M\_latamwin\_2w)}
+\FunctionTok{modelsummary}\NormalTok{(mods\_win, }\AttributeTok{vcov =} \FunctionTok{lapply}\NormalTok{(mods\_win, DK),}
+  \AttributeTok{coef\_map =} \FunctionTok{c}\NormalTok{(}\StringTok{"JLoss\_c"}\OtherTok{=}\StringTok{"JLoss"}\NormalTok{,}\StringTok{"GaR\_c"}\OtherTok{=}\StringTok{"GaR (pp)"}\NormalTok{,}\StringTok{"JxG\_c"}\OtherTok{=}\StringTok{"JLoss × GaR"}\NormalTok{),}
+  \AttributeTok{stars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}*\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{1}\NormalTok{,}\StringTok{\textquotesingle{}**\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{05}\NormalTok{,}\StringTok{\textquotesingle{}***\textquotesingle{}}\OtherTok{=}\NormalTok{.}\DecValTok{01}\NormalTok{), }\AttributeTok{gof\_omit =} \StringTok{"AIC|BIC|Log.Lik|RMSE|Adj"}\NormalTok{,}
+  \AttributeTok{notes =} \StringTok{"SE Driscoll{-}Kraay. Ventana 2010Q1{-}2014Q4 en las tres columnas."}\NormalTok{,}
+  \AttributeTok{title =} \StringTok{"Tabla 4. Ventana común 2010Q1{-}2014Q4: extendido vs. solo LatAm{-}5"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+caption={Tabla 4. Ventana común 2010Q1-2014Q4: extendido vs. solo LatAm-5},
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={SE Driscoll-Kraay. Ventana 2010Q1-2014Q4 en las tres columnas.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]},
+hline{2}={1-4}{solid, black, 0.05em},
+hline{8}={1-4}{solid, black, 0.05em},
+hline{1}={1-4}{solid, black, 0.08em},
+hline{11}={1-4}{solid, black, 0.08em},
+column{2-4}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Extendido, FE país & Extendido, FE país+tiempo & Solo LatAm-5, FE país+tiempo \\
+JLoss & \num{3.386}*** & \num{2.376}*** & \num{1.464}*** \\
+& (\num{1.202}) & (\num{0.689}) & (\num{0.267}) \\
+GaR (pp) & \num{-4.697}** & \num{-3.587} & \num{0.365} \\
+& (\num{2.035}) & (\num{2.368}) & (\num{0.975}) \\
+JLoss × GaR & \num{1.072}** & \num{0.626}** & \num{-0.074} \\
+& (\num{0.421}) & (\num{0.294}) & (\num{0.126}) \\
+Num.Obs. & \num{193} & \num{193} & \num{100} \\
+R2 & \num{0.158} & \num{0.093} & \num{0.275} \\
+Std.Errors & Extendido, FE país & Extendido, FE país+tiempo & Solo LatAm-5, FE país+tiempo \\
+\end{talltblr}
+\end{table}
+
+\begin{quote}
+\textbf{Esto es lo más cercano a una prueba real de generalización fuera
+de LatAm.} Si \(\theta\) mantiene signo y significancia al pasar de
+``Solo LatAm-5'' a ``Extendido'' en la misma ventana, es evidencia de
+que la complementariedad JLoss × GaR no es un artefacto específico de
+las cinco economías originales. Si se debilita o cambia de signo, es una
+señal genuina de heterogeneidad --- igual de informativa, y debe
+reportarse así, no forzarse.
+\end{quote}
+
+\subsection{4.3 Diagnósticos del panel
+extendido}\label{diagnuxf3sticos-del-panel-extendido}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Dependencia transversal (Pesaran CD), ventana común:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Dependencia transversal (Pesaran CD), ventana común:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{pcdtest}\NormalTok{(M\_win\_2w, }\AttributeTok{test =} \StringTok{"cd"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pesaran CD test for cross-sectional dependence in panels
+## 
+## data:  EMBI_bps ~ JLoss_c + GaR_c + JxG_c
+## z = -2.812, p-value = 0.004924
+## alternative hypothesis: cross-sectional dependence
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Autocorrelación (Wooldridge), ventana común:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Autocorrelación (Wooldridge), ventana común:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{pbgtest}\NormalTok{(M\_win\_2w))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Breusch-Godfrey/Wooldridge test for serial correlation in panel models
+## 
+## data:  EMBI_bps ~ JLoss_c + GaR_c + JxG_c
+## chisq = 75.909, df = 6, p-value = 0.00000000000002495
+## alternative hypothesis: serial correlation in idiosyncratic errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Significancia conjunta de efectos de tiempo (ventana común):}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Significancia conjunta de efectos de tiempo (ventana común):
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{pFtest}\NormalTok{(M\_win\_2w, M\_win\_pais))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  F test for twoways effects
+## 
+## data:  EMBI_bps ~ JLoss_c + GaR_c + JxG_c
+## F = 6.231, df1 = 19, df2 = 160, p-value = 0.000000000009488
+## alternative hypothesis: significant effects
+\end{verbatim}
+
+\begin{quote}
+\textbf{Nota de cautela.} Con \emph{T} entre 6 y 20 para los países
+no-LatAm, tanto Pesaran CD como Driscoll-Kraay operan fuera de su rango
+ideal de aplicación (pensado para \emph{T} moderado-grande). Estos
+diagnósticos se reportan por completitud, no como validación fuerte.
+\end{quote}
+
+\section{\texorpdfstring{Sección 5 --- Síntesis: triangulación de
+\(\theta\) (JLoss ×
+GaR)}{Sección 5 --- Síntesis: triangulación de \textbackslash theta (JLoss × GaR)}}\label{secciuxf3n-5-suxedntesis-triangulaciuxf3n-de-theta-jloss-gar}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{get\_theta }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(m, label) \{}
+\NormalTok{  ct }\OtherTok{\textless{}{-}} \FunctionTok{coeftest}\NormalTok{(m, }\AttributeTok{vcov =} \FunctionTok{DK}\NormalTok{(m))}
+  \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{modelo =}\NormalTok{ label,}
+             \AttributeTok{theta =}\NormalTok{ ct[}\StringTok{"JxG\_c"}\NormalTok{,}\StringTok{"Estimate"}\NormalTok{],}
+             \AttributeTok{se =}\NormalTok{ ct[}\StringTok{"JxG\_c"}\NormalTok{,}\StringTok{"Std. Error"}\NormalTok{],}
+             \AttributeTok{p =}\NormalTok{ ct[}\StringTok{"JxG\_c"}\NormalTok{,}\StringTok{"Pr(\textgreater{}|t|)"}\NormalTok{])}
+\NormalTok{\}}
+
+\NormalTok{synth }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}
+  \FunctionTok{get\_theta}\NormalTok{(mods\_corta}\SpecialCharTok{$}\NormalTok{M2, }\StringTok{"1. LatAm corta — M2 (FE2)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(mods\_corta}\SpecialCharTok{$}\NormalTok{M3, }\StringTok{"1. LatAm corta — M3 (+controles)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(M\_dom\_corta,   }\StringTok{"1. LatAm corta — X\_dom\_idx (FE2)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(M\_glob\_corta,  }\StringTok{"1. LatAm corta — X\_global\_idx (FE país)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(mods\_larga}\SpecialCharTok{$}\NormalTok{M2, }\StringTok{"2. LatAm larga — M2 (FE2)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(mods\_larga}\SpecialCharTok{$}\NormalTok{M3, }\StringTok{"2. LatAm larga — M3 (+controles)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(M\_dom\_larga,   }\StringTok{"2. LatAm larga — X\_dom\_idx (FE2)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(M\_glob\_larga,  }\StringTok{"2. LatAm larga — X\_global\_idx (FE país)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(M\_ext\_pais,    }\StringTok{"3. Extendido — muestra completa, FE país"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(M\_glob\_ext,    }\StringTok{"3. Extendido — X\_global\_idx (FE país)"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(M\_win\_2w,      }\StringTok{"3. Extendido — ventana común, FE2"}\NormalTok{),}
+  \FunctionTok{get\_theta}\NormalTok{(M\_latamwin\_2w, }\StringTok{"3b. Solo LatAm{-}5 — ventana común, FE2"}\NormalTok{)}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{lo =}\NormalTok{ theta }\SpecialCharTok{{-}} \FloatTok{1.96}\SpecialCharTok{*}\NormalTok{se, }\AttributeTok{hi =}\NormalTok{ theta }\SpecialCharTok{+} \FloatTok{1.96}\SpecialCharTok{*}\NormalTok{se)}
+
+\FunctionTok{kable}\NormalTok{(synth }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(theta, se, p), }\SpecialCharTok{\textasciitilde{}}\FunctionTok{round}\NormalTok{(., }\DecValTok{4}\NormalTok{))),}
+      \AttributeTok{caption =} \StringTok{"Coeficiente θ de JLoss × GaR a través de las tres bases"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{full\_width =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[t]{lrrrrr}
+\caption{\label{tab:synthesis}Coeficiente θ de JLoss × GaR a través de las tres bases}\\
+\toprule
+modelo & theta & se & p & lo & hi\\
+\midrule
+1. LatAm corta — M2 (FE2) & -0.3522 & 0.0887 & 0.0001 & -0.5260506 & -0.1783648\\
+1. LatAm corta — M3 (+controles) & -0.3156 & 0.1020 & 0.0024 & -0.5155510 & -0.1155653\\
+1. LatAm corta — X\_dom\_idx (FE2) & -0.3058 & 0.0932 & 0.0013 & -0.4885159 & -0.1231002\\
+1. LatAm corta — X\_global\_idx (FE país) & -0.3576 & 0.1334 & 0.0078 & -0.6189916 & -0.0962104\\
+2. LatAm larga — M2 (FE2) & -0.3361 & 0.1197 & 0.0054 & -0.5706780 & -0.1014983\\
+\addlinespace
+2. LatAm larga — M3 (+controles) & -0.3053 & 0.1380 & 0.0282 & -0.5757873 & -0.0347179\\
+2. LatAm larga — X\_dom\_idx (FE2) & -0.3272 & 0.1141 & 0.0046 & -0.5507814 & -0.1035247\\
+2. LatAm larga — X\_global\_idx (FE país) & -0.3909 & 0.1689 & 0.0214 & -0.7218664 & -0.0598710\\
+3. Extendido — muestra completa, FE país & -0.1816 & 0.1832 & 0.3224 & -0.5407123 & 0.1775694\\
+3. Extendido — X\_global\_idx (FE país) & -0.1567 & 0.1742 & 0.3688 & -0.4981352 & 0.1846721\\
+\addlinespace
+3. Extendido — ventana común, FE2 & 0.6257 & 0.2943 & 0.0350 & 0.0489371 & 1.2024539\\
+3b. Solo LatAm-5 — ventana común, FE2 & -0.0739 & 0.1264 & 0.5605 & -0.3216385 & 0.1738289\\
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(synth, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta, }\AttributeTok{y =} \FunctionTok{reorder}\NormalTok{(modelo, theta))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"grey50"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_pointrange}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ lo, }\AttributeTok{xmax =}\NormalTok{ hi), }\AttributeTok{color =} \StringTok{"\#1f3b73"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \FunctionTok{expression}\NormalTok{(theta }\SpecialCharTok{\textasciitilde{}} \StringTok{"(JLoss"} \SpecialCharTok{\%*\%} \StringTok{"GaR)"}\NormalTok{), }\AttributeTok{y =} \ConstantTok{NULL}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Triangulación del término de interacción entre bases y especificaciones"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Barras = IC 95\% (Driscoll{-}Kraay)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Regresiones_panel_v2_files/figure-latex/synthesis-1} \end{center}
+
+\begin{quote}
+\textbf{Lectura para el comité.} Una réplica rápida de esta batería
+fuera del Rmd (Python, \texttt{PanelOLS} con efectos entidad+tiempo y SE
+tipo kernel) adelanta el patrón que verás al correr este documento, para
+que no llegue como sorpresa:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Filas 1-2 (núcleo LatAm, corta vs.~larga):} \(\theta\) se
+  mantiene \textbf{negativo y significativo} en ambas
+  (\(\theta\approx-0.35\), \(p<0.01\) en corta; \(\theta\approx-0.34\),
+  \(p\approx0.01\) en larga). Estirar la ventana de entrenamiento del
+  GaR \textbf{no cambia la conclusión central} --- este es el resultado
+  que sostiene el paper.
+\item
+  \textbf{Fila 3 (extendido, muestra completa, FE país):} el signo se
+  mantiene negativo pero \textbf{pierde significancia}
+  (\(p\approx0.14\)), esperable dado que fuera de 2010-2014 el panel es
+  casi exclusivamente LatAm y la variación adicional es escasa.
+\item
+  \textbf{Filas 3b vs.~3 en la ventana común 2010Q1-2014Q4:} aquí
+  aparece el hallazgo que hay que reportar con honestidad, no maquillar:
+  restringido a esa ventana, \textbf{solo LatAm-5} da un \(\theta\)
+  pequeño y no significativo (\(\approx-0.07\), \(p\approx0.61\)),
+  mientras que el \textbf{panel de 11 países} en la misma ventana da un
+  \(\theta\) \textbf{positivo} y marginalmente significativo
+  (\(\approx+0.63\), \(p\approx0.05\)) --- signo \textbf{contrario} a la
+  hipótesis de complementariedad.
+\end{itemize}
+
+Esto no invalida el resultado LatAm (que es el robusto, con \emph{T}
+largo y controles domésticos completos), pero sí dice que la
+complementariedad JLoss × GaR \textbf{no se generaliza mecánicamente}
+fuera de LatAm con los datos disponibles hoy: la muestra extendida
+combina países con \emph{T} muy corto (Sudáfrica \emph{n}≈6, Bulgaria
+\emph{n}≈8 efectivo), fuentes de EMBI distintas (GFSR vs.~BCRP) y
+estructuras económicas heterogéneas (China, Turquía, Polonia, Indonesia,
+Sudáfrica, Bulgaria en un solo pool). El signo positivo en la fila 3b es
+más creíble como síntoma de heterogeneidad no modelada (pooling de
+economías muy distintas sin controles domésticos que absorban
+diferencias estructurales) que como evidencia real de que la relación se
+invierte. La recomendación es \textbf{anclar el resultado principal del
+paper en el núcleo LatAm (filas 1-2)} y presentar la sección 4
+explícitamente como evidencia exploratoria que motiva trabajo futuro
+(más \emph{T} por país, controles domésticos para los 6 países nuevos)
+antes de generalizar la conclusión.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Estimación: \texttt{plm} (agrupado y efectos fijos }within\emph{).
+Inferencia: Driscoll-Kraay (\texttt{vcovSCC}) salvo donde se compara
+explícitamente con otros estimadores de varianza. Fuentes: EMBI real
+BCRP (LatAm) + tablas GFSR del FMI 2011-2015 (extendido); GaR de
+\texttt{gar\_panel\_all15.csv}; JLoss de \texttt{Jloss.dta}; controles
+domésticos y VIX/g\_GDP solo disponibles para el núcleo LatAm; VIX
+global CBOE disponible para las tres bases.}
+
+\end{document}

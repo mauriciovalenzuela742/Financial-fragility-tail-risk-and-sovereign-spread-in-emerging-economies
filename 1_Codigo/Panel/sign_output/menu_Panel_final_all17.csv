@@ -1,0 +1,15 @@
+especificación,θ,signo
+Pooled (sin FE),-0.23790290100874678,neg
+FE país,-0.4287804374149147,neg
+FE tiempo,-0.057306926595204644,neg
+FE país+tiempo (M2),-0.3591519635001874,neg
+FE2 + controles (M3),-0.33782892079504223,neg
+FE2 + VIX,-0.3506196388828613,neg
+FE2 + X_global_idx,-0.35915196350018785,neg
+FE2 + X_dom_idx,-0.34968158924976045,neg
+Primeras diferencias,-0.17180660548766635,neg
+EMBI winsorizado 1%,-0.3132311963251,neg
+Sin COVID (≤2019),-0.40571927508276073,neg
+Sin 2020–21 (crisis),-0.29079443626094914,neg
+Cola = ES (FE2),-0.24727196847578914,neg
+Cola = GaR skew-t,-0.3456082765839321,neg

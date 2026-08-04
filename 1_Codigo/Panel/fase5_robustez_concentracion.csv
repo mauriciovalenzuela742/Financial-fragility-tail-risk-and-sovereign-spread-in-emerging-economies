@@ -1,0 +1,6 @@
+metrica,tipo,n_paises,beta4,P_b4_pos,LOO_todos_pos,LOO_min
+CR3,concentración,11,720.6,0.871,True,294.0
+CR5,concentración,11,1031.7,0.957,True,906.3
+compuesto(z),concentración,11,110.4,0.929,True,80.0
+Lerner,competencia,10,745.7,0.739,True,38.6
+Boone,competencia,11,-170.7,0.481,False,-909.8

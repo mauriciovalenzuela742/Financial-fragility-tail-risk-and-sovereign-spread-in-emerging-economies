@@ -1,0 +1,322 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\usepackage{mdframed}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposición}
+\newtheorem{lemma}{Lema}
+\newtheorem{corollary}{Corolario}
+\theoremstyle{definition}
+\newtheorem{assumption}{Supuesto}
+\newtheorem{remark}{Observación}
+
+\newcommand{\JLoss}{\mathrm{JLoss}}
+\newcommand{\EMBI}{\mathrm{EMBI}}
+\newcommand{\GaR}{\mathrm{GaR}}
+\newcommand{\PD}{\mathrm{PD}}
+\newcommand{\ES}{\mathrm{ES}}
+\newcommand{\HHI}{\mathrm{HHI}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\dd}{\,\mathrm{d}}
+
+\title{\textbf{Apéndice Matemático}\\[4pt]
+\large Demostraciones detalladas paso a paso\\
+\normalsize (convención de signo alineada con las regresiones: $\GaR$ como variable primitiva)}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+\vspace{-2em}
+
+\begin{abstract}
+\noindent Este apéndice detalla, paso a paso, cada derivada y conclusión matemática del modelo. \textbf{Cambio de convención respecto de la versión anterior:} el bloque soberano se reescribe usando el \emph{Growth-at-Risk} $\GaR_\tau$ como variable primitiva ---el cuantil bajo del crecimiento, negativo en la cola--- \emph{en lugar} de su magnitud $D=-\GaR$. Con ello los signos derivados del modelo coinciden \emph{directamente} con los de las regresiones, sin ningún cambio de variable intermedio: $\beta_1>0$, $\beta_2<0$, $\beta_3<0$, $\beta_4<0$. Todas las identidades (incluidas la derivada cruzada y la tercera derivada) fueron verificadas numéricamente (diferencias finitas frente a fórmula analítica; coincidencia hasta $10^{-6}$).
+\end{abstract}
+
+\begin{mdframed}
+\textbf{Convención de signo (léase primero).} $\GaR_\tau$ es el cuantil $\tau$ (p.ej.\ $5\%$) del crecimiento: es un \emph{nivel de crecimiento} (típicamente negativo en la cola). Un $\GaR$ \emph{más alto} significa una cola \emph{menos} adversa (economía más segura); un $\GaR$ \emph{más bajo} (más negativo) significa mayor riesgo a la baja. Las variables observadas son: $\JLoss$ (fragilidad sistémica, $\uparrow$ = peor), $\GaR$ ($\uparrow$ = mejor), $\HHI$ (concentración, $\uparrow$ = más concentrado), $\EMBI$ ($\uparrow$ = mayor riesgo soberano). Los cuatro coeficientes firmados son
+\[
+\beta_1=\frac{\partial \EMBI}{\partial \JLoss}>0,\quad
+\beta_2=\frac{\partial \EMBI}{\partial \GaR}<0,\quad
+\beta_3=\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0,\quad
+\beta_4=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial \GaR\,\partial \HHI}<0.
+\]
+\end{mdframed}
+
+\tableofcontents
+\bigskip
+
+%==================================================================
+\section{Preliminares: derivadas de la normal bivariada}\label{sec:prelim}
+
+Sea $\Phi_2(a,b;\varrho)=\Pr(X\le a,\,Y\le b)$ la CDF normal estándar bivariada con correlación $\varrho\in(-1,1)$; $\phi,\Phi$ la densidad y CDF univariadas, y $\phi_2(a,b;\varrho)=\frac{1}{2\pi\sqrt{1-\varrho^2}}\exp\!\big(-\frac{a^2-2\varrho ab+b^2}{2(1-\varrho^2)}\big)$ la densidad bivariada.
+
+\begin{lemma}[derivadas de $\Phi_2$]\label{lem:phi2}
+\begin{align}
+\frac{\partial \Phi_2(a,b;\varrho)}{\partial a} &= \phi(a)\,\Phi\!\left(\frac{b-\varrho a}{\sqrt{1-\varrho^2}}\right), \label{eq:dPhi2_da}\\[4pt]
+\frac{\partial \Phi_2(a,b;\varrho)}{\partial \varrho} &= \phi_2(a,b;\varrho) \qquad\text{(Teorema de Price / Plackett).}\label{eq:price}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+\emph{Identidad \eqref{eq:dPhi2_da}.} Con $\Phi_2=\int_{-\infty}^{a}\!\int_{-\infty}^{b}\phi_2(x,y;\varrho)\dd y\dd x$, derivando respecto del límite superior $a$ (Leibniz), $\partial\Phi_2/\partial a=\int_{-\infty}^{b}\phi_2(a,y;\varrho)\dd y$. Como $Y\mid X=a\sim N(\varrho a,1-\varrho^2)$, se factoriza $\phi_2(a,y;\varrho)=\phi(a)\,\phi\!\big((y-\varrho a)/\sqrt{1-\varrho^2}\big)/\sqrt{1-\varrho^2}$; integrando en $y$ hasta $b$ resulta $\phi(a)\Phi\!\big((b-\varrho a)/\sqrt{1-\varrho^2}\big)$.
+
+\emph{Identidad \eqref{eq:price}.} La densidad satisface la ecuación de Plackett $\partial\phi_2/\partial\varrho=\partial^2\phi_2/\partial a\partial b$; integrando sobre $(-\infty,a]\times(-\infty,b]$ y aplicando el teorema fundamental dos veces se obtiene $\phi_2(a,b;\varrho)$.
+\end{proof}
+
+\begin{remark}
+Como $\phi_2>0$ y $\Phi(\cdot)\in(0,1)$, ambas derivadas son estrictamente positivas. \emph{(Verificado: $a=-1{,}6,b=-1{,}0,\varrho=0{,}25\Rightarrow\partial\Phi_2/\partial\varrho=0{,}037718$ por ambos métodos.)}
+\end{remark}
+
+%==================================================================
+\section{El bloque bancario (sin cambios respecto de $\GaR$)}
+
+\emph{Nota:} las Secciones \ref{sec:prelim}--\ref{sec:jl} \textbf{no dependen de la convención sobre $\GaR$}; se reproducen para completitud. Solo el bloque soberano (Sección~\ref{sec:soberano}) se ve afectado por el cambio de variable.
+
+\subsection{Lema de \textit{risk-shifting}}\label{sec:rs}
+El prestatario resuelve $\max_p U(p;R_L)$, $U=(1-p)[R(p)-(1+R_L)]$, con $R'(p)>0$ y $(1-p)R(p)$ cóncava.
+\begin{lemma}[\textit{risk-shifting}]\label{lem:rs}
+En el óptimo interior $\dfrac{\dd p}{\dd R_L}>0$.
+\end{lemma}
+\begin{proof}
+\textbf{Paso 1 (CPO).} $\Psi(p,R_L)\equiv\partial U/\partial p=-[R(p)-(1+R_L)]+(1-p)R'(p)=0.$
+\textbf{Paso 2 (CSO).} $\Psi_p=(1-p)R''(p)-2R'(p)<0$ (concavidad de $(1-p)R(p)$).
+\textbf{Paso 3.} $\Psi_{R_L}=+1>0.$
+\textbf{Paso 4 (IFT).} $\dfrac{\dd p}{\dd R_L}=-\dfrac{\Psi_{R_L}}{\Psi_p}=-\dfrac{1}{(1-p)R''(p)-2R'(p)}>0.$
+\end{proof}
+
+\subsection{La tasa de equilibrio decrece en la competencia}
+\begin{lemma}[efecto pro-competitivo]\label{lem:RL}
+Con $R_L^*(n)=\dfrac{A+n\,mc}{n+1}$ ($A>mc$), $R_L^{*\prime}(n)=\dfrac{mc-A}{(n+1)^2}<0$, con límites $R_L^*(1)=\frac{A+mc}{2}$ y $R_L^*(\infty)=mc$.
+\end{lemma}
+
+\subsection{Proposición 1: relación en U de la fragilidad individual}
+Con $\PD(n)=\Phi(\bar z(n))$, $\bar z(n)=\big[\Phi^{-1}(p^*(n))-\sqrt{1-\rho}\,\Phi^{-1}(\bar x(n))\big]/\sqrt{\rho}$, $\bar x'(R_L)=\frac{1+r_D-e}{(1+R_L)^2}>0$.
+\begin{proposition}[U-shape]\label{prop:U}
+Con $\rho$ constante existe $\hat n$ interior con $\PD'(n)<0$ para $n<\hat n$ y $\PD'(n)>0$ para $n>\hat n$.
+\end{proposition}
+\begin{proof}
+$\PD'(n)=\phi(\bar z)\bar z'(n)$; con $\Phi^{-1\prime}(u)=1/\phi(\Phi^{-1}(u))>0$,
+\[
+\bar z'(n)=\frac{R_L^{*\prime}(n)}{\sqrt\rho}\big[\underbrace{\Phi^{-1\prime}(p^*)p'(R_L)}_{T_{\text{rs}}>0}-\underbrace{\sqrt{1-\rho}\,\Phi^{-1\prime}(\bar x)\bar x'(R_L)}_{T_{\text{mg}}>0}\big].
+\]
+Como $R_L^{*\prime}(n)<0$, $\bar z'(n)$ tiene el signo de $T_{\text{mg}}-T_{\text{rs}}$: en $n$ pequeño domina $T_{\text{rs}}$ (estabiliza, $\PD$ cae); en $n$ grande domina $T_{\text{mg}}$ (fragiliza, $\PD$ sube); por continuidad existe $\hat n$ con $\bar z'(\hat n)=0$.
+\end{proof}
+
+\subsection{$\JLoss$ y sus monotonías}\label{sec:jl}
+$\displaystyle \JLoss_\alpha(n)=\frac1\alpha\Phi_2\big(\underbrace{\Phi^{-1}(\PD(n))}_{a},\underbrace{\Phi^{-1}(\alpha)}_{b};\underbrace{\sqrt{\rho(n)}}_{\varrho}\big)$, con $\rho'(n)\le0$.
+\begin{lemma}[monotonías de $\JLoss$]\label{lem:jl}
+$\partial\JLoss_\alpha/\partial\PD>0$ y $\partial\JLoss_\alpha/\partial\rho>0$.
+\end{lemma}
+\begin{proof}
+Por \eqref{eq:dPhi2_da} y $\dd a/\dd\PD=1/\phi(a)$: $\ \partial\JLoss_\alpha/\partial\PD=\frac1\alpha\Phi\big((b-\varrho a)/\sqrt{1-\varrho^2}\big)>0.$ Por \eqref{eq:price} y $\dd\varrho/\dd\rho=1/(2\sqrt\rho)$: $\ \partial\JLoss_\alpha/\partial\rho=\frac1\alpha\phi_2(a,b;\varrho)/(2\sqrt\rho)>0.$
+\end{proof}
+
+\subsection{Proposición 2: el mínimo sistémico se desplaza a la derecha}
+\begin{proposition}[desplazamiento del mínimo]\label{prop:shift}
+Si $\rho'(n)<0$ en un entorno de $n_{\PD}=\arg\min\PD$, entonces $n_J=\arg\min\JLoss_\alpha>n_{\PD}$. Si $\rho'(n)=0$, $n_J=n_{\PD}$ (anida MMR).
+\end{proposition}
+\begin{proof}
+$\frac{\dd\JLoss_\alpha}{\dd n}=\frac{\partial\JLoss_\alpha}{\partial\PD}\PD'(n)+\frac{\partial\JLoss_\alpha}{\partial\rho}\rho'(n)$. En $n_{\PD}$ ($\PD'=0$): $\frac{\dd\JLoss_\alpha}{\dd n}\big|_{n_{\PD}}=\frac{\partial\JLoss_\alpha}{\partial\rho}\rho'(n_{\PD})<0$ (positivo por negativo). Luego $\JLoss_\alpha$ sigue decreciendo en $n_{\PD}$ y su mínimo está a la derecha.
+\end{proof}
+
+\subsection{Proposición 3: traspaso creciente en la concentración}\label{sec:gran}
+Con $L_{\text{sys}}=\sum_i\lambda_i\1\{\text{quiebra}_i\}$, $H=\sum_i\lambda_i^2=1/n$, quiebras Bernoulli independientes dado $Z$.
+\begin{proposition}[granularidad]\label{prop:gran}
+$\ES_\alpha(L_{\text{sys}})$ es creciente en $H$ (decreciente en $n$).
+\end{proposition}
+\begin{proof}
+$\Var(L_{\text{sys}}\mid Z)=\sum_i\lambda_i^2 q(Z)(1-q(Z))=H\,q(Z)(1-q(Z))$. A igual media condicional, mayor $H$ engrosa la cola (orden convexo), y el $\ES$ es creciente en dicho orden; $\partial\ES_\alpha/\partial H>0$. En $n\to\infty$, $H\to0$ y $L_{\text{sys}}\to q(Z)$ (Vasicek).
+\end{proof}
+
+%==================================================================
+\section{El bloque soberano y la derivada cruzada (convención $\GaR$)}\label{sec:soberano}
+
+\emph{Esta es la sección reescrita.} Se usa $\GaR_\tau$ como variable primitiva. La clave técnica es que el \emph{crecimiento de cola} que entra en la dinámica de deuda es precisamente el Growth-at-Risk: $g=\GaR_\tau$.
+
+\subsection{Supuestos}
+\begin{assumption}[estructura fiscal]\label{as:B}
+$B(\JLoss;H)$ con $B_J\equiv\partial B/\partial\JLoss>0$, $\partial B/\partial H>0$, $\partial B_J/\partial H>0$; $Y>0$.
+\end{assumption}
+\begin{assumption}[shock fiscal]\label{as:eta}
+$\eta$ con densidad $f_\eta\in C^2$, unimodal con moda $0$, CDF $F_\eta$. El soberano opera en la cola derecha: $DFL^*>0\Rightarrow f_\eta'(DFL^*)<0$. (Cola profunda: $DFL^*>\sigma_\eta\Rightarrow f_\eta''(DFL^*)>0$.)
+\end{assumption}
+\begin{assumption}[crecimiento de cola]\label{as:g}
+El crecimiento en el estado de estrés es $g=\GaR_\tau$, con $1+\GaR_\tau>0$; deuda $d>0$, tasa $r>0$.
+\end{assumption}
+
+\subsection{Definición del spread y derivadas de primer orden}
+\begin{equation}
+DFL(\JLoss,\GaR,H)=\bar d-\underbrace{\left[\frac{1+r}{1+\GaR}\,d+\frac{B(\JLoss;H)}{Y}\right]}_{d'\ (\text{deuda proyectada})},\qquad
+\EMBI=LGD\,\big(1-F_\eta(DFL)\big).
+\label{eq:embi}
+\end{equation}
+
+\begin{lemma}[derivadas de $DFL$]\label{lem:dfl}
+\[
+\frac{\partial DFL}{\partial \JLoss}=-\frac{B_J}{Y}<0,\qquad
+\boxed{\ \frac{\partial DFL}{\partial \GaR}=+\frac{(1+r)\,d}{(1+\GaR)^2}>0\ },\qquad
+\frac{\partial DFL}{\partial H}=-\frac{1}{Y}\frac{\partial B}{\partial H}<0.
+\]
+\end{lemma}
+\begin{proof}
+La primera y la tercera son inmediatas. Para la segunda, con $g=\GaR$ (Supuesto~\ref{as:g}):
+\[
+\frac{\partial d'}{\partial \GaR}=\frac{\partial}{\partial \GaR}\!\left[\frac{(1+r)d}{1+\GaR}\right]=-\frac{(1+r)d}{(1+\GaR)^2}<0,
+\]
+y como $DFL=\bar d-d'$, se sigue $\dfrac{\partial DFL}{\partial\GaR}=-\dfrac{\partial d'}{\partial\GaR}=+\dfrac{(1+r)d}{(1+\GaR)^2}>0$.
+
+\noindent\emph{Interpretación:} un $\GaR$ más alto (crecimiento de cola menos adverso) reduce la deuda proyectada y \emph{aumenta} el espacio fiscal. Es el signo \emph{opuesto} al de la versión con $D=-\GaR$: aquí la variable buena es alta cuando la economía está segura.
+\end{proof}
+
+\begin{lemma}[efectos de primer orden: $\beta_1>0$, $\beta_2<0$]\label{lem:first}
+\[
+\frac{\partial \EMBI}{\partial \JLoss}=LGD\,f_\eta(DFL)\,\frac{B_J}{Y}>0,\qquad
+\frac{\partial \EMBI}{\partial \GaR}=-LGD\,f_\eta(DFL)\,\frac{(1+r)d}{(1+\GaR)^2}<0.
+\]
+\end{lemma}
+\begin{proof}
+Con $\frac{\dd}{\dd u}(1-F_\eta(u))=-f_\eta(u)$:
+\[
+\frac{\partial \EMBI}{\partial \JLoss}=LGD(-f_\eta)\frac{\partial DFL}{\partial\JLoss}=LGD(-f_\eta)\Big(-\frac{B_J}{Y}\Big)=LGD\,f_\eta\,\frac{B_J}{Y}>0,
+\]
+\[
+\frac{\partial \EMBI}{\partial \GaR}=LGD(-f_\eta)\frac{\partial DFL}{\partial\GaR}=LGD(-f_\eta)\Big(\!+\frac{(1+r)d}{(1+\GaR)^2}\Big)<0.
+\]
+El signo de $\beta_2$ es \emph{negativo}: mejor crecimiento de cola, menor spread. $\blacksquare$
+\end{proof}
+
+\subsection{Proposición 4: la derivada cruzada es negativa ($\beta_3<0$)}
+
+\begin{proposition}[complementariedad $\JLoss\times\GaR$]\label{prop:cross}
+Bajo los Supuestos~\ref{as:B}--\ref{as:g},
+\[
+\boxed{\ \frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}\;<\;0.\ }
+\]
+\end{proposition}
+\begin{proof}
+\textbf{Paso 1 (punto de partida).} Del Lema~\ref{lem:first}, el efecto marginal de la fragilidad es
+\[
+g(\JLoss,\GaR,H)\equiv\frac{\partial \EMBI}{\partial \JLoss}=LGD\,\frac{B_J}{Y}\,f_\eta\big(DFL(\JLoss,\GaR,H)\big),
+\]
+y $LGD,Y,B_J$ no dependen de $\GaR$ (Supuesto~\ref{as:B}: $B$ depende de $\JLoss,H$).
+
+\textbf{Paso 2 (derivar respecto de $\GaR$).} Solo $f_\eta(DFL)$ depende de $\GaR$, vía $DFL$:
+\[
+\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}=\frac{\partial g}{\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}.
+\]
+
+\textbf{Paso 3 (signo de cada factor).}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Factor & Signo & Razón \\
+\midrule
+$LGD\,B_J/Y$ & $>0$ & $LGD>0$, $B_J>0$ (Sup.~\ref{as:B}), $Y>0$ \\
+$f_\eta'(DFL)$ & $<0$ & $DFL>0=$ moda, cola derecha (Sup.~\ref{as:eta}) \\
+$\partial DFL/\partial \GaR$ & $>0$ & Lema~\ref{lem:dfl} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Paso 4 (conclusión).}
+\[
+\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}=\underbrace{(LGD\,B_J/Y)}_{>0}\times\underbrace{f_\eta'(DFL)}_{<0}\times\underbrace{\frac{\partial DFL}{\partial \GaR}}_{>0}=(+)(-)(+)<0. \qquad\blacksquare
+\]
+\end{proof}
+
+\begin{remark}[por qué el signo negativo \emph{es} la complementariedad]
+El signo negativo \emph{no} contradice la intuición de que ``más riesgo por más riesgo eleva el spread''. El efecto marginal de la fragilidad, $\partial\EMBI/\partial\JLoss=LGD f_\eta(DFL)B_J/Y>0$, es \emph{decreciente} en $\GaR$: cuando $\GaR$ es alto (economía segura) la fragilidad importa poco; cuando $\GaR$ \emph{cae} (crecimiento de cola más adverso), el mismo aumento de fragilidad eleva el spread mucho más. Es decir, $\beta_3<0$ codifica exactamente que \emph{fragilidad y mal crecimiento se refuerzan}. Frente a la versión con $D=-\GaR$, el signo se invierte solo porque $\partial/\partial\GaR=-\partial/\partial D$; la economía es idéntica.
+\end{remark}
+
+\begin{remark}[verificación numérica]
+Punto representativo ($LGD=0{,}55$, $\sigma_\eta=0{,}16$, $b_0=0{,}32$, $b_1=1{,}2$, $d=0{,}55$, $\bar d=1{,}10$, $r=0{,}04$, $\JLoss=0{,}22$, $\GaR=-0{,}05$, $H=1/6$): $DFL=0{,}413>0$; $LGD\,B_J/Y=0{,}2112$; $f_\eta'(DFL)=-1{,}4296$; $\partial DFL/\partial\GaR=+0{,}6338$. Cross-partial $=-0{,}191360$, idéntico (hasta $10^{-6}$) a las diferencias finitas de $\EMBI$.
+\end{remark}
+
+\subsection{Amplificación por concentración: $\beta_4<0$}
+
+\begin{proposition}[la complementariedad se intensifica con la concentración]\label{prop:amp}
+Sea $C(H)\equiv\dfrac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0$. Bajo los Supuestos~\ref{as:B}--\ref{as:g} y la condición de cola profunda $f_\eta''(DFL)\ge0$,
+\[
+\beta_4=\frac{\partial C}{\partial H}=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial \GaR\,\partial H}<0,
+\]
+es decir, el término de interacción (ya negativo) se vuelve \emph{más negativo} al aumentar la concentración: su magnitud crece.
+\end{proposition}
+\begin{proof}
+\textbf{Paso 1.} $C=LGD\,\dfrac{\partial DFL}{\partial \GaR}\,\dfrac1Y\,B_J\,f_\eta'(DFL)$, y $\partial DFL/\partial\GaR=\frac{(1+r)d}{(1+\GaR)^2}$ \emph{no} depende de $H$. Así $H$ entra por $B_J(H)$ y por $DFL(H)$.
+
+\textbf{Paso 2 (regla del producto).}
+\[
+\frac{\partial C}{\partial H}=LGD\,\frac{\partial DFL}{\partial \GaR}\,\frac1Y\left[\underbrace{\frac{\partial B_J}{\partial H}f_\eta'(DFL)}_{\text{(I) canal directo}}+\underbrace{B_J\,f_\eta''(DFL)\frac{\partial DFL}{\partial H}}_{\text{(II) punto de operación}}\right].
+\]
+
+\textbf{Paso 3 (signos del corchete).}
+(I): $\partial B_J/\partial H>0$ y $f_\eta'(DFL)<0\Rightarrow$ (I)$<0$.\quad
+(II): $B_J>0$, $f_\eta''(DFL)\ge0$ (cola profunda), $\partial DFL/\partial H<0\Rightarrow$ (II)$=(+)(+)(-)\le0$.
+Luego el corchete es $\le0$ (estrictamente $<0$ por (I)).
+
+\textbf{Paso 4 (signo global).} El prefactor es $LGD\cdot\dfrac{\partial DFL}{\partial\GaR}\cdot\dfrac1Y=(+)(+)(+)>0$. Por tanto
+\[
+\frac{\partial C}{\partial H}=\underbrace{(>0)}_{\text{prefactor}}\times\underbrace{(<0)}_{\text{corchete}}<0. \qquad\blacksquare
+\]
+\end{proof}
+
+\begin{remark}[descomposición robusta]
+El \emph{canal directo} (I) es inequívoco: manteniendo $DFL$ fijo,
+$\dfrac{\partial C}{\partial H}\big|_{DFL}=LGD\dfrac{\partial DFL}{\partial\GaR}\dfrac1Y\dfrac{\partial B_J}{\partial H}f_\eta'(DFL)=(+)(+)(+)(+)(-)<0.$
+La concentración eleva el costo marginal del rescate $B_J$, intensificando (haciendo más negativa) la interacción. El canal (II) lo refuerza en la cola profunda. \emph{(Verificado: $DFL/\sigma_\eta=2{,}58>1\Rightarrow f_\eta''>0$; $\partial^3\EMBI/\partial\JLoss\partial\GaR\partial H=-0{,}413<0$.)}
+\end{remark}
+
+\begin{remark}[saturación]
+Resultado \emph{local}: si $\PD_{\text{sov}}\to1$ ($DFL\to-\infty$, $f_\eta\to0$), el cross-partial se desvanece. La no monotonía en el extremo es económicamente sensata.
+\end{remark}
+
+%==================================================================
+\section{Mapeo a la ecuación empírica (signos alineados)}
+
+La ecuación estimada es
+\[
+\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss+\beta_2\GaR+\beta_3(\JLoss\times\GaR)+\beta_4(\JLoss\times\GaR\times\HHI)+\boldsymbol\theta'\text{Int}^-+\boldsymbol\gamma'X+\varepsilon_{i,t},
+\]
+donde $\text{Int}^-=\{\JLoss\times\HHI,\ \GaR\times\HHI\}$. La correspondencia teórica, ahora \emph{sin cambios de variable}, es
+\[
+\beta_1=\frac{\partial\EMBI}{\partial\JLoss}>0,\quad
+\beta_2=\frac{\partial\EMBI}{\partial\GaR}<0,\quad
+\beta_3=\frac{\partial^2\EMBI}{\partial\JLoss\partial\GaR}<0\ (\text{Prop.~\ref{prop:cross}}),\quad
+\beta_4=\frac{\partial^3\EMBI}{\partial\JLoss\partial\GaR\partial\HHI}<0\ (\text{Prop.~\ref{prop:amp}}).
+\]
+
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+Coef. & Término & Signo predicho & Fuente \\
+\midrule
+$\beta_1$ & $\JLoss$ & $+$ & Lema~\ref{lem:first} \\
+$\beta_2$ & $\GaR$ & $-$ & Lema~\ref{lem:first} \\
+$\beta_3$ & $\JLoss\times\GaR$ & $-$ & Prop.~\ref{prop:cross} \\
+$\beta_4$ & $\JLoss\times\GaR\times\HHI$ & $-$ & Prop.~\ref{prop:amp} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}[coherencia con las regresiones]
+Estos cuatro signos coinciden directamente con los estimados. En particular, $\beta_3<0$ y $\beta_4<0$ ---que parecían anómalos bajo la convención $D=-\GaR$--- son la predicción \emph{correcta} del modelo cuando la variable de la regresión es $\GaR$. El objeto firmado sigue siendo la \textbf{derivada cruzada} (y su amplificación); el vector $\boldsymbol\theta$ (interacciones dobles) es de control.
+\end{remark}
+
+\begin{thebibliography}{9}
+\small
+\bibitem[Adrian et al.(2019)]{ABG2019} Adrian, T., Boyarchenko, N., Giannone, D. (2019). Vulnerable Growth. \textit{American Economic Review} 109(4), 1263--1289.
+\bibitem[Martínez-Miera \& Repullo(2010)]{MMR2010} Martínez-Miera, D., Repullo, R. (2010). Does Competition Reduce the Risk of Bank Failure? \textit{Review of Financial Studies} 23(10), 3638--3664.
+\bibitem[Plackett(1954)]{Plackett1954} Plackett, R. (1954). A Reduction Formula for Normal Multivariate Integrals. \textit{Biometrika} 41(3/4), 351--360.
+\end{thebibliography}
+
+\end{document}

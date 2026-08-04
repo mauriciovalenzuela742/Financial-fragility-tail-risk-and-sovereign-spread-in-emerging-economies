@@ -1,0 +1,220 @@
+% se puede agregar la opción [english] para 
+%  memorias o tesis en inglés (borrando el archivo .aux)
+\documentclass[english]{umemoria}
+
+\depto{Departamento de Ingeniería Civil Industrial}
+\author{Rienzi Francisco Roldán Campos}
+\title{Gender, Strikes, and Benefits: \\ Unpacking Union Decision-Making in Chile}
+
+% incluir ambos comandos para una doble titulación
+%  o quitar el comando que no aplica
+\memoria{Ingeniero Civil Industrial}
+\tesis{Magíster en Economía Aplicada}
+%\tesis{Doctor en ???} % incluir solo este comando para doctorados
+
+% puede haber varios profesores guía seperados por coma;
+% pero si es una memoria, solo puede haber un profesor guía
+\guia{Sofía Correa Deisler} 
+\coguia{Pablo Muñoz Henríquez}
+
+% puede haber varios profesores co-guía seperados por coma;
+% pero si es una memoria, el profesor co-guía será el primer
+% integrante de la comisión
+%\coguia{Nombre Completo Co-Guía} % incluir en caso de co-guía de *tesis*
+
+%\cotutela{Nombre Institución} % incluir en caso de cotutela
+
+\comision{Daniel Schwartz Perlroth \\
+Damián Vergara Domínguez}
+
+
+\auspicio{Proyecto FONDECYT 11230997} % incluir en caso de recibir financiamiento
+
+% tiene que ser el año en que se da el examen de título/grado (defensa)
+%\anho{2021} % incluir solo para reemplazar el año actual
+
+\usepackage{lipsum}
+\usepackage{natbib}
+
+\usepackage{color}
+\usepackage[capposition=top]{floatrow}
+\usepackage{xcolor}
+\usepackage[table]{xcolor}
+
+\usepackage{standalone}
+\usepackage{istgame}
+\definecolor{sienna}{rgb}{0.53, 0.18, 0.09}
+\definecolor{brightmaroon}{RGB}{178,34,34}
+
+\usepackage{sgame}
+\usepackage{pdflscape}
+
+\usepackage{tikz}
+
+\usepackage{caption}
+
+\usepackage{graphicx} %for figures
+\newcommand{\fnote}[1]{\\ \floatfoot  {#1}}
+
+\usepackage{hyperref} 
+%\usepackage{xr-hyper} 
+\usepackage{multirow}
+\usepackage{rotating} 
+\usepackage{threeparttable}
+%\hypersetup{
+%  colorlinks   = true, 
+%  urlcolor     = blue, 
+%  linkcolor    = blue, 
+%  citecolor   = blue
+%}
+\usepackage{graphicx}  
+
+\RequirePackage[titletoc]{appendix}
+\makeatletter
+
+% Guardar definiciones originales
+\let\originalappendices\appendices
+\let\endoriginalappendices\endappendices
+
+% Redefinir el entorno appendices
+\renewenvironment{appendices}{%
+  \if@en
+    \chapter*{Annexes}
+    \addcontentsline{toc}{chapter}{Annexes}
+  \else
+    \chapter*{Anexos}
+    \addcontentsline{toc}{chapter}{Anexos}
+  \fi
+  \renewcommand{\thesection}{\Alph{section}}
+  \setcounter{section}{0}
+  
+  % Configurar numeración de figuras y tablas por anexo
+  \counterwithin{figure}{section}
+  \counterwithin{table}{section}
+  \renewcommand{\thefigure}{\Alph{section}.\arabic{figure}}
+  \renewcommand{\thetable}{\Alph{section}.\arabic{table}}
+  
+  \par\nobreak\vskip\baselineskip\nobreak
+  \begin{originalappendices}
+}{%
+  \end{originalappendices}
+  
+  % Restaurar numeración normal al salir de los anexos
+  \counterwithout{figure}{section}
+  \counterwithout{table}{section}
+  \renewcommand{\thefigure}{\arabic{figure}}
+  \renewcommand{\thetable}{\arabic{table}}
+}
+
+% Configuración para hyperref
+\appto{\appendices}{%
+  \if@en
+    \def\Hy@chapapp{Annex}%
+    \renewcommand{\appendixname}{Annex}%
+    \renewcommand{\appendixtocname}{Annexes}%
+    \renewcommand{\appendixpagename}{Annexes}%
+  \else
+    \def\Hy@chapapp{Anexo}%
+    \renewcommand{\appendixname}{Anexo}%
+    \renewcommand{\appendixtocname}{Anexos}%
+    \renewcommand{\appendixpagename}{Anexos}%
+  \fi
+}
+
+\makeatother
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+%Me parece demasiado general. No mencionas ni el modelo teórico ni el estructural. Iría más al grano: Esta tesis estudia el efecto de conflictividad laboral sobre los resultados de negociación colectiva y, como consecuencia, el bienestar de los trabajadores. Para lo primero, dado que hay endogeneidad, se utiliza un enfoque de IV. Para estimar el efecto sobre welfare, se desarrolla un modelo teórico, el cual entrega insights para la estimación empírica. Los resultados son 1,2,3. Conclusión. (obviamente escrito bonito y en una página pero algo que incluya esta info)
+
+\begin{resumen}
+Esta tesis analiza las dinámicas de la conflictividad laboral en las negociaciones colectivas en Chile, un tema de relevancia dadas sus implicancias sobre el bienestar de los trabajadores y el diseño de políticas laborales. A pesar de su importancia, persisten interrogantes sobre los factores que motivan a los sindicatos a iniciar conflictos y las consecuencias que estos generan en los resultados de la negociación.
+
+El objetivo central es evaluar cómo la conflictividad laboral incide en los beneficios obtenidos durante la negociación colectiva, entendiendo tanto los determinantes del conflicto como sus efectos sobre el bienestar alcanzado.
+
+Para abordar estas preguntas, se utiliza en primer lugar un enfoque empírico con variables instrumentales, utilizando la conflictividad sectorial previa como fuente exógena, lo que nos permite obtener evidencia causal sobre el rol de la conflictividad en los procesos de negociación. Luego, para estudiar efectos en el bienestar se introduce un modelo teórico que formaliza el sistema de negociación colectiva en Chile, incorporando las preferencias sindicales como clave en la decisión de conflicto. Este marco se valida mediante un modelo estructural que identifica patrones heterogéneos según el género del liderazgo sindical.
+
+Los resultados empíricos revelan, en primer lugar, un efecto de demostración: la probabilidad de que un sindicato inicie un conflicto aumenta cuando en su sector se han registrado más huelgas en el pasado reciente. En segundo lugar, se observa un cambio significativo en la composición de los beneficios negociados: aunque el número total de estos no varía de manera significativa, la conflictividad redistribuye su estructura, incrementando los componentes no monetarios a costa de los monetarios. El modelo teórico plantea que la decisión de conflicto depende de cuánto valoran los sindicatos los beneficios no monetarios: aquellos que lo valoran más tienden más al conflicto. Estas predicciones son validadas empíricamente mediante un modelo estructural, el cual —apoyado en literatura previa— obtiene que los sindicatos liderados por mujeres tienden a valorar más los beneficios no monetarios. Adicionalmente, se muestra que este tipo de sindicatos son más propensos al conflicto laboral.
+
+En conjunto, esta tesis aporta nuevas perspectivas sobre las negociaciones colectivas en Chile, destacando cómo las preferencias sindicales y la estructura de los beneficios interactúan con las estrategias de conflicto. Los hallazgos ofrecen implicancias relevantes tanto para la teoría económica del conflicto como para el diseño de políticas laborales más sensibles a la diversidad de prioridades dentro del movimiento sindical.\end{resumen}
+
+% opcional: incluir para tesis en inglés;
+%  en este caso hay que tener el resumen y abstract
+%   en ambos idiomas
+\begin{abstract}
+This thesis analyzes the dynamics of labor conflict in collective bargaining processes in Chile, a topic of particular relevance given its implications for workers' welfare and the design of labor policies. Despite its importance, questions remain about the factors that motivate unions to initiate conflicts and the consequences these conflicts have on negotiation outcomes.
+
+The central objective is to assess how labor conflict influences the benefits obtained during collective bargaining, by examining both the determinants of conflict and its effects on achieved welfare.
+
+To address these questions, the study first employs an empirical approach using instrumental variables, leveraging past sectoral conflict as an exogenous source of variation. This allows for the identification of causal effects of conflict on bargaining outcomes. Then, to explore the effects on welfare, a theoretical model is introduced that formalizes the collective bargaining system in Chile, incorporating union preferences as a key factor in the decision to engage in conflict. This framework is validated through a structural model that identifies heterogeneous patterns based on the gender of union leadership.
+
+The empirical findings reveal, first, a demonstration effect: the likelihood that a union initiates a conflict increases when more strikes have recently occurred in its sector. Second, there is a significant change in the composition of negotiated benefits: while the total number of benefits does not change substantially, conflict shifts their structure, increasing non-monetary components at the expense of monetary ones. The theoretical model suggests that the decision to engage in labor conflict depends on how much unions value non-monetary benefits: unions that place greater value on these benefits are more likely to engage in conflict. These predictions are empirically validated through a structural model which—drawing on previous literature—finds that unions led by women tend to value non-monetary benefits more. Additionally, such unions are shown to be more prone to labor conflict.
+
+Taken together, this thesis provides new insights into collective bargaining in Chile, highlighting how union preferences and the structure of benefits interact with conflict strategies. The findings offer important implications for both the economic theory of conflict and the design of labor policies that are more responsive to the diverse priorities within the labor movement.
+
+
+\end{abstract}
+
+%\begin{dedicatoria}
+%\end{dedicatoria}
+
+%\begin{thanks}
+%\end{thanks}
+
+\tableofcontents
+\listoftables % opcional
+\listoffigures % opcional
+
+\mainmatter
+
+\input{intro.tex}
+
+\input{contexto.tex}
+
+\input{estrategia empirica.tex}
+
+
+%\clearpage
+
+%\bibliographystyle{apalike}
+%\bibliography{bibliografia}
+
+\input{discusion}
+
+
+% ver https://www.overleaf.com/learn/latex/Glossaries
+% \input{glosario.tex} % opcional
+
+
+
+\clearpage
+
+
+\counterwithin{table}{chapter} % Esto hará que las tablas sean A.1, A.2, etc.
+\renewcommand{\thetable}{\Alph{chapter}.\arabic{table}}
+
+\counterwithin{figure}{section}
+\renewcommand{\thefigure}{\Alph{chapter}.\arabic{figure}}
+
+%\nocite{*}
+\bibliographystyle{apalike}
+\bibliography{bibliografia}
+
+\begin{appendices}
+%\appendix
+
+\input{anexoA.tex}
+
+\input{anexoB.tex}
+
+\input{anexoC.tex}
+\end{appendices}
+% opcional ...
+%\begin{appendices}
+%\input{anexoA.tex}
+%\end{appendices}
+\end{document}

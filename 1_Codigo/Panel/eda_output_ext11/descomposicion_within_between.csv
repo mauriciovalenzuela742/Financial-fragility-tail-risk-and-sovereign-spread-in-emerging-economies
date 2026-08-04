@@ -1,0 +1,6 @@
+variable,sd_total,sd_between,sd_within,within/total
+Spread EMBI (pb),83.335,44.66,71.16,0.854
+Fragilidad bancaria JLoss,7.261,3.989,5.577,0.768
+Growth-at-Risk (q05),0.04,0.028,0.032,0.809
+Expected Shortfall,0.04,0.029,0.033,0.804
+Prob. crecim. negativo,0.245,0.101,0.23,0.939
