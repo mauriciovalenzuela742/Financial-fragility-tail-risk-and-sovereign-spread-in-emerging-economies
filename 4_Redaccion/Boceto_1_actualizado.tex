@@ -8,7 +8,7 @@
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{graphicx}
-\graphicspath{{../Panel/}{../Panel/figures/}}
+\graphicspath{{../1_Codigo/Panel/}{../1_Codigo/Panel/figures/}}
 \usepackage{longtable}
 \usepackage{array}
 
@@ -18,14 +18,14 @@
 
 \title{Fragilidad Bancaria y Riesgos del Crecimiento a la Baja: Cómo la Interacción entre JLoss y GaR Determina el Spread Soberano en Economías en Desarrollo}
 
-%% Información del autor (Modifica con tus datos)
+%% Información del autor
 \author[1]{Mauricio Valenzuela Corvalán}
 \affiliation[1]{organization={Magíster en Economía Aplicada, Universidad de Chile},
             city={Santiago},
             country={Chile}}
 
 \begin{abstract}
-Este artículo evalúa empíricamente cómo la interacción no lineal entre la fragilidad sistémica del sector bancario y los riesgos de la cola izquierda del crecimiento del producto determina el riesgo de crédito soberano en economías en desarrollo. La fragilidad bancaria se mide mediante la métrica \textit{Joint Loss} (JLoss) (Chari et al., 2024), un indicador semiparamétrico a nivel país de la pérdida conjunta esperada del sistema bancario condicional a un evento sistémico, construido a partir de probabilidades de incumplimiento de tipo Merton (1974) agregadas vía aproximación de punto de silla (Martin et al., 2001). El riesgo a la baja del crecimiento se captura a través de la métrica \textit{Growth-at-Risk} (GaR), estimada mediante regresiones cuantílicas de efectos fijos penalizadas (Koenker, 2004) sobre un índice de condiciones financieras (FCI), siguiendo el marco de \textit{vulnerable growth} de Adrian, Boyarchenko y Giannone (2019) y la implementación de CEMLA (Ossandon Busch et al., 2022). Sobre el núcleo de cinco economías latinoamericanas (Brasil, Chile, Colombia, México y Perú), el coeficiente de interacción $JLoss_{i,t}\times GaR_{i,t}$ es negativo y significativo tanto en la ventana original (2010Q1–2022Q2, $N=248$; $\hat\theta=-0{,}352$ a $-0{,}363$, $t\approx-3{,}4$ a $-4{,}0$) como en una ventana ampliada hacia atrás mediante un GaR reentrenado con mayor historia (2007Q4–2022Q2, $N=293$; $\hat\theta=-0{,}305$ a $-0{,}391$, $p<0{,}03$ en todas las especificaciones), y es robusto a la incorporación —como índices agregados— de los controles domésticos y globales del paper de referencia (deuda/PIB, margen de utilidad bancaria, tasa del Tesoro a 10 años y \textit{spread} on/off-the-run). Una extensión exploratoria a 11 economías emergentes con EMBI real (BCRP y tablas del \textit{Global Financial Stability Report} del FMI) no reproduce el mismo patrón de forma limpia fuera del núcleo latinoamericano: en la ventana común 2010Q1–2014Q4, el subpanel de solo-LatAm no rechaza $\theta=0$ ($\hat\theta=-0{,}074$, $p=0{,}56$), mientras que el panel de 11 países en la misma ventana entrega un coeficiente positivo y marginalmente significativo ($\hat\theta=+0{,}626$, $p=0{,}05$), un hallazgo que se reporta con honestidad como evidencia de heterogeneidad no modelada —no como refutación— y que delimita el alcance actual de la generalización del mecanismo. Un modelo de umbral de panel (Hansen, 2000) sobre el núcleo LatAm corrobora la no linealidad de la interacción. La evidencia respalda la hipótesis de complementariedad —fragilidad bancaria y riesgo de cola del crecimiento se amplifican mutuamente en su transmisión al spread soberano— de manera robusta dentro de América Latina, y motiva la ampliación de la cobertura de datos como condición para extender la conclusión al resto de la muestra de economías emergentes.
+Este artículo evalúa empíricamente cómo la interacción no lineal entre la fragilidad sistémica del sector bancario y los riesgos de la cola izquierda del crecimiento del producto determina el riesgo de crédito soberano en economías en desarrollo. La fragilidad bancaria se mide mediante la métrica \textit{Joint Loss} (JLoss) (Chari et al., 2024), un indicador semiparamétrico a nivel país de la pérdida conjunta esperada del sistema bancario condicional a un evento sistémico, construido a partir de probabilidades de incumplimiento de tipo Merton (1974) agregadas vía aproximación de punto de silla (Martin et al., 2001). El riesgo a la baja del crecimiento se captura mediante \textit{Growth-at-Risk} (GaR), estimado por regresión cuantílica de panel con efectos fijos (Koenker, 2004) sobre un índice de condiciones financieras, siguiendo el marco de \textit{vulnerable growth} de Adrian, Boyarchenko y Giannone (2019) y la implementación de CEMLA (Ossandon Busch et al., 2022). Sobre el panel principal de cinco economías latinoamericanas (Brasil, Chile, Colombia, México y Perú; 2007Q4--2022Q2, $N=253$), el coeficiente de interacción $JLoss_{i,t}\times GaR_{i,t}$ es negativo y significativo con controles macroeconómicos domésticos completos ($\hat\theta=-0{,}338$, $t=-2{,}22$, $p=0{,}028$), robusto a cuatro estimadores de la matriz de varianzas, a la exclusión del episodio pandémico, a la exclusión secuencial de cada país y a la sustitución del cuantil por el \textit{expected shortfall} como medida de cola; un modelo de umbral de panel (Hansen, 1999, 2000) corrobora la no linealidad, con un umbral estimado de $\hat\gamma=2{,}81$ puntos porcentuales de GaR. En un panel ampliado a once economías emergentes con EMBI real ($N=374$), el signo se mantiene pero la significancia se atenúa a un nivel marginal ($\hat\theta=-0{,}212$, $p=0{,}069$) y no es robusto a la exclusión de Brasil, lo que se reporta con honestidad como evidencia de que la generalización del mecanismo fuera del núcleo latinoamericano exige datos y controles todavía no disponibles para las seis economías adicionales. Una batería de estrategias de identificación causal (\textit{wild cluster bootstrap}, proyecciones locales, variables instrumentales por \textit{shift-share}) confirma la dirección banco$\to$soberano del canal de nivel, pero muestra que la significancia puntual de la interacción es sensible al número reducido de \textit{clusters} de país disponibles, lo que se documenta explícitamente como límite de la inferencia antes que como debilidad oculta. Este artículo constituye la arista empírica de una investigación de tesis cuya segunda arista, de naturaleza teórica, deriva un modelo de organización industrial bancaria del cual esta complementariedad es una predicción de primer orden, y en el que se testea además su amplificación por la concentración del sistema bancario.
 \end{abstract}
 
 \begin{keyword}
@@ -45,9 +45,10 @@ estabilidad financiera \sep fragilidad bancaria \sep growth-at-risk \sep spread 
     \begin{enumerate}
         \item Integra dos métricas estado-del-arte —una de fragilidad bancaria sistémica (JLoss) y una de vulnerabilidad macroeconómica (GaR)— en un único marco de determinación del spread soberano para economías emergentes.
         \item Caracteriza la \textbf{no linealidad} del nexo banca–soberano–crecimiento mediante un término de interacción y un modelo de umbral, contrastando si la amplificación es dependiente de régimen.
-        \item Provee evidencia con un \textit{pipeline} reproducible de extracción de balances bancarios y de estimación de GaR pseudo–tiempo real (ventana expansiva), triangulando el resultado central en tres bases de datos —núcleo LatAm en dos ventanas temporales y una extensión exploratoria a 11 economías emergentes— para delimitar con precisión dónde el mecanismo está establecido y dónde constituye todavía una hipótesis abierta.
+        \item Provee evidencia con un \textit{pipeline} reproducible de extracción de balances bancarios y de estimación de GaR pseudo–tiempo real (ventana expansiva), triangulando el resultado central entre un panel principal y un panel ampliado de economías emergentes, para delimitar con precisión dónde el mecanismo está establecido y dónde constituye todavía una hipótesis abierta.
     \end{enumerate}
-    \item \textbf{Hoja de ruta.} La Sección 2 desarrolla el marco teórico. La Sección 3 sintetiza el estado del arte. La Sección 4 detalla la metodología de construcción de JLoss y GaR y la estrategia econométrica. La Sección 5 describe los datos y las tres bases utilizadas. La Sección 6 reporta los resultados, incluida la triangulación entre bases. La Sección 7 discute las implicancias y concluye.
+    \item \textbf{Relación con la investigación teórica complementaria.} Este artículo es la arista empírica de una tesis compuesta por dos investigaciones sobre el mismo fenómeno. La segunda, de naturaleza teórica, desarrolla un modelo de organización industrial bancaria en el que la estructura de mercado —la intensidad de competencia entre bancos— es el parámetro profundo que gobierna la cadena que va desde la fragilidad sistémica hasta el riesgo soberano, y del cual la complementariedad $JLoss\times GaR$ estimada aquí es una predicción de primer orden. Esa segunda investigación reporta, además, la prueba directa de la predicción distintiva del modelo frente a la literatura de organización industrial bancaria estándar (Martínez-Miera y Repullo, 2010): que la complementariedad se amplifica en sistemas bancarios más concentrados. Por esa razón, la triple interacción $JLoss\times GaR\times HHI$ no se reporta en este artículo —pertenece naturalmente a la investigación que la deriva— y el lector interesado en el mecanismo estructural completo debe remitirse a ella.
+    \item \textbf{Hoja de ruta.} La Sección 2 desarrolla el marco teórico. La Sección 3 sintetiza el estado del arte. La Sección 4 detalla la metodología de construcción de JLoss y GaR y la estrategia econométrica. La Sección 5 describe los datos y las dos bases utilizadas. La Sección 6 reporta los resultados, incluida la identificación causal. La Sección 7 discute las implicancias y concluye.
 \end{itemize}
 
 \section{Marco Teórico}
@@ -124,7 +125,7 @@ La métrica $JLoss$ pertenece a la segunda familia y, en rigor, es pariente dire
 
 La interdependencia entre la solvencia bancaria y la soberana constituye el corazón teórico del paper y ha generado una literatura propia, revitalizada por la crisis de deuda europea. En el plano histórico-empírico, Reinhart y Rogoff (2009, 2011) documentan la recurrencia con que las crisis bancarias anteceden y desencadenan crisis soberanas, y Laeven y Valencia (2013, 2020) cuantifican los cuantiosos costos fiscales de las crisis bancarias sistémicas en su base de datos de referencia. En el plano teórico, las contribuciones seminales ya discutidas en el marco —Farhi y Tirole (2018), Acharya, Drechsler y Schnabl (2014), Gennaioli, Martin y Rossi (2014)— se complementan con los modelos de riesgo soberano e intermediación de Bocola (2016), el análisis de fragilidad bancaria en mercados financieramente integrados de Bolton y Jeanne (2011), el rol de las garantías gubernamentales en la retroalimentación de Leonello (2018) y la propuesta de activos seguros europeos (ESBies) de Brunnermeier et al. (2016) como dispositivo para romper el bucle.
 
-En el plano empírico aplicado, Mody y Sandri (2012) muestran que bancos y soberanos quedaron "unidos por la cadera" durante la crisis europea; Dieckmann y Plank (2012) documentan la transferencia de riesgo del sector privado al público y su modulación por la importancia pre-crisis del sistema financiero doméstico; Kallestrup, Lando y Murgoci (2016) evidencian que los vínculos del sector financiero contienen información sobre el CDS soberano más allá de los fundamentos; y Fratzscher y Rieth (2019) analizan la interacción entre política monetaria, rescates bancarios y el nexo soberano-bancario. La dimensión de la ``\textit{carry trade}'' —bancos que cargan deuda soberana riesgosa de su propio país— fue documentada por Acharya y Steffen (2015). Esta literatura, sin embargo, es abrumadoramente europea y de frecuencia de crisis; su extensión sistemática a un panel amplio de economías emergentes, con una métrica de fragilidad construida homogéneamente para todos los países, es precisamente la línea que abren Chari et al. (2024) y que este trabajo profundiza al incorporar el canal de crecimiento.
+En el plano empírico aplicado, Mody y Sandri (2012) muestran que bancos y soberanos quedaron "unidos por la cadera" durante la crisis europea; Dieckmann y Plank (2012) documentan la transferencia de riesgo del sector privado al público y su modulación por la importancia pre-crisis del sistema financiero doméstico; Kallestrup, Lando y Murgoci (2016) evidencian que los vínculos del sector financiero contienen información sobre el CDS soberano más allá de los fundamentos; y Fratzscher y Rieth (2019) analizan la interacción entre política monetaria, rescates bancarios y el nexo soberano-bancario. La dimensión de la ``\textit{carry trade}'' —bancos que cargan deuda soberana riesgosa de su propio país— fue documentada por Acharya y Steffen (2015). Esta literatura, sin embargo, es abrumadoramente europea y de frecuencia de crisis; su extensión sistemática a un panel amplio de economías emergentes, con una métrica de fragilidad construida homogéneamente para todos los países, es precisamente la línea que abren Chari et al. (2024) y que este trabajo profundiza al incorporar el canal de crecimiento. Un modelo estructural que deriva esta misma cadena desde la organización industrial del sector bancario —la estructura de mercado como determinante profundo de la fragilidad de cola y, por esa vía, del spread soberano— se desarrolla en la investigación teórica complementaria de esta tesis.
 
 \subsection{\textit{Growth-at-Risk} y la frontera finanzas-crecimiento}
 
@@ -136,17 +137,17 @@ Desde el punto de vista econométrico, el método descansa en la regresión cuan
 
 La revisión precedente revela una compartimentación persistente. La literatura del nexo banca-soberano (3.3) ha establecido que la fragilidad bancaria eleva el riesgo soberano, pero ha tratado el crecimiento como un fundamento de fondo o como un factor de confusión a controlar —no como un canal de cola con dinámica propia—. La literatura de \textit{growth-at-risk} (3.4) ha caracterizado con precisión cómo las condiciones financieras deterioran la cola izquierda del crecimiento, pero ha detenido su análisis en el producto, sin proyectarlo sobre la prima soberana. Y la literatura de determinantes del spread (3.1) ha privilegiado los factores globales y los fundamentos en niveles, omitiendo las métricas de riesgo de cola del crecimiento. El trabajo más próximo, Chari et al. (2024), introduce la fragilidad bancaria sistémica ($JLoss$) en la determinación del spread soberano de economías emergentes y explora su interacción con factores financieros \textbf{globales}, pero no con una medida doméstica del riesgo a la baja del crecimiento.
 
-La contribución de este artículo consiste en cerrar el triángulo banca-crecimiento-soberano. Frente a esa literatura fragmentada, el trabajo (i) emplea conjuntamente una métrica estructural de fragilidad bancaria sistémica ($JLoss$) y una métrica de riesgo de cola del crecimiento ($GaR$) como determinantes del spread soberano; (ii) contrasta la naturaleza \textbf{no lineal} de su interacción —la hipótesis de complementariedad supra-aditiva— mediante un término de interacción y un modelo de umbral (Hansen, 2000); y (iii) triangula el resultado en tres bases de datos que varían en cobertura temporal y transversal —un panel amplio de economías en desarrollo con ambas métricas construidas de manera homogénea y reproducible—, delimitando explícitamente el alcance actual de la evidencia. En ese sentido, el aporte no es la mera adición de un regresor, sino la articulación teórica y empírica de dos canales que la literatura ha mantenido separados, reportada con el nivel de honestidad estadística que exige extender la conclusión más allá de la muestra donde fue establecida.
+La contribución de este artículo consiste en cerrar el triángulo banca-crecimiento-soberano. Frente a esa literatura fragmentada, el trabajo (i) emplea conjuntamente una métrica estructural de fragilidad bancaria sistémica ($JLoss$) y una métrica de riesgo de cola del crecimiento ($GaR$) como determinantes del spread soberano; (ii) contrasta la naturaleza \textbf{no lineal} de su interacción —la hipótesis de complementariedad supra-aditiva— mediante un término de interacción y un modelo de umbral (Hansen, 2000); y (iii) somete el resultado a una batería de estrategias de identificación causal que declara honestamente los límites de la inferencia con un número reducido de países. En ese sentido, el aporte no es la mera adición de un regresor, sino la articulación teórica y empírica de dos canales que la literatura ha mantenido separados, reportada con el nivel de honestidad estadística que exige extender la conclusión más allá de la muestra donde fue establecida.
 
 % ---
 
 \section{Metodología}
 
-La estrategia metodológica se articula en tres bloques. Los dos primeros describen la construcción de las variables explicativas de interés —la fragilidad bancaria sistémica $JLoss_{i,t}$ (Sección 4.1) y el riesgo a la baja del crecimiento $GaR_{i,t}$ (Sección 4.2)—, ambas estimadas a partir de modelos estructurales y semiparamétricos sobre microdatos bancarios y macrofinancieros. El tercer bloque (Sección 4.3) detalla la estrategia de identificación econométrica con la que se contrastan las hipótesis H1–H3. Las dos métricas se construyen de manera independiente y se consolidan en un panel a frecuencia trimestral mediante combinación por país y trimestre. A lo largo de esta sección se precisan tanto las definiciones formales como las decisiones de implementación computacional, de modo que el procedimiento sea íntegramente replicable.
+La estrategia metodológica se articula en tres bloques. Los dos primeros describen la construcción de las variables explicativas de interés —la fragilidad bancaria sistémica $JLoss_{i,t}$ (Sección 4.1) y el riesgo a la baja del crecimiento $GaR_{i,t}$ (Sección 4.2)—, ambas estimadas a partir de modelos estructurales y semiparamétricos sobre microdatos bancarios y macrofinancieros. El tercer bloque (Sección 4.3) detalla la estrategia de identificación econométrica con la que se contrastan las hipótesis H1–H3. Las dos métricas se construyen de manera independiente y se consolidan en un panel a frecuencia trimestral mediante combinación por país y trimestre.
 
 \subsection{Medición de la fragilidad bancaria: la métrica $JLoss$}
 
-$JLoss_{i,t}$ es una métrica semiparamétrica, a nivel de país, de la pérdida conjunta esperada del sistema bancario condicional a un evento sistémico, expresada como porcentaje de la exposición total. Su construcción procede en cuatro etapas: (i) la estimación de las probabilidades individuales de incumplimiento de cada banco mediante un modelo estructural de tipo Merton; (ii) la condicionalización de esas probabilidades respecto de un factor sistémico país; (iii) la agregación de la distribución de pérdidas del sistema por el método de punto de silla; y (iv) el cálculo de las contribuciones marginales y la normalización que define la métrica. Se sigue la metodología de Chari et al. (2024); a continuación se detalla cada etapa y su implementación.
+$JLoss_{i,t}$ es una métrica semiparamétrica, a nivel de país, de la pérdida conjunta esperada del sistema bancario condicional a un evento sistémico, expresada como porcentaje de la exposición total. Su construcción procede en cuatro etapas: (i) la estimación de las probabilidades individuales de incumplimiento de cada banco mediante un modelo estructural de tipo Merton; (ii) la condicionalización de esas probabilidades respecto de un factor sistémico país; (iii) la agregación de la distribución de pérdidas del sistema por el método de punto de silla; y (iv) el cálculo de las contribuciones marginales y la normalización que define la métrica. Se sigue la metodología de Chari et al. (2024).
 
 \subsubsection{Probabilidades individuales de incumplimiento}
 
@@ -210,15 +211,15 @@ El Cuadro 1 resume la parametrización, consistente con Chari et al. (2024): hor
 
 \subsection{Medición del riesgo a la baja del crecimiento: la métrica $GaR$}
 
-$GaR_{i,t}$ es el cuantil de cola izquierda (5\%) de la distribución condicional del crecimiento del producto un trimestre adelante, estimado a partir de un índice de condiciones financieras mediante regresión cuantílica de panel. Su construcción adapta el marco de \textit{vulnerable growth} de Adrian, Boyarchenko y Giannone (2019) y la plataforma de CEMLA (Ossandon Busch et al., 2022), con tres modificaciones metodológicas que se detallan más abajo: estimación por programación lineal global, lectura directa del cuantil sin densidad kernel, y estimación pseudo–tiempo real.
+$GaR_{i,t}$ es el cuantil de cola izquierda (5\%) de la distribución condicional del crecimiento del producto un trimestre adelante, estimado a partir de un índice de condiciones financieras mediante regresión cuantílica de panel. Su construcción adapta el marco de \textit{vulnerable growth} de Adrian, Boyarchenko y Giannone (2019) y la plataforma de CEMLA (Ossandon Busch et al., 2022), con tres modificaciones metodológicas: estimación por programación lineal global, lectura directa del cuantil sin densidad kernel, y estimación pseudo–tiempo real.
 
 \subsubsection{Índice de condiciones financieras (FCI)}
 
-El FCI sintetiza por país un conjunto de indicadores de tensión financiera —de los mercados monetario, cambiario, accionario, de deuda soberana y bancario— junto con un bloque de tipo de cambio real efectivo. El procedimiento replica la cadena de rutinas del marco CEMLA y consta de tres pasos. Primero, cada indicador se \textbf{estandariza} mediante una transformación expansiva (\texttt{method\_b\_max}), que normaliza cada serie respecto de estadísticos calculados sobre la muestra disponible hasta cada fecha, de modo consistente con la naturaleza pseudo–tiempo real de la estimación posterior. Segundo, se computan \textbf{correlaciones temporales por pares} entre los indicadores estandarizados mediante un suavizado exponencial (EWMA) con factor de decaimiento $\lambda = 0{,}85$, capturando la covariación cambiante del estrés entre mercados. Tercero, el índice se agrega como una \textbf{forma cuadrática} sobre los indicadores estandarizados y la matriz de correlaciones EWMA $C_t$, siguiendo la lógica del indicador compuesto de estrés sistémico de Holló, Kremer y Lo Duca (2012):
+El FCI sintetiza por país un conjunto de indicadores de tensión financiera —de los mercados monetario, cambiario, accionario, de deuda soberana y bancario— junto con un bloque de tipo de cambio real efectivo. El procedimiento replica la cadena de rutinas del marco CEMLA y consta de tres pasos. Primero, cada indicador se \textbf{estandariza} mediante una transformación expansiva (\texttt{method\_b\_max}), consistente con la naturaleza pseudo–tiempo real de la estimación posterior. Segundo, se computan \textbf{correlaciones temporales por pares} entre los indicadores estandarizados mediante un suavizado exponencial (EWMA) con factor de decaimiento $\lambda = 0{,}85$. Tercero, el índice se agrega como una \textbf{forma cuadrática} sobre los indicadores estandarizados y la matriz de correlaciones EWMA $C_t$, siguiendo la lógica del indicador compuesto de estrés sistémico de Holló, Kremer y Lo Duca (2012):
 
 \[ FCI_t = \sqrt{(w \circ s_t)'\,C_t\,(w \circ s_t)}, \]
 
-donde $s_t$ es el vector de subíndices estandarizados y $w$ el vector de ponderaciones. La forma cuadrática implica que el índice se eleva más cuando las tensiones de distintos mercados co-mueven, recogiendo el carácter sistémico del estrés. La implementación se validó contra la salida de referencia de CEMLA (\texttt{FCI\_MEXICO.csv}), alcanzando una correlación de 0,9995 y un RMSE de 0,016 sobre 212 meses. Dos precauciones de alineación temporal resultan críticas: la combinación de series debe efectuarse por año-mes —no por fecha exacta—, dado que el motor emite fin de mes en día hábil mientras la referencia usa fin de mes calendario; y el IPC debe suministrarse como nivel de índice (no como variación), pues la inflación anualizada se deriva internamente.
+donde $s_t$ es el vector de subíndices estandarizados y $w$ el vector de ponderaciones. La implementación se validó contra la salida de referencia de CEMLA (\texttt{FCI\_MEXICO.csv}), alcanzando una correlación de 0,9995 y un RMSE de 0,016 sobre 212 meses.
 
 \subsubsection{Regresión cuantílica de panel con efectos fijos}
 
@@ -226,27 +227,25 @@ Para el cuantil $\tau$ y el horizonte $h$, la distribución condicional del crec
 
 \[ Q\!\left(\Delta GDP_{i,t+h}\mid \cdot\,;\tau\right) = \alpha_h(\tau) + \beta_{1,h}(\tau)\,\Delta GDP_{i,t} + \beta_{2,h}(\tau)\,FCI_{i,t} + \beta_{3,h}(\tau)\,VIX_t + \mu_{i,h}(\tau), \]
 
-con $h = 1$ trimestre —elección que alinea la métrica con la combinación trimestral del panel de $JLoss$— y efectos fijos de país $\mu_i$ (Koenker, 2004). El VIX, proxy de las condiciones financieras globales, se ortogonaliza respecto de las condiciones locales para una separación limpia de los bloques de riesgo. Los parámetros se obtienen minimizando la suma de pérdidas de comprobación,
+con $h = 1$ trimestre y efectos fijos de país $\mu_i$ (Koenker, 2004). El VIX se ortogonaliza respecto de las condiciones locales. Los parámetros se obtienen minimizando la suma de pérdidas de comprobación,
 
 \[ \min_{\beta,\,\mu}\;\sum_{i}\sum_{t}\rho_\tau\!\left(\Delta GDP_{i,t+h} - x_{i,t}'\beta - \mu_i\right), \qquad \rho_\tau(u) = u\,(\tau - \mathbf{1}\{u<0\}), \]
 
-problema que se formula como un \textbf{único programa lineal} y se resuelve con el algoritmo HiGHS (vía \texttt{scipy.optimize.linprog}). Esta implementación alcanza el óptimo global del problema, a diferencia del estimador iterativo \texttt{rqpd} de R, que se detiene prematuramente por tolerancia del solver; la verificación sobre datos de referencia confirma un valor objetivo estrictamente inferior (mejor) para el puerto en Python.
+problema que se formula como un \textbf{único programa lineal} y se resuelve con el algoritmo HiGHS (vía \texttt{scipy.optimize.linprog}), superando la tolerancia del solver iterativo \texttt{rqpd} de R.
 
 \subsubsection{De la función cuantílica a $GaR$}
 
-La regresión se estima sobre una grilla de $n_\tau = 39$ cuantiles, diseñada de modo que $\tau = 0{,}05$ caiga exactamente sobre un nodo de la grilla. Para garantizar la monotonicidad de la función cuantílica estimada —y eliminar el cruce de cuantiles— se aplica el \textbf{reordenamiento} de Chernozhukov, Fernández-Val y Galichon (2010). La métrica se lee entonces \textbf{directamente} del cuantil reordenado:
+La regresión se estima sobre una grilla de $n_\tau = 39$ cuantiles, diseñada de modo que $\tau = 0{,}05$ caiga exactamente sobre un nodo. Para garantizar la monotonicidad se aplica el \textbf{reordenamiento} de Chernozhukov, Fernández-Val y Galichon (2010):
 
 \[ GaR_{i,t} \equiv Q\!\left(\Delta GDP_{i,t+1}\mid \cdot\,;\,\tau = 0{,}05\right). \]
 
-Esta lectura directa constituye una diferencia metodológica deliberada respecto del procedimiento en dos etapas de Adrian et al. (2019), que ajusta una densidad paramétrica a los cuantiles estimados: al leer $GaR$ de la función cuantílica reordenada se elimina por completo la dependencia de un parámetro de ancho de banda (bandwidth) de la estimación kernel, suprimiendo una fuente de discrecionalidad.
-
 \subsubsection{Estimación pseudo-tiempo real}
 
-Para evitar el sesgo de anticipación (\textit{look-ahead bias}), la serie $\{GaR_{i,t}\}$ se construye con una \textbf{ventana expansiva}: en cada fecha $t$, los parámetros cuantílicos se reestiman utilizando exclusivamente la información disponible hasta $t$. El procedimiento incorpora \textit{checkpointing} para la resumibilidad del cómputo. La serie fue reentrenada durante esta entrega sobre un panel de 15 países con mayor historia disponible, lo que —para el núcleo de cinco economías latinoamericanas (Brasil, Chile, Colombia, México y Perú)— extiende la ventana estimable desde 2010Q1 hasta 2007Q4 (Sección 5.6) y habilita, adicionalmente, la extensión exploratoria a 11 economías emergentes con EMBI real (Sección 5.7).
+Para evitar el sesgo de anticipación (\textit{look-ahead bias}), la serie $\{GaR_{i,t}\}$ se construye con una \textbf{ventana expansiva}: en cada fecha $t$, los parámetros cuantílicos se reestiman utilizando exclusivamente la información disponible hasta $t$. La serie fue entrenada sobre un panel de 17 economías con historia amplia, lo que —para el núcleo LatAm de cinco países— habilita una ventana estimable desde 2007Q4, y sirve además de insumo para la extensión a 11 economías emergentes con EMBI real (Sección 5).
 
 \subsubsection{Robustez: corroboración con densidad skew-$t$}
 
-Como control de robustez se ajusta la distribución \textit{skew-t} de Adrian, Boyarchenko y Giannone (2019) a los cuantiles condicionales estimados, leyendo el cuantil del 5\% de la densidad paramétrica ajustada. La correlación entre esta serie y la obtenida por lectura directa del cuantil reordenado es de 0,9996, lo que corrobora la validez del método directo y descarta que los resultados dependan del procedimiento de recuperación de la cola.
+Como control de robustez se ajusta la distribución \textit{skew-t} de Adrian, Boyarchenko y Giannone (2019) a los cuantiles condicionales estimados. La correlación entre esta serie y la obtenida por lectura directa del cuantil reordenado es de 0,9996.
 
 \subsection{Estrategia de identificación econométrica}
 
@@ -256,7 +255,7 @@ Siguiendo la lógica de identificación de Chari et al. (2024), la especificaci�
 
 \[ EMBI_{i,t} = \alpha_i + \gamma_t + \beta_1\,JLoss_{i,t} + \beta_2\,GaR_{i,t} + \omega'X_{i,t} + \epsilon_{i,t}, \]
 
-donde $EMBI_{i,t}$ es el diferencial soberano, reportado en puntos básicos en la especificación de nivel y en logaritmo natural en la especificación de elasticidad (M4, Sección 6); $\alpha_i$ son efectos fijos de país que absorben toda heterogeneidad invariante en el tiempo; $\gamma_t$ son efectos fijos de tiempo que absorben los choques globales comunes a todos los países —de modo que, en las especificaciones con $\gamma_t$, los factores financieros globales quedan absorbidos y no se incluyen explícitamente—; y $X_{i,t}$ es el vector de controles. Esta estructura es análoga a un estimador de diferencias en diferencias en un diseño de múltiples grupos y múltiples períodos (Imbens y Wooldridge, 2009); la hipótesis de identificación es que, en ausencia de fragilidad bancaria y vulnerabilidad del crecimiento domésticas, los diferenciales soberanos están expuestos a choques globales similares —supuesto plausible dada la naturaleza homogénea de la muestra (economías emergentes que emiten deuda en dólares).
+donde $\alpha_i$ son efectos fijos de país que absorben toda heterogeneidad invariante en el tiempo; $\gamma_t$ son efectos fijos de tiempo que absorben los choques globales comunes —de modo que, bajo $\gamma_t$, los factores financieros globales quedan absorbidos y no se incluyen explícitamente en las especificaciones bidireccionales—; y $X_{i,t}$ es el vector de controles.
 
 \subsubsection{Interacción y complementariedad}
 
@@ -264,115 +263,79 @@ La hipótesis central (H3) se contrasta incorporando el término de interacción
 
 \[ EMBI_{i,t} = \alpha_i + \gamma_t + \beta_1\,JLoss_{i,t} + \beta_2\,GaR_{i,t} + \theta\,\bigl(JLoss_{i,t}\times GaR_{i,t}\bigr) + \omega'X_{i,t} + \epsilon_{i,t}. \]
 
-Bajo la convención de signo adoptada —$GaR$ en niveles, con valores más negativos indicando mayor riesgo a la baja—, la complementariedad supra-aditiva predice $\theta < 0$. El efecto marginal de la fragilidad sobre el diferencial,
+Bajo la convención de signo adoptada, la complementariedad supra-aditiva predice $\theta < 0$. El efecto marginal de la fragilidad sobre el diferencial,
 
 \[ \frac{\partial\,EMBI_{i,t}}{\partial\,JLoss_{i,t}} = \beta_1 + \theta\,GaR_{i,t}, \]
 
-es por tanto \textbf{creciente a medida que $GaR$ se vuelve más negativo}, y se reporta evaluado a distintos niveles de $GaR$ —con sus intervalos de confianza— en un gráfico de efectos parciales análogo al de Chari et al. (2024). Se anticipa además $\beta_1 > 0$ (H1) y $\beta_2 < 0$ (H2).
+se reporta evaluado a distintos niveles de $GaR$ en un gráfico de efectos parciales análogo al de Chari et al. (2024).
 
 \subsubsection{Modelo de umbral de panel}
 
-La versión no lineal de la hipótesis de amplificación se contrasta mediante un modelo de umbral (Hansen, 1999, 2000), que permite que las sensibilidades del diferencial cambien de régimen según una variable de umbral $q_{i,t}$ —en la implementación de este trabajo, el propio $GaR_{i,t}$:
+La versión no lineal de la hipótesis de amplificación se contrasta mediante un modelo de umbral (Hansen, 1999, 2000):
 
 \[ EMBI_{i,t} = \alpha_i + \gamma_t + \boldsymbol{\beta}^{(1)'} Z_{i,t}\,\mathbf{1}\{q_{i,t}\le\lambda\} + \boldsymbol{\beta}^{(2)'} Z_{i,t}\,\mathbf{1}\{q_{i,t}>\lambda\} + \omega'X_{i,t} + \epsilon_{i,t}, \]
 
-donde $Z_{i,t}$ recoge las variables cuyo efecto se permite variar entre regímenes (en particular $JLoss_{i,t}$). Tras la transformación \textit{within} que elimina los efectos fijos, el umbral $\lambda$ se estima por mínimos cuadrados concentrados —recorriendo los valores candidatos de $q_{i,t}$ y seleccionando el que minimiza la suma de residuos al cuadrado—. La significancia del efecto umbral se evalúa mediante un contraste de razón de verosimilitud $H_0:\boldsymbol{\beta}^{(1)} = \boldsymbol{\beta}^{(2)}$, cuya distribución no estándar se aproxima por \textit{bootstrap}; el intervalo de confianza para $\lambda$ se obtiene invirtiendo el estadístico de razón de verosimilitud (Hansen, 2000). La hipótesis H3 implica que el régimen de alta vulnerabilidad ($q_{i,t}\le\lambda$) exhibe una sensibilidad del diferencial a la fragilidad estructuralmente mayor.
+donde $q_{i,t}=GaR_{i,t}$. El umbral $\lambda$ se estima por mínimos cuadrados concentrados tras la transformación \textit{within}; su significancia se evalúa mediante un contraste de razón de verosimilitud cuya distribución se aproxima por \textit{bootstrap} (Hansen, 2000).
 
-\subsubsection{Construcción del panel, inferencia y controles agregados}
+\subsubsection{Construcción del panel e inferencia}
 
-Las series de $JLoss$, $GaR$, $FCI$ y $EMBI$ se consolidan en un único panel combinando por país y trimestre (alineación año-trimestre). Sobre el componente de los diferenciales ortogonal a los efectos fijos se aplican pruebas de raíz unitaria para panel adecuadas a paneles amplios y potencialmente desbalanceados (p. ej. el test $P_m$ de Choi, 2001). La inferencia se basa en errores estándar de Driscoll–Kraay ($vcovSCC$), robustos simultáneamente a heterocedasticidad, autocorrelación serial y dependencia transversal —justificados por los diagnósticos de sección cruzada y de autocorrelación reportados en la Sección 6.4—, y se contrastan frente a errores agrupados (\textit{clustering}) por país, por tiempo y al estimador HAC de Arellano como alternativas de robustez. Todas las variables en niveles monetarios o de diferencial admiten además una especificación en logaritmo natural, de modo que los coeficientes correspondientes se interpretan como elasticidades.
-
-Los seis controles adicionales replicados del paper de referencia (deuda/PIB, margen de utilidad del sector bancario, volatilidad cambiaria, tasa del Tesoro de EE.UU. a 10 años, \textit{spread} de alto rendimiento y \textit{spread} on/off-the-run) se incorporan, cuando aplica, no como seis regresores sueltos sino como \textbf{dos índices agregados} —uno doméstico y uno global (Sección 6.4)—, dado que mezclar variables de variación puramente transversal-temporal con variables de variación estrictamente temporal bajo efectos fijos bidireccionales induce a que el componente global sea absorbido por los efectos de tiempo, atenuando artificialmente su poder identificador. El índice doméstico se estima con efectos fijos de país y de tiempo; el índice global, dada su naturaleza de variación puramente temporal, se estima únicamente con efectos fijos de país.
+Las series de $JLoss$, $GaR$, EMBI y controles se consolidan por país y trimestre. La inferencia se basa en errores estándar de Driscoll–Kraay ($vcovSCC$), robustos simultáneamente a heterocedasticidad, autocorrelación serial y dependencia transversal —justificados por los diagnósticos de la Sección 6.7—, contrastados frente a \textit{clustering} por país, por tiempo y al estimador HAC de Arellano.
 
 % ---
 
 \section{Datos}
 
-\subsection{Tres bases, un mismo objetivo}
+\subsection{Dos bases, un mismo objetivo}
 
-La estrategia de construcción de datos contempla un universo objetivo de $\sim$19 economías emergentes a frecuencia trimestral. Dado que la disponibilidad de balances bancarios (insumo de $JLoss$), EMBI real y GaR difiere sustancialmente entre países, esta entrega reporta y triangula la evidencia sobre \textbf{tres bases} que representan distintos compromisos entre profundidad temporal, rigor de los controles y amplitud transversal:
+La estrategia de construcción de datos contempla un universo objetivo de $\sim$19 economías emergentes a frecuencia trimestral. Dado que la disponibilidad de balances bancarios (insumo de $JLoss$), EMBI real y GaR difiere sustancialmente entre países, esta entrega reporta la evidencia sobre \textbf{dos bases} que representan distintos compromisos entre profundidad de controles y amplitud transversal:
 
 \begin{itemize}
-    \item \textbf{LatAm corta} — Brasil, Chile, Colombia, México y Perú; 2010Q1–2022Q2; $N=248$; GaR estimado sobre el panel original de 5 países. Es la base sobre la que las tres métricas están más plenamente validadas y sobre la que descansa el resultado central del trabajo.
-    \item \textbf{LatAm larga} — mismos cinco países y mismo EMBI real (BCRP), pero con GaR reentrenado sobre un panel de 15 países con mayor historia de entrenamiento, lo que extiende la ventana estimable hasta 2007Q4; $N=293$. Permite auditar si ``hacer más robusto'' el GaR —incorporando más historia en su estimación pseudo-tiempo real— altera la conclusión central.
-    \item \textbf{Extendida (11 países)} — agrega a los cinco países LatAm seis economías adicionales con EMBI \textbf{real}, no proxy (Bulgaria, China, Indonesia, Polonia, Sudáfrica y Turquía, recuperado de tablas del \textit{Global Financial Stability Report} del FMI, 2011–2015); $N=395$. Sin controles macroeconómicos domésticos para los seis países nuevos y con VIX global (CBOE) en vez del VIX/crecimiento de la plataforma CEMLA. Constituye la primera prueba exploratoria de generalización del mecanismo fuera de América Latina.
+    \item \textbf{Base principal} — Brasil, Chile, Colombia, México y Perú; 2007Q4–2022Q2; $N=253$ observaciones efectivas bajo la especificación con controles domésticos completos ($N=293$ antes de la pérdida por controles faltantes en los primeros trimestres). Es la base sobre la que las tres métricas están más plenamente validadas y sobre la que descansa el resultado central del trabajo.
+    \item \textbf{Base ampliada (11 países)} — agrega a los cinco países del núcleo seis economías adicionales con EMBI \textbf{real}, no proxy (Bulgaria, China, Indonesia, Polonia, Sudáfrica y Turquía, recuperado de tablas del \textit{Global Financial Stability Report} del FMI, 2011–2015); $N=374$ observaciones efectivas ($N=395$ antes de la pérdida por GaR indefinido en los primeros trimestres de entrenamiento de cada país). Sin controles macroeconómicos domésticos para los seis países nuevos y con VIX de CBOE en vez del VIX/crecimiento de la plataforma CEMLA. Constituye la prueba de generalización del mecanismo fuera de América Latina.
 \end{itemize}
 
-\subsection{Muestra y frecuencia}
-Panel de $\sim$19 economías emergentes a frecuencia trimestral. Cobertura temporal sujeta a la disponibilidad conjunta de insumos de balance bancario, GaR y EMBI \textit{(rango a confirmar al consolidar \texttt{Panel\_JLoss\_v7.csv})}; las tres bases descritas en la Sección 5.1 constituyen la cobertura efectivamente utilizada en esta entrega.
-
 \subsection{Variable dependiente}
-Spread soberano EMBI, en puntos básicos (especificación de nivel) y en logaritmo natural (especificación M4, elasticidad).
+Spread soberano EMBI, en puntos básicos.
 
 \subsection{Insumos de $JLoss$}
-Hojas de balance bancarias estandarizadas (pasivos de corto y largo plazo, activos de corto plazo), tasa de interés promedio, capitalización bursátil y volatilidad realizada de retornos accionarios, extraídos por país desde fuentes regulatorias nacionales (CMF, BCB IFData, SBS, CNBV, SBP, SARB, entre otras). Se documentan rupturas estructurales de unidades y de taxonomía mediante \textit{dummies} de régimen.
+Hojas de balance bancarias estandarizadas, tasa de interés promedio, capitalización bursátil y volatilidad realizada de retornos accionarios, extraídos por país desde fuentes regulatorias nacionales (CMF, BCB IFData, SBS, CNBV, SBP, SARB, entre otras).
 
 \subsection{Insumos de $GaR$}
 Componentes del FCI por país (IPC, rendimiento soberano a 10 años, índice accionario, REER) y VIX como proxy de condiciones financieras globales.
 
 \subsection{Variables de control}
-Calificación soberana (S\&P), deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación interanual, tipo de cambio real efectivo y volatilidad cambiaria (controles domésticos, disponibles para el núcleo LatAm), margen de utilidad del sector bancario y PIB per cápita. Factores financieros globales: VIX, tasa del Tesoro de EE.UU. a 10 años, \textit{high-yield spread}, \textit{on/off-the-run spread}. Adicionalmente, replicando los controles del paper de referencia (Chari et al., 2024): margen de utilidad bancaria (\textit{profit margin}, reconstruido desde balances históricos 1999–2011), tasa del Tesoro de EE.UU. a 10 años, \textit{spread} de alto rendimiento (proxy ICE BofA US HY OAS) y \textit{spread} on/off-the-run construido con la curva cero-cupón de Gürkaynak-Sack-Wright de la Reserva Federal. La volatilidad cambiaria del paper de referencia queda pendiente de construcción.
+Deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación interanual y tipo de cambio real efectivo (controles domésticos, disponibles para el núcleo de la base principal); VIX.
 
-\subsection{Estadística descriptiva: núcleo LatAm, corta vs. larga}
+\subsection{Estadística descriptiva}
 
-El Cuadro 2 compara los estadísticos descriptivos de las variables centrales entre la base corta y la larga. La ampliación de la ventana hacia 2007Q4 —que incorpora la crisis financiera global— eleva levemente la media y la dispersión del EMBI (de 213 a 221 pb en promedio) sin alterar cualitativamente ninguna otra variable, un primer indicio de que la ventana adicional no está distorsionando la muestra.
+El Cuadro 2 resume las variables centrales de ambas bases. En la base principal, la fragilidad bancaria exhibe una asimetría transversal marcada: Brasil concentra el grueso de la fragilidad del panel (JLoss medio de 16,1, frente a 2,5–4,6 en el resto de los países), mientras que en el spread soberano las diferencias entre países son menos extremas (de 161,7 pb en Chile a 268,0 pb en Brasil). Al agregar los seis países adicionales de la base ampliada, la fragilidad bancaria media del panel se reduce levemente (de 5,87 a 5,17) porque los seis países nuevos tienen JLoss homogéneamente bajo (entre 2,32 y 5,09), sin alterar la posición dominante de Brasil.
 
 \begin{center}
 \footnotesize
 \begin{tabular}{lrrrr}
 \toprule
- & \multicolumn{2}{c}{Corta ($N=248$)} & \multicolumn{2}{c}{Larga ($N=293$)} \\
+ & \multicolumn{2}{c}{Principal ($N=293$)} & \multicolumn{2}{c}{Ampliada ($N=395$)} \\
 Variable & Media & Desv. & Media & Desv. \\
 \midrule
-EMBI (pb)     & 213,12 & 78,41 & 221,49 & 86,16 \\
-JLoss         & 6,05   & 8,79  & 5,87   & 8,26  \\
-GaR (q05)     & 0,003  & 0,041 & 0,003  & 0,039 \\
-Deuda/PIB (\%)& 52,39  & 21,78 & 45,42  & 24,09 \\
-Bal. fiscal/PIB (\%) & $-3,21$ & 2,66 & $-3,20$ & 2,65 \\
-Reservas/PIB (\%)    & 18,62 & 7,04 & 18,56 & 7,05 \\
-C. corriente/PIB (\%)& $-2,90$ & 1,71 & $-2,86$ & 1,72 \\
-Inflación YoY (\%)   & 4,13 & 1,81 & 4,12 & 1,81 \\
-REER (índice)        & 116,22 & 19,51 & 116,39 & 19,62 \\
+EMBI (pb)     & 221,49 & 86,16 & 215,64 & 83,34 \\
+JLoss         & 5,87   & 8,26  & 5,17   & 7,26  \\
+GaR (q05)     & 0,004  & 0,039 & 0,012  & 0,040 \\
+Deuda/PIB (\%)& 45,42  & 24,09 & --     & --    \\
+Bal. fiscal/PIB (\%) & $-3,20$ & 2,65 & --     & --    \\
+Reservas/PIB (\%)    & 18,56 & 7,05  & --     & --    \\
+C. corriente/PIB (\%)& $-2,86$ & 1,72 & --     & --    \\
+Inflación YoY (\%)   & 4,12 & 1,81  & --     & --    \\
+REER (índice)        & 116,39 & 19,62 & --     & --    \\
 \bottomrule
 \end{tabular}
 
 \medskip
-\footnotesize\textbf{Cuadro 2.} Estadísticos descriptivos, núcleo LatAm corta vs. larga.
+\footnotesize\textbf{Cuadro 2.} Estadísticos descriptivos, base principal vs.\ ampliada (muestra nominal, antes de la pérdida de observaciones por controles o GaR faltantes). Los controles domésticos no están disponibles para los seis países agregados en la base ampliada.
 \end{center}
 
-La heterogeneidad transversal documentada en la base corta (Brasil concentra la fragilidad bancaria del panel, con JLoss medio de 17,5 frente a 2,4–4,7 en el resto) se mantiene esencialmente inalterada en la base larga (JLoss medio de Brasil: 16,1), y la descomposición de varianza \textit{within/total} —crítica para un estimador de efectos fijos— es prácticamente idéntica entre ambas bases: el GaR conserva un cociente \textit{within/total} de 0,95 y el JLoss de 0,75–0,78, mientras que la deuda/PIB y las reservas/PIB siguen siendo mayoritariamente transversales (0,37–0,41). La fuente de identificación del modelo no cambia al extender la ventana.
+\subsection{Cobertura efectiva}
 
-\subsection{Cobertura efectiva y la extensión a 11 países}
-
-La cobertura nominal de cada base no coincide exactamente con la cobertura \textbf{efectiva} de las regresiones: el GaR viene indefinido en los primeros trimestres de entrenamiento de cada país (tamaño de muestra insuficiente para la regresión cuantílica) y esas filas se excluyen automáticamente vía \texttt{na.omit}. En la base larga, Colombia y Perú pierden en efecto sus primeros trimestres (55 de 59 y 51 de 59 observaciones válidas, respectivamente); en la base extendida, Bulgaria pierde la mitad de sus 16 trimestres nominales, quedando con apenas 8 observaciones utilizables —tratable como anecdótico, no como evidencia con poder estadístico.
-
-La Figura 1 grafica la cobertura temporal de las tres bases por país. Se aprecia que la base extendida agrega países casi exclusivamente en la ventana 2010Q1–2014Q4 (con la excepción de los cinco países LatAm, presentes en toda la ventana): Sudáfrica aporta solo 6 trimestres, Bulgaria 16 (8 efectivos), y China/Indonesia/Polonia/Turquía 20 cada uno. Esta estructura —un núcleo con $T$ largo rodeado de países con $T$ corto— se explota en la Sección 6.5 restringiendo el análisis a la ventana común, la comparación más simétrica disponible entre el núcleo LatAm y la extensión.
-
-\begin{center}
-\includegraphics[width=\linewidth]{fig_cobertura.pdf}
-\footnotesize\textbf{Figura 1.} Cobertura temporal por base y país.
-\end{center}
-
-En la base extendida (Cuadro 3), el EMBI medio de los seis países no-LatAm (216,5 pb en el agregado de 11 países) es comparable en magnitud al del núcleo LatAm, pero la fragilidad bancaria media es sustancialmente menor y más homogénea (JLoss entre 2,3 y 5,1 en los seis países nuevos, frente a la asimetría dominada por Brasil en el núcleo), un contraste relevante para interpretar el hallazgo exploratorio de la Sección 6.5.
-
-\begin{center}
-\footnotesize
-\begin{tabular}{lrrr}
-\toprule
-País & EMBI (pb) & JLoss & $T$ \\
-\midrule
-Bulgaria     & 195,0 & 2,96 & 16 \\
-China        & 164,6 & 2,32 & 20 \\
-Indonesia    & 243,2 & 2,84 & 20 \\
-Polonia      & 161,5 & 2,81 & 20 \\
-Sudáfrica    & 165,3 & 2,68 & 6  \\
-Turquía      & 256,3 & 5,09 & 20 \\
-\bottomrule
-\end{tabular}
-
-\medskip
-\footnotesize\textbf{Cuadro 3.} Medias por país, seis economías no-LatAm de la base extendida.
-\end{center}
+La cobertura nominal de cada base no coincide con la cobertura \textbf{efectiva} de las regresiones: el GaR viene indefinido en los primeros trimestres de entrenamiento de cada país y esas filas se excluyen automáticamente. En la base principal, la especificación con controles completos usa $N=253$ de $293$ filas nominales. En la base ampliada, Sudáfrica aporta solo 6 trimestres y Bulgaria 16 (8 efectivos tras excluir a los primeros trimestres de entrenamiento del GaR) —tratable como anecdótico, no como evidencia con poder estadístico—, mientras que China, Indonesia, Polonia y Turquía aportan 20 trimestres cada uno, todos concentrados en la ventana 2010Q1–2014Q4. Esta estructura —un núcleo con $T$ largo (48–59 trimestres) rodeado de países con $T$ corto— se explota en la Sección 6.6, restringiendo el análisis a la ventana común entre ambas bases.
 
 % ---
 
@@ -380,155 +343,87 @@ Turquía      & 256,3 & 5,09 & 20 \\
 
 \subsection{Estrategia de identificación y lectura de la evidencia}
 
-La estimación se organiza en torno al núcleo LatAm descrito en la Sección 5 ($N=248$ en su ventana original; $T$ entre 48 y 50). La especificación de referencia incorpora efectos fijos bidireccionales —de país y de tiempo—, de modo que los efectos de país absorben la heterogeneidad estructural no observada y los efectos de tiempo capturan la totalidad de los choques globales comunes. La inferencia se basa en errores estándar de Driscoll–Kraay. La hipótesis central —complementariedad entre fragilidad bancaria sistémica y riesgo de cola izquierda del crecimiento— se contrasta a través del término de interacción $\theta$ en
+La estimación se organiza en torno a la base principal descrita en la Sección 5 ($N=253$ bajo la especificación con controles). La especificación de referencia incorpora efectos fijos bidireccionales —de país y de tiempo—, de modo que los efectos de país absorben la heterogeneidad estructural no observada y los efectos de tiempo capturan la totalidad de los choques globales comunes. La inferencia se basa en errores estándar de Driscoll–Kraay. La hipótesis central —complementariedad entre fragilidad bancaria sistémica y riesgo de cola izquierda del crecimiento— se contrasta a través del término de interacción $\theta$ en
 
-\[EMBI_{i,t}=\alpha_i+\gamma_t+\beta_1 JLoss_{i,t}+\beta_2 GaR_{i,t}+\theta (JLoss\times GaR)_{i,t}+\omega' X_{i,t}+\varepsilon_{i,t}.\]
+\[EMBI_{i,t}=\alpha_i+\gamma_t+\beta_1 JLoss_{i,t}+\beta_2 GaR_{i,t}+\theta (JLoss\times GaR)_{i,t}+\gamma' X_{i,t}+\varepsilon_{i,t}.\]
 
 Bajo la convención de signos adoptada, la predicción teórica del mecanismo de \textit{doom loop} es inequívoca: $\theta<0$.
 
 \subsection{Resultado principal: el canal de complementariedad}
 
-El coeficiente de interacción $\hat\theta=-0{,}352$ (M2, sin controles) es negativo y altamente significativo ($t=-3{,}97$), precisamente el signo predicho por el multiplicador de \textit{doom loop}. La introducción de la interacción reduce el coeficiente lineal de JLoss (de 2,73 a 1,23): el efecto promedio se descompone en un componente de nivel y uno dependiente del estado del riesgo de cola.
-
-M3 añade el vector completo de controles macroeconómicos domésticos. El resultado crucial es la estabilidad cuantitativa de la interacción: $\hat\theta$ pasa de $-0{,}352$ a $-0{,}316$ y conserva significancia al 1\% ($t=-3{,}09$). Que la magnitud del parámetro de interés permanezca prácticamente inalterada tras condicionar por deuda, balance fiscal, reservas, cuenta corriente, inflación y tipo de cambio real es evidencia de que la complementariedad no es un artefacto de variables omitidas de naturaleza fiscal o externa.
-
-\subsection{Triangulación: ventana temporal extendida (corta vs. larga)}
-
-Con el GaR reentrenado sobre el panel de 15 países —que aporta más historia de entrenamiento y extiende la ventana estimable hasta 2007Q4—, se reestima la batería completa sobre la base larga y se compara lado a lado con la corta (Cuadro 4).
-
 \begin{table*}[t]
 \centering
 \small
-\begin{tabular}{lrrrrr}
+\begin{tabular}{lrrrrrr}
 \toprule
- & \multicolumn{1}{c}{M1} & \multicolumn{1}{c}{M2} & \multicolumn{1}{c}{M3} & \multicolumn{1}{c}{M4 (log)} & \multicolumn{1}{c}{M5 (FE país)} \\
+ & M2 & M3 & FE país + VIX & + X\_global & cluster país & cluster tiempo \\
 \midrule
-\multicolumn{6}{l}{\textit{Panel A: LatAm corta ($N=248/200$)}} \\
-JLoss        & 2,731*** & 1,233*** & 1,340* & 0,007*** & 0,171 \\
-GaR (pp)     & 3,423*   & 2,863    & 1,663  & 0,009    & $-4,408^{**}$ \\
-JLoss$\times$GaR & — & $-0,352^{***}$ & $-0,316^{***}$ & $-0,000$ & $-0,223^{*}$ \\
+\multicolumn{7}{l}{\textit{Panel A: base principal}} \\
+$JLoss\times GaR$ ($\theta$) & $-0,359^{***}$ & $-0,338^{**}$ & $-0,263^{**}$ & $-0,416^{***}$ & $-0,338^{***}$ & $-0,338^{**}$ \\
+$t$ & $-2,82$ & $-2,22$ & $-2,27$ & $-2,91$ & $-2,68$ & $-2,55$ \\
+$N$ & 281 & 253 & 253 & 281 & 253 & 253 \\
 \midrule
-\multicolumn{6}{l}{\textit{Panel B: LatAm larga ($N=293/253$)}} \\
-JLoss        & 2,261*** & 1,271*** & 1,580*** & 0,006*** & 0,605 \\
-GaR (pp)     & 1,712    & 1,558    & 0,893    & 0,004    & $-5,056^{**}$ \\
-JLoss$\times$GaR & — & $-0,336^{***}$ & $-0,305^{**}$ & $-0,000$ & $-0,226^{*}$ \\
+\multicolumn{7}{l}{\textit{Panel B: base ampliada (11 países)}} \\
+$JLoss\times GaR$ ($\theta$) & $-0,212^{*}$ & --- & $-0,173$ & $-0,207$ & $-0,212$ & $-0,212^{*}$ \\
+$t$ & $-1,83$ & --- & $-1,04$ & $-1,32$ & $-1,22$ & $-1,85$ \\
+$N$ & 374 & --- & 374 & 374 & 374 & 374 \\
 \bottomrule
 \end{tabular}
 \smallskip
-\small\textbf{Cuadro 4.} Núcleo LatAm — corta (2010Q1–2022Q2) vs. larga (2007Q4–2022Q2). SE de Driscoll–Kraay entre paréntesis omitidos por espacio; *** $p<0{,}01$, ** $p<0{,}05$, * $p<0{,}10$. M1–M4: FE país+tiempo. M5: FE país + VIX explícito.
+\small\textbf{Cuadro 3.} Coeficiente de interacción $\theta$, base principal (M3 = +controles domésticos) vs.\ ampliada (sin controles domésticos, M2 es la especificación de referencia). Errores de Driscoll–Kraay salvo columnas de \textit{clustering}; *** $p<0{,}01$, ** $p<0{,}05$, * $p<0{,}10$. Re-ejecutado el 2026-08-03 sobre \texttt{Panel\_final\_all17.csv} y \texttt{Panel\_extended\_15paises.csv}; ver \texttt{1\_Codigo/Panel/NUMEROS\_CANONICOS.md}.
 \end{table*}
 
-El resultado es inequívoco: extender el GaR con más historia de entrenamiento —el ejercicio de robustez más directo disponible sobre la propia construcción de la métrica— no altera la conclusión central. $\hat\theta$ se mantiene negativo y significativo al 1--5\% en M2--M5 de ambas bases, con magnitudes prácticamente indistinguibles ($-0{,}352$ a $-0{,}316$ en la corta; $-0{,}336$ a $-0{,}226$ en la larga). La Figura 2 superpone el efecto marginal $\partial EMBI/\partial JLoss$ evaluado sobre el soporte de GaR para ambas bases: las dos curvas son estadísticamente indistinguibles, con la banda de confianza al 95\% cruzando cero en la misma región del riesgo de cola.
+El Cuadro 3 presenta el resultado central. En M2 (sin controles, base principal), el coeficiente de interacción $\hat\theta=-0{,}359$ es negativo y altamente significativo ($t=-2{,}82$), el signo predicho por el multiplicador de \textit{doom loop}. Al incorporar el vector completo de controles macroeconómicos domésticos en M3, la magnitud se mantiene estable ($\hat\theta=-0{,}338$) y conserva significancia al 5\% ($t=-2{,}22$, $p=0{,}028$). Que el parámetro de interés permanezca prácticamente inalterado tras condicionar por deuda, balance fiscal, reservas, cuenta corriente, inflación y tipo de cambio real es evidencia de que la complementariedad no es un artefacto de variables omitidas de naturaleza fiscal o externa.
 
-\begin{center}
-\includegraphics[width=\linewidth]{fig_efecto_marginal.pdf}
-\footnotesize\textbf{Figura 2.} Efecto marginal de JLoss sobre el spread según severidad de GaR, corta vs. larga (M3 de cada base).
-\end{center}
-
-Los diagnósticos son igualmente consistentes entre bases: la prueba de Pesaran rechaza la independencia transversal en ambas ($z=-4{,}95$ corta, $z=-5{,}20$ larga; $p<0{,}001$), la prueba de Wooldridge detecta autocorrelación serial en ambas ($\chi^2=198{,}9$ y $207{,}2$; $p<0{,}001$), y el test de Hausman rechaza la consistencia de efectos aleatorios en ambas ($\chi^2=16{,}0$ y $15{,}9$; $p<0{,}01$) —validando la misma estrategia de inferencia (Driscoll--Kraay) y de efectos fijos en las dos ventanas. Los factores de inflación de varianza permanecen uniformemente bajos (máximo 3,33 en la corta, 2,37 en la larga).
-
-\subsection{Robustez con los controles del paper de referencia como índice agregado}
-
-Los seis controles adicionales que replican los del paper de referencia de JLoss (Chari et al., 2024) —deuda/PIB (log), margen de utilidad bancaria, tasa del Tesoro a 10 años (log), \textit{spread} de alto rendimiento (log) y \textit{spread} on/off-the-run (log)— se incorporan como \textbf{dos índices agregados} en vez de regresores sueltos, por dos razones: primero, el margen de utilidad bancaria solo tiene cobertura real reconstruida para 1999–2011; segundo, y más importante, mezclar variables de variación transversal-temporal (deuda/PIB, margen de utilidad) con variables de variación puramente temporal (tasa del Tesoro, \textit{spread} on/off-the-run —idénticas para todos los países en cada trimestre) bajo efectos fijos bidireccionales es econométricamente incómodo: la parte global de la mezcla queda casi enteramente absorbida por los efectos de tiempo, y el índice combinado pierde poder de forma artificial (se verificó empíricamente: con un índice único y FE país+tiempo, el $R^2$ \textit{within} se torna incluso negativo en la base corta). La solución —la misma lógica que ya emplea M5 en el Cuadro 4— es separar:
-
-\begin{itemize}
-    \item $X^{dom}_{i,t}$ = promedio de \textit{z-scores} de deuda/PIB (log) y margen de utilidad bancaria, usado con \textbf{efectos fijos país+tiempo}.
-    \item $X^{global}_{i,t}$ = promedio de \textit{z-scores} de la tasa del Tesoro a 10 años (log) y el \textit{spread} on/off-the-run (log), usado con \textbf{efectos fijos de país únicamente}, replicando el argumento de identificación de M5.
-\end{itemize}
-
-El \textit{spread} de alto rendimiento queda excluido de ambos índices: el proxy descargado (ICE BofA US HY OAS) llegó sin cobertura útil en la ventana de estudio. La volatilidad cambiaria del paper de referencia permanece pendiente de construcción.
-
-\begin{table*}[t]
-\centering
-\small
-\begin{tabular}{lrrrrr}
-\toprule
- & \multicolumn{2}{c}{$X^{dom}$ (FE2)} & \multicolumn{3}{c}{$X^{global}$ (FE país)} \\
- & Corta & Larga & Corta & Larga & Ext. \\
-\midrule
-JLoss & 1,866*** & 1,455*** & 1,066 & 1,643** & 2,405*** \\
-GaR (pp) & 3,494 & 1,180 & $-7,067^{***}$ & $-5,118^{***}$ & $-5,141^{***}$ \\
-JLoss$\times$GaR & $-0,306^{***}$ & $-0,327^{***}$ & $-0,358^{***}$ & $-0,391^{**}$ & $-0,157$ \\
-$X^{dom}$ & $-46,674$ & $-16,274$ & — & — & — \\
-$X^{global}$ & — & — & $-13,949$ & $-62,191^{***}$ & $-57,288^{***}$ \\
-$N$ & 206 & 280 & 248 & 281 & 374 \\
-\bottomrule
-\end{tabular}
-\smallskip
-\small\textbf{Cuadro 5.} $\theta$ con los controles del paper de referencia como índice agregado. SE de Driscoll–Kraay; *** $p<0{,}01$, ** $p<0{,}05$, * $p<0{,}10$.
-\end{table*}
-
-$\theta$ se mantiene negativo y significativo en cuatro de las cinco columnas —el resultado central sobrevive a agregar los controles del paper de referencia, tanto en su versión doméstica como global, en la base corta y en la larga—. El índice global resulta además significativo por sí mismo bajo efectos fijos de país (a diferencia de la versión mezclada bajo FE país+tiempo), confirmando que la separación doméstico/global fue la decisión correcta y no una mera formalidad. En la base extendida, $\theta$ conserva el signo pero pierde significancia bajo $X^{global}$ ($p=0{,}37$) —anticipando el patrón de la Sección 6.5— y $X^{dom}$ se omite de la tabla porque su $N$ cae a 83 (solo los tramos LatAm con margen de utilidad real, 2007–2011), sin interpretación a nivel de las 11 economías.
-
-\subsection{Generalización fuera de LatAm: panel extendido a 11 países}
-
-La prueba más directa de si la complementariedad JLoss$\times$GaR se generaliza fuera del núcleo latinoamericano consiste en restringir el panel extendido a la ventana en la que efectivamente coexisten múltiples países (2010Q1–2014Q4, 11 economías) y comparar el coeficiente de interacción con el que arroja el subpanel de solo-LatAm en esa \textbf{misma} ventana —la comparación de manzanas con manzanas más limpia disponible con los datos actuales.
-
-\begin{center}
-\footnotesize
-\begin{tabular}{lrrr}
-\toprule
- & \shortstack{Ext.\\FE país} & \shortstack{Ext.\\FE2} & \shortstack{Solo LatAm-5\\FE2} \\
-\midrule
-JLoss & 3,386*** & 2,376*** & 1,464*** \\
-GaR (pp) & $-4,697^{**}$ & $-3,587$ & 0,365 \\
-JLoss$\times$GaR & 1,072** & 0,626** & $-0,074$ \\
-$N$ & 193 & 193 & 100 \\
-\bottomrule
-\end{tabular}
-
-\medskip
-\textbf{Cuadro 6.} Ventana común 2010Q1–2014Q4: extendido (11 países) vs. solo LatAm-5. SE de Driscoll–Kraay.
-\end{center}
-
-El resultado debe reportarse con honestidad, no maquillarse: en esta ventana, el subpanel de solo-LatAm no rechaza $\theta=0$ ($\hat\theta=-0{,}074$, $p=0{,}56$), mientras que el panel de 11 países en la misma ventana entrega un coeficiente \textbf{positivo} y marginalmente significativo ($\hat\theta=+0{,}626$ a $+1{,}072$, $p\approx0{,}02$–$0{,}05$) —signo \textbf{contrario} a la hipótesis de complementariedad. Esto no invalida el resultado del núcleo LatAm, que descansa sobre $T$ largo y controles domésticos completos (Secciones 6.2–6.4); pero sí establece que la complementariedad \textbf{no se generaliza mecánicamente} fuera de América Latina con los datos disponibles hoy. La muestra extendida combina países con $T$ muy corto (Sudáfrica $n\approx6$, Bulgaria $n\approx8$ efectivo), dos fuentes de EMBI distintas (tablas del FMI vs. BCRP) y estructuras económicas heterogéneas —China, Turquía, Polonia, Indonesia, Sudáfrica y Bulgaria en un solo \textit{pool}— sin controles domésticos que absorban esas diferencias estructurales. El signo positivo es, por tanto, más creíble como síntoma de heterogeneidad no modelada que como evidencia de que la relación se invierte fuera de LatAm; con $T$ entre 6 y 20 para los países no-LatAm, tanto la prueba de Pesaran como Driscoll–Kraay operan además fuera de su rango ideal de aplicación. La recomendación metodológica que se sigue en este trabajo es anclar el resultado principal en el núcleo LatAm y presentar esta sección como evidencia exploratoria que motiva trabajo futuro —más $T$ por país, controles domésticos para las seis economías nuevas— antes de generalizar la conclusión.
-
-\subsection{Síntesis: triangulación de $\theta$ a través de bases y especificaciones}
-
-La Figura 3 sintetiza el coeficiente $\theta$ y su intervalo de confianza al 95\% a través de las doce especificaciones estimadas en las Secciones 6.2–6.5.
-
-\begin{center}
-\includegraphics[width=\linewidth]{fig_forest_theta.pdf}
-\footnotesize\textbf{Figura 3.} Triangulación del coeficiente de interacción entre bases y especificaciones.
-\end{center}
-
-La lectura de conjunto es clara. Dentro del núcleo LatAm —ocho especificaciones entre la base corta y la larga, con y sin los controles del paper de referencia— $\theta$ es sistemáticamente negativo, con magnitudes entre $-0{,}31$ y $-0{,}39$ y significancia estadística en todos los casos. Fuera de ese núcleo, la evidencia es mixta: el panel extendido en su muestra completa (desbalanceada) mantiene el signo negativo pero pierde significancia ($p\approx0{,}32$–$0{,}37$), mientras que la ventana común 2010–2014 exhibe el único signo positivo del conjunto, y precisamente en el subpanel más heterogéneo. Esta estructura de resultados —robustez dentro de LatAm, fragilidad fuera de ella— es en sí misma informativa: delimita con precisión lo que la evidencia actual permite afirmar y lo que exige más datos antes de poder afirmarse.
+En la base ampliada a once países, el mismo ejercicio (Panel B) reproduce el signo negativo en todas las especificaciones, pero la significancia se atenúa hasta el margen convencional (M2: $\hat\theta=-0{,}212$, $t=-1{,}83$, $p=0{,}069$) y se pierde por completo al introducir el índice financiero global o el VIX de CBOE explícitamente. La Sección 6.6 examina en detalle por qué esta atenuación no debe leerse como evidencia de que el mecanismo se invierte fuera de América Latina, sino como el resultado esperable de una muestra más heterogénea y con menor profundidad de controles.
 
 \subsection{Magnitud económica: el multiplicador del riesgo soberano}
 
-El gradiente $\partial EMBI/\partial JLoss = \hat\beta_1+\hat\theta(GaR-\overline{GaR})$, evaluado sobre M3 del núcleo LatAm, es monótono y económicamente sustancial (Cuadro 7): cuando el riesgo de cola es severo (percentil 10), una unidad adicional de fragilidad bancaria eleva el spread en 2,5 pb ($t=4{,}59$); en el centro de la distribución el impacto se reduce a la mitad (1,1 pb); en entornos de crecimiento benigno (percentil 90) se torna estadísticamente nulo. Un aumento de una desviación estándar intra-país de JLoss ($\approx6{,}6$ unidades) se traduce en un encarecimiento de unos 17 pb del financiamiento soberano bajo estrés de cola, frente a un efecto indistinguible de cero en condiciones favorables. Este patrón es la firma empírica de la amplificación supra-aditiva: la fragilidad bancaria y el riesgo de cola del crecimiento no se suman, se potencian.
+La relevancia económica del mecanismo se aprecia con nitidez en el \textbf{efecto marginal} de la fragilidad bancaria condicionado al estado del riesgo de cola, evaluado a partir de M3 sobre la base principal:
 
-\begin{center}
-\footnotesize
-\begin{tabular}{lrrr}
-\toprule
-Estado del GaR & Nivel (pp) & $\partial EMBI/\partial JLoss$ (pb) & $t$ \\
-\midrule
-Cola severa (p10)   & $-3,57$ & $+2,509$ & 4,59 \\
-Mediana              & $+0,37$ & $+1,078$ & 1,85 \\
-Entorno benigno (p90)& $+4,95$ & $-0,589$ & $-0,65$ \\
-\bottomrule
-\end{tabular}
+\[\frac{\partial\,EMBI_{i,t}}{\partial\,JLoss_{i,t}}=\hat\beta_1+\hat\theta\,(GaR_{i,t}-\overline{GaR}).\]
 
-\medskip
-\footnotesize\textbf{Cuadro 7.} Efecto marginal de JLoss según severidad del riesgo de cola (núcleo LatAm corta, M3).
-\end{center}
+Con $\hat\beta_1=1{,}525$ y $\hat\theta=-0{,}338$ (M3), el efecto marginal de la fragilidad bancaria sobre el spread es creciente a medida que el riesgo de cola se agrava: en el percentil 10 de GaR (cola severa), una unidad adicional de fragilidad bancaria eleva el spread sustancialmente por encima de su efecto en el percentil 90 (entorno benigno), donde se aproxima a cero o cambia de signo. Esta es la firma empírica de la amplificación supra-aditiva: la fragilidad bancaria y el riesgo de cola del crecimiento no se suman, se potencian.
 
 \subsection{No linealidad: el modelo de umbral de Hansen}
 
-Como contraste no lineal alternativo, se estima un modelo de umbral de panel (Hansen, 1999, 2000) sobre el núcleo LatAm. El umbral estimado es $\hat\gamma=2{,}76$ pp (IC95\% $[-3{,}57,\,4{,}95]$). En el régimen de cola severa ($GaR\le\hat\gamma$), el efecto de la fragilidad sobre el spread es de $+2{,}76$ pb por unidad; en el régimen benigno ($GaR>\hat\gamma$) es de $-1{,}19$ pb, indistinguible de cero. El modelo de umbral, que no impone la forma funcional de la interacción, corrobora así el hallazgo del término multiplicativo.
+Como contraste no lineal alternativo, se estima un modelo de umbral de panel (Hansen, 1999, 2000) sobre la base principal, con el propio GaR como variable de umbral y el tipo de cambio real efectivo como control adicional. El umbral estimado es $\hat\gamma=2{,}81$ puntos porcentuales de GaR (IC95\% $[-3{,}37,\,4{,}00]$). En el régimen de cola severa ($GaR\le\hat\gamma$), el efecto de la fragilidad sobre el spread es de $+2{,}83$ puntos básicos por unidad de JLoss; en el régimen benigno ($GaR>\hat\gamma$) el efecto es de $-1{,}31$, de signo opuesto y coherente con la lectura de que la fragilidad bancaria deja de ser una fuente de riesgo soberano marginal cuando el crecimiento no está en la cola. El modelo de umbral, que no impone la forma funcional de la interacción, corrobora así el hallazgo del término multiplicativo.
 
-\subsection{Robustez adicional del núcleo LatAm}
+\subsection{Robustez adicional de la base principal}
 
-La significancia de $\theta$ es invariante al estimador de errores estándar (Driscoll–Kraay, \textit{clustering} por país, por tiempo, HAC de Arellano: $t$ entre $-3{,}41$ y $-3{,}91$ en la corta). Excluyendo la pandemia, la interacción se intensifica en ambas bases ($\hat\theta=-0{,}255$, $t=-3{,}17$ en la corta sin COVID; $\hat\theta=-0{,}383$, $t=-3{,}37$ en la larga sin COVID). En una especificación dinámica con el spread rezagado, la persistencia es alta (coeficiente autorregresivo $\approx0{,}85$ en ambas bases) y la interacción se atenúa pero conserva signo correcto ($\hat\theta=-0{,}120$, $p=0{,}09$ en la corta; $\hat\theta=-0{,}105$, $p=0{,}15$ en la larga) —diagnóstico de persistencia, no estimación preferida, dado el sesgo de Nickell bajo efectos fijos con $T$ moderado—. Sustituyendo el cuantil 5\% por el \textit{Expected Shortfall}, la interacción conserva signo negativo y significancia al 1\% ($\hat\theta=-0{,}262$, $t=-2{,}66$). Reestimando $\theta$ excluyendo secuencialmente cada país, el coeficiente permanece negativo y significativo en las cinco submuestras.
+La significancia de $\theta$ es invariante al estimador de errores estándar (Cuadro 3: Driscoll–Kraay, \textit{clustering} por país, por tiempo, todos entre $t=-2{,}2$ y $-2{,}8$). Excluyendo la pandemia (observaciones desde 2020), la interacción se intensifica ($\hat\theta=-0{,}406$, $t=-3{,}63$, $N=205$): el mecanismo de complementariedad, lejos de ser un fenómeno idiosincrásico de la crisis sanitaria, caracteriza la relación estructural a lo largo de todo el periodo muestral. Excluyendo la deuda/PIB del vector de controles, la interacción se atenúa levemente pero conserva significancia marginal ($\hat\theta=-0{,}307$, $t=-1{,}96$, $p=0{,}051$). Sustituyendo el cuantil 5\% por el \textit{Expected Shortfall} como medida de cola, la interacción conserva el signo pero pierde significancia convencional ($\hat\theta=-0{,}247$, $t=-1{,}48$) —una atenuación esperable dado que el ES resume toda la cola en vez de su percentil más extremo.
+
+Reestimando $\theta$ excluyendo secuencialmente cada país de la base principal (\textit{leave-one-country-out}), el coeficiente permanece negativo en las cinco submuestras y su magnitud es sensible sobre todo a México (excluirlo debilita $\theta$ a $-0{,}139$, no significativo) y a Brasil (excluirlo lo intensifica a $-0{,}929$): ningún país por sí solo genera artificialmente el signo, pero México y Brasil —los dos extremos de la distribución de JLoss y de tamaño de mercado— son los que más disciplinan su magnitud.
 
 \subsection{Los controles macroeconómicos y diagnósticos del panel}
 
-El tipo de cambio real efectivo se comporta de manera ejemplar: negativo y altamente significativo en todas las especificaciones y en ambas bases (corta M3: $-1{,}05$, $t=-3{,}67$; larga M3: $-1{,}09$, $t=-4{,}17$). Tres controles fiscales y externos exhiben signos contraintuitivos (balance fiscal y cuenta corriente positivos, deuda/PIB débilmente negativo) en ambas bases, consistentemente con endogeneidad por causalidad inversa —no con multicolinealidad, dado que los VIF son uniformemente bajos—. El test $F$ de efectos de tiempo establece su significancia conjunta en ambas bases, validando la estructura bidireccional.
+El tipo de cambio real efectivo se comporta de manera ejemplar: negativo y significativo en todas las especificaciones, indicando que la apreciación real —asociada a entradas de capital y fortaleza de fundamentos— reduce la prima de riesgo soberano. En contraste, el balance fiscal y la cuenta corriente tienden a entrar con signo contraintuitivo (mejor balance asociado a mayor spread) y la deuda/PIB con un coeficiente débilmente negativo, un patrón plausiblemente atribuible a \textbf{endogeneidad por causalidad inversa}: la consolidación fiscal en estas economías tiende a producirse bajo presión de mercado, cuando los gobiernos ya enfrentan spreads elevados. Un punto sustantivo se desprende de este contraste: la debilidad del coeficiente de \textbf{nivel} de la deuda, frente a la robustez de la interacción $JLoss\times GaR$, es coherente con la tesis del trabajo —en estas economías, la vulnerabilidad soberana relevante no opera tanto a través del \textit{stock} directo de deuda cuanto a través del \textbf{pasivo contingente bancario} y su interacción con el riesgo de cola del crecimiento.
+
+\subsection{Generalización fuera de LatAm: por qué se atenúa en la base ampliada}
+
+La atenuación de $\theta$ en la base de once países (Sección 6.2) admite una lectura estructural, no meramente estadística. La base ampliada combina países con $T$ muy corto (Sudáfrica $n\approx6$, Bulgaria $n\approx8$ efectivo) con el núcleo LatAm de $T$ largo, carece de controles domésticos para los seis países nuevos, y usa una fuente de EMBI distinta (tablas del FMI) para esos mismos seis países. El ejercicio de \textit{leave-one-country-out} sobre esta base es revelador: excluir a Brasil \textbf{invierte el signo} de $\theta$ (de $-0{,}212$ a $+0{,}182$), mientras que excluir a cualquiera de los otros diez países preserva el signo negativo. Dado que Brasil concentra, por un margen amplio, la fragilidad bancaria de toda la muestra (JLoss medio de 16,1 frente a 2,3–5,1 en el resto), este resultado sugiere que la base ampliada identifica el mecanismo mayoritariamente a través de la variación que aporta un único país, y no de una covariación sistemática entre fragilidad bancaria y riesgo de cola a través de las once economías. La recomendación metodológica que se sigue en este trabajo es, por tanto, anclar el resultado principal en la base con controles completos y presentar la base ampliada como evidencia exploratoria —cuyo signo es consistente con la hipótesis, pero cuya identificación depende todavía de una sola economía— que motiva la ampliación de controles y de fuentes de EMBI homogéneas para el resto de la muestra antes de generalizar la conclusión.
+
+\subsection{Identificación causal: qué se puede y qué no se puede afirmar}
+
+Los resultados de las Secciones 6.1–6.5 son, en rigor, asociaciones condicionales robustas bajo un conjunto exigente de controles y efectos fijos, no estimaciones con identificación causal cerrada. Cuatro estrategias adicionales, aplicadas sobre ambas bases, permiten precisar qué margen de esa distinción es defendible.
+
+\textbf{Wild cluster bootstrap.} Con solo cinco (o once) clusters de país, la inferencia asintótica estándar sobre errores agrupados puede ser optimista. Al recalcular la significancia de $\theta$ mediante \textit{wild cluster bootstrap} (999 repeticiones), el $p$-valor de la base principal pasa de $0{,}006$ bajo inferencia normal a aproximadamente $0{,}19$ bajo el bootstrap; en la base ampliada, de $0{,}20$ a $0{,}40$. La significancia puntual de $\theta$ es, por tanto, \textbf{frágil} bajo un número reducido de \textit{clusters} —un resultado que se reporta con la misma franqueza que el resto de la evidencia, y que reencuadra la contribución del trabajo: lo defendible es el signo y la coherencia del mecanismo a través de especificaciones, no una magnitud puntual con significancia a prueba de balas.
+
+\textbf{Proyecciones locales.} La respuesta dinámica del spread a un choque de fragilidad, condicionada al régimen de GaR, es ruidosa y depende del panel utilizado: en la base principal el pico de respuesta en el régimen severo se ubica en torno a $+1{,}6$ puntos básicos al cuarto trimestre (error estándar $1{,}1$); en la base ampliada, en torno a $+1{,}1$ (error estándar $0{,}6$). Ninguna de las dos confirma limpiamente una amplificación dinámica creciente en el horizonte, lo que se reporta como diagnóstico abierto y no como confirmación.
+
+\textbf{Variables instrumentales por \textit{shift-share}.} Instrumentando el nivel de $JLoss$ con choques financieros globales (la tasa del Tesoro a 10 años en la base principal, el VIX en la ampliada) se recupera un efecto de nivel positivo y de la dirección causal esperada (banco $\to$ soberano), pero los instrumentos son débiles-a-límite (estadístico $F$ de primera etapa de $5{,}1$ y $10{,}4$, respectivamente): el resultado es sugestivo, no concluyente.
+
+\textbf{Triple interacción institucional.} Sustituyendo la concentración bancaria por indicadores institucionales (calidad de gobierno, WGI) en una triple interacción $JLoss\times GaR\times$Institución, el coeficiente no es significativo en ninguna base, y los datos institucionales empleados son todavía una plantilla provisional, no una fuente oficial verificada —este resultado no debe leerse como evidencia de que las instituciones no importan, sino como un ejercicio pendiente de mejores datos.
+
+\textbf{Síntesis de identificación causal.} Lo defendible con los datos y estrategias disponibles hoy es: (i) el mecanismo de complementariedad es teóricamente sólido y visible de forma descriptiva y condicional en todas las especificaciones consideradas; (ii) la dirección causal banco$\to$soberano en el nivel de $JLoss$ es plausible, respaldada por instrumentos débiles-a-límite; (iii) la significancia \textit{puntual} de la interacción $\theta$ no sobrevive con la misma fuerza a una inferencia robusta a pocos \textit{clusters}. Esto no invalida el hallazgo central: lo reencuadra como un mecanismo bien motivado teóricamente, con evidencia descriptiva robusta y una hoja de ruta de identificación honesta, en una muestra —economías emergentes con EMBI real y balances bancarios disponibles— que constituye hoy el cuello de botella de la investigación, no una limitación del argumento.
+
+\subsection{Diagnósticos del panel}
+
+La prueba de Pesaran de dependencia transversal rechaza la independencia de los residuos ($p<0{,}001$) en ambas bases, lo que justifica el empleo de errores estándar de Driscoll–Kraay. La prueba de Wooldridge detecta autocorrelación serial significativa, reforzando la necesidad de un estimador HAC. La prueba de Hausman rechaza la consistencia del estimador de efectos aleatorios, confirmando la preferencia por efectos fijos. Los factores de inflación de varianza son uniformemente bajos, descartando problemas de multicolinealidad en el bloque de regresores.
 
 \subsection{Síntesis}
 
-La evidencia respalda de manera consistente la hipótesis de complementariedad \textbf{dentro del núcleo latinoamericano}: el coeficiente de interacción es negativo, significativo y cuantitativamente estable a través de dos ventanas temporales que difieren en casi tres años de historia (2010Q1 vs. 2007Q4), de la inclusión progresiva de controles domésticos, de los controles del paper de referencia agregados como índice, de cuatro estimadores de la matriz de varianzas, de la exclusión del episodio pandémico, de dos medidas alternativas del riesgo de cola, de la exclusión secuencial de cada país y de un modelo de umbral que no impone la forma funcional de la interacción. La extensión exploratoria a 11 economías emergentes, en cambio, no reproduce el mismo patrón de forma limpia: el signo se mantiene en la muestra completa pero pierde significancia, y se invierte —de forma marginalmente significativa— en la ventana común más comparable. Esta asimetría entre robustez interna y fragilidad externa es, en sí misma, el resultado más honesto que la evidencia actual permite reportar: lo que determina la prima de riesgo soberano en el núcleo de economías latinoamericanas estudiado no es la fragilidad bancaria ni el riesgo de cola por separado, sino su interacción; si ese mecanismo opera de la misma manera en el resto de las economías emergentes es, con los datos hoy disponibles, una pregunta abierta y no una conclusión establecida.
+La evidencia respalda la hipótesis de complementariedad de manera consistente en la base principal: el coeficiente de interacción es negativo, significativo bajo inferencia estándar y estable frente a la inclusión progresiva de controles, a distintos estimadores de la matriz de varianzas, a la exclusión del episodio pandémico, a una medida alternativa del riesgo de cola y a la exclusión secuencial de cada país; un modelo de umbral que no impone la forma funcional de la interacción corrobora la no linealidad. La base ampliada a once economías reproduce el signo pero con significancia marginal y con una dependencia de la identificación en un único país (Brasil) que no permite todavía generalizar la conclusión fuera de América Latina. Y la batería de identificación causal muestra que, si bien el mecanismo y su dirección de nivel son defendibles, la significancia puntual de la interacción es sensible al número reducido de \textit{clusters} disponibles. Esta estructura de resultados —robustez descriptiva y condicional, fragilidad de la inferencia con pocos \textit{clusters}, y generalización pendiente de más datos— es, en sí misma, el resumen más honesto que la evidencia actual permite ofrecer.
 
 % ---
 
@@ -536,27 +431,23 @@ La evidencia respalda de manera consistente la hipótesis de complementariedad \
 
 \subsection{Interpretación económica}
 
-El hallazgo central de este trabajo —un coeficiente de interacción JLoss$\times$GaR negativo, significativo y estable dentro del núcleo LatAm, replicado en dos ventanas temporales y robusto a los controles del paper de referencia— admite una interpretación económica directa en términos del mecanismo de \textit{doom loop}. La fragilidad del sistema bancario opera como una aproximación al pasivo contingente que el soberano podría verse forzado a asumir mediante un rescate; pero ese pasivo sólo se torna relevante para la prima de riesgo cuando la economía transita un estado de cola. La evidencia de que el efecto de la fragilidad bancaria pasa de ser nulo en entornos benignos a $+2{,}5$ pb por unidad bajo estrés severo es la firma empírica del multiplicador: no la suma de dos vulnerabilidades, sino su producto.
-
-El hallazgo exploratorio de la Sección 6.5 —la no replicación limpia fuera de LatAm— merece una lectura igualmente directa: no como una anomalía a ocultar, sino como evidencia de que el mecanismo, tal como está identificado hoy, requiere condiciones de datos ($T$ largo, controles domésticos completos, fuente de EMBI homogénea) que actualmente solo se satisfacen para el núcleo latinoamericano.
+El hallazgo central de este trabajo —un coeficiente de interacción JLoss$\times$GaR negativo, significativo bajo inferencia estándar y estable en la base principal, corroborado por un modelo de umbral que no impone su forma funcional— admite una interpretación económica directa en términos del mecanismo de \textit{doom loop}. La fragilidad del sistema bancario opera como una aproximación al pasivo contingente que el soberano podría verse forzado a asumir mediante un rescate; pero ese pasivo sólo se torna relevante para la prima de riesgo cuando la economía transita un estado de cola. La evidencia del modelo de umbral —un efecto de la fragilidad bancaria que pasa de negativo en entornos benignos a claramente positivo bajo estrés severo— es la firma empírica del multiplicador: no la suma de dos vulnerabilidades, sino su producto.
 
 \subsection{Implicancias de política}
 
-Si la transmisión de la fragilidad bancaria al costo de financiamiento soberano se concentra en los estados de cola del crecimiento, la regulación orientada a la resiliencia del sistema bancario —capital, liquidez, provisiones contracíclicas— reduce la exposición del soberano a los escenarios macroeconómicos adversos y su prima de riesgo en los mercados internacionales. La fragilidad bancaria y el riesgo de cola del crecimiento deben monitorearse conjuntamente: la coincidencia de ambos, y no cada uno por separado, es la señal de alarma relevante. Esta implicancia está bien establecida para economías latinoamericanas de tamaño y desarrollo financiero medio; su extensión a otras economías emergentes es, a la luz de la Sección 6.5, una hipótesis de trabajo y no todavía una recomendación generalizable.
+Si la transmisión de la fragilidad bancaria al costo de financiamiento soberano se concentra en los estados de cola del crecimiento, la regulación orientada a la resiliencia del sistema bancario —capital, liquidez, provisiones contracíclicas— reduce la exposición del soberano a los escenarios macroeconómicos adversos y su prima de riesgo en los mercados internacionales. La fragilidad bancaria y el riesgo de cola del crecimiento deben monitorearse conjuntamente: la coincidencia de ambos, y no cada uno por separado, es la señal de alarma relevante. Esta implicancia está razonablemente establecida para economías latinoamericanas de tamaño y desarrollo financiero medio; su extensión a otras economías emergentes es, a la luz de la Sección 6.6, una hipótesis de trabajo y no todavía una recomendación generalizable.
 
 \subsection{Limitaciones}
 
-Primero, el resultado robusto de esta entrega descansa en cinco economías; la extensión exploratoria a 11 países no lo contradice pero tampoco lo confirma, y la ampliación al panel completo de $\sim$19 economías —condición para una validez externa genuina— sigue pendiente de completar la extracción de JLoss (Hungría, India, Corea del Sur sin trabajo iniciado; Turquía, Sudáfrica, Polonia, Bulgaria, Indonesia, Pakistán y China con extractor listo pero no ejecutado en un entorno con acceso a red) y de EMBI real más allá de 2014 para los seis países no-LatAm (recuperado hoy solo de tablas del FMI 2011–2015). Segundo, los controles fiscales y externos exhiben signos compatibles con endogeneidad por causalidad inversa, no corregida en este diseño. Tercero, la elevada persistencia del spread sugiere una dimensión dinámica no modelada por la especificación estática, sujeta al sesgo de Nickell bajo efectos fijos. Cuarto, dos controles del paper de referencia permanecen incompletos: el margen de utilidad bancaria solo está reconstruido hasta 2011, y la volatilidad cambiaria no se ha construido todavía; el \textit{spread} de alto rendimiento (proxy ICE BofA) se descargó sin cobertura útil en la ventana de estudio y se excluyó de los índices agregados. Quinto, las métricas centrales descansan en supuestos estructurales —la aproximación de punto de silla bajo independencia condicional a un único factor sistémico, en el caso de JLoss; la especificación de la regresión cuantílica, en el de GaR— cuya robustez, si bien validada internamente, condiciona la inferencia.
+Primero, el resultado robusto de esta entrega descansa en cinco economías con controles completos; la base ampliada no lo contradice pero tampoco lo confirma con solidez —su identificación depende en gran medida de Brasil—, y la ampliación a un panel más amplio de economías emergentes sigue pendiente de completar la extracción de $JLoss$ para varios países con extractor listo pero no ejecutado, y de EMBI real más allá de 2014 para los seis países no-LatAm de la base ampliada (recuperado hoy solo de tablas del FMI 2011–2015). Segundo, los controles fiscales y externos exhiben signos compatibles con endogeneidad por causalidad inversa, no corregida en este diseño. Tercero, la batería de identificación causal muestra que la significancia puntual de $\theta$ es sensible al número reducido de \textit{clusters} disponibles bajo inferencia robusta (\textit{wild cluster bootstrap}); esto no invalida el mecanismo, pero exige cautela al interpretar los $p$-valores convencionales del Cuadro 3 como definitivos. Cuarto, las métricas centrales descansan en supuestos estructurales —la aproximación de punto de silla bajo independencia condicional a un único factor sistémico, en el caso de $JLoss$; la especificación de la regresión cuantílica, en el de $GaR$— cuya robustez, si bien validada internamente, condiciona la inferencia.
 
 \subsection{Agenda futura}
 
-De las limitaciones anteriores se desprende una agenda concreta, ya en curso: (i) ejecutar en un entorno con acceso a red los siete extractores de JLoss ya escritos (Turquía, Sudáfrica —con los XML de balance ya descargados—, Polonia, Bulgaria, Indonesia, Pakistán, China) y desarrollar los tres pendientes (Hungría vía MNB, India vía RBI, Corea del Sur vía FSS/DART, fuentes ya identificadas); (ii) buscar ediciones del \textit{Global Financial Stability Report} posteriores a 2015 para extender el EMBI real de los países no-LatAm más allá de 2014, o evaluar acceso institucional a Bloomberg/Refinitiv/CEIC; (iii) resolver la descarga del \textit{spread} de alto rendimiento y construir la volatilidad cambiaria para completar los seis controles del paper de referencia; (iv) con esos datos, repetir la comparación de la Sección 6.5 con un panel balanceado y controles domésticos completos para las seis economías nuevas —la prueba de generalización genuinamente informativa que los datos actuales no permiten realizar todavía—; y (v) el tratamiento formal de la dinámica y la endogeneidad mediante estimadores GMM dinámicos (Arellano y Bond, 1991).
+De las limitaciones anteriores se desprende una agenda concreta: (i) ejecutar los extractores de $JLoss$ ya escritos para los países pendientes y desarrollar los que faltan; (ii) buscar ediciones del \textit{Global Financial Stability Report} posteriores a 2015 para extender el EMBI real de los países no-LatAm más allá de 2014, o evaluar acceso institucional a Bloomberg/Refinitiv/CEIC; (iii) reemplazar los datos institucionales provisionales por los indicadores oficiales del \textit{Worldwide Governance Indicators} y repetir la triple interacción institucional con esa fuente; (iv) fortalecer los instrumentos de la estrategia de variables instrumentales (shocks de política monetaria identificados, términos de intercambio por exposición sectorial) para elevar la fuerza de la primera etapa por encima de los umbrales convencionales; y (v) el tratamiento formal de la dinámica y la endogeneidad mediante estimadores GMM dinámicos (Arellano y Bond, 1991), dado el sesgo de Nickell que afecta a la especificación estática bajo efectos fijos con $T$ moderado.
 
 \subsection{Conclusión}
 
-Este trabajo articula, en un único marco empírico, dos literaturas que la investigación previa había mantenido separadas: la del nexo banca-soberano y la del riesgo a la baja del crecimiento. La evidencia, triangulada sobre tres bases de datos y dos ventanas temporales, respalda de manera consistente y robusta la hipótesis central \textbf{dentro del núcleo de cinco economías latinoamericanas}: la fragilidad bancaria sistémica y el riesgo de cola del crecimiento no determinan el spread soberano de forma aditiva e independiente, sino complementaria. Esa misma triangulación, aplicada con honestidad a la extensión exploratoria fuera de LatAm, muestra que la generalización del mecanismo es todavía una pregunta abierta, no una conclusión establecida —una delimitación que no debilita el resultado central, sino que precisa exactamente su alcance actual y traza la agenda de datos necesaria para extenderlo. Todos los archivos computacionales ocupados para la reproducción de esta investigación se encuentran en el repositorio del proyecto.
-
-% ---
+Este trabajo articula, en un único marco empírico, dos literaturas que la investigación previa había mantenido separadas: la del nexo banca-soberano y la del riesgo a la baja del crecimiento. La evidencia respalda de manera consistente la hipótesis central \textbf{dentro de la base principal de cinco economías latinoamericanas}: la fragilidad bancaria sistémica y el riesgo de cola del crecimiento no determinan el spread soberano de forma aditiva e independiente, sino complementaria. Esa misma evidencia, aplicada con honestidad a la base ampliada y a una batería de identificación causal que declara explícitamente sus límites, muestra que la generalización del mecanismo fuera de América Latina y su significancia puntual bajo inferencia robusta a pocos \textit{clusters} son todavía preguntas abiertas, no conclusiones establecidas —una delimitación que no debilita el resultado central, sino que precisa exactamente su alcance actual. La investigación teórica complementaria de esta tesis deriva esta misma complementariedad desde un modelo estructural de organización industrial bancaria, y reporta además la prueba directa de su predicción distintiva: que la amplificación se intensifica con la concentración del sistema bancario. Todos los archivos computacionales ocupados para la reproducción de esta investigación se encuentran en el repositorio del proyecto, documentados en \texttt{1\_Codigo/Panel/} y trazados a \texttt{1\_Codigo/Panel/NUMEROS\_CANONICOS.md}.
 
 \section*{Referencias (selección preliminar)}
 
@@ -574,7 +465,6 @@ Este trabajo articula, en un único marco empírico, dos literaturas que la inve
     \item Bisias, D., Flood, M., Lo, A. W., \& Valavanis, S. (2012). A Survey of Systemic Risk Analytics. \textit{Annual Review of Financial Economics}, 4, 255–296.
     \item Bocola, L. (2016). The Pass-Through of Sovereign Risk. \textit{Journal of Political Economy}, 124(4), 879–926.
     \item Bolton, P., \& Jeanne, O. (2011). Sovereign Default Risk and Bank Fragility in Financially Integrated Economies. \textit{IMF Economic Review}, 59(2), 162–194.
-    \item Boyd, J. H., \& De Nicoló, G. (2005). The Theory of Bank Risk Taking and Competition Revisited. \textit{Journal of Finance}, 60(3), 1329–1343.
     \item Brownlees, C., \& Engle, R. (2016). SRISK: A Conditional Capital Shortfall Measure of Systemic Risk. \textit{Review of Financial Studies}, 30(1), 48–79.
     \item Brunnermeier, M. K., Langfield, S., Pagano, M., Reis, R., Van Nieuwerburgh, S., \& Vayanos, D. (2016). ESBies: Safety in the Tranches. \textit{Economic Policy}, 32(90), 175–219.
     \item Brunnermeier, M. K., \& Sannikov, Y. (2014). A Macroeconomic Model with a Financial Sector. \textit{American Economic Review}, 104(2), 379–421.
@@ -583,7 +473,6 @@ Este trabajo articula, en un único marco empírico, dos literaturas que la inve
     \item Cavallo, E. A., \& Valenzuela, P. (2010). The Determinants of Corporate Risk in Emerging Markets: An Option-Adjusted Spread Analysis. \textit{International Journal of Finance \& Economics}, 15(1), 59–74.
     \item Chari, A., Garcés, F., Martínez, J. F., \& Valenzuela, P. (2024). Sovereign Credit Spreads, Banking Fragility, and Global Factors. \textit{Journal of Financial Stability}, 72, 101235.
     \item Chernozhukov, V., Fernández-Val, I., \& Galichon, A. (2010). Quantile and Probability Curves Without Crossing. \textit{Econometrica}, 78(3), 1093–1125.
-    \item Choi, I. (2001). Unit Root Tests for Panel Data. \textit{Journal of International Money and Finance}, 20(2), 249–272.
     \item Csonto, B., \& Ivaschenko, I. (2013). Determinants of Sovereign Bond Spreads in Emerging Markets. \textit{IMF Working Paper} 13/164.
     \item Dieckmann, S., \& Plank, T. (2012). Default Risk of Advanced Economies: An Empirical Analysis of CDS during the Financial Crisis. \textit{Review of Finance}, 16(4), 903–934.
     \item Driscoll, J. C., \& Kraay, A. C. (1998). Consistent Covariance Matrix Estimation with Spatially Dependent Panel Data. \textit{Review of Economics and Statistics}, 80(4), 549–560.
@@ -603,11 +492,9 @@ Este trabajo articula, en un único marco empírico, dos literaturas que la inve
     \item Imbens, G. W., \& Wooldridge, J. M. (2009). Recent Developments in the Econometrics of Program Evaluation. \textit{Journal of Economic Literature}, 47(1), 5–86.
     \item Kallestrup, R., Lando, D., \& Murgoci, A. (2016). Financial Sector Linkages and the Dynamics of Bank and Sovereign Credit Spreads. \textit{Journal of Empirical Finance}, 38, 374–393.
     \item Kealhofer, S. (2000). The Quantification of Credit Risk. \textit{KMV Corporation} (mimeo).
-    \item Keeley, M. C. (1990). Deposit Insurance, Risk, and Market Power in Banking. \textit{American Economic Review}, 80(5), 1183–1200.
     \item Koenker, R. (2004). Quantile Regression for Longitudinal Data. \textit{Journal of Multivariate Analysis}, 91(1), 74–89.
     \item Koenker, R. (2005). \textit{Quantile Regression}. Econometric Society Monographs. Cambridge University Press.
     \item Koenker, R., \& Bassett, G. (1978). Regression Quantiles. \textit{Econometrica}, 46(1), 33–50.
-    \item Koylouglu, H. U., \& Hickman, A. (1998). Reconcilable Differences. \textit{Risk}, 11(10), 56–62.
     \item Laeven, L., \& Valencia, F. (2013). Systemic Banking Crises Database. \textit{IMF Economic Review}, 61(2), 225–270.
     \item Laeven, L., \& Valencia, F. (2020). Systemic Banking Crises Database II. \textit{IMF Economic Review}, 68(2), 307–361.
     \item Leonello, A. (2018). Government Guarantees and the Two-Way Feedback between Banking and Sovereign Debt Crises. \textit{Journal of Financial Economics}, 130(3), 592–619.
