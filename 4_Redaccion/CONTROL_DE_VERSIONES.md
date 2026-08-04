@@ -304,16 +304,23 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
-> **Sección deliberadamente vacía hasta la re-corrida (Fase 2 del plan de trabajo).** Aquí
-> debe quedar registrado, tras re-ejecutar la Sección 14 de `EDA_Panel_Final_17.ipynb`, un
-> único valor por celda:
+> **Resuelto el 2026-08-03 (Fase 2 del plan de trabajo).** Re-ejecución directa e
+> independiente del código canónico. Detalle completo, con controles, errores estándar,
+> especificaciones adicionales y los resultados H4a/H4b del puente OI↔datos reales, en
+> **`1_Codigo/Panel/NUMEROS_CANONICOS.md`** — esa tabla, no ésta, es la fuente de verdad
+> definitiva; lo de abajo es solo el resumen mínimo.
 
 | Parámetro | Base | Spec | N | Valor oficial | Fecha de corrida | Archivo fuente |
 |---|---|---|---|---|---|---|
-| θ (JLoss×GaR) | all17 | M3 (+controles) | 253 | *pendiente* | | |
-| θ (JLoss×GaR) | extendida | M2 (FE país+tiempo) | 374 | *pendiente* | | |
+| θ (JLoss×GaR) | all17 | M3 (+controles) | 253 | **−0,338** (t=−2,22, p=0,028) | 2026-08-03 | Sección 14 (celda M1–M5) de `EDA_Panel_Final_17.ipynb`, re-ejecutada sobre `Panel_final_all17.csv` |
+| θ (JLoss×GaR) | extendida | M2 (FE país+tiempo) | 374 | **−0,212** (t=−1,83, p=0,069) | 2026-08-03 | ídem, sobre `Panel_extended_15paises.csv` |
+| β₄ (JLoss×D×HHI, H4b) | extendida (11 países) | HHI estructural | — | **+721** (t=2,98, P(β₄>0)=87%) | 2026-08-03 | `fase5_estimacion_real.py`, re-ejecutado |
 
-**Ningún número entra a la prosa de la tesis mientras esta tabla esté vacía.**
+El valor −0,313 reportado en `1_Codigo/Plan_tablas_riesgo.md` (28-jul) **no pudo verificarse**
+de forma independiente porque el script que lo produjo no quedó guardado; se documenta la
+discrepancia en detalle en `NUMEROS_CANONICOS.md` §2 en vez de descartarla en silencio.
+
+**Ningún número entra a la prosa de la tesis sin trazarse a `NUMEROS_CANONICOS.md`.**
 
 ---
 
