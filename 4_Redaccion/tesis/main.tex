@@ -1,0 +1,81 @@
+\documentclass{umemoria}
+
+\depto{Departamento de Ingeniería Civil Industrial}
+\author{Mauricio Valenzuela Corvalán}
+\title{Fragilidad Bancaria Sistémica, Riesgo de Cola del Crecimiento y Organización Industrial Bancaria: Determinantes del Spread Soberano en Economías Emergentes}
+
+\tesis{Magíster en Economía Aplicada}
+
+% TODO (completar antes de la entrega final — no se puede inventar):
+% \guia{Nombre Completo Profesor(a) Guía}
+% \coguia{Nombre Completo Profesor(a) Co-Guía}  % opcional
+% \comision{Nombre Completo Miembro 1 \\ Nombre Completo Miembro 2}
+% \auspicio{Fuente de financiamiento, si corresponde}
+% \anho{2026}  % año del examen de grado; por defecto usa el año actual
+
+% Paquetes adicionales requeridos por los capítulos (no incluidos por umemoria.cls)
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{mdframed}
+\usepackage{longtable}
+\usepackage{array}
+
+% Rutas de figuras: cada capítulo referencia imágenes en su carpeta fuente original
+\graphicspath{{../modelo OI/}{imagenes/}}
+
+% Entornos teoremáticos usados por los Capítulos 2-3 y el Anexo A
+% (nombres en inglés, distintos de prop/lema/defn que ya define umemoria.cls)
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposición}[chapter]
+\newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
+\newtheorem{assumption}{Supuesto}[chapter]
+\newtheorem{remark}{Observación}[chapter]
+
+% Macros de notación compartidas por ambos capítulos y el anexo matemático
+\newcommand{\JLoss}{\mathrm{JLoss}}
+\newcommand{\EMBI}{\mathrm{EMBI}}
+\newcommand{\GaR}{\mathrm{GaR}}
+\newcommand{\PD}{\mathrm{PD}}
+\newcommand{\ES}{\mathrm{ES}}
+\newcommand{\HHI}{\mathrm{HHI}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\dd}{\,\mathrm{d}}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\begin{resumen}
+Esta tesis investiga por qué la coincidencia de fragilidad bancaria sistémica y riesgo a la baja del crecimiento amplifica el spread soberano de las economías emergentes por encima de la suma de sus efectos individuales, desde dos aristas complementarias.
+
+La arista empírica (Capítulo 2) estima, sobre un panel principal de cinco economías latinoamericanas (Brasil, Chile, Colombia, México y Perú; 2007Q4--2022Q2, $N=253$), el término de interacción entre la fragilidad bancaria sistémica —medida mediante la métrica \textit{Joint Loss} de Chari et al. (2024), construida a partir de probabilidades de incumplimiento de tipo Merton agregadas por punto de silla— y el riesgo a la baja del crecimiento —medido mediante \textit{Growth-at-Risk}, estimado por regresión cuantílica de panel siguiendo el marco de \textit{vulnerable growth} de Adrian, Boyarchenko y Giannone (2019)—, sobre el spread soberano EMBI. El coeficiente de interacción es negativo y significativo con controles macroeconómicos completos ($\hat\theta=-0{,}338$, $t=-2{,}22$), robusto a una extensa batería de pruebas y corroborado por un modelo de umbral de Hansen. Un panel ampliado a once economías emergentes reproduce el signo con significancia marginal, y una batería de estrategias de identificación causal confirma la dirección banco-soberano del canal de nivel, con la honestidad de que la significancia puntual de la interacción es sensible al reducido número de \textit{clusters} de país disponible.
+
+La arista teórica (Capítulo 3) desarrolla un modelo de organización industrial bancaria —competencia à la Cournot, responsabilidad limitada y seguro de depósitos— en el que la estructura de mercado bancario es el parámetro profundo que gobierna la cadena que va desde la fragilidad sistémica hasta el riesgo soberano. El modelo deriva la complementariedad estimada empíricamente desde primeros principios y genera una predicción distintiva frente a la organización industrial bancaria estándar: que dicha complementariedad se amplifica en sistemas bancarios más concentrados. Esta predicción se pone a prueba con el mismo panel de datos reales, confirmándose con el signo correcto en cuatro de cinco proxies de concentración y competencia sobre el panel de once economías, con poder estadístico todavía moderado.
+
+En conjunto, esta tesis aporta evidencia empírica robusta de la complementariedad fragilidad-crecimiento sobre el riesgo soberano, un modelo estructural que la explica y extiende, y una primera prueba de su predicción distintiva sobre datos reales, con la honestidad estadística que exige delimitar con precisión el alcance actual de cada hallazgo frente a su agenda pendiente.
+\end{resumen}
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\mainmatter
+
+\input{introduccion_general}
+
+\input{paper2_empirico}
+
+\input{paper1_oi}
+
+\input{discusion_general}
+
+\begin{appendices}
+\input{anexoA_matematico}
+\end{appendices}
+
+\end{document}

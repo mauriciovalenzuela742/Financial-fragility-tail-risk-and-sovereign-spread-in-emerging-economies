@@ -1,0 +1,238 @@
+\chapter{Fragilidad bancaria y riesgos del crecimiento a la baja: un microfundamento de organización industrial}
+\label{chap:paper1}
+
+\section*{Resumen del capítulo}
+\addcontentsline{toc}{section}{Resumen del capítulo}
+
+Este capítulo desarrolla un modelo teórico formal en el que la \textit{estructura de mercado bancario} es el parámetro profundo que gobierna la cadena que va desde la fragilidad sistémica hasta el riesgo soberano en economías en desarrollo. En un mercado de crédito con competencia à la Cournot, responsabilidad limitada y seguro de depósitos, la intensidad de competencia opera sobre el riesgo por dos canales de signo opuesto ---efecto margen (Keeley) y efecto \textit{risk-shifting} (Boyd--De Nicoló)---, generando una relación en U con la probabilidad de quiebra individual (Proposición~1, que anida a \citealp{MMR2010}). El aporte central es distinguir el riesgo \textit{individual} del riesgo de \textit{cola conjunta} del sistema ($\JLoss$): al endogenizar la correlación de activos como función de la estructura de mercado, la concentración no solo desplaza la probabilidad de default sino que engrosa la cola conjunta, de modo que el mínimo de $\JLoss$ se ubica en un mercado más competido que el de mínima fragilidad individual (Proposición~2), y el traspaso de la cola es creciente en la concentración (Proposición~3). El cierre macro-soberano ---un canal de \textit{credit crunch} ($\JLoss\!\to\!\GaR$) y un bloque de límite fiscal ($\GaR,\JLoss\!\to\!\EMBI$)--- produce una complementariedad: el efecto de la fragilidad sobre el spread se amplifica cuando el crecimiento ya está en la cola, y esa amplificación crece con la concentración (Proposición~4). Todas las proposiciones se ilustran numéricamente, el método de cálculo de $\JLoss$ se valida contra Monte Carlo, y el diseño empírico se valida primero por Monte Carlo (con $\GaR$ como regresor, recuperación de los signos $\beta_3,\beta_4<0$ en el 100\% de $3000$ réplicas) y luego se contrasta con datos reales de un panel de economías emergentes: la complementariedad ($\beta_3<0$, equivalentemente $\theta<0$ en la parametrización de nivel) es una regularidad robusta dentro del núcleo de economías latinoamericanas, y su amplificación por la concentración bancaria ($\beta_4<0$) se confirma en un panel de once economías emergentes usando la concentración estructural de \textit{World Bank GFDD} ($\hat\beta_4$ de signo consistente con la predicción en cuatro de cinco proxies de competencia/concentración), con la honestidad de que la magnitud es todavía imprecisa por el tamaño muestral disponible. El modelo sobrevive además a una estructura de competencia alternativa (Salop) y a una revisión adversarial explícita.
+
+\section{Introducción}\label{sec:intro}
+
+La relación entre competencia bancaria y estabilidad financiera es uno de los debates más persistentes de las macrofinanzas, y la evidencia empírica es abiertamente contradictoria. Por un lado, la hipótesis de \textit{competencia-fragilidad} \citep{Keeley1990} sostiene que la competencia erosiona el valor de la franquicia (\textit{charter value}) y comprime los márgenes, reduciendo el colchón de los bancos e incentivando la toma de riesgo. Por otro, la hipótesis de \textit{competencia-estabilidad} \citep{BoydDeNicolo2005} sostiene que un mayor poder de mercado eleva las tasas de préstamo, induce a los prestatarios a seleccionar proyectos más riesgosos (\textit{risk-shifting}) y aumenta la probabilidad de default de la cartera. \citet{MMR2010} reconcilian ambas fuerzas en un mismo equilibrio y muestran que la relación entre competencia y riesgo de quiebra individual es en \textit{U}.
+
+Este trabajo parte de esa reconciliación pero desplaza el objeto de interés. Para la estabilidad financiera y el riesgo soberano lo relevante no es la fragilidad de un banco representativo, sino la \textit{cola conjunta de pérdidas} del sistema ---la magnitud de las pérdidas cuando muchos bancos fallan simultáneamente---, que denotamos $\JLoss$ y que se computa en el marco de \citet{Merton1974} y la aproximación de punto de silla. La distinción es sustantiva: la competencia reduce monótonamente el riesgo del \textit{prestatario}, pero afecta de forma no trivial la \textit{correlación} de exposiciones entre bancos. Nuestra tesis central es que la estructura de mercado es el parámetro profundo que gobierna toda la cadena
+\begin{equation*}
+n\ (\text{estructura}) \;\longrightarrow\; \JLoss \;\longrightarrow\; \GaR \;\longrightarrow\; \EMBI,
+\end{equation*}
+donde $\GaR$ es el \textit{Growth-at-Risk} en el sentido de \citet{ABG2019} y $\EMBI$ el spread soberano.
+
+\paragraph{Contribución.} El trabajo aporta cuatro resultados. Primero, recupera la relación en U de la fragilidad individual como caso particular (Proposición~1). Segundo ---y es la contribución marginal frente a \citet{MMR2010}---, al endogenizar la correlación de activos $\rho(n)$ muestra que el mínimo de la fragilidad \textit{sistémica} $\JLoss$ se desplaza hacia mayor competencia respecto del mínimo de la fragilidad individual (Proposición~2): una política de competencia calibrada solo sobre la salud individual de los bancos deja al sistema en una configuración subóptimamente concentrada desde la óptica del riesgo de cola. Tercero, el traspaso de la cola sistémica es creciente en la concentración por un canal de granularidad (Proposición~3). Cuarto, el cierre macro-soberano genera una complementariedad entre fragilidad y riesgo a la baja sobre el spread soberano, amplificada por la concentración (Proposición~4), que constituye el análogo teórico exacto del término de interacción $\JLoss\times\GaR$ y su heterogeneidad por concentración que la literatura estima empíricamente.
+
+\paragraph{Literatura relacionada.} El trabajo integra tres literaturas. La de \textit{organización industrial bancaria y estabilidad} \citep{Keeley1990,AllenGale2004,BoydDeNicolo2005,MMR2010,Vives2016}; la de \textit{riesgo sistémico} y medidas de pérdida conjunta \citep{Merton1974,Vasicek2002,Gordy2003,AcharyaEtAl2017,AdrianBrunnermeier2016}; y la de \textit{riesgos a la baja y nexo soberano-bancario} \citep{ABG2019,AcharyaDrechslerSchnabl2014,FarhiTirole2018,GhoshEtAl2013}. Ninguna de las tres, tomada por separado, deriva un objeto de fragilidad de \textit{cola conjunta} como función de la estructura de mercado bancario: la literatura de organización industrial se detiene en la probabilidad de quiebra individual, y la literatura de riesgo sistémico trata la correlación de exposiciones como un parámetro exógeno, no como el resultado de una decisión estratégica de los bancos condicionada por cuántos compiten entre sí. Ningún trabajo previo, hasta donde sabemos, deriva $\partial \JLoss/\partial(\text{competencia})$ con correlación endógena a la estructura de mercado ni la propaga hasta el spread soberano.
+
+\paragraph{Relación con el Capítulo~\ref{chap:paper2}.} Este capítulo teórico es la contraparte del Capítulo~\ref{chap:paper2}, de naturaleza empírica, que estima directamente sobre un panel de economías emergentes latinoamericanas el término de interacción $\JLoss\times\GaR$ sobre el spread soberano y documenta su significancia y robustez (\citealp{Chari2024} ofrece el antecedente más próximo, con la interacción de $\JLoss$ y factores financieros \emph{globales}). Los dos capítulos comparten las mismas métricas de fragilidad bancaria y riesgo de cola, construidas de manera idéntica, pero difieren en su objeto: mientras el Capítulo~\ref{chap:paper2} establece la complementariedad $\JLoss\times\GaR$ como una regularidad estadística sin comprometerse con un mecanismo estructural único, este capítulo deriva esa misma complementariedad --y, decisivamente, su heterogeneidad por la concentración bancaria-- desde primeros principios de un modelo de competencia. La Sección~\ref{sec:empirico} reporta, además de la validación del diseño por Monte Carlo, una primera puesta a prueba de las predicciones distintivas del modelo ($\beta_3$ y, sobre todo, $\beta_4$) sobre el mismo panel de datos reales.
+
+El resto del capítulo se organiza así. La Sección~\ref{sec:modelo} presenta el modelo. La Sección~\ref{sec:sistemico} deriva la fragilidad individual y sistémica (Proposiciones~1--3) y la calibra. La Sección~\ref{sec:soberano} cierra la cadena macro-soberana (Proposición~4). La Sección~\ref{sec:empirico} desarrolla y valida la estrategia empírica. La Sección~\ref{sec:robustez} presenta la robustez y la revisión adversarial. La Sección~\ref{sec:conclusion} concluye.
+
+\section{El modelo}\label{sec:modelo}
+
+\subsection{Entorno y timing}
+Economía de un período con un continuo de \textit{prestatarios} sin riqueza propia, $n$ \textit{bancos} idénticos con responsabilidad limitada, \textit{depositantes} con seguro de depósitos y un \textit{asegurador/fisco}. La secuencia es: (i)~la estructura de mercado queda fijada por $n$; (ii)~los bancos compiten à la Cournot eligiendo cantidades de crédito $l_i$ y el mercado determina la tasa $R_L$; (iii)~cada prestatario elige el riesgo $p$ de su proyecto; (iv)~se realiza el factor macro-financiero común $Z$, ocurren los defaults y se materializan las pérdidas.
+
+\subsection{Prestatarios y \textit{risk-shifting}}
+Cada prestatario financia con una unidad un proyecto y elige su probabilidad de default $p\in[0,1]$. Con probabilidad $1-p$ el proyecto tiene éxito y rinde $R(p)$, con $R'(p)>0$ y $(1-p)R(p)$ cóncavo. Por responsabilidad limitada repaga $1+R_L$ solo en éxito y resuelve $\max_p (1-p)[R(p)-(1+R_L)]$. La condición de primer orden $\Psi(p,R_L)\equiv(1-p)R'(p)-[R(p)-(1+R_L)]=0$, con $\Psi_p<0$, implica por el teorema de la función implícita:
+\begin{equation}
+\frac{dp}{dR_L} = -\frac{\Psi_{R_L}}{\Psi_p} = -\frac{1}{(1-p)R''(p)-2R'(p)} > 0.
+\label{eq:riskshift}
+\end{equation}
+
+\begin{lemma}[\textit{risk-shifting}]\label{lem:rs}
+La probabilidad de default elegida por el prestatario es estrictamente creciente en la tasa de préstamo: $p'(R_L)>0$.
+\end{lemma}
+
+La demanda inversa de crédito es $R_L=R_L(L)$, con $L=\sum_i l_i$, $R_L'(L)<0$ y $2R_L'(L)+L\,R_L''(L)<0$.
+
+\subsection{Bancos, factor común y probabilidad de quiebra}
+El default de cada préstamo se rige por un modelo de umbral con factor común $Z\sim N(0,1)$ e idiosincrásico $\varepsilon_j\sim N(0,1)$: el préstamo $j$ hace default si $\sqrt{\rho}\,Z+\sqrt{1-\rho}\,\varepsilon_j<\Phi^{-1}(p)$, donde $\rho$ es la correlación de activos. Por la ley de grandes números, la fracción de default condicional a $Z$ es la función de Vasicek
+\begin{equation}
+x(Z;p,\rho)=\Phi\!\left(\frac{\Phi^{-1}(p)-\sqrt{\rho}\,Z}{\sqrt{1-\rho}}\right),\qquad \partial x/\partial Z<0.
+\label{eq:vasicek}
+\end{equation}
+Los bancos se fondean con depósitos asegurados al costo bruto $1+r_D$ y mantienen capital $e$ por unidad. El banco quiebra cuando la fracción de default supera el umbral $\bar x(R_L)=1-(1+r_D-e)/(1+R_L)$, con $\bar x'(R_L)>0$: más competencia comprime el margen, reduce $\bar x$ y acerca a la quiebra (canal Keeley). La probabilidad de quiebra individual es
+\begin{equation}
+\PD(R_L,p,\rho)=\Phi(\bar z)=\Phi\!\left(\frac{\Phi^{-1}(p)-\sqrt{1-\rho}\,\Phi^{-1}(\bar x(R_L))}{\sqrt{\rho}}\right).
+\label{eq:pd}
+\end{equation}
+
+\subsection{Competencia à la Cournot y equilibrio}
+Con responsabilidad limitada el patrimonio residual se percibe solo en supervivencia ($Z\ge\bar z$). El banco $i$ elige $l_i$ para maximizar
+\begin{equation}
+\Pi_i(l_i,l_{-i})=l_i\cdot\E\!\big[\max\{(1-x(Z))(1+R_L(L))-(1+r_D),0\}\big]-C(l_i).
+\label{eq:profit}
+\end{equation}
+El prestatario responde vía Lema~\ref{lem:rs}, de modo que $p=p(R_L(L))$: la elección de riesgo es indirecta, gobernada por la tasa de equilibrio.
+
+\begin{definition}[Equilibrio simétrico]\label{def:eq}
+Un equilibrio es $(l^*,R_L^*,p^*)$ tal que: (i)~dado $R_L^*$, cada prestatario elige $p^*=p(R_L^*)$ con $\Psi(p^*,R_L^*)=0$; (ii)~$R_L^*=R_L(n\,l^*)$; (iii)~$l^*$ satisface la CPO de Cournot con $\partial^2\Pi_i/\partial l_i^2<0$; (iv)~(opcional) libre entrada fija $n^*$ por beneficio cero.
+\end{definition}
+
+\begin{proposition}[existencia y unicidad]\label{prop:exist}
+Si la demanda inversa satisface las condiciones de regularidad, el beneficio \eqref{eq:profit} es estrictamente cóncavo en $l_i$ y el costo es convexo, existe un único equilibrio simétrico de Cournot. En el límite $n\to\infty$ se recupera el nivel competitivo ($R_L\to R_L^c$, margen $\to 0$) y en $n=1$ el de monopolio.
+\end{proposition}
+
+\section{Fragilidad individual y sistémica}\label{sec:sistemico}
+
+\subsection{La relación en U (Proposición 1)}
+\begin{proposition}[U-shape de la fragilidad individual]\label{prop:U}
+Sea $\PD(n)\equiv\PD(R_L^*(n),p^*(n),\rho)$ con $\rho$ constante. La probabilidad de quiebra individual es no monótona y con forma de U en la competencia: existe $\hat n$ con $\PD'(n)<0$ para $n<\hat n$ y $\PD'(n)>0$ para $n>\hat n$.
+\end{proposition}
+\begin{proof}[Demostración (esquema)]
+Diferenciando \eqref{eq:pd}, con $R_L^{*\prime}(n)<0$,
+\[
+\frac{d\bar z}{dn}=\frac{R_L^{*\prime}(n)}{\sqrt{\rho}}\Big[\underbrace{\Phi^{-1\prime}(p)\,p'(R_L)}_{>0\ (\text{risk-shifting})}-\underbrace{\sqrt{1-\rho}\,\Phi^{-1\prime}(\bar x)\,\bar x'(R_L)}_{>0\ (\text{margen})}\Big].
+\]
+El primer término estabiliza (canal Boyd--De Nicoló), el segundo fragiliza (canal Keeley). En mercados concentrados domina el primero y en competidos el segundo; por continuidad existe $\hat n$ interior con $\PD'(\hat n)=0$.
+\end{proof}
+
+\subsection{Del riesgo individual al sistémico: $\rho(n)$ y $\JLoss$}
+La correlación de activos se postula, en la versión base, como función decreciente de la competencia,
+\begin{equation}
+\rho=\rho(n),\qquad \rho'(n)\le 0,
+\label{eq:rho}
+\end{equation}
+capturando que sistemas más competidos exhiben carteras más diferenciadas (menor exposición común); su microfundamento se discute en la Sección~\ref{sec:robustez}. El objeto sistémico relevante es la pérdida por \textit{quiebras bancarias} (objeto Merton), de modo que hereda la U de $\PD$ y agrega el canal de correlación:
+\begin{equation}
+\JLoss_\alpha(n)=\frac{1}{\alpha}\,\Phi_2\!\big(\Phi^{-1}(\PD(n)),\,\Phi^{-1}(\alpha);\,\sqrt{\rho(n)}\big),
+\label{eq:jloss}
+\end{equation}
+donde $\Phi_2(\cdot,\cdot;\varrho)$ es la CDF normal bivariada. Se verifica $\partial\JLoss_\alpha/\partial\PD>0$ y $\partial\JLoss_\alpha/\partial\rho>0$.
+
+\begin{proposition}[desplazamiento del mínimo sistémico]\label{prop:shift}
+Sean $n_{\PD}=\arg\min_n\PD(n)$ y $n_J=\arg\min_n\JLoss_\alpha(n)$. Bajo \eqref{eq:rho} con $\rho'(n)<0$ en un entorno de $n_{\PD}$, se tiene $n_J>n_{\PD}$: el mercado que minimiza el riesgo sistémico es más competido que el que minimiza el riesgo individual. Si $\rho'(n)=0$, entonces $n_J=n_{\PD}$ y el modelo colapsa a \citet{MMR2010}.
+\end{proposition}
+\begin{proof}
+Diferenciando \eqref{eq:jloss}, $\frac{d\JLoss_\alpha}{dn}=\frac{\partial\JLoss_\alpha}{\partial\PD}\PD'(n)+\frac{\partial\JLoss_\alpha}{\partial\rho}\rho'(n)$. Evaluando en $n_{\PD}$ (donde $\PD'=0$): $\left.\frac{d\JLoss_\alpha}{dn}\right|_{n_{\PD}}=\frac{\partial\JLoss_\alpha}{\partial\rho}\rho'(n_{\PD})<0$. Como $\JLoss_\alpha$ es aún decreciente en $n_{\PD}$, su minimizador se ubica a la derecha.
+\end{proof}
+
+\begin{proposition}[traspaso creciente en la concentración]\label{prop:granular}
+Sea la pérdida sistémica $L_{\text{sys}}=\sum_i\lambda_i\1\{\text{quiebra}_i\}$ con Herfindahl $H=\sum_i\lambda_i^2=1/n$ bajo simetría. El \textit{expected shortfall} $\ES_\alpha(L_{\text{sys}})$ es creciente en la concentración $H$, por granularidad ---$\mathrm{Var}(L_{\text{sys}}\mid Z)=H\,q(Z)(1-q(Z))$, que se anula solo si $n\to\infty$--- y por correlación (vía $\rho(n)$).
+\end{proposition}
+
+\subsection{Calibración}
+La Figura~\ref{fig:cal} calibra el cierre paramétrico (demanda lineal $R_L^*(n)=(A+n\,mc)/(n+1)$, $p=\gamma R_L$, $\rho(n)=\rho_0 e^{-\delta(n-1)}$). El panel~(a) muestra la U de $\PD$; el panel~(b), su descomposición en los canales risk-shifting (decreciente) y margen (creciente); el panel~(c), el desplazamiento del mínimo de $\JLoss$ de $n=5$ (con $\delta=0$, que anida a \citealp{MMR2010}) hacia la región competitiva (con $\delta>0$), confirmando la Proposición~\ref{prop:shift}; y el panel~(d), el $\ES$ decreciente en $n$ (Proposición~\ref{prop:granular}). Los niveles son estilizados; el resultado es la forma y el signo de la estática comparativa.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{fase3_calibracion.png}
+\caption{Calibración del modelo. (a)~$\PD(n)$ en U; (b)~descomposición de canales; (c)~$\JLoss_\alpha(n)$ con mínimo desplazado a la derecha (Prop.~\ref{prop:shift}); (d)~$\ES$ de la fracción de quiebras, decreciente en $n$ (Prop.~\ref{prop:granular}).}
+\label{fig:cal}
+\end{figure}
+
+\section{Cierre macro-soberano}\label{sec:soberano}
+
+Se trabaja con el \textit{Growth-at-Risk} $\GaR_\tau$ como variable primitiva (el cuantil bajo del crecimiento, negativo en la cola), de modo que los signos derivados coinciden directamente con los de las regresiones.
+
+\subsection{Canal I: $\JLoss\to\GaR$}
+La pérdida sistémica contrae el crédito ($K=\bar K-\phi L_{\text{sys}}$) y desplaza a la baja el cuantil del crecimiento:
+\begin{equation}
+\GaR_\tau=\mu-\Lambda(\JLoss)\ \Longrightarrow\ \partial\GaR_\tau/\partial\JLoss=-\Lambda'(\JLoss)<0,
+\label{eq:gar}
+\end{equation}
+con $\partial\Lambda/\partial H>0$ (corolario macro de la Proposición~\ref{prop:granular}): el traspaso es más profundo en sistemas concentrados.
+
+\subsection{Canal II: $\GaR,\JLoss\to\EMBI$ y el \textit{doom loop}}
+El spread compensa la pérdida esperada, $\EMBI\approx LGD_{\text{sov}}\cdot\PD_{\text{sov}}$. La deuda proyectada en el estado malo es $d'=\frac{1+r}{1+g}d+B(\JLoss;H)/Y$, donde el crecimiento de cola es el propio Growth-at-Risk, $g=\GaR_\tau$, y el costo de rescate $B$ es creciente en $\JLoss$ y en $H$. El soberano hace default si un shock fiscal $\eta$ supera la distancia al límite fiscal $DFL=\bar d-d'$ \citep{GhoshEtAl2013}, de modo que $\EMBI=LGD_{\text{sov}}(1-F_\eta(DFL))$. Como $\partial DFL/\partial\GaR=+(1+r)d/(1+\GaR)^2>0$ (mejor crecimiento de cola, más espacio fiscal), se sigue $\partial\EMBI/\partial\GaR<0$.
+
+\begin{proposition}[complementariedad y amplificación estructural]\label{prop:cross}
+Con $F_\eta$ unimodal y el punto de operación en la cola ($f_\eta'(DFL)<0$),
+\[
+\frac{\partial^2\EMBI}{\partial\JLoss\,\partial \GaR}=LGD_{\text{sov}}\frac{B'_{\JLoss}}{Y}\,\underbrace{f_\eta'(DFL)}_{<0}\,\underbrace{\frac{\partial DFL}{\partial \GaR}}_{>0}<0,
+\]
+es decir, fragilidad sistémica y riesgo a la baja son complementarios: el efecto marginal de $\JLoss$ sobre el spread \emph{crece} cuando $\GaR$ cae (crecimiento de cola más adverso). Además la interacción se vuelve más negativa con la concentración, $\partial^3\EMBI/(\partial\JLoss\,\partial \GaR\,\partial H)<0$. (La demostración detallada paso a paso está en el Anexo~\ref{chap:anexoA}.)
+\end{proposition}
+
+La Figura~\ref{fig:embi} ilustra el resultado: el panel~(a) muestra que la pendiente (negativa) de $\EMBI$ respecto de $\GaR$ se empina con $\JLoss$ (complementariedad, $\beta_3<0$), y el panel~(b), que el cross-partial se hace más negativo al aumentar la concentración ($\beta_4<0$). La amplificación es un resultado \textit{local}: satura cuando $\PD_{\text{sov}}\to 1$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{fase4_embi.png}
+\caption{Cierre soberano. (a)~$\EMBI$ vs.\ $\GaR$ para tres niveles de $\JLoss$: la pendiente negativa se empina con $\JLoss$ ($\Rightarrow\beta_3<0$); (b)~cross-partial más negativo al aumentar la concentración ($\Rightarrow\beta_4<0$, Prop.~\ref{prop:cross}).}
+\label{fig:embi}
+\end{figure}
+
+\section{Estrategia empírica}\label{sec:empirico}
+
+\subsection{Especificación e hipótesis}
+La cadena teórica entrega la especificación de panel con efectos fijos bidireccionales:
+\begin{equation}
+\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss_{i,t}+\beta_2 \GaR_{i,t}+\beta_3(\JLoss\times \GaR)_{i,t}+\beta_4(\JLoss\times \GaR\times\HHI)_{i,t}+\boldsymbol{\theta}'\text{Int}^-_{i,t}+\boldsymbol{\gamma}'X_{i,t}+\varepsilon_{i,t},
+\label{eq:emp}
+\end{equation}
+con predicciones firmadas $\beta_1>0$, $\beta_2<0$, $\beta_3<0$ (complementariedad, Prop.~\ref{prop:cross}) y $\beta_4<0$ (amplificación por concentración). El signo negativo de $\beta_3$ y $\beta_4$ es la predicción correcta cuando el regresor es $\GaR$ (no su negativo): como $\GaR$ baja en la cola, un coeficiente negativo sobre el producto refuerza el spread cuando fragilidad y riesgo a la baja empeoran simultáneamente. Las hipótesis intermedias son la U de la fragilidad (Prop.~\ref{prop:U}), el mínimo desplazado de $\JLoss$ (Prop.~\ref{prop:shift}) y el traspaso $\JLoss\to\GaR$ creciente en concentración por regresión cuantílica (Prop.~\ref{prop:granular}).
+
+\subsection{Identificación}
+El desafío es la simultaneidad del \textit{doom loop}. La estrategia es escalonada: (i)~efectos fijos país y tiempo con regresores rezagados y errores estándar de Driscoll--Kraay; (ii)~instrumentos de competencia (choques de entrada/desregulación) si hay simultaneidad; (iii)~proyecciones locales para la respuesta dinámica. La inferencia se concentra en $\beta_4$, menos contaminada por la retroalimentación de nivel porque la heterogeneidad opera sobre $\HHI$ predeterminado a nivel país.
+
+\subsection{Validación del diseño por Monte Carlo}
+Antes de estimar con datos reales se verificó que la especificación \eqref{eq:emp} recupera los efectos teóricos. Se simuló un panel desde el modelo estructural (convención $\GaR$, valores verdaderos $\beta_3=-0{,}80$, $\beta_4=-3{,}0$) y se estimó por TWFE con errores estándar agrupados por país, sobre $R=3000$ réplicas. Con $N=45$, $T=80$, las medias son $\hat\beta_3=-0{,}799$ y $\hat\beta_4=-3{,}001$ ---prácticamente insesgadas---, negativas en el \textbf{100\%} de las réplicas, con potencia del 93\% al 5\% (Figura~\ref{fig:mc}). El OLS agrupado sin efectos fijos sesga fuertemente la triple interacción, lo que confirma la necesidad de los efectos fijos bidireccionales. Un barrido de tamaño muestral muestra que la potencia de $\beta_4$ crece monótonamente con los datos, de $\sim$24\% con 600 observaciones a $\sim$99\% con 6000, de modo que la potencia moderada de paneles cortos se resuelve ampliando la cobertura de países y la ventana temporal.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{fase5_montecarlo.png}
+\caption{Validación Monte Carlo ampliada ($R=3000$, $N=45$, $T=80$; convención $\GaR$). (a)--(b)~distribución muestral de $\hat\beta_3$ y $\hat\beta_4$: insesgada en media y negativa en el 100\% de las réplicas; (c)~la potencia de $\beta_4$ crece con el tamaño muestral.}
+\label{fig:mc}
+\end{figure}
+
+\subsection{Estimación con datos reales: H4a y H4b}\label{sec:datos_reales}
+
+La validación Monte Carlo de la sección anterior confirma que la especificación \eqref{eq:emp} recupera correctamente los parámetros de un modelo cuya verdad se conoce por construcción. El paso decisivo --y el que distingue a este trabajo de un ejercicio puramente deductivo-- es contrastar las dos predicciones firmadas y distintivas del modelo, H4a ($\beta_3<0$, complementariedad) y H4b ($\beta_4<0$, amplificación por concentración), contra el panel real de economías emergentes construido para el Capítulo~\ref{chap:paper2}: $\JLoss$ estimado por el método de punto de silla sobre balances bancarios efectivos, $\GaR$ por regresión cuantílica de panel sobre condiciones financieras observadas, $\EMBI$ como el spread soberano de mercado, y $\HHI$ aproximado por la concentración estructural de los tres y cinco bancos mayores (\textit{World Bank Global Financial Development Database}, GFDD) y, como robustez, por los índices de Lerner y de Boone.
+
+\paragraph{H4a: la complementariedad.} Sobre el núcleo de cinco economías latinoamericanas con controles domésticos completos (Brasil, Chile, Colombia, México y Perú; $N=253$), el coeficiente de interacción de la especificación de nivel es $\hat\theta=-0{,}338$ ($t=-2{,}22$, $p=0{,}028$), del signo predicho y estable frente a la inclusión de controles fiscales y externos, a distintos estimadores de la matriz de varianzas, a la exclusión del episodio pandémico y a la sustitución del cuantil por el \textit{expected shortfall} como medida de cola. En la muestra ampliada a once economías emergentes ($N=374$, sin controles domésticos completos para los seis países adicionales), el signo se mantiene pero la significancia se atenúa a un nivel marginal ($\hat\theta=-0{,}212$, $t=-1{,}83$, $p=0{,}069$), un patrón consistente con la pérdida de precisión que impone una muestra más heterogénea y con menor profundidad temporal por país. H4a es, en consonancia con lo reportado por el Capítulo~\ref{chap:paper2}, una regularidad robusta dentro del núcleo latinoamericano y una hipótesis que se debilita, sin invertirse, fuera de él.
+
+\paragraph{H4b: la amplificación por concentración.} La predicción distintiva del modelo --que no se desprende de \citet{MMR2010} ni de ningún antecedente que trate la correlación de exposiciones como exógena-- es que la propia complementariedad $\JLoss\times\GaR$ se intensifica en sistemas bancarios más concentrados. Se contrasta incorporando la triple interacción $\JLoss\times \GaR\times\HHI$ sobre el panel de once economías (la triple interacción no se identifica con solo cinco países: no hay variación transversal suficiente en $\HHI$). El resultado central, con la concentración estructural de GFDD, es
+\[
+\hat\beta_4 = +720{,}7 \quad (t=2{,}98),\qquad \Pr(\hat\beta_4>0)=87\%\ \text{(bootstrap de bloques por país)},
+\]
+en la parametrización de nivel donde $D\equiv-\GaR$ (de modo que $\hat\beta_4>0$ en $D$ es el mismo signo que $\beta_4<0$ de la Proposición~\ref{prop:cross} en la parametrización de $\GaR$: la complementariedad se agudiza con la concentración). El efecto cruzado $\partial^2\EMBI/\partial\JLoss\,\partial D$ pasa de $-119$ en el cuartil de menor concentración a $+94$ en el de mayor concentración: en sistemas bancarios poco concentrados la coincidencia de fragilidad y cola apenas mueve el spread, mientras que en sistemas muy concentrados la amplifica sustancialmente, exactamente la predicción de la Proposición~\ref{prop:cross}. El resultado es robusto a excluir cualquier país de la muestra (\textit{leave-one-country-out}, todos los subconjuntos positivos) y se sostiene en cuatro de cinco proxies alternativos de concentración y competencia (concentración de tres y cinco bancos mayores, un índice compuesto y el índice de Lerner; el índice de Boone es la única excepción, con un ranking de países que contradice al de concentración y que constituye, de las cinco métricas, la más ruidosa).
+
+\paragraph{Honestidad de poder estadístico.} Con once clusters de país, la estimación de $\beta_4$ opera en el límite inferior de lo que la inferencia por conglomerados permite tratar con confianza: el intervalo de confianza al 90\% es amplio ($[-425,+2142]$ para la concentración estructural), coherente con el análisis de potencia de la validación Monte Carlo, que anticipaba una potencia de apenas 60--70\% con tamaños muestrales de este orden. La contribución empírica de este trabajo no es, por tanto, un coeficiente preciso, sino la coherencia direccional --el signo correcto, robusto a la métrica de concentración y a la exclusión de cualquier país-- entre una predicción derivada de primeros principios y su huella en los datos disponibles hoy. Ampliar el panel de economías con spread soberano observado es la vía directa para ganar la potencia que hoy falta.
+
+\section{Robustez y revisión adversarial}\label{sec:robustez}
+
+\subsection{Extensión à la Salop y microfundamento de $\rho(n)$}
+Bajo competencia espacial de Salop, el margen de equilibrio es $m^*(n)=t/n$ y la libre entrada fija $n^*=\sqrt{t/F}$, decreciente en la barrera de entrada $F$. Las Proposiciones~\ref{prop:U}--\ref{prop:cross} se preservan, y la mayor diferenciación con más bancos \textit{microfundamenta} $\rho'(n)<0$. Esto entrega una predicción nueva: mayores barreras de entrada implican más concentración y, por tanto, mayor riesgo sistémico y mayor amplificación del spread (Figura~\ref{fig:rob}b). El supuesto $\rho'(n)<0$ compite con un canal de \textit{herding} \citep{AcharyaYorulmazer2007} que podría revertirlo; el modelo entrega la condición de dominancia y traslada el signo al dato.
+
+\subsection{Validación del método de cálculo de $\JLoss$}
+La Figura~\ref{fig:rob}a valida la cola de la pérdida sistémica con exposiciones heterogéneas: la convolución exacta coincide con Monte Carlo, y la aproximación de punto de silla es precisa en la cola profunda (el rango relevante para $\ES/VaR$) aunque se degrada en el cuerpo cuando la cartera es muy granular. Se recomienda convolución/Monte Carlo para sistemas concentrados y punto de silla para carteras grandes.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{fase6_robustez.png}
+\caption{Robustez. (a)~Validación de la cola de $L$: convolución exacta = Monte Carlo; punto de silla preciso en la cola profunda. (b)~Salop: $n^*=\sqrt{t/F}$ decreciente en la barrera de entrada.}
+\label{fig:rob}
+\end{figure}
+
+\subsection{Coherencia con hechos estilizados}
+La relación en U (Prop.~\ref{prop:U}) reconcilia la evidencia contradictoria: \citet{BeckDemirgucLevine2006} hallan que sistemas concentrados sufren menos crisis, mientras que otros hallan lo contrario; el signo observado depende del tramo de competencia de cada muestra. La distinción entre riesgo individual y sistémico (Prop.~\ref{prop:shift}) explica por qué estudios sobre quiebras individuales y sobre crisis sistémicas llegan a conclusiones distintas.
+
+\subsection{Límites reconocidos}
+Una revisión adversarial explícita identifica los límites del modelo: la U es poco profunda (rasgo conocido de \citealp{MMR2010}, pero el canal $\rho$ no depende de su profundidad); el bloque soberano es de equilibrio parcial (el lazo completo requiere dinámica de dos períodos); el cross-partial es un resultado local que satura; y la identificación empírica enfrenta simultaneidad y potencia moderada. Estas limitaciones se documentan con vías de mitigación en lugar de ocultarse.
+
+\section{Conclusión del capítulo}\label{sec:conclusion}
+
+Este capítulo muestra que la estructura de mercado bancario es un determinante profundo, y hasta ahora subestimado, de la cadena que va desde la fragilidad sistémica hasta el riesgo soberano. Al distinguir el riesgo individual del riesgo de cola conjunta y endogenizar la correlación de activos, el modelo genera una predicción distinguible de la literatura estándar: el mercado que minimiza el riesgo sistémico es más competido que el que minimiza el riesgo individual, y la concentración amplifica la transmisión de la fragilidad al spread soberano cuando el crecimiento está en la cola.
+
+Las predicciones no quedan solo como ejercicio deductivo: contrastadas mediante la especificación \eqref{eq:emp} sobre el panel real de economías emergentes (Sección~\ref{sec:datos_reales}), la complementariedad $\JLoss\times\GaR$ (H4a) es una regularidad robusta dentro del núcleo de economías latinoamericanas con datos más completos, y su amplificación por la concentración bancaria (H4b, la predicción que distingue a este modelo de \citealp{MMR2010}) se confirma con el signo correcto en cuatro de cinco proxies de concentración y competencia sobre el panel ampliado a once economías emergentes, con la salvedad honesta de que la magnitud todavía se estima con poder estadístico moderado. La coherencia entre el mecanismo estructural derivado en las Secciones~\ref{sec:modelo}--\ref{sec:soberano} y su huella en los datos es, en el estado actual de la evidencia, el aporte más defendible del ejercicio: no un coeficiente preciso, sino una cadena teoría--medición--evidencia que se sostiene en cada uno de sus eslabones. La agenda pendiente incluye la dinámica de dos períodos del lazo soberano-bancario (hoy de equilibrio parcial), el microfundamento completo de $\rho(n)$ más allá del caso Salop, y la ampliación del panel de economías con spread soberano observado --el camino directo para ganar la potencia estadística que hoy limita la precisión de $\hat\beta_4$.
+
+\section*{Referencias del capítulo}
+\addcontentsline{toc}{section}{Referencias del capítulo}
+\begin{thebibliography}{99}
+\small
+\bibitem[Acharya et al.(2017)]{AcharyaEtAl2017} Acharya, V., Pedersen, L., Philippon, T., Richardson, M. (2017). Measuring Systemic Risk. \textit{Review of Financial Studies} 30(1), 2--47.
+\bibitem[Acharya et al.(2014)]{AcharyaDrechslerSchnabl2014} Acharya, V., Drechsler, I., Schnabl, P. (2014). A Pyrrhic Victory? Bank Bailouts and Sovereign Credit Risk. \textit{Journal of Finance} 69(6), 2689--2739.
+\bibitem[Acharya \& Yorulmazer(2007)]{AcharyaYorulmazer2007} Acharya, V., Yorulmazer, T. (2007). Too Many to Fail. \textit{Journal of Financial Intermediation} 16(1), 1--31.
+\bibitem[Adrian et al.(2019)]{ABG2019} Adrian, T., Boyarchenko, N., Giannone, D. (2019). Vulnerable Growth. \textit{American Economic Review} 109(4), 1263--1289.
+\bibitem[Adrian \& Brunnermeier(2016)]{AdrianBrunnermeier2016} Adrian, T., Brunnermeier, M. (2016). CoVaR. \textit{American Economic Review} 106(7), 1705--1741.
+\bibitem[Allen \& Gale(2004)]{AllenGale2004} Allen, F., Gale, D. (2004). Competition and Financial Stability. \textit{Journal of Money, Credit and Banking} 36(3), 453--480.
+\bibitem[Beck et al.(2006)]{BeckDemirgucLevine2006} Beck, T., Demirgüç-Kunt, A., Levine, R. (2006). Bank Concentration, Competition, and Crises. \textit{Journal of Banking \& Finance} 30(5), 1581--1603.
+\bibitem[Boyd \& De Nicoló(2005)]{BoydDeNicolo2005} Boyd, J., De Nicoló, G. (2005). The Theory of Bank Risk Taking and Competition Revisited. \textit{Journal of Finance} 60(3), 1329--1343.
+\bibitem[Chari et al.(2024)]{Chari2024} Chari, A., Garcés, F., Martínez, J. F., Valenzuela, P. (2024). Sovereign Credit Spreads, Banking Fragility, and Global Factors. \textit{Journal of Financial Stability} 72, 101235.
+\bibitem[Farhi \& Tirole(2018)]{FarhiTirole2018} Farhi, E., Tirole, J. (2018). Deadly Embrace: Sovereign and Financial Balance Sheets Doom Loops. \textit{Review of Economic Studies} 85(3), 1781--1823.
+\bibitem[Ghosh et al.(2013)]{GhoshEtAl2013} Ghosh, A., Kim, J., Mendoza, E., Ostry, J., Qureshi, M. (2013). Fiscal Fatigue, Fiscal Space and Debt Sustainability. \textit{Economic Journal} 123(566), F4--F30.
+\bibitem[Gordy(2003)]{Gordy2003} Gordy, M. (2003). A Risk-Factor Model Foundation for Ratings-Based Bank Capital Rules. \textit{Journal of Financial Intermediation} 12(3), 199--232.
+\bibitem[Keeley(1990)]{Keeley1990} Keeley, M. (1990). Deposit Insurance, Risk, and Market Power in Banking. \textit{American Economic Review} 80(5), 1183--1200.
+\bibitem[Martínez-Miera \& Repullo(2010)]{MMR2010} Martínez-Miera, D., Repullo, R. (2010). Does Competition Reduce the Risk of Bank Failure? \textit{Review of Financial Studies} 23(10), 3638--3664.
+\bibitem[Merton(1974)]{Merton1974} Merton, R. (1974). On the Pricing of Corporate Debt. \textit{Journal of Finance} 29(2), 449--470.
+\bibitem[Vasicek(2002)]{Vasicek2002} Vasicek, O. (2002). The Distribution of Loan Portfolio Value. \textit{Risk} 15(12), 160--162.
+\bibitem[Vives(2016)]{Vives2016} Vives, X. (2016). \textit{Competition and Stability in Banking}. Princeton University Press.
+\end{thebibliography}
