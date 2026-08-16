@@ -134,24 +134,23 @@ Rutas relativas desde `Jloss/`.
 
 | Campo | Contenido |
 |---|---|
-| **Vigente** | `Boceto_1_actualizado.tex` |
-| **Ruta** | `4_Redaccion/Boceto_1_actualizado.tex` |
-| **Por qué** | 2026-07-17 21:32, 636 líneas. Sucesor directo de `Boceto_1_v2.tex`; el diff confirma **sólo cambios de prosa, mismos números**. |
-| **ADVERTENCIA** | **Vigente como texto, obsoleto en sus números.** Abstract reporta N=248/293 (base vieja); la base canónica da N=253. Sus 3 figuras provienen de la corrida **v2**, superada. Es insumo de reescritura, **no** fuente de cifras. |
-| **Defecto detectado** | Línea 11: `\graphicspath{{../Panel/}{../Panel/figures/}}` — **ruta rota**, no existe `Jloss/Panel/`. Debe ser `{../1_Codigo/Panel/}{../1_Codigo/Panel/figures/}`. Se corrige al reescribir en la Fase 4, no antes (el archivo va a reemplazarse). |
-| **Predecesores** | `Boceto_1_v2.tex` + `.pdf` (17-jul), `Boceto 1.tex` (26-jun), `Resultados_y_Discusion.md` (26-jun), `Avance 1 Tesis Mauricio Valenzuela.pdf` (26-jun). → movidos a `archive/`. |
-| **Acción** | **Permanece en `4_Redaccion/`** (no se mueve: eso mantiene sus rutas relativas sin cambio) hasta ser reemplazado en la Fase 4. |
+| **Vigente** | `paper2_empirico.tex`, capítulo 2 de la tesis ensamblada |
+| **Ruta** | `4_Redaccion/tesis/paper2_empirico.tex` (`\input` por `4_Redaccion/tesis/main.tex`) |
+| **Por qué** | Fase 4 (reescritura: dos bases, no tres; números reconciliados; sección de identificación causal) + Fase 5–6 (despiece de la tesis en capítulos con plantilla `umemoria`, `main.tex` compila a 62 páginas). Sucesor directo de `Boceto_1_actualizado.tex`: mismo contenido y números, reformateado de artículo `elsarticle` a `\chapter` de tesis. |
+| **Citado** | Corregido a natbib real (`\citep`/`\citet` + `\begin{thebibliography}`), igual que `paper1_oi.tex`; antes usaba citas de texto plano "(Autor, Año)" con una lista `itemize` manual, sin verificación de LaTeX. |
+| **Predecesor congelado** | `Boceto_1_actualizado.tex` (`4_Redaccion/`) — ya no se edita; superado por `paper2_empirico.tex`. Sus predecesores (`Boceto_1_v2.tex`, `Boceto 1.tex`, etc.) permanecen en `archive/`. |
+| **Acción** | Editar solo `4_Redaccion/tesis/paper2_empirico.tex`. No tocar `Boceto_1_actualizado.tex`. |
 
-### 3.4 Plantilla oficial de tesis (destino final del texto)
+### 3.4 Tesis ensamblada (plantilla oficial + capítulos)
 
 | Campo | Contenido |
 |---|---|
-| **Vigente** | `main.tex` + `umemoria.cls` (renombrados desde `main (2).tex` / `umemoria (2).cls`) |
-| **Ruta** | `4_Redaccion/plantilla/` |
-| **Por qué** | Agregada 2026-08-03. Plantilla oficial U. de Chile v1.6. Sin versión previa. |
-| **BLOQUEANTE CORREGIDO** | `main (2).tex` hacía `\documentclass[english]{umemoria}`, pero la clase se llamaba `umemoria (2).cls` — LaTeX no la habría encontrado. **Renombrado a `umemoria.cls` / `main.tex`** (ver sección 6). |
-| **Nota** | `main.tex` hace `\input` de 8 capítulos que aún no existen (`intro.tex`, `contexto.tex`, `estrategia empirica.tex`, `discusion`, `anexoA/B/C.tex`). Es un esqueleto a la espera del despiece del Boceto (Fase 5). |
-| **Acción** | Renombrado ya aplicado. No archivar. |
+| **Vigente** | `4_Redaccion/tesis/` completa: `main.tex` + `umemoria.cls` + `introduccion_general.tex` + `paper2_empirico.tex` + `paper1_oi.tex` + `discusion_general.tex` + `anexoA_matematico.tex` |
+| **Ruta** | `4_Redaccion/tesis/` |
+| **Por qué** | Fase 5–6: ensamblaje de los dos papers como capítulos + introducción/discusión general + anexo matemático sobre la plantilla oficial U. de Chile v1.6. Compila limpio (`main.pdf`, 62 páginas). Sustituye al esqueleto vacío de `4_Redaccion/plantilla/`. |
+| **Predecesor obsoleto** | `4_Redaccion/plantilla/` — esqueleto genérico de ejemplo (aún sobre un tema no relacionado a esta tesis), nunca se llenó; `4_Redaccion/tesis/` es la copia real con los capítulos ya escritos. **No confundir ambas carpetas.** |
+| **Sincronía con los standalone de `modelo OI/`** | `paper1_oi.tex` y `anexoA_matematico.tex` son adaptaciones (formato de capítulo, referencias cruzadas entre capítulos) del contenido de `4_Redaccion/modelo OI/working_paper.tex` y `apendice_matematico.tex`. Cuando se corrija el contenido teórico en esos archivos standalone, debe reaplicarse la misma corrección aquí — no son copias independientes que puedan divergir en el fondo, solo en el formato. |
+| **Acción** | Editar dentro de `4_Redaccion/tesis/`. No archivar `4_Redaccion/plantilla/` sin confirmación explícita (puede servir de referencia de la clase `umemoria` original). |
 
 ### 3.5 Construcción del panel base
 

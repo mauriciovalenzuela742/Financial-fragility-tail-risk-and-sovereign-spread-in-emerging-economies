@@ -39,7 +39,7 @@ Como $\phi_2>0$ y $\Phi(\cdot)\in(0,1)$, ambas derivadas son estrictamente posit
 \emph{Nota:} esta sección y la Sección~\ref{sec:jl-A} \textbf{no dependen de la convención sobre $\GaR$}; se reproducen para completitud. Solo el bloque soberano (Sección~\ref{sec:soberano-A}) se ve afectado por el cambio de variable.
 
 \subsection{Lema de \textit{risk-shifting}}\label{sec:rs-A}
-El prestatario resuelve $\max_p U(p;R_L)$, $U=(1-p)[R(p)-(1+R_L)]$, con $R'(p)>0$ y $(1-p)R(p)$ cóncava.
+El proyectista resuelve $\max_p U(p;R_L)$, $U=(1-p)[R(p)-(1+R_L)]$, con $R'(p)>0$ y $(1-p)R(p)$ cóncava.
 \begin{lemma}[\textit{risk-shifting}]\label{lem:rs-A}
 En el óptimo interior $\dfrac{\dd p}{\dd R_L}>0$.
 \end{lemma}
@@ -56,7 +56,7 @@ Con $R_L^*(n)=\dfrac{A+n\,mc}{n+1}$ ($A>mc$), $R_L^{*\prime}(n)=\dfrac{mc-A}{(n+
 \end{lemma}
 
 \subsection{Proposición 1: relación en U de la fragilidad individual}
-Con $\PD(n)=\Phi(\bar z(n))$, $\bar z(n)=\big[\Phi^{-1}(p^*(n))-\sqrt{1-\rho}\,\Phi^{-1}(\bar x(n))\big]/\sqrt{\rho}$, $\bar x'(R_L)=\frac{1+r_D-e}{(1+R_L)^2}>0$.
+Con $\PD(n)=\Phi(\bar z(n))$, $\bar z(n)=\big[\Phi^{-1}(p^*(n))-\sqrt{1-\rho}\,\Phi^{-1}(\bar x(n))\big]/\sqrt{\rho}$, $\bar x'(R_L)=\frac{1+r_D-e}{(1+R_L)^2}>0$. Aquí $e$ es el capital regulatorio mínimo por unidad de crédito (parámetro de política exógeno, no elegido por el banco); en el umbral $\bar x(R_L)$ opera como el colchón que absorbe la pérdida dado el default antes de la quiebra del banco (Merton, 1974).
 \begin{proposition}[U-shape]\label{prop:U-A}
 Con $\rho$ constante existe $\hat n$ interior con $\PD'(n)<0$ para $n<\hat n$ y $\PD'(n)>0$ para $n>\hat n$.
 \end{proposition}
@@ -91,7 +91,7 @@ Con $L_{\text{sys}}=\sum_i\lambda_i\1\{\text{quiebra}_i\}$, $H=\sum_i\lambda_i^2
 $\ES_\alpha(L_{\text{sys}})$ es creciente en $H$ (decreciente en $n$).
 \end{proposition}
 \begin{proof}
-$\Var(L_{\text{sys}}\mid Z)=\sum_i\lambda_i^2 q(Z)(1-q(Z))=H\,q(Z)(1-q(Z))$. A igual media condicional, mayor $H$ engrosa la cola (orden convexo), y el $\ES$ es creciente en dicho orden; $\partial\ES_\alpha/\partial H>0$. En $n\to\infty$, $H\to0$ y $L_{\text{sys}}\to q(Z)$ (Vasicek).
+$\Var(L_{\text{sys}}\mid Z)=\sum_i\lambda_i^2 q(Z)(1-q(Z))=H\,q(Z)(1-q(Z))$. A igual media condicional, mayor $H$ engrosa la cola (orden convexo), y el $\ES$ es creciente en dicho orden; $\partial\ES_\alpha/\partial H>0$. En $n\to\infty$, $H\to0$ y $L_{\text{sys}}\to q(Z)$, el límite de cartera grande de Vasicek (2002; ver también Gordy, 2003).
 \end{proof}
 
 \section{El bloque soberano y la derivada cruzada}\label{sec:soberano-A}
