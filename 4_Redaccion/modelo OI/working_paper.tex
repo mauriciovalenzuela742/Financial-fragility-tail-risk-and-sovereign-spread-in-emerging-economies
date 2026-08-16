@@ -15,6 +15,8 @@
 \newtheorem{lemma}{Lema}
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}
+\theoremstyle{remark}
+\newtheorem{remark}{Observación}
 
 \newcommand{\JLoss}{\mathrm{JLoss}}
 \newcommand{\EMBI}{\mathrm{EMBI}}
@@ -37,7 +39,7 @@ en economías en desarrollo}\\[4pt]
 \maketitle
 
 \begin{abstract}
-\noindent Este trabajo desarrolla un modelo teórico formal en el que la \textit{estructura de mercado bancario} es el parámetro profundo que gobierna la cadena que va desde la fragilidad sistémica hasta el riesgo soberano en economías en desarrollo. En un mercado de crédito con competencia à la Cournot, responsabilidad limitada y seguro de depósitos, la intensidad de competencia opera sobre el riesgo por dos canales de signo opuesto ---efecto margen (Keeley) y efecto \textit{risk-shifting} (Boyd--De Nicoló)---, generando una relación en U con la probabilidad de quiebra individual (Proposición~1, que anida a \citealp{MMR2010}). El aporte central es distinguir el riesgo \textit{individual} del riesgo de \textit{cola conjunta} del sistema ($\JLoss$): al endogenizar la correlación de activos como función de la estructura de mercado, la concentración no solo desplaza la probabilidad de default sino que engrosa la cola conjunta, de modo que el mínimo de $\JLoss$ se ubica en un mercado más competido que el de mínima fragilidad individual (Proposición~2), y el traspaso de la cola es creciente en la concentración (Proposición~3). El cierre macro-soberano ---un canal de \textit{credit crunch} ($\JLoss\!\to\!\GaR$) y un bloque de límite fiscal ($\GaR,\JLoss\!\to\!\EMBI$)--- produce una complementariedad: el efecto de la fragilidad sobre el spread se amplifica cuando el crecimiento ya está en la cola, y esa amplificación crece con la concentración (Proposición~4). Todas las proposiciones se ilustran numéricamente, el método de cálculo de $\JLoss$ se valida contra Monte Carlo, y el diseño empírico se valida primero por Monte Carlo (con $\GaR$ como regresor, recuperación de los signos $\beta_3,\beta_4<0$ en el 100\% de $3000$ réplicas) y luego se contrasta con datos reales de un panel de economías emergentes: la complementariedad ($\beta_3<0$, equivalentemente $\theta<0$ en la parametrización de nivel) es una regularidad robusta dentro del núcleo de economías latinoamericanas, y su amplificación por la concentración bancaria ($\beta_4<0$) se confirma en un panel de once economías emergentes usando la concentración estructural de \textit{World Bank GFDD} ($\hat\beta_4$ de signo consistente con la predicción en cuatro de cinco proxies de competencia/concentración), con la honestidad de que la magnitud es todavía imprecisa por el tamaño muestral disponible. El modelo sobrevive además a una estructura de competencia alternativa (Salop) y a una revisión adversarial explícita.
+\noindent Este trabajo desarrolla un modelo teórico formal en el que la \textit{estructura de mercado bancario} es el parámetro profundo que gobierna la cadena que va desde la fragilidad sistémica hasta el riesgo soberano en economías en desarrollo. En un mercado de crédito con competencia à la Cournot, responsabilidad limitada y seguro de depósitos, la intensidad de competencia opera sobre el riesgo por dos canales de signo opuesto ---efecto margen (Keeley) y efecto \textit{risk-shifting} (Boyd--De Nicoló)---, generando una relación en U con la probabilidad de quiebra individual (Proposición~2, que anida a \citealp{MMR2010}). El aporte central es distinguir el riesgo \textit{individual} del riesgo de \textit{cola conjunta} del sistema ($\JLoss$): al endogenizar la correlación de activos como función de la estructura de mercado, la concentración no solo desplaza la probabilidad de default sino que engrosa la cola conjunta, de modo que el mínimo de $\JLoss$ se ubica en un mercado más competido que el de mínima fragilidad individual (Proposición~3), y el traspaso de la cola es creciente en la concentración (Proposición~4). El cierre macro-soberano ---un canal de \textit{credit crunch} ($\JLoss\!\to\!\GaR$) y un bloque de límite fiscal ($\GaR,\JLoss\!\to\!\EMBI$)--- produce una complementariedad: el efecto de la fragilidad sobre el spread se amplifica cuando el crecimiento ya está en la cola, y esa amplificación crece con la concentración (Proposición~5). Todas las proposiciones se ilustran numéricamente, el método de cálculo de $\JLoss$ se valida contra Monte Carlo, y el diseño empírico se valida primero por Monte Carlo (con $\GaR$ como regresor, recuperación de los signos $\beta_3,\beta_4<0$ en el 100\% de $3000$ réplicas) y luego se contrasta con datos reales de un panel de economías emergentes: la complementariedad ($\beta_3<0$, equivalentemente $\theta<0$ en la parametrización de nivel) es una regularidad robusta dentro del núcleo de economías latinoamericanas, y su amplificación por la concentración bancaria ($\beta_4<0$) se confirma en un panel de once economías emergentes usando la concentración estructural de \textit{World Bank GFDD} ($\hat\beta_4$ de signo consistente con la predicción en cuatro de cinco proxies de competencia/concentración), con la honestidad de que la magnitud es todavía imprecisa por el tamaño muestral disponible. El modelo sobrevive además a una estructura de competencia alternativa (Salop) y a una revisión adversarial explícita.
 
 \vspace{6pt}
 \noindent\textbf{Palabras clave:} estabilidad financiera, competencia bancaria, riesgo sistémico, Growth-at-Risk, riesgo soberano, \textit{doom loop}.\\
@@ -46,71 +48,172 @@ en economías en desarrollo}\\[4pt]
 
 \section{Introducción}\label{sec:intro}
 
-La relación entre competencia bancaria y estabilidad financiera es uno de los debates más persistentes de las macrofinanzas, y la evidencia empírica es abiertamente contradictoria. Por un lado, la hipótesis de \textit{competencia-fragilidad} \citep{Keeley1990} sostiene que la competencia erosiona el valor de la franquicia (\textit{charter value}) y comprime los márgenes, reduciendo el colchón de los bancos e incentivando la toma de riesgo. Por otro, la hipótesis de \textit{competencia-estabilidad} \citep{BoydDeNicolo2005} sostiene que un mayor poder de mercado eleva las tasas de préstamo, induce a los prestatarios a seleccionar proyectos más riesgosos (\textit{risk-shifting}) y aumenta la probabilidad de default de la cartera. \citet{MMR2010} reconcilian ambas fuerzas en un mismo equilibrio y muestran que la relación entre competencia y riesgo de quiebra individual es en \textit{U}.
+La relación entre competencia bancaria y estabilidad financiera es uno de los debates más persistentes de las macrofinanzas, y la evidencia empírica es abiertamente contradictoria. Por un lado, la hipótesis de \textit{competencia-fragilidad} \citep{Keeley1990} sostiene que la competencia erosiona el valor de la franquicia (\textit{charter value}) y comprime los márgenes, reduciendo el colchón de los bancos e incentivando la toma de riesgo. Por otro, la hipótesis de \textit{competencia-estabilidad} \citep{BoydDeNicolo2005} sostiene que un mayor poder de mercado eleva las tasas de préstamo, induce a los proyectistas a seleccionar proyectos más riesgosos (\textit{risk-shifting}) y aumenta la probabilidad de default de la cartera. \citet{MMR2010} reconcilian ambas fuerzas en un mismo equilibrio y muestran que la relación entre competencia y riesgo de quiebra individual es en \textit{U}.
 
-Este trabajo parte de esa reconciliación pero desplaza el objeto de interés. Para la estabilidad financiera y el riesgo soberano lo relevante no es la fragilidad de un banco representativo, sino la \textit{cola conjunta de pérdidas} del sistema ---la magnitud de las pérdidas cuando muchos bancos fallan simultáneamente---, que denotamos $\JLoss$ y que se computa en el marco de \citet{Merton1974} y la aproximación de punto de silla. La distinción es sustantiva: la competencia reduce monótonamente el riesgo del \textit{prestatario}, pero afecta de forma no trivial la \textit{correlación} de exposiciones entre bancos. Nuestra tesis central es que la estructura de mercado es el parámetro profundo que gobierna toda la cadena
+Este trabajo parte de esa reconciliación pero desplaza el objeto de interés. Para la estabilidad financiera y el riesgo soberano lo relevante no es la fragilidad de un banco representativo, sino la \textit{cola conjunta de pérdidas} del sistema ---la magnitud de las pérdidas cuando muchos bancos fallan simultáneamente---, que denotamos $\JLoss$ y que se computa en el marco de \citet{Merton1974} y la aproximación de punto de silla. La distinción es sustantiva: la competencia reduce monótonamente el riesgo del \textit{proyectista}, pero afecta de forma no trivial la \textit{correlación} de exposiciones entre bancos. Nuestra tesis central es que la estructura de mercado es el parámetro profundo que gobierna toda la cadena
 \begin{equation*}
 n\ (\text{estructura}) \;\longrightarrow\; \JLoss \;\longrightarrow\; \GaR \;\longrightarrow\; \EMBI,
 \end{equation*}
 donde $\GaR$ es el \textit{Growth-at-Risk} en el sentido de \citet{ABG2019} y $\EMBI$ el spread soberano.
 
-\paragraph{Contribución.} El trabajo aporta cuatro resultados. Primero, recupera la relación en U de la fragilidad individual como caso particular (Proposición~1). Segundo ---y es la contribución marginal frente a \citet{MMR2010}---, al endogenizar la correlación de activos $\rho(n)$ muestra que el mínimo de la fragilidad \textit{sistémica} $\JLoss$ se desplaza hacia mayor competencia respecto del mínimo de la fragilidad individual (Proposición~2): una política de competencia calibrada solo sobre la salud individual de los bancos deja al sistema en una configuración subóptimamente concentrada desde la óptica del riesgo de cola. Tercero, el traspaso de la cola sistémica es creciente en la concentración por un canal de granularidad (Proposición~3). Cuarto, el cierre macro-soberano genera una complementariedad entre fragilidad y riesgo a la baja sobre el spread soberano, amplificada por la concentración (Proposición~4), que constituye el análogo teórico exacto del término de interacción $\JLoss\times\GaR$ y su heterogeneidad por concentración que la literatura estima empíricamente.
+\paragraph{Contribución.} El modelo se apoya en un resultado técnico preliminar —existencia y unicidad del equilibrio de Cournot (Proposición~1)— sobre el cual el trabajo construye cuatro resultados económicos. Primero, recupera la relación en U de la fragilidad individual como caso particular (Proposición~2). Segundo ---y es la contribución marginal frente a \citet{MMR2010}---, al endogenizar la correlación de activos $\rho(n)$ muestra que el mínimo de la fragilidad \textit{sistémica} $\JLoss$ se desplaza hacia mayor competencia respecto del mínimo de la fragilidad individual (Proposición~3): una política de competencia calibrada solo sobre la salud individual de los bancos deja al sistema en una configuración subóptimamente concentrada desde la óptica del riesgo de cola. Tercero, el traspaso de la cola sistémica es creciente en la concentración por un canal de granularidad (Proposición~4). Cuarto, el cierre macro-soberano genera una complementariedad entre fragilidad y riesgo a la baja sobre el spread soberano, amplificada por la concentración (Proposición~5), que constituye el análogo teórico exacto del término de interacción $\JLoss\times\GaR$ y su heterogeneidad por concentración que la literatura estima empíricamente.
 
 \paragraph{Literatura relacionada.} El trabajo integra tres literaturas. La de \textit{organización industrial bancaria y estabilidad} \citep{Keeley1990,AllenGale2004,BoydDeNicolo2005,MMR2010,Vives2016}; la de \textit{riesgo sistémico} y medidas de pérdida conjunta \citep{Merton1974,Vasicek2002,Gordy2003,AcharyaEtAl2017,AdrianBrunnermeier2016}; y la de \textit{riesgos a la baja y nexo soberano-bancario} \citep{ABG2019,AcharyaDrechslerSchnabl2014,FarhiTirole2018,GhoshEtAl2013}. Ninguna de las tres, tomada por separado, deriva un objeto de fragilidad de \textit{cola conjunta} como función de la estructura de mercado bancario: la literatura de organización industrial se detiene en la probabilidad de quiebra individual, y la literatura de riesgo sistémico trata la correlación de exposiciones como un parámetro exógeno, no como el resultado de una decisión estratégica de los bancos condicionada por cuántos compiten entre sí. Ningún trabajo previo, hasta donde sabemos, deriva $\partial \JLoss/\partial(\text{competencia})$ con correlación endógena a la estructura de mercado ni la propaga hasta el spread soberano.
 
 \paragraph{Relación con la investigación empírica complementaria.} Este trabajo teórico es la contraparte de un segundo artículo de investigación, de naturaleza empírica, elaborado en paralelo por el mismo autor, que estima directamente sobre un panel de economías emergentes latinoamericanas el término de interacción $\JLoss\times\GaR$ sobre el spread soberano y documenta su significancia y robustez (\citealp{Chari2024} ofrece el antecedente más próximo, con la interacción de $\JLoss$ y factores financieros \emph{globales}). Los dos trabajos comparten las mismas métricas de fragilidad bancaria y riesgo de cola, construidas de manera idéntica, pero difieren en su objeto: mientras el artículo empírico establece la complementariedad $\JLoss\times\GaR$ como una regularidad estadística sin comprometerse con un mecanismo estructural único, este trabajo deriva esa misma complementariedad --y, decisivamente, su heterogeneidad por la concentración bancaria-- desde primeros principios de un modelo de competencia. La Sección~\ref{sec:empirico} reporta, además de la validación del diseño por Monte Carlo, una primera puesta a prueba de las predicciones distintivas del modelo ($\beta_3$ y, sobre todo, $\beta_4$) sobre el mismo panel de datos reales.
 
-El resto del documento se organiza así. La Sección~\ref{sec:modelo} presenta el modelo. La Sección~\ref{sec:sistemico} deriva la fragilidad individual y sistémica (Proposiciones~1--3) y la calibra. La Sección~\ref{sec:soberano} cierra la cadena macro-soberana (Proposición~4). La Sección~\ref{sec:empirico} desarrolla y valida la estrategia empírica. La Sección~\ref{sec:robustez} presenta la robustez y la revisión adversarial. La Sección~\ref{sec:conclusion} concluye.
+El resto del documento se organiza así. La Sección~\ref{sec:modelo} presenta el modelo. La Sección~\ref{sec:sistemico} deriva la fragilidad individual y sistémica (Proposiciones~2--4) y la calibra. La Sección~\ref{sec:soberano} cierra la cadena macro-soberana (Proposición~5). La Sección~\ref{sec:empirico} desarrolla y valida la estrategia empírica. La Sección~\ref{sec:robustez} presenta la robustez y la revisión adversarial. La Sección~\ref{sec:conclusion} concluye.
 
 \section{El modelo}\label{sec:modelo}
 
 \subsection{Entorno y timing}
-Economía de un período con un continuo de \textit{prestatarios} sin riqueza propia, $n$ \textit{bancos} idénticos con responsabilidad limitada, \textit{depositantes} con seguro de depósitos y un \textit{asegurador/fisco}. La secuencia es: (i)~la estructura de mercado queda fijada por $n$; (ii)~los bancos compiten à la Cournot eligiendo cantidades de crédito $l_i$ y el mercado determina la tasa $R_L$; (iii)~cada prestatario elige el riesgo $p$ de su proyecto; (iv)~se realiza el factor macro-financiero común $Z$, ocurren los defaults y se materializan las pérdidas.
+Economía de un período con un continuo de \textit{proyectistas} sin patrimonio propio —de modo
+que cada proyecto se financia en su totalidad con crédito bancario, sin aporte de capital
+propio del proyectista—, $n$ \textit{bancos} idénticos con responsabilidad limitada,
+\textit{depositantes} con seguro de depósitos y un \textit{asegurador/fisco}. La secuencia es:
+(i)~la estructura de mercado queda fijada por $n$; (ii)~los bancos compiten à la Cournot
+eligiendo cantidades de crédito $l_i$ y el mercado determina la tasa $R_L$ (la condición de
+vaciado de mercado se formaliza en la Definición~\ref{def:eq}, Sección~\ref{sec:cournot}, a
+continuación); (iii)~cada proyectista elige el riesgo $p$ de su proyecto; (iv)~se realiza el
+factor macro-financiero común $Z$, ocurren los defaults y se materializan las pérdidas.
 
-\subsection{Prestatarios y \textit{risk-shifting}}
-Cada prestatario financia con una unidad un proyecto y elige su probabilidad de default $p\in[0,1]$. Con probabilidad $1-p$ el proyecto tiene éxito y rinde $R(p)$, con $R'(p)>0$ y $(1-p)R(p)$ cóncavo. Por responsabilidad limitada repaga $1+R_L$ solo en éxito y resuelve $\max_p (1-p)[R(p)-(1+R_L)]$. La condición de primer orden $\Psi(p,R_L)\equiv(1-p)R'(p)-[R(p)-(1+R_L)]=0$, con $\Psi_p<0$, implica por el teorema de la función implícita:
+\subsection{Competencia à la Cournot y equilibrio}\label{sec:cournot}
+Siguiendo la tradición de competencia bancaria à la Cournot en cantidad de crédito
+\citep{MMR2010,Vives2016}, el banco $i$ elige $l_i\ge 0$. La demanda inversa de crédito es
+$R_L=R_L(L)$, con $L=\sum_i l_i$, $R_L'(L)<0$ y $2R_L'(L)+L\,R_L''(L)<0$. Dado que cada
+proyectista financia su proyecto con exactamente 1 unidad de crédito (Sección anterior), $l_i$
+mide simultáneamente el volumen de crédito y la masa de proyectistas atendidos por el banco
+$i$, y $L=\sum_i l_i$ es tanto el crédito agregado como el número total de proyectos
+financiados en la economía; empíricamente, $l_i$ se aproxima por el stock de colocaciones de
+cada banco o país, tal como se usa en el panel de la Sección~\ref{sec:empirico}, lo que ancla
+este objeto teórico a los datos.
+
+Sea $\pi(R_L)$ el margen esperado, por unidad de crédito, que un banco obtiene al prestar a la
+tasa $R_L$; se deriva explícitamente a partir de los primitivos de riesgo en la
+Sección~\ref{sec:bancos}, pero por ahora basta con las condiciones de regularidad que se
+verifican allí. El banco $i$ elige $l_i$ para maximizar
+\begin{equation}
+\Pi_i(l_i,l_{-i})=l_i\cdot\pi(R_L(L))-C(l_i),
+\label{eq:profit}
+\end{equation}
+con $C(\cdot)$ convexo. El proyectista responde según el mecanismo de \textit{risk-shifting} de
+la Sección~\ref{sec:proyectistas}, de modo que $p=p(R_L(L))$: la elección de riesgo es
+indirecta, gobernada por la tasa de equilibrio, y por tanto ya incorporada en $\pi(R_L)$.
+
+\begin{definition}[Equilibrio simétrico]\label{def:eq}
+Un equilibrio es $(l^*,R_L^*,p^*)$ tal que: (i)~dado $R_L^*$, cada proyectista elige
+$p^*=p(R_L^*)$ con $\Psi(p^*,R_L^*)=0$ (Sección~\ref{sec:proyectistas}); (ii)~\textbf{vaciado de
+mercado:} $R_L^*=R_L(n\,l^*)$; (iii)~$l^*$ satisface la CPO de Cournot,
+$\pi(R_L^*)+l^*\,\pi'(R_L^*)\,R_L'(n l^*)-C'(l^*)=0$, con $\partial^2\Pi_i/\partial l_i^2<0$;
+(iv)~(opcional) libre entrada fija $n^*$ por beneficio cero.
+\end{definition}
+
+\begin{proposition}[existencia y unicidad]\label{prop:exist}
+Si la demanda inversa satisface las condiciones de regularidad, $\pi(\cdot)$ es tal que el
+beneficio \eqref{eq:profit} es estrictamente cóncavo en $l_i$ y el costo es convexo, existe un
+único equilibrio simétrico de Cournot. En el límite $n\to\infty$ se recupera el nivel
+competitivo ($R_L\to R_L^c$, margen $\to 0$) y en $n=1$ el de monopolio.
+\end{proposition}
+
+\subsection{Microfundamento I: proyectistas y \textit{risk-shifting}}\label{sec:proyectistas}
+Cada proyectista es neutral al riesgo y maximiza el valor esperado de su pago —caso lineal de
+la maximización de utilidad esperada, forma estándar en la literatura de \textit{risk-shifting}
+\citep{StiglitzWeiss1981,BoydDeNicolo2005}—. Financia con una unidad de crédito un proyecto y
+elige su probabilidad de default $p\in[0,1]$. Con probabilidad $1-p$ el proyecto tiene éxito y
+rinde $R(p)$, con $R'(p)>0$ y $(1-p)R(p)$ cóncavo: proyectos más riesgosos pagan más
+condicional al éxito pero tienen menor valor esperado, de modo que distintos niveles de riesgo
+corresponden a instrumentos con distinto valor esperado. Por responsabilidad limitada, el
+proyectista repaga $1+R_L$ solo en éxito, donde $R_L$ —la tasa de préstamo pactada ex-ante y
+determinada por el mercado (Sección~\ref{sec:cournot})— es la única tasa del modelo: el monto de
+repago $1+R_L$ es una función determinística de $R_L$, no una tasa de repago independiente.
+Nótese además que $R_L$ (tasa de préstamo) y $R(p)$ (retorno del proyecto en éxito, elegido
+indirectamente por el proyectista vía $p$) son objetos distintos: $R_L$ entra al costo de
+repago exigido, mientras que $R(p)$ es el ingreso bruto que genera el proyecto. El proyectista
+resuelve $\max_p (1-p)[R(p)-(1+R_L)]$. La condición de primer orden
+$\Psi(p,R_L)\equiv(1-p)R'(p)-[R(p)-(1+R_L)]=0$, con $\Psi_p<0$, implica por el teorema de la
+función implícita:
 \begin{equation}
 \frac{dp}{dR_L} = -\frac{\Psi_{R_L}}{\Psi_p} = -\frac{1}{(1-p)R''(p)-2R'(p)} > 0.
 \label{eq:riskshift}
 \end{equation}
 
 \begin{lemma}[\textit{risk-shifting}]\label{lem:rs}
-La probabilidad de default elegida por el prestatario es estrictamente creciente en la tasa de préstamo: $p'(R_L)>0$.
+La probabilidad de default elegida por el proyectista es estrictamente creciente en la tasa de
+préstamo $R_L$: $p'(R_L)>0$.
 \end{lemma}
 
-La demanda inversa de crédito es $R_L=R_L(L)$, con $L=\sum_i l_i$, $R_L'(L)<0$ y $2R_L'(L)+L\,R_L''(L)<0$.
-
-\subsection{Bancos, factor común y probabilidad de quiebra}
-El default de cada préstamo se rige por un modelo de umbral con factor común $Z\sim N(0,1)$ e idiosincrásico $\varepsilon_j\sim N(0,1)$: el préstamo $j$ hace default si $\sqrt{\rho}\,Z+\sqrt{1-\rho}\,\varepsilon_j<\Phi^{-1}(p)$, donde $\rho$ es la correlación de activos. Por la ley de grandes números, la fracción de default condicional a $Z$ es la función de Vasicek
+\subsection{Microfundamento II: bancos, factor común y probabilidad de quiebra}\label{sec:bancos}
+El default de cada préstamo se rige por un modelo de umbral con factor común $Z\sim N(0,1)$
+—un evento macro-financiero, por ejemplo una recesión o un endurecimiento de las condiciones
+financieras, que golpea a todos los proyectistas a la vez— e idiosincrásico
+$\varepsilon_j\sim N(0,1)$: el préstamo $j$ hace default si
+$\sqrt{\rho}\,Z+\sqrt{1-\rho}\,\varepsilon_j<\Phi^{-1}(p)$, donde $\rho$ es la correlación de
+activos. La estructura es análoga a la de una cartera diversificada por nivel de riesgo —como
+los multifondos de una AFP o un fondo mutuo—, donde $Z$ es el riesgo sistemático que ninguna
+diversificación elimina y $\varepsilon_j$ es el riesgo idiosincrático que sí se diversifica. Por
+la ley de grandes números aplicada al continuo de proyectos que financia cada banco, la fracción
+de default condicional a $Z$ es la función de Vasicek \citep{Vasicek2002,Gordy2003}
 \begin{equation}
 x(Z;p,\rho)=\Phi\!\left(\frac{\Phi^{-1}(p)-\sqrt{\rho}\,Z}{\sqrt{1-\rho}}\right),\qquad \partial x/\partial Z<0.
 \label{eq:vasicek}
 \end{equation}
-Los bancos se fondean con depósitos asegurados al costo bruto $1+r_D$ y mantienen capital $e$ por unidad. El banco quiebra cuando la fracción de default supera el umbral $\bar x(R_L)=1-(1+r_D-e)/(1+R_L)$, con $\bar x'(R_L)>0$: más competencia comprime el margen, reduce $\bar x$ y acerca a la quiebra (canal Keeley). La probabilidad de quiebra individual es
+Esta forma cerrada es el límite de cartera grande \emph{dentro de cada banco} (el continuo de
+proyectistas hace que la fracción de default sea una variable continua, no un conteo de éxitos
+y fracasos); el número de bancos $n$, en cambio, permanece finito, y es precisamente esa
+granularidad a nivel banco la que genera el término de varianza $H\,q(Z)(1-q(Z))$ de la
+Proposición~\ref{prop:granular} más adelante, que se anula solo cuando $n\to\infty$.
+
+Los bancos se fondean con depósitos asegurados al costo bruto $1+r_D$ y mantienen capital $e$
+por unidad de crédito. Siguiendo la práctica estándar de la literatura de organización
+industrial bancaria, $e$ se trata como un parámetro de política exógeno —un requisito
+regulatorio mínimo de capital, análogo a un coeficiente de Basilea/CMF, no una elección del
+banco—. En el lenguaje de \citet{Merton1974}, $e$ es el colchón que absorbe la pérdida dado el
+default antes de que el propio banco quiebre: el banco quiebra cuando la fracción de default
+supera el umbral $\bar x(R_L)=1-(1+r_D-e)/(1+R_L)$, con $\bar x'(R_L)>0$: más competencia
+comprime el margen, reduce $\bar x$ y acerca a la quiebra (canal Keeley). La probabilidad de
+quiebra individual es
 \begin{equation}
 \PD(R_L,p,\rho)=\Phi(\bar z)=\Phi\!\left(\frac{\Phi^{-1}(p)-\sqrt{1-\rho}\,\Phi^{-1}(\bar x(R_L))}{\sqrt{\rho}}\right).
 \label{eq:pd}
 \end{equation}
 
-\subsection{Competencia à la Cournot y equilibrio}
-Con responsabilidad limitada el patrimonio residual se percibe solo en supervivencia ($Z\ge\bar z$). El banco $i$ elige $l_i$ para maximizar
+Con responsabilidad limitada, el patrimonio residual del banco se percibe solo en supervivencia
+($Z\ge\bar z$), de modo que el margen esperado por unidad de \eqref{eq:profit} es
 \begin{equation}
-\Pi_i(l_i,l_{-i})=l_i\cdot\E\!\big[\max\{(1-x(Z))(1+R_L(L))-(1+r_D),0\}\big]-C(l_i).
-\label{eq:profit}
+\pi(R_L)=\E\!\big[\max\{(1-x(Z;p(R_L),\rho))(1+R_L)-(1+r_D),0\}\big].
+\label{eq:margin}
 \end{equation}
-El prestatario responde vía Lema~\ref{lem:rs}, de modo que $p=p(R_L(L))$: la elección de riesgo es indirecta, gobernada por la tasa de equilibrio.
 
-\begin{definition}[Equilibrio simétrico]\label{def:eq}
-Un equilibrio es $(l^*,R_L^*,p^*)$ tal que: (i)~dado $R_L^*$, cada prestatario elige $p^*=p(R_L^*)$ con $\Psi(p^*,R_L^*)=0$; (ii)~$R_L^*=R_L(n\,l^*)$; (iii)~$l^*$ satisface la CPO de Cournot con $\partial^2\Pi_i/\partial l_i^2<0$; (iv)~(opcional) libre entrada fija $n^*$ por beneficio cero.
-\end{definition}
+\begin{remark}[el óptimo de $l_i$ internaliza el \textit{risk-shifting}]\label{rem:chain}
+La derivada total de \eqref{eq:margin} respecto de $R_L$ se descompone en un efecto directo de
+la tasa y un efecto indirecto vía el riesgo elegido por el proyectista:
+\begin{equation}
+\pi'(R_L)=\underbrace{\left.\frac{\partial \pi}{\partial R_L}\right|_{p\ \text{fijo}}}_{\text{efecto directo}}
++\ \underbrace{\frac{\partial \pi}{\partial p}}_{<0}\ \underbrace{p'(R_L)}_{>0\ (\text{Lema~\ref{lem:rs}})}.
+\label{eq:chainrule}
+\end{equation}
+Como el banco anticipa racionalmente $p=p(R_L(L))$ al resolver \eqref{eq:profit}, la CPO de
+Cournot para $l_i$ (Definición~\ref{def:eq}(iii)) ya contiene, vía \eqref{eq:chainrule}, el
+efecto de \textit{risk-shifting} sobre su propio margen. No es necesario, por tanto, un problema
+de maximización conjunta en $(l_i,p)$: la elección univariada de $l_i$, bajo expectativas
+racionales sobre la respuesta del proyectista, basta para caracterizar el equilibrio.
+\end{remark}
 
-\begin{proposition}[existencia y unicidad]\label{prop:exist}
-Si la demanda inversa satisface las condiciones de regularidad, el beneficio \eqref{eq:profit} es estrictamente cóncavo en $l_i$ y el costo es convexo, existe un único equilibrio simétrico de Cournot. En el límite $n\to\infty$ se recupera el nivel competitivo ($R_L\to R_L^c$, margen $\to 0$) y en $n=1$ el de monopolio.
-\end{proposition}
+\begin{remark}[fondeo con precio de riesgo]\label{rem:riskfunding}
+El costo de fondeo $r_D$ admite generalizarse a un costo $r(p)$ creciente en el riesgo asumido
+por el banco, $r'(p)\ge 0$ —disciplina de mercado o un seguro de depósitos con precio
+actuarialmente sensible al riesgo \citep{Merton1977}—, de modo que el margen \eqref{eq:margin}
+pasaría a depender de $r(p)$ en lugar de un costo plano. \citet{ChanGreenbaumThakor1992}
+muestran, sin embargo, que un precio de seguro de depósitos genuinamente justo y sensible al
+riesgo no siempre es implementable sin subsidio en un entorno competitivo; por esa razón se
+mantiene $r(p)=r_D$ constante como caso base para las Proposiciones~\ref{prop:exist}--\ref{prop:cross},
+y $r(p)$ general queda señalada como extensión, en el mismo estatus que la competencia à la
+Salop o el canal de \textit{herding} de la Sección~\ref{sec:robustez}.
+\end{remark}
 
 \section{Fragilidad individual y sistémica}\label{sec:sistemico}
 
-\subsection{La relación en U (Proposición 1)}
+\subsection{La relación en U (Proposición 2)}
 \begin{proposition}[U-shape de la fragilidad individual]\label{prop:U}
 Sea $\PD(n)\equiv\PD(R_L^*(n),p^*(n),\rho)$ con $\rho$ constante. La probabilidad de quiebra individual es no monótona y con forma de U en la competencia: existe $\hat n$ con $\PD'(n)<0$ para $n<\hat n$ y $\PD'(n)>0$ para $n>\hat n$.
 \end{proposition}
@@ -262,6 +365,7 @@ Las predicciones no quedan solo como ejercicio deductivo: contrastadas mediante 
 \bibitem[Allen \& Gale(2004)]{AllenGale2004} Allen, F., Gale, D. (2004). Competition and Financial Stability. \textit{Journal of Money, Credit and Banking} 36(3), 453--480.
 \bibitem[Beck et al.(2006)]{BeckDemirgucLevine2006} Beck, T., Demirgüç-Kunt, A., Levine, R. (2006). Bank Concentration, Competition, and Crises. \textit{Journal of Banking \& Finance} 30(5), 1581--1603.
 \bibitem[Boyd \& De Nicoló(2005)]{BoydDeNicolo2005} Boyd, J., De Nicoló, G. (2005). The Theory of Bank Risk Taking and Competition Revisited. \textit{Journal of Finance} 60(3), 1329--1343.
+\bibitem[Chan et al.(1992)]{ChanGreenbaumThakor1992} Chan, Y.S., Greenbaum, S., Thakor, A. (1992). Is Fairly Priced Deposit Insurance Possible? \textit{Journal of Finance} 47(1), 227--245.
 \bibitem[Chari et al.(2024)]{Chari2024} Chari, A., Garcés, F., Martínez, J. F., Valenzuela, P. (2024). Sovereign Credit Spreads, Banking Fragility, and Global Factors. \textit{Journal of Financial Stability} 72, 101235.
 \bibitem[Farhi \& Tirole(2018)]{FarhiTirole2018} Farhi, E., Tirole, J. (2018). Deadly Embrace: Sovereign and Financial Balance Sheets Doom Loops. \textit{Review of Economic Studies} 85(3), 1781--1823.
 \bibitem[Ghosh et al.(2013)]{GhoshEtAl2013} Ghosh, A., Kim, J., Mendoza, E., Ostry, J., Qureshi, M. (2013). Fiscal Fatigue, Fiscal Space and Debt Sustainability. \textit{Economic Journal} 123(566), F4--F30.
@@ -269,6 +373,8 @@ Las predicciones no quedan solo como ejercicio deductivo: contrastadas mediante 
 \bibitem[Keeley(1990)]{Keeley1990} Keeley, M. (1990). Deposit Insurance, Risk, and Market Power in Banking. \textit{American Economic Review} 80(5), 1183--1200.
 \bibitem[Martínez-Miera \& Repullo(2010)]{MMR2010} Martínez-Miera, D., Repullo, R. (2010). Does Competition Reduce the Risk of Bank Failure? \textit{Review of Financial Studies} 23(10), 3638--3664.
 \bibitem[Merton(1974)]{Merton1974} Merton, R. (1974). On the Pricing of Corporate Debt. \textit{Journal of Finance} 29(2), 449--470.
+\bibitem[Merton(1977)]{Merton1977} Merton, R. (1977). An Analytic Derivation of the Cost of Deposit Insurance and Loan Guarantees. \textit{Journal of Banking \& Finance} 1(1), 3--11.
+\bibitem[Stiglitz \& Weiss(1981)]{StiglitzWeiss1981} Stiglitz, J., Weiss, A. (1981). Credit Rationing in Markets with Imperfect Information. \textit{American Economic Review} 71(3), 393--410.
 \bibitem[Vasicek(2002)]{Vasicek2002} Vasicek, O. (2002). The Distribution of Loan Portfolio Value. \textit{Risk} 15(12), 160--162.
 \bibitem[Vives(2016)]{Vives2016} Vives, X. (2016). \textit{Competition and Stability in Banking}. Princeton University Press.
 \end{thebibliography}
