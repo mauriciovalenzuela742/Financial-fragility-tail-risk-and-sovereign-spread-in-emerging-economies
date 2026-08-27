@@ -35,7 +35,11 @@ from banks_bloomberg import BANKS, EXECUTION_ORDER
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 MIN_BANKS = 3          # bancos con dato de mercado minimos por trimestre (igual al motor JLoss)
-DEFAULT_START = "2010-01-01"
+DEFAULT_START = "2004-01-01"   # 2004 y no antes: el CDS soberano de EM no existe
+                               # antes de 2000-10 (verificado 2026-08-27), y este corte
+                               # deja la crisis financiera global 2008 DENTRO de la muestra.
+                               # Costo: los H-shares chinos recien listan en 2005-2006,
+                               # asi que China entra al panel a mitad de 2005.
 
 
 def compute_prof_margin(balance_df: pd.DataFrame) -> pd.DataFrame:

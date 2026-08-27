@@ -34,7 +34,11 @@ from banks_bloomberg import (BANKS, CDS_COVERAGE_NOTE, CDS_ISSUER_NAME, CDS_TICK
                              COUNTRY_INDEX, EXECUTION_ORDER, GLOBAL_TICKERS)
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output_macro")
-DEFAULT_START = "2010-01-01"
+DEFAULT_START = "2004-01-01"   # 2004 y no antes: el CDS soberano de EM no existe
+                               # antes de 2000-10 (verificado 2026-08-27), y este corte
+                               # deja la crisis financiera global 2008 DENTRO de la muestra.
+                               # Costo: los H-shares chinos recien listan en 2005-2006,
+                               # asi que China entra al panel a mitad de 2005.
 
 
 def fetch_global(start_date: str, end_date: str):

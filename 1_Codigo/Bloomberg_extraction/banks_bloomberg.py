@@ -181,6 +181,53 @@ LATAM_BANKS = {
     },
 }
 
+# ---------------------------------------------------------------------------
+# FASE 2 — los 3 paises que YA estaban en el panel GaR (gar_panel_all17) pero no
+# tenian JLoss. Con esto los dos paneles cubren el mismo universo.
+# Todos verificados 2026-08-27 contra el Terminal: MARKET_STATUS=ACTV y
+# CRNCY == EQY_FUND_CRNCY (cotizacion local, sin ADR).
+FASE2_BANKS = {
+    "hungary": {
+        # Hungria tiene MUY pocos bancos cotizados: OTP concentra casi todo el sistema.
+        # Va a quedar bajo el minimo de 3 bancos en casi todos los trimestres, igual
+        # que Bulgaria y Egipto — es estructural del mercado, no un problema de tickers.
+        "otp_bank":     {"ticker": "OTP HB Equity"},      # 5.660 obs desde 2004-01-05
+        "mbh_mortgage": {"ticker": "MBHJB HB Equity"},    # ex-FHB HB (TKCH, 0 obs de
+                                                          # mktcap). 5.632 obs desde 2004
+        "granit":       {"ticker": "GRANIT HB Equity"},   # IPO 2024: solo aporta los
+                                                          # ultimos trimestres
+    },
+    "india": {
+        "hdfc_bank":      {"ticker": "HDFCB IN Equity"},
+        "icici_bank":     {"ticker": "ICICIBC IN Equity"},
+        "sbi":            {"ticker": "SBIN IN Equity"},
+        "axis_bank":      {"ticker": "AXSB IN Equity"},
+        "kotak_mahindra": {"ticker": "KMB IN Equity"},
+        "indusind":       {"ticker": "IIB IN Equity"},
+        "bank_of_baroda": {"ticker": "BOB IN Equity"},
+        "pnb":            {"ticker": "PNB IN Equity"},
+        "canara_bank":    {"ticker": "CBK IN Equity"},
+        "union_bank":     {"ticker": "UNBK IN Equity"},
+        "federal_bank":   {"ticker": "FB IN Equity"},
+        "idbi":           {"ticker": "IDBI IN Equity"},
+        "yes_bank":       {"ticker": "YES IN Equity"},    # IPO 2005-07
+    },
+    "southkorea": {
+        # Los holdings financieros se formaron en distintos momentos: KB en 2008,
+        # Hana en 2005, BNK/DGB en 2011, JB en 2013, Woori en 2014 (reestructuracion),
+        # Kakaobank IPO 2021. Shinhan e IBK son los unicos con serie completa desde 2004.
+        "shinhan":        {"ticker": "055550 KS Equity"},
+        "ibk":            {"ticker": "024110 KS Equity"},
+        "hana_financial": {"ticker": "086790 KS Equity"},
+        "kb_financial":   {"ticker": "105560 KS Equity"},
+        "bnk_financial":  {"ticker": "138930 KS Equity"},
+        "dgb_financial":  {"ticker": "139130 KS Equity"},  # hoy iM Financial Group
+        "jb_financial":   {"ticker": "175330 KS Equity"},
+        "woori":          {"ticker": "316140 KS Equity"},
+        "kakaobank":      {"ticker": "323410 KS Equity"},
+    },
+}
+
 COUNTRY_INDEX = {
     "argentina":   {"ccy": "ARS", "stx": "MERVAL Index",  "fx": "USDARS Curncy",
                      "sov10y": None, "sov_note": "sin generico limpio — usar CDS soberano 5Y"},
@@ -217,9 +264,17 @@ COUNTRY_INDEX = {
                      "sov10y": "GTMXN10Y Govt"},
     "peru":        {"ccy": "PEN", "stx": "SPBLPGPT Index", "fx": "USDPEN Curncy",
                      "sov10y": "GTPEN10Y Govt"},
+    # --- Fase 2: los 3 que ya estaban en el panel GaR ---
+    "hungary":     {"ccy": "HUF", "stx": "BUX Index",      "fx": "USDHUF Curncy",
+                     "sov10y": "GTHUF10Y Govt"},          # el 10Y arranca 2007-03
+    "india":       {"ccy": "INR", "stx": "NIFTY Index",    "fx": "USDINR Curncy",
+                     "sov10y": "GTINR10Y Govt"},
+    "southkorea":  {"ccy": "KRW", "stx": "KOSPI Index",    "fx": "USDKRW Curncy",
+                     "sov10y": "GTKRW10Y Govt"},
 }
 
 BANKS.update(LATAM_BANKS)
+BANKS.update(FASE2_BANKS)
 
 # Nombre corto de emisor soberano para CDS (convencion Bloomberg/Markit: "<NOMBRE> CDS USD
 # SR 5Y Corp" usa el nombre/abreviatura del PAIS emisor, NO el codigo de moneda). Estos son
@@ -234,6 +289,11 @@ CDS_ISSUER_NAME = {
     # nucleo LatAm — los 5 verificados con ~4.343 obs diarias 2010-2026
     "brazil": "BRAZIL", "chile": "CHILE", "colombia": "COLOM",
     "mexico": "MEX", "peru": "PERU",
+    # Fase 2. INDIA NO APARECE A PROPOSITO: no existe CDS soberano de India en el
+    # terminal ("INDIA CDS USD SR 5Y Corp" no devuelve serie), lo que es consistente
+    # con que India no emite deuda soberana en moneda dura de referencia. Para India
+    # el proxy de spread tiene que salir del GTINR10Y contra el UST10Y.
+    "hungary": "REPHUN", "southkorea": "KOREA",
 }
 
 # Orden de ejecucion sugerido (runbook §6 + advertencias §7): confianza alta primero,
@@ -253,6 +313,7 @@ CDS_COVERAGE_NOTE = {
     "bulgaria": "solo 2012-07-13..2015-10-16 (491 obs) — sin serie utilizable",
     "russia":   "solo 2012-07-13..2015-10-16 (619 obs) — sin serie utilizable",
     "pakistan": "solo desde 2026-03-18 (115 obs) — sin historia",
+    "hungary":  "solo 2012-07-13..2015-10-16 (560 obs) — sin serie utilizable",
     "egypt":    "468 obs dispersas en 2010-2026 — serie muy rala",
 }
 
@@ -264,7 +325,10 @@ PHASE1_ORDER = [
 # Nucleo LatAm: el panel ya los tenia via fuentes publicas, se re-extraen via Bloomberg.
 LATAM_ORDER = ["chile", "brazil", "mexico", "colombia", "peru"]
 
-EXECUTION_ORDER = PHASE1_ORDER + LATAM_ORDER
+# Fase 2: cierran el desajuste con el panel GaR, que ya tenia estos 3 paises.
+FASE2_ORDER = ["southkorea", "india", "hungary"]
+
+EXECUTION_ORDER = PHASE1_ORDER + LATAM_ORDER + FASE2_ORDER
 
 # Variables globales (runbook §1 y §3) — se piden una sola vez, no por pais.
 GLOBAL_TICKERS = {

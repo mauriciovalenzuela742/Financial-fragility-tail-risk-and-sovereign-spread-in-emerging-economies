@@ -1,112 +1,83 @@
-# Estado de la sesión — extracción Bloomberg para el panel JLoss/GaR (17 países)
+# Estado de la sesión — extracción Bloomberg para el panel JLoss/GaR (20 países, 2004→2026)
 
 Última actualización: 2026-08-27. Este archivo es para retomar el trabajo otro día sin
 tener que re-explicar todo desde cero.
 
 ## Qué es esto
 
-Fase 1 del plan aprobado (ver `C:\Users\itau_lab\.claude\plans\perfecto-necesito-extraer-los-calm-hamster.md`):
-construir, 100% desde cero vía Bloomberg Terminal (xbbg), los inputs JLoss (riesgo bancario,
-Merton-KMV) y las variables macro/regresión de GaR para los **12 países "extractor listo,
-sin datos"**: Argentina, China, Egipto, Indonesia, Malasia, Pakistán, Filipinas, Polonia,
-Rusia, Sudáfrica, Turquía, Bulgaria.
+Construcción, 100% desde cero vía Bloomberg Terminal (xbbg), de los inputs JLoss (riesgo
+bancario, Merton-KMV) y las variables macro/regresión de GaR, para la tesis "Financial
+fragility, tail risk and sovereign spread in emerging economies".
 
-A eso se sumó después el **núcleo LatAm** (Chile, Brasil, México, Colombia, Perú), que el
-panel ya tenía vía fuentes públicas y se re-extrajo por Bloomberg para unificar la fuente.
-Total actual: **17 países**.
+Repo de la tesis: `https://github.com/mauriciovalenzuela742/Financial-fragility-tail-risk-and-sovereign-spread-in-emerging-economies`
+El código y los datos viven en `1_Codigo/Bloomberg_extraction/`.
 
-Repo de la tesis (destino final del código): `https://github.com/mauriciovalenzuela742/Financial-fragility-tail-risk-and-sovereign-spread-in-emerging-economies`
-Por instrucción explícita del usuario, se ignora el pipeline JLoss ya subido a ese repo
-(carpetas `extract_<pais>.py` existentes) — solo se reutilizó el **schema/cabecera** de
-`jloss_common.py` y el formato de CSV `DATES,<var>` de
-`1_Codigo/GaR/extraction_individuals/*.py`.
+Se reutilizó solo el **schema/cabecera** de `jloss_common.py` (columnas
+`BALANCE_COLS`/`MKTCAP_COLS`, regla LP/CP bonos-vs-resto) y el formato `DATES,<var>` de
+`1_Codigo/GaR/extraction_individuals/*.py`. Las claves de `bankname` son las mismas que usa
+`JLoss-pipeline/extraccion/<pais>/`, para que estos CSV empaten con el panel existente.
 
-## ESTADO: extracción EJECUTADA y verificada contra el Terminal real (2026-08-27)
+## ESTADO: extracción EJECUTADA y verificada contra el Terminal real
 
-Ya no es código "sin testear". Los dos scripts corrieron completos contra el Bloomberg
-Terminal de esta máquina y escribieron datos.
+**20 países, 113 bancos, 8.611 filas de balance, 564.470 de mktcap, 2004→2026, cero alertas
+de coherencia contable** (sin equity > activos, sin pasivos negativos, sin mktcap ≤ 0).
+91 trimestres de panel.
 
-### Salida JLoss — `bloomberg_extraction/output/<pais>/`
+| País | Grupo | Bancos | balance | mktcap | Nota |
+|---|---|---:|---:|---:|---|
+| india | Fase 2 | 13 | 802 | 72.739 | **sin CDS soberano** |
+| brazil | LatAm | 11 | 855 | 48.009 | |
+| china | Fase 1 | 10 | 735 | 43.543 | mktcap desde 2005-06 (H-shares) |
+| southkorea | Fase 2 | 9 | 538 | 35.573 | **balance solo desde 2009** |
+| poland | Fase 1 | 8 | 696 | 42.906 | CDS inutilizable |
+| turkey | Fase 1 | 8 | 710 | 44.190 | |
+| malaysia | Fase 1 | 6 | 546 | 33.394 | |
+| pakistan | Fase 1 | 6 | 487 | 31.850 | CDS sin historia |
+| southafrica | Fase 1 | 6 | 268 | 33.972 | **frecuencia semestral** |
+| indonesia | Fase 1 | 5 | 434 | 23.961 | |
+| mexico | LatAm | 5 | 385 | 21.586 | |
+| philippines | Fase 1 | 5 | 455 | 27.682 | |
+| argentina | Fase 1 | 4 | 336 | 19.163 | |
+| chile | LatAm | 4 | 364 | 22.596 | |
+| colombia | LatAm | 3 | 218 | 14.927 | |
+| hungary | Fase 2 | 3 | 182 | 11.750 | CDS inutilizable |
+| peru | LatAm | 3 | 273 | 16.890 | |
+| russia | Fase 1 | 2 | 160 | 9.500 | **mktcap corta 2024-08-09** |
+| bulgaria | Fase 1 | 1 | 77 | 4.741 | below_min_banks 77/77 |
+| egypt | Fase 1 | 1 | 90 | 5.498 | below_min_banks 90/90 |
 
-El panel completo son **17 países, 88 bancos, 5.595 filas de balance y 344.671 de mktcap**
-(2010→2026), **cero alertas de coherencia contable**. Los 12 países de Fase 1 aportan 62
-bancos, 3.912 filas de balance y 247.051 de mktcap (sin equity > activos, sin pasivos negativos, sin mktcap ≤ 0).
+### Por qué 2004 y no 1997
 
-| País | Bancos | balance | mktcap | Nota |
-|---|---:|---:|---:|---|
-| poland | 8 | 528 | 32.560 | |
-| turkey | 8 | 536 | 33.432 | |
-| china | 10 | 645 | 38.221 | |
-| southafrica | 6 | 197 | 24.966 | **frecuencia semestral** |
-| malaysia | 6 | 402 | 24.496 | |
-| pakistan | 6 | 402 | 24.762 | |
-| indonesia | 5 | 335 | 18.141 | |
-| philippines | 5 | 335 | 20.310 | |
-| argentina | 4 | 264 | 14.681 | |
-| russia | 2 | 134 | 7.354 | **mktcap corta 2024-08-09** |
-| bulgaria | 1 | 67 | 4.111 | below_min_banks 67/67 |
-| egypt | 1 | 67 | 4.017 | below_min_banks 67/67 |
+Se midió empíricamente la profundidad disponible pidiendo desde 1990:
 
-### Núcleo LatAm — re-extraído vía Bloomberg (2026-08-27)
+- **Macro** (VIX, UST10Y, tipos de cambio): 1990-1993. No es restricción.
+- **HY spread**: 1994.
+- **Insumos GaR ya existentes** (CPI, STX, rEER): 1970-1996; `Ryr` mediana 2003.
+- **CDS soberano 5Y**: el más antiguo es 2000-10 (Sudáfrica, Turquía). El EMBI Global de
+  JP Morgan (`JPEIGLSP Index`) tampoco existe antes de 2000-01.
 
-Los 5 países que el panel ya tenía vía fuentes públicas (CMF/BCB/CNBV/Superfinanciera/SBS
-+ yfinance) se re-extrajeron vía Bloomberg para tener todo en una sola fuente. Las claves
-de `bankname` son las mismas que usa `JLoss-pipeline/extraccion/<pais>/`, así que estos CSV
-empatan con el panel existente.
+O sea que **la restricción es la variable dependiente**, no los bancos: el mercado de CDS
+soberanos de emergentes no existía antes de 2000. Un panel desde 1997 tendría 3-4 años sin
+nada que explicar, y la cobertura bancaria se desploma (34 de 113 bancos, China 0).
 
-| País | Bancos | balance | mktcap | CDS 5Y |
-|---|---:|---:|---:|---:|
-| brazil | 11 | 706 | 38.797 | 4.344 |
-| mexico | 5 | 310 | 17.736 | 4.344 |
-| chile | 4 | 268 | 16.600 | 4.342 |
-| colombia | 3 | 198 | 12.001 | 4.343 |
-| peru | 3 | 201 | 12.486 | 4.343 |
-
-**Regla aplicada: siempre la cotización LOCAL, nunca el ADR**, aunque varios ADRs tenían
-unas pocas observaciones más. `BAP US`, `ITUB US`, `BBD US`, `CIB US` y `BSAC US` cotizan
-en USD contra un balance en moneda local (`EQY_FUND_CRNCY`), y esa inconsistencia corrompe
-el Merton-KMV — es el mismo error que tenía Bulgaria con `5F4 BU`. Verificado: en los 26
-bancos LatAm `CRNCY == EQY_FUND_CRNCY`.
-
-Cuatro tickers más desactualizados, encontrados en la verificación:
-
-| Banco | Esperable | Es | Efecto |
-|---|---|---|---|
-| Santander Chile | `BSANTANDER CI` | `BSAN CI` | el primero es BAD_SEC |
-| Banregio (Mx) | `GFREGIO MM` | `RA MM` (Regional SAB) | GFREGIO está DLST, **0 trimestres** |
-| Bancolombia | `BCOLO CB` | `CIBEST CB` (Grupo Cibest) | BCOLO DLST, solo 14 trimestres |
-| BBVA Perú | `CONTINC1 PE` | `BBVAC1 PE` | TKCH, **0 obs** de mktcap |
-
-Decisiones de universo (revisar si no coinciden con la intención de la tesis):
-- **`grupo_aval` excluido** de Colombia: es el holding de bogota/popular/occidente/av_villas
-  y duplicaría bancos que ya están en el panel.
-- **`bbva_peru` puede pasar de PD contable a PD de mercado**: entraba como `book` en el
-  pipeline original porque yfinance no lo tenía; Bloomberg sí, con 4.176 obs.
-- `banco_bice` y `banco_security` (Chile) no existen como security en Bloomberg (BAD_SEC);
-  en el pipeline original tampoco tenían ticker, así que siguen en PD contable.
-- Series cortas por IPO o adquisición, no por error: btg_pactual (IPO 2012), banco_bmg
-  (IPO 2019), banco_inter (BDR, 42 trim), banco_bajio (IPO 2016), banco_pan (ACQU, mktcap
-  corta 2026-03-13), santander_mexico (ACQU, mktcap corta 2023-07-04).
-- Colombia: 3/67 trimestres bajo el mínimo de 3 bancos, todos al inicio de 2010.
+**2004 deja la crisis financiera global de 2008 DENTRO de la muestra**, que era el hueco
+serio del corte anterior en 2010 para una tesis sobre fragilidad y tail risk.
 
 ### Salida macro/GaR — `bloomberg_extraction/output_macro/`
 
-- `GLOBAL/`: VIX (4.220), UST10Y (4.342), HY_SPREAD (4.196).
-- por país: `EMBI_<pais>.csv` (CDS 5Y), `rating_<pais>.csv`, `fxvol_<pais>.csv` (67
-  trimestres en todos salvo Rusia, 49), `prof_margin_<pais>.csv` (67 trimestres).
-- Rating S&P resuelto para los 17 países (Rusia = `NR`, sin puntaje, correcto).
-- El CDS de LatAm tiene cobertura completa (~4.343 obs, 2010-2026), muy superior a la de
-  varios países de Fase 1 — ver limitación 4 más abajo.
+- `GLOBAL/`: VIX (5.731), UST10Y (5.907), HY_SPREAD (5.698).
+- por país: `EMBI_<pais>.csv` (CDS 5Y), `rating_<pais>.csv`, `fxvol_<pais>.csv`,
+  `prof_margin_<pais>.csv`.
+- Rating S&P resuelto para los 20 países (Rusia = `NR`, sin puntaje, correcto).
 
-## Lo que hubo que arreglar para que esto corriera (todo verificado, no adivinado)
+## Lo que hubo que arreglar (todo verificado, no adivinado)
 
 ### xbbg 1.0 rompió la API de 0.7
 El entorno tiene **xbbg 1.0.0**, que es una reescritura: devuelve un frame *largo* de
 narwhals sobre pyarrow (`ticker, date, field, value`, todo string) en vez de un DataFrame
 pandas ancho, y el kwarg `Per=` ya no existe (`BlpValidationError`). Se agregó una capa de
 adaptación en `bloomberg_common.py` (`_XBBG_CALL`, `_to_wide`, `_PERIODICITY`) que pide
-`backend="pandas"`, `format="long_typed"` y re-arma el formato ancho, de modo que el resto
-del pipeline sigue viendo el contrato de siempre.
+`backend="pandas"`, `format="long_typed"` y re-arma el formato ancho.
 **Si esto se vuelve a romper, el sospechoso #1 es una actualización de xbbg.**
 
 ### Mnemónicos Bloomberg que estaban mal
@@ -114,86 +85,110 @@ del pipeline sigue viendo el contrato de siempre.
 |---|---|---|
 | `LT_DEBT` | `BS_LT_BORROW` | no es mnemónico válido; `bonds` (y toda la regla LP/CP) venía vacío |
 | `RTG_SP_LT_FC_ISSUER_RATING` | `RTG_SP_LT_FC_ISSUER_CREDIT` | rating vacío en los 12 países |
-| `BEBGHYCS Index` | `LF98OAS Index` | BAD_SEC; es el equivalente del FRED BAMLH0A0HYM2 del repo |
+| `BEBGHYCS Index` | `LF98OAS Index` | BAD_SEC; equivale al FRED BAMLH0A0HYM2 del repo |
 
-### Tickers de bancos desactualizados (`MARKET_STATUS = TKCH`)
-| Era | Es | Efecto |
+### Tickers desactualizados (`MARKET_STATUS = TKCH` / `DLST`)
+Todos devolvían **0 observaciones de mktcap** mientras el balance salía completo, así que el
+banco desaparecía del panel en silencio:
+
+| Era | Es | País |
 |---|---|---|
-| `SPL PW` (Santander Polska) | `EBP PW` | **0 obs de mktcap**: el banco desaparecía del panel |
-| `CHIB PM` (China Banking) | `CBC PM` | 0 obs de mktcap |
-| `5F4 BU` (Fibank) | `FIB BU` | 5F4 daba mktcap en **BGN** contra balance en **EUR** → inflado ×1,95583 |
+| `SPL PW` | `EBP PW` | Santander Polska |
+| `CHIB PM` | `CBC PM` | China Banking Corp |
+| `5F4 BU` | `FIB BU` | Fibank — además 5F4 daba mktcap en BGN contra balance en EUR (×1,95583) |
+| `BSANTANDER CI` | `BSAN CI` | Santander Chile |
+| `GFREGIO MM` | `RA MM` | Banregio → Regional SAB |
+| `BCOLO CB` | `CIBEST CB` | Bancolombia → Grupo Cibest |
+| `CONTINC1 PE` | `BBVAC1 PE` | BBVA Perú |
+| `FHB HB` | `MBHJB HB` | MBH Mortgage Bank (Hungría) |
 
-El CDS soberano de China no resuelve por nombre de emisor (`CHINA CDS USD SR 5Y Corp` →
-BAD_SEC); sí por ticker Markit `CCHIN1U5 Curncy`. Está en `CDS_TICKER_OVERRIDE`.
+El CDS soberano de China no resuelve por nombre de emisor (BAD_SEC); sí por ticker Markit
+`CCHIN1U5 Curncy`. Está en `CDS_TICKER_OVERRIDE`.
+
+### Regla de moneda: siempre cotización LOCAL, nunca ADR
+`BAP US`, `ITUB US`, `BBD US`, `CIB US`, `BSAC US` y otros cotizan en USD contra un balance
+en moneda local (`EQY_FUND_CRNCY`); esa inconsistencia corrompe el Merton-KMV por un factor
+de tipo de cambio. En los 113 bancos se verificó `CRNCY == EQY_FUND_CRNCY`.
 
 ### Frecuencia de reporte
-Los 6 bancos sudafricanos reportan **semestralmente**: cualquier pedido trimestral vuelve
-con las fechas pero sin datos. `_pull_fundamentals` ahora intenta trimestral y cae a
-semestral por ticker. No se puede hardcodear por país: para GGAL (Argentina) el pedido
-semestral devuelve 0. Además se cambió `periodicityAdjustment` de `CALENDAR` a `ACTUAL`
-para fundamentales, lo que mejora cobertura (`BS_LT_BORROW` de BDO Unibank: 29 → 46).
+Los 6 bancos sudafricanos reportan **semestralmente**: cualquier pedido trimestral vuelve con
+las fechas pero sin datos. `_pull_fundamentals` intenta trimestral y cae a semestral por
+ticker. No se puede hardcodear por país: para GGAL (Argentina) el pedido semestral da 0.
+Además `periodicityAdjustment` pasó de `CALENDAR` a `ACTUAL` en fundamentales, lo que mejora
+cobertura (`BS_LT_BORROW` de BDO Unibank: 29 → 46).
 
 ### Dato corrupto puntual
-`BS_TOT_ASSET = 0.0` para United Bank (Pakistán) en 2025-02-27, con equity de 275.289 en
-la misma fila. Propagaba `total_liab` y `st_borrow` negativos. `finalize_balance` ahora lo
-marca NaN. **`bonds == 0` sí es legítimo** (174 filas, banco sin deuda LP emitida) y no se toca.
+`BS_TOT_ASSET = 0.0` para United Bank (Pakistán) en 2025-02-27, con equity de 275.289 en la
+misma fila. Propagaba `total_liab` y `st_borrow` negativos. `finalize_balance` lo marca NaN.
+**`bonds == 0` sí es legítimo** (banco sin deuda LP emitida) y no se toca.
 
-## Limitaciones de los datos — decisiones metodológicas PENDIENTES del usuario
+## Limitaciones de los datos — decisiones metodológicas PENDIENTES
 
-Ninguna de estas es un bug arreglable con mejor código. Hay que decidirlas:
+Ninguna es un bug arreglable con mejor código:
 
-1. **Sudáfrica queda en frecuencia semestral** mientras el resto del panel es trimestral.
-   El motor JLoss agrupa por trimestre → la mitad de los trimestres quedarán vacíos.
-   ¿Interpolar, arrastrar el último valor, o dejar el país en semestral?
-2. **Rusia: la serie de mercado termina el 2024-08-09.** `MARKET_STATUS = PRNA` para SBER
-   y VTBR — Bloomberg dejó de precificarlos por sanciones. Los fundamentales siguen, pero
-   sin valor de mercado no hay Merton-KMV. ¿Panel truncado o país fuera?
-3. **Rating S&P es un SNAPSHOT, no una serie.** `RTG_SP_LT_FC_ISSUER_CREDIT` vía `bdh`
-   devuelve vacío en cualquier frecuencia. O sea: un solo rating para los 16 años del
-   panel. Es débil justo para Turquía, Argentina y Rusia, que fueron degradadas varias
-   veces en 2010-2026. Si la tesis lo necesita variando en el tiempo hay que traerlo de
-   otra fuente (S&P directo, o `CRD<GO>` a mano).
-4. **CDS 5Y sin cobertura utilizable en 5 países** (el security resuelve, no hay precios):
-   - Polonia, Bulgaria, Rusia: solo 2012-07-13..2015-10-16
-   - Pakistán: solo desde 2026-03-18
-   - Egipto: 468 obs dispersas en 2010-2026
-   Para Polonia sí existe `GTPLN10Y Govt`, así que un spread de bono soberano contra
-   Bund/UST es la alternativa natural. Es decisión de la tesis.
-5. **Bulgaria y Egipto tienen 1 solo banco cotizado; Rusia, 2.** `below_min_banks` marcará
-   todos los trimestres. Es estructural del universo, no de los tickers.
+1. **India no tiene CDS soberano.** `INDIA CDS USD SR 5Y Corp` no devuelve serie, y no es un
+   problema de nomenclatura: India no emite deuda soberana en moneda dura de referencia. El
+   proxy de spread tiene que salir del `GTINR10Y` contra el UST10Y.
+2. **Corea del Sur: el balance solo llega a 2009**, aunque el mktcap llega a 2004. Los
+   holdings financieros se formaron después (KB 2008, Hana 2005, BNK/DGB 2011, JB 2013,
+   Woori 2014, Kakaobank 2021); solo Shinhan e IBK cotizan desde 2004. El Merton-KMV de
+   Corea empieza efectivamente en 2009.
+3. **Sudáfrica queda en frecuencia semestral** mientras el resto es trimestral. El motor
+   JLoss agrupa por trimestre → la mitad quedará vacía. ¿Interpolar, arrastrar, o dejarla?
+4. **Rusia: la serie de mercado termina el 2024-08-09.** `MARKET_STATUS = PRNA` para SBER y
+   VTBR — Bloomberg dejó de precificarlos por sanciones. Sin valor de mercado no hay
+   Merton-KMV. ¿Panel truncado o país fuera?
+5. **Rating S&P es un SNAPSHOT, no una serie.** `RTG_SP_LT_FC_ISSUER_CREDIT` vía `bdh` vuelve
+   vacío en cualquier frecuencia: un solo rating para todo el panel. Débil justo para
+   Turquía, Argentina y Rusia, degradadas varias veces en el período.
+6. **CDS sin cobertura utilizable en 6 países** (el security resuelve, no hay precios):
+   Polonia, Bulgaria, Rusia y Hungría solo 2012-07..2015-10; Pakistán solo desde 2026-03;
+   Egipto disperso. Los cuatro primeros son todos de Europa central/oriental — parece un
+   hueco de licencia, no de mercado. Para Polonia y Hungría existe el bono genérico 10Y, así
+   que un spread contra Bund/UST es la alternativa natural.
+7. **Bancos cotizados insuficientes:** Bulgaria y Egipto tienen 1, Rusia 2, Hungría 3 (y
+   Gránit solo desde 2024). `below_min_banks` marcará casi todos sus trimestres. Estructural
+   del universo, no de los tickers.
+8. **`grupo_aval` excluido** de Colombia: holding de bogota/popular/occidente/av_villas,
+   duplicaría bancos ya presentes. **`bbva_peru` puede pasar de PD contable a PD de mercado**:
+   entraba como `book` porque yfinance no lo tenía, Bloomberg sí, con 4.176 obs.
+
+## Cobertura cruzada con el panel GaR
+
+Con la Fase 2 (Corea, India, Hungría) el JLoss ya cubre los 17 países de `gar_panel_all17`,
+más Argentina, Egipto y Rusia que el GaR no tiene. Del lado GaR quedan huecos ajenos a
+Bloomberg: **Egipto no tiene carpeta en `GaR/individuals/`** y **Argentina no tiene `Ryr` ni
+`FCI`**. Bloomberg no puede cerrarlos: no existe bono genérico 10Y ni para Argentina ni para
+Egipto (`GTARS10Y`/`GTEGP10Y` sin serie). Sí cubre sus índices bursátiles (`MERVAL`,
+`EGX30`). El script del repo ya los manda a "Capa 2, descarga manual".
 
 ## Entorno de ejecución
 
-El proyecto PyCharm (`PythonProject`) tiene un `.venv` vacío. **El entorno correcto es
-`bloomberg_env`** (conda), en `C:\Users\itau_lab\.conda\envs\bloomberg_env`, con
-blpapi 3.26.2.1, xbbg 1.0.0, pandas 3.0.2. `conda` NO está en el PATH: usar
-`C:\ProgramData\anaconda3\Scripts\conda.exe` o el intérprete directo
-`C:\Users\itau_lab\.conda\envs\bloomberg_env\python.exe`.
-
-Ojo: xbbg está instalado en el site-packages **de usuario**
+`.venv` del proyecto PyCharm está vacío. El entorno correcto es **`bloomberg_env`** (conda),
+en `C:\Users\itau_lab\.conda\envs\bloomberg_env`, con blpapi 3.26.2.1, xbbg 1.0.0,
+pandas 3.0.2. `conda` NO está en el PATH: usar el intérprete directo
+`C:\Users\itau_lab\.conda\envs\bloomberg_env\python.exe`. Requiere el Terminal Bloomberg
+abierto (BBComm activo). Ojo: xbbg está en el site-packages **de usuario**
 (`C:\Users\itau_lab\AppData\Roaming\Python\Python313\site-packages`), no dentro del env.
 
 ```
 cd bloomberg_extraction
-python extract_jloss_bloomberg.py              # los 12 paises
-python extract_jloss_bloomberg.py --country poland
-python gar_macro_bloomberg.py                  # macro + global
+python extract_jloss_bloomberg.py                 # los 20 paises, desde 2004
+python extract_jloss_bloomberg.py --country india
+python extract_jloss_bloomberg.py --start 2000-01-01   # otro corte
+python gar_macro_bloomberg.py                     # macro + global
 ```
 
 ## Pendiente al retomar
 
-1. Decidir los 5 puntos metodológicos de arriba.
-2. **Push**: hay commits locales listos en
-   `C:\Users\itau_lab\PycharmProjects\Financial-fragility-tail-risk-and-sovereign-spread-in-emerging-economies`
-   sin subir. `origin/main` sigue en `8576537`. Falta `git push` desde PyCharm — no hay
-   credenciales de GitHub configuradas en este entorno.
-3. Enchufar estos CSV al motor JLoss y al pipeline GaR aguas abajo (Fase 2).
+1. Decidir los 8 puntos metodológicos de arriba.
+2. Enchufar estos CSV al motor JLoss y al pipeline GaR aguas abajo.
+3. Cerrar los huecos GaR de Egipto y Argentina por fuera de Bloomberg.
 
 ## Preguntas ya resueltas (no volver a preguntar)
 
-- Alcance: Fase 1 = los 12 países pendientes + variables macro/globales. Hungría/India/
-  Tailandia y la decisión de "PD contable" quedan fuera, para una Fase 2 posterior.
-- El JLoss ya subido al repo se ignora — todo se reconstruye desde cero vía Bloomberg,
-  solo se reutiliza el schema/cabecera.
+- El JLoss ya subido al repo se ignora — todo se reconstruye desde Bloomberg, solo se
+  reutiliza el schema/cabecera.
 - Destino GitHub: repo de la tesis, no uno nuevo.
-- Autenticación: Claude no pushea, prepara el commit y el usuario pushea desde PyCharm.
+- Corte histórico: 2004 (ver la justificación arriba).
+- Cotización local siempre, nunca ADR.
