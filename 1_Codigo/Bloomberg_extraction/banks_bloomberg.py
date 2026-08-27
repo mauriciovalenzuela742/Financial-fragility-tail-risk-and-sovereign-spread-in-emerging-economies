@@ -28,7 +28,9 @@ BANKS = {
     },
     "bulgaria": {
         # unico banco bulgaro con free float relevante; resto son filiales no listadas
-        "fibank": {"ticker": "5F4 BU Equity"},
+        # ex-5F4 BU (TKCH). FIB cotiza en EUR, igual que el EQY_FUND_CRNCY del balance;
+        # 5F4 devolvia CUR_MKT_CAP en BGN -> mktcap inflado x1.95583 respecto al balance.
+        "fibank": {"ticker": "FIB BU Equity"},
     },
     "china": {
         # H-shares (HKEX) — Industrial Bank/SPDB/Ping An Bank son solo A-share: verificar en SECF
@@ -75,12 +77,12 @@ BANKS = {
         "bpi":          {"ticker": "BPI PM Equity"},
         "metrobank":    {"ticker": "MBT PM Equity"},
         "security_bank":{"ticker": "SECB PM Equity"},
-        "china_banking":{"ticker": "CHIB PM Equity"},
+        "china_banking":{"ticker": "CBC PM Equity"},   # ex-CHIB PM (TKCH): CHIB devolvia 0 obs de mktcap
     },
     "poland": {
         "pko_bp":           {"ticker": "PKO PW Equity"},
         "pekao":            {"ticker": "PEO PW Equity"},
-        "santander_polska": {"ticker": "SPL PW Equity"},
+        "santander_polska": {"ticker": "EBP PW Equity"},   # ex-SPL PW (TKCH): SPL devolvia 0 obs de mktcap
         "mbank":            {"ticker": "MBK PW Equity"},
         "ing_bsk":          {"ticker": "ING PW Equity"},
         "millennium":       {"ticker": "MIL PW Equity"},
@@ -89,6 +91,9 @@ BANKS = {
     },
     "russia": {
         # cobertura probablemente rota/congelada en terminales fuera de Rusia desde feb-2022
+        # Rusia: ambos MARKET_STATUS=PRNA (pricing not available). Bloomberg dejo de precificar
+        # tras las sanciones -> la serie de mercado termina el 2024-08-09. No hay ticker
+        # alternativo; el panel de Rusia queda truncado ahi (verificado 2026-08-27).
         "sberbank": {"ticker": "SBER RM Equity"},
         "vtb":      {"ticker": "VTBR RM Equity"},
     },
@@ -156,6 +161,24 @@ CDS_ISSUER_NAME = {
 
 # Orden de ejecucion sugerido (runbook §6 + advertencias §7): confianza alta primero,
 # mercados delgados / sancionados al final.
+# El CDS soberano de China NO resuelve por convencion de nombre de emisor: "CHINA CDS USD
+# SR 5Y Corp" y todas sus variantes dan BAD_SEC. Si resuelve por el ticker Markit
+# (CCHIN1U5 Curncy -> "CHINAGOV CDS USD SR 5Y D14", 4059 obs 2010-2026). Para el resto de
+# paises el ticker Markit resuelve al MISMO security que el nombre, asi que no se cambia.
+CDS_TICKER_OVERRIDE = {
+    "china": "CCHIN1U5 Curncy",
+}
+
+# Cobertura real del CDS 5Y en este terminal (verificado 2026-08-27). Los huecos NO son
+# error de ticker: el security resuelve, simplemente no hay precios fuera de esa ventana.
+CDS_COVERAGE_NOTE = {
+    "poland":   "solo 2012-07-13..2015-10-16 (504 obs) — sin serie utilizable",
+    "bulgaria": "solo 2012-07-13..2015-10-16 (491 obs) — sin serie utilizable",
+    "russia":   "solo 2012-07-13..2015-10-16 (619 obs) — sin serie utilizable",
+    "pakistan": "solo desde 2026-03-18 (115 obs) — sin historia",
+    "egypt":    "468 obs dispersas en 2010-2026 — serie muy rala",
+}
+
 EXECUTION_ORDER = [
     "poland", "southafrica", "turkey", "china", "indonesia", "malaysia",
     "philippines", "pakistan", "argentina", "bulgaria", "egypt", "russia",
@@ -165,7 +188,9 @@ EXECUTION_ORDER = [
 GLOBAL_TICKERS = {
     "vix": "VIX Index",
     "ust10y": "USGG10YR Index",
-    # HY spread: sustituto ya usado en el repo es FRED BAMLH0A0HYM2; equivalente Bloomberg
-    # a verificar con FLDS/licencia antes de usar en produccion.
-    "hy_spread": "BEBGHYCS Index",  # VERIFICAR
+    # HY spread: BEBGHYCS Index NO EXISTE en este terminal (BAD_SEC, verificado 2026-08-27).
+    # LF98OAS = "Bloomberg US Corporate High Yield Average OAS", que es el equivalente
+    # directo del FRED BAMLH0A0HYM2 usado en el repo. 4196 obs, 2010-01-04..2026-08-26.
+    # Alternativa global: LG30OAS Index (Bloomberg Global High Yield Avg OAS, 4329 obs).
+    "hy_spread": "LF98OAS Index",
 }

@@ -30,7 +30,8 @@ import numpy as np
 import pandas as pd
 
 import bloomberg_common as bc
-from banks_bloomberg import BANKS, CDS_ISSUER_NAME, COUNTRY_INDEX, EXECUTION_ORDER, GLOBAL_TICKERS
+from banks_bloomberg import (BANKS, CDS_COVERAGE_NOTE, CDS_ISSUER_NAME, CDS_TICKER_OVERRIDE,
+                             COUNTRY_INDEX, EXECUTION_ORDER, GLOBAL_TICKERS)
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output_macro")
 DEFAULT_START = "2010-01-01"
@@ -47,9 +48,7 @@ def fetch_global(start_date: str, end_date: str):
         if df is None or df.empty:
             print(f"[GLOBAL] sin datos para {ticker}")
             continue
-        df = df.copy()
-        df.columns = [c[-1] if isinstance(c, tuple) else c for c in df.columns]
-        df = df.reset_index().rename(columns={df.columns[0]: "date"})
+        df = df.copy()   # bdh_pull ya devuelve ancho, con 'date' como columna
         bc.write_dates_series_csv(df, "date", "PX_LAST", os.path.join(out_dir, f"{name}.csv"), name)
 
     # HY spread: campo marcado "verificar" en el runbook — confirmar con FLDS antes de usar
@@ -58,9 +57,7 @@ def fetch_global(start_date: str, end_date: str):
     res = bc.bdh_pull(hy_ticker, ["PX_LAST"], start_date, end_date, freq="D")
     df = res.get(hy_ticker)
     if df is not None and not df.empty:
-        df = df.copy()
-        df.columns = [c[-1] if isinstance(c, tuple) else c for c in df.columns]
-        df = df.reset_index().rename(columns={df.columns[0]: "date"})
+        df = df.copy()   # bdh_pull ya devuelve ancho, con 'date' como columna
         bc.write_dates_series_csv(df, "date", "PX_LAST", os.path.join(out_dir, "HY_SPREAD.csv"), "HY_SPREAD")
     else:
         print(f"[GLOBAL] AVISO: sin datos para HY spread ({hy_ticker}) — usar sustituto "
@@ -80,7 +77,11 @@ def fetch_country_embi_rating_fxvol(country: str, start_date: str, end_date: str
     # --- CDS soberano 5Y como sustituto de EMBI (mnemonico exacto a confirmar en SECF) ---
     # Usa el nombre corto del EMISOR (convencion Bloomberg/Markit), no el codigo de moneda.
     cds_name = CDS_ISSUER_NAME.get(country)
-    cds_ticker = f"{cds_name} CDS USD SR 5Y Corp" if cds_name else None
+    cds_ticker = CDS_TICKER_OVERRIDE.get(country)
+    if cds_ticker is None and cds_name:
+        cds_ticker = f"{cds_name} CDS USD SR 5Y Corp"
+    if country in CDS_COVERAGE_NOTE:
+        print(f"[{country}] AVISO cobertura CDS: {CDS_COVERAGE_NOTE[country]}")
     df = None
     if cds_ticker is None:
         print(f"[{country}] sin nombre de emisor CDS definido en CDS_ISSUER_NAME — se omite EMBI/CDS "
@@ -90,28 +91,44 @@ def fetch_country_embi_rating_fxvol(country: str, start_date: str, end_date: str
         res = bc.bdh_pull(cds_ticker, ["PX_LAST"], start_date, end_date, freq="D")
         df = res.get(cds_ticker)
     if df is not None and not df.empty:
-        df = df.copy()
-        df.columns = [c[-1] if isinstance(c, tuple) else c for c in df.columns]
-        df = df.reset_index().rename(columns={df.columns[0]: "date"})
+        df = df.copy()   # bdh_pull ya devuelve ancho, con 'date' como columna
         bc.write_dates_series_csv(df, "date", "PX_LAST", os.path.join(out_dir, f"EMBI_{country}.csv"), "EMBI")
     elif cds_ticker is not None:
         print(f"[{country}] sin datos de CDS/EMBI ({cds_ticker}) — verificar ticker en el terminal.")
 
-    # --- Rating S&P: BDP sobre el generico soberano, campo a confirmar con FLDS ---
-    sov_ticker = idx.get("sov10y")
-    if sov_ticker:
-        bc.verify_fields(sov_ticker, ["RTG_SP_LT_FC_ISSUER_RATING"])
-        rt = bc.bdp_pull(sov_ticker, ["RTG_SP_LT_FC_ISSUER_RATING"])
-        if not rt.empty and "RTG_SP_LT_FC_ISSUER_RATING" in rt.columns:
-            notch = rt["RTG_SP_LT_FC_ISSUER_RATING"].iloc[0]
-            score = bc.RATING_SCALE.get(str(notch).strip().upper())
-            pd.DataFrame([{"notch": notch, "rating_score": score}]).to_csv(
-                os.path.join(out_dir, f"rating_{country}.csv"), index=False)
-            print(f"[{country}] rating S&P = {notch} -> {score}")
+    # --- Rating S&P (snapshot) ---
+    # OJO: el campo correcto es RTG_SP_LT_FC_ISSUER_CREDIT (foreign currency), no
+    # ..._ISSUER_RATING, que no existe como mnemonico y devolvia vacio para los 12 paises.
+    # Se prefiere el bono soberano generico y, si el pais no tiene uno definido, se cae al
+    # propio ticker de CDS, que tambien carga el rating del emisor soberano.
+    # LIMITACION: es un SNAPSHOT, no una serie. RTG_SP_LT_FC_ISSUER_CREDIT via bdh devuelve
+    # vacio en cualquier frecuencia (verificado 2026-08-27), asi que el rating es el de hoy
+    # y no varia a lo largo del panel — relevante para Turquia/Argentina/Rusia, que fueron
+    # degradados varias veces en 2010-2026. Si la tesis necesita el rating variando en el
+    # tiempo hay que traerlo de otra fuente (S&P directo, o CRD<GO> a mano).
+    FC, LC = "RTG_SP_LT_FC_ISSUER_CREDIT", "RTG_SP_LT_LC_ISSUER_CREDIT"
+    rating_ticker = idx.get("sov10y") or cds_ticker
+    if rating_ticker:
+        rt = bc.bdp_pull(rating_ticker, [FC, LC])
+        notch = None
+        if not rt.empty:
+            for campo in (FC, LC):
+                if campo in rt.columns and pd.notna(rt[campo].iloc[0]):
+                    notch = rt[campo].iloc[0]
+                    break
+        score = bc.rating_to_score(notch)
+        pd.DataFrame([{"ticker": rating_ticker, "notch": notch,
+                       "rating_score": score}]).to_csv(
+            os.path.join(out_dir, f"rating_{country}.csv"), index=False)
+        if notch is None:
+            print(f"[{country}] sin rating S&P en {rating_ticker} — confirmar campo/licencia.")
+        elif pd.isna(score):
+            print(f"[{country}] rating S&P = {notch} -> sin puntaje "
+                  f"(notch no calificable en la escala 21-1)")
         else:
-            print(f"[{country}] sin rating S&P disponible para {sov_ticker} — confirmar campo/licencia.")
+            print(f"[{country}] rating S&P = {notch} -> {score:.0f}")
     else:
-        print(f"[{country}] sin bono soberano 10Y generico definido — {idx.get('sov_note', '')}")
+        print(f"[{country}] sin ticker para rating — {idx.get('sov_note', '')}")
 
     # --- Volatilidad cambiaria trimestral ---
     fxvol = bc.daily_fx_vol_quarterly(idx["fx"], start_date, end_date)

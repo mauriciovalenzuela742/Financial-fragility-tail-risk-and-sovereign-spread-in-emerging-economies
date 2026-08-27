@@ -71,7 +71,7 @@ def run_country(country: str, start_date: str, end_date: str, verify_only: bool 
 
     # FLDS-check sobre un ticker de muestra antes de tirar el historial completo
     sample_ticker = next(iter(bankmap.values()))["ticker"]
-    bc.verify_fields(sample_ticker, ["BS_TOT_ASSET", "TOTAL_EQUITY", "LT_DEBT",
+    bc.verify_fields(sample_ticker, ["BS_TOT_ASSET", "TOTAL_EQUITY", "BS_LT_BORROW",
                                       "NET_INCOME", "SALES_REV_TURN", "CUR_MKT_CAP"])
     if verify_only:
         return
