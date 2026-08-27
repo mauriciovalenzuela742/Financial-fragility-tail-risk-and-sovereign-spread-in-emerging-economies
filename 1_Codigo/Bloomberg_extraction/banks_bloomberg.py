@@ -120,6 +120,67 @@ BANKS = {
 # ---------------------------------------------------------------------------
 # COUNTRY_INDEX: indice bursatil, FX (Curncy) y bono soberano 10Y por pais (runbook §4)
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# NUCLEO LATAM — los 5 paises que el panel ya tenia via fuentes publicas
+# (CMF/BCB/CNBV/Superfinanciera/SBS + yfinance). Se re-extraen via Bloomberg para
+# tener el panel completo en una sola fuente. Las claves de bankname son las MISMAS
+# que usa JLoss-pipeline/extraccion/<pais>/extract_<pais>.py, para que estos CSV
+# empaten con el panel existente.
+#
+# REGLA: siempre la cotizacion LOCAL, nunca el ADR, aunque el ADR tenga alguna
+# observacion mas. El ADR cotiza en USD contra un balance en moneda local
+# (EQY_FUND_CRNCY), y esa inconsistencia corrompe el Merton-KMV — es exactamente
+# el error que tenia Bulgaria con 5F4 BU. Verificado 2026-08-27: en los 23 bancos
+# de abajo CRNCY == EQY_FUND_CRNCY.
+LATAM_BANKS = {
+    "chile": {
+        # banco_bice y banco_security no existen como security en Bloomberg
+        # (BAD_SEC); en el pipeline original tampoco tenian ticker -> PD contable.
+        "banco_de_chile":   {"ticker": "CHILE CI Equity"},
+        "bci":              {"ticker": "BCI CI Equity"},
+        "santander_chile":  {"ticker": "BSAN CI Equity"},     # BSANTANDER CI = BAD_SEC
+        "itau_corpbanca":   {"ticker": "ITAUCL CI Equity"},
+    },
+    "brazil": {
+        "itau_unibanco":     {"ticker": "ITUB4 BZ Equity"},
+        "bradesco":          {"ticker": "BBDC4 BZ Equity"},
+        "banco_do_brasil":   {"ticker": "BBAS3 BZ Equity"},
+        "santander_brasil":  {"ticker": "SANB11 BZ Equity"},
+        "btg_pactual":       {"ticker": "BPAC11 BZ Equity"},  # IPO 2012 -> 2403 obs
+        "banrisul":          {"ticker": "BRSR6 BZ Equity"},
+        "banco_pan":         {"ticker": "BPAN4 BZ Equity"},   # ACQU: mktcap corta 2026-03-13
+        "abc_brasil":        {"ticker": "ABCB4 BZ Equity"},
+        "banco_bmg":         {"ticker": "BMGB4 BZ Equity"},   # IPO 2019 -> 1692 obs
+        "banco_inter":       {"ticker": "INBR32 BZ Equity"},  # BDR, 42 trimestres
+        "banco_do_nordeste": {"ticker": "BNBR3 BZ Equity"},
+    },
+    "mexico": {
+        "banorte":          {"ticker": "GFNORTEO MM Equity"},
+        "inbursa":          {"ticker": "GFINBURO MM Equity"},
+        "banco_bajio":      {"ticker": "BBAJIOO MM Equity"},  # IPO 2016 -> 42 trimestres
+        "banregio":         {"ticker": "RA MM Equity"},       # ex-GFREGIO MM, hoy Regional SAB
+                                                              # (GFREGIO esta DLST y da 0 trimestres)
+        "santander_mexico": {"ticker": "BSMXB MM Equity"},    # ACQU: mktcap corta 2023-07-04
+                                                              # (Santander recompro el float)
+    },
+    "colombia": {
+        # No se incluye grupo_aval: es el holding de bogota/popular/occidente/av_villas
+        # y duplicaria el balance de bancos que ya estan en el panel.
+        "bancolombia":     {"ticker": "CIBEST CB Equity"},    # ex-BCOLO CB, hoy Grupo Cibest
+                                                              # (BCOLO esta DLST, solo 14 trimestres)
+        "banco_de_bogota": {"ticker": "BOGOTA CB Equity"},
+        "davivienda":      {"ticker": "PFDAVVND CB Equity"},
+    },
+    "peru": {
+        # bbva_peru entraba como PD CONTABLE en el pipeline original (sin ticker en
+        # yfinance); Bloomberg si lo tiene listado, asi que puede pasar a PD de mercado.
+        "bcp":         {"ticker": "CREDITC1 PE Equity"},  # BCP local, no el ADR BAP US
+                                                          # (BAP cotiza USD contra balance PEN)
+        "interbank":   {"ticker": "INTERBC1 PE Equity"},  # local, no el ADR IFS US
+        "bbva_peru":   {"ticker": "BBVAC1 PE Equity"},    # ex-CONTINC1 PE (TKCH, 0 obs)
+    },
+}
+
 COUNTRY_INDEX = {
     "argentina":   {"ccy": "ARS", "stx": "MERVAL Index",  "fx": "USDARS Curncy",
                      "sov10y": None, "sov_note": "sin generico limpio — usar CDS soberano 5Y"},
@@ -145,7 +206,20 @@ COUNTRY_INDEX = {
                      "sov10y": "GTZAR10Y Govt"},
     "turkey":      {"ccy": "TRY", "stx": "XU100 Index",   "fx": "USDTRY Curncy",
                      "sov10y": "GTTRY10Y Govt"},
+    # --- nucleo LatAm (indices, FX y bonos genericos verificados 2026-08-27) ---
+    "brazil":      {"ccy": "BRL", "stx": "IBOV Index",     "fx": "USDBRL Curncy",
+                     "sov10y": "GTBRL10Y Govt"},
+    "chile":       {"ccy": "CLP", "stx": "IPSA Index",     "fx": "USDCLP Curncy",
+                     "sov10y": "GTCLP10Y Govt"},
+    "colombia":    {"ccy": "COP", "stx": "COLCAP Index",   "fx": "USDCOP Curncy",
+                     "sov10y": "GTCOP10Y Govt"},
+    "mexico":      {"ccy": "MXN", "stx": "MEXBOL Index",   "fx": "USDMXN Curncy",
+                     "sov10y": "GTMXN10Y Govt"},
+    "peru":        {"ccy": "PEN", "stx": "SPBLPGPT Index", "fx": "USDPEN Curncy",
+                     "sov10y": "GTPEN10Y Govt"},
 }
+
+BANKS.update(LATAM_BANKS)
 
 # Nombre corto de emisor soberano para CDS (convencion Bloomberg/Markit: "<NOMBRE> CDS USD
 # SR 5Y Corp" usa el nombre/abreviatura del PAIS emisor, NO el codigo de moneda). Estos son
@@ -157,6 +231,9 @@ CDS_ISSUER_NAME = {
     "indonesia": "INDON", "malaysia": "MALAYS", "pakistan": "PAKIST",
     "philippines": "PHILIP", "poland": "POLAND", "russia": "RUSSIA",
     "southafrica": "SOAF", "turkey": "TURKEY",
+    # nucleo LatAm — los 5 verificados con ~4.343 obs diarias 2010-2026
+    "brazil": "BRAZIL", "chile": "CHILE", "colombia": "COLOM",
+    "mexico": "MEX", "peru": "PERU",
 }
 
 # Orden de ejecucion sugerido (runbook §6 + advertencias §7): confianza alta primero,
@@ -179,10 +256,15 @@ CDS_COVERAGE_NOTE = {
     "egypt":    "468 obs dispersas en 2010-2026 — serie muy rala",
 }
 
-EXECUTION_ORDER = [
+PHASE1_ORDER = [
     "poland", "southafrica", "turkey", "china", "indonesia", "malaysia",
     "philippines", "pakistan", "argentina", "bulgaria", "egypt", "russia",
 ]
+
+# Nucleo LatAm: el panel ya los tenia via fuentes publicas, se re-extraen via Bloomberg.
+LATAM_ORDER = ["chile", "brazil", "mexico", "colombia", "peru"]
+
+EXECUTION_ORDER = PHASE1_ORDER + LATAM_ORDER
 
 # Variables globales (runbook §1 y §3) — se piden una sola vez, no por pais.
 GLOBAL_TICKERS = {

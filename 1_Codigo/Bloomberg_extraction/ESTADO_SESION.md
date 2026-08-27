@@ -1,4 +1,4 @@
-# Estado de la sesión — extracción Bloomberg para panel JLoss/GaR (Fase 1)
+# Estado de la sesión — extracción Bloomberg para el panel JLoss/GaR (17 países)
 
 Última actualización: 2026-08-27. Este archivo es para retomar el trabajo otro día sin
 tener que re-explicar todo desde cero.
@@ -10,6 +10,10 @@ construir, 100% desde cero vía Bloomberg Terminal (xbbg), los inputs JLoss (rie
 Merton-KMV) y las variables macro/regresión de GaR para los **12 países "extractor listo,
 sin datos"**: Argentina, China, Egipto, Indonesia, Malasia, Pakistán, Filipinas, Polonia,
 Rusia, Sudáfrica, Turquía, Bulgaria.
+
+A eso se sumó después el **núcleo LatAm** (Chile, Brasil, México, Colombia, Perú), que el
+panel ya tenía vía fuentes públicas y se re-extrajo por Bloomberg para unificar la fuente.
+Total actual: **17 países**.
 
 Repo de la tesis (destino final del código): `https://github.com/mauriciovalenzuela742/Financial-fragility-tail-risk-and-sovereign-spread-in-emerging-economies`
 Por instrucción explícita del usuario, se ignora el pipeline JLoss ya subido a ese repo
@@ -24,8 +28,9 @@ Terminal de esta máquina y escribieron datos.
 
 ### Salida JLoss — `bloomberg_extraction/output/<pais>/`
 
-62 bancos, 3.912 filas de balance, 247.051 filas de mktcap, 2010→2026, **cero alertas de
-coherencia contable** (sin equity > activos, sin pasivos negativos, sin mktcap ≤ 0).
+El panel completo son **17 países, 88 bancos, 5.595 filas de balance y 344.671 de mktcap**
+(2010→2026), **cero alertas de coherencia contable**. Los 12 países de Fase 1 aportan 62
+bancos, 3.912 filas de balance y 247.051 de mktcap (sin equity > activos, sin pasivos negativos, sin mktcap ≤ 0).
 
 | País | Bancos | balance | mktcap | Nota |
 |---|---:|---:|---:|---|
@@ -42,12 +47,56 @@ coherencia contable** (sin equity > activos, sin pasivos negativos, sin mktcap �
 | bulgaria | 1 | 67 | 4.111 | below_min_banks 67/67 |
 | egypt | 1 | 67 | 4.017 | below_min_banks 67/67 |
 
+### Núcleo LatAm — re-extraído vía Bloomberg (2026-08-27)
+
+Los 5 países que el panel ya tenía vía fuentes públicas (CMF/BCB/CNBV/Superfinanciera/SBS
++ yfinance) se re-extrajeron vía Bloomberg para tener todo en una sola fuente. Las claves
+de `bankname` son las mismas que usa `JLoss-pipeline/extraccion/<pais>/`, así que estos CSV
+empatan con el panel existente.
+
+| País | Bancos | balance | mktcap | CDS 5Y |
+|---|---:|---:|---:|---:|
+| brazil | 11 | 706 | 38.797 | 4.344 |
+| mexico | 5 | 310 | 17.736 | 4.344 |
+| chile | 4 | 268 | 16.600 | 4.342 |
+| colombia | 3 | 198 | 12.001 | 4.343 |
+| peru | 3 | 201 | 12.486 | 4.343 |
+
+**Regla aplicada: siempre la cotización LOCAL, nunca el ADR**, aunque varios ADRs tenían
+unas pocas observaciones más. `BAP US`, `ITUB US`, `BBD US`, `CIB US` y `BSAC US` cotizan
+en USD contra un balance en moneda local (`EQY_FUND_CRNCY`), y esa inconsistencia corrompe
+el Merton-KMV — es el mismo error que tenía Bulgaria con `5F4 BU`. Verificado: en los 26
+bancos LatAm `CRNCY == EQY_FUND_CRNCY`.
+
+Cuatro tickers más desactualizados, encontrados en la verificación:
+
+| Banco | Esperable | Es | Efecto |
+|---|---|---|---|
+| Santander Chile | `BSANTANDER CI` | `BSAN CI` | el primero es BAD_SEC |
+| Banregio (Mx) | `GFREGIO MM` | `RA MM` (Regional SAB) | GFREGIO está DLST, **0 trimestres** |
+| Bancolombia | `BCOLO CB` | `CIBEST CB` (Grupo Cibest) | BCOLO DLST, solo 14 trimestres |
+| BBVA Perú | `CONTINC1 PE` | `BBVAC1 PE` | TKCH, **0 obs** de mktcap |
+
+Decisiones de universo (revisar si no coinciden con la intención de la tesis):
+- **`grupo_aval` excluido** de Colombia: es el holding de bogota/popular/occidente/av_villas
+  y duplicaría bancos que ya están en el panel.
+- **`bbva_peru` puede pasar de PD contable a PD de mercado**: entraba como `book` en el
+  pipeline original porque yfinance no lo tenía; Bloomberg sí, con 4.176 obs.
+- `banco_bice` y `banco_security` (Chile) no existen como security en Bloomberg (BAD_SEC);
+  en el pipeline original tampoco tenían ticker, así que siguen en PD contable.
+- Series cortas por IPO o adquisición, no por error: btg_pactual (IPO 2012), banco_bmg
+  (IPO 2019), banco_inter (BDR, 42 trim), banco_bajio (IPO 2016), banco_pan (ACQU, mktcap
+  corta 2026-03-13), santander_mexico (ACQU, mktcap corta 2023-07-04).
+- Colombia: 3/67 trimestres bajo el mínimo de 3 bancos, todos al inicio de 2010.
+
 ### Salida macro/GaR — `bloomberg_extraction/output_macro/`
 
 - `GLOBAL/`: VIX (4.220), UST10Y (4.342), HY_SPREAD (4.196).
 - por país: `EMBI_<pais>.csv` (CDS 5Y), `rating_<pais>.csv`, `fxvol_<pais>.csv` (67
   trimestres en todos salvo Rusia, 49), `prof_margin_<pais>.csv` (67 trimestres).
-- Rating S&P resuelto para los 12 países (Rusia = `NR`, sin puntaje, correcto).
+- Rating S&P resuelto para los 17 países (Rusia = `NR`, sin puntaje, correcto).
+- El CDS de LatAm tiene cobertura completa (~4.343 obs, 2010-2026), muy superior a la de
+  varios países de Fase 1 — ver limitación 4 más abajo.
 
 ## Lo que hubo que arreglar para que esto corriera (todo verificado, no adivinado)
 
