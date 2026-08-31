@@ -27,3 +27,6 @@ __pycache__/
 
 # Checkpoints/backups intermedios de cómputo (se regeneran)
 _ckpt_*.csv
+
+# Claude Code runtime (no versionar)
+.claude/scheduled_tasks.lock
