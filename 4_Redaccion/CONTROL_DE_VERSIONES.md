@@ -303,11 +303,30 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
-> **Resuelto el 2026-08-03 (Fase 2 del plan de trabajo).** Re-ejecución directa e
-> independiente del código canónico. Detalle completo, con controles, errores estándar,
-> especificaciones adicionales y los resultados H4a/H4b del puente OI↔datos reales, en
-> **`1_Codigo/Panel/NUMEROS_CANONICOS.md`** — esa tabla, no ésta, es la fuente de verdad
-> definitiva; lo de abajo es solo el resumen mínimo.
+> **Reancla en Bloomberg (2026-08-31).** Toda la investigación empírica se reconstruyó sobre
+> datos de Bloomberg: JLoss (balances + precios accionarios de 113 bancos), spread soberano
+> (CDS 5A), factores globales. GaR mantiene sus insumos FCI de estadísticas nacionales
+> (Bloomberg no es fuente primaria de cuentas nacionales). Corea del Sur queda fuera del
+> panel (`1_Codigo/Panel/bbg/DIAGNOSTICO_COREA.md`). **La fuente de verdad vigente es
+> `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`.** Pipeline: `1_Codigo/Panel/bbg/p1..p4`.
+> Figuras de la tesis: `1_Codigo/Panel/bbg/figuras/` (copiadas a `4_Redaccion/tesis/imagenes/`).
+>
+> | Parámetro | Base | Valor Bloomberg | (era, v8 regulatorio) |
+> |---|---|---|---|
+> | θ (JLoss×GaR) | principal, M3 (+6 controles), N=228 | **−0,47** (t=−2,15, p=0,033) | −0,338 |
+> | θ (JLoss×GaR) | principal, M2 sin controles | −0,33 (t=−0,89, **n.s.**) | −0,359*** |
+> | θ (JLoss×GaR) | ampliada (11 países), M2, N=809 | **−0,56** (t=−2,25, p=0,025); post-2020 | −0,212* |
+> | umbral Hansen (efecto JLoss severo/benigno) | principal | +7,0 / +3,0 pb | +2,83 / −1,31 |
+> | β₄ (JLoss×D×HHI, **H4b**) | ampliada, HHI estructural | **−418 (t=−2,11) → H4b RECHAZADA** | +721 (t=2,98) |
+>
+> Cambios de fondo en la prosa: (i) θ principal ahora depende de los controles; (ii) el
+> resultado de la base ampliada es un fenómeno post-2020; (iii) **H4b (amplificación por
+> concentración) no se sostiene** — reescrito en `paper1_oi.tex` §5.4 y `discusion_general.tex`.
+>
+> ---
+>
+> **Registro histórico (v8, datos regulatorios) — 2026-08-03.** Detalle en
+> **`1_Codigo/Panel/NUMEROS_CANONICOS.md`** (marcado SUPERADO).
 
 | Parámetro | Base | Spec | N | Valor oficial | Fecha de corrida | Archivo fuente |
 |---|---|---|---|---|---|---|

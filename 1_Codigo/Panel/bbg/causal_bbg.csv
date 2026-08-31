@@ -1,0 +1,9 @@
+base,metodo,theta,t,p_normal,p_wildboot,extra
+principal,wild cluster bootstrap,-0.46564172790393404,-3.429227233278463,,0.05805805805805806,G=4 n=228
+principal,local projections (pico sev.),5.277700041676215,4.833973023786923,,,h=1 se=1.09 thr=-0.69
+principal,IV shift-share (nivel),-0.24480282855216728,,0.9814811013401987,,shock=VIX F1=6.2 theta_IV=3.101244468517782
+principal,triple institucional (JxG x WGI),0.5897269026102627,1.0789896020432728,,,n=228 paises=4
+ampliado,wild cluster bootstrap,-0.5569398687853917,-2.503628148426441,,0.14114114114114115,G=11 n=809
+ampliado,local projections (pico sev.),4.80753783221774,3.160472391124132,,,h=1 se=1.52 thr=-0.03
+ampliado,IV shift-share (nivel),17.260431771276327,,0.07654603586799813,,shock=OnOffRun_spread_log F1=50.6 theta_IV=6.5334469263166755
+ampliado,triple institucional (JxG x WGI),0.03893371017678021,0.1582135443210435,,,n=809 paises=11

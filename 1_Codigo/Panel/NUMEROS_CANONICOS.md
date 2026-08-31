@@ -1,3 +1,10 @@
+> **SUPERADO (2026-08-31).** Esta es la versión con datos **regulatorios** (JLoss v8,
+> EMBI BCRP/GFSR). La tesis se reancló íntegramente en Bloomberg; la fuente de verdad vigente
+> para toda prosa es **`1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`**. Este archivo se
+> conserva como registro del linaje anterior. El cambio principal: θ (M3 principal) pasó de
+> −0,338 a −0,47 y ahora depende de los controles; **H4b (β4>0) dejó de sostenerse** (de
+> +721 a −418, signo contrario).
+
 # Números canónicos — fuente única de verdad para la prosa de la tesis
 
 *Generado el 2026-08-03 re-ejecutando directamente el código canónico documentado (no leyendo
