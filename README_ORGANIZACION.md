@@ -1,5 +1,10 @@
 # Organización de la carpeta — Tesis JLoss × GaR
 
+> **Nota (2026-08-31):** este archivo describe la reorganización de carpetas del 2026-07-25 y
+> sigue siendo válido para la **estructura**, pero está **superado en materia de resultados y
+> versiones vigentes**. Para el estado actual de la investigación ver [`README.md`](README.md);
+> para vigencia archivo por archivo, [`4_Redaccion/CONTROL_DE_VERSIONES.md`](4_Redaccion/CONTROL_DE_VERSIONES.md).
+
 *Reordenada el 2026-07-25.* Todo el material vigente quedó consolidado por tipo dentro de esta carpeta.
 
 ## Estructura
