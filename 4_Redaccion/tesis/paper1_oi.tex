@@ -189,7 +189,7 @@ Diferenciando \eqref{eq:pd}, con $R_L^{*\prime}(n)<0$,
 El primer término estabiliza (canal Boyd--De Nicoló), el segundo fragiliza (canal Keeley). En mercados concentrados domina el primero y en competidos el segundo; por continuidad existe $\hat n$ interior con $\PD'(\hat n)=0$.
 \end{proof}
 
-\subsection{Del riesgo individual al sistémico: $\rho(n)$ y $\JLoss$}
+\subsection{Del riesgo individual al sistémico: \texorpdfstring{$\rho(n)$ y $\JLoss$}{rho(n) y JLoss}}
 La correlación de activos se postula, en la versión base, como función decreciente de la competencia,
 \begin{equation}
 \rho=\rho(n),\qquad \rho'(n)\le 0,
@@ -219,7 +219,7 @@ La Figura~\ref{fig:cal} calibra el cierre paramétrico (demanda lineal $R_L^*(n)
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\textwidth]{fase3_calibracion.png}
-\caption{Calibración del modelo. (a)~$\PD(n)$ en U; (b)~descomposición de canales; (c)~$\JLoss_\alpha(n)$ con mínimo desplazado a la derecha (Prop.~\ref{prop:shift}); (d)~$\ES$ de la fracción de quiebras, decreciente en $n$ (Prop.~\ref{prop:granular}).}
+\caption[Calibración del modelo Cournot--fragilidad]{Calibración del modelo. (a)~$\PD(n)$ en U; (b)~descomposición de canales; (c)~$\JLoss_\alpha(n)$ con mínimo desplazado a la derecha (Prop.~\ref{prop:shift}); (d)~$\ES$ de la fracción de quiebras, decreciente en $n$ (Prop.~\ref{prop:granular}).}
 \label{fig:cal}
 \end{figure}
 
@@ -227,7 +227,7 @@ La Figura~\ref{fig:cal} calibra el cierre paramétrico (demanda lineal $R_L^*(n)
 
 Se trabaja con el \textit{Growth-at-Risk} $\GaR_\tau$ como variable primitiva (el cuantil bajo del crecimiento, negativo en la cola), de modo que los signos derivados coinciden directamente con los de las regresiones.
 
-\subsection{Canal I: $\JLoss\to\GaR$}
+\subsection{Canal I: \texorpdfstring{$\JLoss\to\GaR$}{JLoss a GaR}}
 La pérdida sistémica contrae el crédito ($K=\bar K-\phi L_{\text{sys}}$) y desplaza a la baja el cuantil del crecimiento:
 \begin{equation}
 \GaR_\tau=\mu-\Lambda(\JLoss)\ \Longrightarrow\ \partial\GaR_\tau/\partial\JLoss=-\Lambda'(\JLoss)<0,
@@ -235,7 +235,7 @@ La pérdida sistémica contrae el crédito ($K=\bar K-\phi L_{\text{sys}}$) y de
 \end{equation}
 con $\partial\Lambda/\partial H>0$ (corolario macro de la Proposición~\ref{prop:granular}): el traspaso es más profundo en sistemas concentrados.
 
-\subsection{Canal II: $\GaR,\JLoss\to\EMBI$ y el \textit{doom loop}}
+\subsection{Canal II: \texorpdfstring{$\GaR,\JLoss\to\EMBI$}{GaR, JLoss a EMBI} y el \textit{doom loop}}
 El spread compensa la pérdida esperada, $\EMBI\approx LGD_{\text{sov}}\cdot\PD_{\text{sov}}$. La deuda proyectada en el estado malo es $d'=\frac{1+r}{1+g}d+B(\JLoss;H)/Y$, donde el crecimiento de cola es el propio Growth-at-Risk, $g=\GaR_\tau$, y el costo de rescate $B$ es creciente en $\JLoss$ y en $H$. El soberano hace default si un shock fiscal $\eta$ supera la distancia al límite fiscal $DFL=\bar d-d'$ \citep{GhoshEtAl2013}, de modo que $\EMBI=LGD_{\text{sov}}(1-F_\eta(DFL))$. Como $\partial DFL/\partial\GaR=+(1+r)d/(1+\GaR)^2>0$ (mejor crecimiento de cola, más espacio fiscal), se sigue $\partial\EMBI/\partial\GaR<0$.
 
 \begin{proposition}[complementariedad y amplificación estructural]\label{prop:cross}
@@ -251,7 +251,7 @@ La Figura~\ref{fig:embi} ilustra el resultado: el panel~(a) muestra que la pendi
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\textwidth]{fase4_embi.png}
-\caption{Cierre soberano. (a)~$\EMBI$ vs.\ $\GaR$ para tres niveles de $\JLoss$: la pendiente negativa se empina con $\JLoss$ ($\Rightarrow\beta_3<0$); (b)~cross-partial más negativo al aumentar la concentración ($\Rightarrow\beta_4<0$, Prop.~\ref{prop:cross}).}
+\caption[Cierre soberano: complementariedad y amplificación]{Cierre soberano. (a)~$\EMBI$ vs.\ $\GaR$ para tres niveles de $\JLoss$: la pendiente negativa se empina con $\JLoss$ ($\Rightarrow\beta_3<0$); (b)~cross-partial más negativo al aumentar la concentración ($\Rightarrow\beta_4<0$, Prop.~\ref{prop:cross}).}
 \label{fig:embi}
 \end{figure}
 
@@ -259,10 +259,11 @@ La Figura~\ref{fig:embi} ilustra el resultado: el panel~(a) muestra que la pendi
 
 \subsection{Especificación e hipótesis}
 La cadena teórica entrega la especificación de panel con efectos fijos bidireccionales:
-\begin{equation}
-\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss_{i,t}+\beta_2 \GaR_{i,t}+\beta_3(\JLoss\times \GaR)_{i,t}+\beta_4(\JLoss\times \GaR\times\HHI)_{i,t}+\boldsymbol{\theta}'\text{Int}^-_{i,t}+\boldsymbol{\gamma}'X_{i,t}+\varepsilon_{i,t},
+\begin{multline}
+\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss_{i,t}+\beta_2 \GaR_{i,t}+\beta_3(\JLoss\times \GaR)_{i,t}\\
+{}+\beta_4(\JLoss\times \GaR\times\HHI)_{i,t}+\boldsymbol{\theta}'\text{Int}^-_{i,t}+\boldsymbol{\gamma}'X_{i,t}+\varepsilon_{i,t},
 \label{eq:emp}
-\end{equation}
+\end{multline}
 con predicciones firmadas $\beta_1>0$, $\beta_2<0$, $\beta_3<0$ (complementariedad, Prop.~\ref{prop:cross}) y $\beta_4<0$ (amplificación por concentración). El signo negativo de $\beta_3$ y $\beta_4$ es la predicción correcta cuando el regresor es $\GaR$ (no su negativo): como $\GaR$ baja en la cola, un coeficiente negativo sobre el producto refuerza el spread cuando fragilidad y riesgo a la baja empeoran simultáneamente. Las hipótesis intermedias son la U de la fragilidad (Prop.~\ref{prop:U}), el mínimo desplazado de $\JLoss$ (Prop.~\ref{prop:shift}) y el traspaso $\JLoss\to\GaR$ creciente en concentración por regresión cuantílica (Prop.~\ref{prop:granular}).
 
 \subsection{Identificación}
@@ -274,7 +275,7 @@ Antes de estimar con datos reales se verificó que la especificación \eqref{eq:
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\textwidth]{fase5_montecarlo.png}
-\caption{Validación Monte Carlo ampliada ($R=3000$, $N=45$, $T=80$; convención $\GaR$). (a)--(b)~distribución muestral de $\hat\beta_3$ y $\hat\beta_4$: insesgada en media y negativa en el 100\% de las réplicas; (c)~la potencia de $\beta_4$ crece con el tamaño muestral.}
+\caption[Validación Monte Carlo del diseño empírico]{Validación Monte Carlo ampliada ($R=3000$, $N=45$, $T=80$; convención $\GaR$). (a)--(b)~distribución muestral de $\hat\beta_3$ y $\hat\beta_4$: insesgada en media y negativa en el 100\% de las réplicas; (c)~la potencia de $\beta_4$ crece con el tamaño muestral.}
 \label{fig:mc}
 \end{figure}
 
@@ -293,7 +294,7 @@ es decir, de \emph{signo contrario} al predicho y significativo en esa direcció
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.9\textwidth]{fig_h4b.pdf}
-\caption{Coeficiente de amplificación por concentración $\hat\beta_4$ (parametrización de nivel $D\equiv-\GaR$, donde $\beta_4>0$ es la predicción del modelo). Barras: IC 90\% (\textit{bootstrap} de bloques por país). El punto gris reproduce la estimación con datos regulatorios ($+721$); sobre el panel homogéneo de Bloomberg el coeficiente es negativo.}
+\caption[Amplificación por concentración: regulatorio vs.\ Bloomberg]{Coeficiente de amplificación por concentración $\hat\beta_4$ (parametrización de nivel $D\equiv-\GaR$, donde $\beta_4>0$ es la predicción del modelo). Barras: IC 90\% (\textit{bootstrap} de bloques por país). El punto gris reproduce la estimación con datos regulatorios ($+721$); sobre el panel homogéneo de Bloomberg el coeficiente es negativo.}
 \label{fig:h4b}
 \end{figure}
 
@@ -301,16 +302,16 @@ es decir, de \emph{signo contrario} al predicho y significativo en esa direcció
 
 \section{Robustez y revisión adversarial}\label{sec:robustez}
 
-\subsection{Extensión à la Salop y microfundamento de $\rho(n)$}
+\subsection{Extensión à la Salop y microfundamento de \texorpdfstring{$\rho(n)$}{rho(n)}}
 Bajo competencia espacial de Salop, el margen de equilibrio es $m^*(n)=t/n$ y la libre entrada fija $n^*=\sqrt{t/F}$, decreciente en la barrera de entrada $F$. Las Proposiciones~\ref{prop:U}--\ref{prop:cross} se preservan, y la mayor diferenciación con más bancos \textit{microfundamenta} $\rho'(n)<0$. Esto entrega una predicción nueva: mayores barreras de entrada implican más concentración y, por tanto, mayor riesgo sistémico y mayor amplificación del spread (Figura~\ref{fig:rob}b). El supuesto $\rho'(n)<0$ compite con un canal de \textit{herding} \citep{AcharyaYorulmazer2007} que podría revertirlo; el modelo entrega la condición de dominancia y traslada el signo al dato.
 
-\subsection{Validación del método de cálculo de $\JLoss$}
+\subsection{Validación del método de cálculo de \texorpdfstring{$\JLoss$}{JLoss}}
 La Figura~\ref{fig:rob}a valida la cola de la pérdida sistémica con exposiciones heterogéneas: la convolución exacta coincide con Monte Carlo, y la aproximación de punto de silla es precisa en la cola profunda (el rango relevante para $\ES/VaR$) aunque se degrada en el cuerpo cuando la cartera es muy granular. Se recomienda convolución/Monte Carlo para sistemas concentrados y punto de silla para carteras grandes.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\textwidth]{fase6_robustez.png}
-\caption{Robustez. (a)~Validación de la cola de $L$: convolución exacta = Monte Carlo; punto de silla preciso en la cola profunda. (b)~Salop: $n^*=\sqrt{t/F}$ decreciente en la barrera de entrada.}
+\caption[Robustez: cola de la pérdida sistémica y entrada Salop]{Robustez. (a)~Validación de la cola de $L$: convolución exacta = Monte Carlo; punto de silla preciso en la cola profunda. (b)~Salop: $n^*=\sqrt{t/F}$ decreciente en la barrera de entrada.}
 \label{fig:rob}
 \end{figure}
 
@@ -330,7 +331,7 @@ Las predicciones no quedan solo como ejercicio deductivo. Contrastadas mediante 
 \addcontentsline{toc}{section}{Referencias del capítulo}
 
 \begin{thebibliography}{99}
-\small
+\sloppy\small
 \bibitem[Acharya et al.(2017)]{AcharyaEtAl2017} Acharya, V., Pedersen, L., Philippon, T., Richardson, M. (2017). Measuring Systemic Risk. \textit{Review of Financial Studies} 30(1), 2--47.
 \bibitem[Acharya et al.(2014)]{AcharyaDrechslerSchnabl2014} Acharya, V., Drechsler, I., Schnabl, P. (2014). A Pyrrhic Victory? Bank Bailouts and Sovereign Credit Risk. \textit{Journal of Finance} 69(6), 2689--2739.
 \bibitem[Acharya \& Yorulmazer(2007)]{AcharyaYorulmazer2007} Acharya, V., Yorulmazer, T. (2007). Too Many to Fail. \textit{Journal of Financial Intermediation} 16(1), 1--31.

@@ -38,11 +38,11 @@ Formalmente, este mecanismo admite una representación de punto fijo para el pre
 
 La implicación que este trabajo explota es que la amplificación es \textbf{intrínsecamente no lineal}: el deterioro soberano no es la suma de un componente bancario y uno fiscal independientes, sino su producto a través de un multiplicador que se intensifica con la fragilidad del balance bancario y con la severidad del estado adverso.
 
-\subsection{La fragilidad bancaria como pasivo contingente del soberano: el canal $JLoss$}
+\subsection{La fragilidad bancaria como pasivo contingente del soberano: el canal \texorpdfstring{$JLoss$}{JLoss}}
 
 La métrica de fragilidad bancaria empleada en este trabajo, $JLoss$, se interpreta como el costo directo esperado de rescatar al conjunto del sistema bancario ante un evento sistémico, y por ello entra naturalmente en la valoración del bono soberano \citep{Chari2024b}. Esta interpretación operacionaliza el ``\textit{bailout put}'' de \citet{FarhiTirole2018b} y la dilución de \citet{AcharyaDrechslerSchnabl2014b}: si el mercado anticipa que un soberano deberá asumir el costo de recapitalizar su banca en un escenario de tensión, ese pasivo contingente debe estar incorporado \textit{ex ante} en la prima soberana.
 
-\subsection{El riesgo a la baja del crecimiento: el canal $GaR$}
+\subsection{El riesgo a la baja del crecimiento: el canal \texorpdfstring{$GaR$}{GaR}}
 
 El tercer pilar proviene del programa de \textit{vulnerable growth} de \citet{ABG2019b}, cuya tesis es que las condiciones financieras predicen de manera \textbf{asimétrica} la distribución condicional del crecimiento futuro del producto: la dependencia respecto de las condiciones financieras es marcadamente más fuerte en los cuantiles inferiores —la cola izquierda— que en los superiores, que permanecen comparativamente estables en el tiempo. Sus hallazgos asociados —la correlación negativa entre la media y la volatilidad condicionales del crecimiento, y la ``paradoja de la volatilidad'' según la cual períodos de baja volatilidad anteceden a resultados de crecimiento negativos \citep{BrunnermeierSannikov2014,AdrianBoyarchenko2012}— implican que el objeto relevante para la evaluación del riesgo no es el crecimiento esperado, sino la severidad de su escenario adverso plausible.
 
@@ -112,7 +112,7 @@ La contribución de este capítulo consiste en cerrar el triángulo banca-crecim
 
 La estrategia metodológica se articula en tres bloques. Los dos primeros describen la construcción de las variables explicativas de interés —la fragilidad bancaria sistémica $JLoss_{i,t}$ (Sección 4.1) y el riesgo a la baja del crecimiento $GaR_{i,t}$ (Sección 4.2)—, ambas estimadas a partir de modelos estructurales y semiparamétricos sobre microdatos bancarios y macrofinancieros. El tercer bloque (Sección 4.3) detalla la estrategia de identificación econométrica con la que se contrastan las hipótesis H1–H3. Las dos métricas se construyen de manera independiente y se consolidan en un panel a frecuencia trimestral mediante combinación por país y trimestre.
 
-\subsection{Medición de la fragilidad bancaria: la métrica $JLoss$}
+\subsection{Medición de la fragilidad bancaria: la métrica \texorpdfstring{$JLoss$}{JLoss}}
 
 $JLoss_{i,t}$ es una métrica semiparamétrica, a nivel de país, de la pérdida conjunta esperada del sistema bancario condicional a un evento sistémico, expresada como porcentaje de la exposición total. Su construcción procede en cuatro etapas: (i) la estimación de las probabilidades individuales de incumplimiento de cada banco mediante un modelo estructural de tipo Merton; (ii) la condicionalización de esas probabilidades respecto de un factor sistémico país; (iii) la agregación de la distribución de pérdidas del sistema por el método de punto de silla; y (iv) el cálculo de las contribuciones marginales y la normalización que define la métrica. Se sigue la metodología de \citet{Chari2024b}. Todos los insumos micro —hojas de balance bancarias trimestrales y capitalización bursátil diaria— se obtienen de la terminal Bloomberg mediante un mismo protocolo de extracción para los 113 bancos cotizados de las veinte economías del universo objetivo, lo que elimina la heterogeneidad de definiciones contables entre supervisores nacionales que afectaba a reconstrucciones previas basadas en fuentes regulatorias. La regla de madurez del punto de incumplimiento (deuda emitida = largo plazo; el resto del pasivo = corto plazo) se aplica de manera homogénea a partir de la partida ``\textit{long-term borrowings}'' de Bloomberg.
 
@@ -156,7 +156,7 @@ para $x$ por encima de la media (con la rama simétrica correspondiente en la co
 
 donde $\{V_k, w_k\}$ son los nodos y pesos de la cuadratura. La curva de probabilidad acumulada se evalúa sobre una grilla de 500 pasos entre las cotas de pérdida calibradas (1\% y 4,8\% de la exposición). El valor en riesgo al 99\% ($VaR_{99}$) se obtiene por interpolación lineal sobre esa curva, sin extrapolación (réplica de \texttt{LinealXY2}).
 
-\subsubsection{Contribuciones marginales y definición de $JLoss$}
+\subsubsection{Contribuciones marginales y definición de \texorpdfstring{$JLoss$}{JLoss}}
 
 Siguiendo a \citet{MartinThompsonBrowne2001}, la contribución marginal del banco $n$ al riesgo del sistema, evaluada en el percentil 99, es
 
@@ -176,7 +176,7 @@ El Cuadro 1 resume la parametrización, consistente con \citet{Chari2024b}: hori
 \noindent \textbf{Cuadro 1 — Parámetros del método de punto de silla.} Horizonte: 1 trimestre $\cdot$ LGD: 45\% $\cdot$ Nodos de cuadratura: 7 $\cdot$ Factores sistémicos: 1 $\cdot$ Cota inferior de pérdidas: 0,010 $\cdot$ Cota superior: 0,048 $\cdot$ Pasos: 500 $\cdot$ Percentil: 0,99 $\cdot$ Factor sistémico: $N(0,\,0{,}16\%)$.
 \vspace{1em}
 
-\subsection{Medición del riesgo a la baja del crecimiento: la métrica $GaR$}
+\subsection{Medición del riesgo a la baja del crecimiento: la métrica \texorpdfstring{$GaR$}{GaR}}
 
 $GaR_{i,t}$ es el cuantil de cola izquierda (5\%) de la distribución condicional del crecimiento del producto un trimestre adelante, estimado a partir de un índice de condiciones financieras mediante regresión cuantílica de panel. Su construcción adapta el marco de \textit{vulnerable growth} de \citet{ABG2019b} y la plataforma de CEMLA \citep{OssandonBusch2022}, con tres modificaciones metodológicas: estimación por programación lineal global, lectura directa del cuantil sin densidad kernel, y estimación pseudo–tiempo real.
 
@@ -200,7 +200,7 @@ con $h = 1$ trimestre y efectos fijos de país $\mu_i$ \citep{Koenker2004}. El V
 
 problema que se formula como un \textbf{único programa lineal} y se resuelve con el algoritmo HiGHS (vía \texttt{scipy.optimize.linprog}), superando la tolerancia del solver iterativo \texttt{rqpd} de R.
 
-\subsubsection{De la función cuantílica a $GaR$}
+\subsubsection{De la función cuantílica a \texorpdfstring{$GaR$}{GaR}}
 
 La regresión se estima sobre una grilla de $n_\tau = 39$ cuantiles, diseñada de modo que $\tau = 0{,}05$ caiga exactamente sobre un nodo. Para garantizar la monotonicidad se aplica el \textbf{reordenamiento} de \citet{ChernozhukovEtAl2010}:
 
@@ -210,7 +210,7 @@ La regresión se estima sobre una grilla de $n_\tau = 39$ cuantiles, diseñada d
 
 Para evitar el sesgo de anticipación (\textit{look-ahead bias}), la serie $\{GaR_{i,t}\}$ se construye con una \textbf{ventana expansiva}: en cada fecha $t$, los parámetros cuantílicos se reestiman utilizando exclusivamente la información disponible hasta $t$. La serie se estimó sobre un panel de 17 economías emergentes con historia amplia; la ventana estimable por país comienza tras los primeros trimestres de entrenamiento (Sección 5).
 
-\subsubsection{Robustez: corroboración con densidad skew-$t$}
+\subsubsection{Robustez: corroboración con densidad skew-\texorpdfstring{$t$}{t}}
 
 Como control de robustez se ajusta la distribución \textit{skew-t} de \citet{ABG2019b} a los cuantiles condicionales estimados. La correlación entre esta serie y la obtenida por lectura directa del cuantil reordenado es de 0,9996.
 
@@ -261,17 +261,17 @@ Junto a Corea, se excluye también Bulgaria por la misma razón de fondo —$JLo
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_cobertura.pdf}
-\caption{Cobertura del panel, por país. Marca gris: trimestres con $JLoss$. Marca celeste: además con CDS soberano de Bloomberg. Marca azul: muestra de estimación del mecanismo (CDS + $JLoss$ + $GaR$ simultáneamente). Los países ordenados de menor a mayor aporte a la estimación.}
+\caption[Cobertura del panel, por país]{Cobertura del panel, por país. Marca gris: trimestres con $JLoss$. Marca celeste: además con CDS soberano de Bloomberg. Marca azul: muestra de estimación del mecanismo (CDS + $JLoss$ + $GaR$ simultáneamente). Los países ordenados de menor a mayor aporte a la estimación.}
 \label{fig:cobertura}
 \end{figure}
 
 \subsection{Variable dependiente}
 Spread soberano medido \emph{exclusivamente} por el CDS soberano a cinco años en dólares (Bloomberg; ticker \texttt{<emisor> CDS USD SR 5Y Corp}, con la curva Markit \texttt{CCHIN1U5} para China), en puntos básicos, promediado a frecuencia trimestral. El CDS —a diferencia del EMBI de bonos— aísla el componente puro de riesgo de crédito y es homogéneo entre países. Donde no hay CDS, la observación no entra a la regresión.
 
-\subsection{Insumos de $JLoss$}
+\subsection{Insumos de \texorpdfstring{$JLoss$}{JLoss}}
 Hojas de balance bancarias trimestrales (activos totales, patrimonio, deuda emitida, ingreso neto, ingresos, caja) y capitalización bursátil diaria de los bancos cotizados, de Bloomberg, con un protocolo de extracción común a los 113 bancos. La volatilidad del patrimonio se calcula por varianza realizada de los retornos diarios; la cotización utilizada es siempre la de la bolsa local (nunca ADR), verificada contra la moneda del balance. Motor de agregación en \texttt{jloss\_engine.py}; campos Bloomberg exactos en el Anexo~\ref{chap:anexoB}.
 
-\subsection{Insumos de $GaR$}
+\subsection{Insumos de \texorpdfstring{$GaR$}{GaR}}
 Componentes del FCI por país (IPC, rendimiento soberano a 10 años, índice accionario, REER) de estadísticas nacionales; VIX de Bloomberg como proxy de condiciones financieras globales, ortogonalizado respecto de las condiciones locales.
 
 \subsection{Variables de control}
@@ -306,7 +306,7 @@ REER (índice, 2010=100) & 108 & 20 \\
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_jloss_paises.pdf}
-\caption{Serie trimestral de $JLoss$ por país del \textit{roster}, panel Bloomberg (motor de punto de silla, $\rho=0{,}4$). La escala vertical es común salvo cuando la serie del país la excede.}
+\caption[Serie de JLoss por país del roster]{Serie trimestral de $JLoss$ por país del \textit{roster}, panel Bloomberg (motor de punto de silla, $\rho=0{,}4$). La escala vertical es común salvo cuando la serie del país la excede.}
 \label{fig:jlosspaises}
 \end{figure}
 
@@ -325,10 +325,11 @@ donde $X_{i,t}$ son los seis controles domésticos. Bajo la convención de signo
 \begin{table}[t]
 \centering
 \small
+\setlength{\tabcolsep}{4.5pt}
 \begin{tabular}{lrrrrr}
 \toprule
  & M1 & \textbf{M2} & M3 & cluster país & cluster tiempo \\
- & (sin controles) & \textbf{(+controles)} & (+globales) & & \\
+ & (sin contr.) & \textbf{(+contr.)} & (+glob.) & & \\
 \midrule
 $JLoss\times GaR$ ($\theta$) & $-0,543^{**}$ & $\mathbf{-0,354^{*}}$ & $-0,339$ & $-0,354^{***}$ & $-0,354^{**}$ \\
 $t$ (Driscoll–Kraay)         & $-2,20$ & $\mathbf{-1,91}$ & $-1,65$ & $-3,39$ & $-2,27$ \\
@@ -355,7 +356,7 @@ que la Figura~\ref{fig:efmarg} traza. Evaluado a partir de M2, una unidad adicio
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.8\textwidth]{fig_efecto_marginal.pdf}
-\caption{Efecto marginal de la fragilidad bancaria sobre el CDS soberano según el riesgo de cola del crecimiento (M2). Banda: IC 90\% (errores Driscoll–Kraay). Eje horizontal invertido: cola más severa a la derecha.}
+\caption[Efecto marginal de la fragilidad según el riesgo de cola]{Efecto marginal de la fragilidad bancaria sobre el CDS soberano según el riesgo de cola del crecimiento (M2). Banda: IC 90\% (errores Driscoll–Kraay). Eje horizontal invertido: cola más severa a la derecha.}
 \label{fig:efmarg}
 \end{figure}
 
@@ -366,7 +367,7 @@ Como contraste no lineal alternativo se estima un modelo de umbral de panel \cit
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.55\textwidth]{fig_umbral.pdf}
-\caption{Modelo de umbral de panel (Hansen): efecto de $JLoss$ sobre el CDS soberano por régimen de $GaR$.}
+\caption[Modelo de umbral de Hansen]{Modelo de umbral de panel (Hansen): efecto de $JLoss$ sobre el CDS soberano por régimen de $GaR$.}
 \label{fig:umbral}
 \end{figure}
 
@@ -383,7 +384,7 @@ Sustituyendo el cuantil 5\% por el \textit{Expected Shortfall} como medida de co
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.72\textwidth]{fig_forest_theta.pdf}
-\caption{Coeficiente de interacción $\theta$ por especificación y prueba de robustez. Puntos rojos: $\hat\theta>0$; barras: IC 95\%. Único caso positivo: la submuestra previa a 2020 (imprecisa).}
+\caption[Coeficiente de interacción theta: especificaciones y robustez]{Coeficiente de interacción $\theta$ por especificación y prueba de robustez. Puntos rojos: $\hat\theta>0$; barras: IC 95\%. Único caso positivo: la submuestra previa a 2020 (imprecisa).}
 \label{fig:forest}
 \end{figure}
 
@@ -435,7 +436,7 @@ Este capítulo articula, en un único marco empírico, dos literaturas que la in
 \addcontentsline{toc}{section}{Referencias del capítulo}
 
 \begin{thebibliography}{99}
-\small
+\sloppy\small
 \bibitem[Acharya et al.(2014)]{AcharyaDrechslerSchnabl2014b} Acharya, V., Drechsler, I., \& Schnabl, P. (2014). A Pyrrhic Victory? Bank Bailouts and Sovereign Credit Risk. \textit{Journal of Finance}, 69(6), 2689--2739.
 \bibitem[Acharya et al.(2017)]{AcharyaEtAl2017b} Acharya, V. V., Pedersen, L. H., Philippon, T., \& Richardson, M. (2017). Measuring Systemic Risk. \textit{Review of Financial Studies}, 30(1), 2--47.
 \bibitem[Acharya \& Steffen(2015)]{AcharyaSteffen2015} Acharya, V. V., \& Steffen, S. (2015). The ``Greatest'' Carry Trade Ever? Understanding Eurozone Bank Risks. \textit{Journal of Financial Economics}, 115(2), 215--236.

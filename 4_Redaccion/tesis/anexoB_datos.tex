@@ -16,7 +16,14 @@ consolidación reside en \texttt{1\_Codigo/Bloomberg\_extraction/} y \texttt{1\_
 \begin{footnotesize}
 \setlength{\tabcolsep}{3.5pt}
 \renewcommand{\arraystretch}{1.15}
-\begin{longtable}{p{1.85cm} p{2.6cm} p{1.75cm} p{2.85cm} p{1.35cm} p{2.5cm}}
+\newcommand{\Lc}{\raggedright\arraybackslash\hyphenpenalty=50\relax\hspace{0pt}}
+\begin{longtable}{%
+  >{\Lc}p{2.15cm}%
+  >{\Lc}p{2.7cm}%
+  >{\Lc}p{1.8cm}%
+  >{\Lc}p{2.85cm}%
+  >{\Lc}p{1.75cm}%
+  >{\Lc}p{2.5cm}}
 \caption{Procedencia, definición y transformación de cada serie del panel.}
 \label{tab:datos}\\
 \toprule
@@ -43,8 +50,8 @@ CDS soberano 5Y & Prima del \textit{credit default swap} soberano a cinco años,
 Activos totales & Activos totales del banco & Bloomberg & \texttt{BS\_TOT\_ASSET} & Trimestral & Por banco cotizado; ajuste de periodicidad \texttt{ACTUAL} \\
 Patrimonio & Patrimonio total contable & Bloomberg & \texttt{TOTAL\_EQUITY} & Trimestral & --- \\
 Deuda emitida (LP) & \textit{Long-term borrowings} (bonos, letras, deuda subordinada); define el largo plazo del punto de incumplimiento & Bloomberg & \texttt{BS\_LT\_BORROW} & Trimestral & $D^{*}=$ (pasivo total $-$ bonos) $+ \tfrac12$ bonos \\
-Ingreso neto, ingresos, caja & Insumos del $z$-score y de controles de coherencia contable & Bloomberg & \texttt{NET\_INCOME}, \texttt{SALES\_REV\_TURN}, \texttt{BS\_CASH\_NEAR\_CASH\_ITEM} & Trimestral & --- \\
-Capitalización bursátil & Valor de mercado del patrimonio, cotización local (nunca ADR), verificada contra \texttt{EQY\_FUND\_CRNCY} & Bloomberg & \texttt{CUR\_MKT\_CAP} (o \texttt{PX\_LAST}$\times$\texttt{BS\_SH\_OUT}) & Diaria & Último valor del trimestre \\
+Ingreso neto, ingresos, caja & Insumos del $z$-score y de controles de coherencia contable & Bloomberg & \texttt{NET\_\allowbreak INCOME}, \texttt{SALES\_\allowbreak REV\_\allowbreak TURN}, \texttt{BS\_\allowbreak CASH\_\allowbreak NEAR\_\allowbreak CASH\_\allowbreak ITEM} & Trimestral & --- \\
+Capital. bursátil & Valor de mercado del patrimonio, cotización local (nunca ADR), verificada contra \texttt{EQY\_\allowbreak FUND\_\allowbreak CRNCY} & Bloomberg & \texttt{CUR\_\allowbreak MKT\_\allowbreak CAP}, o \texttt{PX\_\allowbreak LAST} $\times$ \texttt{BS\_\allowbreak SH\_\allowbreak OUT} & Diaria & Último valor del trimestre \\
 Retornos accionarios & Retornos logarítmicos diarios del precio local & Bloomberg & \texttt{PX\_LAST} & Diaria & $\sigma_E=\sqrt{\sum_t r_t^2}$ por banco-trimestre (varianza realizada) \\
 Índice bursátil país & Factor sistémico único de la agregación de pérdidas & Bloomberg & índice de referencia por país (\texttt{COUNTRY\_INDEX}) & Diaria & Retornos $\to$ correlación $\rho_i$ banco-factor \\
 \addlinespace
@@ -55,7 +62,7 @@ Retornos accionarios & Retornos logarítmicos diarios del precio local & Bloombe
 PIB real & Crecimiento trimestral del producto (variable dependiente de la regresión cuantílica) & Estadística nacional (banco central) & \texttt{GDP\_*} & Trimestral & Tasa de variación \\
 IPC & Componente del FCI (bloque de deuda / expectativas) & Estadística nacional & \texttt{CPI\_*} & Mensual & Estand.\ expansiva \\
 Índice accionario & Componente del FCI (bloque accionario) & Bolsa nacional & \texttt{STX\_*} & Mensual & Estand.\ expansiva \\
-Tipo de cambio real efectivo & Componente del FCI (bloque cambiario) & BIS / fuentes nacionales & \texttt{rEER\_*} & Mensual & Estand.\ expansiva \\
+Tipo de cambio real ef. & Componente del FCI (bloque cambiario) & BIS / fuentes nacionales & \texttt{rEER\_*} & Mensual & Estand.\ expansiva \\
 Rendimiento soberano 10Y & Componente del FCI (bloque de deuda soberana) & Mercado / estadística nacional & \texttt{Ryr\_*} & Mensual & Estand.\ expansiva \\
 VIX (ortogonalizado) & Condiciones financieras globales en la regresión cuantílica & Bloomberg & \texttt{VIX Index} & Diaria & Ortogonalizado respecto de las condiciones locales; trimestral \\
 \addlinespace
@@ -69,17 +76,17 @@ Tasa del Tesoro 10Y & Rendimiento del bono del Tesoro estadounidense a 10 años 
 \multicolumn{6}{l}{\textbf{\textit{Controles macroeconómicos domésticos}} (reconstruidos para todos los países del panel)}\\
 \addlinespace
 Deuda gob.\ general/PIB & Deuda bruta del gobierno general, \% del PIB & FMI, \textit{World Economic Outlook} & \texttt{GGXWDG\_NGDP} & Anual & Interpolación lineal a trimestral \\
-Balance fiscal/PIB & Préstamo/endeudamiento neto del gobierno general, \% del PIB & FMI, \textit{World Economic Outlook} & \texttt{GGXCNL\_NGDP} & Anual & Interpolación lineal a trimestral \\
-Reservas/PIB & Reservas internacionales totales sobre PIB corriente & Banco Mundial & \texttt{FI.RES.TOTL.CD} $\div$ \texttt{NY.GDP.MKTP.CD} & Anual & Interpolación lineal a trimestral \\
-Cuenta corriente/PIB & Saldo de cuenta corriente, \% del PIB & Banco Mundial & \texttt{BN.CAB.XOKA.GD.ZS} & Anual & Interpolación lineal a trimestral \\
-Inflación interanual & Variación del IPC a 12 meses & Serie de IPC del FCI; respaldo Banco Mundial & \texttt{FP.CPI.TOTL.ZG} & Mensual & Variación a 4 trimestres \\
-Tipo de cambio real efectivo & Índice de tipo de cambio real efectivo (2010 = 100) & BIS; \texttt{GaR/} \texttt{individuals/} & \texttt{rEER\_*} & Mensual & Último valor del trimestre \\
+Balance fiscal/PIB & Endeudamiento neto del gobierno general, \% del PIB & FMI, \textit{World Economic Outlook} & \texttt{GGXCNL\_NGDP} & Anual & Interpolación lineal a trimestral \\
+Reservas/PIB & Reservas internacionales totales sobre PIB corriente & Banco Mundial & \texttt{FI.\allowbreak RES.\allowbreak TOTL.\allowbreak CD} $\div$ \texttt{NY.\allowbreak GDP.\allowbreak MKTP.\allowbreak CD} & Anual & Interpolación lineal a trimestral \\
+Cuenta corriente/PIB & Saldo de cuenta corriente, \% del PIB & Banco Mundial & \texttt{BN.\allowbreak CAB.\allowbreak XOKA.\allowbreak GD.\allowbreak ZS} & Anual & Interpolación lineal a trimestral \\
+Inflación interanual & Variación del IPC a 12 meses & Serie de IPC del FCI; respaldo Banco Mundial & \texttt{FP.\allowbreak CPI.\allowbreak TOTL.\allowbreak ZG} & Mensual & Variación a 4 trimestres \\
+Tipo de cambio real ef. & Índice de tipo de cambio real efectivo (2010 = 100) & BIS; series locales & \texttt{rEER\_*} & Mensual & Último valor del trimestre \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Concentración bancaria e instituciones}}}\\
 \addlinespace
-$HHI$ (concentración 3 bancos) & Activos de los tres mayores bancos comerciales sobre activos del sistema, \% & Banco Mundial, \textit{Global Financial Development Database} & \texttt{GFDD.OI.01} & Anual & Nivel estructural $=$ mediana por país; serie anual como robustez \\
-Rating soberano S\&P & Calificación de largo plazo en moneda extranjera & Bloomberg & \texttt{RTG\_SP\_LT\_FC\_ISSUER\_CREDIT} & --- & \textit{Snapshot} (no serie); escala 21--1 \\
-Calidad de gobierno (WGI) & Índice de \textit{Worldwide Governance Indicators} (triple interacción institucional) & Banco Mundial & \texttt{instituciones.csv} (plantilla provisional) & Anual & Estandarizado; marcado provisional \\
+$HHI$ (concentración 3 bancos) & Activos de los tres mayores bancos comerciales sobre activos del sistema, \% & Banco Mundial, \textit{Global Financial Development Database} & \texttt{GFDD.\allowbreak OI.01} & Anual & Nivel estructural $=$ mediana por país; serie anual como robustez \\
+Rating soberano S\&P & Calificación de largo plazo en moneda extranjera & Bloomberg & \texttt{RTG\_\allowbreak SP\_\allowbreak LT\_\allowbreak FC\_\allowbreak ISSUER\_\allowbreak CREDIT} & --- & \textit{Snapshot} (no serie); escala 21--1 \\
+Calidad de gobierno (WGI) & Índice de \textit{Worldwide Governance Indicators} (triple interacción institucional) & Banco Mundial & \texttt{instituciones.\allowbreak csv} (provisional) & Anual & Estandarizado; marcado provisional \\
 
 \end{longtable}
 \end{footnotesize}

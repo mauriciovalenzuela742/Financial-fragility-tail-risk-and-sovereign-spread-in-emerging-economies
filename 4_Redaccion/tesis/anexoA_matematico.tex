@@ -5,12 +5,12 @@
 
 \begin{mdframed}
 \textbf{Convención de signo (léase primero).} $\GaR_\tau$ es el cuantil $\tau$ (p.ej.\ $5\%$) del crecimiento: es un \emph{nivel de crecimiento} (típicamente negativo en la cola). Un $\GaR$ \emph{más alto} significa una cola \emph{menos} adversa (economía más segura); un $\GaR$ \emph{más bajo} (más negativo) significa mayor riesgo a la baja. Las variables observadas son: $\JLoss$ (fragilidad sistémica, $\uparrow$ = peor), $\GaR$ ($\uparrow$ = mejor), $\HHI$ (concentración, $\uparrow$ = más concentrado), $\EMBI$ ($\uparrow$ = mayor riesgo soberano). Los cuatro coeficientes firmados son
-\[
-\beta_1=\frac{\partial \EMBI}{\partial \JLoss}>0,\quad
-\beta_2=\frac{\partial \EMBI}{\partial \GaR}<0,\quad
-\beta_3=\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0,\quad
+\begin{gather*}
+\beta_1=\frac{\partial \EMBI}{\partial \JLoss}>0,\qquad
+\beta_2=\frac{\partial \EMBI}{\partial \GaR}<0,\\[2pt]
+\beta_3=\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0,\qquad
 \beta_4=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial \GaR\,\partial \HHI}<0.
-\]
+\end{gather*}
 \end{mdframed}
 
 \section{Preliminares: derivadas de la normal bivariada}\label{sec:prelim}
@@ -68,7 +68,7 @@ $\PD'(n)=\phi(\bar z)\bar z'(n)$; con $\Phi^{-1\prime}(u)=1/\phi(\Phi^{-1}(u))>0
 Como $R_L^{*\prime}(n)<0$, $\bar z'(n)$ tiene el signo de $T_{\text{mg}}-T_{\text{rs}}$: en $n$ pequeño domina $T_{\text{rs}}$ (estabiliza, $\PD$ cae); en $n$ grande domina $T_{\text{mg}}$ (fragiliza, $\PD$ sube); por continuidad existe $\hat n$ con $\bar z'(\hat n)=0$.
 \end{proof}
 
-\subsection{$\JLoss$ y sus monotonías}\label{sec:jl-A}
+\subsection{\texorpdfstring{$\JLoss$}{JLoss} y sus monotonías}\label{sec:jl-A}
 $\displaystyle \JLoss_\alpha(n)=\frac1\alpha\Phi_2\big(\underbrace{\Phi^{-1}(\PD(n))}_{a},\underbrace{\Phi^{-1}(\alpha)}_{b};\underbrace{\sqrt{\rho(n)}}_{\varrho}\big)$, con $\rho'(n)\le0$.
 \begin{lemma}[monotonías de $\JLoss$]\label{lem:jl-A}
 $\partial\JLoss_\alpha/\partial\PD>0$ y $\partial\JLoss_\alpha/\partial\rho>0$.
@@ -111,7 +111,7 @@ El crecimiento en el estado de estrés es $g=\GaR_\tau$, con $1+\GaR_\tau>0$; de
 
 \subsection{Definición del spread y derivadas de primer orden}
 \begin{equation}
-DFL(\JLoss,\GaR,H)=\bar d-\underbrace{\left[\frac{1+r}{1+\GaR}\,d+\frac{B(\JLoss;H)}{Y}\right]}_{d'\ (\text{deuda proyectada})},\qquad
+DFL(\JLoss,\GaR,H)=\bar d-\underbrace{\left[\frac{1+r}{1+\GaR}\,d+\frac{B(\JLoss;H)}{Y}\right]}_{d'\ (\text{deuda proyectada})},\quad
 \EMBI=LGD\,\big(1-F_\eta(DFL)\big).
 \label{eq:embi}
 \end{equation}
@@ -150,7 +150,7 @@ Con $\frac{\dd}{\dd u}(1-F_\eta(u))=-f_\eta(u)$:
 El signo de $\beta_2$ es \emph{negativo}: mejor crecimiento de cola, menor spread. $\blacksquare$
 \end{proof}
 
-\subsection{Proposición 4: la derivada cruzada es negativa ($\beta_3<0$)}
+\subsection{Proposición 4: la derivada cruzada es negativa \texorpdfstring{($\beta_3<0$)}{(beta3<0)}}
 
 \begin{proposition}[complementariedad $\JLoss\times\GaR$]\label{prop:cross-A}
 Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A},
@@ -197,7 +197,7 @@ El signo negativo \emph{no} contradice la intuición de que ``más riesgo por m�
 Punto representativo ($LGD=0{,}55$, $\sigma_\eta=0{,}16$, $b_0=0{,}32$, $b_1=1{,}2$, $d=0{,}55$, $\bar d=1{,}10$, $r=0{,}04$, $\JLoss=0{,}22$, $\GaR=-0{,}05$, $H=1/6$): $DFL=0{,}413>0$; $LGD\,B_J/Y=0{,}2112$; $f_\eta'(DFL)=-1{,}4296$; $\partial DFL/\partial\GaR=+0{,}6338$. Cross-partial $=-0{,}191360$, idéntico (hasta $10^{-6}$) a las diferencias finitas de $\EMBI$.
 \end{remark}
 
-\subsection{Amplificación por concentración: $\beta_4<0$}
+\subsection{\texorpdfstring{Amplificación por concentración: $\beta_4<0$}{Amplificacion por concentracion: beta4<0}}
 
 \begin{proposition}[la complementariedad se intensifica con la concentración]\label{prop:amp-A}
 Sea $C(H)\equiv\dfrac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0$. Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A} y la condición de cola profunda $f_\eta''(DFL)\ge0$,
@@ -238,16 +238,17 @@ Resultado \emph{local}: si $\PD_{\text{sov}}\to1$ ($DFL\to-\infty$, $f_\eta\to0$
 \section{Mapeo a la ecuación empírica}
 
 La ecuación estimada es
-\[
-\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss+\beta_2\GaR+\beta_3(\JLoss\times\GaR)+\beta_4(\JLoss\times\GaR\times\HHI)+\boldsymbol\theta'\text{Int}^-+\boldsymbol\gamma'X+\varepsilon_{i,t},
-\]
+\begin{multline*}
+\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss+\beta_2\GaR+\beta_3(\JLoss\times\GaR)\\
+{}+\beta_4(\JLoss\times\GaR\times\HHI)+\boldsymbol\theta'\text{Int}^-+\boldsymbol\gamma'X+\varepsilon_{i,t},
+\end{multline*}
 donde $\text{Int}^-=\{\JLoss\times\HHI,\ \GaR\times\HHI\}$. La correspondencia teórica, sin cambios de variable, es
-\[
-\beta_1=\frac{\partial\EMBI}{\partial\JLoss}>0,\quad
-\beta_2=\frac{\partial\EMBI}{\partial\GaR}<0,\quad
-\beta_3=\frac{\partial^2\EMBI}{\partial\JLoss\partial\GaR}<0\ (\text{Prop.~\ref{prop:cross-A}}),\quad
+\begin{gather*}
+\beta_1=\frac{\partial\EMBI}{\partial\JLoss}>0,\qquad
+\beta_2=\frac{\partial\EMBI}{\partial\GaR}<0,\\[2pt]
+\beta_3=\frac{\partial^2\EMBI}{\partial\JLoss\partial\GaR}<0\ (\text{Prop.~\ref{prop:cross-A}}),\qquad
 \beta_4=\frac{\partial^3\EMBI}{\partial\JLoss\partial\GaR\partial\HHI}<0\ (\text{Prop.~\ref{prop:amp-A}}).
-\]
+\end{gather*}
 
 \begin{center}
 \begin{tabular}{clcc}

@@ -44,6 +44,20 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\dd}{\,\mathrm{d}}
 
+% Absorbe micro-desbordes de caja en prosa y bibliografía (URLs, compuestos largos)
+\setlength{\emergencystretch}{3em}
+
+% Cadenas PDF (marcadores / índices con hipervínculos): evita los avisos de hyperref
+% "Token not allowed in a PDF string" por la notación matemática en títulos y \caption.
+\pdfstringdefDisableCommands{%
+  \def\({}\def\){}\def\text#1{#1}\def\mathrm#1{#1}\def\textit#1{#1}\def\textbf#1{#1}%
+  \def\hat#1{#1}\def\boldsymbol#1{#1}\def\mathbf#1{#1}%
+  \def\JLoss{JLoss}\def\EMBI{EMBI}\def\GaR{GaR}\def\PD{PD}\def\ES{ES}\def\HHI{HHI}\def\Var{Var}%
+  \def\times{ x }\def\Rightarrow{=>}\def\to{->}\def\equiv{=}\def\leq{<=}\def\geq{>=}%
+  \def\alpha{alpha}\def\beta{beta}\def\theta{theta}\def\rho{rho}\def\gamma{gamma}\def\delta{delta}%
+  \def\sqrt#1{raiz(#1)}\def\frac#1#2{#1/#2}\def\partial{d}%
+}
+
 \begin{document}
 
 \frontmatter
