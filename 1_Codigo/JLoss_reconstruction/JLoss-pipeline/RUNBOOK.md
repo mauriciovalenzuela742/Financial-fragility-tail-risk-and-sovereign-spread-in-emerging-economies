@@ -1,3 +1,10 @@
+> **RECHAZADO por decisión del comité (ago-2026):** no se mezcla PD de mercado con PD contable
+> en ningún país del pipeline (ver `book_pd.py` y `CONTROL_DE_VERSIONES.md`). Los PASOS 5, 6 y
+> parte del 9 de este documento describen exactamente el flujo que quedó descartado — se
+> conserva el archivo completo por historial, pero **no ejecutar** esos pasos. El motor vigente
+> (`jloss_engine.py`) sigue el flujo simple: solo PD de mercado (Merton/KMV), bancos sin ticker
+> quedan fuera del universo.
+
 # Runbook — obtener los resultados JLoss actualizados
 
 Secuencia ejecutable de principio a fin. Corre en **su entorno con red abierta** (no en el

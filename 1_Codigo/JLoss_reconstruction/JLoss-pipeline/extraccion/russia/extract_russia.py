@@ -10,8 +10,9 @@ CAVEATS DE DISPONIBILIDAD (importantes para el comité):
     (Form 101 balance de comprobación, 123 capital, 135 ratios). => hueco en 2022.
   - Los bancos sancionados (p.ej. Sberbank, VTB) pueden omitir información sensible a sanciones
     (divulgación en forma reducida). => cobertura parcial para esos bancos.
-  - La cobertura de precios MOEX (.ME) en yfinance es poco fiable post-2022 => varios bancos caen a
-    PD contable (book_pd).
+  - La cobertura de precios MOEX (.ME) en yfinance es poco fiable post-2022. DECISION DEL COMITE
+    (ago-2026): no se usa PD contable — Gazprombank y Alfa-Bank (sin ticker) quedan FUERA del
+    universo en vez de completarse con book_pd.
   - Para la historia profunda vía Form 101, los bonos se identifican por PREFIJO de cuenta
     (520 obligaciones, 521-523 certificados/letras emitidas); ese mapeo por código requiere un paso
     adicional y debe confirmarse con el plan de cuentas del CBR.
@@ -35,9 +36,8 @@ BANKMAP = {
     "tinkoff":              {"ticker": "TCSG.ME", "names": ["TINKOFF", "TCS", "T-BANK"]},
     "sovcombank":           {"ticker": "SVCB.ME", "names": ["SOVCOMBANK"]},
     "moscow_credit_bank":   {"ticker": "CBOM.ME", "names": ["MOSCOW CREDIT BANK", "CREDIT BANK OF MOSCOW"]},
-    "gazprombank":          {"ticker": None,      "names": ["GAZPROMBANK"]},   # no listado -> book PD
-    "alfa_bank":            {"ticker": None,      "names": ["ALFA-BANK", "ALFA BANK"]},  # no listado
 }
+# Gazprombank y Alfa-Bank: sin ticker de mercado -> excluidos (no se usa PD contable).
 
 # Por NOMBRE (estados IFRS). Para Form 101, mapear por prefijo de cuenta 520-523 (ver caveats).
 ACCOUNT_MAP = {

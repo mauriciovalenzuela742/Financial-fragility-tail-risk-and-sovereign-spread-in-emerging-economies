@@ -9,6 +9,9 @@ Fuente precios: yfinance, sufijo .BA (BYMA) o ADR. Solo bancos listados.
 Criterio del profesor (bonos vs resto): LP = obligaciones negociables + obligaciones subordinadas;
 CP = resto.
 
+DECISIÓN DEL COMITÉ (ago-2026): no se usa PD contable. Santander Argentina y Banco Nación (sin
+ticker) quedan FUERA del universo.
+
 ESTADO: scaffold. Asume que los .txt se han parseado a long-format (entidad, cuenta, período, valor).
 CONFIRMAR los códigos/nombres de cuenta del diseño de registro BCRA antes de la corrida masiva.
 
@@ -28,8 +31,6 @@ BANKMAP = {
     "banco_macro":       {"ticker": "BMA.BA",  "bcra": "00285", "names": ["MACRO"]},
     "bbva_argentina":    {"ticker": "BBAR.BA", "bcra": "00017", "names": ["BBVA", "FRANCES", "FRANCÉS"]},
     "banco_supervielle": {"ticker": "SUPV.BA", "bcra": "00027", "names": ["SUPERVIELLE"]},
-    "santander_arg":     {"ticker": None,      "bcra": "00072", "names": ["SANTANDER"]},
-    "banco_nacion":      {"ticker": None,      "bcra": "00011", "names": ["NACION", "NACIÓN"]},
 }
 
 # Cuentas del estado contable BCRA -> campos v8 (substring, mayúsculas). CONFIRMAR.

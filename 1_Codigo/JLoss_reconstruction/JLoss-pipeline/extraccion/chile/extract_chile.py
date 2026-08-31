@@ -36,25 +36,16 @@ COUNTRY = "chile"
 
 # --- Universo de bancos (codigos CMF verificados con --discover-banks) ---
 # bankname sigue la convencion del panel (minusculas, sin espacios) para empatar con v8.
-# ticker=None -> no transa en bolsa -> entra con PD CONTABLE (book_pd.py) en el motor JLoss.
+# DECISION DEL COMITE (ago-2026): no se usa PD contable en ningun pais -> solo bancos con
+# ticker de mercado real quedan en BANKS. banco_bice y banco_security (sin cobertura yf) y
+# el resto del sistema no listado (bancoestado, scotiabank_chile, banco_internacional,
+# banco_falabella, banco_ripley, banco_consorcio, bbva_chile, btg_pactual_chile) quedan
+# FUERA del universo.
 BANKS = {
-    # --- LISTADOS (PD de mercado via yfinance, .SN) ---
     "banco_de_chile":   {"cmf": "001", "ticker": "CHILE.SN"},
     "bci":              {"cmf": "016", "ticker": "BCI.SN"},
     "santander_chile":  {"cmf": "037", "ticker": "BSANTANDER.SN"},
     "itau_corpbanca":   {"cmf": "039", "ticker": "ITAUCL.SN"},   # ex ITAUCORP.SN (renombrado 04/2023)
-    "banco_bice":       {"cmf": "028", "ticker": None},          # holding BICECORP sin cobertura yf -> PD contable
-    "banco_security":   {"cmf": "049", "ticker": None},          # Grupo Security fusionado con BICECORP 2025 -> PD contable
-    # --- NO LISTADOS (PD contable) -- amplian la cobertura del sistema para JLoss ---
-    # Comenta los que no quieras incluir en el agregado sistemico.
-    "bancoestado":         {"cmf": "012", "ticker": None},   # estatal
-    "scotiabank_chile":    {"cmf": "014", "ticker": None},
-    "banco_internacional": {"cmf": "009", "ticker": None},
-    "banco_falabella":     {"cmf": "051", "ticker": None},
-    "banco_ripley":        {"cmf": "053", "ticker": None},
-    "banco_consorcio":     {"cmf": "055", "ticker": None},
-    "bbva_chile":          {"cmf": "504", "ticker": None},   # BBVA Chile (absorbido por Scotiabank 2018)
-    "btg_pactual_chile":   {"cmf": "059", "ticker": None},
 }
 LISTED_BANKS = {k: v for k, v in BANKS.items() if v["ticker"]}   # subconjunto con precio de mercado
 # --- Mapeo de cuentas del Balance Mensual CMF -> campos del esquema v8 ---

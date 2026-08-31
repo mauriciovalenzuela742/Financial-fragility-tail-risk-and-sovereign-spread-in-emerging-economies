@@ -1,10 +1,12 @@
 """
 extract_bulgaria.py — Inputs JLoss para Bulgaria (Hito 4).
 
-Fuente: BNB (Bulgarian National Bank) + Bolsa de Sofia. Mayoria de bancos son filiales no listadas -> PD contable. Sin API REST por banco: ensamblar long-format.
+Fuente: BNB (Bulgarian National Bank) + Bolsa de Sofia. Sin API REST por banco: ensamblar long-format.
 Precios: yfinance (BSE-Sofia); solo bancos listados.
 Criterio del profesor (bonos vs resto): LP = deuda emitida (titulos/bonos + subordinada); CP = resto.
-\nMayoria filiales no listadas (UniCredit Bulbank, DSK, UBB, Postbank) -> PD contable; panel historico muy delgado.
+DECISION DEL COMITE (ago-2026): no se usa PD contable. UniCredit Bulbank, DSK, UBB, CCB y
+Postbank son filiales no listadas -> EXCLUIDAS del universo. Solo queda Fibank (unico banco
+listado); panel historico muy delgado (n=1, por debajo de MIN_BANKS).
 ESTADO: configuracion delgada sobre jloss_common (long-format -> bonos-vs-resto). CONFIRMAR en
 runtime los nombres de cuenta del estado financiero / regulador y correr reconcile_bonds_vs_rest.
 
@@ -20,11 +22,6 @@ COUNTRY = "bulgaria"
 
 BANKMAP = {
     "fibank": {"ticker": "5F4.SF", "names": ['FIRST INVESTMENT BANK', 'FIBANK']},
-    "ccb": {"ticker": None, "names": ['CENTRAL COOPERATIVE BANK']},
-    "unicredit_bulbank": {"ticker": None, "names": ['UNICREDIT BULBANK']},
-    "dsk": {"ticker": None, "names": ['DSK BANK', 'BANKA DSK']},
-    "ubb": {"ticker": None, "names": ['UNITED BULGARIAN BANK', 'UBB']},
-    "postbank": {"ticker": None, "names": ['POSTBANK', 'EUROBANK BULGARIA']},
 }
 
 ACCOUNT_MAP = {

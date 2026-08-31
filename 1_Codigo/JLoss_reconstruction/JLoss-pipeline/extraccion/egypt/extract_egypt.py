@@ -4,7 +4,9 @@ extract_egypt.py — Inputs JLoss para Egypt (Hito 5).
 Fuente: CBE (agregado) + estados de los bancos cotizados en EGX. Sin API REST por banco: ensamblar long-format.
 Precios: yfinance (.CA (EGX)); solo bancos listados.
 Criterio del profesor (bonos vs resto): LP = deuda emitida (titulos/bonos + subordinada); CP = resto.
-\nSolo CIB tiene liquidez/cobertura solida; el resto mayormente -> PD contable (book_pd).
+DECISION DEL COMITE (ago-2026): no se usa PD contable. Los 9 bancos de BANKMAP ya tienen ticker
+de mercado; National Bank of Egypt y Banque Misr (los dos mas grandes del sistema) son estatales
+y no cotizan -> quedan fuera del universo, no hay PD contable de respaldo para ellos.
 ESTADO: configuracion delgada sobre jloss_common (long-format -> bonos-vs-resto). CONFIRMAR en
 runtime los nombres de cuenta y correr reconcile_bonds_vs_rest.
 

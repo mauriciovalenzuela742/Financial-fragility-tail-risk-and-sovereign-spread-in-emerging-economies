@@ -4,7 +4,11 @@ extract_pakistan.py — Inputs JLoss para Pakistan (Hito 4).
 Fuente: SBP 'Financial Statements Analysis of the Financial Sector' (compendio trimestral) + estados de los bancos en PSX. Sin API REST por banco: ensamblar long-format.
 Precios: yfinance (PSX); solo bancos listados.
 Criterio del profesor (bonos vs resto): LP = deuda emitida (titulos/bonos + subordinada); CP = resto.
-\nCobertura de precios via yfinance pobre para PSX: tickers=None -> estos bancos caen a PD contable (book_pd).
+DECISION DEL COMITE (ago-2026): no se usa PD contable. Los 19 bancos de abajo SI cotizan en la
+PSX (confirmado via Bloomberg, ej. HBL/UBL/MCB/NBP/ABL/BAFL PA Equity) pero yfinance no tiene
+cobertura confiable de precios para PSX -> sin market PD utilizable con esta fuente, quedan
+FUERA del universo (no se sustituye por PD contable). Si se consigue el precio via Bloomberg u
+otra fuente, se reincorporan con su ticker real en vez de None.
 ESTADO: configuracion delgada sobre jloss_common (long-format -> bonos-vs-resto). CONFIRMAR en
 runtime los nombres de cuenta del estado financiero / regulador y correr reconcile_bonds_vs_rest.
 
@@ -19,26 +23,8 @@ import jloss_common as jc
 COUNTRY = "pakistan"
 
 BANKMAP = {
-    "hbl": {"ticker": None, "names": ['HABIB BANK', 'HBL']},
-    "mcb": {"ticker": None, "names": ['MCB BANK', 'MUSLIM COMMERCIAL']},
-    "ubl": {"ticker": None, "names": ['UNITED BANK', 'UBL']},
-    "nbp_pak": {"ticker": None, "names": ['NATIONAL BANK OF PAKISTAN']},
-    "abl": {"ticker": None, "names": ['ALLIED BANK', 'ABL']},
-    "bafl": {"ticker": None, "names": ['BANK ALFALAH', 'ALFALAH']},
-    "meezan": {"ticker": None, "names": ['MEEZAN']},
-    "scb_pak": {"ticker": None, "names": ['STANDARD CHARTERED']},
-    "bank_al_habib": {"ticker": None, "names": ['BANK AL HABIB', 'AL HABIB']},
-    "faysal": {"ticker": None, "names": ['FAYSAL']},
-    "askari": {"ticker": None, "names": ['ASKARI']},
-    "soneri": {"ticker": None, "names": ['SONERI']},
-    "js_bank": {"ticker": None, "names": ['JS BANK']},
-    "bop": {"ticker": None, "names": ['BANK OF PUNJAB', 'PUNJAB']},
-    "bok": {"ticker": None, "names": ['BANK OF KHYBER', 'KHYBER']},
-    "habib_metro": {"ticker": None, "names": ['HABIB METROPOLITAN', 'HABIBMETRO']},
-    "bankislami": {"ticker": None, "names": ['BANKISLAMI', 'BANK ISLAMI']},
-    "summit": {"ticker": None, "names": ['SUMMIT BANK']},
-    "samba_pak": {"ticker": None, "names": ['SAMBA']},
-    "sindh_bank": {"ticker": None, "names": ['SINDH BANK']},
+    # Sin ticker de precio utilizable (ver nota arriba) -> universo vacio hasta conseguir
+    # una fuente de precio distinta de yfinance para PSX. NO se completa con PD contable.
 }
 
 ACCOUNT_MAP = {

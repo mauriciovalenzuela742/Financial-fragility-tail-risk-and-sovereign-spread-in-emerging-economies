@@ -26,40 +26,17 @@ import jloss_common as jc
 
 COUNTRY = "colombia"
 
-# 30 establecimientos bancarios vigilados por la SFC (los que descargaste). Sólo Bancolombia tiene
-# precio fiable en yfinance (ADR CIB); el resto -> PD contable (book_pd). 'names' = subcadenas que
-# identifican al banco en la etiqueta del long-format (coinciden con build_colombia_long).
+# 30 establecimientos bancarios vigilados por la SFC (los que descargaste).
+# DECISION DEL COMITE (ago-2026): no se usa PD contable -> solo bancos con ticker real quedan.
+# 'names' = subcadenas que identifican al banco en la etiqueta del long-format (coinciden con
+# build_colombia_long).
+#
+# NOTA (no ejecutada, opcional a futuro): Grupo Aval (PFAVAL CB Equity) y Davivienda
+# (PFDAVVND CB Equity) SI cotizan (confirmado via Bloomberg) pero no tienen ticker yfinance
+# fiable mapeado aqui -> hoy quedan excluidos igual que el resto de no-listados, no por PD
+# contable sino por falta de fuente de precio ya integrada al extractor.
 BANKMAP = {
     "bancolombia":        {"ticker": "CIB", "names": ["BANCOLOMBIA", "BANCO DE COLOMBIA"]},
-    "banco_de_bogota":    {"ticker": None,  "names": ["BANCO DE BOGOTA", "BANCO DE BOGOTÁ"]},
-    "davivienda":         {"ticker": None,  "names": ["DAVIVIENDA"]},
-    "bbva_colombia":      {"ticker": None,  "names": ["BILBAO VIZCAYA", "BBVA COLOMBIA"]},
-    "banco_de_occidente": {"ticker": None,  "names": ["BANCO DE OCCIDENTE", "OCCIDENTE"]},
-    "banco_popular":      {"ticker": None,  "names": ["BANCO POPULAR"]},
-    "banco_caja_social":  {"ticker": None,  "names": ["CAJA SOCIAL"]},
-    "banco_agrario":      {"ticker": None,  "names": ["BANCO AGRARIO", "BANAGRARIO"]},
-    "av_villas":          {"ticker": None,  "names": ["AV VILLAS"]},
-    "gnb_sudameris":      {"ticker": None,  "names": ["GNB SUDAMERIS", "SUDAMERIS"]},
-    "citibank_colombia":  {"ticker": None,  "names": ["CITIBANK"]},
-    "davibank":           {"ticker": None,  "names": ["DAVIBANK"]},
-    "itau_colombia":      {"ticker": None,  "names": ["ITAU COLOMBIA", "ITAÚ COLOMBIA", "BANCO ITAU"]},
-    "santander_colombia": {"ticker": None,  "names": ["SANTANDER"]},
-    "pichincha":          {"ticker": None,  "names": ["BANCO PICHINCHA", "PICHINCHA"]},
-    "falabella":          {"ticker": None,  "names": ["FALABELLA"]},
-    "bancamia":           {"ticker": None,  "names": ["BANCAMIA"]},
-    "bancien":            {"ticker": None,  "names": ["BANCIEN", "BAN100"]},
-    "btg_pactual":        {"ticker": None,  "names": ["BTG PACTUAL"]},
-    "contactar":          {"ticker": None,  "names": ["CONTACTAR"]},
-    "coomeva":            {"ticker": None,  "names": ["COOMEVA"]},
-    "coopcentral":        {"ticker": None,  "names": ["COOPCENTRAL"]},
-    "finandina":          {"ticker": None,  "names": ["FINANDINA"]},
-    "jp_morgan":          {"ticker": None,  "names": ["J.P. MORGAN", "JP MORGAN", "J P MORGAN"]},
-    "lulo":               {"ticker": None,  "names": ["LULO"]},
-    "mibanco":            {"ticker": None,  "names": ["MIBANCO"]},
-    "mundo_mujer":        {"ticker": None,  "names": ["MUNDO MUJER"]},
-    "serfinanza":         {"ticker": None,  "names": ["SERFINANZA"]},
-    "banco_union":        {"ticker": None,  "names": ["BANCO UNION", "BANCO UNIÓN"]},
-    "banco_w":            {"ticker": None,  "names": ["BANCO W"]},
 }
 
 # etiquetas que emite parse_sfc_xbrl.py -> campos v8 (substring, mayúsculas).

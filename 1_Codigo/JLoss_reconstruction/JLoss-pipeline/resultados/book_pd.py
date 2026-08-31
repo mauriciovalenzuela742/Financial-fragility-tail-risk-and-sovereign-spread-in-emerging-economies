@@ -1,4 +1,10 @@
 """
+RECHAZADO por decision del comite (ago-2026): no se mezcla PD de mercado con PD contable en
+ningun pais del pipeline. Este modulo NO se usa en el motor vigente (jloss_engine.py, que nunca
+lo importo ni lo llamo) ni en ningun extractor tras la limpieza de esa misma fecha. Se conserva
+en disco por historial (ver CONTROL_DE_VERSIONES.md); no reintroducir sin una decision explicita
+que revierta la de ago-2026.
+
 book_pd.py — PD contable (z-score) para bancos NO listados, y fusion con la PD de mercado.
 
 Para no listados no hay E de mercado ni sigma de equity, asi que la PD de Merton/KMV no es

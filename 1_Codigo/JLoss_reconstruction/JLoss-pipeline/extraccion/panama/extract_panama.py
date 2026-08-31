@@ -8,7 +8,12 @@ Acepta dos nomenclaturas en --raw:
 El año se lee SIEMPRE del contenido del archivo (no del nombre).
 
 Decisiones (ver QC): universo = SBN (Oficiales + Lic. General; sin Lic. Internacional);
-LP = OBLIGACIONES, CP = DEPOSITOS + OTROS PASIVOS; PD contable para todos.
+LP = OBLIGACIONES, CP = DEPOSITOS + OTROS PASIVOS.
+
+DECISIÓN DEL COMITÉ (ago-2026): no se usa PD contable en ningún país. Ningún banco panameño del
+universo SBN tiene equity listado con cobertura confiable -> BANKMAP queda vacío y este país NO
+produce JLoss bajo la política vigente, hasta que exista un banco panameño cotizado y líquido.
+No se sustituye con book_pd.
 
 Outputs:
   balance_panama.csv  (countryname,bankname,pd_source,date,year,month,tot_asset,total_liab,
@@ -25,11 +30,12 @@ import sbp_parse as sp
 
 COUNTRY = "panama"
 
-BANKMAP = {k: {"ticker": None, "pd_source": "book"} for k in [
-    "banco_nacional", "caja_ahorros", "banco_general", "banistmo", "bac_panama",
-    "global_bank", "banesco", "bancolombia_pa", "multibank", "credicorp_bank",
-    "mercantil", "metrobank", "towerbank", "aliado", "st_george", "unibank", "bct_bank"]}
-# "bladex": {"ticker": "BLX", "pd_source": "market"}  # opcional NYSE
+BANKMAP = {}
+# Universo SBN previo (banco_nacional, caja_ahorros, banco_general, banistmo, bac_panama,
+# global_bank, banesco, bancolombia_pa, multibank, credicorp_bank, mercantil, metrobank,
+# towerbank, aliado, st_george, unibank, bct_bank) — ninguno tiene equity listado util;
+# ya no se incluyen (no se usa PD contable). Bladex (BLX, NYSE) es el unico candidato real
+# con ticker si se confirma cobertura y se lo agrega explicitamente: {"ticker": "BLX"}.
 
 DL_RE = re.compile(r"^(balance|estado)_(.+)_(\d{4})\.xls[x]?$", re.I)
 RAW_RE = re.compile(r"^RE-(BALANCE|ESTADO)-BANCO-en-(.+)\.xls[x]?$", re.I)

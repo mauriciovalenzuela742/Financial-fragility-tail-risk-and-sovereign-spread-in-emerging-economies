@@ -41,32 +41,16 @@ COUNTRY = "peru"
 # BANKMAP: clave panel -> {ticker, pd_source, names(substring NORMALIZADO)}.
 # 'names' incluye ALIAS HISTÓRICOS (la SBS renombró varias entidades).
 # Solo BCP(BAP) e Interbank(IFS) tienen equity listado líquido -> market PD.
-# El resto -> book PD contable. Bancos no mapeados NO se descartan: caen a book
-# con un slug del nombre SBS (para no perder entidades de la banca múltiple).
+# DECISIÓN DEL COMITÉ (ago-2026): no se usa PD contable. El resto de la banca múltiple
+# (BBVA Perú, Scotiabank, Mibanco, etc.) queda FUERA del universo; los bancos no mapeados
+# se DESCARTAN en vez de caer a un slug con book PD.
+#
+# NOTA (no ejecutada, opcional a futuro): BBVA Perú/Continental sí cotiza en BVL como
+# CONTINC1 (confirmado vía Bloomberg) — se podría subir a "market" con ese ticker.
 # ---------------------------------------------------------------------------
 BANKMAP = [
     ("bcp",               "BAP",  "market", ["BANCO DE CREDITO DEL PERU", "BCP"]),
     ("interbank",         "IFS",  "market", ["INTERBANK"]),
-    ("bbva_peru",         None,   "book",   ["BBVA", "CONTINENTAL"]),            # ex-Banco Continental
-    ("banco_comercio",    None,   "book",   ["BANCOM", "DE COMERCIO"]),
-    ("pichincha",         None,   "book",   ["PICHINCHA", "FINANCIERO"]),       # ex-Banco Financiero
-    ("banbif",            None,   "book",   ["INTERAMERICANO DE FINANZAS", "BANBIF"]),
-    ("scotiabank_peru",   None,   "book",   ["SCOTIABANK", "WIESE", "SUDAMERICANO"]),
-    ("citibank_peru",     None,   "book",   ["CITIBANK"]),
-    ("mibanco",           None,   "book",   ["MIBANCO"]),
-    ("gnb_peru",          None,   "book",   ["GNB"]),
-    ("falabella_peru",    None,   "book",   ["FALABELLA"]),
-    ("santander_consumer",None,   "book",   ["SANTANDER CONSUMER"]),            # antes que santander_peru
-    ("santander_peru",    None,   "book",   ["SANTANDER"]),
-    ("ripley_peru",       None,   "book",   ["RIPLEY"]),
-    ("alfin_peru",        None,   "book",   ["ALFIN", "AZTECA"]),               # ex-Banco Azteca
-    ("icbc_peru",         None,   "book",   ["ICBC"]),
-    ("bank_of_china",     None,   "book",   ["BANK OF CHINA", "DE CHINA"]),
-    ("bci_peru",          None,   "book",   ["BCI"]),
-    ("compartamos",       None,   "book",   ["COMPARTAMOS"]),
-    ("hsbc_peru",         None,   "book",   ["HSBC"]),                          # histórico (hasta ~2013)
-    ("deutsche_peru",     None,   "book",   ["DEUTSCHE"]),                      # histórico
-    ("cencosud_peru",     None,   "book",   ["CENCOSUD"]),                      # histórico (2012-2019)
 ]
 
 ABBR2MONTH = {"en":1,"fe":2,"ma":3,"ab":4,"my":5,"jn":6,
@@ -87,12 +71,13 @@ def _slug(s):
 
 
 def map_bank(sbs_name):
-    """(panel_key, ticker, pd_source). No mapeado -> book con slug."""
+    """(panel_key, ticker, pd_source) o None si el banco no cotiza.
+    No mapeado -> DESCARTADO (no se usa PD contable, decisión del comité ago-2026)."""
     n = _norm(sbs_name)
     for key, ticker, src, subs in BANKMAP:
         if any(sub in n for sub in subs):
             return key, ticker, src
-    return _slug(sbs_name), None, "book"
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -225,7 +210,10 @@ def parse_file(path):
 
     recs = []
     for name, col in banks_b:
-        key, ticker, src = map_bank(name)
+        mapped = map_bank(name)
+        if mapped is None:
+            continue  # banco sin ticker de mercado -> descartado (no se usa PD contable)
+        key, ticker, src = mapped
         tot_asset = _num(bs[r_act][col]) if r_act is not None else None
         tot_liab  = _num(bs[r_pas][col]) if r_pas is not None else None
         equity    = _num(bs[r_pat][col]) if r_pat is not None else None

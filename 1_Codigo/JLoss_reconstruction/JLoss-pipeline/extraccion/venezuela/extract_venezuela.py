@@ -15,10 +15,12 @@ datos públicos NO es viable con el aparato de Merton, por razones estructurales
 
 CURSO DE ACCIÓN RECOMENDADO: conservar la serie histórica de Venezuela del panel de referencia
 (la calculada en su momento) y DOCUMENTAR explícitamente por qué no se actualiza a nivel banco,
-en lugar de forzar una extracción de baja calidad que contamine el panel. Alternativa parcial:
-si se requiere una observación reciente, usar exclusivamente PD contable (book_pd) sobre ratios
-(CAR, ROA) expresados en términos reales o en proporción del balance —que son invariantes a la
-unidad monetaria— y marcar la observación como no comparable con el resto del panel.
+en lugar de forzar una extracción de baja calidad que contamine el panel.
+
+DECISIÓN DEL COMITÉ (ago-2026): no se usa PD contable en ningún país del pipeline. La alternativa
+parcial que se consideraba antes (book_pd sobre CAR/ROA) queda descartada — ninguno de los bancos
+de BANKMAP tiene equity listado útil, así que Venezuela no produce JLoss bajo la política vigente,
+punto. No se busca sustituto contable.
 
 Fuente nominal: SUDEBAN (Superintendencia de las Instituciones del Sector Bancario).
 Bancos relevantes (mayormente sin precio de mercado útil): Banco de Venezuela, Banesco,
@@ -34,13 +36,7 @@ import jloss_common as jc
 
 COUNTRY = "venezuela"
 
-BANKMAP = {
-    "banco_de_venezuela": {"ticker": None, "names": ["BANCO DE VENEZUELA"]},
-    "banesco":            {"ticker": None, "names": ["BANESCO"]},
-    "banco_mercantil":    {"ticker": None, "names": ["MERCANTIL"]},
-    "bbva_provincial":    {"ticker": None, "names": ["PROVINCIAL", "BBVA PROVINCIAL"]},
-    "bod":                {"ticker": None, "names": ["OCCIDENTAL DE DESCUENTO", "BOD"]},
-}
+BANKMAP = {}  # ninguno de los bancos venezolanos tiene equity listado util -> universo vacio.
 ACCOUNT_MAP = {
     "bonds": ["OBLIGACIONES", "BONOS", "TITULOS DE DEUDA EMITIDOS", "DEUDA SUBORDINADA"],
     "tot_asset": ["TOTAL ACTIVO", "ACTIVO TOTAL"],

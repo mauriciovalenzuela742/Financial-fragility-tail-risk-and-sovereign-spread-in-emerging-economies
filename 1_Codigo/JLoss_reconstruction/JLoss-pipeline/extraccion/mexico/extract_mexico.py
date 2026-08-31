@@ -8,6 +8,9 @@ exporta desde el portal o se descargan los archivos del portafolio (long o wide)
 Fuente precios: yfinance, sufijo .MX (BMV). Solo bancos listados (pocos; varios son filiales
 no listadas en Mexico -> cobertura parcial via matriz extranjera).
 
+DECISION DEL COMITE (ago-2026): no se usa PD contable. BBVA Mexico, Banamex, Santander Mexico,
+HSBC Mexico y Scotiabank Mexico (filiales sin ticker propio en BMV) quedan FUERA del universo.
+
 ESTADO: scaffold. Asume export long-format (entidad, concepto, periodo, saldo).
 CONFIRMAR nombres de columna/concepto del export vigente antes de la corrida masiva.
 
@@ -24,11 +27,6 @@ COUNTRY = "mexico"
 # bankname_panel : {ticker .MX o matriz, clave CNBV, nombres (substring)}
 BANKMAP = {
     "banorte":         {"ticker": "GFNORTEO.MX", "cnbv": "072", "names": ["BANORTE"]},
-    "bbva_mexico":     {"ticker": None,          "cnbv": "012", "names": ["BBVA", "BANCOMER"]},
-    "banamex":         {"ticker": None,          "cnbv": "002", "names": ["BANAMEX", "CITIBANAMEX"]},
-    "santander_mexico":{"ticker": None,          "cnbv": "014", "names": ["SANTANDER"]},
-    "hsbc_mexico":     {"ticker": None,          "cnbv": "021", "names": ["HSBC"]},
-    "scotiabank_mexico":{"ticker": None,         "cnbv": "044", "names": ["SCOTIABANK"]},
     "inbursa":         {"ticker": "GFINBURO.MX", "cnbv": "036", "names": ["INBURSA"]},
     "banco_bajio":     {"ticker": "BBAJIOO.MX",  "cnbv": "030", "names": ["BAJIO"]},
     "banregio":        {"ticker": "GFREGIO.MX",  "cnbv": "058", "names": ["BANREGIO", "REGIONAL DE MONTERREY"]},
