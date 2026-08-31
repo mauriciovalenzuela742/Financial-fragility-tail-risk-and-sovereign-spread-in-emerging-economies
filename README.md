@@ -5,7 +5,7 @@ Tesis de Magíster en Economía Aplicada (Universidad de Chile). Investiga por q
 el spread soberano de las economías emergentes por encima de la suma de sus efectos
 individuales, desde dos aristas:
 
-- **Capítulo empírico** — estima el término de interacción $JLoss \times GaR$ sobre el CDS
+- **Capítulo empírico** — estima el término de interacción `JLoss × GaR` sobre el CDS
   soberano en un panel de economías emergentes.
 - **Capítulo teórico (organización industrial)** — modelo de competencia bancaria à la Cournot
   del que esa complementariedad es una predicción de primer orden, con una predicción
@@ -38,11 +38,11 @@ Merton lee incumplimiento inminente) y Bulgaria (un solo banco cotizado). Ver
 
 | Hipótesis | Resultado |
 |---|---|
-| **H1** — nivel: $JLoss \to$ spread | Plausible; IV *shift-share* débil-a-límite ($F \approx 9{,}5$). |
-| **H3 / complementariedad** — $\theta$ (interacción $JLoss \times GaR$) $< 0$ | **Signo y forma respaldados** — $\hat\theta = -0{,}35$; efecto marginal de la fragilidad creciente a medida que empeora el riesgo de cola; modelo de umbral de Hansen lo corrobora ($+8{,}1$ vs $+2{,}3$ pb por régimen). Significancia **marginal**: $p = 0{,}056$ (Driscoll–Kraay), $0{,}035$ (*wild cluster bootstrap*), $0{,}001$ (*cluster* por país). |
-| **Frontera temporal** | La interacción **no se identifica antes de 2020** ($t = -1{,}02$); descansa en los episodios de estrés macrofinanciero recientes. |
-| **H4a** — $\beta_3 > 0$ (parametrización directa de la triple interacción) | Signo predicho, no significativo. |
-| **H4b** — $\beta_4 > 0$: amplificación por concentración | **Rechazada** — $\hat\beta_4 = -392$ ($t = -2{,}34$): signo contrario al predicho y significativo en esa dirección. Contrasta con la reconstrucción previa con datos regulatorios ($+721$); la explicación más probable es que homogeneizar la métrica de fragilidad comprime la dispersión transversal sobre la que se identifica ese término. |
+| **H1** — nivel: `JLoss → spread` | Plausible; IV *shift-share* débil-a-límite (F ≈ 9,5). |
+| **H3 / complementariedad** — θ (interacción `JLoss × GaR`) < 0 | **Signo y forma respaldados** — θ̂ = −0,35; el efecto marginal de la fragilidad crece a medida que empeora el riesgo de cola, y el modelo de umbral de Hansen lo corrobora (+8,1 vs +2,3 pb por régimen). Significancia **marginal**: p = 0,056 (Driscoll–Kraay), 0,035 (*wild cluster bootstrap*), 0,001 (*cluster* por país). |
+| **Frontera temporal** | La interacción **no se identifica antes de 2020** (t = −1,02); descansa en los episodios de estrés macrofinanciero recientes. |
+| **H4a** — β₃ > 0 (parametrización directa de la triple interacción) | Signo predicho, no significativo. |
+| **H4b** — β₄ > 0: amplificación por concentración | **Rechazada** — β̂₄ = −392 (t = −2,34): signo contrario al predicho y significativo en esa dirección. Contrasta con la reconstrucción previa con datos regulatorios (+721); la explicación más probable es que homogeneizar la métrica de fragilidad comprime la dispersión transversal sobre la que se identifica ese término. |
 
 Números canónicos completos y trazables:
 [`1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`](1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md).
