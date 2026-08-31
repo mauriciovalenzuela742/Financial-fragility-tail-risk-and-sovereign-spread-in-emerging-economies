@@ -1,0 +1,19 @@
+country,jloss_q,gar_q,cds_q,cds_cobertura,n_estimacion,ventana_est
+philippines,91,89,91,continua,89,2004Q1..2026Q1
+southafrica,91,89,91,continua,89,2004Q1..2026Q1
+indonesia,91,89,88,continua,86,2004Q4..2026Q1
+china,81,79,91,continua,79,2006Q3..2026Q1
+mexico,91,77,91,continua,77,2006Q4..2025Q4
+brazil,91,75,91,continua,75,2007Q3..2026Q1
+chile,91,75,91,continua,75,2007Q3..2026Q1
+colombia,87,70,91,continua,70,2008Q4..2026Q1
+peru,91,66,91,continua,66,2009Q4..2026Q1
+turkey,91,63,91,continua,63,2010Q3..2026Q1
+malaysia,91,40,91,continua,40,2016Q2..2026Q1
+hungary,91,89,14,rala,14,2012Q3..2015Q4
+poland,91,89,14,rala,14,2012Q3..2015Q4
+pakistan,82,38,7,rala,1,2026Q1..2026Q1
+argentina,91,0,78,continua,0,-
+egypt,90,0,26,rala,0,-
+india,78,76,0,sin serie,0,-
+russia,69,0,14,rala,0,-

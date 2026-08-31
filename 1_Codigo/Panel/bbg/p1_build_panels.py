@@ -1,24 +1,30 @@
 # -*- coding: utf-8 -*-
 """
-p1_build_panels.py  --  Panel de regresiones anclado en Bloomberg
-=================================================================
-Reconstruye las dos bases de la tesis usando, como insumos primarios:
+p1_build_panels.py  --  UN SOLO panel de regresiones anclado en Bloomberg.
+
+Insumos primarios (todos Bloomberg):
   - JLoss  : Panel_JLoss_v9_bloomberg.csv  (motor v8, PD Merton/KMV, datos Bloomberg)
-  - EMBI   : CDS soberano 5Y de Bloomberg  (output_macro/<pais>/EMBI_<pais>.csv), pb
+  - spread : CDS soberano 5Y de Bloomberg  (output_macro/<pais>/EMBI_<pais>.csv), pb.
+             DONDE NO HAY CDS LA CELDA QUEDA VACIA -- no se rellena con EMBI de bonos ni
+             proxies, para no ensuciar la metodologia.
   - global : VIX, UST10Y, US HY spread de Bloomberg (output_macro/GLOBAL/)
-  - GaR    : gar_panel_all17.csv  (regresion cuantilica CEMLA; sus insumos FCI son
-             estadisticas nacionales -- CPI/PIB/bolsa/REER/10Y -- que NO forman parte
-             de la extraccion Bloomberg y se mantienen; ver RESUMEN)
-  - controles domesticos: controls_panel.csv  (5 LatAm, deuda/fiscal/reservas/CA/infl/reer)
-  - HHI    : hhi_nivel.csv + hhi_anual.csv (+ GFDD via API para paises nuevos)
+  - GaR    : gar_panel_all17.csv  (regresion cuantilica CEMLA; insumos FCI = estadisticas
+             nacionales, ver Anexo B)
+  - controles domesticos: controls_all_bbg.csv (p0, los 16 paises)
+  - HHI    : hhi_nivel.csv + hhi_anual.csv (+ GFDD via API para los paises nuevos)
+
+El panel incluye TODAS las economias de las que hay datos. Un pais sin CDS (India) o sin
+GaR (Argentina, Egipto, Rusia) aparece en el roster pero no aporta filas a la estimacion.
+Corea del Sur queda EXCLUIDA: JLoss no valido (E/D mercado ~0.04, "Korea discount";
+ver DIAGNOSTICO_COREA.md).
 
 Salidas -> 1_Codigo/Panel/bbg/
   embi_bbg_quarterly.csv        CDS 5Y -> trimestral, todos los paises + flag de cobertura
-  cobertura_embi_bbg.csv        ventana y n de trimestres por pais
-  Panel_principal_bbg.csv       5 LatAm, con controles domesticos
-  Panel_ampliado_bbg.csv        12 paises con CDS continuo 2004-2026 + GaR + JLoss
-  panel_real_principal_bbg.csv  plantilla fase5 (H4a/H4b), 5 paises
-  panel_real_ampliado_bbg.csv   plantilla fase5, subset con HHI disponible
+  cobertura_panel_bbg.csv       por pais: JLoss / GaR / CDS_q / en_estimacion
+  Panel_bloomberg.csv           EL panel (country, quarter, EMBI_cds, JLoss, GaR..., 6 controles,
+                                VIX/UST10Y/HY, HHI_struct)
+  panel_real_bbg.csv            plantilla fase5 (H4a/H4b): country,time,quarter,EMBI,JLoss,D,
+                                HHI,HHI_anual,debt,growth_q,gfac
 """
 import json
 import os
@@ -27,28 +33,23 @@ import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PANEL = os.path.dirname(HERE)                      # 1_Codigo/Panel
-COD = os.path.dirname(PANEL)                       # 1_Codigo
+PANEL = os.path.dirname(HERE)
+COD = os.path.dirname(PANEL)
 BBG_MACRO = os.path.join(COD, "Bloomberg_extraction", "output_macro")
 JLOSS_BBG = os.path.join(COD, "JLoss_reconstruction", "jloss_bloomberg",
                          "Panel_JLoss_v9_bloomberg.csv")
 OUT = HERE
 
-LATAM = ["brazil", "chile", "colombia", "mexico", "peru"]
-# paises con CDS Bloomberg continuo (>=60 trimestres, 2004->2026) e insumos GaR.
-# southkorea EXCLUIDO: su valor de mercado del equity es ~4% del punto de default
-# (E/D mediana 0.038 vs 0.15-0.34 en el resto del panel), reflejo del "Korea discount"
-# estructural en la valoracion de los holdings bancarios (P/B ~0.3-0.5 persistente por
-# gobernanza/payout, no por solvencia). El Merton-KMV lo lee como default inminente
-# (PD mediana 0.55; JLoss 25-47) -> serie no comparable. La reconstruccion regulatoria
-# v8 tampoco incluia Corea. Ver bbg/DIAGNOSTICO_COREA.md.
-AMPLIADO = ["brazil", "chile", "china", "colombia", "indonesia", "malaysia", "mexico",
-            "peru", "philippines", "southafrica", "turkey"]
-EXCLUIDOS = {"southkorea": "E/D=0.038 (Korea discount); Merton PD no creible"}
-MIN_Q_EMBI = 60          # trimestres minimos de CDS para considerar la serie utilizable
-
+EXCLUIDOS = {
+    "southkorea": "JLoss no valido: E/D mercado ~0.04 (Korea discount), Merton PD ~0.55, "
+                  "JLoss 25-47 (ver DIAGNOSTICO_COREA.md)",
+    "bulgaria": "JLoss no sistemico: 1 banco cotizado (FIBank), 76/76 trimestres "
+                "below_min_banks, JLoss mediana 29 -- no es una medida a nivel pais",
+}
+MIN_Q_CDS_UTIL = 60          # umbral para marcar la serie de CDS como "continua"
 GFDD_ISO = {"malaysia": "MYS", "philippines": "PHL", "southkorea": "KOR",
-            "india": "IND", "argentina": "ARG"}
+            "india": "IND", "argentina": "ARG", "egypt": "EGY", "russia": "RUS",
+            "hungary": "HUN", "pakistan": "PAK"}
 
 
 # ----------------------------------------------------------------------
@@ -66,19 +67,19 @@ def embi_quarterly():
         if s.empty:
             continue
         q = (s.set_index("DATES")["EMBI"].resample("QE").mean().dropna()
-             .rename("EMBI_bps").reset_index())
+             .rename("EMBI_cds").reset_index())
         q["quarter"] = q["DATES"].dt.to_period("Q").astype(str)
         q["country"] = d
-        rows.append(q[["country", "quarter", "EMBI_bps"]])
-        cov.append(dict(country=d, primer=q["quarter"].min(), ultimo=q["quarter"].max(),
-                        n_q=len(q), usable=len(q) >= MIN_Q_EMBI))
+        rows.append(q[["country", "quarter", "EMBI_cds"]])
+        n = len(q)
+        cov.append(dict(country=d, cds_primer=q["quarter"].min(), cds_ultimo=q["quarter"].max(),
+                        cds_q=n,
+                        cds_cobertura=("continua" if n >= MIN_Q_CDS_UTIL else
+                                       "rala" if n >= 5 else "sin serie")))
     embi = pd.concat(rows, ignore_index=True)
-    covdf = pd.DataFrame(cov).sort_values("n_q", ascending=False)
+    covdf = pd.DataFrame(cov).sort_values("cds_q", ascending=False)
     embi.to_csv(os.path.join(OUT, "embi_bbg_quarterly.csv"), index=False)
-    covdf.to_csv(os.path.join(OUT, "cobertura_embi_bbg.csv"), index=False)
-    print("EMBI Bloomberg (CDS 5Y) — cobertura trimestral:")
-    print(covdf.to_string(index=False))
-    return embi
+    return embi, covdf
 
 
 def load_jloss():
@@ -97,12 +98,10 @@ def load_gar():
 
 
 def load_global_bbg():
-    """VIX, UST10Y, US HY spread de Bloomberg -> trimestral."""
     g = os.path.join(BBG_MACRO, "GLOBAL")
     out = None
     for name, col in [("VIX", "VIX"), ("UST10Y", "UST10Y"), ("HY_SPREAD", "US_HY_spread")]:
-        f = os.path.join(g, f"{name}.csv")
-        s = pd.read_csv(f)
+        s = pd.read_csv(os.path.join(g, f"{name}.csv"))
         dcol = s.columns[0]
         s[dcol] = pd.to_datetime(s[dcol], dayfirst=True, errors="coerce")
         s = s.dropna()
@@ -113,7 +112,6 @@ def load_global_bbg():
         out = q if out is None else out.merge(q, on="quarter", how="outer")
     out["UST10Y_log"] = np.log(out["UST10Y"])
     out["US_HY_spread_log"] = np.log(out["US_HY_spread"])
-    # spread on/off-run: se conserva del archivo previo (no es Bloomberg-primario)
     prev = pd.read_csv(os.path.join(PANEL, "global_controls_quarterly.csv"))
     out = out.merge(prev[["quarter", "OnOffRun_spread", "OnOffRun_spread_log"]],
                     on="quarter", how="left")
@@ -122,20 +120,19 @@ def load_global_bbg():
 
 
 def load_controls():
-    c = pd.read_csv(os.path.join(PANEL, "controls_panel.csv"))
+    c = pd.read_csv(os.path.join(HERE, "controls_all_bbg.csv"))
     c["country"] = c["country"].str.lower()
     return c
 
 
 def fetch_hhi_missing(countries):
-    """GFDD.OI.01 (concentracion 3 bancos, %) via API World Bank para paises sin HHI local."""
-    iso = ",".join(GFDD_ISO[c] for c in countries if c in GFDD_ISO)
+    iso = "/".join(GFDD_ISO[c] for c in countries if c in GFDD_ISO)
     if not iso:
         return pd.DataFrame(columns=["country", "year", "HHI_anual"])
-    url = (f"https://api.worldbank.org/v2/country/{iso.replace(',', ';')}"
-           f"/indicator/GFDD.OI.01?format=json&per_page=600&date=2004:2023")
+    url = (f"https://api.worldbank.org/v2/country/{iso.replace('/', ';')}"
+           f"/indicator/GFDD.OI.01?format=json&per_page=600&date=2000:2023")
     try:
-        r = json.load(urllib.request.urlopen(url, timeout=20))[1]
+        r = json.load(urllib.request.urlopen(url, timeout=25))[1]
     except Exception as e:
         print(f"  [!] GFDD API fallo: {e}")
         return pd.DataFrame(columns=["country", "year", "HHI_anual"])
@@ -146,89 +143,98 @@ def fetch_hhi_missing(countries):
     return pd.DataFrame(rows)
 
 
-def build_hhi():
-    niv = pd.read_csv(os.path.join(PANEL, "hhi_nivel.csv"))
-    niv["country"] = niv["country"].str.lower()
-    anu = pd.read_csv(os.path.join(PANEL, "hhi_anual.csv"))
-    anu["country"] = anu["country"].str.lower()
-    missing = [c for c in AMPLIADO if c not in set(niv["country"])]
+def build_hhi(roster):
+    niv = pd.read_csv(os.path.join(PANEL, "hhi_nivel.csv")); niv["country"] = niv["country"].str.lower()
+    anu = pd.read_csv(os.path.join(PANEL, "hhi_anual.csv")); anu["country"] = anu["country"].str.lower()
+    missing = [c for c in roster if c not in set(niv["country"])]
     extra = fetch_hhi_missing(missing)
     if not extra.empty:
         anu = pd.concat([anu, extra], ignore_index=True)
-        niv2 = (extra.groupby("country")["HHI_anual"].median().rename("HHI").reset_index())
+        niv2 = extra.groupby("country")["HHI_anual"].median().rename("HHI").reset_index()
         niv = pd.concat([niv, niv2], ignore_index=True)
         print(f"  HHI via GFDD API para: {sorted(extra['country'].unique())}")
+    still = [c for c in roster if c not in set(niv['country'])]
+    if still:
+        print(f"  [!] sin HHI: {still}")
     return niv, anu
 
 
 # ----------------------------------------------------------------------
-def assemble(countries, embi, jl, gar, glob, controls, hhi_niv, with_controls):
-    p = (embi[embi["country"].isin(countries)]
-         .merge(jl, on=["country", "quarter"], how="inner")
-         .merge(gar, on=["country", "quarter"], how="inner")
-         .merge(glob, on="quarter", how="left"))
-    if with_controls:
-        p = p.merge(controls, on=["country", "quarter"], how="left")
-    p = p.merge(hhi_niv.rename(columns={"HHI": "HHI_struct"}), on="country", how="left")
-    p["GaR_pp"] = p["GaR"] * 100.0
-    p["JLoss_x_GaR"] = (p["JLoss"] - p["JLoss"].mean()) * (p["GaR_pp"] - p["GaR_pp"].mean())
-    p["pi"] = pd.PeriodIndex(p["quarter"], freq="Q")
-    p = p.sort_values(["country", "pi"]).drop(columns="pi").reset_index(drop=True)
-    return p
-
-
-def to_template(panel, hhi_niv, hhi_anu, with_debt):
-    """formato fase5: country,time,quarter,EMBI,JLoss,D,HHI,HHI_anual,debt,growth_q,gfac"""
-    d = panel.copy()
-    d["EMBI"] = d["EMBI_bps"]
-    d["D"] = -d["GaR"]
-    d = d.merge(hhi_niv.rename(columns={"HHI": "HHI"}), on="country", how="left")
-    d["year"] = pd.PeriodIndex(d["quarter"], freq="Q").year
-    d = d.merge(hhi_anu, on=["country", "year"], how="left")
-    d["HHI_anual"] = d.groupby("country")["HHI_anual"].transform(
-        lambda s: s.ffill().bfill())
-    d["debt"] = d["debt_gdp"] if (with_debt and "debt_gdp" in d) else np.nan
-    d["growth_q"] = np.nan
-    d["gfac"] = d.get("VIX", np.nan)
-    d["time"] = d.groupby("country").cumcount()
-    cols = ["country", "time", "quarter", "EMBI", "JLoss", "D", "HHI", "HHI_anual",
-            "debt", "growth_q", "gfac"]
-    return d[cols].dropna(subset=["EMBI", "JLoss", "D"])
-
-
 def main():
     print("=" * 72)
-    embi = embi_quarterly()
+    embi, cov = embi_quarterly()
     jl = load_jloss()
     gar = load_gar()
     glob = load_global_bbg()
     controls = load_controls()
-    hhi_niv, hhi_anu = build_hhi()
 
-    principal = assemble(LATAM, embi, jl, gar, glob, controls, hhi_niv, True)
-    ampliado = assemble(AMPLIADO, embi, jl, gar, glob, controls, hhi_niv, False)
-    principal.to_csv(os.path.join(OUT, "Panel_principal_bbg.csv"), index=False)
-    ampliado.to_csv(os.path.join(OUT, "Panel_ampliado_bbg.csv"), index=False)
+    jl_c = set(jl["country"]) - set(EXCLUIDOS)
+    gar_c = set(gar["country"]) - set(EXCLUIDOS)
+    # roster: toda economia con JLoss (no excluida). Se listan aunque no aporten a la estimacion.
+    roster = sorted(jl_c)
+    hhi_niv, hhi_anu = build_hhi(roster)
 
-    tpl_p = to_template(principal, hhi_niv, hhi_anu, True)
-    tpl_a = to_template(ampliado, hhi_niv, hhi_anu, False)
-    tpl_p.to_csv(os.path.join(OUT, "panel_real_principal_bbg.csv"), index=False)
-    tpl_a.to_csv(os.path.join(OUT, "panel_real_ampliado_bbg.csv"), index=False)
+    # --- panel: JLoss x quarter para todo el roster, con lo demas mergeado (NaN donde falte) ---
+    p = jl[jl["country"].isin(roster)].copy()
+    p = p.merge(gar, on=["country", "quarter"], how="left")
+    p = p.merge(embi, on=["country", "quarter"], how="left")          # EMBI_cds NaN si no hay CDS
+    p = p.merge(glob, on="quarter", how="left")
+    p = p.merge(controls, on=["country", "quarter"], how="left")
+    p = p.merge(hhi_niv.rename(columns={"HHI": "HHI_struct"}), on="country", how="left")
+    p["GaR_pp"] = p["GaR"] * 100.0
+    jc, gc = p["JLoss"].mean(), p["GaR_pp"].mean()
+    p["JLoss_x_GaR"] = (p["JLoss"] - jc) * (p["GaR_pp"] - gc)
+    p["pi"] = pd.PeriodIndex(p["quarter"], freq="Q")
+    p = p.sort_values(["country", "pi"]).drop(columns="pi").reset_index(drop=True)
+    p.to_csv(os.path.join(OUT, "Panel_bloomberg.csv"), index=False)
 
-    print("\n--- Panel principal (Bloomberg) ---")
-    for c, g in principal.groupby("country"):
-        print(f"  {c:12s} n={len(g):3d}  {g['quarter'].min()}..{g['quarter'].max()}  "
-              f"EMBI~{g['EMBI_bps'].mean():.0f}pb  JLoss~{g['JLoss'].mean():.2f}")
-    print(f"  TOTAL {len(principal)} obs | con controles dom.: "
-          f"{principal['debt_gdp'].notna().sum() if 'debt_gdp' in principal else 0}")
-    print("\n--- Panel ampliado (Bloomberg) ---")
-    for c, g in ampliado.groupby("country"):
-        print(f"  {c:12s} n={len(g):3d}  {g['quarter'].min()}..{g['quarter'].max()}  "
-              f"EMBI~{g['EMBI_bps'].mean():.0f}pb  JLoss~{g['JLoss'].mean():.2f}  "
-              f"HHI={g['HHI_struct'].iloc[0] if g['HHI_struct'].notna().any() else 'NA'}")
-    print(f"  TOTAL {len(ampliado)} obs, {ampliado['country'].nunique()} paises")
-    print(f"\nTemplates fase5: principal={len(tpl_p)} filas, ampliado={len(tpl_a)} filas "
-          f"({tpl_a['HHI'].notna().sum()} con HHI)")
+    # --- cobertura por pais ---
+    est = p.dropna(subset=["EMBI_cds", "JLoss", "GaR"])
+    covrows = []
+    for c in roster:
+        g = p[p.country == c]
+        e = est[est.country == c]
+        cc = cov[cov.country == c]
+        covrows.append(dict(
+            country=c, jloss_q=int(g["JLoss"].notna().sum()),
+            gar_q=int(g["GaR"].notna().sum()),
+            cds_q=int(cc["cds_q"].iloc[0]) if len(cc) else 0,
+            cds_cobertura=cc["cds_cobertura"].iloc[0] if len(cc) else "sin serie",
+            n_estimacion=len(e),
+            ventana_est=f"{e['quarter'].min()}..{e['quarter'].max()}" if len(e) else "-"))
+    covdf = pd.DataFrame(covrows).sort_values("n_estimacion", ascending=False)
+    covdf.to_csv(os.path.join(OUT, "cobertura_panel_bbg.csv"), index=False)
+
+    # --- plantilla fase5 (un solo archivo) ---
+    d = p.copy()
+    d["EMBI"] = d["EMBI_cds"]
+    d["D"] = -d["GaR"]
+    d["year"] = pd.PeriodIndex(d["quarter"], freq="Q").year
+    d = d.merge(hhi_niv.rename(columns={"HHI": "HHI"}), on="country", how="left")
+    d = d.merge(hhi_anu, on=["country", "year"], how="left")
+    d["HHI_anual"] = d.groupby("country")["HHI_anual"].transform(lambda s: s.ffill().bfill())
+    d["debt"] = d["debt_gdp"]
+    d["growth_q"] = np.nan
+    d["gfac"] = d["VIX"]
+    d["time"] = d.groupby("country").cumcount()
+    tcols = ["country", "time", "quarter", "EMBI", "JLoss", "D", "HHI", "HHI_anual",
+             "debt", "growth_q", "gfac"]
+    d[tcols].dropna(subset=["EMBI", "JLoss", "D"]).to_csv(
+        os.path.join(OUT, "panel_real_bbg.csv"), index=False)
+
+    # --- reporte ---
+    print(f"\nPanel_bloomberg.csv: {len(p)} filas (roster {len(roster)} paises), "
+          f"{len(est)} en la estimacion (CDS+JLoss+GaR)")
+    print(f"Excluido: {', '.join(EXCLUIDOS)}")
+    print("\nCobertura por pais:")
+    print(covdf.to_string(index=False))
+    print("\nEconomias en el roster sin aporte a la estimacion:")
+    for _, r in covdf[covdf.n_estimacion == 0].iterrows():
+        motivo = "sin CDS" if r["cds_q"] == 0 else ("sin GaR" if r["gar_q"] == 0 else "sin solape")
+        print(f"  {r['country']:12s} ({motivo})")
+    dc = [c for c in (set(jl['country']) - set(gar['country'])) if c not in EXCLUIDOS]
+    print(f"\nCon JLoss+CDS pero sin GaR (fuera de la regresion, en Anexo B): "
+          f"{sorted(c for c in dc if c in set(cov[cov.cds_q>0].country))}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,97 @@
+\chapter{Procedencia de los datos}
+\label{chap:anexoB}
+
+\noindent Este anexo tabula el origen de todas las series usadas en la investigación empírica
+(Capítulo~\ref{chap:paper2}) y en la prueba de las predicciones distintivas del modelo
+(Capítulo~\ref{chap:paper1}, Sección~\ref{sec:datos_reales}). El panel se construye sobre el
+principio de \textbf{homogeneidad de fuente}: todos los insumos de mercado provienen de la
+terminal Bloomberg, extraídos con un mismo protocolo para las veinte economías del universo
+objetivo; solo los componentes reales del índice de condiciones financieras que alimenta
+$GaR$ y los controles macroeconómicos domésticos provienen de estadísticas oficiales, dado
+que Bloomberg no es fuente primaria de cuentas nacionales. El código de extracción y
+consolidación reside en \texttt{1\_Codigo/Bloomberg\_extraction/} y \texttt{1\_Codigo/Panel/bbg/}.
+
+\vspace{1em}
+
+\begin{footnotesize}
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{p{1.85cm} p{2.6cm} p{1.75cm} p{2.85cm} p{1.35cm} p{2.5cm}}
+\caption{Procedencia, definición y transformación de cada serie del panel.}
+\label{tab:datos}\\
+\toprule
+\textbf{Serie} & \textbf{Definición} & \textbf{Fuente} & \textbf{Identificador} & \textbf{Frec.\ nativa} & \textbf{Transformación} \\
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\footnotesize\itshape Cuadro~\ref{tab:datos} (continuación)}\\
+\toprule
+\textbf{Serie} & \textbf{Definición} & \textbf{Fuente} & \textbf{Identificador} & \textbf{Frec.\ nativa} & \textbf{Transformación} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\footnotesize\itshape continúa en la página siguiente}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+\multicolumn{6}{l}{\textbf{\textit{Variable dependiente}}}\\
+\addlinespace
+CDS soberano 5Y & Prima del \textit{credit default swap} soberano a cinco años, en dólares, senior no garantizado & Bloomberg & \texttt{<emisor> CDS USD SR 5Y Corp}; curva Markit \texttt{CCHIN1U5 Curncy} para China & Diaria & Media trimestral, puntos básicos. Sin dato $\Rightarrow$ celda vacía (no se sustituye por EMBI de bonos) \\
+\addlinespace
+\multicolumn{6}{l}{\textbf{\textit{Fragilidad bancaria --- $JLoss$}} (métrica compuesta; motor \texttt{jloss\_engine.py})}\\
+\addlinespace
+Activos totales & Activos totales del banco & Bloomberg & \texttt{BS\_TOT\_ASSET} & Trimestral & Por banco cotizado; ajuste de periodicidad \texttt{ACTUAL} \\
+Patrimonio & Patrimonio total contable & Bloomberg & \texttt{TOTAL\_EQUITY} & Trimestral & --- \\
+Deuda emitida (LP) & \textit{Long-term borrowings} (bonos, letras, deuda subordinada); define el largo plazo del punto de incumplimiento & Bloomberg & \texttt{BS\_LT\_BORROW} & Trimestral & $D^{*}=$ (pasivo total $-$ bonos) $+ \tfrac12$ bonos \\
+Ingreso neto, ingresos, caja & Insumos del $z$-score y de controles de coherencia contable & Bloomberg & \texttt{NET\_INCOME}, \texttt{SALES\_REV\_TURN}, \texttt{BS\_CASH\_NEAR\_CASH\_ITEM} & Trimestral & --- \\
+Capitalización bursátil & Valor de mercado del patrimonio, cotización local (nunca ADR), verificada contra \texttt{EQY\_FUND\_CRNCY} & Bloomberg & \texttt{CUR\_MKT\_CAP} (o \texttt{PX\_LAST}$\times$\texttt{BS\_SH\_OUT}) & Diaria & Último valor del trimestre \\
+Retornos accionarios & Retornos logarítmicos diarios del precio local & Bloomberg & \texttt{PX\_LAST} & Diaria & $\sigma_E=\sqrt{\sum_t r_t^2}$ por banco-trimestre (varianza realizada) \\
+Índice bursátil país & Factor sistémico único de la agregación de pérdidas & Bloomberg & índice de referencia por país (\texttt{COUNTRY\_INDEX}) & Diaria & Retornos $\to$ correlación $\rho_i$ banco-factor \\
+\addlinespace
+\multicolumn{6}{p{15cm}}{\footnotesize\textit{Parámetros del motor (idénticos a \citealp{Chari2024}):} LGD $=0{,}45$; $\rho=0{,}4$; 7 nodos de cuadratura Gauss--Hermite; factor sistémico $N(0,\,0{,}16\%)$; percentil 99; cota de pérdidas $[0{,}010,\,0{,}048]$; horizonte 1 trimestre.}\\
+\addlinespace
+\multicolumn{6}{l}{\textbf{\textit{Riesgo de cola --- $GaR$}} (regresión cuantílica de panel; motor \texttt{gar\_engine.py}, \texttt{fci\_engine.py})}\\
+\addlinespace
+PIB real & Crecimiento trimestral del producto (variable dependiente de la regresión cuantílica) & Estadística nacional (banco central) & \texttt{GDP\_*} & Trimestral & Tasa de variación \\
+IPC & Componente del FCI (bloque de deuda / expectativas) & Estadística nacional & \texttt{CPI\_*} & Mensual & Estand.\ expansiva \\
+Índice accionario & Componente del FCI (bloque accionario) & Bolsa nacional & \texttt{STX\_*} & Mensual & Estand.\ expansiva \\
+Tipo de cambio real efectivo & Componente del FCI (bloque cambiario) & BIS / fuentes nacionales & \texttt{rEER\_*} & Mensual & Estand.\ expansiva \\
+Rendimiento soberano 10Y & Componente del FCI (bloque de deuda soberana) & Mercado / estadística nacional & \texttt{Ryr\_*} & Mensual & Estand.\ expansiva \\
+VIX (ortogonalizado) & Condiciones financieras globales en la regresión cuantílica & Bloomberg & \texttt{VIX Index} & Diaria & Ortogonalizado respecto de las condiciones locales; trimestral \\
+\addlinespace
+\multicolumn{6}{l}{\textbf{\textit{Factores financieros globales}}}\\
+\addlinespace
+VIX & Índice de volatilidad implícita S\&P 500 & Bloomberg & \texttt{VIX Index} & Diaria & Media trimestral \\
+Tasa del Tesoro 10Y & Rendimiento del bono del Tesoro estadounidense a 10 años & Bloomberg & \texttt{USGG10YR Index} & Diaria & Media trimestral; en logaritmo \\
+\textit{Spread} HY EE.UU. & \textit{Option-adjusted spread} del \textit{high yield} corporativo estadounidense (equivale a FRED \texttt{BAMLH0A0HYM2}) & Bloomberg & \texttt{LF98OAS Index} & Diaria & Media trimestral; en logaritmo \\
+\textit{Spread} on/off-run & Diferencial de liquidez del Tesoro (instrumento \textit{shift-share}) & Serie previa del proyecto & \texttt{global\_controls\_} \texttt{quarterly.csv} & Trimestral & En logaritmo \\
+\addlinespace
+\multicolumn{6}{l}{\textbf{\textit{Controles macroeconómicos domésticos}} (reconstruidos para todos los países del panel)}\\
+\addlinespace
+Deuda gob.\ general/PIB & Deuda bruta del gobierno general, \% del PIB & FMI, \textit{World Economic Outlook} & \texttt{GGXWDG\_NGDP} & Anual & Interpolación lineal a trimestral \\
+Balance fiscal/PIB & Préstamo/endeudamiento neto del gobierno general, \% del PIB & FMI, \textit{World Economic Outlook} & \texttt{GGXCNL\_NGDP} & Anual & Interpolación lineal a trimestral \\
+Reservas/PIB & Reservas internacionales totales sobre PIB corriente & Banco Mundial & \texttt{FI.RES.TOTL.CD} $\div$ \texttt{NY.GDP.MKTP.CD} & Anual & Interpolación lineal a trimestral \\
+Cuenta corriente/PIB & Saldo de cuenta corriente, \% del PIB & Banco Mundial & \texttt{BN.CAB.XOKA.GD.ZS} & Anual & Interpolación lineal a trimestral \\
+Inflación interanual & Variación del IPC a 12 meses & Serie de IPC del FCI; respaldo Banco Mundial & \texttt{FP.CPI.TOTL.ZG} & Mensual & Variación a 4 trimestres \\
+Tipo de cambio real efectivo & Índice de tipo de cambio real efectivo (2010 = 100) & BIS; \texttt{GaR/} \texttt{individuals/} & \texttt{rEER\_*} & Mensual & Último valor del trimestre \\
+\addlinespace
+\multicolumn{6}{l}{\textbf{\textit{Concentración bancaria e instituciones}}}\\
+\addlinespace
+$HHI$ (concentración 3 bancos) & Activos de los tres mayores bancos comerciales sobre activos del sistema, \% & Banco Mundial, \textit{Global Financial Development Database} & \texttt{GFDD.OI.01} & Anual & Nivel estructural $=$ mediana por país; serie anual como robustez \\
+Rating soberano S\&P & Calificación de largo plazo en moneda extranjera & Bloomberg & \texttt{RTG\_SP\_LT\_FC\_ISSUER\_CREDIT} & --- & \textit{Snapshot} (no serie); escala 21--1 \\
+Calidad de gobierno (WGI) & Índice de \textit{Worldwide Governance Indicators} (triple interacción institucional) & Banco Mundial & \texttt{instituciones.csv} (plantilla provisional) & Anual & Estandarizado; marcado provisional \\
+
+\end{longtable}
+\end{footnotesize}
+
+\vspace{1em}
+
+\noindent \textbf{Economías del \textit{roster} y su cobertura.} El panel incluye toda economía
+con $JLoss$ disponible. La muestra de estimación del mecanismo (observaciones con CDS $+$
+$JLoss$ $+$ $GaR$ simultáneamente) reúne catorce países: once con CDS de historia continua
+(Brasil, Chile, China, Colombia, Filipinas, Indonesia, Malasia, México, Perú, Sudáfrica,
+Turquía), Hungría y Polonia con CDS solo en 2012Q3--2015Q4, y Pakistán con un trimestre.
+Argentina, Egipto y Rusia tienen $JLoss$ y CDS pero no $GaR$; India tiene $JLoss$ y $GaR$
+pero no emite CDS soberano de referencia. Corea del Sur y Bulgaria se excluyen porque su
+$JLoss$ no es una medida válida a nivel de país (Capítulo~\ref{chap:paper2}, Sección~5.1). La
+Figura~\ref{fig:cobertura} traza esta cobertura.

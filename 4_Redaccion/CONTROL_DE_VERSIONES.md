@@ -303,25 +303,33 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
-> **Reancla en Bloomberg (2026-08-31).** Toda la investigación empírica se reconstruyó sobre
-> datos de Bloomberg: JLoss (balances + precios accionarios de 113 bancos), spread soberano
-> (CDS 5A), factores globales. GaR mantiene sus insumos FCI de estadísticas nacionales
-> (Bloomberg no es fuente primaria de cuentas nacionales). Corea del Sur queda fuera del
-> panel (`1_Codigo/Panel/bbg/DIAGNOSTICO_COREA.md`). **La fuente de verdad vigente es
-> `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`.** Pipeline: `1_Codigo/Panel/bbg/p1..p4`.
-> Figuras de la tesis: `1_Codigo/Panel/bbg/figuras/` (copiadas a `4_Redaccion/tesis/imagenes/`).
+> **Reancla en Bloomberg + panel único (2026-08-31, v3).** Toda la investigación empírica se
+> reconstruyó sobre datos de Bloomberg (JLoss, CDS soberano 5A, factores globales; GaR mantiene
+> sus insumos FCI de estadísticas nacionales) y se reestructuró como **una sola investigación
+> sobre un único panel**, sin la partición "núcleo LatAm / panel ampliado". Variable
+> dependiente = **CDS 5A de Bloomberg y solo eso** (celda vacía si no hay dato). Controles
+> domésticos reconstruidos para todos los países. Corea del Sur y Bulgaria quedan fuera por
+> JLoss no válido a nivel país (`1_Codigo/Panel/bbg/DIAGNOSTICO_COREA.md`).
+> **Fuente de verdad: `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`.** Pipeline: `bbg/p0..p4`.
+> Nuevo `4_Redaccion/tesis/anexoB_datos.tex` = tabla de procedencia de datos.
 >
-> | Parámetro | Base | Valor Bloomberg | (era, v8 regulatorio) |
+> Muestra de estimación: **838 obs, 14 países** (11 con CDS continuo + Hungría/Polonia 14 trim.
+> + Pakistán 1), 2004Q1–2026Q1.
+>
+> | Parámetro | Spec | Valor Bloomberg (panel único) | (era, v8 regulatorio) |
 > |---|---|---|---|
-> | θ (JLoss×GaR) | principal, M3 (+6 controles), N=228 | **−0,47** (t=−2,15, p=0,033) | −0,338 |
-> | θ (JLoss×GaR) | principal, M2 sin controles | −0,33 (t=−0,89, **n.s.**) | −0,359*** |
-> | θ (JLoss×GaR) | ampliada (11 países), M2, N=809 | **−0,56** (t=−2,25, p=0,025); post-2020 | −0,212* |
-> | umbral Hansen (efecto JLoss severo/benigno) | principal | +7,0 / +3,0 pb | +2,83 / −1,31 |
-> | β₄ (JLoss×D×HHI, **H4b**) | ampliada, HHI estructural | **−418 (t=−2,11) → H4b RECHAZADA** | +721 (t=2,98) |
+> | θ (JLoss×GaR) | **M2 (+6 controles), N=738** | **−0,354** (DK p=0,056; wild boot p=0,035; cluster país p=0,001) | −0,338 |
+> | θ (JLoss×GaR) | M1 sin controles, N=838 | −0,543 (p=0,028) | −0,359 |
+> | θ (JLoss×GaR) | pre-2020 | −0,39 (t=−1,02, **n.s.** — signo se mantiene) | — |
+> | θ (JLoss×GaR) | sin 2020–2021 | −1,11 (t=−3,53) | — |
+> | umbral Hansen (efecto JLoss severo/benigno) | — | +8,1 / +2,3 pb, LR=80 | +2,83 / −1,31 |
+> | β₄ (JLoss×D×HHI, **H4b**) | HHI estructural | **−392 (t=−2,34) → H4b RECHAZADA** | +721 (t=2,98) |
 >
-> Cambios de fondo en la prosa: (i) θ principal ahora depende de los controles; (ii) el
-> resultado de la base ampliada es un fenómeno post-2020; (iii) **H4b (amplificación por
-> concentración) no se sostiene** — reescrito en `paper1_oi.tex` §5.4 y `discusion_general.tex`.
+> Cambios de fondo en la prosa: (i) la tesis es **una sola investigación / un solo panel**;
+> (ii) lo respaldado es el **signo y la forma** de θ, con significancia marginal e
+> identificación concentrada en episodios de estrés recientes (pre-2020 no significativo);
+> (iii) **H4b no se sostiene** (signo contrario, significativo). Reescritos: los 5 `.tex` de
+> `4_Redaccion/tesis/` + nuevo `anexoB_datos.tex`. Compila limpio (75 pp).
 >
 > ---
 >

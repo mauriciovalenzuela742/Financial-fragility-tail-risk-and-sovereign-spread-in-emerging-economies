@@ -44,10 +44,20 @@ valora poco esta franquicia" con "el mercado espera que esta franquicia incumpla
 falla conocida de los modelos estructurales de crédito aplicados a franquicias
 persistentemente subvaloradas.
 
+## Bulgaria — misma decisión, otra causa
+
+Bulgaria también queda fuera, por una razón distinta: **solo un banco búlgaro cotiza**
+(FIBank), de modo que el `JLoss` se construye sobre una única institución (**76/76**
+trimestres `below_min_banks`) y arroja una **mediana de 29**, incoherente con un sistema
+bancario solvente. No es un artefacto del modelo de Merton como en Corea, sino que la métrica
+no es una medida a nivel de país cuando el universo cotizado es un solo banco pequeño. Hungría
+(2 bancos, OTP dominante) queda al límite pero su `JLoss` mediano (≈3) es plausible, así que
+se conserva con nota de cobertura.
+
 ## Decisión
 
-**Corea del Sur queda fuera del panel ampliado.** Coherente con la reconstrucción
-regulatoria previa (v8), que tampoco la incluía. Se documenta como limitación de la
-métrica, no como dato faltante. China ($E/D^{*}=0{,}070$, PD 0,030) queda **dentro** pero
-se señala en nota: su PD está algo elevada por el mismo fenómeno en menor grado, sin
-distorsionar el JLoss agregado.
+**Corea del Sur y Bulgaria quedan fuera del panel de estimación** (exclusión por insumo no
+válido, no por dato faltante). Corea es coherente con la reconstrucción regulatoria previa
+(v8), que tampoco la incluía. China ($E/D^{*}=0{,}070$, PD 0,030) queda **dentro** pero se
+señala en nota: su PD está algo elevada por el mismo fenómeno en menor grado, sin distorsionar
+el JLoss agregado.

@@ -1,68 +1,69 @@
-# Reancla de la investigación en datos Bloomberg — resumen
+# Reancla de la investigación en datos Bloomberg — un solo panel
 
-Fecha: 2026-08-31. Qué se hizo, en qué orden, y qué cambió en las conclusiones.
+Fecha: 2026-08-31 (v3). Qué se hizo y qué cambió en las conclusiones.
 
-## Pipeline (todo re-ejecutable)
+## Pipeline (todo re-ejecutable, `.venv`)
 
 ```
-1_Codigo/JLoss_reconstruction/jloss_bloomberg/   JLoss v9 (20 países, 2004–2026) + README + QA
+1_Codigo/JLoss_reconstruction/jloss_bloomberg/   JLoss v9 (20 países, 2004–2026)
 1_Codigo/Panel/bbg/
-  p1_build_panels.py    CDS 5Y Bloomberg → EMBI trimestral; ensambla Panel_principal_bbg / Panel_ampliado_bbg
-  p2_regresiones.py     θ (M2/M3), cluster, robustez, umbral Hansen, efecto marginal, diagnósticos
-  p3_causal_fase5.py    batería causal (wild boot, LP, IV shift-share, triple institucional) + H4a/H4b
-  p4_figuras.py         7 figuras → bbg/figuras/*.pdf (copiadas a 4_Redaccion/tesis/imagenes/)
-  NUMEROS_CANONICOS_BBG.md   ← fuente de verdad para la prosa
-  DIAGNOSTICO_COREA.md       ← por qué Corea queda fuera
+  p0_controles_all.py   controles domésticos (deuda/fiscal IMF WEO, reservas/CA World Bank,
+                        inflación/REER de GaR/individuals) para TODOS los países -> controls_all_bbg.csv
+  p1_build_panels.py    CDS 5Y Bloomberg -> trimestral; ensambla EL panel -> Panel_bloomberg.csv
+                        + panel_real_bbg.csv (plantilla fase5) + cobertura_panel_bbg.csv
+  p2_regresiones.py     Cuadro único (M1/M2/M3 + cluster), robustez (pre-2020 prominente),
+                        umbral Hansen, efecto marginal, diagnósticos
+  p3_causal_fase5.py    batería causal + H4a/H4b
+  p4_figuras.py         7 figuras -> bbg/figuras/*.pdf (copiadas a 4_Redaccion/tesis/imagenes/)
+  NUMEROS_CANONICOS_BBG.md   <- fuente de verdad
+  DIAGNOSTICO_COREA.md       <- por qué Corea y Bulgaria quedan fuera
 ```
 
-Orden: `p1 → p2 → p3 → p4`. Requiere `.venv` (pandas 2.3, linearmodels 7.0).
+Orden: `p0 -> p1 -> p2 -> p3 -> p4`.
 
-## Qué es Bloomberg y qué no
+## Un solo panel
 
-| Insumo | Fuente |
-|---|---|
-| JLoss (balances + capitalización bursátil, 113 bancos) | **Bloomberg** |
-| Spread soberano (CDS 5Y) | **Bloomberg** |
-| VIX, UST10Y, US HY spread | **Bloomberg** |
-| GaR (FCI: IPC, PIB, bolsa, REER, 10Y) | estadísticas nacionales (Bloomberg no publica cuentas nacionales) — sin cambios |
-| HHI concentración | GFDD World Bank |
-| Controles domésticos (deuda, fiscal, reservas, CA, inflación, REER) | sin cambios |
+- **Variable dependiente = CDS soberano 5Y de Bloomberg, y solo eso.** Donde no hay CDS,
+  la celda queda vacía; no se mezcla con EMBI de bonos ni proxies.
+- **Roster: 18 economías** (todas con JLoss, menos Corea y Bulgaria). **Muestra de estimación
+  (CDS+JLoss+GaR): 838 obs, 14 países** (11 con CDS continuo + Hungría/Polonia con 14 trim.
+  + Pakistán con 1).
+- **Exclusiones (2), por JLoss no válido a nivel país:** Corea del Sur (Korea discount ->
+  Merton PD ≈ 0,55) y Bulgaria (1 banco cotizado, JLoss mediana 29). Ver DIAGNOSTICO_COREA.md.
+- **Controles domésticos para todos los países** (antes solo 5 LatAm) -> una sola
+  especificación con controles sobre el panel completo.
 
-## Decisiones tomadas
+## Resultados (panel único)
 
-1. **Corea del Sur excluida** del panel ampliado (11 países, no 12): su E/D de mercado ≈ 0,04
-   (Korea discount estructural) hace que el Merton devuelva PD ~0,55 y JLoss 25–47, no creíble.
-2. **CDS 5Y como variable dependiente** en vez del EMBI de bonos: homogéneo entre países.
-   Cobertura continua 2004–2026 para 11 países; Egipto/Pakistán parciales, Polonia/Hungría/
-   Rusia/Bulgaria sin precios de mercado utilizables (quedan para agenda futura).
-3. **Panel ampliado** = brazil, chile, china, colombia, indonesia, malaysia, mexico, peru,
-   philippines, southafrica, turkey.
+| | v8 regulatorio (dos bases) | Bloomberg (panel único) |
+|---|---|---|
+| θ (JLoss×GaR), M2 con controles | −0,34 (p<0,05) | **−0,354** (DK p=0,056; wild boot p=0,035; cluster país p=0,001) |
+| θ, sin controles (M1) | — | −0,543 (p=0,028) |
+| pre-2020 | (más fuerte) | **−0,39 (t=−1,02): signo se mantiene, no significativo** |
+| sin 2020–2021 | — | −1,11 (t=−3,53) |
+| Umbral Hansen (severo/benigno) | corrobora | +8,1 / +2,3 pb, LR=80 |
+| Efecto marginal p10→p90 GaR | monótono | +4,6 → +1,8 (banda excluye 0 en cola severa) |
+| IV shift-share | débil | F≈9,5 (débil-a-límite) |
+| **H4b (β4>0, amplificación por concentración)** | **+721 (t=2,98) confirmada** | **−392 (t=−2,34): signo contrario, significativo. RECHAZADA** |
 
-## Qué cambió en las conclusiones de la tesis
+**Lectura honesta:** el panel único respalda el **signo y la forma** de la complementariedad
+(θ<0, efecto marginal creciente en severidad de cola, umbral); la **magnitud puntual** es
+marginalmente significativa y su **identificación descansa en episodios de estrés recientes**
+(pre-2020 no se distingue de cero). H4a débil, H4b rechazada.
 
-| | v8 (regulatorio) | Bloomberg | Efecto en la tesis |
-|---|---|---|---|
-| θ (JLoss×GaR), principal M3 | −0,338 (p=0,028) | **−0,47 (p=0,033)** | se mantiene, pero ahora **depende de los controles** (M2 sin controles n.s.) |
-| θ, base ampliada M2 | −0,212 (p=0,069) | **−0,56 (p=0,025)** | más significativo, pero **solo post-2020** |
-| Umbral Hansen | corrobora | corrobora (severo +7,0 vs benigno +3,0) | sin cambio de fondo |
-| IV shift-share | F débil | **F=51 en panel ampliado** | mejor evidencia del canal de nivel |
-| **H4b (β4>0, amplificación por concentración)** | **+721 (t=2,98), confirmada** | **−418 (t=−2,11), RECHAZADA** | **cambio mayor: la predicción distintiva del modelo OI no se sostiene** |
+## Tesis reescrita (una sola investigación, sin "núcleo/ampliado")
 
-## Archivos de la tesis reescritos
-
-- `4_Redaccion/tesis/main.tex` — resumen
-- `4_Redaccion/tesis/introduccion_general.tex` — contribución (iii)
-- `4_Redaccion/tesis/paper2_empirico.tex` — resumen, §4.1, §5 (Datos), §6 (Resultados completo), Cuadros 2–3, limitaciones, agenda, conclusión; 4 figuras nuevas embebidas
-- `4_Redaccion/tesis/paper1_oi.tex` — resumen, §5.4 (H4a/H4b, resultado negativo de H4b + interpretación), conclusión; 1 figura nueva
-- `4_Redaccion/tesis/discusion_general.tex` — síntesis, implicancias, limitaciones, agenda, conclusión
-- `4_Redaccion/CONTROL_DE_VERSIONES.md` §5 y `1_Codigo/Panel/NUMEROS_CANONICOS.md` (marcado SUPERADO)
-
-Compila limpio: `4_Redaccion/tesis/main.pdf`, 71 páginas, sin referencias indefinidas.
+`4_Redaccion/tesis/` — recompilada limpio, **75 páginas**:
+- `main.tex` (resumen), `introduccion_general.tex`, `discusion_general.tex`
+- `paper2_empirico.tex` — §5 "Un solo panel", §6 un solo Cuadro 3, §6.5 robustez con
+  subsección prominente de frontera temporal, limitaciones y conclusión reescritas
+- `paper1_oi.tex` — §5.4 (H4a/H4b sobre el panel único; H4b resultado negativo)
+- **`anexoB_datos.tex` (NUEVO)** — tabla de procedencia de todas las series, `\input` en
+  `main.tex` tras el anexo matemático; aparece en el índice de tablas.
 
 ## Pendiente (declarado en la tesis)
 
+- Profundidad temporal: pocos episodios de cola independientes; India vía bono 10Y, cerrar
+  GaR de Argentina/Egipto/Rusia.
 - Extraer de Bloomberg los componentes reales del FCI para anclar también GaR.
-- Serie de concentración bancaria trimestral (el GFDD es anual y casi invariante) — es la
-  única forma de dirimir si H4b falla por medición o porque el canal es débil.
-- Controles domésticos para los 6 países no-LatAm de la base ampliada.
-- Incorporar Egipto/Pakistán/Polonia/Hungría/Rusia/Bulgaria con spread de bono 10Y.
+- Serie de concentración bancaria trimestral (GFDD es anual, casi invariante).
