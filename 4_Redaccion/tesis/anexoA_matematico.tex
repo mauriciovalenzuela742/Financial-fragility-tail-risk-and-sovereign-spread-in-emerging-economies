@@ -4,12 +4,12 @@
 \noindent Este anexo detalla, paso a paso, cada derivada y conclusión matemática del modelo del Capítulo~\ref{chap:paper1}. Se usa el \emph{Growth-at-Risk} $\GaR_\tau$ como variable primitiva ---el cuantil bajo del crecimiento, negativo en la cola--- de modo que los signos derivados del modelo coinciden \emph{directamente} con los de las regresiones del Capítulo~\ref{chap:paper2}, sin ningún cambio de variable intermedio: $\beta_1>0$, $\beta_2<0$, $\beta_3<0$, $\beta_4<0$. Todas las identidades (incluidas la derivada cruzada y la tercera derivada) fueron verificadas numéricamente (diferencias finitas frente a fórmula analítica; coincidencia hasta $10^{-6}$).
 
 \begin{mdframed}
-\textbf{Convención de signo (léase primero).} $\GaR_\tau$ es el cuantil $\tau$ (p.ej.\ $5\%$) del crecimiento: es un \emph{nivel de crecimiento} (típicamente negativo en la cola). Un $\GaR$ \emph{más alto} significa una cola \emph{menos} adversa (economía más segura); un $\GaR$ \emph{más bajo} (más negativo) significa mayor riesgo a la baja. Las variables observadas son: $\JLoss$ (fragilidad sistémica, $\uparrow$ = peor), $\GaR$ ($\uparrow$ = mejor), $\HHI$ (concentración, $\uparrow$ = más concentrado), $\EMBI$ ($\uparrow$ = mayor riesgo soberano). Los cuatro coeficientes firmados son
+\textbf{Convención de signo (léase primero).} $\GaR_\tau$ es el cuantil $\tau$ (p.ej.\ $5\%$) del crecimiento: es un \emph{nivel de crecimiento} (típicamente negativo en la cola). Un $\GaR$ \emph{más alto} significa una cola \emph{menos} adversa (economía más segura); un $\GaR$ \emph{más bajo} (más negativo) significa mayor riesgo a la baja. Las variables observadas son: $\JLoss$ (fragilidad sistémica, $\uparrow$ = peor), $\GaR$ ($\uparrow$ = mejor), $\HHI$ (concentración, $\uparrow$ = más concentrado), $\Spread$ ($\uparrow$ = mayor riesgo soberano). Los cuatro coeficientes firmados son
 \begin{gather*}
-\beta_1=\frac{\partial \EMBI}{\partial \JLoss}>0,\qquad
-\beta_2=\frac{\partial \EMBI}{\partial \GaR}<0,\\[2pt]
-\beta_3=\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0,\qquad
-\beta_4=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial \GaR\,\partial \HHI}<0.
+\beta_1=\frac{\partial \Spread}{\partial \JLoss}>0,\qquad
+\beta_2=\frac{\partial \Spread}{\partial \GaR}<0,\\[2pt]
+\beta_3=\frac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}<0,\qquad
+\beta_4=\frac{\partial^3 \Spread}{\partial \JLoss\,\partial \GaR\,\partial \HHI}<0.
 \end{gather*}
 \end{mdframed}
 
@@ -112,7 +112,7 @@ El crecimiento en el estado de estrés es $g=\GaR_\tau$, con $1+\GaR_\tau>0$; de
 \subsection{Definición del spread y derivadas de primer orden}
 \begin{equation}
 DFL(\JLoss,\GaR,H)=\bar d-\underbrace{\left[\frac{1+r}{1+\GaR}\,d+\frac{B(\JLoss;H)}{Y}\right]}_{d'\ (\text{deuda proyectada})},\quad
-\EMBI=LGD\,\big(1-F_\eta(DFL)\big).
+\Spread=LGD\,\big(1-F_\eta(DFL)\big).
 \label{eq:embi}
 \end{equation}
 
@@ -135,17 +135,17 @@ y como $DFL=\bar d-d'$, se sigue $\dfrac{\partial DFL}{\partial\GaR}=-\dfrac{\pa
 
 \begin{lemma}[efectos de primer orden: $\beta_1>0$, $\beta_2<0$]\label{lem:first-A}
 \[
-\frac{\partial \EMBI}{\partial \JLoss}=LGD\,f_\eta(DFL)\,\frac{B_J}{Y}>0,\qquad
-\frac{\partial \EMBI}{\partial \GaR}=-LGD\,f_\eta(DFL)\,\frac{(1+r)d}{(1+\GaR)^2}<0.
+\frac{\partial \Spread}{\partial \JLoss}=LGD\,f_\eta(DFL)\,\frac{B_J}{Y}>0,\qquad
+\frac{\partial \Spread}{\partial \GaR}=-LGD\,f_\eta(DFL)\,\frac{(1+r)d}{(1+\GaR)^2}<0.
 \]
 \end{lemma}
 \begin{proof}
 Con $\frac{\dd}{\dd u}(1-F_\eta(u))=-f_\eta(u)$:
 \[
-\frac{\partial \EMBI}{\partial \JLoss}=LGD(-f_\eta)\frac{\partial DFL}{\partial\JLoss}=LGD(-f_\eta)\Big(-\frac{B_J}{Y}\Big)=LGD\,f_\eta\,\frac{B_J}{Y}>0,
+\frac{\partial \Spread}{\partial \JLoss}=LGD(-f_\eta)\frac{\partial DFL}{\partial\JLoss}=LGD(-f_\eta)\Big(-\frac{B_J}{Y}\Big)=LGD\,f_\eta\,\frac{B_J}{Y}>0,
 \]
 \[
-\frac{\partial \EMBI}{\partial \GaR}=LGD(-f_\eta)\frac{\partial DFL}{\partial\GaR}=LGD(-f_\eta)\Big(\!+\frac{(1+r)d}{(1+\GaR)^2}\Big)<0.
+\frac{\partial \Spread}{\partial \GaR}=LGD(-f_\eta)\frac{\partial DFL}{\partial\GaR}=LGD(-f_\eta)\Big(\!+\frac{(1+r)d}{(1+\GaR)^2}\Big)<0.
 \]
 El signo de $\beta_2$ es \emph{negativo}: mejor crecimiento de cola, menor spread. $\blacksquare$
 \end{proof}
@@ -155,19 +155,19 @@ El signo de $\beta_2$ es \emph{negativo}: mejor crecimiento de cola, menor sprea
 \begin{proposition}[complementariedad $\JLoss\times\GaR$]\label{prop:cross-A}
 Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A},
 \[
-\boxed{\ \frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}\;<\;0.\ }
+\boxed{\ \frac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}\;<\;0.\ }
 \]
 \end{proposition}
 \begin{proof}
 \textbf{Paso 1 (punto de partida).} Del Lema~\ref{lem:first-A}, el efecto marginal de la fragilidad es
 \[
-g(\JLoss,\GaR,H)\equiv\frac{\partial \EMBI}{\partial \JLoss}=LGD\,\frac{B_J}{Y}\,f_\eta\big(DFL(\JLoss,\GaR,H)\big),
+g(\JLoss,\GaR,H)\equiv\frac{\partial \Spread}{\partial \JLoss}=LGD\,\frac{B_J}{Y}\,f_\eta\big(DFL(\JLoss,\GaR,H)\big),
 \]
 y $LGD,Y,B_J$ no dependen de $\GaR$ (Supuesto~\ref{as:B-A}: $B$ depende de $\JLoss,H$).
 
 \textbf{Paso 2 (derivar respecto de $\GaR$).} Solo $f_\eta(DFL)$ depende de $\GaR$, vía $DFL$:
 \[
-\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}=\frac{\partial g}{\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}.
+\frac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}=\frac{\partial g}{\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}.
 \]
 
 \textbf{Paso 3 (signo de cada factor).}
@@ -185,24 +185,24 @@ $\partial DFL/\partial \GaR$ & $>0$ & Lema~\ref{lem:dfl-A} \\
 
 \textbf{Paso 4 (conclusión).}
 \[
-\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}=\underbrace{(LGD\,B_J/Y)}_{>0}\times\underbrace{f_\eta'(DFL)}_{<0}\times\underbrace{\frac{\partial DFL}{\partial \GaR}}_{>0}=(+)(-)(+)<0. \qquad\blacksquare
+\frac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}=\underbrace{(LGD\,B_J/Y)}_{>0}\times\underbrace{f_\eta'(DFL)}_{<0}\times\underbrace{\frac{\partial DFL}{\partial \GaR}}_{>0}=(+)(-)(+)<0. \qquad\blacksquare
 \]
 \end{proof}
 
 \begin{remark}[por qué el signo negativo \emph{es} la complementariedad]
-El signo negativo \emph{no} contradice la intuición de que ``más riesgo por más riesgo eleva el spread''. El efecto marginal de la fragilidad, $\partial\EMBI/\partial\JLoss=LGD f_\eta(DFL)B_J/Y>0$, es \emph{decreciente} en $\GaR$: cuando $\GaR$ es alto (economía segura) la fragilidad importa poco; cuando $\GaR$ \emph{cae} (crecimiento de cola más adverso), el mismo aumento de fragilidad eleva el spread mucho más. Es decir, $\beta_3<0$ codifica exactamente que \emph{fragilidad y mal crecimiento se refuerzan}.
+El signo negativo \emph{no} contradice la intuición de que ``más riesgo por más riesgo eleva el spread''. El efecto marginal de la fragilidad, $\partial\Spread/\partial\JLoss=LGD f_\eta(DFL)B_J/Y>0$, es \emph{decreciente} en $\GaR$: cuando $\GaR$ es alto (economía segura) la fragilidad importa poco; cuando $\GaR$ \emph{cae} (crecimiento de cola más adverso), el mismo aumento de fragilidad eleva el spread mucho más. Es decir, $\beta_3<0$ codifica exactamente que \emph{fragilidad y mal crecimiento se refuerzan}.
 \end{remark}
 
 \begin{remark}[verificación numérica]
-Punto representativo ($LGD=0{,}55$, $\sigma_\eta=0{,}16$, $b_0=0{,}32$, $b_1=1{,}2$, $d=0{,}55$, $\bar d=1{,}10$, $r=0{,}04$, $\JLoss=0{,}22$, $\GaR=-0{,}05$, $H=1/6$): $DFL=0{,}413>0$; $LGD\,B_J/Y=0{,}2112$; $f_\eta'(DFL)=-1{,}4296$; $\partial DFL/\partial\GaR=+0{,}6338$. Cross-partial $=-0{,}191360$, idéntico (hasta $10^{-6}$) a las diferencias finitas de $\EMBI$.
+Punto representativo ($LGD=0{,}55$, $\sigma_\eta=0{,}16$, $b_0=0{,}32$, $b_1=1{,}2$, $d=0{,}55$, $\bar d=1{,}10$, $r=0{,}04$, $\JLoss=0{,}22$, $\GaR=-0{,}05$, $H=1/6$): $DFL=0{,}413>0$; $LGD\,B_J/Y=0{,}2112$; $f_\eta'(DFL)=-1{,}4296$; $\partial DFL/\partial\GaR=+0{,}6338$. Cross-partial $=-0{,}191360$, idéntico (hasta $10^{-6}$) a las diferencias finitas de $\Spread$.
 \end{remark}
 
 \subsection{\texorpdfstring{Amplificación por concentración: $\beta_4<0$}{Amplificacion por concentracion: beta4<0}}
 
 \begin{proposition}[la complementariedad se intensifica con la concentración]\label{prop:amp-A}
-Sea $C(H)\equiv\dfrac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0$. Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A} y la condición de cola profunda $f_\eta''(DFL)\ge0$,
+Sea $C(H)\equiv\dfrac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}<0$. Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A} y la condición de cola profunda $f_\eta''(DFL)\ge0$,
 \[
-\beta_4=\frac{\partial C}{\partial H}=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial \GaR\,\partial H}<0,
+\beta_4=\frac{\partial C}{\partial H}=\frac{\partial^3 \Spread}{\partial \JLoss\,\partial \GaR\,\partial H}<0,
 \]
 es decir, el término de interacción (ya negativo) se vuelve \emph{más negativo} al aumentar la concentración: su magnitud crece.
 \end{proposition}
@@ -228,7 +228,7 @@ Luego el corchete es $\le0$ (estrictamente $<0$ por (I)).
 \begin{remark}[descomposición robusta]
 El \emph{canal directo} (I) es inequívoco: manteniendo $DFL$ fijo,
 $\dfrac{\partial C}{\partial H}\big|_{DFL}=LGD\dfrac{\partial DFL}{\partial\GaR}\dfrac1Y\dfrac{\partial B_J}{\partial H}f_\eta'(DFL)=(+)(+)(+)(+)(-)<0.$
-La concentración eleva el costo marginal del rescate $B_J$, intensificando (haciendo más negativa) la interacción. El canal (II) lo refuerza en la cola profunda. \emph{(Verificado: $DFL/\sigma_\eta=2{,}58>1\Rightarrow f_\eta''>0$; $\partial^3\EMBI/\partial\JLoss\partial\GaR\partial H=-0{,}413<0$.)}
+La concentración eleva el costo marginal del rescate $B_J$, intensificando (haciendo más negativa) la interacción. El canal (II) lo refuerza en la cola profunda. \emph{(Verificado: $DFL/\sigma_\eta=2{,}58>1\Rightarrow f_\eta''>0$; $\partial^3\Spread/\partial\JLoss\partial\GaR\partial H=-0{,}413<0$.)}
 \end{remark}
 
 \begin{remark}[saturación]
@@ -239,15 +239,15 @@ Resultado \emph{local}: si $\PD_{\text{sov}}\to1$ ($DFL\to-\infty$, $f_\eta\to0$
 
 La ecuación estimada es
 \begin{multline*}
-\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss+\beta_2\GaR+\beta_3(\JLoss\times\GaR)\\
+\Spread_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss+\beta_2\GaR+\beta_3(\JLoss\times\GaR)\\
 {}+\beta_4(\JLoss\times\GaR\times\HHI)+\boldsymbol\theta'\text{Int}^-+\boldsymbol\gamma'X+\varepsilon_{i,t},
 \end{multline*}
 donde $\text{Int}^-=\{\JLoss\times\HHI,\ \GaR\times\HHI\}$. La correspondencia teórica, sin cambios de variable, es
 \begin{gather*}
-\beta_1=\frac{\partial\EMBI}{\partial\JLoss}>0,\qquad
-\beta_2=\frac{\partial\EMBI}{\partial\GaR}<0,\\[2pt]
-\beta_3=\frac{\partial^2\EMBI}{\partial\JLoss\partial\GaR}<0\ (\text{Prop.~\ref{prop:cross-A}}),\qquad
-\beta_4=\frac{\partial^3\EMBI}{\partial\JLoss\partial\GaR\partial\HHI}<0\ (\text{Prop.~\ref{prop:amp-A}}).
+\beta_1=\frac{\partial\Spread}{\partial\JLoss}>0,\qquad
+\beta_2=\frac{\partial\Spread}{\partial\GaR}<0,\\[2pt]
+\beta_3=\frac{\partial^2\Spread}{\partial\JLoss\partial\GaR}<0\ (\text{Prop.~\ref{prop:cross-A}}),\qquad
+\beta_4=\frac{\partial^3\Spread}{\partial\JLoss\partial\GaR\partial\HHI}<0\ (\text{Prop.~\ref{prop:amp-A}}).
 \end{gather*}
 
 \begin{center}
