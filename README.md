@@ -11,9 +11,13 @@ individuales, desde dos aristas:
   del que esa complementariedad es una predicción de primer orden, con una predicción
   distintiva adicional: la amplificación por concentración bancaria.
 
-> **Estado a 2026-08-31.** Toda la evidencia empírica está reanclada en datos de **Bloomberg**
-> y estructurada como **una sola investigación sobre un único panel**. Documento de tesis
-> compilado y limpio: [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (74 pp).
+> **Estado a 2026-09-01.** Toda la evidencia empírica está reanclada en datos de **Bloomberg**
+> y estructurada como **una sola investigación sobre un único panel**. Tras una revisión de
+> árbitro senior (batería de robustez ampliada, reconciliación de cifras, censura de la
+> métrica de fragilidad), documento de tesis compilado y limpio:
+> [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (79 pp). Los dos capítulos se
+> preparan además como envíos separados a revista — ver
+> [`4_Redaccion/envios/`](4_Redaccion/envios/).
 
 ---
 
@@ -38,14 +42,18 @@ Merton lee incumplimiento inminente) y Bulgaria (un solo banco cotizado). Ver
 
 | Hipótesis | Resultado |
 |---|---|
-| **H1** — nivel: `JLoss → spread` | Plausible; IV *shift-share* débil-a-límite (F ≈ 9,5). |
-| **H3 / complementariedad** — θ (interacción `JLoss × GaR`) < 0 | **Signo y forma respaldados** — θ = −0,35; el efecto marginal de la fragilidad crece a medida que empeora el riesgo de cola, y el modelo de umbral de Hansen lo corrobora (+8,1 vs +2,3 pb por régimen). Significancia **marginal**: p = 0,056 (Driscoll–Kraay), 0,035 (*wild cluster bootstrap*), 0,001 (*cluster* por país). |
-| **Frontera temporal** | La interacción **no se identifica antes de 2020** (t = −1,02); descansa en los episodios de estrés macrofinanciero recientes. |
-| **H4a** — β₃ > 0 (parametrización directa de la triple interacción) | Signo predicho, no significativo. |
-| **H4b** — β₄ > 0: amplificación por concentración | **Rechazada** — β₄ = −392 (t = −2,34): signo contrario al predicho y significativo en esa dirección. Contrasta con la reconstrucción previa con datos regulatorios (+721); la explicación más probable es que homogeneizar la métrica de fragilidad comprime la dispersión transversal sobre la que se identifica ese término. |
+| **H1** — nivel: `JLoss → spread` | Respaldada — IV *shift-share*: β = +32,6 pb (p = 0,038), dirección banco→soberano; primera etapa en el límite (F ≈ 9,5) ⇒ sugestivo, no concluyente. |
+| **H3 / complementariedad** — θ (interacción `JLoss × GaR`) < 0 | **Signo y forma respaldados** — θ = −0,35; efecto marginal creciente y modelo de umbral de Hansen lo corrobora (+8,1 vs +2,3 pb por régimen). θ **invariante** a la medida de cola (GaR q05 / skew-t / ES). Significancia **marginal**: p = 0,056 (Driscoll–Kraay), 0,035 (*wild cluster bootstrap*), 0,001 (*cluster* por país); placebo de reasignación → p ≈ 0,05. |
+| **Frontera temporal** | **Regularidad post-crisis financiera global**, no artefacto de COVID: θ positivo/nulo en 2006–2011, negativo y significativo en **todas** las ventanas móviles de 5 años que empiezan en 2012. El pre-2020 de muestra completa es n.s. sólo por promediar con 2004–2011; no hay quiebre discreto en 2020. |
+| **Corte transversal efectivo** | La significancia descansa en **China**: sin China θ = −0,17 (n.s.); sin China+Turquía θ ≈ 0. 9 de 13 países casi no tienen variación de `JLoss`. |
+| **Robustez a la censura de `JLoss`** | La cota del grid de pérdidas (4,8 % de la exposición) satura el VaR99 en el **98 %** de las observaciones. Recalculando con grid ancho `[0,01, 0,20]` (`JLoss` ×2,8, corr 0,92): **θ conserva la magnitud y gana precisión** — M2 θ = −0,330 (p = 0,032), M1 θ = −0,572 (p = 0,010). La censura sesgaba *en contra* del hallazgo. |
+| **Regresor generado** | `JLoss` y `GaR` son estimados; el error de medición atenúa. θ estable a perturbar `GaR` hasta 25 % de su desviación. |
+| **H4a** — β₃ > 0 (parametrización directa de la triple interacción) | Signo **contrario** al predicho, no significativo (+56). Sólo el θ de nivel sin HHI recupera el signo del modelo. |
+| **H4b** — β₄ > 0: amplificación por concentración | **No identificada** — el estadístico agrupado da β₄ = −392 (t = −2,34), pero con 13 países y un HHI casi invariante el *bootstrap* de bloques deja el IC 90 % cruzando el cero (−627, +212). No respalda ni refuta la predicción. |
 
 Números canónicos completos y trazables:
 [`1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`](1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md).
+Batería de robustez de árbitro: [`1_Codigo/Panel/bbg/p5_robustez_arbitro.py`](1_Codigo/Panel/bbg/p5_robustez_arbitro.py).
 
 ---
 
@@ -68,10 +76,15 @@ python bbg/p0_controles_all.py     # controles domésticos, todos los países
 python bbg/p1_build_panels.py      # -> bbg/Panel_bloomberg.csv, panel_real_bbg.csv, cobertura
 python bbg/p2_regresiones.py       # theta (M1/M2/M3), robustez, umbral, efecto marginal
 python bbg/p3_causal_fase5.py      # batería causal + H4a/H4b
+python bbg/p5_robustez_arbitro.py  # ventanas móviles, placebo, país influyente, regresor generado, GMM
 python bbg/p4_figuras.py           # figuras -> bbg/figuras/ (se copian a 4_Redaccion/tesis/imagenes/)
 
+# 2b. Robustez a la censura del grid de JLoss (opcional, ~40 min de motor)
+cd ../JLoss_reconstruction && python _engine_wide.py    # -> Panel_JLoss_wide.csv (grid [0.01,0.20])
+cd ../Panel && python bbg/_robustez_widebounds.py       # -> robustez_widebounds_bbg.csv
+
 # 3. Documento de tesis (desde 4_Redaccion/tesis/)
-latexmk -pdf main.tex             # -> main.pdf, 74 pp, compila sin warnings
+latexmk -pdf main.tex             # -> main.pdf, 79 pp, compila sin warnings
 ```
 
 ---
@@ -84,13 +97,14 @@ latexmk -pdf main.tex             # -> main.pdf, 74 pp, compila sin warnings
   JLoss_reconstruction/     Motor JLoss (jloss_engine.py) + salida jloss_bloomberg/
   GaR/                      Growth-at-Risk: motor CEMLA, FCI, insumos por país
   Panel/
-    bbg/                    ← PIPELINE VIGENTE: p0..p4, panel único, números canónicos
+    bbg/                    ← PIPELINE VIGENTE: p0..p5, panel único, números canónicos
     (legado)               construcción "dos bases" previa, notebooks EDA, análisis causal
   Stata_Sov_Risk/  v0/      Análisis predecesores (legado, no vigente)
 2_Datos/                    Datos sueltos y paquetes portátiles
 3_Marco_teorico/            Literatura de referencia (PDF)
 4_Redaccion/
   tesis/                    ← TESIS VIGENTE: main.tex + capítulos + anexos (A matemático, B datos)
+  envios/                   ← dos papers standalone para envío a revista + cartas + README
   CONTROL_DE_VERSIONES.md   fuente única de verdad sobre qué archivo es vigente por hilo
   modelo OI/                working paper del modelo teórico + apéndice
 ```
@@ -111,3 +125,6 @@ latexmk -pdf main.tex             # -> main.pdf, 74 pp, compila sin warnings
 | `JLoss-pipeline: elimina PD contable del universo` | Decisión del comité (ago-2026): solo PD de mercado |
 | `Reestructura la tesis como una sola investigación sobre un único panel` | Fin de la partición "núcleo LatAm / panel ampliado"; controles para todos los países; Anexo B de procedencia de datos |
 | `Tesis: compilación limpia` | 0 warnings, 0 overfull boxes |
+| `Revisión de árbitro: reconciliar cifras y batería de robustez` | Resumen del Cap. 2 realineado con el cuerpo; `p5_robustez_arbitro.py` (ventanas móviles, placebo, país influyente, regresor generado, GMM); reencuadre temporal a "post-GFC" |
+| `Censura del VaR99 de JLoss` + `Robustez grid ancho — VERIFICADA` | El grid de pérdidas satura el VaR99 en el 98 % de las obs.; con grid ancho θ conserva magnitud y gana precisión (M2 p 0,056 → 0,032) |
+| `Fase 2-3: prosa de artículo + empaquetado` | `paper2` §1 a prosa; H4b → "no identificado"; `4_Redaccion/envios/` con dos papers standalone |
