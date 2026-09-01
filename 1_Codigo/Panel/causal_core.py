@@ -131,7 +131,8 @@ def _first_stage_F(P, global_var, ctrls, pre_year=2016):
     return ((sr-sf)/1)/(sf/(len(jf)-Xf.shape[1]))
 
 def iv_shiftshare(P, global_var='auto', ctrls=None, pre_year=2016,
-                  candidatos=('UST10Y_log','VIX','VIX_cboe','OnOffRun_spread_log','X_global_idx')):
+                  candidatos=('UST10Y_log','VIX','VIX_cboe','OnOffRun_spread_log','X_global_idx',
+                              'USD_NEER_log')):
     from linearmodels.iv import IV2SLS
     ctrls = ctrls or []
     if global_var == 'auto':   # elige el shock global con primera etapa más fuerte
@@ -172,6 +173,61 @@ def iv_shiftshare(P, global_var='auto', ctrls=None, pre_year=2016,
         out.update(theta_IV=m2.params['JxG_c'], se_theta_IV=m2.std_errors['JxG_c'])
     except Exception as ex:
         out['theta_IV']=float('nan')
+    return out
+
+def _shift_share_Z(P, global_var, pre_year):
+    """phi_c (exposicion pre-periodo) * global_var_t -> instrumento shift-share."""
+    d = P.copy()
+    phi = {}
+    for c, gg in d[d.year < pre_year].groupby('country'):
+        if len(gg) > 5 and gg[global_var].std() > 0:
+            phi[c] = np.polyfit(gg[global_var], gg['JLoss'], 1)[0]
+        else:
+            phi[c] = np.nan
+    gm = np.nanmean(list(phi.values()))
+    d['phi'] = d['country'].map(lambda c: phi.get(c, gm)); d['phi'] = d['phi'].fillna(gm)
+    return d['phi'] * d[global_var]
+
+def iv_shiftshare_overid(P, global_vars, ctrls=None, pre_year=2012):
+    """IV shift-share SOBRE-IDENTIFICADO: un instrumento Z_g = phi_c(g) * g_t por cada
+    shock global en `global_vars` (>=2), un solo endogeno (JLoss_c a nivel). Reporta
+    el F de la 1a etapa de cada instrumento por separado, el F conjunto, el efecto de
+    nivel 2SLS y el test de Sargan de sobre-identificacion (nulo: instrumentos validos)."""
+    from linearmodels.iv import IV2SLS
+    ctrls = ctrls or []
+    d = P.dropna(subset=['EMBI_bps','JLoss_c','GaR_pp_c']+list(global_vars)).copy()
+    zcols = []
+    for g in global_vars:
+        zc = f'Z_{g}'
+        d[zc] = _shift_share_Z(d, g, pre_year)
+        zcols.append(zc)
+    exog = ['GaR_pp_c'] + ctrls
+    dd = d.dropna(subset=['EMBI_bps','JLoss_c']+exog+zcols).copy()
+    dm = demean2(dd, ['EMBI_bps','JLoss_c']+exog+zcols); dm['country'] = dd['country'].values
+
+    # F individual de cada instrumento (controlando por los demas exog, sin los otros Z)
+    Fs = {}
+    for zc in zcols:
+        Xf = dm[exog+[zc]].values; jf = dm['JLoss_c'].values
+        bf = np.linalg.lstsq(Xf, jf, rcond=None)[0]; sf=(jf-Xf@bf)@(jf-Xf@bf)
+        Xr = dm[exog].values; br=np.linalg.lstsq(Xr, jf, rcond=None)[0]; sr=(jf-Xr@br)@(jf-Xr@br)
+        Fs[zc] = ((sr-sf)/1)/(sf/(len(jf)-Xf.shape[1]))
+    # F conjunto (todos los Z a la vez)
+    Xf = dm[exog+zcols].values; jf = dm['JLoss_c'].values
+    bf = np.linalg.lstsq(Xf, jf, rcond=None)[0]; sf=(jf-Xf@bf)@(jf-Xf@bf)
+    Xr = dm[exog].values; br=np.linalg.lstsq(Xr, jf, rcond=None)[0]; sr=(jf-Xr@br)@(jf-Xr@br)
+    F_joint = ((sr-sf)/len(zcols))/(sf/(len(jf)-Xf.shape[1]))
+
+    out = dict(instrumentos=list(global_vars), F_individual=Fs, F_conjunto=F_joint,
+              n=len(dm), paises=dd['country'].nunique(), pre_year=pre_year)
+    m2 = IV2SLS(dm['EMBI_bps'], dm[exog], dm[['JLoss_c']], dm[zcols]).fit(
+        cov_type='clustered', clusters=dm['country'])
+    out.update(beta_JLoss_IV=m2.params['JLoss_c'], se_JLoss=m2.std_errors['JLoss_c'],
+              p_JLoss=m2.pvalues['JLoss_c'])
+    try:
+        out.update(sargan_stat=m2.sargan.stat, sargan_p=m2.sargan.pval)
+    except Exception as ex:
+        out['sargan_error'] = str(ex)[:80]
     return out
 
 if __name__ == '__main__':

@@ -71,7 +71,8 @@ VIX (ortogonalizado) & Condiciones financieras globales en la regresión cuantí
 VIX & Índice de volatilidad implícita S\&P 500 & Bloomberg & \texttt{VIX Index} & Diaria & Media trimestral \\
 Tasa del Tesoro 10Y & Rendimiento del bono del Tesoro estadounidense a 10 años & Bloomberg & \texttt{USGG10YR Index} & Diaria & Media trimestral; en logaritmo \\
 \textit{Spread} HY EE.UU. & \textit{Option-adjusted spread} del \textit{high yield} corporativo estadounidense (equivale a FRED \texttt{BAMLH0A0HYM2}) & Bloomberg & \texttt{LF98OAS Index} & Diaria & Media trimestral; en logaritmo \\
-\textit{Spread} on/off-run & Diferencial de liquidez del Tesoro (instrumento \textit{shift-share}) & Serie previa del proyecto & \texttt{global\_controls\_} \texttt{quarterly.csv} & Trimestral & En logaritmo \\
+\textit{Spread} on/off-run & Diferencial de liquidez del Tesoro (instrumento \textit{shift-share} principal) & Serie previa del proyecto & \texttt{global\_controls\_} \texttt{quarterly.csv} & Trimestral & En logaritmo \\
+Dólar efectivo amplio & Tipo de cambio efectivo nominal de EE.\ UU., canasta de 64 economías (instrumento \textit{shift-share} secundario) & BIS, \textit{Effective Exchange Rate Indices} & \texttt{WS\_\allowbreak EER}, \texttt{M.N.B.US} & Mensual & Media trimestral; en logaritmo \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Controles macroeconómicos domésticos}} (reconstruidos para todos los países del panel)}\\
 \addlinespace
@@ -85,6 +86,7 @@ Tipo de cambio real ef. & Índice de tipo de cambio real efectivo (2010 = 100) &
 \multicolumn{6}{l}{\textbf{\textit{Concentración bancaria e instituciones}}}\\
 \addlinespace
 $HHI$ (concentración 3 bancos) & Activos de los tres mayores bancos comerciales sobre activos del sistema, \% & Banco Mundial, \textit{Global Financial Development Database} & \texttt{GFDD.\allowbreak OI.01} & Anual & Nivel estructural $=$ mediana por país; serie anual como robustez \\
+$HHI_q$ (concentración trimestral) & Activos de los tres mayores bancos \emph{cotizados} sobre activos cotizados totales, \% (mismos bancos que $\JLoss$) & Bloomberg (balances, \texttt{tot\_\allowbreak asset}) & motor \texttt{p6\_\allowbreak concentracion\_\allowbreak trimestral.py} & Trimestral & CR3 y HHI directos; NaN si $<$3 bancos cotizados; corr.\ 0,62 con GFDD \\
 Rating soberano S\&P & Calificación de largo plazo en moneda extranjera & Bloomberg & \texttt{RTG\_\allowbreak SP\_\allowbreak LT\_\allowbreak FC\_\allowbreak ISSUER\_\allowbreak CREDIT} & --- & \textit{Snapshot} (no serie); escala 21--1 \\
 Calidad de gobierno (WGI) & Índice de \textit{Worldwide Governance Indicators} (triple interacción institucional) & Banco Mundial & \texttt{instituciones.\allowbreak csv} (provisional) & Anual & Estandarizado; marcado provisional \\
 

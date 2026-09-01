@@ -42,14 +42,14 @@ Merton lee incumplimiento inminente) y Bulgaria (un solo banco cotizado). Ver
 
 | Hipótesis | Resultado |
 |---|---|
-| **H1** — nivel: `JLoss → spread` | Respaldada — IV *shift-share*: β = +32,6 pb (p = 0,038), dirección banco→soberano; primera etapa en el límite (F ≈ 9,5) ⇒ sugestivo, no concluyente. |
+| **H1** — nivel: `JLoss → spread` | Respaldada con **instrumento fuerte** — IV *shift-share* (spread de liquidez de fondeo, exposición pre-2012): F = 21,6, β = +17,5 pb (**p = 0,001**), dirección banco→soberano. Un segundo instrumento (dólar efectivo amplio, BIS) también tiene primera etapa fuerte (F = 23,7) pero no corrobora la magnitud solo (p = 0,46), y combinar ambos **rechaza Sargan** (p = 0,003) — no conjuntamente válidos; se reporta el de mejor exclusión como principal. |
 | **H3 / complementariedad** — θ (interacción `JLoss × GaR`) < 0 | **Signo y forma respaldados** — θ = −0,35; efecto marginal creciente y modelo de umbral de Hansen lo corrobora (+8,1 vs +2,3 pb por régimen). θ **invariante** a la medida de cola (GaR q05 / skew-t / ES). Significancia **marginal**: p = 0,056 (Driscoll–Kraay), 0,035 (*wild cluster bootstrap*), 0,001 (*cluster* por país); placebo de reasignación → p ≈ 0,05. |
 | **Frontera temporal** | **Regularidad post-crisis financiera global**, no artefacto de COVID: θ positivo/nulo en 2006–2011, negativo y significativo en **todas** las ventanas móviles de 5 años que empiezan en 2012. El pre-2020 de muestra completa es n.s. sólo por promediar con 2004–2011; no hay quiebre discreto en 2020. |
 | **Corte transversal efectivo** | La significancia descansa en **China**: sin China θ = −0,17 (n.s.); sin China+Turquía θ ≈ 0. 9 de 13 países casi no tienen variación de `JLoss`. |
 | **Robustez a la censura de `JLoss`** | La cota del grid de pérdidas (4,8 % de la exposición) satura el VaR99 en el **98 %** de las observaciones. Recalculando con grid ancho `[0,01, 0,20]` (`JLoss` ×2,8, corr 0,92): **θ conserva la magnitud y gana precisión** — M2 θ = −0,330 (p = 0,032), M1 θ = −0,572 (p = 0,010). La censura sesgaba *en contra* del hallazgo. |
 | **Regresor generado** | `JLoss` y `GaR` son estimados; el error de medición atenúa. θ estable a perturbar `GaR` hasta 25 % de su desviación. |
 | **H4a** — β₃ > 0 (parametrización directa de la triple interacción) | Signo **contrario** al predicho, no significativo (+56). Sólo el θ de nivel sin HHI recupera el signo del modelo. |
-| **H4b** — β₄ > 0: amplificación por concentración | **No identificada** — el estadístico agrupado da β₄ = −392 (t = −2,34), pero con 13 países y un HHI casi invariante el *bootstrap* de bloques deja el IC 90 % cruzando el cero (−627, +212). No respalda ni refuta la predicción. |
+| **H4b** — β₄ > 0: amplificación por concentración | **No identificada** con ninguno de tres proxies de HHI. GFDD estructural: β₄ = −392 (t = −2,34), IC90 (−627, +212). **Concentración trimestral** (construida de los mismos bancos que `JLoss`, corr 0,62 con GFDD): β₄ = −0,114 (t = −2,75, el más negativo), IC90 (−0,144, **+0,013**) — cruza el cero por un margen mínimo. La variación temporal real no rescata la predicción; si acaso refuerza que el signo empírico es negativo. |
 
 Números canónicos completos y trazables:
 [`1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`](1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md).
@@ -75,7 +75,9 @@ JLoss-pipeline/venv/Scripts/python.exe jloss_engine.py --indir _stage \
 python bbg/p0_controles_all.py     # controles domésticos, todos los países
 python bbg/p1_build_panels.py      # -> bbg/Panel_bloomberg.csv, panel_real_bbg.csv, cobertura
 python bbg/p2_regresiones.py       # theta (M1/M2/M3), robustez, umbral, efecto marginal
-python bbg/p3_causal_fase5.py      # batería causal + H4a/H4b
+python bbg/p6_concentracion_trimestral.py  # -> concentracion_trimestral_bbg.csv (HHI_q)
+python bbg/p7_iv_dolar_bis.py      # instrumento dólar BIS -> usd_neer_bbg.csv (red: stats.bis.org)
+python bbg/p3_causal_fase5.py      # batería causal (IV reforzado) + H4a/H4b (3 proxies de HHI)
 python bbg/p5_robustez_arbitro.py  # ventanas móviles, placebo, país influyente, regresor generado, GMM
 python bbg/p4_figuras.py           # figuras -> bbg/figuras/ (se copian a 4_Redaccion/tesis/imagenes/)
 
@@ -128,3 +130,4 @@ latexmk -pdf main.tex             # -> main.pdf, 79 pp, compila sin warnings
 | `Revisión de árbitro: reconciliar cifras y batería de robustez` | Resumen del Cap. 2 realineado con el cuerpo; `p5_robustez_arbitro.py` (ventanas móviles, placebo, país influyente, regresor generado, GMM); reencuadre temporal a "post-GFC" |
 | `Censura del VaR99 de JLoss` + `Robustez grid ancho — VERIFICADA` | El grid de pérdidas satura el VaR99 en el 98 % de las obs.; con grid ancho θ conserva magnitud y gana precisión (M2 p 0,056 → 0,032) |
 | `Fase 2-3: prosa de artículo + empaquetado` | `paper2` §1 a prosa; H4b → "no identificado"; `4_Redaccion/envios/` con dos papers standalone |
+| `Concentración trimestral + IV reforzado` | `HHI_q` de los mismos bancos que `JLoss` (H4b sigue no identificado, margen mínimo); IV con exposición pre-2012 pasa de F≈9,5 a F=21,6 (p=0,001); segundo instrumento (dólar BIS) rechaza Sargan al combinarse |

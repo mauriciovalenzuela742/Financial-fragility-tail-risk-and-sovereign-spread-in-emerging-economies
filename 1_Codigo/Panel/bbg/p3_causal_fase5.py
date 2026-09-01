@@ -47,16 +47,33 @@ def causal_block():
                          extra=f"h={int(pk['h'])} se={pk['se_sev']:.2f} thr={thr:.2f}"))
     except Exception as e:
         rows.append(dict(metodo="local projections", extra=str(e)[:60]))
+    # pre_year=2012: exposicion phi estimada en el periodo pre-GFC/GFC, coherente con
+    # el quiebre de regimen post-GFC ya documentado en theta (Seccion 6.5). A ese corte
+    # el instrumento original deja de ser debil (F 9.5 -> 21.6 en pre_year=2016 vs 2012).
     try:
-        iv = cc.iv_shiftshare(P, ctrls=ctr)
-        rows.append(dict(metodo="IV shift-share (nivel)", theta=iv.get("beta_JLoss_IV"),
+        iv = cc.iv_shiftshare(P, global_var="OnOffRun_spread_log", ctrls=ctr, pre_year=2012)
+        rows.append(dict(metodo="IV shift-share (nivel, pre_year=2012)", theta=iv.get("beta_JLoss_IV"),
                          p_normal=iv.get("p_JLoss"),
                          extra=f"shock={iv.get('shock_global')} F1={iv.get('F_primera'):.1f} "
                                f"theta_IV={iv.get('theta_IV')}"))
     except Exception as e:
         rows.append(dict(metodo="IV shift-share", extra=str(e)[:60]))
     try:
-        ti = cc.triple_institucional(P, ctrls=ctr)
+        ivd = cc.iv_shiftshare(P, global_var="USD_NEER_log", ctrls=ctr, pre_year=2012)
+        rows.append(dict(metodo="IV shift-share (nivel, shock USD amplio BIS)",
+                         theta=ivd.get("beta_JLoss_IV"), p_normal=ivd.get("p_JLoss"),
+                         extra=f"F1={ivd.get('F_primera'):.1f}"))
+    except Exception as e:
+        rows.append(dict(metodo="IV shift-share USD", extra=str(e)[:60]))
+    try:
+        ivo = cc.iv_shiftshare_overid(P, ["OnOffRun_spread_log", "USD_NEER_log"], ctrls=ctr, pre_year=2012)
+        rows.append(dict(metodo="IV shift-share (sobre-identificado, 2 instrumentos)",
+                         theta=ivo.get("beta_JLoss_IV"), p_normal=ivo.get("p_JLoss"),
+                         extra=f"F_conj={ivo.get('F_conjunto'):.1f} sargan_p={ivo.get('sargan_p'):.4f}"))
+    except Exception as e:
+        rows.append(dict(metodo="IV shift-share sobre-id", extra=str(e)[:60]))
+    try:
+        ti = cc.triple_institucional(P, inst_file=os.path.join(PANEL, "instituciones.csv"), ctrls=ctr)
         b, se, t = ti["JxG_I"]
         rows.append(dict(metodo="triple institucional (JxG x WGI)", theta=b, t=t,
                          extra=f"n={ti['_meta']['n']} paises={ti['_meta']['paises']}"))
@@ -138,8 +155,17 @@ def b4_bootstrap(df, hhicol, B=1000, seed=7):
 def fase5_block():
     df = pd.read_csv(TMPL_CSV)
     df["country"] = df["country"].str.lower()
+    # concentracion TRIMESTRAL (mismos balances Bloomberg que JLoss) -- p6_concentracion_trimestral.py
+    conc_csv = os.path.join(HERE, "concentracion_trimestral_bbg.csv")
+    if os.path.exists(conc_csv):
+        conc = pd.read_csv(conc_csv)[["country", "quarter", "HHI_q"]]
+        df = df.merge(conc, on=["country", "quarter"], how="left")
+        print(f"  HHI_q (trimestral) disponible en {df['HHI_q'].notna().sum()}/{len(df)} filas del template")
     rows = []
-    for hhicol, lbl in [("HHI", "estructural"), ("HHI_anual", "anual")]:
+    hhi_specs = [("HHI", "estructural"), ("HHI_anual", "anual")]
+    if "HHI_q" in df.columns:
+        hhi_specs.append(("HHI_q", "trimestral"))
+    for hhicol, lbl in hhi_specs:
         if df[hhicol].notna().sum() < 30:
             continue
         r = fit_f5(df, hhicol)

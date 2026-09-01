@@ -2,7 +2,10 @@
 
 *Generado el 2026-08-31 (v3, panel único, 14 países) re-ejecutando `1_Codigo/Panel/bbg/p0..p4`.
 Fuente de verdad para toda prosa de la tesis. Sustituye a la versión de dos bases y a
-`1_Codigo/Panel/NUMEROS_CANONICOS.md` (v8 regulatorio).*
+`1_Codigo/Panel/NUMEROS_CANONICOS.md` (v8 regulatorio).
+Actualizado 2026-09-01 (revisión de árbitro): censura de JLoss (§0), IV reforzado con
+exposición pre-2012 y segundo instrumento del dólar BIS (§5, §7), concentración trimestral
+`HHI_q` para H4b (§6, §7bis).*
 
 **Regla de uso:** ningún coeficiente entra a la prosa sin trazarse a una fila de este documento.
 
@@ -22,7 +25,8 @@ bonos ni proxies).
 | VIX, UST10Y, US HY OAS | Bloomberg |
 | GaR | regresión cuantílica CEMLA; FCI = estadísticas nacionales (Anexo B) |
 | Controles domésticos (6, **todos los países**) | IMF WEO (`GGXWDG_NGDP`, `GGXCNL_NGDP`), World Bank (`BN.CAB.XOKA.GD.ZS`, `FI.RES.TOTL.CD`), CPI/REER de `GaR/individuals/` |
-| HHI | World Bank GFDD `GFDD.OI.01` |
+| HHI (estructural/anual) | World Bank GFDD `GFDD.OI.01` |
+| HHI trimestral (`HHI_q`) | **NUEVO** — `p6_concentracion_trimestral.py` sobre los mismos balances Bloomberg que `JLoss` (113 bancos); corr con GFDD en la muestra de estimación = 0,62 |
 
 **Exclusiones (2), por `JLoss` no válido a nivel país — no por dato faltante:**
 - **southkorea**: E/D mercado ≈ 0,04 (*Korea discount*), Merton PD ≈ 0,55, JLoss 25–47.
@@ -164,10 +168,26 @@ LR = 80,0. El efecto de la fragilidad es ~3,5× mayor en el régimen de cola sev
 | Método | Resultado |
 |---|---|
 | **Wild cluster bootstrap** (M2, 999 rep., 13 clusters) | θ = −0,354; **p_wildboot = 0,035** |
-| **IV shift-share — efecto de NIVEL** (instrumento = `OnOffRun_spread_log` × exposición pre-muestral; 1 endógeno `JLoss_c`) | β_JLoss_IV = **+32,6 pb/unidad**, **p = 0,038**; **F 1ª etapa ≈ 9,5** (límite convencional). Dirección banco→soberano respaldada; primera etapa en el límite ⇒ sugestivo, no concluyente. |
-| IV shift-share — interacción (2 endógenos, 2º instrumento débil; "con cautela") | θ_IV = −5,25 (no se usa en prosa como resultado principal) |
+| **IV shift-share — efecto de NIVEL, `OnOffRun_spread_log`, exposición pre-2012** | β_JLoss_IV = **+17,49 pb/unidad**, **p = 0,001**; **F 1ª etapa = 21,6** — instrumento **fuerte**, no "débil-a-límite". Ver nota sobre `pre_year` abajo. |
+| IV shift-share — efecto de NIVEL, shock USD amplio (BIS, exposición pre-2012) | β_JLoss_IV = +6,27, **p = 0,458** (n.s.); F 1ª etapa = 23,7 (fuerte, pero 2ª etapa no significativa) |
+| **IV sobre-identificado (2 instrumentos: OnOffRun + USD amplio)** | β_JLoss_IV = +11,45, p = 0,048; F conjunto = 16,3; **Sargan stat = 9,06, p = 0,0026 → RECHAZA H0 de validez conjunta**. Los dos instrumentos no identifican el mismo parámetro — no reportar el sobre-identificado como estimación principal. |
+| IV shift-share — interacción (2 endógenos, 2º instrumento débil; "con cautela") | θ_IV = +7,96 (se 45,7), no informativo (no se usa en prosa como resultado principal) |
 | Proyecciones locales (pico régimen severo) | +4,35 pb (se 2,22) en h = 1; sin amplificación dinámica creciente |
 | Triple interacción institucional (JxG × WGI) | −0,013 (t = −0,10), n.s. |
+
+> **Nota sobre `pre_year` (elección del corte para estimar la exposición φ_país,
+> verificado 2026-09-01, `p7_iv_dolar_bis.py` + `causal_core.iv_shiftshare_overid`):**
+> la versión original usaba `pre_year=2016` (arbitrario) y daba F≈9,5 ("débil-a-límite").
+> Se recalibró a `pre_year=2012` —el mismo quiebre de régimen post-GFC ya establecido en
+> §2/§7bis para θ— y el instrumento original resultó **fuerte** (F=21,6, no débil). Grid
+> de verificación (F por `pre_year`, no es un óptimo elegido ad hoc): 2010→9,2/15,8;
+> 2012→**21,6/23,7**; 2014→12,9/19,3 (OnOffRun/USD) — fuerte en toda la vecindad, no un
+> artefacto de un corte puntual. **Instrumento recomendado para prosa: `OnOffRun_spread_log`
+> con `pre_year=2012`** (F=21,6, β=+17,5, p=0,001) — mejor restricción de exclusión
+> (spread de liquidez de fondeo bancario) que el shock del dólar (afecta el soberano por
+> canales no bancarios: reservas, deuda externa, importaciones). El fallo de Sargan al
+> combinar ambos es evidencia honesta de que **no son conjuntamente válidos**; se reporta
+> como límite de la estrategia, no se oculta.
 
 ---
 
@@ -177,18 +197,26 @@ LR = 80,0. El efecto de la fragilidad es ~3,5× mayor en el régimen de cola sev
 
 | HHI | β3 (JLoss×D) | t | **β4 (JLoss×D×HHI)** | t agrup. | P(β4>0) boot bloques | **IC90 boot bloques** | rango LOO |
 |---|---:|---:|---:|---:|---:|---|---|
-| estructural | +56,3 | +1,72 | **−392** | −2,34 | 12 % | **(−627, +212)** — incluye 0 | [−491, −236] |
-| anual | +24,5 | +1,08 | −268 | −2,14 | 30 % | (−387, +345) — incluye 0 | [−286, −45] |
+| estructural (GFDD, nivel) | +56,3 | +1,72 | **−392** | −2,34 | 12 % | **(−627, +212)** — incluye 0 | [−491, −236] |
+| anual (GFDD, serie) | +24,5 | +1,08 | −268 | −2,14 | 30 % | (−387, +345) — incluye 0 | [−286, −45] |
+| **trimestral** (`HHI_q`, verificado 2026-09-01, N=773, 13 países) | −5,5 | −0,17 | **−0,114** | **−2,75** | **9 %** | **(−0,144, +0,013)** — incluye 0 por muy poco | [≈0, ≈0] |
 
-> **H4a (β3 > 0):** signo **opuesto** al predicho, no significativo (+56, t = 1,72). Sólo el θ
-> de nivel *sin* HHI (§1) tiene el signo predicho.
-> **H4b (β4 > 0): NO identificado.** El t agrupado es −2,34, pero el **bootstrap de bloques por
-> país —la inferencia que corresponde con 13 clusters y un HHI casi invariante en el tiempo—
-> deja el IC90 cruzando el cero** (P(β4>0) = 12 %). El coeficiente no respalda ni refuta la
-> predicción. Contrasta con la versión v8 regulatoria (+721, t = +2,98), de dispersión
-> transversal mucho mayor. **La predicción distintiva del modelo de OI no puede contrastarse
-> con potencia sobre este panel.** (Redacción de prosa: "no identificado / imprecise", NO
-> "significativo en la dirección equivocada".)
+> **H4a (β3 > 0):** signo **opuesto** al predicho, no significativo (+56, t = 1,72). Con la
+> concentración trimestral (variación temporal real, no proxy anual casi invariante) β3
+> también cambia de signo y pierde toda precisión (−5,5, t=−0,17). Sólo el θ de nivel *sin*
+> HHI (§1) tiene el signo predicho.
+> **H4b (β4 > 0): NO identificado, y el test más potente lo confirma.** Con `HHI_q`
+> —concentración trimestral construida de los mismos 113 bancos que `JLoss`, corr 0,62 con
+> el GFDD anual— el IC90 del bootstrap de bloques es (−0,144, +0,013): **todavía cruza el
+> cero, pero por un margen mínimo**, con el t agrupado más negativo de los tres (−2,75) y la
+> P(β4>0) más baja (9 %). La concentración trimestral **no rescata la predicción del
+> modelo** — si acaso, aporta más evidencia (aunque no concluyente al 90%) de que el signo
+> empírico es negativo, no que sea únicamente un problema de falta de variación temporal
+> en el proxy de concentración. Contrasta con la versión v8 regulatoria (+721, t = +2,98),
+> de dispersión transversal de `JLoss` mucho mayor. **La predicción distintiva del modelo de
+> OI sigue sin encontrar respaldo, ahora con un proxy de concentración mejor identificado.**
+> (Redacción de prosa: "no identificado / imprecise", NO "significativo en la dirección
+> equivocada".)
 
 Explicación más probable (`paper1_oi.tex` §5.4): la serie JLoss de Bloomberg es
 transversalmente comprimida (sd ≈4 vs 8,3), y la triple interacción necesita la dispersión
@@ -280,8 +308,12 @@ estático de EF bidireccionales es el apropiado** dada la forma del panel.
 
 ## 7. Resumen para la prosa
 
-- **H1 (nivel, JLoss→CDS):** respaldada — IV shift-share da β_JLoss = +32,6 pb (p = 0,038),
-  dirección banco→soberano; primera etapa en el límite (F ≈ 9,5) ⇒ sugestivo, no concluyente.
+- **H1 (nivel, JLoss→CDS):** respaldada con un instrumento **fuerte** — IV shift-share
+  (`OnOffRun_spread_log`, exposición pre-2012): F = 21,6, β_JLoss = +17,5 pb (**p = 0,001**),
+  dirección banco→soberano. Un segundo instrumento (shock USD amplio BIS) tiene primera etapa
+  igual de fuerte (F=23,7) pero efecto no significativo solo (p=0,46), y combinar ambos
+  **rechaza Sargan** (p=0,003) — no son conjuntamente válidos; se reporta el de mejor
+  restricción de exclusión (`OnOffRun`, spread de liquidez de fondeo bancario) como principal.
 - **H2 (GaR→CDS):** β2 < 0.
 - **H3 (complementariedad, θ < 0):** **signo y forma respaldados** — θ = −0,354, invariante a
   la medida de cola (GaR q05 / skew-t / ES), al efecto marginal y al modelo de umbral.
@@ -296,4 +328,7 @@ estático de EF bidireccionales es el apropiado** dada la forma del panel.
     atenúa. Bootstrap completo de 1ª etapa pendiente.
 - **H4a (β3 > 0):** signo opuesto al predicho, no significativo.
 - **H4b (β4 > 0):** **no identificado** — el bootstrap de bloques por país deja el IC90
-  cruzando el cero. No se afirma dirección.
+  cruzando el cero con los tres proxies de concentración (GFDD estructural, GFDD anual y la
+  nueva concentración **trimestral** de los mismos bancos de `JLoss`); con la serie trimestral
+  el margen es mínimo (IC90 −0,144/+0,013) y la P(β4>0) más baja (9 %), pero no cruza el
+  umbral de significancia. No se afirma dirección.
