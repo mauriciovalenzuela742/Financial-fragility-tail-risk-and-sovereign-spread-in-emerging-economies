@@ -320,16 +320,28 @@ y hubo que restaurarlos.
 > |---|---|---|---|
 > | θ (JLoss×GaR) | **M2 (+6 controles), N=738** | **−0,354** (DK p=0,056; wild boot p=0,035; cluster país p=0,001) | −0,338 |
 > | θ (JLoss×GaR) | M1 sin controles, N=838 | −0,543 (p=0,028) | −0,359 |
-> | θ (JLoss×GaR) | pre-2020 | −0,39 (t=−1,02, **n.s.** — signo se mantiene) | — |
-> | θ (JLoss×GaR) | sin 2020–2021 | −1,11 (t=−3,53) | — |
+> | θ (JLoss×GaR) | pre-2020 | −0,39 (t=−1,02, **n.s.** — promedia post-2012 con 2004–2011 nulo) | — |
+> | θ (JLoss×GaR) | ventanas móviles 5 años desde 2012 | −0,2 a −1,2, todas significativas | — |
+> | θ (JLoss×GaR) | invariancia de cola (GaR q05 / skew-t / ES) | −0,354 / −0,354 / −0,390 | — |
+> | θ (JLoss×GaR) | sin China / sin China+Turquía | −0,17 (n.s.) / −0,07 (n.s.) | — |
 > | umbral Hansen (efecto JLoss severo/benigno) | — | +8,1 / +2,3 pb, LR=80 | +2,83 / −1,31 |
-> | β₄ (JLoss×D×HHI, **H4b**) | HHI estructural | **−392 (t=−2,34) → H4b RECHAZADA** | +721 (t=2,98) |
+> | β₄ (JLoss×D×HHI, **H4b**) | HHI estructural | t agrup. −2,34 pero **IC90 boot (−627,+212) → H4b NO IDENTIFICADO** | +721 (t=2,98) |
+> | IV shift-share (nivel de JLoss) | — | β=+32,6 pb, p=0,038; F 1ª etapa ≈ 9,5 | — |
 >
 > Cambios de fondo en la prosa: (i) la tesis es **una sola investigación / un solo panel**;
-> (ii) lo respaldado es el **signo y la forma** de θ, con significancia marginal e
-> identificación concentrada en episodios de estrés recientes (pre-2020 no significativo);
-> (iii) **H4b no se sostiene** (signo contrario, significativo). Reescritos: los 5 `.tex` de
-> `4_Redaccion/tesis/` + nuevo `anexoB_datos.tex`. Compila limpio (75 pp).
+> (ii) lo respaldado es el **signo y la forma** de θ, con significancia marginal ($p\approx0{,}05$),
+> **regularidad post-GFC** (no artefacto de COVID: negativa y significativa en todas las
+> ventanas móviles desde 2012, nula antes) e identificación que **descansa en pocos países**
+> (sin China deja de ser significativa); (iii) **H4b no identificado** (IC robusto cruza cero),
+> no "rechazada / significativa en dirección contraria". Reescritos: los 5 `.tex` +
+> `anexoB_datos.tex`. Nueva batería de árbitro: `bbg/p5_robustez_arbitro.py` →
+> `robustez_arbitro_bbg.csv`, `diag_por_pais_bbg.csv`, `fig_ventanas_theta.pdf`. Compila
+> limpio (77 pp).
+>
+> **Revisión de árbitro senior (2026-08-31).** Ver plan e informe en
+> `~/.claude/plans/adaptive-discovering-tarjan.md`. Pendiente: bootstrap de regresor generado
+> re-estimando GaR; re-corrida del motor JLoss con cotas de pérdida más anchas; serie de
+> concentración trimestral; empaquetado de los dos papers para envío a revista hispana.
 >
 > ---
 >

@@ -37,9 +37,28 @@ bonos ni proxies).
 | CDS ~1 trimestre | pakistan (1) | 1 |
 | En el roster, sin aporte | argentina/egypt/russia (sin GaR), india (sin CDS) | 0 |
 
-Descriptivos (muestra de estimación, N≈838): CDS 149/102 pb; JLoss 4,1/4,1 (sd transversal
-≈4, vs 8,3 regulatorio); deuda/PIB 46/20; balance fiscal −3,0/2,3; reservas/PIB 19/9;
-CA/PIB −1,1/3,0; inflación 5,6/8,4.
+Descriptivos (muestra de estimación, N=838, 14 países):
+
+| Variable | Media | Desv. | Mín | Máx |
+|---|---:|---:|---:|---:|
+| CDS soberano 5Y (pb) | 148,6 | 101,8 | 11 | 780 |
+| JLoss | 4,13 | 4,06 | 1,43 | 28,97 |
+| GaR (q05, fracción; más negativo = más riesgo) | +0,014 | 0,039 | −0,228 | +0,140 |
+| GaR_pp (pp) | +1,42 | 3,90 | −22,8 | +14,0 |
+| ES (Expected Shortfall, fracción) | +0,007 | 0,041 | −0,245 | +0,120 |
+| deuda gob. gral./PIB (%) | 46 | 20 | | |
+| balance fiscal/PIB (%) | −3,0 | 2,3 | | |
+| reservas/PIB (%) | 19 | 9 | | |
+| CA/PIB (%) | −1,1 | 3,0 | | |
+| inflación YoY (%) | 5,6 | 8,4 | | |
+
+**JLoss — estructura transversal (clave para la identificación de θ y β4):** la mediana por
+país va de 2,18 (Perú) a 11,58 (Pakistán), pero **9 de 14 países se agrupan en 2,2–2,6**; la
+variación entre países la aportan sobre todo Pakistán (11,6), Turquía (6,0), Brasil (4,0) y
+China (3,8). sd transversal ≈4 (vs 8,3 en la reconstrucción regulatoria v8). El 21% de las
+observaciones tiene JLoss ≥ 4,5 y el grid de pérdidas del motor llega a 4,8% "sin
+extrapolación": el VaR99 de los país-trimestre de alta fragilidad puede estar censurado por
+arriba (robustez pendiente: re-correr con cotas más anchas).
 
 ---
 
@@ -118,9 +137,10 @@ LR = 80,0. El efecto de la fragilidad es ~3,5× mayor en el régimen de cola sev
 | Método | Resultado |
 |---|---|
 | **Wild cluster bootstrap** (M2, 999 rep., 13 clusters) | θ = −0,354; **p_wildboot = 0,035** |
-| **IV shift-share (nivel)** | F 1ª etapa ≈ **9,5** (débil-a-límite); efecto de nivel sensible a la especificación → sugestivo, no concluyente |
-| Proyecciones locales (pico régimen severo) | +4,3 pb (se 2,2) en h = 1; sin amplificación dinámica creciente |
-| Triple interacción institucional (JxG × WGI) | −0,013 (t = −0,13), n.s. |
+| **IV shift-share — efecto de NIVEL** (instrumento = `OnOffRun_spread_log` × exposición pre-muestral; 1 endógeno `JLoss_c`) | β_JLoss_IV = **+32,6 pb/unidad**, **p = 0,038**; **F 1ª etapa ≈ 9,5** (límite convencional). Dirección banco→soberano respaldada; primera etapa en el límite ⇒ sugestivo, no concluyente. |
+| IV shift-share — interacción (2 endógenos, 2º instrumento débil; "con cautela") | θ_IV = −5,25 (no se usa en prosa como resultado principal) |
+| Proyecciones locales (pico régimen severo) | +4,35 pb (se 2,22) en h = 1; sin amplificación dinámica creciente |
+| Triple interacción institucional (JxG × WGI) | −0,013 (t = −0,10), n.s. |
 
 ---
 
@@ -128,16 +148,20 @@ LR = 80,0. El efecto de la fragilidad es ~3,5× mayor en el régimen de cola sev
 
 `CDS = α_i + δ_t + β1·JLoss + β2·D + β3·(JLoss×D) + β4·(JLoss×D×HHI) + …`, D = −GaR.
 
-| HHI | β3 (JLoss×D) | t | **β4 (JLoss×D×HHI)** | t | P(β4>0) boot | IC90% | LOO |
+| HHI | β3 (JLoss×D) | t | **β4 (JLoss×D×HHI)** | t agrup. | P(β4>0) boot bloques | **IC90 boot bloques** | rango LOO |
 |---|---:|---:|---:|---:|---:|---|---|
-| estructural | +56,3 | +1,72 | **−392** | −2,34 | 12 % | [−491, −236] | todos < 0 |
-| anual | +24,5 | +1,08 | −268 | −2,14 | 30 % | [−286, −45] | — |
+| estructural | +56,3 | +1,72 | **−392** | −2,34 | 12 % | **(−627, +212)** — incluye 0 | [−491, −236] |
+| anual | +24,5 | +1,08 | −268 | −2,14 | 30 % | (−387, +345) — incluye 0 | [−286, −45] |
 
-> **H4a (β3 > 0):** signo predicho, **no significativo** (+56, t = 1,72).
-> **H4b (β4 > 0): NO se sostiene.** β4 = −392 (t = −2,34): **signo opuesto al predicho y
-> significativo en esa dirección**, negativo en todas las submuestras leave-one-out. Contrasta
-> con la versión v8 regulatoria (+721, t = +2,98). **La predicción distintiva del modelo de OI
-> no encuentra respaldo empírico con datos homogéneos.**
+> **H4a (β3 > 0):** signo **opuesto** al predicho, no significativo (+56, t = 1,72). Sólo el θ
+> de nivel *sin* HHI (§1) tiene el signo predicho.
+> **H4b (β4 > 0): NO identificado.** El t agrupado es −2,34, pero el **bootstrap de bloques por
+> país —la inferencia que corresponde con 13 clusters y un HHI casi invariante en el tiempo—
+> deja el IC90 cruzando el cero** (P(β4>0) = 12 %). El coeficiente no respalda ni refuta la
+> predicción. Contrasta con la versión v8 regulatoria (+721, t = +2,98), de dispersión
+> transversal mucho mayor. **La predicción distintiva del modelo de OI no puede contrastarse
+> con potencia sobre este panel.** (Redacción de prosa: "no identificado / imprecise", NO
+> "significativo en la dirección equivocada".)
 
 Explicación más probable (`paper1_oi.tex` §5.4): la serie JLoss de Bloomberg es
 transversalmente comprimida (sd ≈4 vs 8,3), y la triple interacción necesita la dispersión
@@ -146,13 +170,103 @@ invariante en el tiempo.
 
 ---
 
+## 7bis. Batería de robustez de árbitro (`p5_robustez_arbitro.py` → `robustez_arbitro_bbg.csv`)
+
+**Invariancia de la cola (M2):** θ = −0,354 con GaR q05 directo (p = 0,056); θ = −0,354 con
+GaR skew-t de ABG2019 (p = 0,051); θ = −0,390 con Expected Shortfall (p = 0,036). El resultado
+**no depende de la especificación de la primera etapa de GaR**.
+
+**Ventanas móviles de 5 años** (M2, θ del término JLoss×GaR):
+
+| Ventana | θ | t | Lectura |
+|---|---:|---:|---|
+| 2006–2010 | +1,08 | +0,83 | GFC: positivo, no significativo |
+| 2009–2013 | +0,28 | +0,47 | ≈ cero |
+| 2012–2016 | **−1,23** | **−3,34** | crisis euro / taper / EM 2015 |
+| 2015–2019 | −0,39 | −1,65 | |
+| 2018–2022 | −0,17 | −2,15 | |
+| 2021–2025 | −0,27 | −3,06 | |
+
+> **Reencuadre temporal (importante):** la complementariedad es un fenómeno **post-GFC**:
+> ausente o positiva en 2006–2011, se vuelve negativa y significativa **desde 2012** y es
+> estable hasta 2025. El estimador pre-2020 de muestra completa es no significativo (θ = −0,39,
+> t = −1,02) **sólo porque promedia la señal post-2012 con el período nulo 2004–2011**. No hay
+> quiebre discreto en 2020: al interactuar JLoss×GaR con una dummy post-2020, el término extra
+> es +0,46 (t = 0,82, n.s.). La lectura "artefacto de COVID" **no se sostiene**; la correcta es
+> "regularidad post-GFC, identificada fuera de tiempos tranquilos".
+
+**Placebo (destruir la estructura de GaR, B = 600):**
+
+| Diseño | θ medio placebo | P(placebo ≤ obs) |
+|---|---:|---:|
+| A. reshuffle global de GaR (null exacto) | −0,005 | **0,053** |
+| B. permutar GaR dentro de país | −0,274 | 0,29 |
+| C. intercambiar series GaR entre países | +0,04 | 0,12 |
+
+> El placebo de referencia (A, null exacto) deja el θ observado en el **percentil 5** → p ≈ 0,05,
+> consistente con la inferencia analítica. El diseño B "filtra" (θ medio −0,27) porque la
+> posición transversal de GaR está correlacionada con la de JLoss y los EF bidireccionales no
+> la absorben del todo: **parte de la identificación proviene de covariación entre países, no
+> solo de la sincronía intra-país.** (Caveat para prosa.)
+
+**Regresor generado (GaR):** perturbando GaR con ruido N(0, s):
+
+| s (fracción de sd(GaR) = 3,90 pp) | θ medio | P(θ ≥ 0) |
+|---|---:|---:|
+| 0 % | −0,354 | 0,00 |
+| 10 % (0,39 pp) | −0,353 | 0,00 |
+| 25 % (0,98 pp) | −0,339 | 0,00 |
+| 50 % (1,95 pp) | −0,290 | 0,00 |
+
+> θ es estable a perturbaciones de hasta el 25 % de sd(GaR); a 50 % atenúa a −0,29 (signo
+> intacto). El error de medición **atenúa** → el θ verdadero es, si acaso, mayor. **Pendiente:**
+> bootstrap que re-estime la regresión cuantílica de GaR por réplica (inviable en este pase por
+> costo del LP en ventana expansiva; ~45.000 solves).
+
+**País influyente (M2, DK):**
+
+| Excluye | θ | t | p |
+|---|---:|---:|---:|
+| — (M2) | −0,354 | −1,91 | 0,056 |
+| China | −0,172 | −1,33 | 0,18 |
+| Sudáfrica | −0,360 | −1,39 | 0,17 |
+| China + Sudáfrica | −0,279 | −1,68 | 0,094 |
+| Turquía | −0,410 | −3,25 | 0,001 |
+| **Turquía + China** | **−0,068** | **−0,31** | **0,75** |
+| Brasil | −0,305 | −1,77 | 0,078 |
+| jackknife de 2 países (91 pares) | [−0,49, −0,07] | | 100 % < 0; 75 % con p < 0,10 |
+
+> **Vulnerabilidad principal:** el signo es negativo en las 91 submuestras de 2 países, pero
+> **la significancia descansa en China** (y, para el nivel de JLoss, en Turquía y Brasil). El
+> diagnóstico por país lo explica: 9 de 13 países tienen JLoss mediana 2,2–2,6 y máximo < 18;
+> **China (máx 29), Turquía (máx 28) y Brasil (máx 15,5) aportan casi toda la variación de
+> fragilidad.** El θ se identifica de ~4 países con movimiento real de JLoss + los episodios de
+> estrés. "14 países" sobreestima el corte transversal efectivo.
+
+**GMM dinámico:** T = 88, N = 13 ⇒ sesgo de Nickell ≈ 1,1 % (despreciable). AB/system-GMM
+(diseñado para N grande, T chico) **no es apropiado**; su test de Hansen da p = 1,00
+(sobre-identificación no informativa, 100 instrumentos). Devuelve JxG = −0,25 (p ≈ 0,007),
+AR(2) p = 0,74 — confirma el signo, sin peso inferencial. La conclusión es que **el estimador
+estático de EF bidireccionales es el apropiado** dada la forma del panel.
+
+---
+
 ## 7. Resumen para la prosa
 
-- **H1 (nivel, JLoss→CDS):** plausible; IV shift-share débil-a-límite (F ≈ 9,5).
+- **H1 (nivel, JLoss→CDS):** respaldada — IV shift-share da β_JLoss = +32,6 pb (p = 0,038),
+  dirección banco→soberano; primera etapa en el límite (F ≈ 9,5) ⇒ sugestivo, no concluyente.
 - **H2 (GaR→CDS):** β2 < 0.
-- **H3 (complementariedad, θ < 0):** **signo y forma respaldados** (efecto marginal + umbral);
-  significancia **marginal** (p ≈ 0,056 DK, 0,035 wild boot, 0,001 cluster país). Identificación
-  **concentrada en episodios de estrés recientes**; antes de 2020 el signo se mantiene pero la
-  interacción no se distingue de cero.
-- **H4a (β3 > 0):** signo predicho, no significativo.
-- **H4b (β4 > 0):** **rechazada** — signo contrario, significativo en esa dirección.
+- **H3 (complementariedad, θ < 0):** **signo y forma respaldados** — θ = −0,354, invariante a
+  la medida de cola (GaR q05 / skew-t / ES), al efecto marginal y al modelo de umbral.
+  Significancia **marginal** (p ≈ 0,056 DK, 0,035 wild boot, 0,051 con GaR skew-t, 0,001 cluster
+  país); placebo de null exacto → p ≈ 0,05.
+  - **Temporalidad:** fenómeno **post-GFC**, no artefacto de COVID. Positivo/nulo 2006–2011,
+    negativo y significativo en todas las ventanas de 5 años que empiezan en 2012+. El pre-2020
+    de muestra completa es n.s. sólo por promediar con 2004–2011.
+  - **Corte transversal efectivo:** la significancia descansa en **China** (sin China → n.s.;
+    sin China+Turquía → θ ≈ 0). 9 de 13 países casi no tienen variación de JLoss.
+  - **Regresor generado:** θ estable a perturbar GaR hasta 25 % de su sd; el sesgo de medición
+    atenúa. Bootstrap completo de 1ª etapa pendiente.
+- **H4a (β3 > 0):** signo opuesto al predicho, no significativo.
+- **H4b (β4 > 0):** **no identificado** — el bootstrap de bloques por país deja el IC90
+  cruzando el cero. No se afirma dirección.
