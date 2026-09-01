@@ -5,17 +5,18 @@ Tesis de Magíster en Economía Aplicada (Universidad de Chile). Investiga por q
 el spread soberano de las economías emergentes por encima de la suma de sus efectos
 individuales, desde dos aristas:
 
-- **Capítulo empírico** — estima el término de interacción `JLoss × GaR` sobre el CDS
-  soberano en un panel de economías emergentes.
+- **Capítulo empírico** — estima el término de interacción `JLoss × GaR` sobre el spread
+  soberano (**EMBI Global Diversified**, siguiendo a Chari et al. 2024) en un panel de
+  economías emergentes.
 - **Capítulo teórico (organización industrial)** — modelo de competencia bancaria à la Cournot
   del que esa complementariedad es una predicción de primer orden, con una predicción
   distintiva adicional: la amplificación por concentración bancaria.
 
-> **Estado a 2026-09-01.** Toda la evidencia empírica está reanclada en datos de **Bloomberg**
-> y estructurada como **una sola investigación sobre un único panel**. Tras una revisión de
-> árbitro senior (batería de robustez ampliada, reconciliación de cifras, censura de la
-> métrica de fragilidad), documento de tesis compilado y limpio:
-> [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (80 pp). Los dos capítulos se
+> **Estado a 2026-09-02.** La variable dependiente del capítulo empírico es el **EMBI Global
+> Diversified** (como en Chari et al. 2024); el CDS soberano 5Y queda como serie de robustez.
+> Hungría sale del panel por el mismo criterio de bancos mínimos que ya excluía a Bulgaria.
+> **Panel de 13 países.** Documento de tesis compilado y limpio:
+> [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (82 pp). Los dos capítulos se
 > preparan además como envíos separados a revista — ver
 > [`4_Redaccion/envios/`](4_Redaccion/envios/).
 
@@ -28,28 +29,28 @@ individuales, desde dos aristas:
 | Insumo | Fuente | Cobertura efectiva |
 |---|---|---|
 | **JLoss** (fragilidad, motor de punto de silla / Merton–KMV) | Bloomberg: balances + capitalización bursátil de 113 bancos | 20 economías, 2004–2026 |
-| **Spread soberano** | Bloomberg: **CDS soberano 5Y USD, exclusivamente** (celda vacía si no hay dato) | 11 países con historia continua + 3 parciales |
+| **Spread soberano** | **EMBI Global Diversified (J.P. Morgan)**, principal; CDS soberano 5Y USD de Bloomberg, robustez | 9 países con historia continua + 4 parciales |
 | **GaR** (riesgo de cola, regresión cuantílica de panel, marco CEMLA) | insumos FCI de estadísticas nacionales (Bloomberg no publica cuentas nacionales) | 17 economías |
 | **Controles domésticos** (deuda, fiscal, reservas, CA, inflación, REER) | IMF WEO + World Bank + BIS, para **todos** los países del panel | — |
-| **HHI** (concentración bancaria) | World Bank GFDD | — |
+| **HHI** (concentración bancaria) | World Bank GFDD + serie trimestral de bancos Bloomberg | — |
 
-**Muestra de estimación:** 14 países, ~838 observaciones trimestrales.
-**Exclusiones (2), por JLoss no válido a nivel país:** Corea del Sur (*Korea discount* →
-Merton lee incumplimiento inminente) y Bulgaria (un solo banco cotizado). Ver
+**Muestra de estimación:** 13 países, N = 721 (M1) / 614 (M2) observaciones trimestrales.
+**Exclusiones (3), por JLoss no válido a nivel país — bancos cotizados insuficientes:** Corea
+del Sur (*Korea discount* → Merton lee incumplimiento inminente), Bulgaria (un solo banco
+cotizado) y **Hungría** (2 bancos, `below_min_banks` en 89/89 trimestres). Ver
 [`1_Codigo/Panel/bbg/DIAGNOSTICO_COREA.md`](1_Codigo/Panel/bbg/DIAGNOSTICO_COREA.md).
 
 ### Resultados principales
 
 | Hipótesis | Resultado |
 |---|---|
-| **H1** — nivel: `JLoss → spread` | Respaldada con **instrumento fuerte** — IV *shift-share* (spread de liquidez de fondeo, exposición pre-2012): F = 21,6, β = +17,5 pb (**p = 0,001**), dirección banco→soberano. Un segundo instrumento (dólar efectivo amplio, BIS) también tiene primera etapa fuerte (F = 23,7) pero no corrobora la magnitud solo (p = 0,46), y combinar ambos **rechaza Sargan** (p = 0,003) — no conjuntamente válidos; se reporta el de mejor exclusión como principal. |
-| **H3 / complementariedad** — θ (interacción `JLoss × GaR`) < 0 | **Signo y forma respaldados** — θ = −0,35; efecto marginal creciente y modelo de umbral de Hansen lo corrobora (+8,1 vs +2,3 pb por régimen). θ **invariante** a la medida de cola (GaR q05 / skew-t / ES). Significancia **marginal**: p = 0,056 (Driscoll–Kraay), 0,035 (*wild cluster bootstrap*), 0,001 (*cluster* por país); placebo de reasignación → p ≈ 0,05. |
-| **Frontera temporal** | **Regularidad post-crisis financiera global**, no artefacto de COVID: θ positivo/nulo en 2006–2011, negativo y significativo en **todas** las ventanas móviles de 5 años que empiezan en 2012. El pre-2020 de muestra completa es n.s. sólo por promediar con 2004–2011; no hay quiebre discreto en 2020. |
-| **Corte transversal efectivo** | La significancia descansa en **China**: sin China θ = −0,17 (n.s.); sin China+Turquía θ ≈ 0. 9 de 13 países casi no tienen variación de `JLoss`. |
-| **Robustez a la censura de `JLoss`** | La cota del grid de pérdidas (4,8 % de la exposición) satura el VaR99 en el **98 %** de las observaciones. Recalculando con grid ancho `[0,01, 0,20]` (`JLoss` ×2,8, corr 0,92): **θ conserva la magnitud y gana precisión** — M2 θ = −0,330 (p = 0,032), M1 θ = −0,572 (p = 0,010). La censura sesgaba *en contra* del hallazgo. |
-| **Regresor generado** | `JLoss` y `GaR` son estimados; el error de medición atenúa. θ estable a perturbar `GaR` hasta 25 % de su desviación. |
-| **H4a** — β₃ > 0 (parametrización directa de la triple interacción) | Signo **contrario** al predicho, no significativo (+56). Sólo el θ de nivel sin HHI recupera el signo del modelo. |
-| **H4b** — β₄ > 0: amplificación por concentración | **No identificada** con ninguno de tres proxies de HHI. GFDD estructural: β₄ = −392 (t = −2,34), IC90 (−627, +212). **Concentración trimestral** (construida de los mismos bancos que `JLoss`, corr 0,62 con GFDD): β₄ = −0,114 (t = −2,75, el más negativo), IC90 (−0,144, **+0,013**) — cruza el cero por un margen mínimo. La variación temporal real no rescata la predicción; si acaso refuerza que el signo empírico es negativo. |
+| **H1** — nivel: `JLoss → spread` | **Respaldada** por MCO con efectos fijos (β₁ = +2,8, t = 2,7) y proyecciones locales (+4,6 pb, t = 2,9, pico en h = 1). El IV *shift-share* sobre el panel de 13 países es más débil que en la versión con CDS (F ≈ 11, 2ª etapa no significativa); un 2º instrumento da signo opuesto y Sargan rechaza. **El canal causal de nivel no está cerrado por IV.** |
+| **H2** — nivel: `GaR → spread` | Respaldada — β₂ = −4,3 (t = −2,3): un `GaR` más negativo se asocia con mayor spread. |
+| **H3 / complementariedad** — θ (interacción `JLoss × GaR`) < 0 | **Condicional.** Sobre la muestra completa de 13 países, θ = −0,16 (**no significativo**, p = 0,26; wild boot 0,14). **No es la métrica del spread:** EMBI y CDS dan el mismo θ (≈ −0,7, p ≈ 0,05) sobre la misma submuestra. Es la **composición de la muestra**. |
+| **Heterogeneidad — el hallazgo central** | En el **núcleo de 11 economías emergentes de financiamiento externo**, θ = **−0,47** (t = −2,29, **p = 0,023**; wild boot 0,015). Se diluye al añadir Polonia e India (mercados de deuda local profundos). La diferencia de grupo no es significativa (p = 0,23) — solo 2 países en el grupo de contraste. El modelo de umbral de Hansen corrobora la no linealidad (+5,9 vs +2,0 pb por régimen, LR = 27). |
+| **Frontera temporal** | Fenómeno **pre-pandemia**: θ base = −1,0 (p = 0,057), el término post-2020 (+1,0) lo compensa. Negativo y significativo en la ventana móvil 2012–2016. |
+| **H4a** — β₃ (parametrización directa de la triple interacción) | Signo **contrario** al predicho, no significativo. Sólo el θ de nivel sin HHI recupera el signo del modelo. |
+| **H4b** — amplificación por concentración | **No identificada** con ninguno de tres proxies de HHI (estructural, anual, trimestral). El punto estimado no tiene signo estable entre proxies; el bootstrap de bloques cruza el cero holgadamente con todos. |
 
 Números canónicos completos y trazables:
 [`1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`](1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md).
@@ -57,30 +58,30 @@ Batería de robustez de árbitro: [`1_Codigo/Panel/bbg/p5_robustez_arbitro.py`](
 
 ### Fronteras y limitaciones del resultado
 
-Lo que la evidencia **respalda** es el **signo y la forma** de la complementariedad, no una
-magnitud puntual. Las fronteras honestas:
+Lo que la evidencia **respalda con solidez** son los canales de **nivel** (H1, H2). La
+complementariedad (H3) es **condicional** — significativa en el núcleo de economías de
+financiamiento externo, no en el conjunto del panel. Las fronteras honestas:
 
-- **Restricción de exclusión del IV (H1).** El efecto causal de nivel `JLoss → spread` se
-  apoya en un instrumento cuya validez no se puede verificar directamente. El *shift-share*
-  con el spread de liquidez de fondeo bancario es fuerte (F = 21,6) y significativo
-  (p = 0,001), pero un **segundo** instrumento igualmente fuerte —el choque del dólar
-  efectivo amplio (BIS)— no corrobora la magnitud al usarse solo, y la especificación
-  sobre-identificada con ambos **rechaza el test de Sargan (p = 0,003)**: los dos
-  instrumentos no identifican el mismo parámetro, luego al menos uno viola la exclusión. Se
-  reporta el de mejor argumento de exclusión (opera sobre el costo de fondeo bancario, no
-  sobre el soberano directamente) como el más creíble, pero **el efecto de nivel no está
-  causalmente cerrado**. El capítulo teórico hereda la misma dificultad: su estrategia de
-  instrumentos de competencia se anuncia pero no se implementa.
-- **Significancia marginal de θ:** p ≈ 0,05 bajo las tres formas de inferencia principales.
-- **Identificación acotada:** regularidad post-GFC (no antes de 2012) y sostenida por pocos
-  países con variación real de `JLoss` (sin China deja de ser significativa).
-- **`JLoss` ordinal, no cardinal:** la censura de la malla de pérdidas comprime el nivel
-  ×2,8 (el signo y la inferencia se preservan; la magnitud en niveles no es interpretable).
+- **La complementariedad no es significativa sobre la muestra completa** (θ = −0,16, p = 0,26).
+  Solo lo es sobre el núcleo de 11 economías de financiamiento externo (θ = −0,47, p = 0,023);
+  con solo 2 economías (Polonia, India) en el grupo de contraste, la diferencia entre grupos
+  no alcanza un contraste estadístico formal (p = 0,23).
+- **Identificación temporal acotada:** fenómeno pre-pandemia; la señal se concentra en la
+  ventana 2012–2016.
+- **Corte transversal efectivo:** 9 de 13 países casi no tienen variación de `JLoss`; sin
+  China θ cae a −0,05.
+- **Identificación causal de nivel no cerrada por IV** sobre esta muestra reducida (F ≈ 11,
+  2ª etapa n.s.; 2º instrumento con signo opuesto; Sargan rechaza). H1 se apoya en MCO con
+  efectos fijos y proyecciones locales.
+- **`JLoss` ordinal, no cardinal:** la censura de la malla de pérdidas satura el VaR99 en el
+  ~98 % de las observaciones; se interpreta como ranking de fragilidad relativa.
 - **Regresores generados:** `JLoss` y `GaR` son estimados; la inferencia que los trata como
   datos subestima la varianza de θ (el sesgo de medición atenúa, así que θ es un límite
   conservador).
-- **H4b sin identificar** con ninguno de los tres proxies de concentración, incluida la
-  serie trimestral construida para este propósito.
+- **Controles domésticos interpolados de series anuales:** sus coeficientes bajo FE
+  bidireccionales no tienen signo económico fiable; se incluyen como controles, no se
+  interpretan.
+- **H4b sin identificar** con ninguno de los tres proxies de concentración.
 
 ---
 
@@ -113,7 +114,7 @@ cd ../JLoss_reconstruction && python _engine_wide.py    # -> Panel_JLoss_wide.cs
 cd ../Panel && python bbg/_robustez_widebounds.py       # -> robustez_widebounds_bbg.csv
 
 # 3. Documento de tesis (desde 4_Redaccion/tesis/)
-latexmk -pdf main.tex             # -> main.pdf, 80 pp, compila sin warnings
+latexmk -pdf main.tex             # -> main.pdf, 82 pp, compila sin warnings
 ```
 
 ---
@@ -157,4 +158,6 @@ latexmk -pdf main.tex             # -> main.pdf, 80 pp, compila sin warnings
 | `Revisión de árbitro: reconciliar cifras y batería de robustez` | Resumen del Cap. 2 realineado con el cuerpo; `p5_robustez_arbitro.py` (ventanas móviles, placebo, país influyente, regresor generado, GMM); reencuadre temporal a "post-GFC" |
 | `Censura del VaR99 de JLoss` + `Robustez grid ancho — VERIFICADA` | El grid de pérdidas satura el VaR99 en el 98 % de las obs.; con grid ancho θ conserva magnitud y gana precisión (M2 p 0,056 → 0,032) |
 | `Fase 2-3: prosa de artículo + empaquetado` | `paper2` §1 a prosa; H4b → "no identificado"; `4_Redaccion/envios/` con dos papers standalone |
-| `Concentración trimestral + IV reforzado` | `HHI_q` de los mismos bancos que `JLoss` (H4b sigue no identificado, margen mínimo); IV con exposición pre-2012 pasa de F≈9,5 a F=21,6 (p=0,001); segundo instrumento (dólar BIS) rechaza Sargan al combinarse |
+| `Concentración trimestral + IV reforzado` | `HHI_q` de los mismos bancos que `JLoss` (H4b sigue no identificado); IV con exposición pre-2012 |
+| `Reestructura el panel: EMBI como variable dependiente principal, CDS a robustez` | Variable dependiente = EMBI Global Diversified (Chari et al. 2024); CDS a robustez; el θ marginal negativo era específico del CDS |
+| `Excluye Hungría; sección de heterogeneidad núcleo/convergencia` | Hungría fuera (2 bancos, `below_min` 89/89, mismo criterio que Bulgaria); panel de 13 países; hallazgo central pasa a ser la heterogeneidad: θ = −0,47 (p = 0,023) en el núcleo de 11 EM de financiamiento externo, no significativo al añadir Polonia e India; EMBI vs CDS dan el mismo θ sobre la misma submuestra |

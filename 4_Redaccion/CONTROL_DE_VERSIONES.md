@@ -303,7 +303,39 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
-> **Reancla en Bloomberg + panel único (2026-08-31, v3).** Toda la investigación empírica se
+> **★ DV = EMBI, 13 países (2026-09-02).** La variable dependiente del capítulo empírico es
+> el **EMBI Global Diversified (J.P. Morgan)**, como en Chari et al. (2024); el CDS 5A de
+> Bloomberg queda como **serie de robustez**. Fuente EMBI: `2_Datos/embi.xlsx`. **Hungría sale
+> del panel** por el mismo criterio de bancos mínimos que ya excluía a Bulgaria (2 bancos,
+> `below_min_banks` 89/89 trimestres). Panel de estimación: **13 países, N = 721 (M1) / 614
+> (M2)**. Pipeline: `bbg/p1..p7`. Fuente de verdad: `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`
+> (sección superior "★ DISEÑO VIGENTE").
+>
+> | Parámetro | Spec | Valor (EMBI, 13 países) |
+> |---|---|---|
+> | θ (JLoss×GaR) | M2 (+6 controles), N=614 | **−0,16** (DK p=0,26; wild boot p=0,14) — **NO significativo** |
+> | θ (JLoss×GaR) | M1 sin controles, N=721 | −0,14 (p=0,57) |
+> | β₁ (nivel JLoss), β₂ (nivel GaR) | M2 | +2,8 (t=2,7) / −4,3 (t=−2,3) — **ambos significativos** |
+> | θ — EMBI vs CDS, submuestra común (606 obs) | M1 | −0,66 (p=0,046) vs −0,76 (p=0,048) — **la métrica no cambia el resultado** |
+> | θ — **núcleo 11 EM de financiamiento externo** | M2, N=479 | **−0,47** (t=−2,29, **p=0,023**; wild boot 0,015) |
+> | θ — diferencia grupo Polonia+India | interacción de grupo | +0,36 (p=0,23) — no significativa (solo 2 países) |
+> | θ — pre-2020 / término post-2020 | interacción de crisis | −1,0 (p=0,057) / +1,0 (p=0,12) |
+> | θ — ventana móvil 2012–2016 | — | −0,65 (t=−2,4, p=0,018) |
+> | umbral Hansen (efecto JLoss severo/benigno) | — | +5,9 / +2,0 pb, LR=27,5 |
+> | β₄ (JLoss×D×HHI, **H4b**) | 3 proxies HHI | +122 / +152 / ≈0 — **NO IDENTIFICADO** (signo inestable, IC boot cruza cero) |
+> | H1 causal | proyecciones locales | +4,6 pb (t=2,9) — respalda H1; IV *shift-share* F≈11, 2ª etapa n.s., Sargan rechaza |
+>
+> **El θ marginal negativo (−0,35, p=0,056) de la versión con CDS era específico del CDS** —
+> no del mecanismo, sino de la composición de la muestra: el CDS de Bloomberg estaba truncado
+> para Polonia (14 trim.) y ausente para India. La prosa de la tesis pasa a: canales de nivel
+> (H1, H2) sólidos; complementariedad (H3) **condicional** — significativa en el núcleo de EM
+> de financiamiento externo, no en el conjunto. Reescritos: los 5 `.tex` + `anexoB_datos.tex`
+> + resumen de `main.tex`. Compila limpio (82 pp). Nuevo bloque de heterogeneidad en
+> `bbg/p5_robustez_arbitro.py`.
+>
+> ---
+>
+> **Reancla en Bloomberg + panel único (2026-08-31, v3) [SUPERADO por lo anterior en la DV].** Toda la investigación empírica se
 > reconstruyó sobre datos de Bloomberg (JLoss, CDS soberano 5A, factores globales; GaR mantiene
 > sus insumos FCI de estadísticas nacionales) y se reestructuró como **una sola investigación
 > sobre un único panel**, sin la partición "núcleo LatAm / panel ampliado". Variable

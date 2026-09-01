@@ -1,6 +1,5 @@
 country,jloss_q,gar_q,embi_q,cds_q,embi_cobertura,n_estimacion,n_est_cds,ventana_est
 poland,91,89,107,14,continua,89,14,2004Q1..2026Q1
-hungary,91,89,107,14,continua,89,14,2004Q1..2026Q1
 china,81,79,107,91,continua,79,79,2006Q3..2026Q1
 mexico,91,77,107,91,continua,77,77,2006Q4..2025Q4
 chile,91,75,107,91,continua,75,75,2007Q3..2026Q1

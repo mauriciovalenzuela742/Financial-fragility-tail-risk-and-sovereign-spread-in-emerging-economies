@@ -80,16 +80,20 @@ mide con la métrica \textit{Joint Loss} ($\JLoss$) construida a partir de
 probabilidades de incumplimiento de tipo Merton agregadas por punto de silla, con
 balances y precios accionarios de 113 bancos extraídos homogéneamente de Bloomberg; el
 riesgo a la baja del crecimiento, con \textit{Growth-at-Risk} ($\GaR$) por regresión
-cuantílica de panel; el \textit{spread} soberano, exclusivamente por el CDS a cinco
-años. Sobre un panel único de catorce economías emergentes (2004--2026), el coeficiente
-de interacción $\JLoss\times\GaR$ sobre el CDS es negativo —el signo que predice el
-multiplicador de \textit{doom loop}—, con $\hat\theta=-0{,}35$ ($p\approx0{,}05$ bajo
-inferencia robusta al número reducido de países), y un modelo de umbral corrobora la no
-linealidad. El efecto es una regularidad \textbf{posterior a la crisis financiera
-global}: negativo y significativo en todas las ventanas móviles de cinco años desde
-2012, nulo antes. La identificación descansa de forma desproporcionada en los pocos
-países con variación sustantiva de la fragilidad. Se reporta el signo y la forma del
-mecanismo como resultado establecido y la magnitud puntual como evidencia marginal.\\[4pt]
+cuantílica de panel; el \textit{spread} soberano, por el índice EMBI Global Diversified
+de J.P.\ Morgan (con el CDS a cinco años como robustez). Sobre un panel único de trece
+economías emergentes (2004--2026), los canales de nivel están bien identificados: la
+fragilidad bancaria ($\hat\beta_1>0$) y el riesgo de cola del crecimiento
+($\hat\beta_2<0$) elevan cada uno el \textit{spread} soberano. El coeficiente de
+interacción $\JLoss\times\GaR$ tiene el signo que predice el multiplicador de
+\textit{doom loop} pero no es significativo sobre la muestra completa ($\hat\theta=-0{,}16$,
+$p=0{,}26$); la elección de la métrica del \textit{spread} no incide en ello (EMBI y CDS
+arrojan el mismo coeficiente sobre la misma submuestra). La interacción \textbf{sí es
+significativa} ($\hat\theta=-0{,}47$, $p=0{,}023$) sobre el núcleo de once economías
+emergentes de financiamiento externo, y se diluye al añadir economías con mercados de
+deuda local profundos. Un modelo de umbral corrobora la no linealidad. La complementariedad
+fragilidad--crecimiento sobre el riesgo soberano se revela como un fenómeno
+\textbf{condicional}, no una regularidad universal.\\[4pt]
 \noindent\textbf{Palabras clave:} riesgo soberano, fragilidad bancaria, \textit{Growth-at-Risk},
 \textit{doom loop}, economías emergentes.\quad\textbf{JEL:} F34, G21, G15, H63, E44.
 \end{abstract}

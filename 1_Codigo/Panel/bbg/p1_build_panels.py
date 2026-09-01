@@ -56,6 +56,8 @@ EXCLUIDOS = {
                   "JLoss 25-47 (ver DIAGNOSTICO_COREA.md)",
     "bulgaria": "JLoss no sistemico: 1 banco cotizado (FIBank), 76/76 trimestres "
                 "below_min_banks, JLoss mediana 29 -- no es una medida a nivel pais",
+    "hungary": "JLoss no sistemico: mediana 2 bancos cotizados (OTP dominante), "
+               "below_min_banks en 89/89 trimestres -- mismo criterio que Bulgaria",
 }
 MIN_Q_CDS_UTIL = 60          # umbral para marcar la serie de CDS como "continua"
 GFDD_ISO = {"malaysia": "MYS", "philippines": "PHL", "southkorea": "KOR",

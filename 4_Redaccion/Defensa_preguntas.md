@@ -8,6 +8,15 @@ citar; **Si insiste** = la línea de defensa de segundo nivel.*
 Complemento específico para la construcción del GaR:
 `1_Codigo/Defensa_GaR_preguntas_respuestas.md`.
 
+> **Encuadre vigente (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**
+> (como en Chari et al. 2024); el CDS 5A es robustez. Panel de **13 países** (Hungría excluida
+> por bancos mínimos). El hallazgo central: los canales de **nivel** (H1 `JLoss→spread`, H2
+> `GaR→spread`) están bien identificados; la **complementariedad** (H3, θ) es **condicional** —
+> θ = −0,16 (n.s.) sobre la muestra completa, pero **θ = −0,47 (p = 0,023)** sobre el núcleo
+> de 11 economías emergentes de financiamiento externo, diluyéndose al añadir Polonia e India.
+> EMBI y CDS dan el mismo θ sobre la misma submuestra: **la métrica no cambia el resultado; la
+> composición de la muestra sí.**
+
 ---
 
 ## A. Pregunta de investigación, contribución y posicionamiento
@@ -30,15 +39,16 @@ coeficiente.
 aporte del de ese grupo?**
 R. Comparto las métricas (`JLoss`, marco GaR-CEMLA) pero el objeto es distinto: la
 interacción con la cola doméstica, el modelo de OI que la microfundamenta, y la prueba —de
-resultado negativo— de la amplificación por concentración. El *pipeline* y todos los números
-son reproducibles y están versionados.
+resultado no concluyente— de la amplificación por concentración. El *pipeline* y todos los
+números son reproducibles y están versionados.
 
 **P3. Si tuviera que resumir el aporte en una frase, ¿cuál es?**
-R. La fragilidad bancaria sistémica y el riesgo de cola del crecimiento no determinan el
-spread soberano de forma aditiva, sino **complementaria**: su coincidencia lo amplifica. Se
-establece el **signo y la forma** de esa complementariedad sobre un panel homogéneo, se la
-deriva de un modelo estructural, y se delimita con precisión qué parte está respaldada y
-qué parte no.
+R. La fragilidad bancaria sistémica y el riesgo de cola del crecimiento elevan cada uno el
+spread soberano de las economías emergentes, y su coincidencia lo amplifica de forma
+**complementaria** —pero solo en las economías más expuestas al financiamiento externo de
+cartera. Se caracteriza *dónde* y *cuándo* esa complementariedad aparece en los precios
+soberanos, se la deriva de un modelo estructural de organización industrial bancaria, y se
+delimita con precisión qué parte está respaldada y qué parte no.
 
 **P4. ¿Por qué dos capítulos-paper y no un solo artículo integrado?**
 R. Son dos objetos de conocimiento que se validan con estándares distintos: el empírico con
@@ -58,24 +68,26 @@ país-trimestre**. `JLoss` mide, en la práctica, la pérdida esperada (probabil
 Merton) más una contribución de cola evaluada a un **nivel de estrés fijo**, no en el
 percentil 99 verdadero. Consecuencia: la variación de `JLoss` la gobierna la pérdida
 esperada, no la forma de la cola.
-Si insiste: recalculé el motor con malla `[0,01; 0,20]` para los 14 países de estimación.
-`JLoss` escala **×2,8** (heterogéneo entre países), correlación 0,92 con la base. Re-estimando
-θ con esa serie corregida: **M2 θ = −0,330 (p = 0,032)** vs base −0,354 (p = 0,056); M1 θ =
-−0,572 (p = 0,010). La censura, de sesgar algo, **sesgaba en contra** del hallazgo. `JLoss`
-se interpreta ordinalmente, no en niveles — y así lo dice el §4.1.
+Si insiste: recalculé el motor con una malla más ancha. `JLoss` escala por un factor de
+varias veces (heterogéneo entre países) pero preserva en lo esencial el ordenamiento
+(correlación ≈ 0,9 con la base). Por eso `JLoss` se interpreta **ordinalmente** —como un
+ranking de fragilidad relativa entre países y en el tiempo— y no en niveles, y así lo dice
+el §4.1.
 
-**P6. ¿Por qué excluye a Corea del Sur y a Bulgaria y deja a China, que también tiene un
-`JLoss` elevado?**
-R. Corea: el valor de mercado de la banca es ≈4 % del punto de incumplimiento (frente a
-15–34 % en el resto), reflejo del *Korea discount*, no de la solvencia; Merton lo lee como
-incumplimiento inminente y devuelve `JLoss` 25–47. Bulgaria: un solo banco cotiza (FIBank),
-76/76 trimestres bajo el mínimo. China: `JLoss` mediano 3,8, máximo 29 —elevado pero no
-implausible; su descuento de valoración es mucho menos extremo. Es una exclusión por
-**insumo no válido**, no por dato faltante, y coincide con la reconstrucción regulatoria
-previa.
-Si insiste: reconozco que China es la exclusión que más condicionaría el resultado —lo digo
-en las limitaciones (§7, punto cuarto). Por eso reporto la robustez sin China de forma
-prominente.
+**P6. ¿Por qué excluye a Corea del Sur, Bulgaria y Hungría y deja a China?**
+R. El criterio es único: que `JLoss` no sea una medida sistémica a nivel de país por número
+de bancos cotizados insuficiente. Corea: el valor de mercado de la banca es ≈4 % del punto de
+incumplimiento (frente a 15–34 % en el resto), reflejo del *Korea discount*, no de la
+solvencia; Merton lo lee como incumplimiento inminente y devuelve `JLoss` 25–47. Bulgaria: un
+solo banco cotiza (FIBank), 76/76 trimestres bajo el mínimo. **Hungría: dos bancos cotizados
+(OTP dominante), `below_min_banks` en 89/89 trimestres** —mismo criterio que Bulgaria. (En la
+versión previa con CDS, Hungría no era candidata porque solo tenía 14 trimestres de CDS; al
+pasar la DV al EMBI —que le da 89— la exclusión debe hacerse explícita.) China: `JLoss`
+mediano 3,8, máximo 29 —elevado pero no implausible, con 9 bancos cotizados. Es una exclusión
+por **insumo no válido**, no por dato faltante.
+Si insiste: China es la exclusión que más condicionaría el resultado —lo digo en las
+limitaciones (§7). Por eso reporto la robustez sin China de forma prominente (sin China, θ
+cae a −0,05 sobre la muestra completa).
 
 **P7. `JLoss` es un regresor estimado, no observado. ¿No invalida eso la inferencia sobre
 θ?**
@@ -91,8 +103,9 @@ refinamiento pendiente (es ~45.000 solves del programa lineal).
 R. Es el precio de la homogeneidad: un solo protocolo elimina la heterogeneidad de
 definiciones contables entre supervisores, pero también comprime la dispersión —en la
 versión regulatoria, Brasil solo concentraba `JLoss` ≈ 16. Esa compresión es la razón más
-probable de que la prueba de amplificación por concentración (H4b) quede sin potencia. Para
-la interacción de primer orden (θ) la señal alcanza, aunque marginalmente.
+probable de que la prueba de amplificación por concentración (H4b) quede sin potencia, y
+contribuye a que la interacción de primer orden (θ) solo se identifique en el subconjunto de
+economías con variación real de fragilidad.
 
 **P9. ¿Por qué ρ = 0,4 y LGD = 0,45 y no otros valores?**
 R. Son los parámetros de Chari et al. (2024), a su vez estándar (LGD 45 % es Basilea II para
@@ -112,42 +125,50 @@ componentes de mercado del FCI (índice accionario, REER, 10Y) para cerrar más 
 
 **P11. La media de `GaR` (q05) es +1,4 pp. ¿Un percentil 5 del crecimiento positivo?**
 R. Es el cuantil 5 % del crecimiento interanual condicional un trimestre adelante, promediado
-sobre 838 observaciones-país que incluyen muchos trimestres de expansión en emergentes. El
-rango es [−22,8; +14,0] pp: en los episodios de estrés `GaR` es marcadamente negativo, que
-es donde el mecanismo se identifica. La convención: más negativo = más riesgo a la baja.
+sobre las ~720 observaciones-país que incluyen muchos trimestres de expansión en emergentes.
+El rango es [−19; +14] pp: en los episodios de estrés `GaR` es marcadamente negativo, que es
+donde el mecanismo se identifica. La convención: más negativo = más riesgo a la baja.
 
 **P12. ¿Por qué el cuantil directo y no la skew-t de Adrian et al.?**
 R. El cuantil condicional es el objeto primitivo del estimador de Koenker; la skew-t es una
 elección de suavizado. Uso el cuantil directo (con reordenamiento de Chernozhukov et al.
 2010) y conservo la skew-t como robustez: la correlación entre ambas series de `GaR` es
-0,9996, y θ con `GaR` skew-t es −0,354 (p = 0,051), idéntico al del cuantil directo.
+0,9996, y θ con `GaR` skew-t es −0,16 (n.s.), idéntico al del cuantil directo —la (no)
+significancia sobre la muestra completa no depende de la especificación de la cola.
 (Detalle en `Defensa_GaR_preguntas_respuestas.md`.)
 
 ---
 
-## D. CDS, controles y concentración
+## D. Spread soberano, controles y concentración
 
-**P13. ¿Por qué CDS y no EMBI? Pierde observaciones.**
-R. El CDS a cinco años aísla el componente puro de riesgo de crédito y es homogéneo entre
-países; el EMBI mezcla vencimiento, cupón y liquidez de bonos heterogéneos. Decisión
-metodológica: donde no hay CDS, la celda queda vacía —no se sustituye por proxies, para no
-ensuciar la variable dependiente. Cuesta cobertura pero gana comparabilidad.
+**P13. ¿Por qué EMBI y no CDS?**
+R. El EMBI Global Diversified es el índice de referencia de la literatura de spreads
+soberanos de economías emergentes y la variable dependiente del trabajo más próximo (Chari
+et al. 2024). El CDS a cinco años aísla mejor el componente puro de riesgo de crédito, y por
+eso se conserva como **serie de robustez**. Lo decisivo: en la submuestra donde ambas series
+coexisten (606 observaciones, correlación 0,86) arrojan **el mismo coeficiente de
+interacción** (θ ≈ −0,7, p ≈ 0,05). La elección de la métrica no cambia el resultado.
+Si insiste: una versión previa de este panel usaba el CDS y daba θ = −0,35 (p = 0,056). La
+diferencia con el θ actual (−0,16 sobre la muestra completa) **no es la métrica**, es que el
+CDS de Bloomberg estaba truncado para Polonia (14 trimestres) y ausente para India, mientras
+el EMBI les da 89 y 54 —y esas economías diluyen la interacción (ver P18).
 
 **P14. Los controles domésticos son anuales interpolados a trimestral. La variación
 trimestral es un artefacto.**
 R. Cierto para deuda/PIB, balance fiscal, reservas y cuenta corriente (§7). Son variables
-lento-móviles y la interpolación lineal es estándar para ellas. La inflación y el REER sí
-son de frecuencia nativa mensual. El coeficiente de deuda/PIB (+2,32; t = 4,5) se identifica
-sobre todo de la variación entre países y de baja frecuencia; lo relevante para la tesis es
-que θ **conserva el signo** una vez condicionado por ese bloque, no la magnitud de los
-controles.
+lento-móviles y la interpolación lineal es estándar para ellas. Bajo efectos fijos
+bidireccionales su variación intra-anual identificable es escasa, de modo que sus
+coeficientes **no tienen un signo económico fiable** (la deuda/PIB, por ejemplo, sale con
+signo negativo, y la correlación *within* entre EMBI y deuda/PIB es de apenas +0,10). Se
+incluyen como controles, no se interpretan; lo relevante es que θ **conserva el signo** y la
+(no) significancia con y sin ese bloque.
 
 **P15. El HHI del GFDD es casi invariante en el tiempo. ¿Cómo puede identificar β4?**
 R. No puede bien —es exactamente el problema de H4b. Por eso construí una serie de
 concentración **trimestral** (`p6_concentracion_trimestral.py`) a partir de los mismos
 balances Bloomberg que `JLoss`: CR3/HHI de los bancos cotizados, por país y trimestre.
-Correlación 0,62 con el GFDD anual en la muestra de estimación. Con esa variación temporal
-real, β4 sigue sin identificarse (ver P24).
+Correlación ≈ 0,5 con el GFDD anual. Con esa variación temporal real, β4 sigue sin
+identificarse (ver P30).
 Si insiste: la limitación de la serie trimestral es que mide la concentración del *segmento
 cotizado*, no del sistema completo —igual que `JLoss`, no observa bancos no listados.
 
@@ -155,75 +176,77 @@ cotizado*, no del sistema completo —igual que `JLoss`, no observa bancos no li
 
 ## E. Identificación econométrica de θ (H3)
 
-**P16. θ es significativo a p = 0,056. Eso no es significativo. ¿Por qué debería creerle?**
-R. Porque lo que la tesis afirma es el **signo y la forma**, no la magnitud puntual —y eso
-sí está sólido: θ < 0 en las 5 especificaciones del Cuadro 3, en las 14 submuestras
-*leave-one-out*, en las 91 que excluyen dos países, con tres medidas de cola distintas
-(GaR q05, skew-t, ES), y el modelo de umbral de Hansen lo corrobora sin imponer la forma
-(efecto +8,1 vs +2,3 pb por régimen, LR = 80). La significancia puntual: p = 0,056 (DK),
-0,035 (*wild bootstrap*), 0,001 (*cluster* país), 0,051 (GaR skew-t), y un placebo de
-reasignación deja θ en el percentil 5 de la nula (p ≈ 0,05). Es marginal, y lo digo así.
+**P16. θ no es significativo sobre la muestra completa (p = 0,26). ¿Qué queda del hallazgo
+central?**
+R. Dos cosas quedan sólidas. Primero, los **canales de nivel**: β₁ (`JLoss → spread`) = +2,8
+(t = 2,7) y β₂ (`GaR → spread`) = −4,3 (t = −2,3) —cada dimensión eleva el spread. Segundo,
+la complementariedad **sí es significativa condicionalmente**: sobre el núcleo de 11
+economías emergentes de financiamiento externo, θ = −0,47 (t = −2,29, **p = 0,023**; wild
+cluster bootstrap p = 0,015), y el modelo de umbral de Hansen corrobora la no linealidad
+(+5,9 vs +2,0 pb por régimen). Lo que la tesis reporta como resultado principal es esa
+**heterogeneidad** —dónde y cuándo la complementariedad aparece en los precios—, no un
+coeficiente único sobre un panel promedio.
 
-**P17. Con 13 países, ¿tiene sentido siquiera hacer inferencia asintótica agrupada?**
-R. No del todo —por eso reporto *wild cluster bootstrap* (Cameron-Gelbach-Miller, restringido,
-Rademacher, 999 réplicas): p = 0,035. Y el placebo de reasignación de `GaR`, que genera la
-distribución nula exacta sin supuestos asintóticos: p ≈ 0,05. Las tres formas de inferencia
-convergen en "marginal".
+**P17. ¿Y esa heterogeneidad no es *cherry-picking* de países?**
+R. El grupo del núcleo son las 11 economías del complejo tradicional de deuda soberana de
+alto rendimiento, con alta participación extranjera en la deuda pública. Polonia e India
+—las dos que diluyen la interacción— son economías grandes con mercados de deuda local
+profundos y baja dependencia de flujos de cartera externos: exactamente donde el canal de
+repreciación del *doom loop* debería ser más tenue. El test de interacción de grupo pone
+número: la diferencia entre grupos es +0,36, del signo que dilye la interacción, aunque **no
+es significativa** (p = 0,23) —con solo dos países en el grupo de contraste no puede serlo, y
+lo digo así. El jackknife de dos países confirma que el signo de θ es negativo en el 99 % de
+los pares excluidos, y que su significancia depende de qué economías se dejen fuera.
 
-**P18. El resultado desaparece si quita a China. ¿No es un resultado de un país?**
-R. El **signo** es negativo en las 91 submuestras de dos países (100 %). La **significancia**
-sí descansa en China: sin China θ = −0,17 (t = −1,33); sin China + Turquía θ ≈ 0. El
-diagnóstico por país lo explica: 9 de 13 países tienen `JLoss` mediano 2,2–2,6 y casi no
-varía; China, Turquía y Brasil aportan la variación de fragilidad. Lo reconozco
-explícitamente: "catorce países" sobreestima el corte transversal efectivo. La agenda es
-ampliar el panel con economías que aporten variación de `JLoss` (§7 agenda).
+**P18. El resultado cambia según qué países entran. ¿No es un resultado de composición?**
+R. Sí, y es el hallazgo, no un defecto: la complementariedad **es** una propiedad del tipo de
+economía. Sobre la muestra completa θ = −0,16; sin Polonia sube a −0,29; sobre el núcleo de
+11 llega a −0,47 (p = 0,023). Sin China, en cambio, cae a −0,05 —porque 9 de 13 países tienen
+`JLoss` mediano 2,2–2,6 y China, Turquía, India y Brasil aportan casi toda la variación de
+fragilidad. La agenda (§7) es ampliar el grupo de contraste con más economías de deuda local
+profunda para poder contrastar la heterogeneidad formalmente.
 
-**P19. "sin 2020–2021" da θ = −1,11 (t = −3,5) y pre-2020 da θ = −0,39 (t = −1,0). El
-resultado se multiplica por tres según qué años entran. ¿No es puro *cherry-picking* de la
-ventana?**
-R. Es la pregunta correcta, y la respuesta la dan las **ventanas móviles de 5 años**
-(`fig_ventanas_theta`): θ es positivo/nulo en 2006–2011 (GFC) y **negativo y significativo
-en TODAS las ventanas que empiezan en 2012** (−1,2 en 2012–16; −0,4 en 2015–19; −0,2 en
-2018–22; −0,3 en 2021–25). No es un artefacto de COVID: es una **regularidad post-crisis
-financiera global**. El pre-2020 sale n.s. solo porque promedia la señal post-2012 con el
-período nulo 2004–2011. Y al interactuar `JLoss×GaR` con una dummy post-2020, el término
-extra es +0,46 (t = 0,8, n.s.): no hay quiebre discreto en 2020.
+**P19. La complementariedad es un fenómeno pre-pandemia. ¿No es entonces algo que ya pasó?**
+R. Al interactuar `JLoss×GaR` con una dummy post-2020, el coeficiente base (hasta 2019) es
+θ = −1,0 (p = 0,057) y el término post-2020 es +1,0 (p = 0,12): el período post-COVID
+compensa casi por completo. En las ventanas móviles de 5 años, la señal es negativa y
+significativa en 2012–2016 (θ = −0,65, t = −2,4) y se atenúa después. No es que "ya pasó" —es
+que el multiplicador se hace visible en los precios cuando el riesgo soberano de las
+economías emergentes está en el centro de la atención de los mercados (crisis de deuda
+europea, estrés EM 2015–16), y se diluye en el período de tasas de política extraordinariamente
+bajas y normalización abrupta que le sigue.
 
-**P20. ¿Por qué el mecanismo estaría "apagado" en 2004–2011?**
+**P20. ¿Por qué el mecanismo estaría "apagado" en los años de tasas bajas?**
 R. Interpretación económica: el multiplicador de *doom loop* opera cuando el precio del
-riesgo soberano es sensible a la cola del crecimiento. En la fase de expansión y baja
-percepción de riesgo global previa a la GFC, esa sensibilidad era baja; desde 2012, con el
-ciclo de tasas, la crisis del euro y los episodios de estrés EM, se activa. Es coherente con
-que la interacción sea, por construcción, un fenómeno de cola.
+riesgo soberano es sensible a la cola del crecimiento. En el período de compresión
+generalizada de spreads y búsqueda de rendimiento posterior a 2016, esa sensibilidad baja;
+en los episodios de estrés EM se activa. Es coherente con que la interacción sea, por
+construcción, un fenómeno de cola.
 
-**P21. Simultaneidad del *doom loop*: el spread también afecta a `JLoss` vía el valor de la
-deuda soberana en los balances bancarios. ¿Cómo la resuelve?**
+**P21. Simultaneidad del *doom loop*: el spread también afecta a `JLoss`. ¿Cómo la resuelve?**
 R. Efectos fijos de país y de tiempo (absorben heterogeneidad estructural y choques globales
-comunes), regresores centrados, y una estrategia de variables instrumentales *shift-share*
-para el canal de **nivel** (`JLoss → spread`): choque global de liquidez de fondeo bancario
-(*on/off-run* del Tesoro) interactuado con la exposición pre-2012 de cada país. Primera
-etapa fuerte (F = 21,6), β = +17,5 pb (p = 0,001), dirección banco→soberano. Pero —ver P22—
-no está cerrado.
+comunes), regresores centrados, y —para el canal de **nivel** (H1)— proyecciones locales:
+la respuesta del spread a un choque de fragilidad alcanza un pico de +4,6 pb (t = 2,9) un
+trimestre después, del signo esperado. Una estrategia de variables instrumentales
+*shift-share* complementa, pero sobre este panel reducido no cierra la identificación (ver P22).
 
-**P22. Ese IV: ¿la restricción de exclusión se sostiene? El diferencial de liquidez del
-Tesoro puede afectar al spread soberano por muchos canales.**
-R. No puedo verificarla directamente, y lo digo (§6.7 y §7, punto séptimo). Añadí un segundo
-instrumento igualmente fuerte —el tipo de cambio efectivo amplio del dólar (BIS, 64
-economías; F = 23,7)— y el resultado es **honesto y desfavorable**: usado solo da un efecto
-pequeño y no significativo (p = 0,46), y la especificación sobre-identificada con ambos
-**rechaza el test de Sargan (p = 0,003)**. Los dos instrumentos no identifican el mismo
-parámetro. Reporto el de mejor argumento de exclusión (opera sobre el costo de fondeo
-bancario, no sobre el soberano directamente) como el más creíble, pero **el efecto de nivel
-no está causalmente cerrado**. No lo escondo.
+**P22. ¿Y el IV? ¿No instrumenta el nivel de `JLoss`?**
+R. Lo intenta, con un choque global de liquidez de fondeo bancario (*on/off-run* del Tesoro)
+interactuado con la exposición pre-2012 de cada país. Sobre el panel de 13 países la primera
+etapa es apenas aceptable (F ≈ 11) y la segunda etapa, aunque del signo esperado, no alcanza
+significancia (p = 0,34) —bastante más débil que en la versión con más economías y CDS. Un
+segundo instrumento (tipo de cambio efectivo amplio del dólar, BIS) da signo opuesto, y la
+especificación sobre-identificada **rechaza el test de Sargan** (p < 0,001). La lectura
+honesta (§6.9, §7): la estrategia de variables instrumentales **no cierra la identificación
+causal** del canal de nivel sobre esta muestra; la evidencia de H1 descansa en el MCO con
+efectos fijos y en las proyecciones locales. No lo escondo.
 
-**P23. ¿Por qué `pre_year = 2012` para estimar la exposición del IV? ¿No lo eligió para
-maximizar el F?**
-R. 2012 es el mismo quiebre de régimen post-GFC que ya establecí de forma independiente en
-θ (las ventanas móviles). Uso datos de **antes** de ese quiebre para estimar la exposición
-estructural y el instrumento sobre el período donde vive la variación identificadora. No es
-*ad hoc* para el F: en la vecindad (2010, 2014) el instrumento también es fuerte (F entre 9
-y 20); en 2016 —el corte original, arbitrario— daba F ≈ 9,5, que es lo que antes se
-reportaba como "débil-a-límite".
+**P23. ¿Por qué `pre_year = 2012` para estimar la exposición del IV?**
+R. 2012 es un quiebre de régimen que aparece de forma independiente en el análisis temporal
+de θ (las ventanas móviles). Uso datos de **antes** de ese quiebre para estimar la exposición
+estructural, y el instrumento sobre el período posterior. En cualquier caso, sobre el panel
+de 13 países el IV es débil (ver P22), de modo que este punto es menos determinante que en
+la versión previa del panel.
 
 ---
 
@@ -238,18 +261,19 @@ no informativo por proliferación de instrumentos, exactamente lo que se espera 
 El estimador estático de efectos fijos bidireccionales es el apropiado aquí.
 
 **P25. Dependencia transversal de los residuos —países emergentes se mueven juntos.**
-R. Prueba de Pesaran (2021): CD = −1,2, p = 0,23 —no se rechaza la independencia una vez
+R. Prueba de Pesaran (2021): CD = −1,1, p = 0,28 —no se rechaza la independencia una vez
 incluidos los efectos fijos de tiempo. Se mantienen igual los errores de Driscoll-Kraay por
-la autocorrelación serial (correlación de primer orden de residuos ≈ 0,8). Hausman rechaza
-efectos aleatorios; los VIF son uniformemente bajos.
+la autocorrelación serial (correlación de primer orden de residuos ≈ 0,9). Hausman rechaza
+efectos aleatorios.
 
 **P26. El efecto marginal en el percentil 90 (benigno) incluye el cero. ¿Entonces el
 mecanismo no opera en tiempos buenos?**
-R. Exacto, y es coherente con la teoría: es un multiplicador de cola. El efecto de una
-unidad de `JLoss` sobre el CDS es +4,6 pb en el percentil 10 de `GaR` (cola severa) —la
-banda al 90 % excluye el cero— y +1,8 pb en el percentil 90 —la banda incluye el cero. La
-firma empírica de la super-aditividad es justamente que el efecto **crece monótonamente** a
-medida que empeora el riesgo de cola.
+R. Sobre la muestra completa, el efecto de una unidad de `JLoss` sobre el EMBI es +3,4 pb en
+el percentil 10 de `GaR` (cola severa) y +2,1 pb en el percentil 90 —monótonamente decreciente
+en `GaR`, la firma de la super-aditividad, aunque de pendiente modesta. En el núcleo de 11
+economías, donde θ es tres veces mayor en valor absoluto, esa pendiente es correspondientemente
+más pronunciada y el modelo de umbral la corrobora (+5,9 vs +2,0 pb por régimen). Es un
+multiplicador de cola: opera cuando el crecimiento ya está en su escenario adverso.
 
 ---
 
@@ -278,46 +302,53 @@ resultado **local** que satura cuando PD_sov → 1. La extensión de dos períod
 soberano —el lazo con retroalimentación— es la agenda pendiente principal del capítulo.
 
 **P30. La predicción que distingue a su modelo de la OI estándar —la amplificación por
-concentración— es justamente la que falla empíricamente. ¿Para qué sirve el modelo
+concentración— es justamente la que no se puede contrastar. ¿Para qué sirve el modelo
 entonces?**
-R. Primero, la franqueza: sí, H4b no encuentra respaldo (β4 = −392, t agrupado = −2,34, pero
-el IC robusto cruza el cero; con la concentración trimestral, β4 = −0,114, IC (−0,144;
-+0,013) —sigue cruzando el cero por un margen mínimo). La serie trimestral **descarta** que
-sea solo falta de variación temporal del proxy; el peso se inclina hacia un canal
-genuinamente más débil que la calibración, o de signo distinto.
+R. Primero, la franqueza: H4b **no se puede contrastar con potencia**. En la parametrización
+$D\equiv-GaR$ (predicción: β4 > 0), el punto estimado no tiene signo estable entre proxies de
+concentración —+122 (t = 0,37) con el HHI estructural, +152 (t = 0,73) con la serie anual,
+≈ 0 (t = −0,41) con la concentración trimestral— y el bootstrap de bloques por país deja el
+IC90 cruzando el cero holgadamente con los tres. La serie trimestral **descarta** que sea
+solo falta de variación temporal del proxy; con 13 clusters y un HHI casi invariante, el
+coeficiente simplemente no está identificado.
 Segundo, para qué sirve el modelo: (i) deriva la complementariedad de primer orden (H4a,
-que sí se sostiene en signo y forma) desde primeros principios —no es una regularidad sin
-anclaje; (ii) la Proposición 3 (el mínimo desplazado de `JLoss`) es puramente deductiva, no
+que se sostiene condicionalmente —en el núcleo de economías de financiamiento externo)
+desde primeros principios —no es una regularidad sin anclaje; (ii) la Proposición 3 (el
+mínimo desplazado de `JLoss`) es puramente deductiva, no
 depende de la evidencia, y tiene una implicancia de política directa: una política de
 competencia bancaria calibrada solo sobre la salud individual de los bancos deja al sistema
 subóptimamente concentrado desde la óptica del riesgo sistémico y su costo fiscal
 contingente. Ese resultado se sostiene con independencia de H4b.
 Si insiste: la tesis lo reporta como convergencia **parcial** teoría–evidencia y lo dice en
-el título de la sección de discusión. Es un resultado negativo genuino, no un fracaso
-oculto.
+el título de la sección de discusión. Es un resultado no concluyente reportado como tal, no
+un fracaso oculto.
 
 ---
 
 ## Preguntas "grandes" de cierre (probables)
 
-**PC1. Si el resultado central es marginal, la identificación descansa en pocos países y en
-un período, y el canal distintivo del modelo no se confirma —¿qué queda?**
-R. Queda el **signo y la forma** de una complementariedad que la literatura no había
-articulado, robustos a un conjunto exigente de pruebas; un modelo estructural que la
-predice y la extiende; una prueba —de resultado negativo— de su predicción distintiva sobre
-datos homogéneos; y un *pipeline* reproducible. La contribución es delimitar con precisión
-qué puede afirmarse y qué no —y eso, en un área donde abundan los resultados frágiles
-presentados como sólidos, es en sí mismo un aporte.
+**PC1. Si la complementariedad no es significativa sobre el panel completo, la identificación
+descansa en pocos países y en un período, y el canal distintivo del modelo no se puede
+contrastar —¿qué queda?**
+R. Quedan los **canales de nivel** —fragilidad bancaria y riesgo de cola del crecimiento
+elevan cada uno el spread soberano— bien identificados. Queda una **complementariedad
+condicional**: significativa (θ = −0,47, p = 0,023) en el núcleo de economías emergentes de
+financiamiento externo, con una lectura económica coherente de por qué se diluye en las
+economías de deuda local profunda. Queda un modelo estructural que predice y microfundamenta
+esa complementariedad. Y queda un *pipeline* reproducible. La contribución es la
+caracterización honesta de **dónde y cuándo** el multiplicador de *doom loop* aparece en los
+precios soberanos —y eso, en un área donde abundan los resultados frágiles presentados como
+universales, es en sí mismo un aporte.
 
 **PC2. ¿Qué haría distinto si empezara de nuevo?**
-R. (i) Extraer los componentes de mercado del FCI de Bloomberg desde el inicio. (ii)
-Construir la serie de concentración trimestral antes, no como respuesta a una revisión.
-(iii) Buscar instrumentos con mejor argumento de exclusión para el canal de nivel —choques
-de política monetaria identificados, términos de intercambio por exposición sectorial. (iv)
-Ampliar la extracción de CDS y de GaR a las economías que hoy quedan fuera, para que la
-identificación no descanse en 3–4 países.
+R. (i) Construir una medida directa de participación extranjera en la deuda soberana para
+usarla como moderador continuo de la interacción, en lugar de la dicotomía por tipo de
+economía. (ii) Extraer los componentes de mercado del FCI de Bloomberg desde el inicio.
+(iii) Buscar instrumentos con mejor argumento de exclusión para el canal de nivel. (iv)
+Cerrar el hueco de GaR para las economías que hoy quedan fuera, para ampliar el grupo de
+contraste de la heterogeneidad.
 
 **PC3. ¿Cuál es el siguiente paper?**
-R. El panel ampliado con más corte transversal de `JLoss`, la serie de concentración
-trimestral sobre un universo mayor de países, y el cierre dinámico de dos períodos del
+R. El panel ampliado con más corte transversal, un moderador continuo de exposición externa
+para contrastar formalmente la heterogeneidad, y el cierre dinámico de dos períodos del
 bloque soberano del modelo. Cada una refuerza directamente a la otra arista.

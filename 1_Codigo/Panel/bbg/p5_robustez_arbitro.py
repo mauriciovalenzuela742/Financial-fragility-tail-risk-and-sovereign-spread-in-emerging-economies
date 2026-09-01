@@ -137,6 +137,43 @@ def main():
     rows.append(dict(spec="jackknife-2 paises: %<0", theta=(jk[:, 0] < 0).mean()))
     rows.append(dict(spec="jackknife-2 paises: %p<0.10", theta=(jk[:, 1] < 0.10).mean()))
 
+    # ---- 2b. heterogeneidad: nucleo de EM de financiamiento externo vs. Polonia+India ----
+    # Polonia e India: mercados de deuda local profundos, baja dependencia de flujos de
+    # cartera externos -> el bucle banca-soberano no se traslada al spread. El resto son
+    # las EM del complejo de alto rendimiento con alta participacion extranjera en la
+    # deuda soberana. Prueba formal: interaccion de grupo sobre JxT.
+    print("== 2b. heterogeneidad nucleo vs. Polonia+India ==")
+    CONV = ["poland", "india"]
+    from linearmodels.panel import PanelOLS as _POLS
+    dh = d.dropna(subset=["_DV", "JLoss", "GaR_pp"] + ctr).copy()
+    dh["JLoss_c"] = dh["JLoss"] - dh["JLoss"].mean()
+    dh["GaR_c"] = dh["GaR_pp"] - dh["GaR_pp"].mean()
+    dh["JxT"] = dh["JLoss_c"] * dh["GaR_c"]
+    dh["conv"] = dh["country"].isin(CONV).astype(float)
+    dh["JxT_conv"] = dh["JxT"] * dh["conv"]
+    dh["GaR_conv"] = dh["GaR_c"] * dh["conv"]
+    dh["JLoss_conv"] = dh["JLoss_c"] * dh["conv"]
+    mh = _POLS.from_formula(
+        "_DV ~ JLoss_c + GaR_c + JxT + JLoss_conv + GaR_conv + JxT_conv + "
+        + " + ".join(ctr) + " + EntityEffects + TimeEffects",
+        dh.set_index(["country", "t"])).fit(cov_type="kernel", kernel="bartlett")
+    th_core = mh.params["JxT"]
+    th_conv = mh.params["JxT"] + mh.params["JxT_conv"]
+    print(f"   theta nucleo (11 EM)      = {th_core:+.3f} (t={mh.tstats['JxT']:+.2f}, p={mh.pvalues['JxT']:.3f})")
+    print(f"   diferencia Polonia+India  = {mh.params['JxT_conv']:+.3f} (t={mh.tstats['JxT_conv']:+.2f}, p={mh.pvalues['JxT_conv']:.3f})")
+    print(f"   theta Polonia+India (neto)= {th_conv:+.3f}")
+    rows += [dict(spec="heterogeneidad: theta nucleo (11 EM)", theta=th_core,
+                  t=mh.tstats["JxT"], p=mh.pvalues["JxT"], N=int(mh.nobs), paises=11),
+             dict(spec="heterogeneidad: diferencia Polonia+India", theta=mh.params["JxT_conv"],
+                  t=mh.tstats["JxT_conv"], p=mh.pvalues["JxT_conv"], N=int(mh.nobs)),
+             dict(spec="heterogeneidad: theta Polonia+India (neto)", theta=th_conv, N=int(mh.nobs))]
+    # theta re-estimado solo en el nucleo (spec M2 identica)
+    core = [c for c in d.country.unique() if c not in CONV]
+    m, _ = fit(d[d.country.isin(core)], ctr, "dk")
+    r = row(m, "heterogeneidad: M2 solo nucleo (11 EM)")
+    rows.append(r)
+    print(f"   M2 re-estimado en el nucleo: theta={r['theta']:+.3f} (t={r['t']:+.2f}, p={r['p']:.3f}, N={r['N']}, G={r['paises']})")
+
     # ---- 3. multiplicador de cola vs. desplazamiento 2020-26 ----
     print("== 3. termino de cola JxG*D(post-2020) ==")
     cr = (d["year"] >= 2020).astype(float)

@@ -43,7 +43,8 @@ consolidación reside en \texttt{1\_Codigo/Bloomberg\_extraction/} y \texttt{1\_
 
 \multicolumn{6}{l}{\textbf{\textit{Variable dependiente}}}\\
 \addlinespace
-CDS soberano 5Y & Prima del \textit{credit default swap} soberano a cinco años, en dólares, senior no garantizado & Bloomberg & \texttt{<emisor> CDS USD SR 5Y Corp}; curva Markit \texttt{CCHIN1U5 Curncy} para China & Diaria & Media trimestral, puntos básicos. Sin dato $\Rightarrow$ celda vacía (no se sustituye por EMBI de bonos) \\
+EMBI Global Diversified & Diferencial del índice de bonos soberanos de mercados emergentes de J.P.\ Morgan frente a la curva del Tesoro estadounidense (\textbf{variable dependiente principal}, siguiendo a \citealp{Chari2024}) & J.P.\ Morgan (serie \texttt{embi.xlsx}) & spread EMBI Global por país & Diaria & Media trimestral, puntos básicos. Sin dato $\Rightarrow$ la observación no entra a la regresión de referencia \\
+CDS soberano 5Y & Prima del \textit{credit default swap} soberano a cinco años, en dólares, senior no garantizado (\textbf{serie de robustez}) & Bloomberg & \texttt{<emisor> CDS USD SR 5Y Corp}; curva Markit \texttt{CCHIN1U5 Curncy} para China & Diaria & Media trimestral, puntos básicos. Correlación 0,86 con el EMBI en la submuestra común \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Fragilidad bancaria --- $JLoss$}} (métrica compuesta; motor \texttt{jloss\_engine.py})}\\
 \addlinespace
@@ -86,7 +87,7 @@ Tipo de cambio real ef. & Índice de tipo de cambio real efectivo (2010 = 100) &
 \multicolumn{6}{l}{\textbf{\textit{Concentración bancaria e instituciones}}}\\
 \addlinespace
 $HHI$ (concentración 3 bancos) & Activos de los tres mayores bancos comerciales sobre activos del sistema, \% & Banco Mundial, \textit{Global Financial Development Database} & \texttt{GFDD.\allowbreak OI.01} & Anual & Nivel estructural $=$ mediana por país; serie anual como robustez \\
-$HHI_q$ (concentración trimestral) & Activos de los tres mayores bancos \emph{cotizados} sobre activos cotizados totales, \% (mismos bancos que $\JLoss$) & Bloomberg (balances, \texttt{tot\_\allowbreak asset}) & motor \texttt{p6\_\allowbreak concentracion\_\allowbreak trimestral.py} & Trimestral & CR3 y HHI directos; NaN si $<$3 bancos cotizados; corr.\ 0,62 con GFDD \\
+$HHI_q$ (concentración trimestral) & Activos de los tres mayores bancos \emph{cotizados} sobre activos cotizados totales, \% (mismos bancos que $\JLoss$) & Bloomberg (balances, \texttt{tot\_\allowbreak asset}) & motor \texttt{p6\_\allowbreak concentracion\_\allowbreak trimestral.py} & Trimestral & CR3 y HHI directos; NaN si $<$3 bancos cotizados; corr.\ $\approx$0,5 con GFDD \\
 Rating soberano S\&P & Calificación de largo plazo en moneda extranjera & Bloomberg & \texttt{RTG\_\allowbreak SP\_\allowbreak LT\_\allowbreak FC\_\allowbreak ISSUER\_\allowbreak CREDIT} & --- & \textit{Snapshot} (no serie); escala 21--1 \\
 Calidad de gobierno (WGI) & Índice de \textit{Worldwide Governance Indicators} (triple interacción institucional) & Banco Mundial & \texttt{instituciones.\allowbreak csv} (provisional) & Anual & Estandarizado; marcado provisional \\
 
@@ -96,13 +97,14 @@ Calidad de gobierno (WGI) & Índice de \textit{Worldwide Governance Indicators} 
 \vspace{1em}
 
 \noindent \textbf{Economías del panel y su cobertura.} El panel incluye toda economía
-con $JLoss$ disponible. La muestra de estimación del mecanismo (observaciones con CDS $+$
-$JLoss$ $+$ $GaR$ simultáneamente) reúne catorce países: once con CDS de historia continua
-(Brasil, Chile, China, Colombia, Filipinas, Indonesia, Malasia, México, Perú, Sudáfrica,
-Turquía), Hungría y Polonia con CDS solo en 2012Q3--2015Q4, y Pakistán con un trimestre.
-Argentina, Egipto y Rusia tienen $JLoss$ y CDS pero no $GaR$; India tiene $JLoss$ y $GaR$
-pero no emite CDS soberano de referencia. Corea del Sur y Bulgaria se excluyen porque su
-$JLoss$ no es una medida válida a nivel de país (Capítulo~\ref{chap:paper2}, Sección~5.1). La
+con $JLoss$ disponible. La muestra de estimación del mecanismo (observaciones con EMBI $+$
+$JLoss$ $+$ $GaR$ simultáneamente) reúne \textbf{trece países}: nueve con EMBI de historia
+continua (Brasil, Chile, China, Colombia, Malasia, México, Perú, Polonia, Turquía), India
+con 54 trimestres (EMBI desde 2012Q4), y Filipinas, Indonesia y Sudáfrica con once cada uno
+(EMBI desde 2023Q3, aunque su CDS es de historia larga). Argentina, Egipto y Rusia tienen
+$JLoss$ pero no $GaR$; Pakistán tiene $JLoss$ y $GaR$ pero no EMBI. Corea del Sur, Bulgaria
+y Hungría se excluyen porque su $JLoss$ no es una medida válida a nivel de país —número de
+bancos cotizados insuficiente— (Capítulo~\ref{chap:paper2}, Sección~5.1). La
 Figura~\ref{fig:cobertura} traza esta cobertura.
 
 \vspace{1ex}
@@ -110,11 +112,11 @@ Figura~\ref{fig:cobertura} traza esta cobertura.
 \noindent La Tabla~\ref{tab:diagpais} resume, por país de la muestra de estimación, el número
 mediano de bancos cotizados que alimentan $JLoss$, los trimestres marcados con menos bancos
 que el mínimo requerido, y la mediana y el máximo de la serie de $JLoss$. Deja ver dos rasgos
-que el Capítulo~\ref{chap:paper2} discute: (i) nueve de los trece países del panel de M2
-tienen un $JLoss$ mediano entre 2,2 y 2,6 —la variación transversal de la fragilidad la
-aportan China, Turquía y Brasil—; y (ii) Hungría (dos bancos, todos los trimestres bajo el
-mínimo) y Colombia y México (una fracción alta) descansan sobre pocas instituciones, aunque
-sin llegar al caso de Bulgaria (un banco) que motivó su exclusión.
+que el Capítulo~\ref{chap:paper2} discute: (i) nueve de los trece países tienen un $JLoss$
+mediano entre 2,2 y 2,6 —la variación transversal de la fragilidad la aportan Turquía, India,
+China y Brasil—; y (ii) Colombia y México descansan sobre pocas instituciones en una fracción
+de los trimestres, aunque sin llegar al caso de Bulgaria (un banco) o Hungría (dos, todos los
+trimestres bajo el mínimo) que motivaron su exclusión del panel.
 
 \begin{table}[htbp]
 \centering
@@ -125,26 +127,25 @@ sin llegar al caso de Bulgaria (un banco) que motivó su exclusión.
 \toprule
 País & Bancos (mediana) & Trim.\ bajo mínimo & $JLoss$ mediana & $JLoss$ máx. \\
 \midrule
-Brasil       & 8 & 0  & 4,0  & 15,5 \\
-Chile        & 4 & 0  & 2,2  & 11,6 \\
-China        & 9 & 2  & 3,8  & 29,0 \\
-Colombia     & 3 & 23 & 2,4  & 16,7 \\
-Filipinas    & 5 & 0  & 2,6  & 11,3 \\
-Hungría      & 2 & 91 & 2,9  & 4,3  \\
-Indonesia    & 4 & 0  & 2,4  & 17,5 \\
-Malasia      & 6 & 0  & 2,2  & 5,9  \\
-México       & 4 & 13 & 2,4  & 13,9 \\
-Pakistán     & 6 & 0  & 11,6 & 11,6 \\
-Perú         & 3 & 6  & 2,2  & 8,7  \\
-Polonia      & 8 & 0  & 2,3  & 2,9  \\
-Sudáfrica    & 6 & 0  & 2,4  & 15,9 \\
-Turquía      & 8 & 0  & 6,0  & 28,0 \\
+Brasil       & 8  & 0  & 4,0  & 15,5 \\
+Chile        & 4  & 0  & 2,2  & 11,6 \\
+China        & 9  & 2  & 3,8  & 29,0 \\
+Colombia     & 3  & 23 & 2,4  & 16,7 \\
+Filipinas    & 5  & 0  & 2,9  & 4,3  \\
+India        & 11 & 6  & 7,5  & 23,2 \\
+Indonesia    & 4  & 0  & 2,3  & 3,7  \\
+Malasia      & 6  & 0  & 2,2  & 5,9  \\
+México       & 4  & 13 & 2,4  & 13,9 \\
+Perú         & 3  & 6  & 2,2  & 8,7  \\
+Polonia      & 8  & 0  & 2,6  & 15,0 \\
+Sudáfrica    & 6  & 0  & 2,4  & 3,9  \\
+Turquía      & 8  & 0  & 6,0  & 28,0 \\
 \bottomrule
 \end{tabular}
 
 \medskip
 \footnotesize\raggedright Fuente: \texttt{1\_Codigo/Panel/bbg/diag\_por\_pais\_bbg.csv}
 (motor \texttt{jloss\_engine.py}). ``Trim.\ bajo mínimo'' cuenta los trimestres con menos
-bancos cotizados que el umbral del motor. Corea del Sur y Bulgaria no aparecen: quedan fuera
-del panel por $JLoss$ no válido a nivel de país.
+bancos cotizados que el umbral del motor. Corea del Sur, Bulgaria y Hungría no aparecen:
+quedan fuera del panel por $JLoss$ no válido a nivel de país.
 \end{table}

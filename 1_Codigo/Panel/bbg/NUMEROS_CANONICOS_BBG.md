@@ -1,74 +1,161 @@
 # Números canónicos — panel único anclado en Bloomberg
 
-*Generado el 2026-08-31 (v3, panel único, 14 países) re-ejecutando `1_Codigo/Panel/bbg/p0..p4`.
-Fuente de verdad para toda prosa de la tesis. Sustituye a la versión de dos bases y a
-`1_Codigo/Panel/NUMEROS_CANONICOS.md` (v8 regulatorio).
-Actualizado 2026-09-01 (revisión de árbitro): censura de JLoss (§0), IV reforzado con
-exposición pre-2012 y segundo instrumento del dólar BIS (§5, §7), concentración trimestral
-`HHI_q` para H4b (§6, §7bis).*
+*Generado el 2026-08-31, reestructurado 2026-09-01 (variable dependiente = EMBI) y
+2026-09-02 (Hungría excluida por `below_min_banks`; 13 países). Re-ejecutando
+`1_Codigo/Panel/bbg/p1..p7`. Fuente de verdad para toda prosa de la tesis. Sustituye a la
+versión de dos bases y a `1_Codigo/Panel/NUMEROS_CANONICOS.md` (v8 regulatorio).*
 
 **Regla de uso:** ningún coeficiente entra a la prosa sin trazarse a una fila de este documento.
 
 ---
 
-## ⚠️ CAMBIO DE FONDO (2026-09-01, tarde): variable dependiente = EMBI, CDS a robustez
+## ★ DISEÑO VIGENTE (2026-09-02): DV = EMBI, 13 países, CDS a robustez
 
-Se reestructuró el panel para que la **variable dependiente principal sea el spread EMBI
-Global Diversified (J.P. Morgan)**, como en Chari et al. (2024); el CDS soberano a 5 años
-queda como serie de **robustez**. Fuente EMBI: `2_Datos/embi.xlsx` (diario 2000–2026).
+**Variable dependiente principal: spread EMBI Global Diversified (J.P. Morgan), en pb**, como
+en Chari et al. (2024). Fuente: `2_Datos/embi.xlsx` (diario 2000–2026). El CDS soberano 5Y de
+Bloomberg queda como serie de **robustez**.
 
-**Muestra de estimación con EMBI: N=810 (M1) / N=700 (M2), 14 países.**
-Composición nueva: Polonia y Hungría pasan de 14 a 89 trimestres (EMBI completo, no solo la
-ventana de CDS 2012–15); **entra India** (54 trim.); Filipinas, Indonesia y Sudáfrica caen a
-11 trim. cada uno (EMBI solo desde 2023Q3); Pakistán sale (sin EMBI).
+**Exclusiones (3), por `JLoss` no válido a nivel país — no por dato faltante:**
+- **southkorea**: E/D de mercado ≈ 0,04 (*Korea discount*), Merton PD ≈ 0,55, JLoss 25–47.
+- **bulgaria**: 1 banco cotizado (FIBank), 76/76 trimestres `below_min_banks`, JLoss mediana 29.
+- **hungary** *(nuevo)*: mediana 2 bancos cotizados (OTP dominante), `below_min_banks` en
+  **89/89 trimestres** — mismo criterio que Bulgaria. Antes entraba porque el EMBI le daba
+  serie larga (89 trim.), pero su JLoss no es una medida sistémica de país.
 
-### Resultado central con EMBI — H3 (θ = JLoss × GaR) **NO se sostiene**
+**Muestra de estimación (EMBI + JLoss + GaR): N = 721 (M1) / N = 614 (M2), 13 países.**
+`brazil, chile, china, colombia, india, indonesia, malaysia, mexico, peru, philippines,
+poland, southafrica, turkey`. Cobertura: 9 países con EMBI continuo desde 2004–2010;
+`india` 54 trim. (EMBI desde 2012Q4); `indonesia/philippines/southafrica` 11 trim. cada uno
+(EMBI desde 2023Q3, aunque su CDS es largo).
+
+### Resultado central — H3 (θ = JLoss × GaR)
 
 | Spec | N | θ | t (DK) | p (DK) | p (wild boot) |
 |---|---:|---:|---:|---:|---:|
-| M1 — FE país+tiempo, sin controles | 810 | −0,085 | −0,42 | 0,675 | 0,810 |
-| **M2 — FE país+tiempo, + 6 controles** | **700** | **−0,077** | **−0,45** | **0,650** | **0,750** |
-| M3 — FE país + factores globales (sin FE tiempo) | 700 | +0,050 | +0,33 | 0,744 | 0,667 |
-| M2, cluster país | 700 | −0,077 | −0,44 | 0,660 | — |
-| M2, cluster tiempo | 700 | −0,077 | −0,66 | 0,510 | — |
-| **robustez: DV = CDS 5Y (M2)** | 738 | **−0,354** | **−1,91** | **0,056** | 0,035 |
-| robustez: DV = CDS 5Y (M1) | 838 | −0,543 | −2,20 | 0,028 | 0,127 |
+| M1 — FE país+tiempo, sin controles | 721 | −0,136 | −0,57 | 0,569 | 0,669 |
+| **M2 — FE país+tiempo, + 6 controles** | **614** | **−0,160** | **−1,13** | **0,258** | **0,138** |
+| M3 — FE país + factores globales (sin FE tiempo) | 614 | +0,019 | +0,20 | 0,840 | 0,111 |
+| M2, cluster país | 614 | −0,160 | −1,43 | 0,153 | — |
+| M2, cluster tiempo | 614 | −0,160 | −1,53 | 0,126 | — |
+| M2, cola = Expected Shortfall | 614 | −0,185 | −1,33 | 0,184 | — |
+| M2, cola = GaR skew-t (ABG2019) | 614 | −0,155 | −1,11 | 0,268 | — |
+| **robustez: DV = CDS 5Y (M2)** | 724 | **−0,380** | **−2,00** | **0,046** | — |
+| robustez: DV = CDS 5Y (M1) | 824 | −0,553 | −2,23 | 0,026 | — |
 
-> **Con EMBI, la interacción es indistinguible de cero** (θ ≈ −0,08, p ≈ 0,65 en todas las
-> variantes; invariante a GaR q05 / skew-t / ES). El resultado marginal negativo
-> (θ = −0,35, p = 0,056) era **específico del CDS**. β2 (GaR → EMBI) sí es negativo y
-> significativo; β1 (nivel de JLoss) positivo (+3,96 en M2).
+> **En la muestra completa de 13 países, θ es negativo pero no significativo** (M2: −0,160,
+> p = 0,26; wild boot p = 0,14). β1 (nivel de JLoss) = **+2,79 (t = +2,74)** y β2 (GaR) =
+> **−4,33 (t = −2,25)**: los efectos de primer orden sí se identifican. La interacción, no.
 
-### Lo que SÍ se sostiene con EMBI
+### EMBI vs CDS: la elección de la métrica NO cambia el resultado
 
-- **H1 (nivel, JLoss → EMBI):** respaldada. IV shift-share (`OnOffRun`, exp. pre-2012):
-  β = +18,2 pb, **F = 39,1** (fuerte). Proyecciones locales: +5,5 pb (t = 3,1) en h = 1.
-  \[Advertencia: el 2º instrumento (dólar BIS) da β = −13,2 con F = 34,4 — signo opuesto —
-  y el test de Sargan sobre-identificado **rechaza fuerte** (p ≈ 0,0000). El efecto de nivel
-  no está causalmente cerrado.\]
-- **H2 (GaR → EMBI):** β2 < 0, significativo.
-- **Umbral de Hansen:** γ̂ = +0,13; efecto de JLoss +7,7 pb (cola severa) vs +3,0 (benigno);
-  LR = 30 (vs LR = 80 con CDS). Persiste una diferencia de régimen ~2,5×, más débil.
-- **Ventanas móviles de 5 años:** θ **significativamente negativo** en 2006–2010
-  (−0,82, t = −5,5) y 2012–2016 (−0,63, t = −2,5); n.s. en el resto; +0,08 en 2021–2025.
-  La complementariedad aparece en las ventanas de crisis (GFC, euro) pero se diluye en la
-  muestra completa.
+En la **muestra común** (mismos 606 país-trimestre con EMBI y CDS disponibles, único cambio =
+la variable dependiente), M1 sin controles:
 
-### H4b con EMBI
+| DV | θ | t | p |
+|---|---:|---:|---:|
+| EMBI | −0,655 | −2,00 | 0,046 |
+| CDS  | −0,763 | −1,98 | 0,048 |
 
-β4 (JLoss×D×HHI): estructural −125 (t = −0,42), anual −74, trimestral ≈ 0 — todos
-indistinguibles de cero, IC amplios. Sin respaldo y sin poder, igual que con CDS.
+Correlación EMBI–CDS en el panel = **0,86**. **El EMBI da el mismo θ que el CDS cuando la
+muestra es idéntica.** Lo que mueve el resultado entre el panel de CDS (θ = −0,35, p = 0,056)
+y el de EMBI de 13 países (θ = −0,16) es la **composición de la muestra**: el CDS de
+Bloomberg venía truncado para Polonia (2012Q3–2015Q4, 14 trim.) y ausente para India,
+mientras el EMBI les da 89 y 54 trimestres.
 
-### Efecto marginal ∂EMBI/∂JLoss (M2, EMBI)
+### Heterogeneidad: núcleo de EM de financiamiento externo vs. Polonia + India
 
-p10 (cola severa) +4,28 (se 1,40); p50 +3,95; p90 (benigno) +3,64 (se 1,15). **Casi plano**
-—no hay firma de amplificación supra-aditiva (con CDS era +4,6 vs +1,8).
+`p5_robustez_arbitro.py`, bloque 2b. Polonia e India tienen mercados de deuda local profundos
+y baja dependencia de flujos de cartera externos.
+
+| Spec | θ | t | p | N |
+|---|---:|---:|---:|---:|
+| **M2 re-estimado solo en el núcleo (11 EM)** | **−0,472** | **−2,29** | **0,023** | 479 |
+| interacción de grupo: θ del núcleo | −0,476 | −2,13 | 0,034 | 614 |
+| interacción de grupo: diferencia Polonia+India | +0,364 | +1,20 | 0,229 | 614 |
+| interacción de grupo: θ Polonia+India (neto) | −0,112 | — | — | 614 |
+| wild bootstrap, núcleo 11 | — | — | **0,015** | 479 |
+| jackknife de 2 países (78 pares) | [−0,47, +0,06] | — | 99 % < 0; 18 % con p<0,10 | — |
+| sin Polonia | −0,285 | −1,88 | 0,060 | 529 |
+| sin China | −0,048 | −0,38 | 0,704 | 538 |
+
+> **La complementariedad se identifica en el núcleo de 11 EM de alto rendimiento**
+> (θ = −0,47, p = 0,023; wild boot p = 0,015) **y se diluye al añadir Polonia e India**. El
+> punto estimado del grupo Polonia+India es ≈ 0 (−0,11), pero la diferencia de grupo no es
+> estadísticamente significativa (p = 0,23) — con solo 2 países en ese grupo no puede serlo.
+> Lectura honesta: **heterogeneidad de régimen sugerida por los puntos estimados, no un
+> contraste nítido**. El signo de θ es negativo en 99 % de los jackknife de 2 países; la
+> significancia depende de qué 2 países se excluyan (y descansa en China).
+
+### Temporalidad: fenómeno pre-pandemia, más marcado post-GFC
+
+- **Interacción con dummy post-2020:** θ base (pre-2020) = **−1,014 (t = −1,90, p = 0,057)**;
+  término JxG × D(post-2020) = **+0,989 (t = +1,55, p = 0,12)** — el período post-COVID
+  compensa casi por completo la complementariedad pre-pandemia.
+- **Ventanas móviles de 5 años:** 2009–2013 **+0,73 (p = 0,04)**; 2012–2016 **−0,65
+  (p = 0,02)**; 2015–2019 −0,53 (p = 0,13); 2018–2022 −0,13 (p = 0,05); 2021–2025 −0,05 (n.s.).
+- `sin 2020–2021` (mantiene pre-2020 + 2022+): θ = **−0,719 (t = −2,14)**.
+
+### Modelo de umbral de Hansen (13 países)
+
+γ̂ (GaR pp) = +0,06; efecto de JLoss sobre el EMBI **+5,88 pb** en cola severa vs **+2,02** en
+régimen benigno; LR = 27,5. Persiste una diferencia de régimen ~2,9×.
+
+### Efecto marginal ∂EMBI/∂JLoss (M2)
+
+| Percentil de GaR | ∂EMBI/∂JLoss (pb/unidad) | se |
+|---|---:|---:|
+| p10 (cola severa, GaR = −2,15) | +3,43 | 1,33 |
+| p50 (GaR = +1,96) | +2,77 | 1,01 |
+| p90 (benigno, GaR = +6,06) | +2,11 | 0,97 |
+
+Monótono decreciente en GaR (consistente con θ < 0), pendiente modesta; el IC90 del tramo de
+cola severa apenas excluye el cero.
+
+### Identificación causal (13 países, `causal_bbg.csv`)
+
+| Método | Resultado |
+|---|---|
+| Wild cluster bootstrap (M2) | θ = −0,160; p_wildboot = 0,138 |
+| **Proyecciones locales (nivel, pico)** | **+4,62 pb (t = +2,85)** en h = 1 — respalda H1 (JLoss → EMBI) |
+| IV shift-share nivel — `OnOffRun_spread_log`, exp. pre-2012 | β_JLoss_IV = +7,46; F 1ª etapa = **11,4**; p = 0,34 (n.s.) |
+| IV shift-share nivel — shock USD amplio (BIS) | β_JLoss_IV = −12,50 (signo opuesto); F = 37,8; p = 0,43 |
+| IV sobre-identificado (2 instrumentos) | Sargan p = **0,0003 → RECHAZA** validez conjunta |
+| Triple interacción institucional (JxG × WGI) | +0,26 (t = +0,89), n.s. |
+
+> **H1 (nivel):** respaldada por OLS (β1 = +2,79, t = 2,74) y proyecciones locales
+> (+4,62, t = 2,85). La evidencia IV es **más débil que en el panel de CDS**: con 13 países
+> el instrumento `OnOffRun` baja a F = 11,4 y su 2ª etapa no es significativa; el 2º
+> instrumento da signo opuesto y Sargan rechaza. **El efecto de nivel no está causalmente
+> cerrado con IV**; se apoya en OLS + proyecciones locales.
+
+### H4b (amplificación por concentración) — no identificado
+
+β4 (JLoss×D×HHI): estructural +122 (t = +0,37), anual +152 (t = +0,73), trimestral ≈ 0
+(t = −0,41) — los tres con IC de bootstrap de bloques cruzando el cero holgadamente. Sin
+respaldo y sin poder, igual que en el panel de CDS.
+
+### Placebo temporal (destruir la estructura de GaR, B = 600)
+
+Reshuffle global (null exacto): θ medio ≈ +0,01, P(placebo ≤ obs) = 0,12. Con θ observado
+= −0,16 (n.s.), el placebo es **consistente con la no-significancia**: el observado no está
+en la cola de la distribución nula.
+
+### Regresor generado (GaR)
+
+θ estable a perturbar GaR con ruido de hasta 25 % de su sd (−0,161); a 50 % atenúa a −0,151.
+El error de medición **atenúa** — el θ verdadero es, si acaso, más negativo.
+
+### Coeficientes de control en M2 — advertencia
+
+Bajo FE país + FE tiempo, los controles domésticos son interpolaciones lineales de datos
+anuales; sus coeficientes **no tienen signo económico fiable** (deuda/PIB sale con signo
+negativo, corr. within EMBI–deuda solo +0,10). Se reportan como controles, no se interpretan.
 
 ---
 
-*Lo que sigue (§0–§7bis) documenta el panel con CDS, ahora relegado a robustez. Se conserva
-porque muchas de sus cifras (censura de JLoss, exposición del IV, etc.) siguen siendo
-válidas para la serie de CDS.*
+*Lo que sigue (§0–§7) fue escrito para el panel con CDS de 14 países. Se conserva como
+referencia y porque varias cifras estructurales (censura de JLoss, exposición del IV) valen
+para ambas series. **Para prosa, usar SIEMPRE las tablas de esta sección superior.***
 
 ---
 
