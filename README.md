@@ -15,7 +15,7 @@ individuales, desde dos aristas:
 > y estructurada como **una sola investigación sobre un único panel**. Tras una revisión de
 > árbitro senior (batería de robustez ampliada, reconciliación de cifras, censura de la
 > métrica de fragilidad), documento de tesis compilado y limpio:
-> [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (79 pp). Los dos capítulos se
+> [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (80 pp). Los dos capítulos se
 > preparan además como envíos separados a revista — ver
 > [`4_Redaccion/envios/`](4_Redaccion/envios/).
 
@@ -113,7 +113,7 @@ cd ../JLoss_reconstruction && python _engine_wide.py    # -> Panel_JLoss_wide.cs
 cd ../Panel && python bbg/_robustez_widebounds.py       # -> robustez_widebounds_bbg.csv
 
 # 3. Documento de tesis (desde 4_Redaccion/tesis/)
-latexmk -pdf main.tex             # -> main.pdf, 79 pp, compila sin warnings
+latexmk -pdf main.tex             # -> main.pdf, 80 pp, compila sin warnings
 ```
 
 ---
