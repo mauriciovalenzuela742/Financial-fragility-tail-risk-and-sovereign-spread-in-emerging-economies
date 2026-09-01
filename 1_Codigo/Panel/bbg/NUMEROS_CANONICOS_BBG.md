@@ -61,6 +61,12 @@ centradas, errores Driscoll–Kraay (kernel Bartlett), `linearmodels.PanelOLS`.
 > bajo clustering por país (p=0,001) y tiempo (p=0,023).** Signo robusto a la especificación.
 > R²_within = 0,18.
 
+**Coeficientes de los 6 controles en M2** (verificado 2026-08-31; DK):
+deuda gobierno general/PIB **+2,32 (t=4,54)**, inflación interanual **+3,04 (t=2,71)**,
+REER **−2,52 (t=−6,81)** — los tres con el signo esperado y significativos; balance
+fiscal/PIB −1,06 (n.s.), reservas/PIB −0,53 (n.s.) — signo esperado, no significativos;
+CA/PIB +1,03 (n.s.) — único signo contraintuitivo, no significativo.
+
 ---
 
 ## 2. Robustez
