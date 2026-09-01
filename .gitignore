@@ -35,3 +35,9 @@ _ckpt_*.csv
 1_Codigo/JLoss_reconstruction/_stage/
 1_Codigo/JLoss_reconstruction/_diag_*.out
 1_Codigo/JLoss_reconstruction/_diag_run.log
+1_Codigo/JLoss_reconstruction/_diag_*.log
+1_Codigo/JLoss_reconstruction/_diag_*run*.log
+1_Codigo/Panel/bbg/_*.out
+1_Codigo/Panel/bbg/_*run*.log
+1_Codigo/Panel/bbg/_gmm_input.csv
+1_Codigo/Panel/bbg/_causal_input.csv

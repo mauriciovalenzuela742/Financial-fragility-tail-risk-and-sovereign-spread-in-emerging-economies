@@ -55,10 +55,32 @@ Descriptivos (muestra de estimación, N=838, 14 países):
 **JLoss — estructura transversal (clave para la identificación de θ y β4):** la mediana por
 país va de 2,18 (Perú) a 11,58 (Pakistán), pero **9 de 14 países se agrupan en 2,2–2,6**; la
 variación entre países la aportan sobre todo Pakistán (11,6), Turquía (6,0), Brasil (4,0) y
-China (3,8). sd transversal ≈4 (vs 8,3 en la reconstrucción regulatoria v8). El 21% de las
-observaciones tiene JLoss ≥ 4,5 y el grid de pérdidas del motor llega a 4,8% "sin
-extrapolación": el VaR99 de los país-trimestre de alta fragilidad puede estar censurado por
-arriba (robustez pendiente: re-correr con cotas más anchas).
+China (3,8). sd transversal ≈4 (vs 8,3 en la reconstrucción regulatoria v8).
+
+**Censura del VaR99 (verificado 2026-09-01, `_diag_censura.py`, 6 países):** el grid de
+pérdidas del motor es `[0,010, 0,048]` de la exposición y `find_var99` interpola "sin
+extrapolación". El VaR99 **se clipa a 0,048 en el 98,3 % de los país-trimestre** (p50 = p90 =
+p99 = max = 0,0480). Es decir: la componente de pérdida inesperada (UL) de JLoss se evalúa
+en un nivel de estrés **fijo** (4,8 % de la exposición) para casi todas las observaciones, no
+en el verdadero percentil 99. Consecuencias: (i) la variación transversal de JLoss la manda
+la **pérdida esperada** (EL, diferencias de PD de Merton), no la forma de la cola; (ii) la
+cola sistémica está comprimida por arriba — coherente con el sd transversal bajo y con que
+H4b (que necesita variación de forma de cola × concentración) no se identifique; (iii) es la
+calibración declarada como "consistente con Chari et al." — no un error de la reconstrucción
+Bloomberg.
+
+**Comparación grid ancho (`_diag_widebounds.py`, 4 países, 2026-09-01):** con grid
+`[0,01, 0,20]` en vez de `[0,01, 0,048]`, JLoss sube **~2,5×** (ratio mediano por país:
+Chile 2,34 · China 2,35 · Turquía 2,34 · México 3,67), **pero `corr(base, wide) = 0,953`** —
+el orden transversal y temporal se preserva en un 95 %. La censura es entonces un problema
+de **escala** (el nivel de JLoss está comprimido ~2,5×) con algo de reordenamiento
+heterogéneo (México se mueve más). Implicación para θ: bajo grid ancho, θ en niveles se
+reduciría ~2,5× por covarianza de escala, pero el **signo, la significancia, el patrón
+post-GFC y la dependencia de China** son propiedades de la estructura de correlación (95 %
+preservada) → la inferencia se mantiene; la magnitud puntual de θ (ya declarada como no
+interpretable) lo es aún menos en niveles, y JLoss debe leerse **ordinalmente**.
+**Pendiente (definitivo):** re-correr el motor con grid ancho para los 20 países y
+re-estimar todo el pipeline (~1 h de motor).
 
 ---
 
