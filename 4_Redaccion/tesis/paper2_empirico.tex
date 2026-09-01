@@ -275,7 +275,7 @@ donde $q_{i,t}=GaR_{i,t}$. El umbral $\lambda$ se estima por mínimos cuadrados 
 
 \subsubsection{Construcción del panel e inferencia}
 
-Las series de $JLoss$, $GaR$, el spread soberano (EMBI; CDS para la robustez) y los controles se consolidan por país y trimestre. La inferencia se basa en errores estándar de Driscoll–Kraay \citep{DriscollKraay1998} ($vcovSCC$), robustos simultáneamente a heterocedasticidad, autocorrelación serial y dependencia transversal —justificados por los diagnósticos de la Sección 6.6—, contrastados frente a \textit{clustering} por país, por tiempo y al estimador HAC de Arellano.
+Las series de $JLoss$, $GaR$, el spread soberano (EMBI; CDS para la robustez) y los controles se consolidan por país y trimestre. La inferencia se basa en errores estándar de Driscoll–Kraay \citep{DriscollKraay1998} ($vcovSCC$), robustos simultáneamente a heterocedasticidad, autocorrelación serial y dependencia transversal —justificados por los diagnósticos de la Sección~\ref{sec:diag}—, contrastados frente a \textit{clustering} por país, por tiempo y al estimador HAC de Arellano.
 
 \section{Datos}
 
@@ -314,7 +314,7 @@ Los controles domésticos son la deuda del gobierno general/PIB y el balance fis
 
 \subsection{Estadística descriptiva}
 
-La Tabla~\ref{tab:descriptivos} resume las variables centrales sobre la muestra de estimación. Un rasgo relevante para lo que sigue: a diferencia de la reconstrucción con datos regulatorios —en la que Brasil concentraba el grueso de la fragilidad del panel ($JLoss$ medio $\approx$16)— la serie construida homogéneamente desde Bloomberg es \textbf{mucho más comprimida en el corte transversal} (desviación estándar $\approx$4,6 frente a 8,3), con Turquía, India y China en el extremo superior. Esta homogeneidad favorece la comparabilidad entre países pero, como se discute en el Capítulo~\ref{chap:paper1}, reduce la variación transversal de la fragilidad que identifica los términos de interacción de orden superior.
+La Tabla~\ref{tab:descriptivos} resume las variables centrales sobre la muestra de estimación. Un rasgo relevante para lo que sigue: a diferencia de la reconstrucción con datos regulatorios —en la que Brasil concentraba el grueso de la fragilidad del panel ($JLoss$ medio $\approx$16)— la serie construida homogéneamente desde Bloomberg es \textbf{mucho más comprimida en el corte transversal} (desviación estándar $\approx$4,6 frente a 8,3), con Turquía, India y China en el extremo superior (Figura~\ref{fig:jlosspaises}). Esta homogeneidad favorece la comparabilidad entre países pero, como se discute en el Capítulo~\ref{chap:paper1}, reduce la variación transversal de la fragilidad que identifica los términos de interacción de orden superior.
 
 \begin{table}[htbp]
 \centering
@@ -347,15 +347,9 @@ REER (índice, 2010=100) & 109 & 19 \\
 
 \section{Resultados}
 
-\subsection{Estrategia de identificación}
-
-La estimación se realiza sobre la muestra descrita en la Sección 5: las observaciones del panel único con EMBI soberano, $JLoss$ y $GaR$ disponibles simultáneamente ($N=721$, trece países; $N=614$ bajo la especificación con el vector completo de controles). La especificación de referencia incorpora efectos fijos bidireccionales —de país y de tiempo—, de modo que los efectos de país absorben la heterogeneidad estructural no observada y los efectos de tiempo capturan la totalidad de los choques globales comunes. La inferencia se basa en errores estándar de Driscoll–Kraay, contrastada con \textit{clustering} por país y por tiempo y con \textit{wild cluster bootstrap}. La hipótesis central —complementariedad entre fragilidad bancaria sistémica y riesgo de cola izquierda del crecimiento— se contrasta a través del término de interacción $\theta$ en
-
-\[ \Spread_{i,t} = \alpha_i + \gamma_t + \beta_1\,JLoss_{i,t} + \beta_2\,GaR_{i,t} + \theta\,\bigl(JLoss_{i,t}\times GaR_{i,t}\bigr) + \omega'X_{i,t} + \epsilon_{i,t}, \]
-
-donde $X_{i,t}$ es el vector de seis controles domésticos. Bajo la convención de signos adoptada, la predicción teórica del mecanismo de \textit{doom loop} es inequívoca: $\theta<0$.
-
 \subsection{Resultado principal: la muestra completa}
+
+La estimación se realiza sobre la muestra descrita en la Sección~5 —el panel único con EMBI soberano, $JLoss$ y $GaR$ disponibles simultáneamente ($N=721$, trece países; $N=614$ bajo la especificación con el vector completo de controles)— con la especificación de interacción de la Sección~4.3 (efectos fijos bidireccionales, errores de Driscoll–Kraay contrastados con \textit{clustering} por país y por tiempo y con \textit{wild cluster bootstrap}). La predicción del mecanismo de \textit{doom loop} sobre el coeficiente de interacción es inequívoca: $\theta<0$.
 
 \begin{table}[t]
 \centering
@@ -378,35 +372,43 @@ $R^2_{\text{within}}$        & $0,25$ & $0,44$ & $0,52$ & $0,44$ & $0,44$ \\
 \end{tabular}
 \end{table}
 
-La Tabla~\ref{tab:theta} presenta el resultado sobre la muestra completa de trece países. En la especificación de referencia M2 el coeficiente de interacción $\hat\theta=-0{,}160$ tiene el signo predicho por el multiplicador de \textit{doom loop}, pero \textbf{no es estadísticamente significativo} ($t=-1{,}13$, $p=0{,}26$; $p=0{,}14$ bajo \textit{wild cluster bootstrap}; $p=0{,}15$ bajo \textit{clustering} por país). El signo negativo es estable entre especificaciones y entre construcciones del riesgo de cola (Sección~6.6), pero la muestra completa no permite rechazar la hipótesis nula de aditividad.
+La Tabla~\ref{tab:theta} presenta el resultado sobre la muestra completa de trece países. En la especificación de referencia M2 el coeficiente de interacción $\hat\theta=-0{,}160$ tiene el signo predicho por el multiplicador de \textit{doom loop}, pero \textbf{no es estadísticamente significativo} ($t=-1{,}13$, $p=0{,}26$; $p=0{,}14$ bajo \textit{wild cluster bootstrap}; $p=0{,}15$ bajo \textit{clustering} por país). El signo negativo es estable entre especificaciones y entre construcciones del riesgo de cola (Sección~\ref{sec:robustez2}), pero la muestra completa no permite rechazar la hipótesis nula de aditividad.
 
 En cambio, los \textbf{efectos de primer orden} sí se identifican con claridad. El coeficiente de nivel de la fragilidad es positivo y significativo ($\hat\beta_1=+2{,}8$, $t=2{,}7$): un sistema bancario más frágil se asocia con un spread soberano más alto (H1). El coeficiente del riesgo de cola tiene el signo esperado y es significativo ($\hat\beta_2=-4{,}3$, $t=-2{,}3$): un $GaR$ más negativo —mayor riesgo a la baja— se asocia con un spread más alto (H2). Lo que la evidencia de este panel no respalda de forma concluyente en su conjunto es que ambos canales se \emph{complementen} de manera supra-aditiva.
 
 \subsection{El spread: EMBI o CDS, la métrica no cambia el resultado}
 
-Antes de interpretar la no significancia conviene descartar que se deba a la elección de la variable dependiente. Una versión anterior de este panel medía el spread por el CDS soberano a cinco años y arrojaba $\hat\theta=-0{,}35$ ($p=0{,}056$). La diferencia \textbf{no} proviene del instrumento. En la submuestra donde EMBI y CDS coexisten (606 observaciones, correlación 0,86), estimando el modelo M1 con una y otra serie como variable dependiente —única diferencia entre las dos regresiones—:
-
-\begin{center}
-\small
-\begin{tabular}{lrrr}
-\toprule
-Variable dependiente & $\hat\theta$ & $t$ & $p$ \\
-\midrule
-EMBI Global Diversified & $-0{,}66$ & $-2{,}00$ & $0{,}046$ \\
-CDS soberano 5A         & $-0{,}76$ & $-1{,}98$ & $0{,}048$ \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-Las dos series arrojan el \textbf{mismo} coeficiente. Lo que mueve el resultado entre el panel de CDS y el de EMBI es la \textbf{composición de la muestra}: la serie de CDS de Bloomberg estaba truncada para Polonia (solo 14 trimestres, 2012--2015) y ausente para India, mientras que el EMBI les da 89 y 54 trimestres respectivamente. La versión anterior del panel también incluía a Hungría, que ahora se excluye por el criterio de bancos mínimos (Sección~5.1). La pregunta relevante es, por tanto, por qué esas economías diluyen la interacción —y es la que aborda la subsección siguiente.
+Antes de interpretar la no significancia conviene descartar que se deba a la elección de la variable dependiente. Una versión anterior de este panel medía el spread por el CDS soberano a cinco años y arrojaba $\hat\theta=-0{,}35$ ($p=0{,}056$). La diferencia \textbf{no} proviene del instrumento: en la submuestra donde EMBI y CDS coexisten (606 observaciones, correlación 0,86), estimar el modelo con una y otra serie como variable dependiente —única diferencia entre las dos regresiones— arroja el \textbf{mismo} coeficiente ($\hat\theta=-0{,}66$ vs $-0{,}76$, ambos $p\approx0{,}05$; Panel~A de la Tabla~\ref{tab:hetero}). Lo que mueve el resultado entre el panel de CDS y el de EMBI es la \textbf{composición de la muestra}: la serie de CDS de Bloomberg estaba truncada para Polonia (solo 14 trimestres, 2012--2015) y ausente para India, mientras que el EMBI les da 89 y 54 trimestres respectivamente. La versión anterior del panel también incluía a Hungría, que ahora se excluye por el criterio de bancos mínimos (Sección~5.1). La pregunta relevante es, por tanto, por qué esas economías diluyen la interacción —y es la que aborda la subsección siguiente.
 
 \subsection{Heterogeneidad: el núcleo de economías emergentes de financiamiento externo}
+\label{sec:hetero}
 
-La interacción se comporta de forma marcadamente distinta según el tipo de economía. Reestimando M2 sobre el \textbf{núcleo de once economías emergentes} —Brasil, Chile, China, Colombia, Filipinas, Indonesia, Malasia, México, Perú, Sudáfrica y Turquía, todas ellas del complejo tradicional de deuda soberana de alto rendimiento, con participación extranjera elevada en la deuda pública y dependencia de flujos de cartera— el coeficiente es
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\caption[Heterogeneidad del coeficiente de interacción $\theta$]{Heterogeneidad del coeficiente de interacción $\theta$ ($JLoss\times GaR$). \textbf{Panel A}: submuestra donde EMBI y CDS coexisten (606 obs.), modelo sin controles, la variable dependiente es la única diferencia entre las dos filas. \textbf{Panel B}: especificación M2 (con controles) sobre el panel de EMBI, por composición de la muestra. La ``interacción de grupo'' añade a M2 los términos $JLoss\times GaR\times\mathbf{1}\{$Polonia o India$\}$ y los efectos de nivel correspondientes; la fila reporta el coeficiente del triple producto. Errores de Driscoll--Kraay. Trazabilidad: \texttt{NUMEROS\_CANONICOS\_BBG.md}.}
+\label{tab:hetero}
+\begin{tabular}{lrrrr}
+\toprule
+ & $\hat\theta$ & $t$ & $p$ & $N$ \\
+\midrule
+\multicolumn{5}{l}{\textit{Panel A --- variable dependiente (submuestra común, sin controles)}}\\
+\quad EMBI Global Diversified & $-0{,}66$ & $-2{,}00$ & $0{,}046$ & 606 \\
+\quad CDS soberano 5A         & $-0{,}76$ & $-1{,}98$ & $0{,}048$ & 606 \\
+\addlinespace
+\multicolumn{5}{l}{\textit{Panel B --- composición de la muestra (EMBI, M2)}}\\
+\quad Panel completo (13 países)               & $-0{,}16$ & $-1{,}13$ & $0{,}26$  & 614 \\
+\quad Sin Polonia                              & $-0{,}29$ & $-1{,}88$ & $0{,}060$ & 529 \\
+\quad \textbf{Núcleo, 11 EM de financiam.\ externo} & $\mathbf{-0{,}47}$ & $\mathbf{-2{,}29}$ & $\mathbf{0{,}023}$ & 479 \\
+\quad Interacción de grupo: diferencia \{Polonia, India\} & $+0{,}36$ & $+1{,}20$ & $0{,}23$ & 614 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\[ \hat\theta = -0{,}47 \quad (t=-2{,}29,\ p=0{,}023;\ p=0{,}015 \text{ bajo \textit{wild cluster bootstrap}};\ N=479). \]
+La interacción se comporta de forma marcadamente distinta según el tipo de economía (Tabla~\ref{tab:hetero}, Panel~B). Reestimando M2 sobre el \textbf{núcleo de once economías emergentes} —Brasil, Chile, China, Colombia, Filipinas, Indonesia, Malasia, México, Perú, Sudáfrica y Turquía, todas ellas del complejo tradicional de deuda soberana de alto rendimiento, con participación extranjera elevada en la deuda pública y dependencia de flujos de cartera— el coeficiente es $\hat\theta = -0{,}47$ ($t=-2{,}29$, $p=0{,}023$; $p=0{,}015$ bajo \textit{wild cluster bootstrap}; $N=479$).
 
-Añadir Polonia e India —dos economías grandes con mercados de deuda local profundos, base inversora doméstica amplia y baja dependencia de financiamiento externo de cartera— diluye el coeficiente hasta $\hat\theta=-0{,}16$. Una especificación con interacción de grupo lo confirma: el $\theta$ del núcleo es $-0{,}48$ ($t=-2{,}13$, $p=0{,}034$) y el término diferencial para Polonia e India es $+0{,}36$, positivo (compensa el efecto del núcleo) aunque \textbf{no significativo} ($t=1{,}20$, $p=0{,}23$) —con solo dos países en el grupo, la diferencia no puede estimarse con precisión. El jackknife de dos países refuerza el diagnóstico: $\hat\theta$ es negativo en el 99\,\% de los 78 pares excluidos, con un rango de $[-0{,}47, +0{,}06]$, pero solo alcanza $p<0{,}10$ en el 18\,\% de ellos —el signo es robusto, la significancia depende de qué economías se excluyan, y descansa sobre todo en China (sin China, $\hat\theta=-0{,}05$).
+Añadir Polonia e India —dos economías grandes con mercados de deuda local profundos, base inversora doméstica amplia y baja dependencia de financiamiento externo de cartera— diluye el coeficiente hasta $\hat\theta=-0{,}16$. Una especificación con interacción de grupo lo confirma: el $\theta$ del núcleo es $-0{,}48$ ($t=-2{,}13$, $p=0{,}034$) y el término diferencial para Polonia e India es $+0{,}36$, positivo —compensa el efecto del núcleo— aunque \textbf{no significativo} ($t=1{,}20$, $p=0{,}23$): con solo dos países en el grupo, la diferencia no puede estimarse con precisión. El jackknife de dos países refuerza el diagnóstico: $\hat\theta$ es negativo en el 99\,\% de los 78 pares excluidos, con un rango de $[-0{,}47, +0{,}06]$, pero solo alcanza $p<0{,}10$ en el 18\,\% de ellos —el signo es robusto, la significancia depende de qué economías se excluyan, y descansa sobre todo en China (sin China, $\hat\theta=-0{,}05$).
 
 La lectura económica es coherente con el mecanismo. El multiplicador de \textit{doom loop} opera sobre el precio de la deuda soberana en la medida en que el tenedor marginal de esa deuda —típicamente un inversor de cartera extranjero— reprecia el pasivo contingente bancario cuando el crecimiento entra en su cola izquierda. En economías donde la deuda pública está mayoritariamente en manos de bancos, fondos de pensiones y aseguradoras domésticas con horizontes largos, ese canal de repreciación es más tenue. La complementariedad fragilidad--crecimiento sobre el spread es, según esta evidencia, una \textbf{propiedad del núcleo de economías emergentes de financiamiento externo}, no una regularidad universal del conjunto de mercados emergentes. Es una conclusión que la muestra sugiere con nitidez en los puntos estimados pero que no puede elevar a contraste estadístico formal con solo dos economías en el grupo de contraste; la agenda de datos (Sección~7.4) apunta a ampliar ese grupo.
 
@@ -435,6 +437,7 @@ Como contraste no lineal alternativo se estima un modelo de umbral de panel \cit
 \end{figure}
 
 \subsection{Robustez}
+\label{sec:robustez2}
 
 \subsubsection{Invariancia a la medida de cola}
 
@@ -455,7 +458,7 @@ Las ventanas móviles de cinco años (Figura~\ref{fig:ventanas}) sitúan la señ
 
 \subsubsection{El corte transversal efectivo}
 
-Reestimando $\theta$ excluyendo secuencialmente cada país (\textit{leave-one-country-out}, Figura~\ref{fig:forest}), el coeficiente permanece negativo en las trece submuestras. Como se detalló en la Sección~6.4, su magnitud y su significancia dependen de forma desproporcionada de un conjunto reducido de países: excluir China lo lleva a $\hat\theta=-0{,}05$ ($t=-0{,}38$); excluir Polonia lo lleva a $-0{,}29$ ($p=0{,}060$, en el sentido opuesto, acercándolo al valor del núcleo). El diagnóstico por país explica la sensibilidad (Anexo~\ref{chap:anexoB}): nueve de los trece países tienen un $JLoss$ mediano entre 2,2 y 2,6 —casi sin variación transversal—, mientras que Turquía (mediano 6,0; máximo 28), India (mediano 7,5; máximo 23), China (mediano 3,8; máximo 29) y Brasil (mediano 4,0) aportan la mayor parte de la dispersión de la fragilidad entre países. El término de interacción se identifica, en la práctica, de esos pocos países con movimiento sustantivo de $JLoss$ y de los episodios de estrés macrofinanciero.
+Reestimando $\theta$ excluyendo secuencialmente cada país (\textit{leave-one-country-out}, Figura~\ref{fig:forest}), el coeficiente permanece negativo en las trece submuestras. Como se detalló en la Sección~\ref{sec:hetero}, su magnitud y su significancia dependen de forma desproporcionada de un conjunto reducido de países: excluir China lo lleva a $\hat\theta=-0{,}05$ ($t=-0{,}38$); excluir Polonia lo lleva a $-0{,}29$ ($p=0{,}060$, en el sentido opuesto, acercándolo al valor del núcleo). El diagnóstico por país explica la sensibilidad (Anexo~\ref{chap:anexoB}): nueve de los trece países tienen un $JLoss$ mediano entre 2,2 y 2,6 —casi sin variación transversal—, mientras que Turquía (mediano 6,0; máximo 28), India (mediano 7,5; máximo 23), China (mediano 3,8; máximo 29) y Brasil (mediano 4,0) aportan la mayor parte de la dispersión de la fragilidad entre países. El término de interacción se identifica, en la práctica, de esos pocos países con movimiento sustantivo de $JLoss$ y de los episodios de estrés macrofinanciero.
 
 \subsubsection{Otras pruebas}
 
@@ -469,6 +472,7 @@ Excluyendo la deuda/PIB del vector de controles la interacción se mantiene ($\h
 \end{figure}
 
 \subsection{Controles macroeconómicos y diagnósticos del panel}
+\label{sec:diag}
 
 Los controles domésticos son interpolaciones lineales de series anuales; bajo efectos fijos bidireccionales su variación intra-anual identificable es escasa y sus coeficientes \textbf{no tienen un signo económico fiable} (la deuda/PIB, por ejemplo, entra con signo negativo, y la correlación \textit{within} entre EMBI y deuda/PIB es de apenas $+0{,}10$). Se incluyen como controles, no se interpretan. Lo relevante es que la inclusión o exclusión de este bloque no altera el signo ni la (no) significancia de la interacción.
 

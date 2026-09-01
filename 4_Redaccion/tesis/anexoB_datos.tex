@@ -16,7 +16,7 @@ consolidación reside en \texttt{1\_Codigo/Bloomberg\_extraction/} y \texttt{1\_
 \begin{footnotesize}
 \setlength{\tabcolsep}{3.5pt}
 \renewcommand{\arraystretch}{1.15}
-\newcommand{\Lc}{\raggedright\arraybackslash\hyphenpenalty=50\relax\hspace{0pt}}
+\newcommand{\Lc}{\rightskip=0pt plus 1em\relax\arraybackslash\hyphenpenalty=50\relax\hspace{0pt}}
 \begin{longtable}{%
   >{\Lc}p{2.15cm}%
   >{\Lc}p{2.7cm}%
@@ -43,8 +43,8 @@ consolidación reside en \texttt{1\_Codigo/Bloomberg\_extraction/} y \texttt{1\_
 
 \multicolumn{6}{l}{\textbf{\textit{Variable dependiente}}}\\
 \addlinespace
-EMBI Global Diversified & Diferencial del índice de bonos soberanos de mercados emergentes de J.P.\ Morgan frente a la curva del Tesoro estadounidense (\textbf{variable dependiente principal}, siguiendo a \citealp{Chari2024}) & J.P.\ Morgan (serie \texttt{embi.xlsx}) & spread EMBI Global por país & Diaria & Media trimestral, puntos básicos. Sin dato $\Rightarrow$ la observación no entra a la regresión de referencia \\
-CDS soberano 5Y & Prima del \textit{credit default swap} soberano a cinco años, en dólares, senior no garantizado (\textbf{serie de robustez}) & Bloomberg & \texttt{<emisor> CDS USD SR 5Y Corp}; curva Markit \texttt{CCHIN1U5 Curncy} para China & Diaria & Media trimestral, puntos básicos. Correlación 0,86 con el EMBI en la submuestra común \\
+EMBI Global Diversified & Diferencial del índice de bonos soberanos emergentes de J.P.\ Morgan frente al Tesoro de EE.\ UU.\ (\textbf{DV principal}, sigue a \citealp{Chari2024}) & J.P.\ Morgan (\texttt{embi.xlsx}) & spread EMBI Global por país & Diaria & Media trimestral, pb \\
+CDS soberano 5Y & \textit{Credit default swap} soberano a 5 años, USD, senior no garantizado (\textbf{robustez}) & Bloomberg & \texttt{<emisor> CDS USD SR 5Y Corp}; Markit \texttt{CCHIN1U5} para China & Diaria & Media trimestral, pb; corr.\ 0,86 con el EMBI \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Fragilidad bancaria --- $JLoss$}} (métrica compuesta; motor \texttt{jloss\_engine.py})}\\
 \addlinespace
