@@ -69,18 +69,22 @@ H4b (que necesita variación de forma de cola × concentración) no se identifiq
 calibración declarada como "consistente con Chari et al." — no un error de la reconstrucción
 Bloomberg.
 
-**Comparación grid ancho (`_diag_widebounds.py`, 4 países, 2026-09-01):** con grid
-`[0,01, 0,20]` en vez de `[0,01, 0,048]`, JLoss sube **~2,5×** (ratio mediano por país:
-Chile 2,34 · China 2,35 · Turquía 2,34 · México 3,67), **pero `corr(base, wide) = 0,953`** —
-el orden transversal y temporal se preserva en un 95 %. La censura es entonces un problema
-de **escala** (el nivel de JLoss está comprimido ~2,5×) con algo de reordenamiento
-heterogéneo (México se mueve más). Implicación para θ: bajo grid ancho, θ en niveles se
-reduciría ~2,5× por covarianza de escala, pero el **signo, la significancia, el patrón
-post-GFC y la dependencia de China** son propiedades de la estructura de correlación (95 %
-preservada) → la inferencia se mantiene; la magnitud puntual de θ (ya declarada como no
-interpretable) lo es aún menos en niveles, y JLoss debe leerse **ordinalmente**.
-**Pendiente (definitivo):** re-correr el motor con grid ancho para los 20 países y
-re-estimar todo el pipeline (~1 h de motor).
+**Robustez grid ancho — VERIFICADA sobre los 14 países de estimación (2026-09-01,
+`_engine_wide.py` + splice, `Panel_JLoss_wide.csv`):** con grid `[0,01, 0,20]` en vez de
+`[0,01, 0,048]`, JLoss sube **~2,8×** de forma heterogénea entre países, `corr(base, wide) =
+0,919` (838 obs). Re-estimando θ con esa serie corregida:
+
+| Spec | θ base | t | p | θ WIDE | t | p |
+|---|---:|---:|---:|---:|---:|---:|
+| M1 | −0,543 | −2,20 | 0,028 | **−0,572** | **−2,57** | **0,010** |
+| M2 | −0,354 | −1,91 | 0,056 | **−0,330** | **−2,15** | **0,032** |
+
+> **θ NO se reduce con el grid ancho** (contra lo que sugeriría un reescalado uniforme): el
+> factor de escala varía entre países, y tras la transformación \textit{within} + centrado el
+> coeficiente **conserva su magnitud y GANA precisión** (M2: p 0,056 → 0,032; M1: 0,028 →
+> 0,010). La censura de la cola, de haber sesgado algo, **sesgaba en contra del hallazgo**.
+> Los resultados de la tesis se reportan sobre la calibración base (Chari et al.); la serie
+> ancha es una robustez. JLoss se interpreta **ordinalmente**, no en niveles.
 
 ---
 
@@ -118,6 +122,7 @@ CA/PIB +1,03 (n.s.) — único signo contraintuitivo, no significativo.
 | solo 2020–2026 | 209 | −0,245 | −1,81 |
 | sin 2020–2021 (mantiene pre-2020 + 2022+) | 650 | −1,109 | −3,53 |
 | cola = Expected Shortfall | 738 | −0,390 | −2,10 |
+| **JLoss malla ancha [0,01, 0,20]** (corrige censura del VaR99) | 738 | **−0,330** | **−2,15** (p=0,032) |
 | sin deuda/PIB (5 controles) | 738 | −0,335 | −2,49 |
 | leave-one-country-out: rango de θ | — | [−0,41 (sin Turquía), −0,17 (sin China)] | todos < 0 |
 
