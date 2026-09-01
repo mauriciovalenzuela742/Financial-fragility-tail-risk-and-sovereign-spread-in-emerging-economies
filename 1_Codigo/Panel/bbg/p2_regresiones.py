@@ -27,7 +27,12 @@ CTRLS = ["debt_gdp", "fisc_bal", "res_gdp", "ca_gdp", "infl_yoy", "reer"]
 GLOB = ["VIX", "UST10Y_log", "US_HY_spread_log"]
 
 
-def prep():
+# Variable dependiente PRINCIPAL: spread EMBI Global (Chari et al. 2024).
+# CDS_bps queda para la robustez (spec "CDS" en la tabla de robustez).
+DV = "EMBI_bps"
+
+
+def prep(dv=DV):
     d = pd.read_csv(PANEL_CSV)
     d["GaR_pp"] = d["GaR"] * 100.0
     if "ES" in d:
@@ -35,12 +40,13 @@ def prep():
     d["t"] = pd.PeriodIndex(d["quarter"], freq="Q").to_timestamp()
     d["year"] = pd.PeriodIndex(d["quarter"], freq="Q").year
     # muestra efectiva del mecanismo
-    d = d.dropna(subset=["EMBI_cds", "JLoss", "GaR_pp"]).copy()
+    d = d.dropna(subset=[dv, "JLoss", "GaR_pp"]).copy()
+    d["_DV"] = d[dv]
     return d
 
 
-def fit(d, extra_rhs, cov, tail="GaR_pp", time_fe=True):
-    dd = d.dropna(subset=["EMBI_cds", "JLoss", tail] + extra_rhs).copy()
+def fit(d, extra_rhs, cov, tail="GaR_pp", time_fe=True, dv="_DV"):
+    dd = d.dropna(subset=[dv, "JLoss", tail] + extra_rhs).copy()
     if dd["country"].nunique() < 3 or len(dd) < 30:
         return None, None
     dd["JLoss_c"] = dd["JLoss"] - dd["JLoss"].mean()
@@ -48,7 +54,7 @@ def fit(d, extra_rhs, cov, tail="GaR_pp", time_fe=True):
     dd["JxT"] = dd["JLoss_c"] * dd["tail_c"]
     rhs = ["JLoss_c", "tail_c", "JxT"] + extra_rhs
     eff = "EntityEffects + TimeEffects" if time_fe else "EntityEffects"
-    f = f"EMBI_cds ~ {' + '.join(rhs)} + {eff}"
+    f = f"{dv} ~ {' + '.join(rhs)} + {eff}"
     md = dd.set_index(["country", "t"])
     kw = (dict(cov_type="kernel", kernel="bartlett") if cov == "dk" else
           dict(cov_type="clustered", cluster_entity=True) if cov == "pais" else
@@ -66,7 +72,7 @@ def row(m, label):
 
 def wild_boot(d, extra_rhs, B=999, seed=7):
     """wild cluster bootstrap (Rademacher, restringido) del p-valor de theta."""
-    dd = d.dropna(subset=["EMBI_cds", "JLoss", "GaR_pp"] + extra_rhs).copy()
+    dd = d.dropna(subset=["_DV", "JLoss", "GaR_pp"] + extra_rhs).copy()
     for v in ("JLoss", "GaR_pp"):
         dd[v + "_c"] = dd[v] - dd[v].mean()
     dd["JxT"] = dd["JLoss_c"] * dd["GaR_pp_c"]
@@ -77,7 +83,7 @@ def wild_boot(d, extra_rhs, B=999, seed=7):
             x = x - x.groupby(dd["country"].values).transform("mean")
             x = x - x.groupby(dd["quarter"].values).transform("mean")
         return x
-    y = dm(dd[["EMBI_cds"]]).values.ravel()
+    y = dm(dd[["_DV"]]).values.ravel()
     X = dm(dd[cols]).values
     cl = dd["country"].values
     ki = cols.index("JxT")
@@ -107,14 +113,14 @@ def wild_boot(d, extra_rhs, B=999, seed=7):
 
 
 def umbral_hansen(d, extra_rhs, n_grid=120):
-    dd = d.dropna(subset=["EMBI_cds", "JLoss", "GaR_pp"] + extra_rhs).copy()
+    dd = d.dropna(subset=["_DV", "JLoss", "GaR_pp"] + extra_rhs).copy()
     def within(x):
         x = x.astype(float)
         for _ in range(30):
             x = x - x.groupby(dd["country"].values).transform("mean")
             x = x - x.groupby(dd["quarter"].values).transform("mean")
         return x
-    y = within(dd[["EMBI_cds"]]).values.ravel()
+    y = within(dd[["_DV"]]).values.ravel()
     q = dd["GaR_pp"].values
     ex = within(dd[extra_rhs]).values if extra_rhs else np.empty((len(y), 0))
 
@@ -176,6 +182,13 @@ def main():
     # sin deuda/PIB
     m, _ = fit(d, [c for c in ctr if c != "debt_gdp"], "dk")
     if m: rrows.append(row(m, "sin deuda/PIB"))
+    # variable dependiente = CDS 5Y (robustez; Chari et al. usan CDS como alternativa)
+    dcds = prep(dv="CDS_bps")
+    ctr_cds = [c for c in CTRLS if c in dcds.columns and dcds[c].notna().sum() > 50]
+    m, _ = fit(dcds, ctr_cds, "dk")
+    if m: rrows.append(row(m, "DV = CDS 5Y (robustez)"))
+    m, _ = fit(dcds, [], "dk")
+    if m: rrows.append(row(m, "DV = CDS 5Y, M1 sin controles"))
     # M1 sin controles ya esta arriba; aqui M2 sin globales explicitos = M2 base (referencia)
     # leave-one-country-out sobre M2
     for c in sorted(d["country"].unique()):

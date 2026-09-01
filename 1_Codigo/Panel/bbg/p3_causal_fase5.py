@@ -22,10 +22,11 @@ TMPL_CSV = os.path.join(HERE, "panel_real_bbg.csv")
 
 
 # ---------------- causal battery ----------------
-def load_for_causal():
+def load_for_causal(dv="EMBI_bps"):
     d = pd.read_csv(PANEL_CSV)
-    d = d.dropna(subset=["EMBI_cds", "JLoss", "GaR"]).copy()
-    d = d.rename(columns={"EMBI_cds": "EMBI_bps"})
+    d = d.dropna(subset=[dv, "JLoss", "GaR"]).copy()
+    if dv != "EMBI_bps":
+        d = d.rename(columns={dv: "EMBI_bps"})   # causal_core espera 'EMBI_bps'
     tmp = os.path.join(HERE, "_causal_input.csv")
     d.to_csv(tmp, index=False)
     return tmp

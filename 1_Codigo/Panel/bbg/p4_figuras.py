@@ -40,12 +40,12 @@ def _panel():
 
 
 def _fit(d, ctrls):
-    dd = d.dropna(subset=["EMBI_cds", "JLoss", "GaR_pp"] + ctrls).copy()
+    dd = d.dropna(subset=["EMBI_bps", "JLoss", "GaR_pp"] + ctrls).copy()
     dd["JLoss_c"] = dd["JLoss"] - dd["JLoss"].mean()
     dd["GaR_c"] = dd["GaR_pp"] - dd["GaR_pp"].mean()
     dd["JxG"] = dd["JLoss_c"] * dd["GaR_c"]
     m = PanelOLS.from_formula(
-        "EMBI_cds ~ JLoss_c + GaR_c + JxG + " + " + ".join(ctrls) + " + EntityEffects + TimeEffects",
+        "EMBI_bps ~ JLoss_c + GaR_c + JxG + " + " + ".join(ctrls) + " + EntityEffects + TimeEffects",
         dd.set_index(["country", "t"])).fit(cov_type="kernel", kernel="bartlett")
     return m, dd
 
@@ -65,8 +65,8 @@ def fig_cobertura():
     fig, ax = plt.subplots(figsize=(8.6, 5.4))
     for i, c in enumerate(order):
         g = d[d.country == c]
-        cds = g.dropna(subset=["EMBI_cds"])
-        est = g.dropna(subset=["EMBI_cds", "JLoss", "GaR"])
+        cds = g.dropna(subset=["EMBI_bps"])
+        est = g.dropna(subset=["EMBI_bps", "JLoss", "GaR"])
         ax.plot(g.dropna(subset=["JLoss"])["t"], [i] * g["JLoss"].notna().sum(), "|",
                 color=GRID, ms=7, mew=2)
         ax.plot(cds["t"], [i] * len(cds), "|", color="#9ec5f4", ms=7, mew=2)

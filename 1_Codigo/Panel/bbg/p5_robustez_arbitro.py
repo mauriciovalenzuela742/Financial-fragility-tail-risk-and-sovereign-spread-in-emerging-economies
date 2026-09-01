@@ -53,14 +53,14 @@ def _within(df, cols, ent, tim):
 def fast_theta(d, tail="GaR_pp", extra=None, crisis=None, ret_se=True):
     """theta del termino JLoss_c x tail_c (o + JxG*crisis). SE cluster-pais."""
     extra = extra or []
-    need = ["EMBI_cds", "JLoss", tail] + extra + (["_crisis"] if crisis is not None else [])
+    need = ["_DV", "JLoss", tail] + extra + (["_crisis"] if crisis is not None else [])
     dd = d.dropna(subset=[c for c in need if c in d.columns]).copy()
     if crisis is not None:
         dd["_crisis"] = crisis.loc[dd.index].values
     dd["JLoss_c"] = dd["JLoss"] - dd["JLoss"].mean()
     dd["tail_c"] = dd[tail] - dd[tail].mean()
     dd["JxT"] = dd["JLoss_c"] * dd["tail_c"]
-    cols = ["EMBI_cds", "JLoss_c", "tail_c", "JxT"] + extra
+    cols = ["_DV", "JLoss_c", "tail_c", "JxT"] + extra
     if crisis is not None:
         dd["JxT_cr"] = dd["JxT"] * dd["_crisis"]
         dd["tail_cr"] = dd["tail_c"] * dd["_crisis"]
@@ -168,7 +168,7 @@ def main():
     base = fast_theta(d, "GaR_pp", ctr)
     b0 = base["JxT"][0]
     rng = np.random.default_rng(2024)
-    dd = d.dropna(subset=["EMBI_cds", "JLoss", "GaR_pp"] + ctr).copy().reset_index(drop=True)
+    dd = d.dropna(subset=["_DV", "JLoss", "GaR_pp"] + ctr).copy().reset_index(drop=True)
 
     def _placebo(mk, B=600):
         v = []
@@ -242,7 +242,7 @@ def main():
         g["qi"] = pd.factorize(pd.PeriodIndex(g["quarter"], freq="Q"))[0]
         g["cid"] = pd.factorize(g["country"])[0]
         g["JxG"] = (g["JLoss"] - g["JLoss"].mean()) * (g["GaR_pp"] - g["GaR_pp"].mean())
-        g = g.rename(columns={"EMBI_cds": "cds"})
+        g = g.rename(columns={"_DV": "cds"})
         keep = ["cid", "qi", "cds", "JLoss", "GaR_pp", "JxG"] + ctr
         cmd = ("cds L1.cds JLoss GaR_pp JxG " + " ".join(ctr) +
                " | gmm(cds, 2:4) | timedumm collapse")
@@ -257,7 +257,7 @@ def main():
     print("== 8. diagnostico por pais ==")
     try:
         qa = pd.read_csv(QA)
-        est = d.dropna(subset=["EMBI_cds", "JLoss", "GaR"])
+        est = d.dropna(subset=["_DV", "JLoss", "GaR"])
         jm = est.groupby("country")["JLoss"].agg(["median", "max", "count"])
         diag = qa.set_index("countryname").join(jm, how="inner")
         print(diag[["n_banks_med", "q_pocos_bancos", "median", "max", "count"]].round(1).to_string())

@@ -11,6 +11,67 @@ exposición pre-2012 y segundo instrumento del dólar BIS (§5, §7), concentrac
 
 ---
 
+## ⚠️ CAMBIO DE FONDO (2026-09-01, tarde): variable dependiente = EMBI, CDS a robustez
+
+Se reestructuró el panel para que la **variable dependiente principal sea el spread EMBI
+Global Diversified (J.P. Morgan)**, como en Chari et al. (2024); el CDS soberano a 5 años
+queda como serie de **robustez**. Fuente EMBI: `2_Datos/embi.xlsx` (diario 2000–2026).
+
+**Muestra de estimación con EMBI: N=810 (M1) / N=700 (M2), 14 países.**
+Composición nueva: Polonia y Hungría pasan de 14 a 89 trimestres (EMBI completo, no solo la
+ventana de CDS 2012–15); **entra India** (54 trim.); Filipinas, Indonesia y Sudáfrica caen a
+11 trim. cada uno (EMBI solo desde 2023Q3); Pakistán sale (sin EMBI).
+
+### Resultado central con EMBI — H3 (θ = JLoss × GaR) **NO se sostiene**
+
+| Spec | N | θ | t (DK) | p (DK) | p (wild boot) |
+|---|---:|---:|---:|---:|---:|
+| M1 — FE país+tiempo, sin controles | 810 | −0,085 | −0,42 | 0,675 | 0,810 |
+| **M2 — FE país+tiempo, + 6 controles** | **700** | **−0,077** | **−0,45** | **0,650** | **0,750** |
+| M3 — FE país + factores globales (sin FE tiempo) | 700 | +0,050 | +0,33 | 0,744 | 0,667 |
+| M2, cluster país | 700 | −0,077 | −0,44 | 0,660 | — |
+| M2, cluster tiempo | 700 | −0,077 | −0,66 | 0,510 | — |
+| **robustez: DV = CDS 5Y (M2)** | 738 | **−0,354** | **−1,91** | **0,056** | 0,035 |
+| robustez: DV = CDS 5Y (M1) | 838 | −0,543 | −2,20 | 0,028 | 0,127 |
+
+> **Con EMBI, la interacción es indistinguible de cero** (θ ≈ −0,08, p ≈ 0,65 en todas las
+> variantes; invariante a GaR q05 / skew-t / ES). El resultado marginal negativo
+> (θ = −0,35, p = 0,056) era **específico del CDS**. β2 (GaR → EMBI) sí es negativo y
+> significativo; β1 (nivel de JLoss) positivo (+3,96 en M2).
+
+### Lo que SÍ se sostiene con EMBI
+
+- **H1 (nivel, JLoss → EMBI):** respaldada. IV shift-share (`OnOffRun`, exp. pre-2012):
+  β = +18,2 pb, **F = 39,1** (fuerte). Proyecciones locales: +5,5 pb (t = 3,1) en h = 1.
+  \[Advertencia: el 2º instrumento (dólar BIS) da β = −13,2 con F = 34,4 — signo opuesto —
+  y el test de Sargan sobre-identificado **rechaza fuerte** (p ≈ 0,0000). El efecto de nivel
+  no está causalmente cerrado.\]
+- **H2 (GaR → EMBI):** β2 < 0, significativo.
+- **Umbral de Hansen:** γ̂ = +0,13; efecto de JLoss +7,7 pb (cola severa) vs +3,0 (benigno);
+  LR = 30 (vs LR = 80 con CDS). Persiste una diferencia de régimen ~2,5×, más débil.
+- **Ventanas móviles de 5 años:** θ **significativamente negativo** en 2006–2010
+  (−0,82, t = −5,5) y 2012–2016 (−0,63, t = −2,5); n.s. en el resto; +0,08 en 2021–2025.
+  La complementariedad aparece en las ventanas de crisis (GFC, euro) pero se diluye en la
+  muestra completa.
+
+### H4b con EMBI
+
+β4 (JLoss×D×HHI): estructural −125 (t = −0,42), anual −74, trimestral ≈ 0 — todos
+indistinguibles de cero, IC amplios. Sin respaldo y sin poder, igual que con CDS.
+
+### Efecto marginal ∂EMBI/∂JLoss (M2, EMBI)
+
+p10 (cola severa) +4,28 (se 1,40); p50 +3,95; p90 (benigno) +3,64 (se 1,15). **Casi plano**
+—no hay firma de amplificación supra-aditiva (con CDS era +4,6 vs +1,8).
+
+---
+
+*Lo que sigue (§0–§7bis) documenta el panel con CDS, ahora relegado a robustez. Se conserva
+porque muchas de sus cifras (censura de JLoss, exposición del IV, etc.) siguen siendo
+válidas para la serie de CDS.*
+
+---
+
 ## 0. Diseño
 
 **Un solo panel.** No hay partición "núcleo LatAm / panel ampliado". El panel incluye *todas*
