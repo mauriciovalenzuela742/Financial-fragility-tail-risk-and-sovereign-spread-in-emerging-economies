@@ -1,4 +1,4 @@
-\chapter{Fragilidad bancaria y riesgos del crecimiento a la baja: evidencia empírica del spread soberano}
+\chapter{Fragilidad bancaria sistémica y riesgo de cola del crecimiento: evidencia empírica sobre el spread soberano}
 \label{chap:paper2}
 
 \section*{Resumen del capítulo}
@@ -166,11 +166,28 @@ donde la exposición al incumplimiento incorpora la pérdida dada el incumplimie
 
 \subsubsection{Parametrización e implementación computacional}
 
-El Cuadro 1 resume la parametrización, consistente con \citet{Chari2024b}: horizonte de un trimestre; $LGD = 45\%$; siete nodos de cuadratura; un único factor sistémico; cota inferior de pérdidas de 1,0\% y superior de 4,8\%; 500 pasos de discretización; percentil de 99\%; y factor sistémico $N(0,\,0{,}16\%)$. La totalidad del cómputo se reimplementó en Python validándolo contra el código original en MATLAB (\texttt{countrypd.m}, \texttt{loss\_distrib.m}, \texttt{loss\_contrib.m}, \texttt{get\_prob.m}, \texttt{LinealXY2.m}, \texttt{find\_saddlev1.m} y los módulos \texttt{get\_K*.m}), reproduciendo sus resultados. La búsqueda del punto de silla emplea el algoritmo de Brent (\texttt{brentq}) en lugar del Newton–Raphson original, por su mayor robustez ante curvaturas extremas de la CGF, e incorpora salvaguardas numéricas frente a desbordamiento en la evaluación de las exponenciales.
+La Tabla~\ref{tab:params} resume la parametrización del motor, idéntica a la de \citet{Chari2024b}. La totalidad del cómputo se reimplementó en Python y se validó contra el código original en MATLAB, reproduciendo sus resultados; la búsqueda del punto de silla emplea el algoritmo de Brent en lugar del Newton--Raphson original, por su mayor robustez ante curvaturas extremas de la función generadora de cumulantes, e incorpora salvaguardas numéricas frente a desbordamiento en la evaluación de las exponenciales.
 
-\vspace{1em}
-\noindent \textbf{Cuadro 1 — Parámetros del método de punto de silla.} Horizonte: 1 trimestre $\cdot$ LGD: 45\% $\cdot$ Nodos de cuadratura: 7 $\cdot$ Factores sistémicos: 1 $\cdot$ Cota inferior de pérdidas: 0,010 $\cdot$ Cota superior: 0,048 $\cdot$ Pasos: 500 $\cdot$ Percentil: 0,99 $\cdot$ Factor sistémico: $N(0,\,0{,}16\%)$.
-\vspace{1em}
+\begin{table}[htbp]
+\centering
+\small
+\caption{Parámetros del método de punto de silla.}
+\label{tab:params}
+\begin{tabular}{lr}
+\toprule
+Parámetro & Valor \\
+\midrule
+Horizonte & 1 trimestre \\
+LGD & 45\% \\
+Nodos de cuadratura Gauss--Hermite & 7 \\
+Factores sistémicos & 1 \\
+Cota de pérdidas (fracción de la exposición) & $[0{,}010,\ 0{,}048]$ \\
+Pasos de discretización & 500 \\
+Percentil del valor en riesgo & 99\% \\
+Varianza del factor sistémico & $0{,}16$\% \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \noindent\textbf{Una consecuencia de la calibración.} La malla de pérdidas está acotada
 superiormente en el 4,8\% de la exposición y el valor en riesgo al 99\% se lee por
@@ -293,10 +310,13 @@ Los controles domésticos son la deuda del gobierno general/PIB y el balance fis
 
 \subsection{Estadística descriptiva}
 
-El Cuadro 2 resume las variables centrales sobre la muestra de estimación. Un rasgo relevante para lo que sigue: a diferencia de la reconstrucción con datos regulatorios —en la que Brasil concentraba el grueso de la fragilidad del panel ($JLoss$ medio $\approx$16)— la serie construida homogéneamente desde Bloomberg es \textbf{mucho más comprimida en el corte transversal} (desviación estándar $\approx$4 frente a 8,3), con Turquía y China, no Brasil, en el extremo superior. Esta homogeneidad favorece la comparabilidad entre países pero, como se discute en el Capítulo~\ref{chap:paper1}, reduce la variación transversal de la fragilidad que identifica los términos de interacción de orden superior.
+La Tabla~\ref{tab:descriptivos} resume las variables centrales sobre la muestra de estimación. Un rasgo relevante para lo que sigue: a diferencia de la reconstrucción con datos regulatorios —en la que Brasil concentraba el grueso de la fragilidad del panel ($JLoss$ medio $\approx$16)— la serie construida homogéneamente desde Bloomberg es \textbf{mucho más comprimida en el corte transversal} (desviación estándar $\approx$4 frente a 8,3), con Turquía y China, no Brasil, en el extremo superior. Esta homogeneidad favorece la comparabilidad entre países pero, como se discute en el Capítulo~\ref{chap:paper1}, reduce la variación transversal de la fragilidad que identifica los términos de interacción de orden superior.
 
-\begin{center}
+\begin{table}[htbp]
+\centering
 \footnotesize
+\caption[Estadísticos descriptivos de la muestra de estimación]{Estadísticos descriptivos sobre la muestra de estimación (observaciones con CDS $+$ $JLoss$ $+$ $GaR$). Fuente y transformación de cada serie: Anexo~\ref{chap:anexoB}.}
+\label{tab:descriptivos}
 \begin{tabular}{lrr}
 \toprule
 Variable & Media & Desv. \\
@@ -312,15 +332,12 @@ Inflación YoY (\%)    & 5,6 & 8,4 \\
 REER (índice, 2010=100) & 108 & 20 \\
 \bottomrule
 \end{tabular}
-
-\medskip
-\footnotesize\textbf{Cuadro 2.} Estadísticos descriptivos sobre la muestra de estimación (observaciones con CDS + $JLoss$ + $GaR$). Fuente y transformación de cada serie: Anexo~\ref{chap:anexoB}.
-\end{center}
+\end{table}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_jloss_paises.pdf}
-\caption[Serie de JLoss por país del roster]{Serie trimestral de $JLoss$ por país del \textit{roster}, panel Bloomberg (motor de punto de silla, $\rho=0{,}4$). La escala vertical es común salvo cuando la serie del país la excede.}
+\caption[Serie de JLoss por país del panel]{Serie trimestral de $JLoss$ por país del panel, insumos de Bloomberg (motor de punto de silla, $\rho=0{,}4$). La escala vertical es común salvo cuando la serie del país la excede.}
 \label{fig:jlosspaises}
 \end{figure}
 
@@ -340,6 +357,8 @@ donde $X_{i,t}$ es el vector de seis controles domésticos. Bajo la convención 
 \centering
 \small
 \setlength{\tabcolsep}{4.5pt}
+\caption[Coeficiente de interacción $\theta$ sobre el CDS soberano]{Coeficiente de interacción $\theta$ ($JLoss\times GaR$) sobre el CDS soberano. Panel único de 14 países; M2, la especificación de referencia, usa 13 al perder el único trimestre de Pakistán. M1: efectos fijos país$+$tiempo sin controles. M2: $+$ seis controles domésticos. M3: efectos fijos de país $+$ factores financieros globales explícitos (sin efectos de tiempo). Errores de Driscoll--Kraay salvo las dos últimas columnas; *** $p<0{,}01$, ** $p<0{,}05$, * $p<0{,}10$. Trazabilidad: \texttt{1\_Codigo/Panel/bbg/NUMEROS\_CANONICOS\_BBG.md}.}
+\label{tab:theta}
 \begin{tabular}{lrrrrr}
 \toprule
  & M1 & \textbf{M2} & M3 & cluster país & cluster tiempo \\
@@ -353,11 +372,9 @@ $N$                          & 838 & 738 & 738 & 738 & 738 \\
 $R^2_{\text{within}}$        & $0,15$ & $0,18$ & $0,63$ & $0,18$ & $0,18$ \\
 \bottomrule
 \end{tabular}
-\smallskip
-\small\textbf{Cuadro 3.} Coeficiente de interacción $\theta$ sobre el panel único (14 países; M2, la especificación de referencia, usa 13 al perder Pakistán, que aporta un solo trimestre efectivo). M1: efectos fijos país+tiempo sin controles. M2: + seis controles domésticos. M3: efectos fijos de país + factores financieros globales explícitos (sin efectos de tiempo). Errores de Driscoll–Kraay salvo las dos últimas columnas; *** $p<0{,}01$, ** $p<0{,}05$, * $p<0{,}10$. Ver \texttt{1\_Codigo/Panel/bbg/NUMEROS\_CANONICOS\_BBG.md}.
 \end{table}
 
-El Cuadro 3 presenta el resultado central. En la especificación de referencia M2 —con el vector completo de controles macroeconómicos domésticos— el coeficiente de interacción $\hat\theta=-0{,}354$ es negativo, el signo predicho por el multiplicador de \textit{doom loop}. Su significancia es \textbf{marginal} bajo errores de Driscoll–Kraay ($t=-1{,}91$, $p=0{,}056$) y bajo \textit{wild cluster bootstrap} ($p=0{,}035$), y \textbf{convencional} bajo \textit{clustering} por país ($p=0{,}001$) y por tiempo ($p=0{,}023$). El signo es robusto a la especificación: sin controles (M1) la magnitud es mayor ($\hat\theta=-0{,}543$, $p=0{,}028$); con los factores globales explícitos en lugar de los efectos de tiempo (M3), $\hat\theta=-0{,}339$ ($p\approx0{,}10$, justo en el límite convencional). El ajuste dentro del panel es adecuado ($R^2_{\text{within}}=0{,}18$).
+La Tabla~\ref{tab:theta} presenta el resultado central. En la especificación de referencia M2 —con el vector completo de controles macroeconómicos domésticos— el coeficiente de interacción $\hat\theta=-0{,}354$ es negativo, el signo predicho por el multiplicador de \textit{doom loop}. Su significancia es \textbf{marginal} bajo errores de Driscoll–Kraay ($t=-1{,}91$, $p=0{,}056$) y bajo \textit{wild cluster bootstrap} ($p=0{,}035$), y \textbf{convencional} bajo \textit{clustering} por país ($p=0{,}001$) y por tiempo ($p=0{,}023$). El signo es robusto a la especificación: sin controles (M1) la magnitud es mayor ($\hat\theta=-0{,}543$, $p=0{,}028$); con los factores globales explícitos en lugar de los efectos de tiempo (M3), $\hat\theta=-0{,}339$ ($p\approx0{,}10$, justo en el límite convencional). El ajuste dentro del panel es adecuado ($R^2_{\text{within}}=0{,}18$).
 
 Esta es una evidencia más modesta que la de una reconstrucción previa con datos regulatorios (donde $\hat\theta\approx-0{,}34$ era significativo al 5\% de forma robusta), y se reporta como tal: lo que el panel homogéneo respalda con solidez es el \textbf{signo} y la \textbf{forma} de la complementariedad —confirmada por el efecto marginal (Sección 6.3) y por el modelo de umbral (Sección 6.4)—, no una magnitud puntual con significancia a prueba de toda inferencia.
 
@@ -415,7 +432,7 @@ Excluyendo la deuda/PIB del vector de controles la interacción se mantiene ($\h
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.72\textwidth]{fig_forest_theta.pdf}
-\caption[Coeficiente de interacción theta: especificaciones y robustez]{Coeficiente de interacción $\theta$ por especificación y prueba de robustez; barras: IC 95\% (errores de Driscoll--Kraay). El punto estimado es negativo en las veinticuatro filas —todas las especificaciones, todas las submuestras temporales y todos los \textit{leave-one-country-out}—; la submuestra previa a 2020 conserva el signo pero su intervalo cruza el cero.}
+\caption[Coeficiente de interacción $\theta$: especificaciones y robustez]{Coeficiente de interacción $\theta$ por especificación y prueba de robustez; barras: IC 95\% (errores de Driscoll--Kraay). El punto estimado es negativo en las veinticuatro filas —todas las especificaciones, todas las submuestras temporales y todos los \textit{leave-one-country-out}—; la submuestra previa a 2020 conserva el signo pero su intervalo cruza el cero.}
 \label{fig:forest}
 \end{figure}
 
