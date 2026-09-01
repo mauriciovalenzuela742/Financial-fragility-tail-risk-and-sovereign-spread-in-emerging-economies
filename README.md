@@ -55,6 +55,33 @@ Números canónicos completos y trazables:
 [`1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`](1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md).
 Batería de robustez de árbitro: [`1_Codigo/Panel/bbg/p5_robustez_arbitro.py`](1_Codigo/Panel/bbg/p5_robustez_arbitro.py).
 
+### Fronteras y limitaciones del resultado
+
+Lo que la evidencia **respalda** es el **signo y la forma** de la complementariedad, no una
+magnitud puntual. Las fronteras honestas:
+
+- **Restricción de exclusión del IV (H1).** El efecto causal de nivel `JLoss → spread` se
+  apoya en un instrumento cuya validez no se puede verificar directamente. El *shift-share*
+  con el spread de liquidez de fondeo bancario es fuerte (F = 21,6) y significativo
+  (p = 0,001), pero un **segundo** instrumento igualmente fuerte —el choque del dólar
+  efectivo amplio (BIS)— no corrobora la magnitud al usarse solo, y la especificación
+  sobre-identificada con ambos **rechaza el test de Sargan (p = 0,003)**: los dos
+  instrumentos no identifican el mismo parámetro, luego al menos uno viola la exclusión. Se
+  reporta el de mejor argumento de exclusión (opera sobre el costo de fondeo bancario, no
+  sobre el soberano directamente) como el más creíble, pero **el efecto de nivel no está
+  causalmente cerrado**. El capítulo teórico hereda la misma dificultad: su estrategia de
+  instrumentos de competencia se anuncia pero no se implementa.
+- **Significancia marginal de θ:** p ≈ 0,05 bajo las tres formas de inferencia principales.
+- **Identificación acotada:** regularidad post-GFC (no antes de 2012) y sostenida por pocos
+  países con variación real de `JLoss` (sin China deja de ser significativa).
+- **`JLoss` ordinal, no cardinal:** la censura de la malla de pérdidas comprime el nivel
+  ×2,8 (el signo y la inferencia se preservan; la magnitud en niveles no es interpretable).
+- **Regresores generados:** `JLoss` y `GaR` son estimados; la inferencia que los trata como
+  datos subestima la varianza de θ (el sesgo de medición atenúa, así que θ es un límite
+  conservador).
+- **H4b sin identificar** con ninguno de los tres proxies de concentración, incluida la
+  serie trimestral construida para este propósito.
+
 ---
 
 ## Reproducir
