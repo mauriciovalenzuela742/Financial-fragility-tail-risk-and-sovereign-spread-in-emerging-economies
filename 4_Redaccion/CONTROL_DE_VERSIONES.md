@@ -260,12 +260,12 @@ Rutas relativas desde `Jloss/`.
 | **Dónde debe ir en la tesis** | (a) Sección/anexo "Validación externa del GaR", apoyada en `Defensa_GaR_preguntas_respuestas.md`; (b) Tabla A.3 de métricas de comparación, según `Plan_tablas_riesgo.md`. |
 | **Acción** | Copia de `1_Codigo/` = canónica. La de `2_Datos/` se declara **congelada (paquete portátil)**; no se borra ni se renombra. |
 
-### 3.14 Plan de tablas de riesgo y guion de defensa — hilo más reciente
+### 3.14 Guion de defensa — hilo más reciente
 
 | Campo | Contenido |
 |---|---|
-| **Vigente** | `Plan_tablas_riesgo.md` (28-jul 20:14) y `Defensa_GaR_preguntas_respuestas.md` (28-jul 19:55) |
-| **Ruta** | `1_Codigo/` (raíz) |
+| **Vigente** | `4_Redaccion/Defensa_preguntas.md` (2026-09-01) — 30 preguntas de la comisión sobre toda la investigación, con guion de respuesta y cifras trazables al pipeline post-revisión de árbitro. Complemento específico de GaR: `1_Codigo/Defensa_GaR_preguntas_respuestas.md` (28-jul). |
+| **Ruta** | `4_Redaccion/` y `1_Codigo/` |
 | **Por qué** | **Son los dos artefactos de investigación más recientes de todo el repositorio.** `Plan_tablas_riesgo.md` contiene el conjunto de θ más granular y actual (Paneles A–C: supervivencia de θ a métricas de riesgo, especificidad del GaR, horse-race JLoss×GaR vs JLoss×VIX) y es el que reconcilia parcialmente las cifras en conflicto. `Defensa_GaR_preguntas_respuestas.md` documenta la validación del porteo R→Python (corr 0,9995 en FCI México; `max|diff| ≈ 1e-15` en preprocesamiento). |
 | **Predecesores** | Ninguno. |
 | **Acción** | **No tocar. Tratar como fuente prioritaria de cifras**, por encima de `LEEME_analisis_v3.md`, hasta que se resuelva el pendiente crítico de la sección 0. |
