@@ -1,0 +1,99 @@
+% =====================================================================
+%  Paper teórico — versión standalone para envío a revista
+%  Un microfundamento de organización industrial para la fragilidad
+%  bancaria sistémica y el riesgo soberano
+%
+%  Reutiliza el cuerpo del Capítulo 3 de la tesis (../../tesis/paper1_oi.tex)
+%  + el Anexo A matemático (../../tesis/anexoA_matematico.tex) como apéndice.
+%  Revistas objetivo (español): El Trimestre Económico, Estudios de Economía
+%  (U. de Chile), Revista de Análisis Económico (ILADES).
+% =====================================================================
+\documentclass[12pt,letterpaper]{article}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+\graphicspath{{figuras/}}
+\setlength{\emergencystretch}{3em}
+\onehalfspacing
+
+\newcommand{\JLoss}{\mathrm{JLoss}}
+\newcommand{\EMBI}{\mathrm{EMBI}}
+\newcommand{\GaR}{\mathrm{GaR}}
+\newcommand{\PD}{\mathrm{PD}}
+\newcommand{\ES}{\mathrm{ES}}
+\newcommand{\HHI}{\mathrm{HHI}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\dd}{\,\mathrm{d}}
+% macros que la tesis hereda de umemoria.cls
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\1}{\mathbf{1}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\N}{\mathbb{N}}
+\let\epsilon\varepsilon
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposición}
+\newtheorem{lemma}{Lema}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\newtheorem{assumption}{Supuesto}
+\newtheorem{remark}{Observación}
+
+\let\chapter\section
+\makeatletter
+\newcommand{\definelabel}[2]{\expandafter\gdef\csname r@#1\endcsname{{#2}{}{}{}{}}}
+\makeatother
+\definelabel{chap:paper2}{el trabajo empírico complementario}
+\definelabel{chap:discusion}{la discusión general de la tesis}
+
+\title{Estructura de mercado bancario, fragilidad sistémica y riesgo soberano:\\
+un microfundamento de organización industrial}
+\author{Mauricio Valenzuela Corvalán\\[2pt]
+\small Magíster en Economía Aplicada, Universidad de Chile}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Este trabajo desarrolla un modelo formal en el que la \textit{estructura de mercado
+bancario} es el parámetro profundo que gobierna la cadena que va desde la fragilidad
+sistémica hasta el riesgo soberano. En un mercado de crédito con competencia à la
+Cournot, responsabilidad limitada y seguro de depósitos, la intensidad de competencia
+opera sobre el riesgo por dos canales de signo opuesto —efecto margen y efecto
+\textit{risk-shifting}—, generando una relación en U con la probabilidad de quiebra
+individual. El aporte central es distinguir el riesgo \emph{individual} del riesgo de
+\emph{cola conjunta} del sistema ($\JLoss$): al endogenizar la correlación de activos
+como función de la estructura de mercado, el mínimo de $\JLoss$ se ubica en un mercado
+más competido que el de mínima fragilidad individual, de modo que una política de
+competencia calibrada solo sobre la salud individual de los bancos deja al sistema en
+una configuración subóptimamente concentrada desde la óptica del riesgo sistémico y de
+su costo fiscal contingente. El cierre macro-soberano genera una complementariedad
+entre fragilidad y riesgo a la baja del crecimiento sobre el \textit{spread} soberano,
+que constituye el análogo teórico exacto del término de interacción $\JLoss\times\GaR$
+que la evidencia empírica documenta. El modelo se ilustra numéricamente, se valida
+contra Monte Carlo y sobrevive a una estructura de competencia alternativa (Salop) y a
+una revisión adversarial explícita.\\[4pt]
+\noindent\textbf{Palabras clave:} competencia bancaria, riesgo sistémico,
+\textit{Growth-at-Risk}, riesgo soberano, \textit{doom loop}.\quad
+\textbf{JEL:} G21, G28, E44, H63, L13.
+\end{abstract}
+
+\input{../../tesis/paper1_oi.tex}
+
+\appendix
+\input{../../tesis/anexoA_matematico.tex}
+
+\end{document}

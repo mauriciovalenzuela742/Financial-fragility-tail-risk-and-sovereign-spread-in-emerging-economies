@@ -1,0 +1,99 @@
+% =====================================================================
+%  Paper empírico — versión standalone para envío a revista
+%  Fragilidad bancaria sistémica, riesgo de cola del crecimiento y
+%  spread soberano en economías emergentes
+%
+%  Reutiliza el cuerpo del Capítulo 2 de la tesis (../../tesis/paper2_empirico.tex)
+%  con remapeo de \chapter->\section y los entornos teoremáticos redefinidos.
+%  Revistas objetivo (español): Latin American Journal of Central Banking,
+%  Economía Chilena (BCCh), Estudios de Economía (U. de Chile), El Trimestre
+%  Económico.
+% =====================================================================
+\documentclass[12pt,letterpaper]{article}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+\graphicspath{{figuras/}}
+\setlength{\emergencystretch}{3em}
+\onehalfspacing
+
+% --- macros de notación compartidas con la tesis ---
+\newcommand{\JLoss}{\mathrm{JLoss}}
+\newcommand{\EMBI}{\mathrm{EMBI}}
+\newcommand{\GaR}{\mathrm{GaR}}
+\newcommand{\PD}{\mathrm{PD}}
+\newcommand{\ES}{\mathrm{ES}}
+\newcommand{\HHI}{\mathrm{HHI}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\1}{\mathbf{1}}
+\providecommand{\R}{\mathbb{R}}
+\let\epsilon\varepsilon
+
+% --- entornos teoremáticos (sin contador [chapter]) ---
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposición}
+\newtheorem{lemma}{Lema}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\newtheorem{assumption}{Supuesto}
+\newtheorem{remark}{Observación}
+
+% --- remapeos para reusar el archivo de capítulo sin editarlo ---
+\let\chapter\section
+% referencias cruzadas a otros capítulos de la tesis -> texto neutro
+\makeatletter
+\newcommand{\definelabel}[2]{\expandafter\gdef\csname r@#1\endcsname{{#2}{}{}{}{}}}
+\makeatother
+\definelabel{chap:paper1}{el trabajo teórico complementario}
+\definelabel{chap:anexoB}{el anexo de procedencia de datos}
+\definelabel{chap:discusion}{la discusión general de la tesis}
+\definelabel{chap:anexoA}{el anexo matemático}
+
+\title{Fragilidad bancaria sistémica, riesgo de cola del crecimiento y
+\textit{spread} soberano en economías emergentes}
+\author{Mauricio Valenzuela Corvalán\\[2pt]
+\small Magíster en Economía Aplicada, Universidad de Chile}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Este trabajo evalúa si la fragilidad sistémica del sector bancario y el riesgo de la
+cola izquierda del crecimiento del producto determinan de forma \emph{complementaria}
+—no aditiva— el riesgo de crédito soberano en economías emergentes. La fragilidad se
+mide con la métrica \textit{Joint Loss} ($\JLoss$) construida a partir de
+probabilidades de incumplimiento de tipo Merton agregadas por punto de silla, con
+balances y precios accionarios de 113 bancos extraídos homogéneamente de Bloomberg; el
+riesgo a la baja del crecimiento, con \textit{Growth-at-Risk} ($\GaR$) por regresión
+cuantílica de panel; el \textit{spread} soberano, exclusivamente por el CDS a cinco
+años. Sobre un panel único de catorce economías emergentes (2004--2026), el coeficiente
+de interacción $\JLoss\times\GaR$ sobre el CDS es negativo —el signo que predice el
+multiplicador de \textit{doom loop}—, con $\hat\theta=-0{,}35$ ($p\approx0{,}05$ bajo
+inferencia robusta al número reducido de países), y un modelo de umbral corrobora la no
+linealidad. El efecto es una regularidad \textbf{posterior a la crisis financiera
+global}: negativo y significativo en todas las ventanas móviles de cinco años desde
+2012, nulo antes. La identificación descansa de forma desproporcionada en los pocos
+países con variación sustantiva de la fragilidad. Se reporta el signo y la forma del
+mecanismo como resultado establecido y la magnitud puntual como evidencia marginal.\\[4pt]
+\noindent\textbf{Palabras clave:} riesgo soberano, fragilidad bancaria, \textit{Growth-at-Risk},
+\textit{doom loop}, economías emergentes.\quad\textbf{JEL:} F34, G21, G15, H63, E44.
+\end{abstract}
+
+\input{../../tesis/paper2_empirico.tex}
+
+\end{document}

@@ -102,3 +102,47 @@ Argentina, Egipto y Rusia tienen $JLoss$ y CDS pero no $GaR$; India tiene $JLoss
 pero no emite CDS soberano de referencia. Corea del Sur y Bulgaria se excluyen porque su
 $JLoss$ no es una medida válida a nivel de país (Capítulo~\ref{chap:paper2}, Sección~5.1). La
 Figura~\ref{fig:cobertura} traza esta cobertura.
+
+\vspace{1ex}
+
+\noindent El Cuadro~\ref{tab:diagpais} resume, por país de la muestra de estimación, el número
+mediano de bancos cotizados que alimentan $JLoss$, los trimestres marcados con menos bancos
+que el mínimo requerido, y la mediana y el máximo de la serie de $JLoss$. Deja ver dos rasgos
+que el Capítulo~\ref{chap:paper2} discute: (i) nueve de los trece países del panel de M2
+tienen un $JLoss$ mediano entre 2,2 y 2,6 —la variación transversal de la fragilidad la
+aportan China, Turquía y Brasil—; y (ii) Hungría (dos bancos, todos los trimestres bajo el
+mínimo) y Colombia y México (una fracción alta) descansan sobre pocas instituciones, aunque
+sin llegar al caso de Bulgaria (un banco) que motivó su exclusión.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Diagnóstico de $JLoss$ por país (muestra de estimación).}
+\label{tab:diagpais}
+\begin{tabular}{lrrrr}
+\toprule
+País & Bancos (mediana) & Trim.\ bajo mínimo & $JLoss$ mediana & $JLoss$ máx. \\
+\midrule
+Brasil       & 8 & 0  & 4,0  & 15,5 \\
+Chile        & 4 & 0  & 2,2  & 11,6 \\
+China        & 9 & 2  & 3,8  & 29,0 \\
+Colombia     & 3 & 23 & 2,4  & 16,7 \\
+Filipinas    & 5 & 0  & 2,6  & 11,3 \\
+Hungría      & 2 & 91 & 2,9  & 4,3  \\
+Indonesia    & 4 & 0  & 2,4  & 17,5 \\
+Malasia      & 6 & 0  & 2,2  & 5,9  \\
+México       & 4 & 13 & 2,4  & 13,9 \\
+Pakistán     & 6 & 0  & 11,6 & 11,6 \\
+Perú         & 3 & 6  & 2,2  & 8,7  \\
+Polonia      & 8 & 0  & 2,3  & 2,9  \\
+Sudáfrica    & 6 & 0  & 2,4  & 15,9 \\
+Turquía      & 8 & 0  & 6,0  & 28,0 \\
+\bottomrule
+\end{tabular}
+
+\medskip
+\footnotesize\raggedright Fuente: \texttt{1\_Codigo/Panel/bbg/diag\_por\_pais\_bbg.csv}
+(motor \texttt{jloss\_engine.py}). ``Trim.\ bajo mínimo'' cuenta los trimestres con menos
+bancos cotizados que el umbral del motor. Corea del Sur y Bulgaria no aparecen: quedan fuera
+del panel por $JLoss$ no válido a nivel de país.
+\end{table}

@@ -30,3 +30,8 @@ _ckpt_*.csv
 
 # Claude Code runtime (no versionar)
 .claude/scheduled_tasks.lock
+
+# JLoss engine transient staging / diagnostics
+1_Codigo/JLoss_reconstruction/_stage/
+1_Codigo/JLoss_reconstruction/_diag_*.out
+1_Codigo/JLoss_reconstruction/_diag_run.log
