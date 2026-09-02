@@ -61,9 +61,9 @@ suma.
 
 ## B. Medición de la fragilidad — `JLoss`
 
-**P5. `JLoss` medio es 4,1 y la cota superior de la malla de pérdidas del motor es 4,8 %.
+**P5. `JLoss` medio es 4,8 y la cota superior de la malla de pérdidas del motor es 4,8 %.
 ¿No está la métrica pegada al techo?**
-R. Verificado (`_diag_censura.py`, 6 países): la cota **satura el VaR99 en el 98 % de los
+R. Verificado (`_diag_censura.py`): la cota **satura el VaR99 en el 98 % de los
 país-trimestre**. `JLoss` mide, en la práctica, la pérdida esperada (probabilidades de
 Merton) más una contribución de cola evaluada a un **nivel de estrés fijo**, no en el
 percentil 99 verdadero. Consecuencia: la variación de `JLoss` la gobierna la pérdida
@@ -91,14 +91,14 @@ cae a −0,05 sobre la muestra completa).
 
 **P7. `JLoss` es un regresor estimado, no observado. ¿No invalida eso la inferencia sobre
 θ?**
-R. Es una limitación real (§7, punto quinto). Dos cosas la acotan: (i) el error de medición
+R. Es una limitación real (§7). Dos cosas la acotan: (i) el error de medición
 clásico en un regresor **atenúa** el coeficiente hacia cero, así que el θ reportado es un
 límite conservador; (ii) perturbando `GaR` con ruido creciente, θ es estable hasta el 25 %
-de su desviación (θ = −0,34) y solo baja a −0,29 con el 50 %, sin cambiar de signo. Un
+de su desviación (θ ≈ −0,16) y solo baja a −0,15 con el 50 %, sin cambiar de signo. Un
 *bootstrap* que re-estime la regresión cuantílica de `GaR` en cada réplica queda como
 refinamiento pendiente (es ~45.000 solves del programa lineal).
 
-**P8. El `JLoss` de Bloomberg está mucho más comprimido que el regulatorio (sd ≈ 4 vs 8,3).
+**P8. El `JLoss` de Bloomberg está mucho más comprimido que el regulatorio (sd ≈ 4,6 vs 8,3).
 ¿No debería preocuparle que la métrica "buena" dé menos señal?**
 R. Es el precio de la homogeneidad: un solo protocolo elimina la heterogeneidad de
 definiciones contables entre supervisores, pero también comprime la dispersión —en la
@@ -110,7 +110,8 @@ economías con variación real de fragilidad.
 **P9. ¿Por qué ρ = 0,4 y LGD = 0,45 y no otros valores?**
 R. Son los parámetros de Chari et al. (2024), a su vez estándar (LGD 45 % es Basilea II para
 exposiciones no garantizadas). El objetivo era comparabilidad con esa reconstrucción, no
-recalibrar. La sensibilidad a ρ está en la validación Monte Carlo del método (Cap. 3, §5.2).
+recalibrar. La sensibilidad del método a ρ se examina en la validación Monte Carlo del
+Capítulo 3.
 
 ---
 
@@ -119,11 +120,13 @@ recalibrar. La sensibilidad a ρ está en la validación Monte Carlo del método
 **P10. `GaR` no viene de Bloomberg —rompe el principio de homogeneidad de fuente.**
 R. Correcto y explícito (Anexo B): los insumos reales del FCI (PIB, IPC, índice accionario,
 REER, rendimiento 10Y) son estadísticas nacionales porque Bloomberg no es fuente primaria de
-cuentas nacionales. Lo que sí es homogéneo es todo el insumo **de mercado** (balances,
-capitalización, CDS, factores globales). En la agenda está extraer de Bloomberg los
-componentes de mercado del FCI (índice accionario, REER, 10Y) para cerrar más el círculo.
+cuentas nacionales. Lo que sí es homogéneo es la métrica de fragilidad —`JLoss`, con
+balances y capitalización de los 113 bancos de un solo protocolo Bloomberg—; el spread es el
+EMBI Global de J.P. Morgan (el índice de referencia de la literatura, como en Chari et al.).
+En la agenda está extraer de Bloomberg los componentes de mercado del FCI (índice accionario,
+REER, 10Y) para cerrar más el círculo.
 
-**P11. La media de `GaR` (q05) es +1,4 pp. ¿Un percentil 5 del crecimiento positivo?**
+**P11. La media de `GaR` (q05) es +1,6 pp. ¿Un percentil 5 del crecimiento positivo?**
 R. Es el cuantil 5 % del crecimiento interanual condicional un trimestre adelante, promediado
 sobre las ~720 observaciones-país que incluyen muchos trimestres de expansión en emergentes.
 El rango es [−19; +14] pp: en los episodios de estrés `GaR` es marcadamente negativo, que es
@@ -193,10 +196,13 @@ alto rendimiento, con alta participación extranjera en la deuda pública. Polon
 —las dos que diluyen la interacción— son economías grandes con mercados de deuda local
 profundos y baja dependencia de flujos de cartera externos: exactamente donde el canal de
 repreciación del *doom loop* debería ser más tenue. El test de interacción de grupo pone
-número: la diferencia entre grupos es +0,36, del signo que dilye la interacción, aunque **no
+número: la diferencia entre grupos es +0,36, del signo que diluye la interacción, aunque **no
 es significativa** (p = 0,23) —con solo dos países en el grupo de contraste no puede serlo, y
 lo digo así. El jackknife de dos países confirma que el signo de θ es negativo en el 99 % de
-los pares excluidos, y que su significancia depende de qué economías se dejen fuera.
+los pares excluidos, y que su significancia depende de qué economías se dejen fuera. La
+partición no es *ex post*: es la distinción, anunciada en la introducción, entre economías de
+financiamiento externo y de deuda local —el moderador natural, cuando haya datos, es la
+participación de no residentes en la deuda soberana (agenda, PC2).
 
 **P18. El resultado cambia según qué países entran. ¿No es un resultado de composición?**
 R. Sí, y es el hallazgo, no un defecto: la complementariedad **es** una propiedad del tipo de
@@ -237,9 +243,9 @@ etapa es apenas aceptable (F ≈ 11) y la segunda etapa, aunque del signo espera
 significancia (p = 0,34) —bastante más débil que en la versión con más economías y CDS. Un
 segundo instrumento (tipo de cambio efectivo amplio del dólar, BIS) da signo opuesto, y la
 especificación sobre-identificada **rechaza el test de Sargan** (p < 0,001). La lectura
-honesta (§6.9, §7): la estrategia de variables instrumentales **no cierra la identificación
-causal** del canal de nivel sobre esta muestra; la evidencia de H1 descansa en el MCO con
-efectos fijos y en las proyecciones locales. No lo escondo.
+honesta (§6.8 y limitaciones): la estrategia de variables instrumentales **no cierra la
+identificación causal** del canal de nivel sobre esta muestra; la evidencia de H1 descansa en
+el MCO con efectos fijos y en las proyecciones locales. No lo escondo.
 
 **P23. ¿Por qué `pre_year = 2012` para estimar la exposición del IV?**
 R. 2012 es un quiebre de régimen que aparece de forma independiente en el análisis temporal
@@ -256,7 +262,7 @@ la versión previa del panel.
 dinámica del *doom loop*?**
 R. Porque la forma del panel es la contraria a la que ese estimador supone: T ≈ 88, N = 13.
 El sesgo de Nickell es del orden de 1/T ≈ 1 %, despreciable. Corrí igual un system-GMM: el
-signo de la interacción se mantiene (−0,25), pero el test de Hansen da p = 1,00 —diagnóstico
+signo de la interacción se mantiene negativo, pero el test de Hansen da p = 1,00 —diagnóstico
 no informativo por proliferación de instrumentos, exactamente lo que se espera con T ≫ N.
 El estimador estático de efectos fijos bidireccionales es el apropiado aquí.
 
