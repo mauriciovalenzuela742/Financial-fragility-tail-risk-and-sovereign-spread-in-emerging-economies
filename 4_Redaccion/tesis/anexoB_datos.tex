@@ -43,7 +43,7 @@ consolidación reside en \texttt{1\_Codigo/Bloomberg\_extraction/} y \texttt{1\_
 
 \multicolumn{6}{l}{\textbf{\textit{Variable dependiente}}}\\
 \addlinespace
-EMBI Global Diversified & Diferencial del índice de bonos soberanos emergentes de J.P.\ Morgan frente al Tesoro de EE.\ UU.\ (\textbf{DV principal}, sigue a \citealp{Chari2024}) & J.P.\ Morgan (\texttt{embi.xlsx}) & spread EMBI Global por país & Diaria & Media trimestral, pb \\
+EMBI Global Diversified & Diferencial del índice de bonos soberanos emergentes de J.P.\ Morgan frente al Tesoro de EE.\ UU.\ (\textbf{DV principal}, sigue a \citealp{Chari2024}) & J.P.\ Morgan & \texttt{embi.xlsx}; spread EMBI Global por país & Diaria & Media trimestral, pb \\
 CDS soberano 5Y & \textit{Credit default swap} soberano a 5 años, USD, senior no garantizado (\textbf{robustez}) & Bloomberg & \texttt{<emisor> CDS USD SR 5Y Corp}; Markit \texttt{CCHIN1U5} para China & Diaria & Media trimestral, pb; corr.\ 0,86 con el EMBI \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Fragilidad bancaria --- $JLoss$}} (métrica compuesta; motor \texttt{jloss\_engine.py})}\\
@@ -56,7 +56,7 @@ Capital. bursátil & Valor de mercado del patrimonio, cotización local (nunca A
 Retornos accionarios & Retornos logarítmicos diarios del precio local & Bloomberg & \texttt{PX\_LAST} & Diaria & $\sigma_E=\sqrt{\sum_t r_t^2}$ por banco-trimestre (varianza realizada) \\
 Índice bursátil país & Factor sistémico único de la agregación de pérdidas & Bloomberg & índice de referencia por país (\texttt{COUNTRY\_INDEX}) & Diaria & Retornos $\to$ correlación $\rho_i$ banco-factor \\
 \addlinespace
-\multicolumn{6}{p{15cm}}{\footnotesize\textit{Parámetros del motor (idénticos a \citealp{Chari2024}):} LGD $=0{,}45$; $\rho=0{,}4$; 7 nodos de cuadratura Gauss--Hermite; factor sistémico $N(0,\,0{,}16\%)$; percentil 99; cota de pérdidas $[0{,}010,\,0{,}048]$; horizonte 1 trimestre.}\\
+\multicolumn{6}{@{}l@{}}{\parbox{13.6cm}{\footnotesize\itshape Parámetros del motor (idénticos a \citealp{Chari2024}): LGD $=0{,}45$; $\rho=0{,}4$; 7 nodos de cuadratura Gauss--Hermite; factor sistémico $N(0,\,0{,}16\%)$; percentil 99; cota de pérdidas $[0{,}010,\,0{,}048]$; horizonte 1 trimestre.}}\\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Riesgo de cola --- $GaR$}} (regresión cuantílica de panel; motor \texttt{gar\_engine.py}, \texttt{fci\_engine.py})}\\
 \addlinespace
