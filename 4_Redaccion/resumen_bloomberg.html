@@ -1,0 +1,451 @@
+<!-- Resumen de avances y resultados — tesis JLoss × GaR (panel Bloomberg) -->
+<title>Doom loop y spread soberano</title>
+<meta name="description" content="Avances y resultados de la tesis, con la evidencia empírica reconstruida sobre datos de Bloomberg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --ground:#FBFAF6; --surface:#FFFFFF; --raised:#F3F1E9;
+    --ink:#232830; --ink-soft:#5C636F; --ink-faint:#8A909C;
+    --rule:#E5E0D4; --rule-soft:#EEEADF;
+    --accent:#3A5A8C; --accent-deep:#2B4269;
+    --supported:#2E6E52; --conditional:#A9701F; --notid:#9A3B32;
+    --mark-muted:#B3B8C3; --chart-grid:#EBE7DB;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#13161D; --surface:#191D26; --raised:#222732;
+      --ink:#E8EAEF; --ink-soft:#9BA2AF; --ink-faint:#6C7482;
+      --rule:#2B313D; --rule-soft:#232935;
+      --accent:#84A3D7; --accent-deep:#A9C1E7;
+      --supported:#63BC92; --conditional:#D79C50; --notid:#D97C70;
+      --mark-muted:#585F6D; --chart-grid:#262C38;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#13161D; --surface:#191D26; --raised:#222732;
+    --ink:#E8EAEF; --ink-soft:#9BA2AF; --ink-faint:#6C7482;
+    --rule:#2B313D; --rule-soft:#232935;
+    --accent:#84A3D7; --accent-deep:#A9C1E7;
+    --supported:#63BC92; --conditional:#D79C50; --notid:#D97C70;
+    --mark-muted:#585F6D; --chart-grid:#262C38;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+    font-size:17px; line-height:1.62; font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:41rem; margin:0 auto; padding:clamp(2rem,6vw,4.5rem) clamp(1.15rem,5vw,2rem) 5rem}
+
+  h1,h2,h3{font-family:"Fraunces","Georgia",serif; font-optical-sizing:auto; text-wrap:balance; margin:0}
+  h1{font-weight:500; font-size:clamp(2.1rem,5.4vw,3rem); line-height:1.08; letter-spacing:-0.012em}
+  h2{font-weight:500; font-size:clamp(1.4rem,3.6vw,1.7rem); line-height:1.15; letter-spacing:-0.01em}
+  h3{font-family:"IBM Plex Sans",sans-serif; font-weight:600; font-size:1rem; line-height:1.35; letter-spacing:0}
+  p{margin:0 0 1.05em}
+  a{color:var(--accent-deep); text-underline-offset:2px}
+  strong{font-weight:600}
+  em{font-style:italic}
+
+  .kicker{
+    font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:500;
+    text-transform:uppercase; letter-spacing:.15em; color:var(--ink-faint);
+  }
+  .mono{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+  .num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-weight:500}
+
+  /* ---- masthead ---- */
+  header{margin-bottom:3.2rem}
+  header .lede{
+    font-family:"Fraunces",serif; font-weight:400; font-size:1.18rem; line-height:1.42;
+    color:var(--ink-soft); margin:1.1rem 0 1.6rem; max-width:34rem;
+  }
+  .meta{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr)); gap:.15rem 1.4rem;
+    border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    padding:.9rem 0; margin-top:.4rem;
+  }
+  .meta div{display:flex; flex-direction:column; gap:.12rem; padding:.25rem 0}
+  .meta dt{font-family:"IBM Plex Mono",monospace; font-size:.66rem; text-transform:uppercase; letter-spacing:.12em; color:var(--ink-faint)}
+  .meta dd{margin:0; font-size:.92rem; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; color:var(--ink)}
+
+  /* ---- sections ---- */
+  section{margin-top:3.4rem}
+  section > .eyebrow{
+    font-family:"IBM Plex Mono",monospace; font-size:.7rem; font-weight:500;
+    text-transform:uppercase; letter-spacing:.16em; color:var(--accent);
+    display:block; margin-bottom:.5rem;
+  }
+  section > h2{margin-bottom:1.1rem}
+
+  .spec{border-top:1px solid var(--rule); margin-top:1.2rem}
+  .spec div{
+    display:grid; grid-template-columns:9.5rem 1fr; gap:.4rem 1.2rem;
+    padding:.7rem 0; border-bottom:1px solid var(--rule-soft);
+  }
+  .spec dt{font-family:"IBM Plex Mono",monospace; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint); padding-top:.1rem}
+  .spec dd{margin:0; font-size:.96rem}
+  @media (max-width:30rem){ .spec div{grid-template-columns:1fr; gap:.15rem} }
+
+  /* ---- findings grid ---- */
+  .findings{display:flex; flex-direction:column; gap:0; border-top:1px solid var(--rule); margin:1.3rem 0 2rem}
+  .finding{
+    display:grid; grid-template-columns:auto 1fr; gap:.3rem 1rem;
+    padding:1.05rem 0; border-bottom:1px solid var(--rule-soft);
+  }
+  .finding .h{
+    font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:.82rem;
+    color:var(--ink-faint); align-self:start; padding-top:.15rem;
+    letter-spacing:.04em;
+  }
+  .finding .body h3{margin-bottom:.3rem}
+  .finding .body p{margin:0; font-size:.95rem; color:var(--ink-soft); line-height:1.5}
+  .finding .body .num{color:var(--ink)}
+  .chip{
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-family:"IBM Plex Mono",monospace; font-size:.7rem; font-weight:500;
+    text-transform:uppercase; letter-spacing:.09em;
+    padding:.16rem .5rem .16rem .42rem; border-radius:3px; white-space:nowrap;
+    border:1px solid; margin-bottom:.45rem;
+  }
+  .chip::before{content:""; width:.44rem; height:.44rem; border-radius:50%; background:currentColor; flex:none}
+  .chip.ok{color:var(--supported); border-color:color-mix(in srgb,var(--supported) 40%,transparent); background:color-mix(in srgb,var(--supported) 9%,transparent)}
+  .chip.cond{color:var(--conditional); border-color:color-mix(in srgb,var(--conditional) 40%,transparent); background:color-mix(in srgb,var(--conditional) 9%,transparent)}
+  .chip.no{color:var(--notid); border-color:color-mix(in srgb,var(--notid) 40%,transparent); background:color-mix(in srgb,var(--notid) 9%,transparent)}
+
+  /* ---- charts ---- */
+  figure{margin:1.8rem 0; padding:0}
+  figure svg{display:block; width:100%; height:auto; overflow:visible}
+  figcaption{font-size:.8rem; line-height:1.5; color:var(--ink-soft); margin-top:.7rem; max-width:32rem}
+  .chart-title{font-family:"IBM Plex Sans",sans-serif; font-weight:600; font-size:.92rem; margin-bottom:.9rem; color:var(--ink)}
+  .c-label{font-family:"IBM Plex Sans",sans-serif; font-size:13.5px; font-weight:600; fill:var(--ink)}
+  .c-sub{font-family:"IBM Plex Mono",monospace; font-size:11.5px; fill:var(--ink-faint)}
+  .c-tick{font-family:"IBM Plex Mono",monospace; font-size:11px; fill:var(--ink-faint)}
+  .c-val{font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:500; fill:var(--ink)}
+  .c-zero{font-family:"IBM Plex Mono",monospace; font-size:9.5px; fill:var(--ink-faint)}
+  @media (prefers-reduced-motion:no-preference){
+    .anim .c-mark{opacity:0; animation:pop .5s cubic-bezier(.2,.7,.3,1) forwards}
+    .anim .c-whisk{opacity:0; animation:fade .5s ease forwards}
+    @keyframes pop{to{opacity:1; transform:none}}
+    @keyframes fade{to{opacity:var(--o,.8)}}
+  }
+
+  .callout{
+    border:1px solid var(--rule); background:var(--surface);
+    border-radius:5px; padding:1.1rem 1.2rem; margin:1.6rem 0;
+  }
+  .callout .k{font-family:"IBM Plex Mono",monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.13em; color:var(--accent); display:block; margin-bottom:.45rem}
+  .callout p{margin:0; font-size:.95rem; line-height:1.5}
+  .callout p + p{margin-top:.6rem}
+
+  ol.contrib{list-style:none; counter-reset:c; padding:0; margin:1.3rem 0 0}
+  ol.contrib li{
+    counter-increment:c; display:grid; grid-template-columns:1.9rem 1fr; gap:.1rem .9rem;
+    padding:.95rem 0; border-bottom:1px solid var(--rule-soft);
+  }
+  ol.contrib li::before{
+    content:counter(c); font-family:"Fraunces",serif; font-weight:500; font-size:1.15rem;
+    color:var(--accent); line-height:1.3;
+  }
+  ol.contrib h3{margin-bottom:.2rem}
+  ol.contrib p{margin:0; font-size:.93rem; color:var(--ink-soft); line-height:1.5}
+
+  ul.plain{list-style:none; padding:0; margin:1.1rem 0 0}
+  ul.plain li{padding:.55rem 0 .55rem 1.4rem; position:relative; font-size:.95rem; color:var(--ink-soft); border-bottom:1px solid var(--rule-soft)}
+  ul.plain li::before{content:"—"; position:absolute; left:0; color:var(--notid); font-family:"IBM Plex Mono",monospace}
+
+  footer{margin-top:4rem; padding-top:1.6rem; border-top:1px solid var(--rule); font-size:.82rem; color:var(--ink-faint); line-height:1.6}
+  footer .mono{color:var(--ink-soft)}
+
+  .toggle{
+    position:fixed; top:1rem; right:1rem; z-index:9;
+    font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+    background:var(--surface); color:var(--ink-soft); border:1px solid var(--rule);
+    border-radius:3px; padding:.4rem .55rem; cursor:pointer;
+  }
+  .toggle:hover{color:var(--ink); border-color:var(--ink-faint)}
+  .toggle:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  .rule{border:0; border-top:1px solid var(--rule); margin:2.6rem 0}
+</style>
+
+<button class="toggle" id="tg" aria-label="Cambiar tema">tema</button>
+
+<div class="wrap">
+  <header>
+    <span class="kicker">Tesis de Magíster · Economía Aplicada · U. de Chile</span>
+    <h1>Fragilidad bancaria, riesgo de cola del crecimiento y <em>spread</em> soberano</h1>
+    <p class="lede">Un resumen de los avances y los resultados centrales, ahora con toda la evidencia empírica reconstruida sobre datos de Bloomberg.</p>
+    <dl class="meta">
+      <div><dt>Panel</dt><dd>13 economías EM</dd></div>
+      <div><dt>Período</dt><dd>2004Q1–2026Q1</dd></div>
+      <div><dt>Observaciones</dt><dd>N = 721 / 614</dd></div>
+      <div><dt>Var. dependiente</dt><dd>EMBI Global Div.</dd></div>
+      <div><dt>Documento</dt><dd>83 pp · compila</dd></div>
+      <div><dt>Actualizado</dt><dd>2026-09-02</dd></div>
+    </dl>
+  </header>
+
+  <section>
+    <span class="eyebrow">La pregunta</span>
+    <h2>¿Se complementan la fragilidad bancaria y el mal crecimiento?</h2>
+    <p>Cuando un sistema bancario frágil coincide con un deterioro agudo de las perspectivas de crecimiento, el costo de financiamiento de los gobiernos emergentes se dispara <em>más</em> que proporcionalmente. La literatura ha tratado estos dos canales por separado: el nexo banca–soberano trata el crecimiento como un fundamento de fondo; el <em>growth-at-risk</em> detiene su análisis en el producto. La tesis sostiene que son <strong>dos caras del mismo mecanismo de <em>doom loop</em></strong> y lo formaliza como un término de interacción no lineal <span class="mono">JLoss × GaR</span> sobre el <em>spread</em> soberano.</p>
+  </section>
+
+  <section>
+    <span class="eyebrow">El reencuadre</span>
+    <h2>Todo anclado en Bloomberg, un solo panel</h2>
+    <p>Toda la evidencia empírica se reconstruyó sobre datos homogéneos de Bloomberg y se estructuró como una sola investigación sobre un único panel. La variable dependiente es el <strong>EMBI Global Diversified</strong> de J.P.&nbsp;Morgan —el índice de referencia de la literatura, como en Chari et&nbsp;al.&nbsp;(2024)—; el CDS soberano a cinco años queda como serie de robustez.</p>
+    <dl class="spec">
+      <div><dt>JLoss</dt><dd>Pérdida conjunta esperada del sistema bancario. Motor Merton/KMV + punto de silla sobre balances y precios accionarios de <span class="num">113</span> bancos, un solo protocolo de extracción.</dd></div>
+      <div><dt>GaR</dt><dd>Cuantil 5&nbsp;% del crecimiento condicional, regresión cuantílica de panel en pseudo–tiempo real (marco CEMLA).</dd></div>
+      <div><dt>Exclusiones</dt><dd>Corea, Bulgaria y <strong>Hungría</strong> — JLoss no es una medida válida a nivel país (bancos cotizados insuficientes; Hungría: 2 bancos, <span class="num">89/89</span> trimestres bajo el mínimo).</dd></div>
+      <div><dt>Reproducible</dt><dd>Pipeline versionado, trazable a una única fuente de verdad (<span class="mono">NUMEROS_CANONICOS_BBG.md</span>).</dd></div>
+    </dl>
+  </section>
+
+  <section>
+    <span class="eyebrow">Resultados centrales</span>
+    <h2>Los niveles se sostienen; la complementariedad es condicional</h2>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="h">H1</span>
+        <div class="body">
+          <span class="chip ok">Respaldada</span>
+          <h3>La fragilidad bancaria eleva el <em>spread</em> soberano</h3>
+          <p><span class="num">β₁ = +2,8</span> (t = 2,7). Proyecciones locales: <span class="num">+4,6</span> pb (t = 2,9) un trimestre después del choque, dirección banco→soberano.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="h">H2</span>
+        <div class="body">
+          <span class="chip ok">Respaldada</span>
+          <h3>El riesgo de cola del crecimiento eleva el <em>spread</em></h3>
+          <p><span class="num">β₂ = −4,3</span> (t = −2,3): un GaR más negativo —mayor riesgo a la baja— se asocia con un <em>spread</em> más alto.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="h">H3</span>
+        <div class="body">
+          <span class="chip cond">Condicional</span>
+          <h3>La complementariedad θ (JLoss × GaR)</h3>
+          <p>Sobre la muestra completa <span class="num">θ = −0,16</span> (p = 0,26) — <strong>no significativa</strong>. Sobre el núcleo de 11 EM de financiamiento externo, <span class="num">θ = −0,47</span> (p = 0,023). El signo es el predicho por el multiplicador de <em>doom loop</em>.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="h">H4b</span>
+        <div class="body">
+          <span class="chip no">No identificada</span>
+          <h3>Amplificación por concentración bancaria (β₄)</h3>
+          <p>El punto estimado no tiene signo estable entre proxies de HHI (<span class="num">+122 / +152 / ≈0</span>); el <em>bootstrap</em> de bloques cruza el cero con los tres. Es la predicción distintiva del modelo teórico.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure id="fig-hetero" class="anim">
+      <div class="chart-title">θ por composición de la muestra (especificación M2, EMBI)</div>
+      <div id="c-hetero"></div>
+      <figcaption>Punto: estimación. Barra: intervalo de confianza al 95&nbsp;% (Driscoll–Kraay). El azul marca las especificaciones donde θ es significativo al 5&nbsp;%. La complementariedad emerge al restringir la muestra a las economías más expuestas al financiamiento externo de cartera.</figcaption>
+    </figure>
+
+    <div class="callout">
+      <span class="k">No es la métrica — es la muestra</span>
+      <p>En la submuestra donde el EMBI y el CDS soberano coexisten (<span class="num">606</span> obs., correlación <span class="num">0,86</span>), ambas variables dependientes arrojan <strong>el mismo coeficiente</strong>: <span class="num">θ = −0,66</span> con EMBI, <span class="num">θ = −0,76</span> con CDS, ambos p&nbsp;≈&nbsp;0,05.</p>
+      <p>La diferencia con la versión anterior del panel no fue el instrumento, sino la <strong>composición</strong>: el CDS de Bloomberg estaba truncado para Polonia y ausente para India —dos economías con mercados de deuda local profundos que diluyen la interacción.</p>
+    </div>
+
+    <figure id="fig-win" class="anim">
+      <div class="chart-title">θ por ventana móvil de 5 años (panel completo)</div>
+      <div id="c-win"></div>
+      <figcaption>La señal que identifica el mecanismo se concentra en el período de la crisis de deuda europea y el estrés emergente de 2015–2016. El azul marca |t|&nbsp;≥&nbsp;1,64. El coeficiente base pre-2020 es <span class="num">−1,0</span> (p = 0,057); el período posterior a la pandemia lo compensa.</figcaption>
+    </figure>
+
+    <figure id="fig-hansen" class="anim">
+      <div class="chart-title">Efecto de JLoss sobre el EMBI, por régimen de crecimiento</div>
+      <div id="c-hansen"></div>
+      <figcaption>Modelo de umbral de panel (Hansen). El efecto de la fragilidad bancaria sobre el <em>spread</em> es unas tres veces mayor cuando el crecimiento ya está en su cola izquierda (LR&nbsp;=&nbsp;27). El umbral no impone la forma funcional de la interacción.</figcaption>
+    </figure>
+
+    <p style="font-size:.95rem;color:var(--ink-soft)"><strong style="color:var(--ink)">Identificación causal del canal de nivel:</strong> la estrategia de variables instrumentales <em>shift-share</em> no cierra sobre esta muestra reducida (primera etapa F&nbsp;≈&nbsp;11, segunda etapa no significativa; un segundo instrumento con signo opuesto y rechazo del test de Sargan). La evidencia de H1 descansa en el MCO con efectos fijos y en las proyecciones locales.</p>
+  </section>
+
+  <section>
+    <span class="eyebrow">La arista teórica</span>
+    <h2>Un microfundamento de organización industrial</h2>
+    <p>El Capítulo&nbsp;3 desarrolla un modelo de competencia bancaria à la Cournot —con responsabilidad limitada y seguro de depósitos— del que la complementariedad es una predicción de primer orden. Su resultado deductivo nuevo, la <strong>Proposición&nbsp;3</strong>: el mercado que minimiza la fragilidad <em>sistémica</em> está más competido que el que minimiza la fragilidad <em>individual</em> de un banco representativo.</p>
+    <p>La implicancia de política se sostiene con independencia de la econometría: una regulación de competencia bancaria calibrada solo sobre la salud individual de los bancos deja al sistema subóptimamente concentrado desde la óptica del riesgo sistémico y su costo fiscal contingente. La política macroprudencial y la de competencia no son instrumentos independientes.</p>
+  </section>
+
+  <section>
+    <span class="eyebrow">La contribución</span>
+    <h2>Cinco aportes, en orden de solidez</h2>
+    <ol class="contrib">
+      <li>
+        <div><h3>Un encuadre</h3><p>Articular como un solo mecanismo dos literaturas que evolucionaron en paralelo. No es agregar un regresor: es sostener que los dos canales son la misma cadena.</p></div>
+      </li>
+      <li>
+        <div><h3>Un hallazgo condicional con contenido económico</h3><p>La complementariedad es una <em>propiedad de la estructura de financiamiento del soberano</em>: el multiplicador opera sobre el precio de la deuda en la medida en que el tenedor marginal —un inversor de cartera extranjero— reprecia el pasivo contingente bancario cuando el crecimiento cae.</p></div>
+      </li>
+      <li>
+        <div><h3>Dos hallazgos sobre la medición</h3><p>EMBI y CDS dan el mismo θ sobre la misma submuestra. Y la malla de pérdidas del motor de JLoss satura el VaR99 en el <span class="num">98&nbsp;%</span> de las observaciones — la métrica se interpreta ordinalmente.</p></div>
+      </li>
+      <li>
+        <div><h3>Un microfundamento estructural</h3><p>El modelo Cournot y la Proposición&nbsp;3, con una implicancia de política de competencia que no depende de la evidencia empírica.</p></div>
+      </li>
+      <li>
+        <div><h3>Un <em>pipeline</em> reproducible</h3><p>JLoss de 113 bancos con un solo protocolo Bloomberg, versionado y trazable a una única fuente de verdad.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <span class="eyebrow">Los límites</span>
+    <h2>Lo que la evidencia no permite afirmar</h2>
+    <ul class="plain">
+      <li>Un θ&nbsp;&lt;&nbsp;0 robusto y universal para el conjunto de mercados emergentes.</li>
+      <li>Identificación causal cerrada del canal de nivel por variables instrumentales.</li>
+      <li>Respaldo empírico de la amplificación de la complementariedad por la concentración bancaria (H4b).</li>
+    </ul>
+    <p style="margin-top:1.3rem;font-size:.95rem;color:var(--ink-soft)">El hilo común es una disciplina metodológica: reportar con precisión dónde el mecanismo está establecido y dónde no. En un área donde abundan los resultados marginales presentados como robustos, esa delimitación es en sí una contribución a la credibilidad de la evidencia.</p>
+  </section>
+
+  <hr class="rule">
+
+  <footer>
+    <p class="mono">Documento de tesis: <span>4_Redaccion/tesis/main.pdf</span> · 83&nbsp;pp · 0 referencias indefinidas, 0 overfull.<br>
+    Papers standalone: <span>envios/paper_empirico</span> (41&nbsp;pp) · <span>envios/paper_teorico</span> (27&nbsp;pp).<br>
+    Números canónicos: <span>1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md</span>.</p>
+    <p style="margin-top:.9rem">Pendiente antes de la entrega final (no se puede inventar): completar la portada con la comisión y el profesor guía.</p>
+  </footer>
+</div>
+
+<script>
+  // ---- theme toggle ----
+  (function(){
+    var root=document.documentElement, btn=document.getElementById('tg');
+    try{ var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s); }catch(e){}
+    btn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var mq=window.matchMedia('(prefers-color-scheme:dark)').matches;
+      var next=(cur==='dark'||(!cur&&mq))?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{ localStorage.setItem('theme',next); }catch(e){}
+    });
+  })();
+
+  // ---- tiny SVG charting ----
+  var NS='http://www.w3.org/2000/svg';
+  function E(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function fmt(v){return String(v).replace('-','−').replace('.',',');}
+
+  // Horizontal coefficient plot: rows with point + optional CI whisker
+  function coefPlot(mountId,opt){
+    var rows=opt.rows, dom=opt.dom, ticks=opt.ticks||[], W=opt.W||660,
+        padL=opt.padL||188, padR=opt.padR||30, padT=16, rowH=opt.rowH||50, padB=26;
+    var H=padT+rows.length*rowH+padB, plotW=W-padL-padR;
+    var sx=function(v){return padL+(v-dom[0])/(dom[1]-dom[0])*plotW;};
+    var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':opt.aria||''});
+    ticks.forEach(function(t){
+      svg.appendChild(E('line',{x1:sx(t).toFixed(1),x2:sx(t).toFixed(1),y1:padT,y2:H-padB,stroke:'var(--chart-grid)','stroke-width':'1'}));
+      var tx=E('text',{x:sx(t).toFixed(1),y:H-8,'text-anchor':'middle',class:'c-tick'}); tx.textContent=fmt(t); svg.appendChild(tx);
+    });
+    if(opt.zero!==false){
+      svg.appendChild(E('line',{x1:sx(0).toFixed(1),x2:sx(0).toFixed(1),y1:padT-2,y2:H-padB,stroke:'var(--ink-faint)','stroke-width':'1.4'}));
+    }
+    rows.forEach(function(r,i){
+      var y=padT+i*rowH+rowH/2;
+      var col=r.sig?'var(--accent)':'var(--mark-muted)';
+      var lb=E('text',{x:padL-14,y:(y-3).toFixed(1),'text-anchor':'end',class:'c-label'}); lb.textContent=r.label; svg.appendChild(lb);
+      if(r.sub){var sb=E('text',{x:padL-14,y:(y+13).toFixed(1),'text-anchor':'end',class:'c-sub'}); sb.textContent=r.sub; svg.appendChild(sb);}
+      if(r.ci){
+        var o=r.sig?0.9:0.55;
+        var wl=E('line',{x1:sx(r.ci[0]).toFixed(1),x2:sx(r.ci[1]).toFixed(1),y1:y,y2:y,stroke:col,'stroke-width':'2','stroke-linecap':'round',class:'c-whisk',style:'--o:'+o,opacity:o});
+        svg.appendChild(wl);
+        [r.ci[0],r.ci[1]].forEach(function(c){
+          svg.appendChild(E('line',{x1:sx(c).toFixed(1),x2:sx(c).toFixed(1),y1:y-4,y2:y+4,stroke:col,'stroke-width':'2','stroke-linecap':'round',class:'c-whisk',style:'--o:'+o,opacity:o}));
+        });
+      }
+      var d=E('circle',{cx:sx(r.v).toFixed(1),cy:y,r:opt.dotR||5.2,fill:col,class:'c-mark'});
+      d.style.animationDelay=(i*70)+'ms';
+      svg.appendChild(d);
+      var vt;
+      if(r.ci){
+        // value sits above the point, clear of the horizontal whisker
+        vt=E('text',{x:sx(r.v).toFixed(1),y:(y-11).toFixed(1),'text-anchor':'middle',class:'c-val'});
+      }else{
+        var vx=r.v<0?sx(r.v)-11:sx(r.v)+11;
+        vt=E('text',{x:vx.toFixed(1),y:(y+4).toFixed(1),'text-anchor':r.v<0?'end':'start',class:'c-val'});
+      }
+      vt.textContent='θ = '+fmt(r.v.toFixed(2));
+      svg.appendChild(vt);
+    });
+    document.getElementById(mountId).appendChild(svg);
+  }
+
+  // Horizontal bars from zero
+  function barPlot(mountId,opt){
+    var rows=opt.rows, dom=opt.dom, ticks=opt.ticks||[], W=opt.W||660,
+        padL=opt.padL||150, padR=48, padT=14, rowH=54, padB=26;
+    var H=padT+rows.length*rowH+padB, plotW=W-padL-padR;
+    var sx=function(v){return padL+(v-dom[0])/(dom[1]-dom[0])*plotW;};
+    var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':opt.aria||''});
+    ticks.forEach(function(t){
+      svg.appendChild(E('line',{x1:sx(t).toFixed(1),x2:sx(t).toFixed(1),y1:padT,y2:H-padB,stroke:'var(--chart-grid)','stroke-width':'1'}));
+      var tx=E('text',{x:sx(t).toFixed(1),y:H-8,'text-anchor':'middle',class:'c-tick'}); tx.textContent=fmt(t); svg.appendChild(tx);
+    });
+    rows.forEach(function(r,i){
+      var y=padT+i*rowH+rowH/2, bh=18;
+      var lb=E('text',{x:padL-14,y:(y-2).toFixed(1),'text-anchor':'end',class:'c-label'}); lb.textContent=r.label; svg.appendChild(lb);
+      if(r.sub){var sb=E('text',{x:padL-14,y:(y+13).toFixed(1),'text-anchor':'end',class:'c-sub'}); sb.textContent=r.sub; svg.appendChild(sb);}
+      var x0=sx(0), x1=sx(r.v), w=Math.max(2,x1-x0);
+      var rect=E('rect',{x:x0.toFixed(1),y:(y-bh/2).toFixed(1),width:w.toFixed(1),height:bh,rx:'3',fill:r.color||'var(--accent)',class:'c-mark','transform-origin':x0.toFixed(1)+'px '+y+'px'});
+      rect.style.animationDelay=(i*90)+'ms';
+      svg.appendChild(rect);
+      var vt=E('text',{x:(x1+9).toFixed(1),y:(y+4).toFixed(1),'text-anchor':'start',class:'c-val'}); vt.textContent=r.vlabel; svg.appendChild(vt);
+    });
+    document.getElementById(mountId).appendChild(svg);
+  }
+
+  coefPlot('c-hetero',{
+    dom:[-1.0,0.28], ticks:[-1,-0.75,-0.5,-0.25,0],
+    rowH:56, padL:172,
+    rows:[
+      {label:'Panel completo (13)', sub:'p = 0,26 · N = 614', v:-0.16, ci:[-0.44,0.11], sig:false},
+      {label:'Sin Polonia (12)',    sub:'p = 0,060 · N = 529', v:-0.29, ci:[-0.59,0.01], sig:false},
+      {label:'Núcleo, 11 EM',       sub:'fin. externo · p = 0,023', v:-0.47, ci:[-0.87,-0.07], sig:true}
+    ],
+    aria:'Coeficiente de interacción theta por composición de la muestra: panel completo -0,16 no significativo; sin Polonia -0,29; núcleo de 11 economías -0,47 significativo al 5 por ciento.'
+  });
+
+  coefPlot('c-win',{
+    dom:[-0.95,0.95], ticks:[-0.75,-0.5,-0.25,0,0.25,0.5,0.75],
+    rowH:44, padL:140,
+    rows:[
+      {label:'2006–2010', sub:'t = +1,5', v:0.41, sig:false},
+      {label:'2009–2013', sub:'t = +2,1', v:0.73, sig:true},
+      {label:'2012–2016', sub:'t = −2,4', v:-0.65, sig:true},
+      {label:'2015–2019', sub:'t = −1,5', v:-0.53, sig:false},
+      {label:'2018–2022', sub:'t = −2,0', v:-0.13, sig:true},
+      {label:'2021–2025', sub:'t = −0,3', v:-0.05, sig:false}
+    ],
+    aria:'Coeficiente de interacción por ventana móvil de cinco años: positivo en 2009-2013, negativo y significativo en 2012-2016, cercano a cero en las ventanas recientes.'
+  });
+
+  barPlot('c-hansen',{
+    dom:[0,7], ticks:[0,2,4,6], padL:162,
+    rows:[
+      {label:'Cola severa', sub:'GaR bajo el umbral', v:5.9, vlabel:'+5,9 pb', color:'var(--conditional)'},
+      {label:'Régimen benigno', sub:'GaR sobre el umbral', v:2.0, vlabel:'+2,0 pb', color:'var(--accent)'}
+    ],
+    aria:'Efecto de JLoss sobre el EMBI por régimen: 5,9 puntos básicos en cola severa frente a 2,0 en régimen benigno.'
+  });
+</script>
