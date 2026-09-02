@@ -55,6 +55,22 @@
 % Absorbe micro-desbordes de caja en prosa y bibliografía (URLs, compuestos largos)
 \setlength{\emergencystretch}{3em}
 
+% Cada capítulo lleva sus referencias en línea con \begin{thebibliography} y su
+% propio encabezado \section*{Referencias del capítulo}. Se suprime el
+% \chapter*{Bibliografía} automático (y su salto de página) que la clase book
+% inserta al abrir el entorno, para no duplicar el título.
+\makeatletter
+\renewenvironment{thebibliography}[1]
+  {\list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+         \leftmargin\labelwidth \advance\leftmargin\labelsep
+         \@openbib@code \usecounter{enumiv}\let\p@enumiv\@empty
+         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+   \sloppy\clubpenalty4000 \@clubpenalty\clubpenalty
+   \widowpenalty4000 \sfcode`\.\@m}
+  {\def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}\endlist}
+\makeatother
+
 % Cadenas PDF (marcadores / índices con hipervínculos): evita los avisos de hyperref
 % "Token not allowed in a PDF string" por la notación matemática en títulos y \caption.
 \pdfstringdefDisableCommands{%

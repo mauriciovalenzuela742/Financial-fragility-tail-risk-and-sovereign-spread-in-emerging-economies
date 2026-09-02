@@ -73,7 +73,7 @@ def fig_cobertura():
         ax.plot(est["t"], [i] * len(est), "|", color=BLUE, ms=7, mew=2)
     ax.set_yticks(range(len(order))); ax.set_yticklabels(order, fontsize=8)
     ax.grid(axis="y", visible=False)
-    ax.set_title("Cobertura del panel — gris: JLoss · celeste: + CDS soberano · azul: muestra de estimación (CDS+JLoss+GaR)")
+    ax.set_title("Cobertura del panel — gris: JLoss · celeste: + EMBI soberano · azul: muestra de estimación (EMBI+JLoss+GaR)")
     _save(fig, "fig_cobertura")
 
 
@@ -93,7 +93,7 @@ def fig_efecto_marginal():
     ax.plot(gs, me, color=BLUE, lw=2.2)
     ax.invert_xaxis()
     ax.set_xlabel("GaR (cuantil 5 % del crecimiento, pp)")
-    ax.set_ylabel(r"$\partial\,$CDS$/\partial\,$JLoss  (pb por unidad)")
+    ax.set_ylabel(r"$\partial\,$EMBI$/\partial\,$JLoss  (pb por unidad)")
     ax.set_title("Efecto marginal de la fragilidad bancaria según el riesgo de cola (M2)")
     fig.text(0.5, -0.03, "Banda: IC 90 % (Driscoll–Kraay). Eje X invertido: cola más severa a la derecha.",
              ha="center", color=INK2, fontsize=8)
@@ -130,7 +130,7 @@ def fig_umbral():
     ax.bar([0.7], [u["efecto_benigno"]], 0.5, color=BLUE, label="régimen benigno")
     ax.axhline(0, color=INK2, lw=0.8)
     ax.set_xticks([0, 0.7]); ax.set_xticklabels(["GaR ≤ γ̂", "GaR > γ̂"])
-    ax.set_ylabel("efecto de JLoss sobre el CDS (pb/unidad)")
+    ax.set_ylabel("efecto de JLoss sobre el EMBI (pb/unidad)")
     ax.legend()
     ax.set_title(f"Modelo de umbral de Hansen (γ̂ = {u['gamma']:+.1f} pp de GaR)")
     _save(fig, "fig_umbral")

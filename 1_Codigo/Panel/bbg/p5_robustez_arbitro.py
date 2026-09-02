@@ -7,13 +7,14 @@ Bloques:
   1. Invariancia de la cola      theta(M2) con GaR (q05 directo) / GaR skew-t / ES
   2. Pais influyente             theta sin {china},{southafrica},{ambos},{turkey}...
                                  + jackknife de 2 paises (rango, % que sigue < 0)
-  3. Multiplicador vs. nivel     CDS ~ ... + JxG + JxG*D_post2020  (test del termino
+  2b. Heterogeneidad             theta nucleo (11 EM financiam. externo) vs. Polonia+India
+  3. Multiplicador vs. nivel     EMBI ~ ... + JxG + JxG*D_post2020  (test del termino
                                  de cola frente a un simple desplazamiento 2020-26)
   4. Ventanas moviles de 5 anos  theta por ventana -> donde vive la senal
   5. Placebo temporal            permuta trimestres dentro de pais -> theta ~ 0
   6. Regresor generado (GaR)     bootstrap que perturba GaR por su incertidumbre
                                  de 1a etapa (proxy: |GaR - GaR_skewt|) -> p de theta
-  7. GMM dinamico (Arellano-Bond) CDS ~ L.CDS + JLoss + GaR + JxG + controles
+  7. GMM dinamico (Arellano-Bond) EMBI ~ L.EMBI + JLoss + GaR + JxG + controles
   8. Diagnostico por pais         n_banks, below_min_banks, JLoss mediana/max
 
 Salida -> bbg/robustez_arbitro_bbg.csv  (+ consola)
