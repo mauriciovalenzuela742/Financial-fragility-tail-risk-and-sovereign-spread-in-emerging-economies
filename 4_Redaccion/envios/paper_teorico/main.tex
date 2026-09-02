@@ -50,6 +50,10 @@
 \newtheorem{assumption}{Supuesto}
 \newtheorem{remark}{Observación}
 
+% Re-enunciado de una proposición en el anexo matemático (numeración vía \ref).
+\newcommand{\restateprop}[2]{%
+  \par\medskip\noindent\textbf{Proposición~\ref{#1}.}\enspace\begingroup\itshape #2\endgroup\par\medskip}
+
 \let\chapter\section
 \makeatletter
 \newcommand{\definelabel}[2]{\expandafter\gdef\csname r@#1\endcsname{{#2}{}{}{}{}}}

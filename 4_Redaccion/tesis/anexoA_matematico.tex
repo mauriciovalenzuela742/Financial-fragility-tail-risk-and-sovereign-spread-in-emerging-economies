@@ -55,11 +55,9 @@ En el óptimo interior $\dfrac{\dd p}{\dd R_L}>0$.
 Con $R_L^*(n)=\dfrac{A+n\,mc}{n+1}$ ($A>mc$), $R_L^{*\prime}(n)=\dfrac{mc-A}{(n+1)^2}<0$, con límites $R_L^*(1)=\frac{A+mc}{2}$ y $R_L^*(\infty)=mc$.
 \end{lemma}
 
-\subsection{Proposición 1: relación en U de la fragilidad individual}
+\subsection{La relación en U de la fragilidad individual}
 Con $\PD(n)=\Phi(\bar z(n))$, $\bar z(n)=\big[\Phi^{-1}(p^*(n))-\sqrt{1-\rho}\,\Phi^{-1}(\bar x(n))\big]/\sqrt{\rho}$, $\bar x'(R_L)=\frac{1+r_D-e}{(1+R_L)^2}>0$. Aquí $e$ es el capital regulatorio mínimo por unidad de crédito (parámetro de política exógeno, no elegido por el banco); en el umbral $\bar x(R_L)$ opera como el colchón que absorbe la pérdida dado el default antes de la quiebra del banco (Merton, 1974).
-\begin{proposition}[U-shape]\label{prop:U-A}
-Con $\rho$ constante existe $\hat n$ interior con $\PD'(n)<0$ para $n<\hat n$ y $\PD'(n)>0$ para $n>\hat n$.
-\end{proposition}
+\restateprop{prop:U}{Con $\rho$ constante existe $\hat n$ interior con $\PD'(n)<0$ para $n<\hat n$ y $\PD'(n)>0$ para $n>\hat n$.}
 \begin{proof}
 $\PD'(n)=\phi(\bar z)\bar z'(n)$; con $\Phi^{-1\prime}(u)=1/\phi(\Phi^{-1}(u))>0$,
 \[
@@ -77,19 +75,15 @@ $\partial\JLoss_\alpha/\partial\PD>0$ y $\partial\JLoss_\alpha/\partial\rho>0$.
 Por \eqref{eq:dPhi2_da} y $\dd a/\dd\PD=1/\phi(a)$: $\ \partial\JLoss_\alpha/\partial\PD=\frac1\alpha\Phi\big((b-\varrho a)/\sqrt{1-\varrho^2}\big)>0.$ Por \eqref{eq:price} y $\dd\varrho/\dd\rho=1/(2\sqrt\rho)$: $\ \partial\JLoss_\alpha/\partial\rho=\frac1\alpha\phi_2(a,b;\varrho)/(2\sqrt\rho)>0.$
 \end{proof}
 
-\subsection{Proposición 2: el mínimo sistémico se desplaza a la derecha}
-\begin{proposition}[desplazamiento del mínimo]\label{prop:shift-A}
-Si $\rho'(n)<0$ en un entorno de $n_{\PD}=\arg\min\PD$, entonces $n_J=\arg\min\JLoss_\alpha>n_{\PD}$. Si $\rho'(n)=0$, $n_J=n_{\PD}$ (anida MMR).
-\end{proposition}
+\subsection{El mínimo sistémico se desplaza a la derecha}
+\restateprop{prop:shift}{Si $\rho'(n)<0$ en un entorno de $n_{\PD}=\arg\min\PD$, entonces $n_J=\arg\min\JLoss_\alpha>n_{\PD}$. Si $\rho'(n)=0$, $n_J=n_{\PD}$ (anida MMR).}
 \begin{proof}
 $\frac{\dd\JLoss_\alpha}{\dd n}=\frac{\partial\JLoss_\alpha}{\partial\PD}\PD'(n)+\frac{\partial\JLoss_\alpha}{\partial\rho}\rho'(n)$. En $n_{\PD}$ ($\PD'=0$): $\frac{\dd\JLoss_\alpha}{\dd n}\big|_{n_{\PD}}=\frac{\partial\JLoss_\alpha}{\partial\rho}\rho'(n_{\PD})<0$ (positivo por negativo). Luego $\JLoss_\alpha$ sigue decreciendo en $n_{\PD}$ y su mínimo está a la derecha.
 \end{proof}
 
-\subsection{Proposición 3: traspaso creciente en la concentración}\label{sec:gran-A}
+\subsection{El traspaso de la cola crece en la concentración}\label{sec:gran-A}
 Con $L_{\text{sys}}=\sum_i\lambda_i\1\{\text{quiebra}_i\}$, $H=\sum_i\lambda_i^2=1/n$, quiebras Bernoulli independientes dado $Z$.
-\begin{proposition}[granularidad]\label{prop:gran-A}
-$\ES_\alpha(L_{\text{sys}})$ es creciente en $H$ (decreciente en $n$).
-\end{proposition}
+\restateprop{prop:granular}{$\ES_\alpha(L_{\text{sys}})$ es creciente en $H$ (decreciente en $n$).}
 \begin{proof}
 $\Var(L_{\text{sys}}\mid Z)=\sum_i\lambda_i^2 q(Z)(1-q(Z))=H\,q(Z)(1-q(Z))$. A igual media condicional, mayor $H$ engrosa la cola (orden convexo), y el $\ES$ es creciente en dicho orden; $\partial\ES_\alpha/\partial H>0$. En $n\to\infty$, $H\to0$ y $L_{\text{sys}}\to q(Z)$, el límite de cartera grande de Vasicek (2002; ver también Gordy, 2003).
 \end{proof}
@@ -150,14 +144,9 @@ Con $\frac{\dd}{\dd u}(1-F_\eta(u))=-f_\eta(u)$:
 El signo de $\beta_2$ es \emph{negativo}: mejor crecimiento de cola, menor spread. $\blacksquare$
 \end{proof}
 
-\subsection{Proposición 4: la derivada cruzada es negativa \texorpdfstring{($\beta_3<0$)}{(beta3<0)}}
+\subsection{La derivada cruzada es negativa \texorpdfstring{($\beta_3<0$)}{(beta3<0)}}
 
-\begin{proposition}[complementariedad $\JLoss\times\GaR$]\label{prop:cross-A}
-Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A},
-\[
-\boxed{\ \frac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}\;<\;0.\ }
-\]
-\end{proposition}
+\restateprop{prop:cross}{(Parte relativa a $\beta_3$.) Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A}, \[ \frac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}\;<\;0. \]}
 \begin{proof}
 \textbf{Paso 1 (punto de partida).} Del Lema~\ref{lem:first-A}, el efecto marginal de la fragilidad es
 \[
@@ -199,13 +188,7 @@ Punto representativo ($LGD=0{,}55$, $\sigma_\eta=0{,}16$, $b_0=0{,}32$, $b_1=1{,
 
 \subsection{\texorpdfstring{Amplificación por concentración: $\beta_4<0$}{Amplificacion por concentracion: beta4<0}}
 
-\begin{proposition}[la complementariedad se intensifica con la concentración]\label{prop:amp-A}
-Sea $C(H)\equiv\dfrac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}<0$. Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A} y la condición de cola profunda $f_\eta''(DFL)\ge0$,
-\[
-\beta_4=\frac{\partial C}{\partial H}=\frac{\partial^3 \Spread}{\partial \JLoss\,\partial \GaR\,\partial H}<0,
-\]
-es decir, el término de interacción (ya negativo) se vuelve \emph{más negativo} al aumentar la concentración: su magnitud crece.
-\end{proposition}
+\restateprop{prop:cross}{(Parte relativa a $\beta_4$.) Sea $C(H)\equiv\dfrac{\partial^2 \Spread}{\partial \JLoss\,\partial \GaR}<0$. Bajo los Supuestos~\ref{as:B-A}--\ref{as:g-A} y la condición de cola profunda $f_\eta''(DFL)\ge0$, \[ \beta_4=\frac{\partial C}{\partial H}=\frac{\partial^3 \Spread}{\partial \JLoss\,\partial \GaR\,\partial H}<0, \] es decir, el término de interacción (ya negativo) se vuelve más negativo al aumentar la concentración: su magnitud crece.}
 \begin{proof}
 \textbf{Paso 1.} $C=LGD\,\dfrac{\partial DFL}{\partial \GaR}\,\dfrac1Y\,B_J\,f_\eta'(DFL)$, y $\partial DFL/\partial\GaR=\frac{(1+r)d}{(1+\GaR)^2}$ \emph{no} depende de $H$. Así $H$ entra por $B_J(H)$ y por $DFL(H)$.
 
@@ -246,8 +229,8 @@ donde $\text{Int}^-=\{\JLoss\times\HHI,\ \GaR\times\HHI\}$. La correspondencia t
 \begin{gather*}
 \beta_1=\frac{\partial\Spread}{\partial\JLoss}>0,\qquad
 \beta_2=\frac{\partial\Spread}{\partial\GaR}<0,\\[2pt]
-\beta_3=\frac{\partial^2\Spread}{\partial\JLoss\partial\GaR}<0\ (\text{Prop.~\ref{prop:cross-A}}),\qquad
-\beta_4=\frac{\partial^3\Spread}{\partial\JLoss\partial\GaR\partial\HHI}<0\ (\text{Prop.~\ref{prop:amp-A}}).
+\beta_3=\frac{\partial^2\Spread}{\partial\JLoss\partial\GaR}<0\ (\text{Prop.~\ref{prop:cross}}),\qquad
+\beta_4=\frac{\partial^3\Spread}{\partial\JLoss\partial\GaR\partial\HHI}<0\ (\text{Prop.~\ref{prop:cross}}).
 \end{gather*}
 
 \begin{center}
@@ -257,8 +240,8 @@ Coef. & Término & Signo predicho & Fuente \\
 \midrule
 $\beta_1$ & $\JLoss$ & $+$ & Lema~\ref{lem:first-A} \\
 $\beta_2$ & $\GaR$ & $-$ & Lema~\ref{lem:first-A} \\
-$\beta_3$ & $\JLoss\times\GaR$ & $-$ & Prop.~\ref{prop:cross-A} \\
-$\beta_4$ & $\JLoss\times\GaR\times\HHI$ & $-$ & Prop.~\ref{prop:amp-A} \\
+$\beta_3$ & $\JLoss\times\GaR$ & $-$ & Prop.~\ref{prop:cross} \\
+$\beta_4$ & $\JLoss\times\GaR\times\HHI$ & $-$ & Prop.~\ref{prop:cross} \\
 \bottomrule
 \end{tabular}
 \end{center}

@@ -27,12 +27,20 @@
 % Entornos teoremáticos usados por los Capítulos 2-3 y el Anexo A
 % (nombres en inglés, distintos de prop/lema/defn que ya define umemoria.cls)
 \theoremstyle{plain}
-\newtheorem{proposition}{Proposición}[chapter]
+% Proposiciones con numeración global (1..5): son los resultados centrales del
+% Capítulo 3 y se citan por ese número en el resumen, el Anexo A y el Capítulo 2.
+\newtheorem{proposition}{Proposición}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \newtheorem{assumption}{Supuesto}[chapter]
 \newtheorem{remark}{Observación}[chapter]
+
+% Re-enunciado de una proposición del Capítulo 3 en el Anexo A (una sola fuente
+% de numeración: el número lo da \ref, no un contador propio del anexo).
+% Uso: \restateprop{prop:U}{enunciado}
+\newcommand{\restateprop}[2]{%
+  \par\medskip\noindent\textbf{Proposición~\ref{#1}.}\enspace\begingroup\itshape #2\endgroup\par\medskip}
 
 % Macros de notación compartidas por ambos capítulos y el anexo matemático
 \newcommand{\JLoss}{\mathrm{JLoss}}
