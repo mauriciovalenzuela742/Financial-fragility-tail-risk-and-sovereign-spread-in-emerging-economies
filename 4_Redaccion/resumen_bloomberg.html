@@ -138,6 +138,32 @@
     @keyframes fade{to{opacity:var(--o,.8)}}
   }
 
+  /* ---- regression table ---- */
+  .tablewrap{overflow-x:auto; margin:1.5rem 0 .5rem; border:1px solid var(--rule); border-radius:5px; -webkit-overflow-scrolling:touch}
+  table.reg{
+    border-collapse:collapse; width:100%; min-width:640px;
+    font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
+    font-size:.72rem; line-height:1.25;
+  }
+  table.reg th, table.reg td{padding:.3rem .5rem; text-align:right; white-space:nowrap}
+  table.reg thead th{
+    font-weight:500; color:var(--ink-soft); border-bottom:1px solid var(--rule);
+    font-size:.66rem; text-transform:uppercase; letter-spacing:.05em;
+  }
+  table.reg thead tr:first-child th{border-bottom:1px solid var(--rule-soft)}
+  table.reg tbody th{text-align:left; font-weight:500; color:var(--ink); font-family:"IBM Plex Sans",sans-serif}
+  table.reg tr.panel td{
+    text-align:left; padding:.7rem .5rem .35rem; color:var(--ink-soft);
+    font-family:"IBM Plex Sans",sans-serif; font-size:.78rem; border-top:1px solid var(--rule-soft);
+  }
+  table.reg tr.t td, table.reg tr.t th{color:var(--ink-faint); font-size:.66rem; padding-top:0}
+  table.reg tr.r2 td, table.reg tr.r2 th{color:var(--ink-soft); border-top:1px solid var(--rule-soft); padding-top:.4rem}
+  table.reg tr.hi td, table.reg tr.hi th{color:var(--conditional); font-weight:600}
+  table.reg tr.hi.t td{color:var(--conditional); opacity:.8; font-weight:400}
+  table.reg sup{font-size:.7em}
+  .tnote{font-size:.76rem; line-height:1.5; color:var(--ink-faint); margin:.4rem 0 1.6rem}
+  .tnote .mono{color:var(--ink-soft)}
+
   .callout{
     border:1px solid var(--rule); background:var(--surface);
     border-radius:5px; padding:1.1rem 1.2rem; margin:1.6rem 0;
@@ -216,6 +242,8 @@
     <span class="eyebrow">Resultados centrales</span>
     <h2>Los niveles se sostienen; la complementariedad es condicional</h2>
 
+    <p>El esqueleto de la evidencia es una <strong>batería de veinticuatro regresiones</strong> al modo de Chari et&nbsp;al.&nbsp;(2024) —cuatro modelos anidados, tres estructuras de efectos fijos, dos muestras (completa y sin trimestres de crisis)—. De ahí salen los cuatro resultados que siguen.</p>
+
     <div class="findings">
       <div class="finding">
         <span class="h">H1</span>
@@ -238,7 +266,7 @@
         <div class="body">
           <span class="chip cond">Condicional</span>
           <h3>La complementariedad θ (JLoss × GaR)</h3>
-          <p>Sobre la muestra completa <span class="num">θ = −0,16</span> (p = 0,26) — <strong>no significativa</strong>. Sobre el núcleo de 11 EM de financiamiento externo, <span class="num">θ = −0,47</span> (p = 0,023). El signo es el predicho por el multiplicador de <em>doom loop</em>.</p>
+          <p>Sobre la muestra completa <span class="num">θ = −0,16</span> (p = 0,26) — <strong>no significativa</strong>, e invariante a la estructura de efectos fijos. Pero es negativa y significativa en <strong>dos cortes</strong>: el núcleo de 11 EM de financiamiento externo (<span class="num">θ = −0,47</span>, p = 0,023) y los trimestres sin crisis financiera aguda (<span class="num">θ ≈ −1,2</span>, p &lt; 0,01). Combinados: <span class="num">θ = −0,94</span> (p = 0,004).</p>
         </div>
       </div>
       <div class="finding">
@@ -251,22 +279,61 @@
       </div>
     </div>
 
+    <h3 style="margin-top:2.4rem">El esqueleto: la batería de especificaciones</h3>
+    <p>La evidencia se organiza al modo de Chari et&nbsp;al.&nbsp;(2024): el EMBI sobre <strong>cuatro modelos anidados</strong> (JLoss; GaR; ambos; ambos + interacción) × <strong>tres estructuras de efectos fijos</strong> (tiempo; país; ambos) × <strong>dos muestras</strong> (completa; sin trimestres de crisis). Veinticuatro regresiones, sin controles domésticos.</p>
+
+    <div class="tablewrap">
+      <table class="reg">
+        <thead>
+          <tr><th></th><th colspan="4">Efectos fijos de tiempo</th><th colspan="4">Efectos fijos de país</th><th colspan="4">País + tiempo</th></tr>
+          <tr><th></th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th></tr>
+        </thead>
+        <tbody>
+          <tr class="panel"><td colspan="13"><em>Panel A · Muestra completa</em> &nbsp; (N = 721; 13 países)</td></tr>
+          <tr><th>JLoss</th><td>7,4<sup>***</sup></td><td></td><td>8,5<sup>***</sup></td><td>8,5<sup>***</sup></td><td>8,1<sup>***</sup></td><td></td><td>6,1<sup>***</sup></td><td>6,1<sup>***</sup></td><td>5,0<sup>***</sup></td><td></td><td>4,6<sup>***</sup></td><td>4,6<sup>***</sup></td></tr>
+          <tr class="t"><th></th><td>(4,7)</td><td></td><td>(5,9)</td><td>(5,9)</td><td>(6,4)</td><td></td><td>(5,2)</td><td>(5,4)</td><td>(4,1)</td><td></td><td>(4,0)</td><td>(4,2)</td></tr>
+          <tr><th>GaR</th><td></td><td>−7,9<sup>***</sup></td><td>−10,1<sup>***</sup></td><td>−10,1<sup>***</sup></td><td></td><td>−9,1<sup>***</sup></td><td>−6,0<sup>***</sup></td><td>−5,6<sup>***</sup></td><td></td><td>−5,7<sup>*</sup></td><td>−3,8</td><td>−3,6</td></tr>
+          <tr class="t"><th></th><td></td><td>(−2,9)</td><td>(−3,6)</td><td>(−3,7)</td><td></td><td>(−5,2)</td><td>(−4,0)</td><td>(−3,7)</td><td></td><td>(−1,8)</td><td>(−1,3)</td><td>(−1,2)</td></tr>
+          <tr><th>JLoss×GaR</th><td></td><td></td><td></td><td>−0,08</td><td></td><td></td><td></td><td>−0,16</td><td></td><td></td><td></td><td>−0,14</td></tr>
+          <tr class="t"><th></th><td></td><td></td><td></td><td>(−0,2)</td><td></td><td></td><td></td><td>(−0,7)</td><td></td><td></td><td></td><td>(−0,6)</td></tr>
+          <tr class="r2"><th>R²<sub>within</sub></th><td>0,20</td><td>0,17</td><td>0,19</td><td>0,19</td><td>0,21</td><td>0,17</td><td>0,27</td><td>0,27</td><td>0,18</td><td>0,15</td><td>0,25</td><td>0,25</td></tr>
+          <tr class="panel"><td colspan="13"><em>Panel B · Sin trimestres de crisis</em> &nbsp; (N = 610; excluye 2008Q4–2009Q4 y 2020Q1–2021Q4)</td></tr>
+          <tr><th>JLoss</th><td>6,7<sup>***</sup></td><td></td><td>8,1<sup>***</sup></td><td>8,3<sup>***</sup></td><td>7,0<sup>***</sup></td><td></td><td>5,1<sup>***</sup></td><td>5,5<sup>***</sup></td><td>4,6<sup>***</sup></td><td></td><td>3,8<sup>***</sup></td><td>4,3<sup>***</sup></td></tr>
+          <tr class="t"><th></th><td>(3,2)</td><td></td><td>(4,1)</td><td>(4,6)</td><td>(5,1)</td><td></td><td>(3,8)</td><td>(4,8)</td><td>(2,9)</td><td></td><td>(2,9)</td><td>(3,4)</td></tr>
+          <tr><th>GaR</th><td></td><td>−9,2<sup>***</sup></td><td>−11,2<sup>***</sup></td><td>−10,8<sup>***</sup></td><td></td><td>−10,5<sup>***</sup></td><td>−7,3<sup>***</sup></td><td>−6,8<sup>***</sup></td><td></td><td>−9,1<sup>***</sup></td><td>−7,2<sup>**</sup></td><td>−6,0<sup>**</sup></td></tr>
+          <tr class="t"><th></th><td></td><td>(−3,1)</td><td>(−3,4)</td><td>(−3,6)</td><td></td><td>(−3,9)</td><td>(−2,9)</td><td>(−2,8)</td><td></td><td>(−2,9)</td><td>(−2,6)</td><td>(−2,2)</td></tr>
+          <tr class="hi"><th>JLoss×GaR</th><td></td><td></td><td></td><td>−1,72<sup>***</sup></td><td></td><td></td><td></td><td>−1,18<sup>***</sup></td><td></td><td></td><td></td><td>−1,19<sup>***</sup></td></tr>
+          <tr class="t hi"><th></th><td></td><td></td><td></td><td>(−4,4)</td><td></td><td></td><td></td><td>(−4,2)</td><td></td><td></td><td></td><td>(−3,5)</td></tr>
+          <tr class="r2"><th>R²<sub>within</sub></th><td>0,15</td><td>0,13</td><td>0,14</td><td>0,17</td><td>0,15</td><td>0,14</td><td>0,20</td><td>0,24</td><td>0,13</td><td>0,13</td><td>0,20</td><td>0,23</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Variable dependiente: EMBI Global Diversified (pb). Estadístico <em>t</em> de Driscoll–Kraay entre paréntesis. <sup>***</sup> p&lt;0,01, <sup>**</sup> p&lt;0,05, <sup>*</sup> p&lt;0,10. Trazable a <span class="mono">bateria_bbg.csv</span>.</p>
+
+    <p><strong>Tres lecturas.</strong> (1)&nbsp;<strong>H1</strong> se sostiene en las 12 especificaciones de cada panel —positivo, significativo al 1&nbsp;%—; la magnitud decrece de forma ordenada al añadir efectos fijos. (2)&nbsp;<strong>H2</strong> es significativo con efectos fijos de tiempo o de país; pierde precisión solo con los bidireccionales sobre la muestra completa. (3)&nbsp;<strong>H3</strong> —la interacción— es indistinguible de cero sobre la muestra completa bajo <em>cualquier</em> estructura de efectos fijos, y <strong>negativa y significativa al 1&nbsp;% bajo las tres</strong> al excluir los trimestres de crisis. No es un artefacto de qué efectos fijos se elijan.</p>
+
     <figure id="fig-hetero" class="anim">
-      <div class="chart-title">θ por composición de la muestra (especificación M2, EMBI)</div>
+      <div class="chart-title">θ por corte de la muestra (M2 con controles, EMBI)</div>
       <div id="c-hetero"></div>
-      <figcaption>Punto: estimación. Barra: intervalo de confianza al 95&nbsp;% (Driscoll–Kraay). El azul marca las especificaciones donde θ es significativo al 5&nbsp;%. La complementariedad emerge al restringir la muestra a las economías más expuestas al financiamiento externo de cartera.</figcaption>
+      <figcaption>Punto: estimación. Barra: intervalo de confianza al 95&nbsp;% (Driscoll–Kraay). El azul marca los cortes donde θ es significativo al 5&nbsp;%. Las dos dimensiones de la condicionalidad —el tipo de economía y el régimen temporal— se refuerzan al combinarse.</figcaption>
     </figure>
+
+    <div class="callout">
+      <span class="k">Las dos dimensiones, un solo mecanismo</span>
+      <p>El multiplicador de <em>doom loop</em> se traslada al <strong>precio</strong> de la deuda cuando el mercado espera que el pasivo contingente bancario recaiga sobre un soberano <strong>no respaldado</strong>, cuya deuda se fija al margen por un inversor de cartera extranjero sensible al riesgo.</p>
+      <p>Ese <em>repricing</em> no lo hacen los inversores domésticos de horizonte largo (de ahí que la interacción se apague en Polonia e India, de deuda local profunda). Y no ocurre cuando las líneas de <em>swap</em> de la Reserva Federal, el FMI y las compras de los bancos centrales domésticos desacoplan la transmisión (de ahí que se apague en la GFC y la pandemia).</p>
+    </div>
 
     <div class="callout">
       <span class="k">No es la métrica — es la muestra</span>
       <p>En la submuestra donde el EMBI y el CDS soberano coexisten (<span class="num">606</span> obs., correlación <span class="num">0,86</span>), ambas variables dependientes arrojan <strong>el mismo coeficiente</strong>: <span class="num">θ = −0,66</span> con EMBI, <span class="num">θ = −0,76</span> con CDS, ambos p&nbsp;≈&nbsp;0,05.</p>
-      <p>La diferencia con la versión anterior del panel no fue el instrumento, sino la <strong>composición</strong>: el CDS de Bloomberg estaba truncado para Polonia y ausente para India —dos economías con mercados de deuda local profundos que diluyen la interacción.</p>
+      <p>La diferencia con la versión anterior del panel no fue el instrumento, sino la <strong>composición</strong>: el CDS de Bloomberg estaba truncado para Polonia y ausente para India.</p>
     </div>
 
     <figure id="fig-win" class="anim">
       <div class="chart-title">θ por ventana móvil de 5 años (panel completo)</div>
       <div id="c-win"></div>
-      <figcaption>La señal que identifica el mecanismo se concentra en el período de la crisis de deuda europea y el estrés emergente de 2015–2016. El azul marca |t|&nbsp;≥&nbsp;1,64. El coeficiente base pre-2020 es <span class="num">−1,0</span> (p = 0,057); el período posterior a la pandemia lo compensa.</figcaption>
+      <figcaption>Vista complementaria de la dimensión temporal: la señal se concentra en el período de tiempos normales entre la crisis de deuda europea y el estrés emergente de 2015–2016, y se atenúa cuando los episodios de estrés sistémico entran en la ventana. El azul marca |t|&nbsp;≥&nbsp;1,64.</figcaption>
     </figure>
 
     <figure id="fig-hansen" class="anim">
@@ -293,7 +360,7 @@
         <div><h3>Un encuadre</h3><p>Articular como un solo mecanismo dos literaturas que evolucionaron en paralelo. No es agregar un regresor: es sostener que los dos canales son la misma cadena.</p></div>
       </li>
       <li>
-        <div><h3>Un hallazgo condicional con contenido económico</h3><p>La complementariedad es una <em>propiedad de la estructura de financiamiento del soberano</em>: el multiplicador opera sobre el precio de la deuda en la medida en que el tenedor marginal —un inversor de cartera extranjero— reprecia el pasivo contingente bancario cuando el crecimiento cae.</p></div>
+        <div><h3>Un hallazgo condicional con contenido económico</h3><p>La complementariedad aparece en dos cortes que apuntan al mismo mecanismo —el núcleo de EM de financiamiento externo y los tiempos sin crisis—: opera sobre el <em>precio</em> de la deuda cuando el mercado espera que el pasivo contingente bancario recaiga sobre un soberano <strong>no respaldado</strong>, cuya deuda fija al margen un inversor de cartera extranjero.</p></div>
       </li>
       <li>
         <div><h3>Dos hallazgos sobre la medición</h3><p>EMBI y CDS dan el mismo θ sobre la misma submuestra. Y la malla de pérdidas del motor de JLoss satura el VaR99 en el <span class="num">98&nbsp;%</span> de las observaciones — la métrica se interpreta ordinalmente.</p></div>
@@ -416,14 +483,15 @@
   }
 
   coefPlot('c-hetero',{
-    dom:[-1.0,0.28], ticks:[-1,-0.75,-0.5,-0.25,0],
-    rowH:56, padL:172,
+    dom:[-1.65,0.35], ticks:[-1.5,-1,-0.5,0],
+    rowH:56, padL:182,
     rows:[
-      {label:'Panel completo (13)', sub:'p = 0,26 · N = 614', v:-0.16, ci:[-0.44,0.11], sig:false},
-      {label:'Sin Polonia (12)',    sub:'p = 0,060 · N = 529', v:-0.29, ci:[-0.59,0.01], sig:false},
-      {label:'Núcleo, 11 EM',       sub:'fin. externo · p = 0,023', v:-0.47, ci:[-0.87,-0.07], sig:true}
+      {label:'Panel completo (13)',  sub:'p = 0,26 · N = 614',  v:-0.16, ci:[-0.44,0.11],  sig:false},
+      {label:'Sin crisis',            sub:'GFC + COVID fuera · p = 0,053', v:-0.69, ci:[-1.39,0.01], sig:false},
+      {label:'Núcleo, 11 EM',         sub:'fin. externo · p = 0,023', v:-0.47, ci:[-0.87,-0.07], sig:true},
+      {label:'Núcleo y sin crisis',   sub:'ambos cortes · p = 0,004', v:-0.94, ci:[-1.57,-0.31], sig:true}
     ],
-    aria:'Coeficiente de interacción theta por composición de la muestra: panel completo -0,16 no significativo; sin Polonia -0,29; núcleo de 11 economías -0,47 significativo al 5 por ciento.'
+    aria:'Coeficiente de interacción theta por corte de la muestra: panel completo -0,16 no significativo; sin trimestres de crisis -0,69; núcleo de 11 economías -0,47; ambos cortes combinados -0,94, significativo.'
   });
 
   coefPlot('c-win',{

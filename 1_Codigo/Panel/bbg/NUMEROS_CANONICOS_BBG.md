@@ -28,6 +28,64 @@ poland, southafrica, turkey`. Cobertura: 9 países con EMBI continuo desde 2004�
 `india` 54 trim. (EMBI desde 2012Q4); `indonesia/philippines/southafrica` 11 trim. cada uno
 (EMBI desde 2023Q3, aunque su CDS es largo).
 
+---
+
+### ★ BATERÍA DE REGRESIONES (esqueleto del Cap. 2) — `p8_bateria_regresiones.py` → `bateria_bbg.csv`
+
+Estilo Chari et al.: 4 modelos anidados (M1 JLoss; M2 GaR; M3 ambos; M4 + interacción)
+× 3 efectos fijos (T = tiempo; P = país; PT = país+tiempo) × 2 muestras. Sin controles.
+Errores Driscoll–Kraay. Tabla 2.3 de la tesis (apaisada).
+
+**Panel A — muestra completa (N = 721, 13 países)**
+
+| coef | M1/T | M1/P | M1/PT | M2/T | M2/P | M2/PT | M3/T | M3/P | M3/PT | M4/T | M4/P | M4/PT |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| JLoss | +7,4*** | +8,1*** | +5,0*** | | | | +8,5*** | +6,1*** | +4,6*** | +8,5*** | +6,1*** | +4,6*** |
+| GaR   | | | | −7,9*** | −9,1*** | −5,7* | −10,1*** | −6,0*** | −3,8 | −10,1*** | −5,6*** | −3,6 |
+| JLoss×GaR | | | | | | | | | | **−0,08** | **−0,16** | **−0,14** |
+| (t interacción) | | | | | | | | | | (−0,2) | (−0,7) | (−0,6) |
+| R²within | 0,20 | 0,21 | 0,18 | 0,17 | 0,17 | 0,15 | 0,19 | 0,27 | 0,25 | 0,19 | 0,27 | 0,25 |
+
+**Panel B — sin trimestres de crisis (N = 610; excluye 2008Q4–2009Q4 y 2020Q1–2021Q4)**
+
+| coef | M1/T | M1/P | M1/PT | M2/T | M2/P | M2/PT | M3/T | M3/P | M3/PT | M4/T | M4/P | M4/PT |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| JLoss | +6,7*** | +7,0*** | +4,6*** | | | | +8,1*** | +5,1*** | +3,8*** | +8,3*** | +5,5*** | +4,3*** |
+| GaR   | | | | −9,2*** | −10,5*** | −9,1*** | −11,2*** | −7,3*** | −7,2** | −10,8*** | −6,8*** | −6,0** |
+| **JLoss×GaR** | | | | | | | | | | **−1,72*** ** | **−1,18*** ** | **−1,19*** ** |
+| (t interacción) | | | | | | | | | | (−4,4) | (−4,2) | (−3,5) |
+| R²within | 0,15 | 0,15 | 0,13 | 0,13 | 0,14 | 0,13 | 0,14 | 0,20 | 0,20 | 0,17 | 0,24 | 0,23 |
+
+**Lecturas:**
+1. **H1 (JLoss → EMBI):** +4,6 a +8,5 pb, *** en las 12 columnas de cada panel. Robusto a modelo y a efectos fijos; la magnitud decrece de forma ordenada al añadir FE.
+2. **H2 (GaR → EMBI):** negativo, *** con FE de tiempo o de país; marginal (t≈−1,2) sólo con FE bidireccionales en muestra completa; recupera significancia sin crisis.
+3. **H3 (interacción):** −0,08 a −0,16 (**n.s.**) en la muestra completa bajo cualquier FE; **−1,19 (PT) a −1,72 (T), todos *** ** sin los trimestres de crisis.
+
+**Inferencia de la interacción M4/PT:**
+
+| muestra | θ | DK p | cluster país p | cluster tiempo p | wild boot p | N |
+|---|---:|---:|---:|---:|---:|---:|
+| completa | −0,136 | 0,569 | 0,661 | 0,384 | 0,669 | 721 |
+| sin crisis (GFC+COVID) | **−1,190** | **0,0004** | **0,015** | **0,0004** | 0,127 | 610 |
+| sin COVID solo | −0,806 | 0,039 | — | — | — | 641 |
+| sin GFC solo | −0,195 | 0,459 | — | — | — | 690 |
+
+> COVID hace la mayor parte del enmascaramiento; sacar ambas crisis da el resultado más limpio.
+> Bajo *wild cluster bootstrap* (13 clusters) la dimensión temporal queda marginal (p = 0,13);
+> la dimensión transversal (núcleo, p_wb = 0,015) sí sobrevive.
+
+**Combinando ambas dimensiones (M2 + 6 controles):**
+- Sin crisis: θ = −0,687 (t = −1,94, p = 0,053, N = 519)
+- Núcleo 11 EM **y** sin crisis: **θ = −0,938 (t = −2,94, p = 0,0035, N = 405)**
+
+**Lectura económica unificada:** la complementariedad aparece cuando el mercado espera que el
+pasivo contingente bancario recaiga sobre un soberano **no respaldado**, cuya deuda se fija al
+margen por inversores de cartera extranjeros sensibles al riesgo. No ocurre (i) donde la deuda
+la tienen inversores domésticos de horizonte largo (Polonia, India), ni (ii) en las crisis con
+líneas de swap de la Fed, financiamiento del FMI y compras de bancos centrales domésticos.
+
+---
+
 ### Resultado central — H3 (θ = JLoss × GaR)
 
 | Spec | N | θ | t (DK) | p (DK) | p (wild boot) |
