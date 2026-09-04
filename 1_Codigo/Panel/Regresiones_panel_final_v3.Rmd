@@ -1,6 +1,6 @@
 ---
 title: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano"
-subtitle: "Base final v3 — Panel_final_all17.csv (5 países LatAm, GaR entrenado con 17 economías)"
+subtitle: "Base final v3 — bbg/Panel_bloomberg.csv (13 países, EMBI Global Diversified)"
 author: "Mauricio Valenzuela"
 date: "`r Sys.Date()`"
 output:
@@ -19,11 +19,16 @@ options(scipen = 999)
 
 # Objetivo
 
-Análisis de regresión de **una sola base** — `Panel_final_all17.csv` — sin comparaciones
-multi-base ni intervenciones intermedias. Es la reconstrucción final del panel LatAm-5
-(Brasil, Chile, Colombia, México, Perú, 2007Q4–2022Q2) con el GaR estimado sobre el
-conjunto de 17 economías. Se replica exactamente la batería de la versión previa
-(`Regresiones_panel_v2`), pero aplicada de forma independiente a esta base.
+Análisis de regresión de **una sola base** — `bbg/Panel_bloomberg.csv` — sin comparaciones
+multi-base ni intervenciones intermedias. Es la reconstrucción final del panel ancla en
+Bloomberg: 13 economías emergentes con EMBI Global Diversified (J.P. Morgan), JLoss (fragilidad
+bancaria, Merton/KMV + punto de silla) y GaR (cuantil 5 % de crecimiento, panel cuantílico).
+Reemplaza la versión anterior de este documento (`Panel_final_all17.csv`, 5 países LatAm,
+controles del paper de JLoss como índices agregados), que quedó superada por esta
+reconstrucción. Para la batería completa de 24 especificaciones (Tabla 2.3 de la tesis), ver
+`Regresiones_panel_extended_v3.Rmd` — este documento es el complementario: un núcleo más
+compacto (M1-M5) con diagnósticos formales (Hausman, VIF) y una robustez más profunda por
+especificación.
 
 La hipótesis central es la **complementariedad supra-aditiva**: el efecto de la fragilidad
 bancaria (`JLoss`) sobre el spread soberano (`EMBI_bps`) se intensifica cuando el riesgo de
@@ -43,7 +48,7 @@ library(tidyr)
 library(car)
 library(kableExtra)
 
-BASE_FILE <- "Panel_final_all17.csv"   # <-- única base que lee este documento
+BASE_FILE <- "bbg/Panel_bloomberg.csv"   # <-- única base que lee este documento
 
 prep <- function(path) {
   d <- read.csv(path, stringsAsFactors = FALSE)
@@ -62,7 +67,12 @@ prep <- function(path) {
   d
 }
 
+# Muestra de estimación: EMBI + JLoss + GaR disponibles simultáneamente. Argentina, Egipto,
+# Rusia y Pakistán tienen JLoss pero no EMBI ni (en tres de ellos) GaR -- "sin serie" en
+# bbg/cobertura_panel_bbg.csv -- y por eso no entran acá.
 dat <- prep(BASE_FILE)
+dat <- subset(dat, !is.na(EMBI_bps) & !is.na(JLoss) & !is.na(GaR))
+dat$country <- factor(dat$country)
 pan <- pdata.frame(dat, index = c("country", "tnum"))
 
 # Errores estándar Driscoll-Kraay (robustos a dependencia transversal y autocorrelación)
@@ -79,8 +89,9 @@ cat("Base:", BASE_FILE, "| países:", length(unique(dat$country)),
 ```{r cobertura}
 cov <- dat %>%
   group_by(country) %>%
-  summarise(n = n(), desde = min(quarter), hasta = max(quarter), .groups = "drop")
-kable(cov, caption = "Cobertura por país") %>%
+  summarise(n = n(), desde = min(quarter), hasta = max(quarter), .groups = "drop") %>%
+  arrange(desc(n))
+kable(cov, caption = "Cobertura por país (muestra de estimación: EMBI+JLoss+GaR)") %>%
   kable_styling(full_width = FALSE, font_size = 12)
 ```
 
@@ -95,13 +106,13 @@ eff <- dat %>%
 if (nrow(eff) > 0) {
   kable(eff, caption = "Filas con GaR faltante (excluidas de las regresiones vía na.omit)") %>%
     kable_styling(full_width = FALSE, font_size = 12)
-} else cat("Sin filas con GaR faltante.\n")
+} else cat("Sin filas con GaR faltante (ya se filtró por GaR no-NA al construir `dat`).\n")
 ```
 
-```{r cobertura-fig, fig.height=4}
+```{r cobertura-fig, fig.height=4.5}
 ggplot(dat, aes(x = tnum, y = country)) +
   geom_point(size = 1.6, alpha = .8, color = "#1f3b73") +
-  labs(x = "Tiempo", y = NULL, title = "Cobertura temporal por país") +
+  labs(x = "Tiempo", y = NULL, title = "Cobertura temporal por país (base Bloomberg)") +
   theme_minimal(base_size = 11)
 ```
 
@@ -136,8 +147,15 @@ modelsummary(mods,
   stars = c('*'=.1,'**'=.05,'***'=.01),
   gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
   notes = "SE Driscoll-Kraay. M1-M4: FE país+tiempo. M5: FE país + VIX explícito.",
-  title = "Tabla 1. Núcleo — base final all17 (5 países, 2007Q4-2022Q2)")
+  title = "Tabla 1. Núcleo — base final Bloomberg (13 países)")
 ```
+
+El coeficiente de interés es `JLoss × GaR` en M2-M5: negativo cuando aparece significativo
+significa que el efecto de la fragilidad bancaria se **atenúa** con la cola completa incluida
+—la Sección "Robustez de θ" de más abajo muestra que, sobre la muestra completa (incluida la
+pandemia), θ es chico y no significativo, y que se vuelve grande y significativo al excluir los
+trimestres de crisis (ver `Regresiones_panel_extended_v3.Rmd` para la batería completa donde
+esto se documenta con las 24 especificaciones).
 
 # Efecto marginal de JLoss según el riesgo de cola
 
@@ -220,6 +238,24 @@ m_nc <- plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c +", CTRL)),
 printCoefmat(coeftest(m_nc, vcov = DK(m_nc)))
 ```
 
+## Excluyendo todos los trimestres de crisis (GFC + COVID)
+
+La definición completa del Capítulo 2 —GFC 2008Q4-2009Q4 y pandemia 2020Q1-2021Q4 fuera,
+recentrando `JLoss`/`GaR` en la submuestra— es la que sostiene la Tabla 2.3 de la tesis.
+
+```{r sin-crisis}
+CRISIS_Q <- c("2008Q4","2009Q1","2009Q2","2009Q3","2009Q4",
+              "2020Q1","2020Q2","2020Q3","2020Q4","2021Q1","2021Q2","2021Q3","2021Q4")
+dat_sc <- subset(dat, !(quarter %in% CRISIS_Q))
+dat_sc$JLoss_c <- dat_sc$JLoss - mean(dat_sc$JLoss)
+dat_sc$GaR_c   <- dat_sc$GaR_pp - mean(dat_sc$GaR_pp)
+dat_sc$JxG_c   <- dat_sc$JLoss_c * dat_sc$GaR_c
+pan_sc <- pdata.frame(dat_sc, index = c("country","tnum"))
+m_sc <- plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c +", CTRL)),
+            data = pan_sc, model = "within", effect = "twoways")
+printCoefmat(coeftest(m_sc, vcov = DK(m_sc)))
+```
+
 ## Especificación dinámica (EMBI rezagado)
 
 ```{r dynamic}
@@ -262,28 +298,35 @@ modelsummary(bat, vcov = lapply(bat, DK),
   title = "Tabla 2. Del modelo agrupado a los efectos fijos")
 ```
 
-# Controles del paper de JLoss como índices agregados
+# Factores globales
 
-```{r indices}
-mods_idx <- list(
-  "X_dom (FE país+tiempo)" = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + X_dom_idx,
-                                 data = pdata.frame(subset(dat, !is.na(X_dom_idx)), index = c("country","tnum")),
-                                 model = "within", effect = "twoways"),
-  "X_global (FE país)"     = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + X_global_idx,
-                                 data = pdata.frame(subset(dat, !is.na(X_global_idx)), index = c("country","tnum")),
-                                 model = "within", effect = "individual")
+La base anterior comparaba contra los índices agregados del paper de JLoss (`X_dom_idx`,
+`X_global_idx`), que no existen en la reconstrucción Bloomberg. El equivalente que sí trae esta
+base son los factores financieros globales de la propia tesis (VIX, tasa a 10 años de EE.UU.,
+spread de high yield) — la especificación M3 de `tabla_theta_bbg.csv`.
+
+```{r globales}
+mods_glob <- list(
+  "+ UST10Y + US_HY (FE país)" = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + UST10Y_log + US_HY_spread_log,
+                                      data = pdata.frame(subset(dat, !is.na(UST10Y_log) & !is.na(US_HY_spread_log)),
+                                                          index = c("country","tnum")),
+                                      model = "within", effect = "individual"),
+  "+ VIX + UST10Y + US_HY (FE país)" = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + VIX + UST10Y_log + US_HY_spread_log,
+                                      data = pdata.frame(subset(dat, !is.na(VIX) & !is.na(UST10Y_log) & !is.na(US_HY_spread_log)),
+                                                          index = c("country","tnum")),
+                                      model = "within", effect = "individual")
 )
-modelsummary(mods_idx, vcov = lapply(mods_idx, DK),
-  coef_map = c("JLoss_c"="JLoss", "GaR_c"="GaR (pp)", "JxG_c"="JLoss × GaR",
-               "X_dom_idx"="Índice doméstico (paper)", "X_global_idx"="Índice global (paper)"),
+modelsummary(mods_glob, vcov = lapply(mods_glob, DK),
+  coef_map = c("JLoss_c"="JLoss", "GaR_c"="GaR (pp)", "JxG_c"="JLoss × GaR", "VIX"="VIX",
+               "UST10Y_log"="UST 10Y (log)", "US_HY_spread_log"="Spread HY EE.UU. (log)"),
   stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
-  notes = "SE Driscoll-Kraay. X_dom: FE país+tiempo. X_global: FE país.",
-  title = "Tabla 3. θ con los controles del paper de JLoss como índice agregado")
+  notes = "SE Driscoll-Kraay. FE país (los factores globales no varían por país, no admiten FE de tiempo).",
+  title = "Tabla 3. θ controlando por factores financieros globales")
 ```
 
 # Síntesis: triangulación de θ
 
-```{r synthesis, fig.height=5}
+```{r synthesis, fig.height=5.5}
 get_theta <- function(m, label) {
   ct <- coeftest(m, vcov = DK(m))
   data.frame(modelo = label,
@@ -296,9 +339,9 @@ synth <- bind_rows(
   get_theta(mods$M3,        "M3 — + controles"),
   get_theta(mods$M5,        "M5 — FE país + VIX"),
   get_theta(m_nc,           "Sin COVID (≤2019)"),
+  get_theta(m_sc,           "Sin crisis (GFC+COVID)"),
   get_theta(m_dyn,          "Dinámico (EMBI rezagado)"),
-  get_theta(mods_idx[[1]],  "X_dom_idx (FE2)"),
-  get_theta(mods_idx[[2]],  "X_global_idx (FE país)")
+  get_theta(mods_glob[[1]], "+ factores globales (FE país)")
 ) %>% mutate(lo = theta - 1.96*se, hi = theta + 1.96*se)
 
 kable(synth %>% mutate(across(c(theta, se, p), ~round(., 4))),
@@ -309,16 +352,22 @@ ggplot(synth, aes(x = theta, y = reorder(modelo, theta))) +
   geom_vline(xintercept = 0, color = "grey50") +
   geom_pointrange(aes(xmin = lo, xmax = hi), color = "#1f3b73") +
   labs(x = expression(theta ~ "(JLoss" %*% "GaR)"), y = NULL,
-       title = "Triangulación del término de interacción — base final all17",
+       title = "Triangulación del término de interacción — base final Bloomberg",
        subtitle = "Barras = IC 95% (Driscoll-Kraay)") +
   theme_minimal(base_size = 12)
 ```
 
 # Notas
 
-- **Base:** `Panel_final_all17.csv` únicamente. No se cargan otras bases.
+- **Base:** `bbg/Panel_bloomberg.csv` únicamente. No se cargan otras bases. Muestra de
+  estimación: 13 países con EMBI+JLoss+GaR simultáneos (Argentina, Egipto, Rusia y Pakistán
+  quedan fuera — no tienen EMBI Global Diversified ni, en tres de los cuatro, GaR; ver
+  `bbg/cobertura_panel_bbg.csv`).
 - **Escala:** `GaR_pp = GaR × 100` (puntos porcentuales); `EMBI_bps` en puntos base.
 - **Identificación:** efectos fijos de país y tiempo; los efectos principales se interpretan
   en la media porque `JLoss` y `GaR` están centrados.
 - **Inferencia:** errores Driscoll-Kraay por defecto (robustos a dependencia transversal
   y autocorrelación), con variantes de robustez reportadas.
+- **La batería completa** (4 modelos × 3 efectos fijos × 2 muestras = Tabla 2.3 de la tesis)
+  vive en `Regresiones_panel_extended_v3.Rmd`; este documento es un núcleo más compacto con
+  diagnósticos formales adicionales (Hausman, VIF) sobre la misma base.
