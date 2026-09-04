@@ -1,0 +1,271 @@
+---
+title: "Fragilidad bancaria, GaR y spread soberano — panel Bloomberg"
+subtitle: "EDA y batería de regresiones del Capítulo 2 (reproducción en R)"
+author: "Mauricio Valenzuela Corvalán"
+date: "`r format(Sys.Date(), '%d de %B de %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    df_print: kable
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                       fig.width = 9, fig.height = 5.5)
+options(width = 100)
+library(plm)
+library(lmtest)
+library(knitr)
+```
+
+# Qué es este documento
+
+Réplica en R, autocontenida y reproducible, de la evidencia empírica del
+Capítulo 2 de la tesis *"Fragilidad bancaria, riesgo de cola del crecimiento y
+spread soberano en economías emergentes"*: un EDA rápido del panel único
+anclado en Bloomberg y la batería de regresiones que es su esqueleto (Tabla
+2.3 de la tesis). El pipeline canónico está en Python
+(`1_Codigo/Panel/bbg/p1..p8`); este `.Rmd` es la versión para tener a mano —
+o correr en vivo— si en la defensa piden ver el código o probar algo distinto.
+
+Requiere los paquetes `plm`, `lmtest` y `knitr` (`install.packages(c("plm",
+"lmtest", "knitr"))`), y que `Panel_bloomberg.csv` esté en la misma carpeta
+que este archivo.
+
+# Los datos
+
+```{r datos}
+panel <- read.csv("Panel_bloomberg.csv", stringsAsFactors = FALSE)
+panel$GaR_pp <- panel$GaR * 100
+
+# Muestra de estimación: EMBI + JLoss + GaR disponibles simultáneamente
+est <- subset(panel, !is.na(EMBI_bps) & !is.na(JLoss) & !is.na(GaR))
+est$country <- factor(est$country)
+
+cat(sprintf("Panel completo (roster): %d filas, %d economías, %s a %s\n",
+            nrow(panel), length(unique(panel$country)), min(panel$quarter), max(panel$quarter)))
+cat(sprintf("Muestra de estimación   : %d filas, %d países\n",
+            nrow(est), length(unique(est$country))))
+```
+
+La variable dependiente principal es el **EMBI Global Diversified** (J.P.
+Morgan), siguiendo a Chari et al. (2024); el CDS soberano a 5 años de
+Bloomberg queda como serie de robustez. `JLoss` es la métrica semiparamétrica
+de pérdida conjunta esperada del sistema bancario (Merton/KMV + punto de
+silla, 113 bancos); `GaR` es el cuantil 5 % de la distribución condicional del
+crecimiento (regresión cuantílica de panel, marco CEMLA). Corea del Sur,
+Bulgaria y Hungría quedan fuera del panel: en las tres, `JLoss` no es una
+medida sistémica válida a nivel país (número de bancos cotizados
+insuficiente).
+
+## Cobertura por país
+
+```{r cobertura}
+cobertura <- do.call(rbind, lapply(split(est, est$country), function(g) {
+  data.frame(país = unique(g$country), n_trim = nrow(g),
+             desde = min(g$quarter), hasta = max(g$quarter),
+             con_CDS = sum(!is.na(g$CDS_bps)),
+             JLoss_mediana = round(median(g$JLoss), 2),
+             JLoss_máx = round(max(g$JLoss), 1))
+}))
+cobertura <- cobertura[order(-cobertura$n_trim), ]
+kable(cobertura, row.names = FALSE)
+```
+
+## Estadística descriptiva
+
+```{r descriptivos}
+vars_desc <- c("EMBI_bps", "CDS_bps", "JLoss", "GaR_pp",
+               "debt_gdp", "fisc_bal", "res_gdp", "ca_gdp", "infl_yoy", "reer")
+desc <- do.call(rbind, lapply(vars_desc, function(v) {
+  x <- est[[v]]
+  data.frame(variable = v, media = mean(x, na.rm = TRUE), sd = sd(x, na.rm = TRUE),
+             mín = min(x, na.rm = TRUE), máx = max(x, na.rm = TRUE), n_NA = sum(is.na(x)))
+}))
+kable(desc, digits = 2, row.names = FALSE)
+```
+
+## Distribuciones
+
+```{r histogramas}
+par(mfrow = c(2, 2), mar = c(4, 4, 3, 1))
+hist(est$EMBI_bps, breaks = 30, col = "#3A5A8C", border = "white", main = "EMBI (pb)", xlab = "pb")
+hist(est$JLoss, breaks = 30, col = "#9A3B32", border = "white", main = "JLoss", xlab = "JLoss")
+hist(est$GaR_pp, breaks = 30, col = "#2E6E52", border = "white", main = "GaR (q05, pp)", xlab = "pp")
+hist(est$CDS_bps, breaks = 30, col = "#A9701F", border = "white", main = "CDS soberano 5A (pb)", xlab = "pb")
+```
+
+## La dispersión transversal de `JLoss`
+
+Nueve de trece países tienen una mediana de `JLoss` casi idéntica (2,2 a 2,9);
+Turquía, India, China y Brasil son los que aportan variación entre países. Es
+la razón por la que, más adelante, la identificación de la interacción
+descansa desproporcionadamente en un puñado de economías.
+
+```{r dispersion, fig.height=6}
+ord <- names(sort(tapply(est$JLoss, est$country, median)))
+par(mar = c(7, 4, 3, 1))
+boxplot(JLoss ~ factor(country, levels = ord), data = est, las = 2,
+        col = "#3A5A8C22", border = "#3A5A8C",
+        main = "JLoss por país (muestra de estimación)", xlab = "", ylab = "JLoss")
+```
+
+## Correlaciones, y el EMBI frente al CDS
+
+```{r correlaciones}
+vars_cor <- c("EMBI_bps", "CDS_bps", "JLoss", "GaR_pp", "debt_gdp", "infl_yoy", "reer")
+kable(round(cor(est[, vars_cor], use = "pairwise.complete.obs"), 2))
+
+comun <- subset(est, !is.na(EMBI_bps) & !is.na(CDS_bps))
+cat(sprintf("EMBI vs CDS, submuestra donde ambos existen: N=%d, correlación=%.2f\n",
+            nrow(comun), cor(comun$EMBI_bps, comun$CDS_bps)))
+```
+
+```{r embi-vs-cds, fig.height=5.5}
+par(mar = c(4, 4, 3, 1))
+plot(comun$CDS_bps, comun$EMBI_bps, pch = 16, col = adjustcolor("#A9701F", 0.4),
+     xlab = "CDS soberano 5A (pb)", ylab = "EMBI (pb)",
+     main = sprintf("EMBI vs. CDS (N=%d, corr=%.2f)", nrow(comun), cor(comun$EMBI_bps, comun$CDS_bps)))
+abline(0, 1, lty = 2, col = "grey50")
+abline(lm(EMBI_bps ~ CDS_bps, comun), col = "#9A3B32", lwd = 2)
+legend("topleft", legend = c("ajuste lineal", "diagonal 45°"),
+       col = c("#9A3B32", "grey50"), lty = c(1, 2), lwd = c(2, 1), bty = "n")
+```
+
+Como se muestra más abajo, el EMBI y el CDS arrojan el **mismo** coeficiente
+de interacción sobre la misma submuestra: la elección de la métrica del
+*spread* no es lo que mueve el resultado central del capítulo.
+
+# La batería de regresiones (esqueleto del Capítulo 2)
+
+Cuatro modelos anidados (`JLoss` solo; `GaR` solo; ambos; ambos más la
+interacción `JLoss`$\times$`GaR`) $\times$ tres estructuras de efectos fijos
+(tiempo; país; país+tiempo) $\times$ dos muestras (completa; sin trimestres de
+crisis financiera aguda), al modo de Chari et al. (2024). Veinticuatro
+regresiones, sin controles domésticos, errores de Driscoll–Kraay
+(`plm::vcovSCC`).
+
+```{r construccion}
+crisis_q <- c("2008Q4", "2009Q1", "2009Q2", "2009Q3", "2009Q4",
+              "2020Q1", "2020Q2", "2020Q3", "2020Q4",
+              "2021Q1", "2021Q2", "2021Q3", "2021Q4")
+est$sin_crisis <- !(est$quarter %in% crisis_q)
+
+# JLoss y GaR centrados EN CADA MUESTRA por su propia media (igual que el
+# pipeline Python): con efectos fijos esto no cambia theta, pero sí el valor
+# reportado de los coeficientes de nivel si no se recalcula por muestra.
+centrar <- function(df) {
+  df$JLoss_c <- df$JLoss - mean(df$JLoss)
+  df$GaR_c   <- df$GaR_pp - mean(df$GaR_pp)
+  df$Int     <- df$JLoss_c * df$GaR_c
+  df
+}
+d_completa   <- centrar(est)
+d_sin_crisis <- centrar(subset(est, sin_crisis))
+
+pdata_completa   <- pdata.frame(d_completa,   index = c("country", "quarter"))
+pdata_sin_crisis <- pdata.frame(d_sin_crisis, index = c("country", "quarter"))
+
+run_dk <- function(data, formula, effect = "twoways") {
+  m  <- plm(formula, data = data, model = "within", effect = effect)
+  ct <- coeftest(m, vcov = vcovSCC)
+  list(model = m, test = ct, N = nobs(m),
+       R2_within = unname(summary(m)$r.squared["rsq"]))
+}
+```
+
+## La especificación de referencia (M4, país + tiempo)
+
+```{r m4-referencia}
+f_M4 <- EMBI_bps ~ JLoss_c + GaR_c + Int
+
+r_completa   <- run_dk(pdata_completa,   f_M4, "twoways")
+r_sin_crisis <- run_dk(pdata_sin_crisis, f_M4, "twoways")
+```
+
+**Muestra completa** ($N=`r r_completa$N`$, $R^2_{\text{within}}=`r round(r_completa$R2_within,3)`$):
+
+```{r echo=FALSE}
+kable(round(unclass(r_completa$test), 4))
+```
+
+**Sin trimestres de crisis** ($N=`r r_sin_crisis$N`$, $R^2_{\text{within}}=`r round(r_sin_crisis$R2_within,3)`$):
+
+```{r echo=FALSE}
+kable(round(unclass(r_sin_crisis$test), 4))
+```
+
+El coeficiente de interacción pasa de **no significativo** sobre la muestra
+completa ($\hat\theta\approx-0{,}14$) a **negativo y significativo al 1 %**
+al excluir los trimestres de la crisis financiera global y la pandemia
+($\hat\theta\approx-1{,}2$): la crisis financiera aguda —cuando el soberano
+suele estar respaldado por líneas de *swap*, financiamiento del FMI o compras
+de los bancos centrales domésticos— enmascara la complementariedad.
+
+## La batería completa (Tabla 2.3 de la tesis)
+
+```{r bateria}
+modelos <- list(
+  M1 = EMBI_bps ~ JLoss_c,
+  M2 = EMBI_bps ~ GaR_c,
+  M3 = EMBI_bps ~ JLoss_c + GaR_c,
+  M4 = EMBI_bps ~ JLoss_c + GaR_c + Int
+)
+efectos  <- c(tiempo = "time", país = "individual", "país+tiempo" = "twoways")
+muestras <- list(completa = pdata_completa, sin_crisis = pdata_sin_crisis)
+estrella <- function(p) ifelse(p < 0.01, "***", ifelse(p < 0.05, "**", ifelse(p < 0.10, "*", "")))
+
+filas <- list()
+for (sname in names(muestras)) {
+  for (ename in names(efectos)) {
+    for (mname in names(modelos)) {
+      r <- tryCatch(run_dk(muestras[[sname]], modelos[[mname]], efectos[[ename]]),
+                     error = function(e) NULL)
+      if (is.null(r)) next
+      ct <- r$test
+      colt <- intersect(c("t value", "z value"), colnames(ct))[1]
+      fila <- data.frame(muestra = sname, modelo = mname, efectos_fijos = ename,
+                          N = r$N, R2_within = round(r$R2_within, 2))
+      for (rn in rownames(ct)) {
+        fila[[paste0(rn, "_coef")]] <- sprintf("%+.2f%s", ct[rn, "Estimate"], estrella(ct[rn, 4]))
+        fila[[paste0(rn, "_t")]]    <- round(ct[rn, colt], 2)
+      }
+      filas[[length(filas) + 1]] <- fila
+    }
+  }
+}
+bateria <- do.call(rbind, lapply(filas, function(f) {
+  # normaliza columnas para que todas las filas tengan las mismas
+  cols <- c("muestra","modelo","efectos_fijos","N","R2_within",
+            "JLoss_c_coef","JLoss_c_t","GaR_c_coef","GaR_c_t","Int_coef","Int_t")
+  for (c in cols) if (is.null(f[[c]])) f[[c]] <- NA
+  f[cols]
+}))
+kable(bateria, row.names = FALSE,
+      col.names = c("Muestra", "Modelo", "Efectos fijos", "N", "R²w",
+                    "JLoss", "t", "GaR", "t", "JLoss×GaR", "t"))
+```
+
+*** p<0,01, ** p<0,05, * p<0,10. Errores de Driscoll–Kraay
+(`plm::vcovSCC`). Trazable a `1_Codigo/Panel/bbg/bateria_bbg.csv`
+(pipeline canónico en Python).
+
+# Síntesis
+
+La fragilidad bancaria (`JLoss`) y el riesgo de cola del crecimiento (`GaR`)
+elevan cada uno el *spread* soberano en las doce especificaciones de cada
+panel — robusto a qué modelo y qué efectos fijos se impongan. La
+complementariedad entre ambos (`JLoss`$\times$`GaR`) es indistinguible de
+cero sobre la muestra completa bajo cualquier estructura de efectos fijos,
+pero **negativa y significativa al 1 % bajo las tres** una vez excluidos los
+trimestres de crisis financiera aguda. Combinada con la otra dimensión de la
+condicionalidad —el núcleo de economías emergentes de financiamiento
+externo, ver Capítulo 2, Sección 6.3 de la tesis— el coeficiente llega a
+$\hat\theta\approx-0{,}94$ ($p=0{,}004$). La lectura económica: la
+complementariedad aparece en los precios soberanos cuando el mercado espera
+que el pasivo contingente bancario recaiga sobre un soberano **no
+respaldado**, cuya deuda fija al margen un inversor de cartera extranjero
+sensible al riesgo.

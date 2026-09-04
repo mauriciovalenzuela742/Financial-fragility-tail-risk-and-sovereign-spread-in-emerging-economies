@@ -1,6 +1,6 @@
 ---
-title: "Fragilidad bancaria, riesgo de cola y spread soberano — robustez extendida"
-subtitle: "Base extendida v3 — Panel_extended_15paises.csv (11 países con EMBI)"
+title: "Fragilidad bancaria, riesgo de cola y spread soberano"
+subtitle: "Panel Bloomberg (base final, EMBI Global Diversified) — batería de 24 regresiones y robustez"
 author: "Mauricio Valenzuela"
 date: "`r Sys.Date()`"
 output:
@@ -19,15 +19,21 @@ options(scipen = 999)
 
 # Objetivo
 
-Réplica de robustez sobre la **base extendida** — `Panel_extended_15paises.csv` — con
-11 economías que disponen de EMBI (Brasil, Bulgaria, Chile, China, Colombia, Indonesia,
-México, Perú, Polonia, Sudáfrica, Turquía). A diferencia de la base final LatAm-5, esta
-base **no tiene los controles macro domésticos** (deuda/PIB, balance fiscal, etc.), por lo
-que la identificación se apoya en efectos fijos, el `VIX (CBOE)` y los índices agregados
-(`X_global_idx`, `X_dom_idx`). Es la contraparte de máxima cobertura de países al análisis
-principal, y debe leerse como **robustez**, no como el modelo central.
+Batería de regresiones del Capítulo 2 de la tesis sobre la **base final ancla en
+Bloomberg** — `bbg/Panel_bloomberg.csv` —, 13-14 economías emergentes con EMBI Global
+Diversified, JLoss (fragilidad bancaria, Merton/KMV + punto de silla) y GaR (cuantil 5 % de
+crecimiento, panel cuantílico). Corea del Sur, Bulgaria y Hungría quedan fuera del panel: en
+las tres `JLoss` no es una medida sistémica válida a nivel país (bancos cotizados
+insuficientes).
 
-El parámetro de interés sigue siendo θ, la interacción `JLoss × GaR`.
+Este documento reemplaza la versión anterior (base regulatoria `Panel_extended_15paises.csv`,
+11 países, sin EMBI Global Diversified ni controles domésticos) — esa base quedó superada por
+la reconstrucción Bloomberg de la tesis y no debe citarse en la defensa.
+
+El parámetro de interés es θ, la interacción `JLoss × GaR`. El esqueleto empírico es la
+**batería de 24 especificaciones** (4 modelos × 3 estructuras de efectos fijos × 2 muestras,
+al modo de Chari et al. 2024) que es la Tabla 2.3 de la tesis; el resto del documento es
+diagnóstico y robustez sobre esa misma batería.
 
 ```{r libs}
 library(plm)
@@ -39,8 +45,11 @@ library(dplyr)
 library(tidyr)
 library(kableExtra)
 
-BASE_FILE <- "Panel_extended_15paises.csv"   # <-- única base que lee este documento
-VIXVAR    <- "VIX_cboe"                       # esta base usa el VIX de CBOE
+BASE_FILE <- "bbg/Panel_bloomberg.csv"   # base final: panel único Bloomberg
+CTRLS <- c("debt_gdp", "fisc_bal", "res_gdp", "ca_gdp", "infl_yoy", "reer")
+CRISIS_Q <- c("2008Q4","2009Q1","2009Q2","2009Q3","2009Q4",
+              "2020Q1","2020Q2","2020Q3","2020Q4","2021Q1","2021Q2","2021Q3","2021Q4")
+NUCLEO_EXCL <- c("poland", "india")   # mercados de deuda local profundos, sin bucle banca-soberano
 
 prep <- function(path) {
   d <- read.csv(path, stringsAsFactors = FALSE)
@@ -49,17 +58,27 @@ prep <- function(path) {
   d$tnum <- d$year + (d$q - 1) / 4
   d <- d[order(d$country, d$tnum), ]
   d$GaR_pp <- d$GaR * 100
-  d$ES_pp  <- if ("ES" %in% names(d)) d$ES * 100 else NA
-  center   <- function(x) x - mean(x, na.rm = TRUE)
-  d$JLoss_c <- center(d$JLoss)
-  d$GaR_c   <- center(d$GaR_pp)
-  d$JxG_c   <- d$JLoss_c * d$GaR_c
-  d$lnEMBI  <- log(d$EMBI_bps)
-  d$post2020 <- as.integer(d$year >= 2020)
+  d$sin_crisis <- !(d$quarter %in% CRISIS_Q)
+  d$sin_covid  <- !(d$quarter %in% CRISIS_Q[grepl("^202[01]", CRISIS_Q)])
+  d$sin_gfc    <- !(d$quarter %in% CRISIS_Q[grepl("^200[89]", CRISIS_Q)])
   d
 }
 
-dat <- prep(BASE_FILE)
+# Muestra de estimacion: EMBI + JLoss + GaR disponibles simultaneamente. JLoss/GaR se
+# centran DENTRO de cada muestra que se estima (igual que p8_bateria_regresiones.py) --
+# invariante para theta, pero necesario para que los coeficientes de nivel coincidan.
+centrar <- function(df) {
+  df$JLoss_c <- df$JLoss - mean(df$JLoss)
+  df$GaR_c   <- df$GaR_pp - mean(df$GaR_pp)
+  df$Int     <- df$JLoss_c * df$GaR_c
+  df
+}
+
+raw <- prep(BASE_FILE)
+est <- subset(raw, !is.na(EMBI_bps) & !is.na(JLoss) & !is.na(GaR))
+est$country <- factor(est$country)
+
+dat <- centrar(est)
 pan <- pdata.frame(dat, index = c("country", "tnum"))
 DK  <- function(m) vcovSCC(m, type = "HC1", maxlag = NULL)
 
@@ -72,8 +91,9 @@ cat("Base:", BASE_FILE, "| países:", length(unique(dat$country)),
 ```{r cobertura}
 cov <- dat %>%
   group_by(country) %>%
-  summarise(n = n(), n_GaR_valido = sum(!is.na(GaR)), desde = min(quarter), hasta = max(quarter),
-            .groups = "drop")
+  summarise(n = n(), con_CDS = sum(!is.na(CDS_bps)), desde = min(quarter), hasta = max(quarter),
+            JLoss_mediana = round(median(JLoss), 2), .groups = "drop") %>%
+  arrange(desc(n))
 kable(cov, caption = "Cobertura por país (panel desbalanceado; ventanas distintas)") %>%
   kable_styling(full_width = FALSE, font_size = 12)
 ```
@@ -81,100 +101,136 @@ kable(cov, caption = "Cobertura por país (panel desbalanceado; ventanas distint
 ```{r cobertura-fig, fig.height=4.5}
 ggplot(dat, aes(x = tnum, y = country)) +
   geom_point(size = 1.5, alpha = .8, color = "#b23a48") +
-  labs(x = "Tiempo", y = NULL, title = "Cobertura temporal por país (base extendida)") +
+  labs(x = "Tiempo", y = NULL, title = "Cobertura temporal por país (base Bloomberg)") +
   theme_minimal(base_size = 11)
 ```
 
-# Del modelo agrupado a los efectos fijos
+# La batería de especificaciones (Tabla 2.3 de la tesis)
 
-Sin controles domésticos, el núcleo es la progresión de agrupado a efectos fijos de país
-y tiempo sobre `JLoss`, `GaR` y su interacción.
+Cuatro modelos anidados (`JLoss` solo; `GaR` solo; ambos; ambos + interacción) × tres
+estructuras de efectos fijos (tiempo; país; país+tiempo) × dos muestras (completa; sin
+trimestres de crisis financiera aguda — GFC 2008Q4-2009Q4 y pandemia 2020Q1-2021Q4). Sin
+controles domésticos: mide el mecanismo "desnudo". Errores de Driscoll-Kraay.
 
-```{r battery}
-run_battery <- function(pdat) {
-  list(
-    "(1) Solo JLoss"          = plm(EMBI_bps ~ JLoss_c,                 pdat, model = "pooling"),
-    "(2) Solo GaR"            = plm(EMBI_bps ~ GaR_c,                   pdat, model = "pooling"),
-    "(3) JLoss + GaR"         = plm(EMBI_bps ~ JLoss_c + GaR_c,         pdat, model = "pooling"),
-    "(4) + interac. (sin FE)" = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, pdat, model = "pooling"),
-    "(5) FE país"             = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, pdat, model = "within", effect = "individual"),
-    "(6) FE tiempo"           = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, pdat, model = "within", effect = "time"),
-    "(7) FE país + tiempo"    = plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, pdat, model = "within", effect = "twoways")
-  )
+```{r bateria-construccion}
+modelos <- list(
+  M1 = EMBI_bps ~ JLoss_c,
+  M2 = EMBI_bps ~ GaR_c,
+  M3 = EMBI_bps ~ JLoss_c + GaR_c,
+  M4 = EMBI_bps ~ JLoss_c + GaR_c + Int
+)
+efectos <- c(tiempo = "time", país = "individual", "país+tiempo" = "twoways")
+
+d_completa   <- pan
+d_sin_crisis <- pdata.frame(centrar(subset(est, sin_crisis)), index = c("country", "tnum"))
+muestras <- list(completa = d_completa, "sin crisis" = d_sin_crisis)
+
+run_dk <- function(data, formula, effect) {
+  m  <- plm(formula, data = data, model = "within", effect = effect)
+  ct <- tryCatch(coeftest(m, vcov = DK(m)),
+                  error = function(e) coeftest(m, vcov = vcovHC(m, method = "arellano")))
+  list(model = m, test = ct, N = nobs(m),
+       R2w = unname(summary(m)$r.squared["rsq"]))
 }
-bat <- run_battery(pan)
-modelsummary(bat, vcov = lapply(bat, DK),
-  coef_map = c("JLoss_c"="JLoss","GaR_c"="GaR (pp)","JxG_c"="JLoss × GaR"),
-  stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
-  notes = "SE Driscoll-Kraay. Muestra completa desbalanceada (11 países).",
-  title = "Tabla 1. Del modelo agrupado a los efectos fijos — base extendida")
+
+estrella <- function(p) ifelse(p < 0.01, "***", ifelse(p < 0.05, "**", ifelse(p < 0.10, "*", "")))
+
+filas <- list()
+modelos_M4 <- list()   # para modelsummary, solo M4 (la especificación completa) x 3 FE x 2 muestras
+for (sname in names(muestras)) {
+  for (ename in names(efectos)) {
+    for (mname in names(modelos)) {
+      r <- tryCatch(run_dk(muestras[[sname]], modelos[[mname]], efectos[[ename]]), error = function(e) NULL)
+      if (is.null(r)) next
+      ct <- r$test
+      colt <- intersect(c("t value", "z value"), colnames(ct))[1]
+      fila <- data.frame(muestra = sname, modelo = mname, efectos_fijos = ename, N = r$N, R2w = round(r$R2w, 2))
+      for (rn in rownames(ct)) {
+        fila[[paste0(rn, "_coef")]] <- sprintf("%+.2f%s", ct[rn, "Estimate"], estrella(ct[rn, 4]))
+        fila[[paste0(rn, "_t")]]    <- round(ct[rn, colt], 2)
+      }
+      filas[[length(filas) + 1]] <- fila
+      if (mname == "M4") modelos_M4[[paste(sname, ename)]] <- r$model
+    }
+  }
+}
+bateria <- do.call(rbind, lapply(filas, function(f) {
+  cols <- c("muestra","modelo","efectos_fijos","N","R2w",
+            "JLoss_c_coef","JLoss_c_t","GaR_c_coef","GaR_c_t","Int_coef","Int_t")
+  for (cc in cols) if (is.null(f[[cc]])) f[[cc]] <- NA
+  f[cols]
+}))
+kable(bateria, row.names = FALSE,
+      col.names = c("Muestra","Modelo","Efectos fijos","N","R²w","JLoss","t","GaR","t","JLoss×GaR","t"),
+      caption = "Tabla 2.3 — batería completa (4 modelos × 3 FE × 2 muestras)") %>%
+  kable_styling(full_width = FALSE, font_size = 11) %>%
+  pack_rows(index = table(bateria$muestra)[unique(bateria$muestra)])
 ```
 
-# Modelos con VIX e índices agregados
+*** p<0,01, ** p<0,05, * p<0,10. Trazable a `bbg/bateria_bbg.csv`.
 
-```{r idx-models}
-# Modelos base (siempre corren) y modelos de índice (protegidos por si la cobertura es baja)
-M_pais <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c,                data = pan, model = "within", effect = "individual")
-M_vix  <- plm(as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + JxG_c +", VIXVAR)),
-              data = pan, model = "within", effect = "individual")
-M_2w   <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c,                data = pan, model = "within", effect = "twoways")
+## La especificación de referencia, en detalle (M4, país + tiempo)
 
-try_model <- function(expr) tryCatch(expr, error = function(e) NULL)
-M_glob <- try_model(plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + X_global_idx,
-                        data = pdata.frame(subset(dat, !is.na(X_global_idx)), index = c("country","tnum")),
-                        model = "within", effect = "individual"))
-M_dom  <- try_model(plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c + X_dom_idx,
-                        data = pdata.frame(subset(dat, !is.na(X_dom_idx)), index = c("country","tnum")),
-                        model = "within", effect = "individual"))
-
-mods_idx <- list("FE país" = M_pais, "FE país + VIX" = M_vix, "FE país+tiempo" = M_2w,
-                 "+ X_global_idx (FE país)" = M_glob, "+ X_dom_idx (FE país)" = M_dom)
-mods_idx <- mods_idx[!sapply(mods_idx, is.null)]
-
-modelsummary(mods_idx, vcov = lapply(mods_idx, DK),
-  coef_map = c("JLoss_c"="JLoss","GaR_c"="GaR (pp)","JxG_c"="JLoss × GaR",
-               "VIX_cboe"="VIX (CBOE)","X_global_idx"="Índice global","X_dom_idx"="Índice doméstico"),
+```{r m4-detalle}
+mods_ref <- list(
+  "M4 / completa"     = modelos_M4[["completa país+tiempo"]],
+  "M4 / sin crisis"    = modelos_M4[["sin crisis país+tiempo"]]
+)
+modelsummary(mods_ref, vcov = lapply(mods_ref, DK),
+  coef_map = c("JLoss_c" = "JLoss", "GaR_c" = "GaR (pp)", "Int" = "JLoss × GaR"),
   stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
-  notes = "SE Driscoll-Kraay. Base extendida sin controles macro domésticos.",
-  title = "Tabla 2. FE, VIX e índices agregados — base extendida")
+  notes = "SE Driscoll-Kraay. FE país+tiempo.",
+  title = "M4 (referencia): completa vs. sin trimestres de crisis")
 ```
+
+El coeficiente de interacción es **no significativo** sobre la muestra completa
+($\hat\theta\approx-0{,}14$) y **negativo, significativo al 1 %** al excluir GFC y pandemia
+($\hat\theta\approx-1{,}2$): la crisis financiera aguda —cuando el soberano suele estar
+respaldado por líneas de *swap*, financiamiento del FMI o compras del banco central
+doméstico— enmascara la complementariedad.
 
 # Efecto marginal de JLoss según el riesgo de cola
 
 ```{r marginal}
 marginal_df <- function(m, d) {
   V  <- DK(m); b <- coef(m)
-  bJ <- b["JLoss_c"]; bI <- b["JxG_c"]
-  vJ <- V["JLoss_c","JLoss_c"]; vI <- V["JxG_c","JxG_c"]; cJI <- V["JLoss_c","JxG_c"]
-  mu <- mean(d$GaR_pp, na.rm = TRUE)
-  grid <- seq(quantile(d$GaR_pp, .05, na.rm = TRUE), quantile(d$GaR_pp, .95, na.rm = TRUE), length.out = 100)
+  bJ <- b["JLoss_c"]; bI <- b["Int"]
+  vJ <- V["JLoss_c","JLoss_c"]; vI <- V["Int","Int"]; cJI <- V["JLoss_c","Int"]
+  mu <- mean(d$GaR_c, na.rm = TRUE)
+  grid <- seq(quantile(d$GaR_c, .05, na.rm = TRUE), quantile(d$GaR_c, .95, na.rm = TRUE), length.out = 100)
   dev <- grid - mu
   me  <- bJ + bI * dev
   se  <- sqrt(vJ + dev^2 * vI + 2 * dev * cJI)
-  data.frame(GaR = grid, me = me, lo = me - 1.96*se, hi = me + 1.96*se)
+  data.frame(GaR_pp = grid + mean(d$GaR_pp, na.rm = TRUE) - mu, me = me, lo = me - 1.96*se, hi = me + 1.96*se)
 }
-mdf <- marginal_df(M_2w, dat)
-ggplot(mdf, aes(GaR, me)) +
+mdf <- bind_rows(
+  marginal_df(modelos_M4[["completa país+tiempo"]], dat) %>% mutate(muestra = "Completa"),
+  marginal_df(modelos_M4[["sin crisis país+tiempo"]], centrar(subset(est, sin_crisis))) %>% mutate(muestra = "Sin crisis")
+)
+ggplot(mdf, aes(GaR_pp, me, color = muestra, fill = muestra)) +
   geom_hline(yintercept = 0, color = "grey50") +
-  geom_ribbon(aes(ymin = lo, ymax = hi), alpha = .15, fill = "#b23a48") +
-  geom_line(linewidth = 1, color = "#b23a48") +
+  geom_ribbon(aes(ymin = lo, ymax = hi), alpha = .15, color = NA) +
+  geom_line(linewidth = 1) +
   scale_x_reverse() +
+  scale_color_manual(values = c("Completa" = "#3A5A8C", "Sin crisis" = "#b23a48")) +
+  scale_fill_manual(values = c("Completa" = "#3A5A8C", "Sin crisis" = "#b23a48")) +
   labs(x = "GaR (pp) — izquierda = mayor riesgo de cola",
-       y = "∂EMBI/∂JLoss (pb por unidad de JLoss)",
+       y = "∂EMBI/∂JLoss (pb por unidad de JLoss)", color = NULL, fill = NULL,
        title = "Efecto marginal de la fragilidad según el riesgo de cola (FE país+tiempo)",
-       subtitle = "Base extendida, 11 países") +
-  theme_minimal(base_size = 12)
+       subtitle = "Base Bloomberg — completa vs. sin trimestres de crisis") +
+  theme_minimal(base_size = 12) + theme(legend.position = "top")
 ```
 
 # Diagnósticos y robustez de θ
 
 ```{r diagnostics}
+m_ref <- modelos_M4[["completa país+tiempo"]]
 diag <- data.frame(
   test = c("Pesaran CD (dep. transversal)", "Wooldridge (autocorr.)"),
-  estadistico = round(c(pcdtest(M_2w, test = "cd")$statistic, pbgtest(M_2w)$statistic), 3),
-  p_valor = round(c(pcdtest(M_2w, test = "cd")$p.value, pbgtest(M_2w)$p.value), 4)
+  estadistico = round(c(pcdtest(m_ref, test = "cd")$statistic, pbgtest(m_ref)$statistic), 3),
+  p_valor = round(c(pcdtest(m_ref, test = "cd")$p.value, pbgtest(m_ref)$p.value), 4)
 )
-kable(diag, caption = "Diagnósticos del panel (sobre FE país+tiempo)") %>%
+kable(diag, caption = "Diagnósticos del panel (sobre M4, FE país+tiempo, muestra completa)") %>%
   kable_styling(full_width = FALSE)
 ```
 
@@ -187,64 +243,128 @@ se_compare <- function(m) {
     "Arellano (HAC)" = vcovHC(m, method = "arellano", type = "HC1")
   )
   sapply(variants, function(v) {
-    ct <- coeftest(m, vcov = v)["JxG_c", ]
+    ct <- coeftest(m, vcov = v)["Int", ]
     c(coef = round(ct[1],3), se = round(ct[2],3), t = round(ct[3],2), p = round(ct[4],4))
   })
 }
-kable(t(se_compare(M_2w)), caption = "θ bajo distintas matrices de varianza (FE país+tiempo)") %>%
+kable(t(se_compare(m_ref)), caption = "θ bajo distintas matrices de varianza (M4, FE país+tiempo, muestra completa)") %>%
   kable_styling(full_width = FALSE)
 ```
 
 ```{r robustez-extra}
-# Sin COVID
-pan_nc <- pdata.frame(subset(dat, post2020 == 0), index = c("country","tnum"))
-m_nc <- plm(EMBI_bps ~ JLoss_c + GaR_c + JxG_c, data = pan_nc, model = "within", effect = "twoways")
-cat("== θ sin COVID (≤2019), FE país+tiempo ==\n"); printCoefmat(coeftest(m_nc, vcov = DK(m_nc)))
+sub_dk <- function(mask, label) {
+  d <- centrar(subset(est, mask))
+  p <- pdata.frame(d, index = c("country", "tnum"))
+  m <- plm(EMBI_bps ~ JLoss_c + GaR_c + Int, data = p, model = "within", effect = "twoways")
+  cat("==", label, "==\n"); printCoefmat(coeftest(m, vcov = DK(m)))
+  cat(sprintf("N = %d\n\n", nobs(m)))
+  m
+}
+m_sin_covid <- sub_dk(est$sin_covid, "θ sin COVID (2020Q1-2021Q4 fuera), FE país+tiempo")
+m_sin_gfc   <- sub_dk(est$sin_gfc,   "θ sin GFC (2008Q4-2009Q4 fuera), FE país+tiempo")
 
-# Dinámico
-dat$EMBI_lag <- ave(dat$EMBI_bps, dat$country, FUN = function(x) c(NA, head(x, -1)))
-pan_dyn <- pdata.frame(dat, index = c("country","tnum"))
-m_dyn <- plm(EMBI_bps ~ EMBI_lag + JLoss_c + GaR_c + JxG_c, data = pan_dyn, model = "within", effect = "twoways")
-cat("\n== θ dinámico (EMBI rezagado), FE país+tiempo ==\n"); printCoefmat(coeftest(m_dyn, vcov = DK(m_dyn)))
+# Dinamico: EMBI rezagado
+est_dyn <- est %>% arrange(country, tnum) %>% group_by(country) %>%
+  mutate(EMBI_lag = lag(EMBI_bps)) %>% ungroup() %>% as.data.frame()
+d_dyn <- centrar(est_dyn)
+p_dyn <- pdata.frame(d_dyn, index = c("country", "tnum"))
+m_dyn <- plm(EMBI_bps ~ EMBI_lag + JLoss_c + GaR_c + Int, data = p_dyn, model = "within", effect = "twoways")
+cat("== θ dinámico (EMBI rezagado), FE país+tiempo ==\n"); printCoefmat(coeftest(m_dyn, vcov = DK(m_dyn)))
 ```
+
+Sacar solo la pandemia (θ≈−0,81, p≈0,04) alcanza para que la interacción emerja; sacar solo la
+crisis financiera global no (θ≈−0,20, n.s.): la mayor parte del enmascaramiento la produce
+COVID, no la crisis de 2008-09.
+
+# Heterogeneidad: el núcleo de economías emergentes de financiamiento externo
+
+Segunda dimensión de la condicionalidad, transversal en vez de temporal. Polonia e India
+tienen mercados de deuda local profundos y baja dependencia de flujos de cartera externos —el
+bucle banca-soberano no se traslada a su spread. El resto (núcleo, 11 países) sí. Especificación
+M2 (con los seis controles domésticos, FE país+tiempo).
+
+```{r nucleo}
+fit_ctrl <- function(d, extra = character(0)) {
+  dd <- d[complete.cases(d[, c("EMBI_bps","JLoss","GaR_pp", CTRLS)]), ]
+  dd <- centrar(dd)
+  pdd <- pdata.frame(dd, index = c("country", "tnum"))
+  f <- as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + Int +", paste(CTRLS, collapse = " + ")))
+  m <- plm(f, data = pdd, model = "within", effect = "twoways")
+  list(model = m, N = nobs(m), G = length(unique(dd$country)))
+}
+
+r_completa_ctrl <- fit_ctrl(est)
+r_nucleo        <- fit_ctrl(subset(est, !(country %in% NUCLEO_EXCL)))
+r_sin_crisis_ctrl <- fit_ctrl(subset(est, sin_crisis))
+r_nucleo_sin_crisis <- fit_ctrl(subset(est, sin_crisis & !(country %in% NUCLEO_EXCL)))
+
+get_theta <- function(r, label) {
+  ct <- coeftest(r$model, vcov = DK(r$model))
+  data.frame(spec = label, theta = ct["Int","Estimate"], se = ct["Int","Std. Error"],
+             t = ct["Int","t value"], p = ct["Int","Pr(>|t|)"], N = r$N, paises = r$G)
+}
+hetero <- bind_rows(
+  get_theta(r_completa_ctrl,      "M2+controles, completa (todos los países)"),
+  get_theta(r_nucleo,             "M2+controles, núcleo (11 EM, sin Polonia/India)"),
+  get_theta(r_sin_crisis_ctrl,    "M2+controles, sin crisis (todos los países)"),
+  get_theta(r_nucleo_sin_crisis,  "M2+controles, núcleo Y sin crisis")
+) %>% mutate(across(c(theta, se, t, p), ~round(., 4)))
+
+kable(hetero, caption = "θ bajo la especificación M2+controles — dimensión transversal, temporal y combinada") %>%
+  kable_styling(full_width = FALSE) %>%
+  row_spec(4, bold = TRUE, background = "#fdf1e8")
+```
+
+**Las dos dimensiones apuntan al mismo mecanismo.** Combinando ambas condicionalidades —núcleo
+de EM de financiamiento externo, excluyendo trimestres de crisis— el coeficiente llega a su
+magnitud e inferencia más nítidas: la interacción se identifica cuando el mercado espera que el
+pasivo contingente bancario recaiga sobre un soberano **no respaldado**, cuya deuda fija al
+margen un inversor de cartera extranjero sensible al riesgo — ausente donde la deuda está en
+manos de inversores domésticos de largo horizonte (Polonia, India) y donde un respaldo oficial
+desacopla la transmisión (líneas swap de la Fed, FMI, QE doméstico en GFC/COVID).
 
 # Síntesis: triangulación de θ
 
-```{r synthesis, fig.height=5}
-get_theta <- function(m, label) {
+```{r synthesis, fig.height=5.5}
+get_theta_dk <- function(m, label, N = NULL) {
   if (is.null(m)) return(NULL)
   ct <- coeftest(m, vcov = DK(m))
-  data.frame(modelo = label, theta = ct["JxG_c","Estimate"],
-             se = ct["JxG_c","Std. Error"], p = ct["JxG_c","Pr(>|t|)"])
+  data.frame(modelo = label, theta = ct["Int","Estimate"], se = ct["Int","Std. Error"],
+             p = ct["Int","Pr(>|t|)"], N = if (is.null(N)) nobs(m) else N)
 }
 synth <- bind_rows(
-  get_theta(M_pais,  "FE país"),
-  get_theta(M_vix,   "FE país + VIX"),
-  get_theta(M_2w,    "FE país+tiempo"),
-  get_theta(M_glob,  "+ X_global_idx"),
-  get_theta(m_nc,    "Sin COVID (≤2019)"),
-  get_theta(m_dyn,   "Dinámico (EMBI rezagado)")
+  get_theta_dk(modelos_M4[["completa país+tiempo"]], "M4, completa (FE país+tiempo)"),
+  get_theta_dk(modelos_M4[["sin crisis país+tiempo"]], "M4, sin crisis (FE país+tiempo)"),
+  get_theta_dk(m_sin_covid, "Sin COVID solo"),
+  get_theta_dk(m_sin_gfc,   "Sin GFC solo"),
+  get_theta_dk(m_dyn,       "Dinámico (EMBI rezagado)"),
+  get_theta(r_nucleo, "M2+controles, núcleo (11 EM)") %>% select(modelo = spec, theta, se, p, N),
+  get_theta(r_nucleo_sin_crisis, "M2+controles, núcleo y sin crisis") %>% select(modelo = spec, theta, se, p, N)
 ) %>% mutate(lo = theta - 1.96*se, hi = theta + 1.96*se)
 
 kable(synth %>% mutate(across(c(theta, se, p), ~round(., 4))),
-      caption = "Coeficiente θ de JLoss × GaR — base extendida") %>%
+      caption = "Coeficiente θ de JLoss × GaR a través de la batería y la robustez") %>%
   kable_styling(full_width = FALSE)
 
 ggplot(synth, aes(x = theta, y = reorder(modelo, theta))) +
   geom_vline(xintercept = 0, color = "grey50") +
   geom_pointrange(aes(xmin = lo, xmax = hi), color = "#b23a48") +
   labs(x = expression(theta ~ "(JLoss" %*% "GaR)"), y = NULL,
-       title = "Triangulación de θ — base extendida (11 países)",
+       title = "Triangulación de θ — base Bloomberg (13-14 países)",
        subtitle = "Barras = IC 95% (Driscoll-Kraay)") +
   theme_minimal(base_size = 12)
 ```
 
 # Notas
 
-- **Base:** `Panel_extended_15paises.csv` únicamente (11 países con EMBI). Robustez, no modelo central.
-- **Sin controles domésticos:** esta base no incluye deuda/PIB, balance fiscal, etc.; la
-  identificación se apoya en FE de país/tiempo, `VIX (CBOE)` e índices agregados.
-- **Panel desbalanceado:** las ventanas temporales difieren por país; los diagnósticos y la
-  inferencia usan Driscoll-Kraay.
-- **Comparabilidad:** para contrastar con el análisis principal (LatAm-5, con controles),
-  ver `Regresiones_panel_final_v3.Rmd`.
+- **Base:** `bbg/Panel_bloomberg.csv` (panel único ancla en Bloomberg; EMBI Global
+  Diversified, JLoss, GaR). Esta es la base **final y canónica** de la tesis — reemplaza a
+  la anterior `Panel_extended_15paises.csv` (regulatoria, 11 países, sin EMBI Global
+  Diversified), que queda superada.
+- **Esqueleto:** la batería de 24 especificaciones (Tabla 2.3 de la tesis) es la fuente de
+  verdad; este documento la reproduce íntegra y agrega diagnósticos y robustez alrededor de
+  la especificación de referencia (M4, FE país+tiempo).
+- **Fuente canónica de cifras:** `bbg/NUMEROS_CANONICOS_BBG.md` y `bbg/bateria_bbg.csv` — si
+  un número de este documento difiere, esos archivos son la referencia.
+- **Panel desbalanceado:** las ventanas temporales difieren por país; toda la inferencia usa
+  errores de Driscoll-Kraay (`plm::vcovSCC`).
