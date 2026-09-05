@@ -1,7 +1,7 @@
 metodo,theta,t,p_wildboot,extra,p_normal
-wild cluster bootstrap,-0.15998750974723092,-1.5049750833002418,0.13813813813813813,G=13 n=614,
-local projections (pico sev.),4.619731532470409,2.8480514087416298,,h=1 se=1.62 thr=0.05,
-"IV shift-share (nivel, pre_year=2012)",7.4637003893091105,,,shock=OnOffRun_spread_log F1=11.4 theta_IV=2.987905826863757,0.3364229703891528
-"IV shift-share (nivel, shock USD amplio BIS)",-12.49609000406965,,,F1=37.8,0.42799908815951304
-"IV shift-share (sobre-identificado, 2 instrumentos)",-10.073994063592536,,,F_conj=19.8 sargan_p=0.0003,0.49413289013655204
-triple institucional (JxG x WGI),0.2574412210035555,0.8899670568726121,,n=614 paises=13,
+wild cluster bootstrap,-0.18773246485282646,-1.6718195662635573,0.11411411411411411,G=13 n=614,
+local projections (pico sev.),3.3118633117316163,1.5976507290102586,,h=1 se=2.07 thr=-0.05,
+"IV shift-share (nivel, pre_year=2012)",7.508892134612665,,,shock=OnOffRun_spread_log F1=11.5 theta_IV=2.240866852899859,0.3332412175329633
+"IV shift-share (nivel, shock USD amplio BIS)",-12.471339377984478,,,F1=37.9,0.42850125578162634
+"IV shift-share (sobre-identificado, 2 instrumentos)",-10.028452333876231,,,F_conj=19.8 sargan_p=0.0003,0.49546421562265985
+triple institucional (JxG x WGI),0.2325317498602373,0.749998024714547,,n=614 paises=13,

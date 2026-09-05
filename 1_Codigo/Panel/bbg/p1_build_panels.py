@@ -11,7 +11,8 @@ Insumos primarios:
   - CDS 5Y : output_macro/<pais>/EMBI_<pais>.csv (Bloomberg) -> CDS_bps  (robustez)
   - JLoss  : Panel_JLoss_v9_bloomberg.csv  (motor v8/v9, PD Merton/KMV, datos Bloomberg)
   - global : VIX, UST10Y, US HY spread de Bloomberg (output_macro/GLOBAL/)
-  - GaR    : gar_panel_all17.csv  (regresion cuantilica CEMLA; insumos FCI = estadisticas
+  - GaR    : gar_panel_all18.csv  (regresion cuantilica CEMLA, 18 paises con Rusia;
+             insumos FCI = estadisticas
              nacionales, ver Anexo B)
   - controles domesticos: controls_all_bbg.csv (p0, los 16 paises)
   - HHI    : hhi_nivel.csv + hhi_anual.csv (+ GFDD via API para los paises nuevos)
@@ -128,10 +129,13 @@ def load_jloss():
 
 
 def load_gar():
-    g = pd.read_csv(os.path.join(PANEL, "gar_panel_all17.csv"))
+    g = pd.read_csv(os.path.join(PANEL, "gar_panel_all18.csv"))
     g["country"] = g["country"].str.lower()
+    # 'mean' -> 'gar_mean' para no chocar con el metodo DataFrame.mean aguas abajo
+    g = g.rename(columns={"mean": "gar_mean"})
     keep = [c for c in ["country", "quarter", "GaR", "ES", "prob_neg", "skew", "std",
-                        "GaR_st", "n_train"] if c in g.columns]
+                        "GaR_st", "n_train", "gar_mean", "iqr_05_95", "scale_st",
+                        "skew_st", "nu_st"] if c in g.columns]
     return g[keep].dropna(subset=["GaR"])
 
 
