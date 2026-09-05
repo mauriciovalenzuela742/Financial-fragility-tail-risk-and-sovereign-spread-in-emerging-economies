@@ -1,0 +1,6 @@
+# Motor GaR pooled (phase2_gar_panel_all18.py) -- deps de runtime.
+# Versiones con las que se validó localmente; rangos por si el cluster trae otras.
+numpy>=1.26,<3
+scipy>=1.11,<2
+pandas>=2.0,<3
+openpyxl>=3.1

@@ -31,13 +31,13 @@ OUT = os.path.join(HERE, "controls_all_bbg.csv")
 
 LATAM = ["brazil", "chile", "colombia", "mexico", "peru"]
 NEW = ["china", "indonesia", "malaysia", "philippines", "southafrica", "turkey",
-       "bulgaria", "hungary", "poland", "pakistan", "india"]
+       "bulgaria", "hungary", "poland", "pakistan", "india", "russia"]
 
 ISO3 = {"brazil": "BRA", "chile": "CHL", "china": "CHN", "colombia": "COL",
         "indonesia": "IDN", "malaysia": "MYS", "mexico": "MEX", "peru": "PER",
         "philippines": "PHL", "southafrica": "ZAF", "turkey": "TUR",
         "bulgaria": "BGR", "hungary": "HUN", "poland": "POL", "pakistan": "PAK",
-        "india": "IND"}
+        "india": "IND", "russia": "RUS"}
 
 # deuda y balance fiscal: IMF WEO (mejor cobertura EM que WB)
 IMF = {"debt_gdp": "GGXWDG_NGDP",          # deuda bruta del gobierno general, % PIB
