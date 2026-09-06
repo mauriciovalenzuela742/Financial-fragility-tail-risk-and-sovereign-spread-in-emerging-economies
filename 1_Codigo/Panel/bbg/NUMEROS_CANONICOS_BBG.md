@@ -9,6 +9,42 @@ versión de dos bases y a `1_Codigo/Panel/NUMEROS_CANONICOS.md` (v8 regulatorio)
 
 ---
 
+## ⚠ RE-EJECUCIÓN 2026-09-06 — GaR de 18 países (Rusia agregada al pool)
+
+`gar_panel_all18.csv` reemplaza a `gar_panel_all17.csv`: Rusia entra a la regresión
+cuantílica pooled (motor corrido en NLHPC, job 12748912). Efecto:
+
+- **Muestra principal (EMBI): sin cambio** — 13 países, N = 721 (M1) / 614 (M2). Rusia no
+  tiene EMBI Global Diversified de J.P. Morgan.
+- **Muestra de robustez (CDS): 13 → 14 países.** Rusia aporta 10 trimestres
+  (CDS+JLoss+GaR, 2013Q3–2015Q4). θ (DV=CDS): M1 sin controles −0,55 → **−0,615** (t=−2,26);
+  con controles −0,38 → **−0,413** (t=−1,98).
+- **Batería (Tabla 2.3), interacción M4:**
+
+  | spec | θ antes (all17) | θ ahora (all18) |
+  |---|---|---|
+  | completa / FE país+tiempo | −0,136 (n.s.) | **−0,176** (n.s., t=−0,68) |
+  | sin crisis / FE tiempo | −1,724*** | **−1,729*** |
+  | sin crisis / FE país | −1,179*** | **−1,159*** |
+  | sin crisis / FE país+tiempo | −1,190*** | **−1,171*** (p<0,001) |
+
+- **Heterogeneidad (M2+6 controles, FE país+tiempo):**
+  núcleo 11 EM −0,47 → **−0,49** (t=−2,59, p=0,010, N=479);
+  núcleo Y sin crisis −0,94 → **−0,93** (t=−3,23, p=0,001, N=405);
+  sin crisis (todos) −0,69 → **−0,68** (t=−2,17, p=0,031, N=519).
+- **Definición de crisis:** sin COVID solo −0,81 → **−0,81** (p=0,022); sin GFC solo
+  −0,20 → **−0,24** (n.s.).
+- **GaR de los 13 países previos:** |Δ| mediana 0,000, p90 0,003, máx 0,019 (unidades de
+  GaR, ~×100 para pp).
+
+**Lectura:** meter a Rusia hace θ uniformemente ~0,02–0,03 más negativo, sin cambiar ninguna
+conclusión cualitativa (muestra completa nula, sin-crisis fuerte, China pivote, núcleo).
+**La prosa de la tesis y el artifact NO se actualizan todavía** — se hará en una sola pasada
+junto con Argentina (bono 5Y, pendiente de Bloomberg). Las filas de abajo son todavía del
+estado all17; usar la tabla de arriba para los números de la re-ejecución.
+
+---
+
 ## ★ DISEÑO VIGENTE (2026-09-02): DV = EMBI, 13 países, CDS a robustez
 
 **Variable dependiente principal: spread EMBI Global Diversified (J.P. Morgan), en pb**, como
