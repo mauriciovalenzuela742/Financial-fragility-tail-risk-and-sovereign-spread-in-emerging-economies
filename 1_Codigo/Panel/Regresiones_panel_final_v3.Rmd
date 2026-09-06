@@ -360,9 +360,10 @@ ggplot(synth, aes(x = theta, y = reorder(modelo, theta))) +
 # Notas
 
 - **Base:** `bbg/Panel_bloomberg.csv` únicamente. No se cargan otras bases. Muestra de
-  estimación: 13 países con EMBI+JLoss+GaR simultáneos (Argentina, Egipto, Rusia y Pakistán
-  quedan fuera — no tienen EMBI Global Diversified ni, en tres de los cuatro, GaR; ver
-  `bbg/cobertura_panel_bbg.csv`).
+  estimación principal: 13 países con EMBI+JLoss+GaR simultáneos. Argentina, Egipto,
+  Pakistán y Rusia no tienen EMBI Global Diversified de J.P. Morgan (índice que no las
+  cubre); Rusia y Pakistán sí tienen GaR y CDS, así que entran a la muestra de robustez
+  con DV = CDS (Rusia, 10 trimestres 2013Q3–2015Q4). Ver `bbg/cobertura_panel_bbg.csv`.
 - **Escala:** `GaR_pp = GaR × 100` (puntos porcentuales); `EMBI_bps` en puntos base.
 - **Identificación:** efectos fijos de país y tiempo; los efectos principales se interpretan
   en la media porque `JLoss` y `GaR` están centrados.

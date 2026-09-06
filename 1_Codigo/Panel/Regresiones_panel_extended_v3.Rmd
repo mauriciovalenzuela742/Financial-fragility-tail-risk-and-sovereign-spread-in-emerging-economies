@@ -184,8 +184,8 @@ modelsummary(mods_ref, vcov = lapply(mods_ref, DK),
 ```
 
 El coeficiente de interacción es **no significativo** sobre la muestra completa
-($\hat\theta\approx-0{,}14$) y **negativo, significativo al 1 %** al excluir GFC y pandemia
-($\hat\theta\approx-1{,}2$): la crisis financiera aguda —cuando el soberano suele estar
+($\hat\theta\approx-0{,}18$) y **negativo, significativo al 1 %** al excluir GFC y pandemia
+($\hat\theta\approx-1{,}17$): la crisis financiera aguda —cuando el soberano suele estar
 respaldado por líneas de *swap*, financiamiento del FMI o compras del banco central
 doméstico— enmascara la complementariedad.
 
