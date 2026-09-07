@@ -2,8 +2,8 @@
 # bateria_regresiones.R
 #
 # Replica en R (paquete `plm`) la bateria de regresiones del Capitulo 2 de la
-# tesis: EMBI Global Diversified ~ JLoss x GaR, panel unico de 13 economias
-# emergentes, datos Bloomberg. Es la version R de
+# tesis: EMBI Global Diversified ~ JLoss x D  (D = -GaR, "riesgo de cola"),
+# panel unico de 13 economias emergentes, datos Bloomberg. Es la version R de
 # `1_Codigo/Panel/bbg/p8_bateria_regresiones.py` (Python, linearmodels) --
 # pensada para tener a mano si en la defensa piden correr algo en vivo.
 #
@@ -34,6 +34,9 @@ panel <- read.csv(ruta_csv, stringsAsFactors = FALSE)
 # en Chari et al. (2024). Muestra de estimacion = EMBI + JLoss + GaR disponibles.
 d <- subset(panel, !is.na(EMBI_bps) & !is.na(JLoss) & !is.na(GaR))
 d$GaR_pp <- d$GaR * 100          # GaR en puntos porcentuales (igual que el pipeline Python)
+d$D_pp   <- -d$GaR_pp            # D = -GaR: "riesgo de cola" (D mayor = peor). Se reporta
+                                # la interaccion sobre D para que el coeficiente salga
+                                # POSITIVO cuando hay amplificacion: beta3 = coef(JLoss x D) = -theta.
 
 # Trimestres de crisis financiera aguda: crisis financiera global (2008Q4-2009Q4)
 # y pandemia (2020Q1-2021Q4). "Sin crisis" es la segunda muestra de la bateria.
@@ -49,7 +52,9 @@ d$sin_crisis <- !(d$quarter %in% crisis_q)
 centrar <- function(df) {
   df$JLoss_c <- df$JLoss - mean(df$JLoss)
   df$GaR_c   <- df$GaR_pp - mean(df$GaR_pp)
-  df$Int     <- df$JLoss_c * df$GaR_c
+  df$D_c     <- df$D_pp - mean(df$D_pp)     # = -GaR_c
+  df$Int     <- df$JLoss_c * df$D_c         # interaccion de referencia: coef = beta3 = -theta
+  df$Int_GaR <- df$JLoss_c * df$GaR_c       # forma GaR (coef = theta), por si se quiere cotejar
   df
 }
 d_completa   <- centrar(d)
@@ -75,10 +80,11 @@ run_dk <- function(data, formula, effect = "twoways") {
 
 # ------------------------------------------------------------------------------
 # 3. La especificacion de referencia (M4, efectos fijos pais + tiempo)
+#    D = -GaR ; coef(Int = JLoss_c x D_c) = beta3 = -theta (positivo = amplificacion)
 # ------------------------------------------------------------------------------
-f_M4 <- EMBI_bps ~ JLoss_c + GaR_c + Int
+f_M4 <- EMBI_bps ~ JLoss_c + D_c + Int
 
-cat("\n================ M4 (JLoss + GaR + interaccion), FE pais+tiempo ================\n")
+cat("\n================ M4 (JLoss + D + interaccion), D = -GaR, FE pais+tiempo ================\n")
 cat("\n--- Muestra completa ---\n")
 r_completa <- run_dk(pdata_completa, f_M4, "twoways")
 print(r_completa$test)
@@ -90,8 +96,11 @@ print(r_sin_crisis$test)
 cat(sprintf("N = %d   R2_within = %.3f\n", r_sin_crisis$N, r_sin_crisis$R2_within))
 
 cat("\nNumeros de referencia (pipeline Python, linearmodels, Tabla 2.3 de la tesis):\n")
-cat("  Muestra completa   : JLoss=+4.64  GaR=-3.63  theta=-0.14 (t=-0.57, n.s.)\n")
-cat("  Sin crisis         : JLoss=+4.29  GaR=-6.00  theta=-1.19 (t=-3.55, p<0.001)\n")
+cat("  [forma D = -GaR, la que imprime este script]\n")
+cat("  Muestra completa   : JLoss=+4.64  D=+3.63  beta3=+0.14 (t=+0.57, n.s.)\n")
+cat("  Sin crisis         : JLoss=+4.29  D=+6.00  beta3=+1.19 (t=+3.55, p<0.001)\n")
+cat("  [forma GaR, trazable a bbg/bateria_bbg.csv] theta = -beta3 :\n")
+cat("  Muestra completa   : GaR=-3.63  theta=-0.14   |  Sin crisis: GaR=-6.00  theta=-1.19\n")
 cat("  Los coeficientes coinciden (verificado); el estadistico t de Driscoll-Kraay\n")
 cat("  puede diferir un poco entre `plm::vcovSCC` y linearmodels (ancho de banda /\n")
 cat("  kernel por defecto), sin cambiar el signo ni la conclusion de significancia.\n")
@@ -101,9 +110,9 @@ cat("  kernel por defecto), sin cambiar el signo ni la conclusion de significanc
 # ------------------------------------------------------------------------------
 modelos <- list(
   M1 = EMBI_bps ~ JLoss_c,
-  M2 = EMBI_bps ~ GaR_c,
-  M3 = EMBI_bps ~ JLoss_c + GaR_c,
-  M4 = EMBI_bps ~ JLoss_c + GaR_c + Int
+  M2 = EMBI_bps ~ D_c,
+  M3 = EMBI_bps ~ JLoss_c + D_c,
+  M4 = EMBI_bps ~ JLoss_c + D_c + Int    # Int = JLoss_c x D_c ; coef = beta3 = -theta
 )
 efectos  <- c(tiempo = "time", pais = "individual", "pais+tiempo" = "twoways")
 muestras <- list(completa = pdata_completa, sin_crisis = pdata_sin_crisis)
@@ -141,6 +150,9 @@ for (sname in names(muestras)) {
 #   - datos  : pdata_completa, pdata_sin_crisis, o un subset tuyo
 #     (p.ej. subset(d, country != "china") para un leave-one-out)
 #
-# mi_modelo <- plm(EMBI_bps ~ JLoss_c + GaR_c + Int + debt_gdp + fisc_bal,
+# mi_modelo <- plm(EMBI_bps ~ JLoss_c + D_c + Int + debt_gdp + fisc_bal,
 #                   data = pdata_completa, model = "within", effect = "twoways")
 # coeftest(mi_modelo, vcov = vcovSCC)
+#
+# Nota: Int = JLoss_c x D_c con D = -GaR. El coeficiente de Int es beta3 = -theta.
+# Si quieres la forma GaR clasica, usa Int_GaR (= JLoss_c x GaR_c) en su lugar.

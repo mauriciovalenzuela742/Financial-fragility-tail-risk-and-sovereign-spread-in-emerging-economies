@@ -7,6 +7,13 @@ versión de dos bases y a `1_Codigo/Panel/NUMEROS_CANONICOS.md` (v8 regulatorio)
 
 **Regla de uso:** ningún coeficiente entra a la prosa sin trazarse a una fila de este documento.
 
+> **Nota de parametrización (2026-09-07).** La prosa de la tesis (Cap. 2, introducción y
+> discusión generales) y los `.Rmd` del panel reportan la interacción sobre **`D = −GaR`**
+> ("riesgo de cola"; `D` mayor = peor), con coeficiente **`β₃ = coef(JLoss × D) = −θ`**
+> (positivo cuando hay amplificación). Este documento y `bateria_bbg.csv` se mantienen en
+> forma **`θ` (`JLoss × GaR`)**. Traducción: `β₃ = −θ`, `coef(D) = −coef(GaR)`; ninguna
+> magnitud, `t` en valor absoluto, `p` ni `N` cambian. Las tablas de abajo NO se reescriben.
+
 ---
 
 ## ⚠ RE-EJECUCIÓN 2026-09-06 — GaR de 18 países (Rusia agregada al pool)
@@ -222,11 +229,13 @@ cola severa apenas excluye el cero.
 > instrumento da signo opuesto y Sargan rechaza. **El efecto de nivel no está causalmente
 > cerrado con IV**; se apoya en OLS + proyecciones locales.
 
-### H4b (amplificación por concentración) — no identificado
+### H4a / H4b (triple interacción con concentración) — no identificados
 
-β4 (JLoss×D×HHI): estructural +122 (t = +0,37), anual +152 (t = +0,73), trimestral ≈ 0
-(t = −0,41) — los tres con IC de bootstrap de bloques cruzando el cero holgadamente. Sin
-respaldo y sin poder, igual que en el panel de CDS.
+β3 (JLoss×D, HHI centrado): estructural +32,5 (t = +0,55), anual +23,3 (t = +0,53) —**signo
+predicho, no significativo**—, trimestral −4,0 (t = −0,12). β4 (JLoss×D×HHI): estructural
++139 (t = +0,39), anual +171 (t = +0,81), trimestral ≈ 0 (t = −0,54) — los tres con IC de
+bootstrap de bloques cruzando el cero holgadamente. Sin respaldo y sin poder, igual que en el
+panel de CDS. Ver §6 para el detalle. (`bbg/fase5_bbg.csv`.)
 
 ### Placebo temporal (destruir la estructura de GaR, B = 600)
 
@@ -435,30 +444,37 @@ LR = 80,0. El efecto de la fragilidad es ~3,5× mayor en el régimen de cola sev
 
 ## 6. Puente OI ↔ datos: H4a y H4b
 
-`CDS = α_i + δ_t + β1·JLoss + β2·D + β3·(JLoss×D) + β4·(JLoss×D×HHI) + …`, D = −GaR.
+`EMBI = α_i + δ_t + β1·JLoss + β2·D + β3·(JLoss×D) + β4·(JLoss×D×HHI) + β·(JLoss×HHI) + β·(D×HHI) + …`,
+`D = −GaR`, **HHI centrado** ⇒ β3 = complementariedad *en el HHI medio* (cantidad con sentido
+económico; predicción del modelo OI: **β3 > 0**). Fuente: `bbg/fase5_bbg.csv`
+(`p3_causal_fase5.py`, `fit_f5` con *cluster* por país; bootstrap de bloques por país B=1000).
 
-| HHI | β3 (JLoss×D) | t | **β4 (JLoss×D×HHI)** | t agrup. | P(β4>0) boot bloques | **IC90 boot bloques** | rango LOO |
+| HHI | β3 (JLoss×D) | t | β4 (JLoss×D×HHI) | t | P(β4>0) boot | IC90 boot bloques | rango LOO (β4) |
 |---|---:|---:|---:|---:|---:|---|---|
-| estructural (GFDD, nivel) | +56,3 | +1,72 | **−392** | −2,34 | 12 % | **(−627, +212)** — incluye 0 | [−491, −236] |
-| anual (GFDD, serie) | +24,5 | +1,08 | −268 | −2,14 | 30 % | (−387, +345) — incluye 0 | [−286, −45] |
-| **trimestral** (`HHI_q`, verificado 2026-09-01, N=773, 13 países) | −5,5 | −0,17 | **−0,114** | **−2,75** | **9 %** | **(−0,144, +0,013)** — incluye 0 por muy poco | [≈0, ≈0] |
+| estructural (GFDD, nivel) | **+32,5** | +0,55 | +139 | +0,39 | 43 % | (−715, +611) — incluye 0 | [−201, +368] |
+| anual (GFDD, serie) | **+23,3** | +0,53 | +171 | +0,81 | 68 % | (−301, +620) — incluye 0 | [−45, +354] |
+| trimestral (`HHI_q`, N=706, 13 países) | **−4,0** | −0,12 | ≈0 (−0,02) | −0,54 | 54 % | (−0,07, +0,07) — incluye 0 | [≈0, ≈0] |
 
-> **H4a (β3 > 0):** signo **opuesto** al predicho, no significativo (+56, t = 1,72). Con la
-> concentración trimestral (variación temporal real, no proxy anual casi invariante) β3
-> también cambia de signo y pierde toda precisión (−5,5, t=−0,17). Sólo el θ de nivel *sin*
-> HHI (§1) tiene el signo predicho.
-> **H4b (β4 > 0): NO identificado, y el test más potente lo confirma.** Con `HHI_q`
-> —concentración trimestral construida de los mismos 113 bancos que `JLoss`, corr 0,62 con
-> el GFDD anual— el IC90 del bootstrap de bloques es (−0,144, +0,013): **todavía cruza el
-> cero, pero por un margen mínimo**, con el t agrupado más negativo de los tres (−2,75) y la
-> P(β4>0) más baja (9 %). La concentración trimestral **no rescata la predicción del
-> modelo** — si acaso, aporta más evidencia (aunque no concluyente al 90%) de que el signo
-> empírico es negativo, no que sea únicamente un problema de falta de variación temporal
-> en el proxy de concentración. Contrasta con la versión v8 regulatoria (+721, t = +2,98),
-> de dispersión transversal de `JLoss` mucho mayor. **La predicción distintiva del modelo de
-> OI sigue sin encontrar respaldo, ahora con un proxy de concentración mejor identificado.**
-> (Redacción de prosa: "no identificado / imprecise", NO "significativo en la dirección
-> equivocada".)
+> **H4a (predicción β3 > 0):** con la triple interacción incluida, β3 sale con el **signo
+> predicho (positivo)** con los dos proxies del GFDD —+32,5 (estructural) y +23,3 (anual)—
+> pero **no es significativo** (t ≈ 0,5); con la concentración trimestral es ≈ 0 (−4,0,
+> t = −0,12). En esta parametrización **β3 no está identificado** (t < 1 en los tres casos).
+> El test limpio de H4a es el término `JLoss × D` **sin** HHI (§1 y §"Heterogeneidad"):
+> β3 = +0,16 en la muestra completa (n.s.) y **+0,47 (t = 2,29, p = 0,023) en el núcleo de
+> 11 EM** — ahí sí con el signo del modelo y significativo.
+> _Corrección 2026-09-07: la versión previa de esta sección decía "signo opuesto al
+> predicho"; era un error — +32,5 y +23,3 tienen el mismo signo que la predicción β3 > 0.
+> La lectura correcta es "no identificado / no significativo", no "signo equivocado"._
+>
+> **H4b (predicción β4 > 0): NO identificado.** El punto estimado de β4 es pequeño y no
+> significativo con los tres proxies (+139, +171, ≈0; |t| < 1) y el IC90 del bootstrap de
+> bloques por país cruza el cero holgadamente; P(β4>0) entre 43 % y 68 % — sin señal en
+> ninguna dirección. Contrasta con la reconstrucción regulatoria v8 (+721, t = +2,98), de
+> dispersión transversal de `JLoss` mucho mayor. La predicción distintiva del modelo de OI
+> **no encuentra respaldo pero tampoco se rechaza**: no hay potencia con 13 *clusters* de
+> país y un HHI casi invariante en el tiempo.
+> (Redacción de prosa: "no identificado / impreciso", NO "significativo en la dirección
+> equivocada" NI "signo empírico negativo".)
 
 Explicación más probable (`paper1_oi.tex` §5.4): la serie JLoss de Bloomberg es
 transversalmente comprimida (sd ≈4 vs 8,3), y la triple interacción necesita la dispersión
@@ -568,9 +584,13 @@ estático de EF bidireccionales es el apropiado** dada la forma del panel.
     sin China+Turquía → θ ≈ 0). 9 de 13 países casi no tienen variación de JLoss.
   - **Regresor generado:** θ estable a perturbar GaR hasta 25 % de su sd; el sesgo de medición
     atenúa. Bootstrap completo de 1ª etapa pendiente.
-- **H4a (β3 > 0):** signo opuesto al predicho, no significativo.
+- **H4a (β3 > 0), triple interacción:** **no identificado** — con la triple interacción
+  incluida (HHI centrado), β3 sale con el **signo predicho** pero no significativo con los
+  dos proxies del GFDD (+32,5 y +23,3; |t| < 0,6) y ≈ 0 con la concentración trimestral
+  (−4,0, t = −0,12). El test con potencia de H4a es `JLoss × D` **sin** HHI (§1 y
+  "Heterogeneidad"): +0,16 completa (n.s.), **+0,47 (t = 2,29, p = 0,023) en el núcleo de
+  11 EM**. Ver §6.
 - **H4b (β4 > 0):** **no identificado** — el bootstrap de bloques por país deja el IC90
-  cruzando el cero con los tres proxies de concentración (GFDD estructural, GFDD anual y la
-  nueva concentración **trimestral** de los mismos bancos de `JLoss`); con la serie trimestral
-  el margen es mínimo (IC90 −0,144/+0,013) y la P(β4>0) más baja (9 %), pero no cruza el
-  umbral de significancia. No se afirma dirección.
+  cruzando el cero holgadamente con los tres proxies de concentración (β4 = +139, +171, ≈0;
+  |t| < 1; P(β4>0) 43 %–68 %), incluida la concentración **trimestral** construida de los
+  mismos bancos de `JLoss`. No se afirma dirección. Ver §6.

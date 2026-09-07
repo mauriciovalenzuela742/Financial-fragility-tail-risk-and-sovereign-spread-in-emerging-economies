@@ -1,0 +1,218 @@
+Juan / mauricio
+Fri, Sep 4, 2026
+
+0:04 - Juan Fco. Martinez S.
+Hola.
+
+0:05 - mauricio valenzuela corvalan
+Hola, profe, ¿cómo estás? Bien, ¿y tú? Ahí sí, bien, igual.
+
+0:11 - Unidentified Speaker
+Qué bueno.
+
+0:13 - mauricio valenzuela corvalan
+A ver, no voy a compartir pantalla. Estaba revisando un proyecto.
+
+0:19 - Unidentified Speaker
+Bueno, obtuve resultados ya.
+
+0:22 - mauricio valenzuela corvalan
+Esta es la tableta resumen del resumen. Algo que me parece interesante de lo que es que cuando saco los trimestres de crisis, ahí hay significancia en el signo, en el valor. Esto serían las regresiones, ¿cierto? Y esta es la que nos interesa. Y cuando considero el universo completo de todos los países que encontré, porque al final hay unos países que no los puede considerar, por ejemplo, no puede construir el Gar de Rusia, o el Gar de Egipto, o el Gar de Argentina, y pero si lo tenías porque no lo tenía algar el gar si el ya no lo tengo sí es por el tema de la identificación si está ahí es usted en identificación porque los que tienen riesgo argentina no tiene el bono soberano a 10 años que se puede ocupar y de hecho tengo un Por ejemplo, del JLOS efectivamente los tengo todos.
+
+ Tengo Argentina, Brasil, Chile, China, Colombia, Egipto, India, Indonesia, Malasia, México, Pakistán, Perú, Filipinas, Polonia, Rusia, Turquía y Sudáfrica. Pero, después del Grow That Risk, aquí es donde nos caemos con Egipto, Argentina y algunos periodos. Por ejemplo, Filipinas no está completa. O Rusia tampoco está completo. O sea, Pakistán. Rusia tampoco tiene GAR. Como una de las métricas que era el bono soberano a 10 años, esas no las tienen.
+
+ Por ejemplo, Argentina no la tiene, Rusia no la tiene. Entonces, como que ahí no lo consideré nomás, inicialmente. Y esa era una de las preguntas que le quería hacer. Sí, eso es muy, muy importante. Entonces, los únicos países que entraron a la regresión que le hemos fueron Brasil, Chile, China, Indonesia, India, Colombia, Malasia, México, Polonia, Turquía, Sudáfrica, Filipinas y Perú. El resto no entró.
+
+
+
+2:35 - Juan Fco. Martinez S.
+Ya, pero entonces pensemos en lo que encontraste y después vemos cómo se puede arreglar lo otro. Entonces tenís a la izquierda el envío.
+
+2:51 - mauricio valenzuela corvalan
+¿Aquí en estos gráficos o en el...?
+
+2:53 - Juan Fco. Martinez S.
+No, no, no, en esta tablita. Entonces a la izquierda tení ENVY, y a la derecha tení estas variables que están acá, ¿cierto? Claro. Perfecto.
+
+3:03 - mauricio valenzuela corvalan
+Y al principio consideré una YALOS, solo CARD, solo YALOS... Es que esto fue lo que me dijo el profe Pato. Lo de todas las reacciones de nuevo, con los nuevos datos de Bloomberg, y me dio esto nuevo. Y... Por ejemplo, igual consideré otros controles que están acá. El control del... Por ejemplo aquí, deuda contra el PIB, balance fiscal... Y con las mismas regresiones, básicamente. Ah, pero no sé si les estoy mostrando lo que les estoy mostrando.
+
+
+
+3:36 - Unidentified Speaker
+No, te estoy mostrando... Sí, sí, sí.
+
+3:39 - mauricio valenzuela corvalan
+Sí, sí, me di cuenta. A ver, voy a... A ver si lo voy a compartir.
+
+3:46 - Juan Fco. Martinez S.
+completo y completo aquí entonces esto está mostrando entonces aquí hacemos los mismos controles pero añadí otros otros controles que a los controles que estaban en el en el paper de la jailo te pido un favor mira como cuéntame para poder ordenarme cuéntame resultados que tiene, cuál es la instrucción que te da detrás y después vemos cómo ordenar el material para mostrárselo al pato. Ya? Ya.
+
+4:25 - mauricio valenzuela corvalan
+Entonces veamos lo que encontraste. Esto es lo que encontré, esto es lo más interesante. ¿Cómo lo interpretas? Yo lo interpreto que básicamente el efecto que nosotros estamos viendo en donde una mala predicción debilita aún más el sistema que ya está debilitado solo se da cuando no hay como una entidad supranacional que está ahí cuidando, porque hubo una crisis masiva. No hay, al final del día, como que esta confianza de los inversores, por así decirlo de alguna forma, el rescate, no lo está haciendo al final la entidad nacional sí misma, sino que lo está haciendo un FMI o lo está haciendo algo más allá, porque fue el COVID, que fue la crisis subprime, que al final son los dos periodos de crisis que sacamos.
+
+ Y ahí por eso estamos viendo que al final del día este sistema que está prediciendo el futuro de un país hace frágil el país en sí mismo, se ve como más amplificado este efecto cuando no hay nadie afuera salvándome. Entonces como que se las tiene que ver solo el Banco Central del propio país. Algo así lo entendí yo.
+
+5:39 - mauricio valenzuela corvalan
+porque al final igual resiste todos los efectos fijos.
+
+5:44 - Juan Fco. Martinez S.
+Eso igual me llamó la atención. Ya, pero eso como que captura que el interior económico y financiero explican a los express soberanos en forma conjunta cuando tiene, cuando no incorpora que está ahí en un Ah, ya.
+
+6:07 - mauricio valenzuela corvalan
+Sí, solamente ese efecto cruzado, ese efecto amplificador, se da cuando en periodo fuera de crisis.
+
+6:13 - Unidentified Speaker
+Claro, exacto.
+
+6:14 - Juan Fco. Martinez S.
+Esos seis, eso dice. Sí, sí, sí. Ya? Perfecto.
+
+6:17 - mauricio valenzuela corvalan
+Sí, eso me queda claro. Ok.
+
+6:20 - Juan Fco. Martinez S.
+Y que el efecto es negativo.
+
+6:22 - mauricio valenzuela corvalan
+Sí. Es igual como el...
+
+6:24 - Juan Fco. Martinez S.
+¿Qué quiere decir?
+
+6:25 - mauricio valenzuela corvalan
+Que... Pero es raro esa hueá, ¿verdad?
+
+6:28 - Juan Fco. Martinez S.
+Es raro, es cierto. Yo eso mismo le iba a preguntar por qué.
+
+6:33 - mauricio valenzuela corvalan
+No, no, no. Ah, está al revés, es porque está al revés, verdad, sí, el GAR está al revés.
+
+6:40 - Juan Fco. Martinez S.
+Más negativo era peor, sí, es por eso. Claro, entonces el GAR está influenced, o sea, tenéis que descartar eso, podéis ponerlo con el signo correcto, o sea, poner más riesgo del GAR porque tú te estás basando en una cola, me imagino que es la izquierda.
+
+6:57 - Unidentified Speaker
+Sí, es la izquierda, el 5.
+
+6:59 - Juan Fco. Martinez S.
+Claro, entonces a lo mejor el JLoss por GAR, valor absoluto, que tenéis que poner acá.
+
+7:05 - mauricio valenzuela corvalan
+¿Cachai?
+
+7:06 - Juan Fco. Martinez S.
+Para que te quede positivo, para que sea interpretable.
+
+7:11 - mauricio valenzuela corvalan
+Un poco más, ya, sí entiendo.
+
+7:14 - Juan Fco. Martinez S.
+Verlo de una y entender ya. Y lo otro, entonces, lo que tendréis que hacer es agarrar lo original del paper y ver cómo cambió en términos de especificación. Pero no te muevas, hipo.
+
+7:31 - mauricio valenzuela corvalan
+Estás mirando la misma tablita. Ah, disculpe.
+
+7:34 - Juan Fco. Martinez S.
+La original de la ESA, tenés que compararla con la tabla original del paper, porque si hiciste solo la modificación de meter el GAR y el efecto cruzado, la idea es que miremos los coeficientes, por ejemplo, JLOS contra JLOS debería dar un coeficiente en una unidad similar.
+
+7:52 - mauricio valenzuela corvalan
+Ponte tú.
+
+7:52 - Juan Fco. Martinez S.
+Si te diera 400 en el JLOS, para la regresión donde JLOS contra enví y ahora te da 7.4, raro. Algo hay, o el logaritmo, ¿caché? Necesitáis pararte en el mismo punto de partida para poder después definir qué ocurre con la extensión, ¿bien? Perfecto. Y así lo voy a mostrar al pato para que lo pueda comparar. Voy a poner el resultado número 1, tal cual como yo te dije, más que como idear alguna teoría específica, el Es decir, mira, el efecto cruzado domina solo en periodos fuera de crisis.
+
+
+
+8:31 - mauricio valenzuela corvalan
+Y esto es lo que vemos en la tabla.
+
+8:35 - Juan Fco. Martinez S.
+Y después, ¿tienes otras regresiones más?
+
+8:37 - mauricio valenzuela corvalan
+Sí, sí, tengo regresiones más. Por ejemplo, aquí los controles de deuda contra PIB.
+
+8:44 - Juan Fco. Martinez S.
+Ahí no logro ver bien, por si acaso. A lo mejor aquí estoy. Ahí veo, pero...
+
+8:53 - mauricio valenzuela corvalan
+No sé si lo puedo agrandar más.
+
+8:56 - Juan Fco. Martinez S.
+Sí, sí, sí, no, se lo ve.
+
+8:59 - mauricio valenzuela corvalan
+Ahí lo ve. Sí, estos controles y, por ejemplo, también le metí el ENVY con LAD. También, efectivamente, el ENVY con LAD es significativo, pero no la multiplicación. O no tanto. Y cambié la... En vez de usar el GAR, ocupé el SPECTRE CHORD FOLD. Tampoco da lo que buscamos, pero el signo da igual. O sea, menos... Siendo al menos como que vemos el mismo signo, lo mismo GAR negativo, JLONS negativo, GAR negativo, JLONS por GAR negativo.
+
+
+
+9:30 - Juan Fco. Martinez S.
+Yo creo que avanzaste harto con los datos de Bloomberg y todo y te dieron las regresiones, ahora lo único que tenés que hacer es agarrar el, como te decía, el paper original, comparar con los nuevos, con las nuevas especificaciones que lo que te dio, pero que te diría es que para que pudieras avanzar y que te quedara como más de tesis, si pudieras complementar con ahora el Garen que te está fallando, puedes tratar de meter como por ejemplo la parte financiera, estoy pensando en una en Argentina o en Rusia que no tienen cotizaciones de buenos soberanos probablemente en ese período.
+
+
+
+10:14 - mauricio valenzuela corvalan
+Tienen a 5 años. Ah ya no importa, lo digo nomás.
+
+10:18 - Juan Fco. Martinez S.
+Si, ocupa IES y listo, porque te van a dar un premio. Si lo que es importante ahí en los instrumentos es que te dan un premio en los precios, que se va agrandando en el tiempo, entonces es como lo único relevante.
+
+10:35 - mauricio valenzuela corvalan
+Perfecto, y aquí por ejemplo lo mismo esto efectivamente este es el análisis de la marginalidad y se da efectivamente pero se da cuando este es con o sin los periodos de crisis con periodo de crisis claro y si es periodo de crisis tenés que probarlo también voy a revisar eso Y aquí ese mapita que... Este mapita igual es bueno, a mi me gusta entenderlo, porque efectivamente cuando hay... Yo me lo imagino como un colchón, entonces como que el colchón se hunde más, mucho más fuerte cuando hay una Jaylos coordinada con un Gar malo.
+
+
+
+11:22 - Juan Fco. Martinez S.
+A ver, explícame eso, es como...
+
+11:25 - mauricio valenzuela corvalan
+Es como un potencial, el potencial. Entonces esas son como curvas de nivel y mientras más arriba estemos...
+
+11:34 - Juan Fco. Martinez S.
+o sea yo, hacia mi viene el spread, eso? Si, si, como, como, si y mientras más rojito es que teneis más yalos y más gar exacto, o sea, los puntos que son?
+
+11:49 - mauricio valenzuela corvalan
+son los bancos en específico, como el momento que está pero que momento estáis midiendo aquí? Aquí estamos midiendo como ya si es cierto no sé si está diferenciado a nivel temporal como que hay diferencia a nivel temporal pero son todos son todos los puntos del panel 720 puntos?
+
+12:19 - Juan Fco. Martinez S.
+si es cierto debería ser pero debería poner el programa que te lo debe hacer, que en la medida que sean observaciones más recientes las pongan más oscuras y observaciones más antiguas las pongan más claras, te serviría.
+
+12:33 - mauricio valenzuela corvalan
+Sí, sí, me parece.
+
+12:34 - Juan Fco. Martinez S.
+¿Cachai? Sí, está bueno. Si no, no tenéis que meterle otra dimensión más.
+
+12:39 - mauricio valenzuela corvalan
+Sí, porque al final es como esto mismo, pero cortado hacia el otro lado. Claro, no sé qué hacer. Sí, entonces, esa inclinación yo me la imagino como el potencial gravitatorio incluso, entonces como que si tú llevas las hacia muy allá te va a costar mucho después cuando te caigas, por decirlo de alguna forma.
+
+12:59 - Juan Fco. Martinez S.
+Sí, yo creo que está difícil de sorprender con potencial gravitatorio que lo hiciste.
+
+13:06 - mauricio valenzuela corvalan
+Sí, sí, no sé, así me lo imaginé un poco.
+
+13:10 - Juan Fco. Martinez S.
+Eso, mira, ya está llegando el resultado, entonces como trata de capturar por lo menos Rusia y Argentina, que te quede limpio, lo graficáis, etcétera. Después comparáis las tablas más importantes del paper anterior con éste, para que te den un poco cuál es el valor agregado de incorporar el GAR. Y ahí recién lo mandáis en un correo ordenado al Pato y a mí, para que lo puedan mirar.
+
+13:44 - mauricio valenzuela corvalan
+Y lo mandáis como con buenas noticias, encontré los datos...
+
+13:49 - Juan Fco. Martinez S.
+para ser bien correcto contigo. El Pato está un poco menos entusiasmado con esta parte porque pensó que te iba a ir a trazar y iba a entrar en un bucle, pero si ya lograste sacar los datos, entonces ahora va a ser una buena noticia y creo que se va a poder incorporar de nuevo al trabajo. Sí, sí.
+
+14:15 - mauricio valenzuela corvalan
+Entonces, van a descargar todos los datos Bloomberg. Ahora ya lo puedo hacer cuando sea. Ya aprendí, así que bien. Bien, fue excelente. Bueno, mauricio, eso.
+
+14:23 - Juan Fco. Martinez S.
+Yo me tengo que ir ahora, pero bueno, igual qué buena onda que pudiste avanzar. Sí, no, y yo quiero también, si quiero, también terminar.
+
+14:30 - mauricio valenzuela corvalan
+Así que, ya, pero para que aquí estén buenos resultados. Esto fue lo que más me entusiasmó. Esta diferencia que fue como lo más interesante y que dio el mismo signo. Y que el signo se mantuvo. Voy a hacer eso que me dices, del valor absoluto no lo había pensado de esa forma, pero perfecto.
+
+14:47 - Juan Fco. Martinez S.
+Eso, y de nuevo te digo, en la parte de la comparativa, la interpretación simple del resultado, eso es clave, porque así tú llegas y lo explicas bien en el correo, y así el pato no se tiene que dar tanta vuelta, porque si lo ponés como las regresiones así crúas que vienen saliendo del Stata o del programa que estás ocupando, Sí, me imagino.
+
+15:14 - mauricio valenzuela corvalan
+Muchas gracias por tu tiempo. Nos vemos. Gracias.

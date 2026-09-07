@@ -44,12 +44,17 @@ Orden: `p0 -> p1 -> p2 -> p3 -> p4`.
 | Umbral Hansen (severo/benigno) | corrobora | +8,1 / +2,3 pb, LR=80 |
 | Efecto marginal p10→p90 GaR | monótono | +4,6 → +1,8 (banda excluye 0 en cola severa) |
 | IV shift-share | débil | F≈9,5 (débil-a-límite) |
-| **H4b (β4>0, amplificación por concentración)** | **+721 (t=2,98) confirmada** | **−392 (t=−2,34): signo contrario, significativo. RECHAZADA** |
+| **H4b (β4>0, amplificación por concentración)** | **+721 (t=2,98) confirmada** | **+139 / +171 / ≈0 (|t|<1): NO IDENTIFICADA** (IC90 boot cruza el cero; ver NUMEROS §6) |
 
 **Lectura honesta:** el panel único respalda el **signo y la forma** de la complementariedad
 (θ<0, efecto marginal creciente en severidad de cola, umbral); la **magnitud puntual** es
 marginalmente significativa y su **identificación descansa en episodios de estrés recientes**
-(pre-2020 no se distingue de cero). H4a débil, H4b rechazada.
+(pre-2020 no se distingue de cero). H4a condicional (significativa solo en el núcleo de
+11 EM), H4b no identificada.
+
+> *Nota: varias filas de esta tabla son de una corrida antigua (p. ej. IV shift-share ya no
+> es "débil-a-límite": F=21,6 con `pre_year=2012`). La fuente vigente es*
+> *`NUMEROS_CANONICOS_BBG.md`.*
 
 ## Tesis reescrita (una sola investigación, sin "núcleo/ampliado")
 

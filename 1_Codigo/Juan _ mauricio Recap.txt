@@ -1,0 +1,52 @@
+Juan / mauricio
+Fri, Sep 4, 2026
+
+Summary:
+
+Se evaluaron nuevas regresiones sobre ENVY, JLoss y GAR para validar su aporte al análisis de spreads soberanos.
+• El efecto conjunto ENVY-GAR fue negativo fuera de crisis.
+• GAR debe corregirse o expresarse en valor absoluto.
+• La muestra excluyó países sin bonos soberanos a diez años.
+• Se analizará incorporar Argentina y Rusia mediante IES.
+• Mauricio comparará tablas, limpiará resultados y actualizará gráficos.
+
+
+Action Items:
+
+* Mauricio Valenzuela Corvalán: Compara la especificación original del paper con las nuevas regresiones y verifica que los coeficientes base mantengan magnitudes comparables
+* Mauricio Valenzuela Corvalán: Intenta incorporar Argentina y Rusia mediante instrumentos alternativos como IES
+* Mauricio Valenzuela Corvalán: Verifica el análisis de marginalidad con y sin los períodos de crisis
+* Mauricio Valenzuela Corvalán: Mejora el mapa de resultados diferenciando las observaciones recientes mediante colores más oscuros
+* Mauricio Valenzuela Corvalán: Limpia y grafica los resultados incluyendo, en lo posible, Argentina y Rusia
+* Mauricio Valenzuela Corvalán: Compara las tablas principales del paper anterior con las nuevas especificaciones para identificar el valor agregado de GAR
+* Mauricio Valenzuela Corvalán: Envía a Juan y al profesor Pato un correo ordenado con los resultados y su interpretación sencilla
+* Mauricio Valenzuela Corvalán: Corrige la orientación de GAR utilizando su valor absoluto o un signo equivalente que permita una interpretación positiva y coherente
+
+
+Key Discussion Points:
+
+Datos, muestra y disponibilidad de GAR
+Mauricio presentó los resultados obtenidos con nuevos datos de Bloomberg y explicó la composición de la muestra de países. Se identificaron problemas de cobertura para Argentina, Egipto, Rusia y algunos períodos debido a la ausencia de bonos soberanos a diez años necesarios para calcular GAR.
+
+Interpretación del efecto cruzado
+Juan pidió concentrarse primero en interpretar los resultados antes de resolver las limitaciones de datos. Mauricio explicó que el efecto amplificador de una mala predicción sobre un sistema debilitado aparece cuando no existe un respaldo supranacional, y ambos confirmaron que el efecto se observa principalmente fuera de períodos de crisis y es negativo.
+
+Corrección de la orientación de GAR y comparación metodológica
+Juan y Mauricio detectaron que el signo de GAR estaba invertido porque la medida provenía de una cola izquierda de la distribución. Juan recomendó utilizar el valor absoluto o corregir la orientación, y pidió comparar la especificación original del paper con las nuevas regresiones para verificar que los coeficientes base conservaran magnitudes razonables.
+
+Controles y especificaciones alternativas
+Mauricio presentó regresiones adicionales con controles de deuda sobre PIB, balance fiscal y otras variables. ENVY con LAD fue significativo, aunque su interacción no lo fue claramente, mientras que una medida alternativa a GAR mantuvo signos similares pero no produjo el resultado buscado.
+
+Cobertura de países y alternativas de medición
+Juan recomendó intentar incorporar Argentina y Rusia mediante instrumentos alternativos, como IES, para resolver la falta de cotizaciones de bonos soberanos a diez años. También se revisó un análisis de marginalidad y se discutió cómo presentar gráficamente la interacción entre JLoss y GAR.
+
+Visualización e interpretación del mapa de resultados
+Mauricio explicó el mapa como una representación de la intensidad conjunta de JLoss y GAR, comparándola con un colchón o un potencial gravitatorio. Juan sugirió añadir una dimensión temporal mediante colores para diferenciar observaciones recientes de las antiguas.
+
+Próximos pasos y comunicación de resultados
+Juan indicó que Mauricio debía limpiar los resultados, preparar gráficos y comparar las tablas principales del paper anterior con las nuevas especificaciones. El siguiente entregable sería un correo ordenado para Juan y el profesor Pato, con una interpretación simple del resultado y una explicación del valor agregado de GAR.
+
+
+Notepad:
+
+* No notes
