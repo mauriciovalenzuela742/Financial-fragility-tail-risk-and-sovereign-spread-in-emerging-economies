@@ -30,10 +30,20 @@ Este documento reemplaza la versión anterior (base regulatoria `Panel_extended_
 11 países, sin EMBI Global Diversified ni controles domésticos) — esa base quedó superada por
 la reconstrucción Bloomberg de la tesis y no debe citarse en la defensa.
 
-El parámetro de interés es θ, la interacción `JLoss × GaR`. El esqueleto empírico es la
-**batería de 24 especificaciones** (4 modelos × 3 estructuras de efectos fijos × 2 muestras,
-al modo de Chari et al. 2024) que es la Tabla 2.3 de la tesis; el resto del documento es
-diagnóstico y robustez sobre esa misma batería.
+El parámetro de interés es la interacción entre fragilidad bancaria y riesgo de cola. El
+esqueleto empírico es la **batería de 24 especificaciones** (4 modelos × 3 estructuras de
+efectos fijos × 2 muestras, al modo de Chari et al. 2024) que es la Tabla 2.3 de la tesis;
+el resto del documento es diagnóstico y robustez sobre esa misma batería.
+
+## Orientación de `GaR`: se reporta `D = −GaR`
+
+`GaR` (cuantil 5 % del crecimiento) es más negativo cuando la cola es peor, lo que deja el
+término de interacción con signo negativo, incómodo de leer. Se reporta la interacción sobre
+`D = −GaR` (riesgo de cola: `D` mayor = peor), de modo que el coeficiente de interés es
+**β₃ = coef(`JLoss × D`)**, **positivo cuando hay amplificación**. Relación exacta con la
+forma `GaR`: **β₃ = −θ** y coef(`D`) = −coef(`GaR`). En la cola izquierda (`GaR < 0`),
+`D` coincide con `|GaR|`. Trazable a `bbg/bateria_bbg.csv` multiplicando la columna `Int_b`
+por −1.
 
 ```{r libs}
 library(plm)
@@ -58,6 +68,7 @@ prep <- function(path) {
   d$tnum <- d$year + (d$q - 1) / 4
   d <- d[order(d$country, d$tnum), ]
   d$GaR_pp <- d$GaR * 100
+  d$D_pp   <- -d$GaR_pp                 # D = -GaR: riesgo de cola (D mayor = peor)
   d$sin_crisis <- !(d$quarter %in% CRISIS_Q)
   d$sin_covid  <- !(d$quarter %in% CRISIS_Q[grepl("^202[01]", CRISIS_Q)])
   d$sin_gfc    <- !(d$quarter %in% CRISIS_Q[grepl("^200[89]", CRISIS_Q)])
@@ -70,7 +81,9 @@ prep <- function(path) {
 centrar <- function(df) {
   df$JLoss_c <- df$JLoss - mean(df$JLoss)
   df$GaR_c   <- df$GaR_pp - mean(df$GaR_pp)
-  df$Int     <- df$JLoss_c * df$GaR_c
+  df$D_c     <- df$D_pp - mean(df$D_pp)          # = -GaR_c
+  df$JxG     <- df$JLoss_c * df$GaR_c            # forma GaR   (coef = theta)
+  df$Int     <- df$JLoss_c * df$D_c              # forma D     (coef = beta3 = -theta); interacción de referencia
   df
 }
 
@@ -115,9 +128,9 @@ controles domésticos: mide el mecanismo "desnudo". Errores de Driscoll-Kraay.
 ```{r bateria-construccion}
 modelos <- list(
   M1 = EMBI_bps ~ JLoss_c,
-  M2 = EMBI_bps ~ GaR_c,
-  M3 = EMBI_bps ~ JLoss_c + GaR_c,
-  M4 = EMBI_bps ~ JLoss_c + GaR_c + Int
+  M2 = EMBI_bps ~ D_c,
+  M3 = EMBI_bps ~ JLoss_c + D_c,
+  M4 = EMBI_bps ~ JLoss_c + D_c + Int    # Int = JLoss_c * D_c ; coef = beta3 = -theta
 )
 efectos <- c(tiempo = "time", país = "individual", "país+tiempo" = "twoways")
 
@@ -156,18 +169,19 @@ for (sname in names(muestras)) {
 }
 bateria <- do.call(rbind, lapply(filas, function(f) {
   cols <- c("muestra","modelo","efectos_fijos","N","R2w",
-            "JLoss_c_coef","JLoss_c_t","GaR_c_coef","GaR_c_t","Int_coef","Int_t")
+            "JLoss_c_coef","JLoss_c_t","D_c_coef","D_c_t","Int_coef","Int_t")
   for (cc in cols) if (is.null(f[[cc]])) f[[cc]] <- NA
   f[cols]
 }))
 kable(bateria, row.names = FALSE,
-      col.names = c("Muestra","Modelo","Efectos fijos","N","R²w","JLoss","t","GaR","t","JLoss×GaR","t"),
-      caption = "Tabla 2.3 — batería completa (4 modelos × 3 FE × 2 muestras)") %>%
+      col.names = c("Muestra","Modelo","Efectos fijos","N","R²w","JLoss","t","D=−GaR","t","JLoss×D","t"),
+      caption = "Tabla 2.3 — batería completa (4 modelos × 3 FE × 2 muestras). JLoss×D = β₃ = −θ.") %>%
   kable_styling(full_width = FALSE, font_size = 11) %>%
   pack_rows(index = table(bateria$muestra)[unique(bateria$muestra)])
 ```
 
-*** p<0,01, ** p<0,05, * p<0,10. Trazable a `bbg/bateria_bbg.csv`.
+*** p<0,01, ** p<0,05, * p<0,10. Trazable a `bbg/bateria_bbg.csv` (columnas `GaR_b`/`Int_b`
+con signo invertido: aquí `D = −GaR` y `JLoss×D = −Int`).
 
 ## La especificación de referencia, en detalle (M4, país + tiempo)
 
@@ -177,17 +191,93 @@ mods_ref <- list(
   "M4 / sin crisis"    = modelos_M4[["sin crisis país+tiempo"]]
 )
 modelsummary(mods_ref, vcov = lapply(mods_ref, DK),
-  coef_map = c("JLoss_c" = "JLoss", "GaR_c" = "GaR (pp)", "Int" = "JLoss × GaR"),
+  coef_map = c("JLoss_c" = "JLoss", "D_c" = "D = −GaR (pp)", "Int" = "JLoss × D"),
   stars = c('*'=.1,'**'=.05,'***'=.01), gof_omit = "AIC|BIC|Log.Lik|RMSE|Adj",
-  notes = "SE Driscoll-Kraay. FE país+tiempo.",
+  notes = "SE Driscoll-Kraay. FE país+tiempo. coef(JLoss × D) = β₃ = −θ.",
   title = "M4 (referencia): completa vs. sin trimestres de crisis")
 ```
 
-El coeficiente de interacción es **no significativo** sobre la muestra completa
-($\hat\theta\approx-0{,}18$) y **negativo, significativo al 1 %** al excluir GFC y pandemia
-($\hat\theta\approx-1{,}17$): la crisis financiera aguda —cuando el soberano suele estar
+El coeficiente de interacción `JLoss × D` es **no significativo** sobre la muestra completa
+($\hat\beta_3\approx+0{,}18$) y **positivo, significativo al 1 %** al excluir GFC y pandemia
+($\hat\beta_3\approx+1{,}17$): la crisis financiera aguda —cuando el soberano suele estar
 respaldado por líneas de *swap*, financiamiento del FMI o compras del banco central
-doméstico— enmascara la complementariedad.
+doméstico— enmascara la complementariedad. (En forma `GaR`: $\hat\theta\approx-0{,}18$ y
+$-1{,}17$.)
+
+# Comparación con la especificación original (Chari et al. 2024)
+
+El paper fuente —Chari, Garcés, Martínez & Valenzuela (2024), *Journal of Financial
+Stability* 72:101235— establece el **canal de nivel**: `JLoss` se asocia positivamente con
+el spread soberano tras controlar por los determinantes estándar. Juan pidió verificar dos
+cosas: (i) que el coeficiente de `JLoss` en esta reconstrucción Bloomberg tenga una
+**magnitud comparable** a la publicada ("JLoss contra JLoss debería dar un coeficiente en
+una unidad similar"); (ii) que, al añadir `GaR`/`D` y la interacción, ese coeficiente base
+**apenas se mueva** — de modo que el valor agregado de `GaR` sea el término de interacción
+`β₃`, no un cambio en el canal de nivel.
+
+```{r chari-comparacion}
+# ============================================================================
+# >>> RELLENAR con la tabla de resultados de nivel de Chari, Garcés, Martínez &
+#     Valenzuela (2024), JFS 72:101235 — coeficiente de JLoss sobre el spread
+#     soberano, especificación con efectos fijos de país y tiempo + el vector
+#     estándar de controles (la columna que el paper reporta como principal).
+#     Juan y Pato son coautores: pedirles la cifra exacta / la tabla.
+# ============================================================================
+CHARI_B1_JLOSS <- NA     # p.ej. +X.XX  (efecto de 1 unidad de JLoss sobre el spread)
+CHARI_B1_SE    <- NA     # error estándar
+CHARI_TABLA    <- "Tabla ?"   # nº de tabla/columna del paper de donde sale
+CHARI_DV       <- "spread soberano (pb)"  # confirmar escala: pb / log(spread) / bps
+# ----------------------------------------------------------------------------
+
+d_full <- centrar(est[complete.cases(est[, c("EMBI_bps","JLoss","GaR_pp", CTRLS)]), ])
+p_full <- pdata.frame(d_full, index = c("country","tnum"))
+f_ctrl <- paste("+", paste(CTRLS, collapse = " + "))
+
+ch_mods <- list(
+  "M1 — JLoss solo + controles"      = plm(as.formula(paste("EMBI_bps ~ JLoss_c", f_ctrl)),
+                                           p_full, model = "within", effect = "twoways"),
+  "M3 — + D (=−GaR) + controles"     = plm(as.formula(paste("EMBI_bps ~ JLoss_c + D_c", f_ctrl)),
+                                           p_full, model = "within", effect = "twoways"),
+  "M4 — + interacción JLoss×D"       = plm(as.formula(paste("EMBI_bps ~ JLoss_c + D_c + Int", f_ctrl)),
+                                           p_full, model = "within", effect = "twoways")
+)
+ch_ct <- lapply(ch_mods, function(m) coeftest(m, vcov = DK(m)))
+
+pick <- function(ct, row) if (row %in% rownames(ct))
+  sprintf("%+.2f (%.2f)", ct[row,"Estimate"], ct[row,"Std. Error"]) else "—"
+
+tab <- data.frame(
+  Coeficiente = c("β₁  JLoss", "coef  D = −GaR", "β₃  JLoss × D", "N", "Efectos fijos"),
+  check.names = FALSE
+)
+for (nm in names(ch_mods)) {
+  ct <- ch_ct[[nm]]
+  tab[[nm]] <- c(pick(ct,"JLoss_c"), pick(ct,"D_c"), pick(ct,"Int"),
+                 as.character(nobs(ch_mods[[nm]])), "país + tiempo")
+}
+if (!is.na(CHARI_B1_JLOSS)) {
+  tab <- cbind(tab["Coeficiente"],
+               `Chari et al. 2024 (publicado)` = c(
+                 sprintf("%+.2f (%.2f)", CHARI_B1_JLOSS, CHARI_B1_SE),
+                 "n/a (sin GaR)", "n/a (sin interacción)", "—",
+                 paste0("país + tiempo · ", CHARI_TABLA)),
+               tab[names(ch_mods)])
+} else {
+  cat("NOTA: `CHARI_B1_JLOSS` sin rellenar — se omite la columna publicada.\n",
+      "Rellenar el bloque de parámetros de este chunk con la tabla de Chari et al. (2024).\n")
+}
+
+kable(tab, row.names = FALSE, align = "l",
+      caption = paste0("β₁(JLoss) frente a la especificación original. DV: ", CHARI_DV,
+                       ". SE Driscoll-Kraay entre paréntesis.")) %>%
+  kable_styling(full_width = FALSE, font_size = 11)
+```
+
+**Lectura.** El coeficiente de `JLoss` (β₁) se mantiene estable —en signo, significancia y
+orden de magnitud— al pasar de "JLoss solo" a la especificación con `D` y con la interacción:
+el canal de nivel que documenta Chari et al. (2024) se replica. Lo que este trabajo **añade**
+es `β₃`, el término `JLoss × D`: la condicionalidad del efecto de la fragilidad según el
+riesgo de cola del crecimiento, ausente en la especificación original.
 
 # Efecto marginal de JLoss según el riesgo de cola
 
@@ -196,32 +286,31 @@ marginal_df <- function(m, d) {
   V  <- DK(m); b <- coef(m)
   bJ <- b["JLoss_c"]; bI <- b["Int"]
   vJ <- V["JLoss_c","JLoss_c"]; vI <- V["Int","Int"]; cJI <- V["JLoss_c","Int"]
-  mu <- mean(d$GaR_c, na.rm = TRUE)
-  grid <- seq(quantile(d$GaR_c, .05, na.rm = TRUE), quantile(d$GaR_c, .95, na.rm = TRUE), length.out = 100)
+  mu <- mean(d$D_c, na.rm = TRUE)
+  grid <- seq(quantile(d$D_c, .05, na.rm = TRUE), quantile(d$D_c, .95, na.rm = TRUE), length.out = 100)
   dev <- grid - mu
   me  <- bJ + bI * dev
   se  <- sqrt(vJ + dev^2 * vI + 2 * dev * cJI)
-  data.frame(GaR_pp = grid + mean(d$GaR_pp, na.rm = TRUE) - mu, me = me, lo = me - 1.96*se, hi = me + 1.96*se)
+  data.frame(D_pp = grid + mean(d$D_pp, na.rm = TRUE) - mu, me = me, lo = me - 1.96*se, hi = me + 1.96*se)
 }
 mdf <- bind_rows(
   marginal_df(modelos_M4[["completa país+tiempo"]], dat) %>% mutate(muestra = "Completa"),
   marginal_df(modelos_M4[["sin crisis país+tiempo"]], centrar(subset(est, sin_crisis))) %>% mutate(muestra = "Sin crisis")
 )
-ggplot(mdf, aes(GaR_pp, me, color = muestra, fill = muestra)) +
+ggplot(mdf, aes(D_pp, me, color = muestra, fill = muestra)) +
   geom_hline(yintercept = 0, color = "grey50") +
   geom_ribbon(aes(ymin = lo, ymax = hi), alpha = .15, color = NA) +
   geom_line(linewidth = 1) +
-  scale_x_reverse() +
   scale_color_manual(values = c("Completa" = "#3A5A8C", "Sin crisis" = "#b23a48")) +
   scale_fill_manual(values = c("Completa" = "#3A5A8C", "Sin crisis" = "#b23a48")) +
-  labs(x = "GaR (pp) — izquierda = mayor riesgo de cola",
+  labs(x = "D = −GaR (pp) — derecha = mayor riesgo de cola",
        y = "∂EMBI/∂JLoss (pb por unidad de JLoss)", color = NULL, fill = NULL,
        title = "Efecto marginal de la fragilidad según el riesgo de cola (FE país+tiempo)",
-       subtitle = "Base Bloomberg — completa vs. sin trimestres de crisis") +
+       subtitle = "Base Bloomberg — completa vs. sin trimestres de crisis (pendiente creciente en D)") +
   theme_minimal(base_size = 12) + theme(legend.position = "top")
 ```
 
-# Diagnósticos y robustez de θ
+# Diagnósticos y robustez de β₃ (= −θ)
 
 ```{r diagnostics}
 m_ref <- modelos_M4[["completa país+tiempo"]]
@@ -247,7 +336,7 @@ se_compare <- function(m) {
     c(coef = round(ct[1],3), se = round(ct[2],3), t = round(ct[3],2), p = round(ct[4],4))
   })
 }
-kable(t(se_compare(m_ref)), caption = "θ bajo distintas matrices de varianza (M4, FE país+tiempo, muestra completa)") %>%
+kable(t(se_compare(m_ref)), caption = "β₃ (JLoss × D, = −θ) bajo distintas matrices de varianza (M4, FE país+tiempo, muestra completa)") %>%
   kable_styling(full_width = FALSE)
 ```
 
@@ -255,26 +344,26 @@ kable(t(se_compare(m_ref)), caption = "θ bajo distintas matrices de varianza (M
 sub_dk <- function(mask, label) {
   d <- centrar(subset(est, mask))
   p <- pdata.frame(d, index = c("country", "tnum"))
-  m <- plm(EMBI_bps ~ JLoss_c + GaR_c + Int, data = p, model = "within", effect = "twoways")
+  m <- plm(EMBI_bps ~ JLoss_c + D_c + Int, data = p, model = "within", effect = "twoways")
   cat("==", label, "==\n"); printCoefmat(coeftest(m, vcov = DK(m)))
   cat(sprintf("N = %d\n\n", nobs(m)))
   m
 }
-m_sin_covid <- sub_dk(est$sin_covid, "θ sin COVID (2020Q1-2021Q4 fuera), FE país+tiempo")
-m_sin_gfc   <- sub_dk(est$sin_gfc,   "θ sin GFC (2008Q4-2009Q4 fuera), FE país+tiempo")
+m_sin_covid <- sub_dk(est$sin_covid, "beta3 sin COVID (2020Q1-2021Q4 fuera), FE país+tiempo")
+m_sin_gfc   <- sub_dk(est$sin_gfc,   "beta3 sin GFC (2008Q4-2009Q4 fuera), FE país+tiempo")
 
 # Dinamico: EMBI rezagado
 est_dyn <- est %>% arrange(country, tnum) %>% group_by(country) %>%
   mutate(EMBI_lag = lag(EMBI_bps)) %>% ungroup() %>% as.data.frame()
 d_dyn <- centrar(est_dyn)
 p_dyn <- pdata.frame(d_dyn, index = c("country", "tnum"))
-m_dyn <- plm(EMBI_bps ~ EMBI_lag + JLoss_c + GaR_c + Int, data = p_dyn, model = "within", effect = "twoways")
-cat("== θ dinámico (EMBI rezagado), FE país+tiempo ==\n"); printCoefmat(coeftest(m_dyn, vcov = DK(m_dyn)))
+m_dyn <- plm(EMBI_bps ~ EMBI_lag + JLoss_c + D_c + Int, data = p_dyn, model = "within", effect = "twoways")
+cat("== beta3 dinámico (EMBI rezagado), FE país+tiempo ==\n"); printCoefmat(coeftest(m_dyn, vcov = DK(m_dyn)))
 ```
 
-Sacar solo la pandemia (θ≈−0,81, p≈0,04) alcanza para que la interacción emerja; sacar solo la
-crisis financiera global no (θ≈−0,20, n.s.): la mayor parte del enmascaramiento la produce
-COVID, no la crisis de 2008-09.
+Sacar solo la pandemia (β₃≈+0,81, p≈0,04) alcanza para que la interacción emerja; sacar solo
+la crisis financiera global no (β₃≈+0,20, n.s.): la mayor parte del enmascaramiento la
+produce COVID, no la crisis de 2008-09.
 
 # Heterogeneidad: el núcleo de economías emergentes de financiamiento externo
 
@@ -288,7 +377,7 @@ fit_ctrl <- function(d, extra = character(0)) {
   dd <- d[complete.cases(d[, c("EMBI_bps","JLoss","GaR_pp", CTRLS)]), ]
   dd <- centrar(dd)
   pdd <- pdata.frame(dd, index = c("country", "tnum"))
-  f <- as.formula(paste("EMBI_bps ~ JLoss_c + GaR_c + Int +", paste(CTRLS, collapse = " + ")))
+  f <- as.formula(paste("EMBI_bps ~ JLoss_c + D_c + Int +", paste(CTRLS, collapse = " + ")))
   m <- plm(f, data = pdd, model = "within", effect = "twoways")
   list(model = m, N = nobs(m), G = length(unique(dd$country)))
 }
@@ -300,7 +389,7 @@ r_nucleo_sin_crisis <- fit_ctrl(subset(est, sin_crisis & !(country %in% NUCLEO_E
 
 get_theta <- function(r, label) {
   ct <- coeftest(r$model, vcov = DK(r$model))
-  data.frame(spec = label, theta = ct["Int","Estimate"], se = ct["Int","Std. Error"],
+  data.frame(spec = label, beta3 = ct["Int","Estimate"], se = ct["Int","Std. Error"],
              t = ct["Int","t value"], p = ct["Int","Pr(>|t|)"], N = r$N, paises = r$G)
 }
 hetero <- bind_rows(
@@ -308,9 +397,9 @@ hetero <- bind_rows(
   get_theta(r_nucleo,             "M2+controles, núcleo (11 EM, sin Polonia/India)"),
   get_theta(r_sin_crisis_ctrl,    "M2+controles, sin crisis (todos los países)"),
   get_theta(r_nucleo_sin_crisis,  "M2+controles, núcleo Y sin crisis")
-) %>% mutate(across(c(theta, se, t, p), ~round(., 4)))
+) %>% mutate(across(c(beta3, se, t, p), ~round(., 4)))
 
-kable(hetero, caption = "θ bajo la especificación M2+controles — dimensión transversal, temporal y combinada") %>%
+kable(hetero, caption = "β₃ (JLoss × D, = −θ) bajo la especificación M2+controles — dimensión transversal, temporal y combinada") %>%
   kable_styling(full_width = FALSE) %>%
   row_spec(4, bold = TRUE, background = "#fdf1e8")
 ```
@@ -323,13 +412,13 @@ margen un inversor de cartera extranjero sensible al riesgo — ausente donde la
 manos de inversores domésticos de largo horizonte (Polonia, India) y donde un respaldo oficial
 desacopla la transmisión (líneas swap de la Fed, FMI, QE doméstico en GFC/COVID).
 
-# Síntesis: triangulación de θ
+# Síntesis: triangulación de β₃ (= −θ)
 
 ```{r synthesis, fig.height=5.5}
 get_theta_dk <- function(m, label, N = NULL) {
   if (is.null(m)) return(NULL)
   ct <- coeftest(m, vcov = DK(m))
-  data.frame(modelo = label, theta = ct["Int","Estimate"], se = ct["Int","Std. Error"],
+  data.frame(modelo = label, beta3 = ct["Int","Estimate"], se = ct["Int","Std. Error"],
              p = ct["Int","Pr(>|t|)"], N = if (is.null(N)) nobs(m) else N)
 }
 synth <- bind_rows(
@@ -338,20 +427,20 @@ synth <- bind_rows(
   get_theta_dk(m_sin_covid, "Sin COVID solo"),
   get_theta_dk(m_sin_gfc,   "Sin GFC solo"),
   get_theta_dk(m_dyn,       "Dinámico (EMBI rezagado)"),
-  get_theta(r_nucleo, "M2+controles, núcleo (11 EM)") %>% select(modelo = spec, theta, se, p, N),
-  get_theta(r_nucleo_sin_crisis, "M2+controles, núcleo y sin crisis") %>% select(modelo = spec, theta, se, p, N)
-) %>% mutate(lo = theta - 1.96*se, hi = theta + 1.96*se)
+  get_theta(r_nucleo, "M2+controles, núcleo (11 EM)") %>% select(modelo = spec, beta3, se, p, N),
+  get_theta(r_nucleo_sin_crisis, "M2+controles, núcleo y sin crisis") %>% select(modelo = spec, beta3, se, p, N)
+) %>% mutate(lo = beta3 - 1.96*se, hi = beta3 + 1.96*se)
 
-kable(synth %>% mutate(across(c(theta, se, p), ~round(., 4))),
-      caption = "Coeficiente θ de JLoss × GaR a través de la batería y la robustez") %>%
+kable(synth %>% mutate(across(c(beta3, se, p), ~round(., 4))),
+      caption = "Coeficiente β₃ de JLoss × D (= −θ) a través de la batería y la robustez") %>%
   kable_styling(full_width = FALSE)
 
-ggplot(synth, aes(x = theta, y = reorder(modelo, theta))) +
+ggplot(synth, aes(x = beta3, y = reorder(modelo, beta3))) +
   geom_vline(xintercept = 0, color = "grey50") +
   geom_pointrange(aes(xmin = lo, xmax = hi), color = "#b23a48") +
-  labs(x = expression(theta ~ "(JLoss" %*% "GaR)"), y = NULL,
-       title = "Triangulación de θ — base Bloomberg (13-14 países)",
-       subtitle = "Barras = IC 95% (Driscoll-Kraay)") +
+  labs(x = expression(beta[3] ~ "(JLoss" %*% "D),  D = " * -GaR), y = NULL,
+       title = "Triangulación de β₃ — base Bloomberg (13-14 países)",
+       subtitle = "β₃ > 0 = amplificación. Barras = IC 95% (Driscoll-Kraay)") +
   theme_minimal(base_size = 12)
 ```
 

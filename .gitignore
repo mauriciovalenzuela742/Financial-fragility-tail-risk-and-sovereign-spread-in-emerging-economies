@@ -22,8 +22,10 @@ __pycache__/
 *.lof
 *.lot
 
-# Historial de sesión R
+# Historial y dump de sesión R
 .Rhistory
+.RData
+*.RData
 
 # Checkpoints/backups intermedios de cómputo (se regeneran)
 _ckpt_*.csv
