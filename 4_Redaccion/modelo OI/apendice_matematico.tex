@@ -30,7 +30,7 @@
 
 \title{\textbf{Apéndice Matemático}\\[4pt]
 \large Demostraciones detalladas paso a paso\\
-\normalsize (convención de signo alineada con las regresiones: $\GaR$ como variable primitiva)}
+\normalsize (convención de riesgo de cola $D\equiv-\GaR$; las derivadas se calculan en $\GaR$ por comodidad algebraica)}
 \author{}
 \date{\today}
 
@@ -39,17 +39,20 @@
 \vspace{-2em}
 
 \begin{abstract}
-\noindent Este apéndice detalla, paso a paso, cada derivada y conclusión matemática del modelo. \textbf{Cambio de convención respecto de la versión anterior:} el bloque soberano se reescribe usando el \emph{Growth-at-Risk} $\GaR_\tau$ como variable primitiva ---el cuantil bajo del crecimiento, negativo en la cola--- \emph{en lugar} de su magnitud $D=-\GaR$. Con ello los signos derivados del modelo coinciden \emph{directamente} con los de las regresiones, sin ningún cambio de variable intermedio: $\beta_1>0$, $\beta_2<0$, $\beta_3<0$, $\beta_4<0$. Todas las identidades (incluidas la derivada cruzada y la tercera derivada) fueron verificadas numéricamente (diferencias finitas frente a fórmula analítica; coincidencia hasta $10^{-6}$).
+\noindent Este apéndice detalla, paso a paso, cada derivada y conclusión matemática del modelo. El bloque soberano se \emph{deriva} sobre el \emph{Growth-at-Risk} $\GaR_\tau$ ---el cuantil bajo del crecimiento, negativo en la cola--- por comodidad algebraica (la forma $1/(1+\GaR)$ del servicio de deuda), y el resultado final se reexpresa en el \textbf{riesgo de cola} $D\equiv-\GaR$, la convención de las regresiones. En esa convención los cuatro signos predichos son $\beta_1>0$, $\beta_2^{D}>0$, $\beta_3>0$, $\beta_4>0$, con la traducción $\beta_k^{\GaR}=-\beta_k^{D}$ para $k\in\{2,3,4\}$. Todas las identidades (incluidas la derivada cruzada y la tercera derivada) fueron verificadas numéricamente (diferencias finitas frente a fórmula analítica; coincidencia hasta $10^{-6}$).
 \end{abstract}
 
 \begin{mdframed}
-\textbf{Convención de signo (léase primero).} $\GaR_\tau$ es el cuantil $\tau$ (p.ej.\ $5\%$) del crecimiento: es un \emph{nivel de crecimiento} (típicamente negativo en la cola). Un $\GaR$ \emph{más alto} significa una cola \emph{menos} adversa (economía más segura); un $\GaR$ \emph{más bajo} (más negativo) significa mayor riesgo a la baja. Las variables observadas son: $\JLoss$ (fragilidad sistémica, $\uparrow$ = peor), $\GaR$ ($\uparrow$ = mejor), $\HHI$ (concentración, $\uparrow$ = más concentrado), $\EMBI$ ($\uparrow$ = mayor riesgo soberano). Los cuatro coeficientes firmados son
+\textbf{Convención de signo (léase primero).} $\GaR_\tau$ es el cuantil $\tau$ (p.ej.\ $5\%$) del crecimiento: un $\GaR$ \emph{más alto} = cola \emph{menos} adversa. El \textbf{riesgo de cola} es $D\equiv-\GaR$ ($D$ \emph{más alto} = cola más adversa), la variable de las regresiones. Variables observadas: $\JLoss$ (fragilidad sistémica, $\uparrow$ = peor), $D$ ($\uparrow$ = peor), $\HHI$ (concentración, $\uparrow$ = más concentrado), $\EMBI$ ($\uparrow$ = mayor riesgo soberano). Los cuatro coeficientes firmados, en convención $D$, son
 \[
 \beta_1=\frac{\partial \EMBI}{\partial \JLoss}>0,\quad
-\beta_2=\frac{\partial \EMBI}{\partial \GaR}<0,\quad
-\beta_3=\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0,\quad
-\beta_4=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial \GaR\,\partial \HHI}<0.
+\beta_2^{D}=\frac{\partial \EMBI}{\partial D}>0,\quad
+\beta_3=\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial D}>0,\quad
+\beta_4=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial D\,\partial \HHI}>0.
 \]
+Las derivadas de abajo se escriben en $\GaR$; la traducción es $\partial/\partial D=-\partial/\partial\GaR$, de modo que cada resultado ``$<0$ respecto de $\GaR$'' equivale a ``$>0$ respecto de $D$''. En convención $\GaR$, $\theta=\beta_3^{\GaR}<0$ y $\beta_4^{\GaR}<0$.
+
+\medskip\noindent\emph{Numeración.} Este apéndice numera sus proposiciones de forma independiente (Prop.~1 = U de la fragilidad; 2 = mínimo sistémico desplazado; 3 = granularidad; 4 = derivada cruzada; 5 = amplificación). En el documento de tesis, la numeración global antepone la existencia y unicidad del equilibrio como Proposición~1, de modo que la U es la Proposición~2, etc.
 \end{mdframed}
 
 \tableofcontents
@@ -139,9 +142,12 @@ $\Var(L_{\text{sys}}\mid Z)=\sum_i\lambda_i^2 q(Z)(1-q(Z))=H\,q(Z)(1-q(Z))$. A i
 \end{proof}
 
 %==================================================================
-\section{El bloque soberano y la derivada cruzada (convención $\GaR$)}\label{sec:soberano}
+\section{El bloque soberano y la derivada cruzada}\label{sec:soberano}
 
-\emph{Esta es la sección reescrita.} Se usa $\GaR_\tau$ como variable primitiva. La clave técnica es que el \emph{crecimiento de cola} que entra en la dinámica de deuda es precisamente el Growth-at-Risk: $g=\GaR_\tau$.
+Las derivadas se calculan en $\GaR_\tau$ por comodidad algebraica; el mapeo final
+(Sección~\ref{sec:map}) las reexpresa en $D\equiv-\GaR$. La clave técnica es que el
+\emph{crecimiento de cola} que entra en la dinámica de deuda es precisamente el
+Growth-at-Risk: $g=\GaR_\tau$.
 
 \subsection{Supuestos}
 \begin{assumption}[estructura fiscal]\label{as:B}
@@ -175,7 +181,7 @@ La primera y la tercera son inmediatas. Para la segunda, con $g=\GaR$ (Supuesto~
 \]
 y como $DFL=\bar d-d'$, se sigue $\dfrac{\partial DFL}{\partial\GaR}=-\dfrac{\partial d'}{\partial\GaR}=+\dfrac{(1+r)d}{(1+\GaR)^2}>0$.
 
-\noindent\emph{Interpretación:} un $\GaR$ más alto (crecimiento de cola menos adverso) reduce la deuda proyectada y \emph{aumenta} el espacio fiscal. Es el signo \emph{opuesto} al de la versión con $D=-\GaR$: aquí la variable buena es alta cuando la economía está segura.
+\noindent\emph{Interpretación:} un $\GaR$ más alto (crecimiento de cola menos adverso) reduce la deuda proyectada y \emph{aumenta} el espacio fiscal; equivalentemente, $\partial DFL/\partial D<0$ (más riesgo de cola, menos espacio fiscal).
 \end{proof}
 
 \begin{lemma}[efectos de primer orden: $\beta_1>0$, $\beta_2<0$]\label{lem:first}
@@ -192,15 +198,17 @@ Con $\frac{\dd}{\dd u}(1-F_\eta(u))=-f_\eta(u)$:
 \[
 \frac{\partial \EMBI}{\partial \GaR}=LGD(-f_\eta)\frac{\partial DFL}{\partial\GaR}=LGD(-f_\eta)\Big(\!+\frac{(1+r)d}{(1+\GaR)^2}\Big)<0.
 \]
-El signo de $\beta_2$ es \emph{negativo}: mejor crecimiento de cola, menor spread. $\blacksquare$
+El signo de $\beta_2$ respecto de $\GaR$ es \emph{negativo}: mejor crecimiento de cola, menor spread. Equivalentemente, $\beta_2^{D}=\partial\EMBI/\partial D=-\partial\EMBI/\partial\GaR>0$: más riesgo de cola, mayor spread. $\blacksquare$
 \end{proof}
 
-\subsection{Proposición 4: la derivada cruzada es negativa ($\beta_3<0$)}
+\subsection{Proposición 4: la derivada cruzada ($\beta_3>0$ en convención $D$)}
 
-\begin{proposition}[complementariedad $\JLoss\times\GaR$]\label{prop:cross}
+\begin{proposition}[complementariedad $\JLoss\times D$]\label{prop:cross}
 Bajo los Supuestos~\ref{as:B}--\ref{as:g},
 \[
-\boxed{\ \frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}\;<\;0.\ }
+\boxed{\ \frac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}=LGD\,\frac{B_J}{Y}\,f_\eta'(DFL)\,\frac{\partial DFL}{\partial \GaR}\;<\;0
+\;\Longleftrightarrow\;
+\frac{\partial^2 \EMBI}{\partial \JLoss\,\partial D}\;>\;0,\quad D\equiv-\GaR.\ }
 \]
 \end{proposition}
 \begin{proof}
@@ -234,22 +242,24 @@ $\partial DFL/\partial \GaR$ & $>0$ & Lema~\ref{lem:dfl} \\
 \]
 \end{proof}
 
-\begin{remark}[por qué el signo negativo \emph{es} la complementariedad]
-El signo negativo \emph{no} contradice la intuición de que ``más riesgo por más riesgo eleva el spread''. El efecto marginal de la fragilidad, $\partial\EMBI/\partial\JLoss=LGD f_\eta(DFL)B_J/Y>0$, es \emph{decreciente} en $\GaR$: cuando $\GaR$ es alto (economía segura) la fragilidad importa poco; cuando $\GaR$ \emph{cae} (crecimiento de cola más adverso), el mismo aumento de fragilidad eleva el spread mucho más. Es decir, $\beta_3<0$ codifica exactamente que \emph{fragilidad y mal crecimiento se refuerzan}. Frente a la versión con $D=-\GaR$, el signo se invierte solo porque $\partial/\partial\GaR=-\partial/\partial D$; la economía es idéntica.
+\begin{remark}[por qué esto \emph{es} la complementariedad]
+En convención $D\equiv-\GaR$ el signo es \emph{positivo} y directamente intuitivo: ``más riesgo por más riesgo eleva el spread''. El efecto marginal de la fragilidad, $\partial\EMBI/\partial\JLoss=LGD f_\eta(DFL)B_J/Y>0$, es \emph{creciente} en $D$: cuando $D$ es bajo (economía segura) la fragilidad importa poco; cuando $D$ \emph{sube} (crecimiento de cola más adverso), el mismo aumento de fragilidad eleva el spread mucho más. En convención $\GaR$ el mismo hecho se escribe $\beta_3^{\GaR}<0$ (el efecto es decreciente en $\GaR$), por la razón puramente mecánica de que $\GaR$ baja en la cola. En ambas parametrizaciones, $\beta_3$ codifica que \emph{fragilidad y mal crecimiento se refuerzan}.
 \end{remark}
 
 \begin{remark}[verificación numérica]
-Punto representativo ($LGD=0{,}55$, $\sigma_\eta=0{,}16$, $b_0=0{,}32$, $b_1=1{,}2$, $d=0{,}55$, $\bar d=1{,}10$, $r=0{,}04$, $\JLoss=0{,}22$, $\GaR=-0{,}05$, $H=1/6$): $DFL=0{,}413>0$; $LGD\,B_J/Y=0{,}2112$; $f_\eta'(DFL)=-1{,}4296$; $\partial DFL/\partial\GaR=+0{,}6338$. Cross-partial $=-0{,}191360$, idéntico (hasta $10^{-6}$) a las diferencias finitas de $\EMBI$.
+Punto representativo ($LGD=0{,}55$, $\sigma_\eta=0{,}16$, $b_0=0{,}32$, $b_1=1{,}2$, $d=0{,}55$, $\bar d=1{,}10$, $r=0{,}04$, $\JLoss=0{,}22$, $\GaR=-0{,}05$, $H=1/6$): $DFL=0{,}413>0$; $LGD\,B_J/Y=0{,}2112$; $f_\eta'(DFL)=-1{,}4296$; $\partial DFL/\partial\GaR=+0{,}6338$. Cross-partial respecto de $\GaR$ $=-0{,}191360$ (respecto de $D$: $+0{,}191360$), idéntico (hasta $10^{-6}$) a las diferencias finitas de $\EMBI$.
 \end{remark}
 
-\subsection{Amplificación por concentración: $\beta_4<0$}
+\subsection{Amplificación por concentración: $\beta_4>0$ en convención $D$}
 
 \begin{proposition}[la complementariedad se intensifica con la concentración]\label{prop:amp}
 Sea $C(H)\equiv\dfrac{\partial^2 \EMBI}{\partial \JLoss\,\partial \GaR}<0$. Bajo los Supuestos~\ref{as:B}--\ref{as:g} y la condición de cola profunda $f_\eta''(DFL)\ge0$,
 \[
-\beta_4=\frac{\partial C}{\partial H}=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial \GaR\,\partial H}<0,
+\frac{\partial C}{\partial H}=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial \GaR\,\partial H}<0
+\;\Longleftrightarrow\;
+\beta_4=\frac{\partial^3 \EMBI}{\partial \JLoss\,\partial D\,\partial H}>0,
 \]
-es decir, el término de interacción (ya negativo) se vuelve \emph{más negativo} al aumentar la concentración: su magnitud crece.
+es decir, el término de interacción se intensifica al aumentar la concentración: su magnitud crece.
 \end{proposition}
 \begin{proof}
 \textbf{Paso 1.} $C=LGD\,\dfrac{\partial DFL}{\partial \GaR}\,\dfrac1Y\,B_J\,f_\eta'(DFL)$, y $\partial DFL/\partial\GaR=\frac{(1+r)d}{(1+\GaR)^2}$ \emph{no} depende de $H$. Así $H$ entra por $B_J(H)$ y por $DFL(H)$.
@@ -273,7 +283,7 @@ Luego el corchete es $\le0$ (estrictamente $<0$ por (I)).
 \begin{remark}[descomposición robusta]
 El \emph{canal directo} (I) es inequívoco: manteniendo $DFL$ fijo,
 $\dfrac{\partial C}{\partial H}\big|_{DFL}=LGD\dfrac{\partial DFL}{\partial\GaR}\dfrac1Y\dfrac{\partial B_J}{\partial H}f_\eta'(DFL)=(+)(+)(+)(+)(-)<0.$
-La concentración eleva el costo marginal del rescate $B_J$, intensificando (haciendo más negativa) la interacción. El canal (II) lo refuerza en la cola profunda. \emph{(Verificado: $DFL/\sigma_\eta=2{,}58>1\Rightarrow f_\eta''>0$; $\partial^3\EMBI/\partial\JLoss\partial\GaR\partial H=-0{,}413<0$.)}
+La concentración eleva el costo marginal del rescate $B_J$, intensificando la interacción (aumentando su magnitud). El canal (II) lo refuerza en la cola profunda. \emph{(Verificado: $DFL/\sigma_\eta=2{,}58>1\Rightarrow f_\eta''>0$; $\partial^3\EMBI/\partial\JLoss\partial\GaR\partial H=-0{,}413<0$, esto es $\beta_4=+0{,}413>0$ en convención $D$.)}
 \end{remark}
 
 \begin{remark}[saturación]
@@ -281,35 +291,36 @@ Resultado \emph{local}: si $\PD_{\text{sov}}\to1$ ($DFL\to-\infty$, $f_\eta\to0$
 \end{remark}
 
 %==================================================================
-\section{Mapeo a la ecuación empírica (signos alineados)}
+\section{Mapeo a la ecuación empírica}\label{sec:map}
 
-La ecuación estimada es
+La ecuación estimada, en la convención de riesgo de cola $D\equiv-\GaR$, es
 \[
-\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss+\beta_2\GaR+\beta_3(\JLoss\times\GaR)+\beta_4(\JLoss\times\GaR\times\HHI)+\boldsymbol\theta'\text{Int}^-+\boldsymbol\gamma'X+\varepsilon_{i,t},
+\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\JLoss+\beta_2^{D} D+\beta_3(\JLoss\times D)+\beta_4(\JLoss\times D\times\HHI)+\boldsymbol\varphi'\text{Int}^-+\boldsymbol\gamma'X+\varepsilon_{i,t},\qquad D\equiv-\GaR,
 \]
-donde $\text{Int}^-=\{\JLoss\times\HHI,\ \GaR\times\HHI\}$. La correspondencia teórica, ahora \emph{sin cambios de variable}, es
+donde $\text{Int}^-=\{\JLoss\times\HHI,\ D\times\HHI\}$. La correspondencia teórica, usando $\partial/\partial D=-\partial/\partial\GaR$, es
 \[
 \beta_1=\frac{\partial\EMBI}{\partial\JLoss}>0,\quad
-\beta_2=\frac{\partial\EMBI}{\partial\GaR}<0,\quad
-\beta_3=\frac{\partial^2\EMBI}{\partial\JLoss\partial\GaR}<0\ (\text{Prop.~\ref{prop:cross}}),\quad
-\beta_4=\frac{\partial^3\EMBI}{\partial\JLoss\partial\GaR\partial\HHI}<0\ (\text{Prop.~\ref{prop:amp}}).
+\beta_2^{D}=\frac{\partial\EMBI}{\partial D}=-\frac{\partial\EMBI}{\partial\GaR}>0,\quad
+\beta_3=\frac{\partial^2\EMBI}{\partial\JLoss\,\partial D}>0\ (\text{Prop.~\ref{prop:cross}}),\quad
+\beta_4=\frac{\partial^3\EMBI}{\partial\JLoss\,\partial D\,\partial\HHI}>0\ (\text{Prop.~\ref{prop:amp}}).
 \]
+En la parametrización con $\GaR$ (la que usan las tablas de \texttt{bateria\_bbg.csv} y \texttt{NUMEROS\_CANONICOS\_BBG.md}) los signos son $\beta_2<0$, $\theta=\beta_3^{\GaR}<0$ y $\beta_4^{\GaR}<0$; la traducción es $\beta_k^{D}=-\beta_k^{\GaR}$.
 
 \begin{center}
-\begin{tabular}{clcc}
+\begin{tabular}{clccc}
 \toprule
-Coef. & Término & Signo predicho & Fuente \\
+Coef. & Término & Signo ($D$) & Signo ($\GaR$) & Fuente \\
 \midrule
-$\beta_1$ & $\JLoss$ & $+$ & Lema~\ref{lem:first} \\
-$\beta_2$ & $\GaR$ & $-$ & Lema~\ref{lem:first} \\
-$\beta_3$ & $\JLoss\times\GaR$ & $-$ & Prop.~\ref{prop:cross} \\
-$\beta_4$ & $\JLoss\times\GaR\times\HHI$ & $-$ & Prop.~\ref{prop:amp} \\
+$\beta_1$ & $\JLoss$ & $+$ & $+$ & Lema~\ref{lem:first} \\
+$\beta_2$ & $D=-\GaR$ & $+$ & $-$ & Lema~\ref{lem:first} \\
+$\beta_3$ & $\JLoss\times D$ & $+$ & $-$ & Prop.~\ref{prop:cross} \\
+$\beta_4$ & $\JLoss\times D\times\HHI$ & $+$ & $-$ & Prop.~\ref{prop:amp} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \begin{remark}[coherencia con las regresiones]
-Estos cuatro signos coinciden directamente con los estimados. En particular, $\beta_3<0$ y $\beta_4<0$ ---que parecían anómalos bajo la convención $D=-\GaR$--- son la predicción \emph{correcta} del modelo cuando la variable de la regresión es $\GaR$. El objeto firmado sigue siendo la \textbf{derivada cruzada} (y su amplificación); el vector $\boldsymbol\theta$ (interacciones dobles) es de control.
+En convención $D=-\GaR$ estos cuatro signos coinciden directamente con los reportados en el trabajo empírico complementario y en los \texttt{.Rmd} del panel. El objeto firmado central es la \textbf{derivada cruzada} (y su amplificación); el vector $\boldsymbol\varphi$ (interacciones dobles) es de control.
 \end{remark}
 
 \begin{thebibliography}{9}
