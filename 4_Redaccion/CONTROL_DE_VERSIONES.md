@@ -304,7 +304,9 @@ y hubo que restaurarlos.
 ## 5. Números oficiales
 
 > **Revisión de la línea teórica — Cap. 3 (2026-09-09).** Preparación de la reunión con el
-> profesor sobre el capítulo teórico. Plan e informe: `~/.claude/plans/arma-el-dag-de-moonlit-moonbeam.md`.
+> profesor sobre el capítulo teórico. Plan e informe:
+> `4_Redaccion/modelo OI/Plan_Revision_Linea_Teorica_2026-09.md`
+> (copia de trabajo en `~/.claude/plans/`).
 > Sin cambios de números; ediciones de estructura y encuadre en `4_Redaccion/tesis/paper1_oi.tex`:
 > (i) box "Convención de signos" ($D\equiv-\GaR$) al inicio del capítulo;
 > (ii) nueva figura TikZ `fig:dag` (Fig. 3.3) + subsección "El DAG del mecanismo" (§3.5.4) —
