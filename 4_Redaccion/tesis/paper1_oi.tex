@@ -26,6 +26,25 @@ donde $\GaR$ es el \textit{Growth-at-Risk} en el sentido de \citet{ABG2019} y $\
 
 \paragraph{Relación con el Capítulo~\ref{chap:paper2}.} Este capítulo teórico es la contraparte del Capítulo~\ref{chap:paper2}, de naturaleza empírica, que estima directamente sobre un panel de economías emergentes el término de interacción $\JLoss\times D$ ($D\equiv-\GaR$) sobre el spread soberano y documenta su signo, su forma y su robustez (\citealp{Chari2024} ofrece el antecedente más próximo, con la interacción de $\JLoss$ y factores financieros \emph{globales}). Los dos capítulos comparten las mismas métricas de fragilidad bancaria y riesgo de cola, construidas de manera idéntica, pero difieren en su objeto: mientras el Capítulo~\ref{chap:paper2} establece la complementariedad $\JLoss\times D$ como una regularidad estadística sin comprometerse con un mecanismo estructural único, este capítulo deriva esa misma complementariedad --y, decisivamente, su heterogeneidad por la concentración bancaria-- desde primeros principios de un modelo de competencia. La Sección~\ref{sec:empirico} reporta, además de la validación del diseño por Monte Carlo, la puesta a prueba de las predicciones distintivas del modelo ($\beta_3$ y $\beta_4$) sobre el mismo panel de datos reales, con la fragilidad bancaria anclada en Bloomberg: la complementariedad de primer orden se sostiene de forma condicional (en el núcleo de economías de financiamiento externo), pero la amplificación por concentración --la predicción que distingue a este modelo-- no puede contrastarse con potencia, un resultado que se reporta y discute explícitamente.
 
+\begin{mdframed}
+\noindent\textbf{Convención de signos (léase primero).} El álgebra del bloque soberano
+(Sección~\ref{sec:soberano} y Anexo~\ref{chap:anexoA}) se desarrolla sobre el
+\textit{Growth-at-Risk} $\GaR_\tau$ —el cuantil bajo del crecimiento, típicamente
+negativo en la cola— por comodidad algebraica. El resultado y la ecuación estimada
+se reexpresan en el \textbf{riesgo de cola} $D\equiv-\GaR$ (un $D$ mayor $=$ cola
+más adversa), la convención del Capítulo~\ref{chap:paper2} y de las regresiones del
+panel. En esa convención los cuatro coeficientes firmados son
+\[
+\beta_1=\tfrac{\partial\Spread}{\partial\JLoss}>0,\quad
+\beta_2^{D}=\tfrac{\partial\Spread}{\partial D}>0,\quad
+\beta_3=\tfrac{\partial^2\Spread}{\partial\JLoss\,\partial D}>0,\quad
+\beta_4=\tfrac{\partial^3\Spread}{\partial\JLoss\,\partial D\,\partial\HHI}>0.
+\]
+La traducción a la parametrización con $\GaR$ es $\beta_k^{\GaR}=-\beta_k^{D}$ para
+$k\in\{2,3,4\}$; en particular $\theta\equiv\beta_3^{\GaR}<0$. Todo enunciado de
+signo de este capítulo está en convención $D$ salvo mención explícita.
+\end{mdframed}
+
 El resto del capítulo se organiza así. La Sección~\ref{sec:modelo} presenta el modelo. La Sección~\ref{sec:sistemico} deriva la fragilidad individual y sistémica (Proposiciones~\ref{prop:U}--\ref{prop:granular}) y la calibra. La Sección~\ref{sec:soberano} cierra la cadena macro-soberana (Proposición~\ref{prop:cross}). La Sección~\ref{sec:empirico} desarrolla y valida la estrategia empírica. La Sección~\ref{sec:robustez} presenta la robustez y la revisión adversarial. La Sección~\ref{sec:conclusion} concluye.
 
 \section{El modelo}\label{sec:modelo}
@@ -176,6 +195,27 @@ y $r(p)$ general queda señalada como extensión, en el mismo estatus que la com
 Salop o el canal de \textit{herding} de la Sección~\ref{sec:robustez}.
 \end{remark}
 
+\subsection{\texorpdfstring{$n$}{n} como instrumento de política}\label{sec:npolitica}
+El número de bancos $n$ es el objeto de estática comparativa de todo el capítulo, de
+modo que conviene ser explícito sobre qué lo mueve. En la versión base $n$ es un
+parámetro; bajo libre entrada (Definición~\ref{def:eq}(iv)) queda fijado por la
+condición de beneficio cero, y la comparativa estática requiere entonces variar un
+primitivo. La extensión de competencia espacial de la Sección~\ref{sec:robustez}
+—Salop con costo de transporte $t$ y barrera de entrada $F$— hace ese primitivo
+explícito: $n^{*}=\sqrt{t/F}$, decreciente en $F$. La palanca es una \textbf{política
+de competencia bancaria}: el régimen de licenciamiento, el capital mínimo exigido
+para operar, las restricciones a la apertura de sucursales o a la entrada de banca
+extranjera, y el control de fusiones actúan todos sobre $F$ (o directamente sobre
+$n$, en el caso de un regulador que veta concentración por encima de un umbral). Las
+comparativas estáticas $\partial\cdot/\partial n$ de las Secciones~\ref{sec:sistemico}
+y~\ref{sec:soberano} se leen, por tanto, como el efecto de un cambio de esa política.
+Esta lectura además sugiere la estrategia de identificación que el Capítulo~\ref{chap:paper2}
+deja pendiente: los episodios de entrada por desregulación o de liberalización de la
+banca extranjera son variación de $n$ plausiblemente exógena al lazo
+soberano--bancario contemporáneo, y son el ``instrumento de competencia'' que la
+Sección~\ref{sec:empirico} menciona y que la evidencia de este capítulo no llega a
+implementar.
+
 \section{Fragilidad individual y sistémica}\label{sec:sistemico}
 
 \subsection{La relación en U de la fragilidad individual}
@@ -249,6 +289,19 @@ Con $F_\eta$ unimodal y el punto de operación en la cola ($f_\eta'(DFL)<0$),
 es decir, fragilidad sistémica y riesgo a la baja son complementarios: el efecto marginal de $\JLoss$ sobre el spread \emph{crece} cuando el riesgo de cola $D$ sube (crecimiento de cola más adverso). Además la interacción se intensifica con la concentración, $\partial^3\Spread/(\partial\JLoss\,\partial D\,\partial H)>0$. (La demostración completa está en el Anexo~\ref{chap:anexoA}.)
 \end{proposition}
 
+\begin{remark}[la derivada cruzada no depende del Canal I]\label{rem:decouple}
+La Proposición~\ref{prop:cross} se obtiene tratando $\JLoss$ y $D$ como argumentos
+\emph{separados} de $\Spread$: $\JLoss$ entra por el costo de rescate $B(\JLoss;H)$ y
+$D$ por el servicio de deuda proyectado $d'$. El signo del cross-partial no requiere
+el Canal~I ($\JLoss\to\GaR$): aun si la fragilidad bancaria y el riesgo de cola del
+crecimiento se determinaran de forma independiente, su coincidencia elevaría el
+spread de forma supra-aditiva por la curvatura de $F_\eta$ en el punto de operación.
+El Canal~I es un eslabón \emph{auxiliar} —que además cuenta con respaldo empírico
+directo en la literatura de \textit{growth-at-risk} y de efectos reales de las
+contracciones de crédito bancario \citep{ABG2019,Chari2024}— y no una premisa de la
+complementariedad. El objeto firmado del modelo es la derivada cruzada.
+\end{remark}
+
 La Figura~\ref{fig:embi} ilustra el resultado: el panel~(a) muestra que la pendiente (negativa) de $\Spread$ respecto de $\GaR$ se empina con $\JLoss$ (complementariedad; en convención $D=-\GaR$, $\beta_3>0$), y el panel~(b), que el cross-partial se hace más pronunciado al aumentar la concentración ($\beta_4>0$ en convención $D$). La amplificación es un resultado \textit{local}: satura cuando $\PD_{\text{sov}}\to 1$.
 
 \begin{figure}[t]
@@ -269,8 +322,103 @@ La cadena teórica entrega la especificación de panel con efectos fijos bidirec
 \end{multline}
 donde $\mathrm{Int}_{i,t}$ recoge las interacciones de orden inferior que la triple interacción arrastra por construcción ($\JLoss\times\HHI$ y $D\times\HHI$) y $X_{i,t}$ el vector de controles. Las predicciones firmadas son $\beta_1>0$, $\beta_2^{D}>0$ (equivalentemente $\beta_2<0$ en convención $\GaR$), $\beta_3>0$ (complementariedad, Prop.~\ref{prop:cross}) y $\beta_4>0$ (amplificación por concentración). Se usa el riesgo de cola $D\equiv-\GaR$ —como en el Capítulo~\ref{chap:paper2} y en las regresiones del panel— de modo que un coeficiente \emph{positivo} sobre el producto refuerza el spread cuando la fragilidad y el riesgo de cola empeoran simultáneamente; en la parametrización con $\GaR$, los signos son $\theta=\beta_3^{\GaR}<0$ y $\beta_4^{\GaR}<0$. Las hipótesis intermedias son la U de la fragilidad (Prop.~\ref{prop:U}), el mínimo desplazado de $\JLoss$ (Prop.~\ref{prop:shift}) y el traspaso $\JLoss\to\GaR$ creciente en concentración por regresión cuantílica (Prop.~\ref{prop:granular}).
 
+\subsection{Qué estima cada coeficiente}\label{sec:estimandos}
+Conviene fijar, para cada $\beta_k$ de \eqref{eq:emp}, el objeto estructural que le
+corresponde y el estimando poblacional que recupera bajo los supuestos de
+identificación (Cuadro~\ref{tab:estimandos}). Dos precisiones importan para la
+interpretación. Primera: como $\GaR$ (vía $D$) entra en la ecuación, $\beta_1$ es el
+efecto \emph{directo} de $\JLoss$ sobre el spread, \emph{neto} del canal de
+\textit{credit crunch}; el efecto \emph{total} de la fragilidad es
+$\beta_1+\beta_2^{D}\,(\partial D/\partial\JLoss)$, con
+$\partial D/\partial\JLoss>0$ por el Canal~I. Segunda: $\JLoss$ y $\GaR$ son
+\emph{regresores generados} —el primero por el motor Merton/punto de silla, el
+segundo por regresión cuantílica—, de modo que la inferencia que los trata como
+datos subestima la varianza de $\hat\beta_k$; el Capítulo~\ref{chap:paper2} acota
+ese sesgo por perturbación del regresor y muestra que el error de medición
+\emph{atenúa} $\hat\beta_3$ hacia cero.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}p{1.3cm}p{3.0cm}p{7.6cm}@{}}
+\toprule
+Coef. & Término & Estimando (bajo EF país$+$tiempo, exogeneidad condicional) \\
+\midrule
+$\beta_1$ & $\JLoss$ & Efecto marginal directo de la fragilidad sobre el spread, manteniendo $D$ fijo; \emph{no} incluye la parte mediada por el Canal~I. \\
+$\beta_2^{D}$ & $D\equiv-\GaR$ & Efecto del riesgo de cola sobre el spread manteniendo $\JLoss$ fijo (canal de límite fiscal puro). \\
+$\beta_3$ & $\JLoss\times D$ & $E\!\left[\partial^2\Spread/\partial\JLoss\,\partial D\mid \alpha_i,\delta_t\right]$: cuánto crece el efecto marginal de $\JLoss$ por punto de $D$ (complementariedad, Prop.~\ref{prop:cross}). \\
+$\beta_4$ & $\JLoss\times D\times\HHI$ & $E\!\left[\partial^3\Spread/\partial\JLoss\,\partial D\,\partial\HHI\right]$: cómo cambia $\beta_3$ con la concentración; identificado \emph{de la varianza transversal de $\HHI$}, por lo que con trece países es impreciso (Sección~\ref{sec:datos_reales}). \\
+\bottomrule
+\end{tabular}
+\caption[Objeto estructural y estimando de cada coeficiente]{Objeto estructural y estimando de cada coeficiente de \eqref{eq:emp}. Todos los signos en convención $D\equiv-\GaR$.}
+\label{tab:estimandos}
+\end{table}
+
 \subsection{Identificación}
-El desafío es la simultaneidad del \textit{doom loop}. La estrategia es escalonada: (i)~efectos fijos país y tiempo con regresores rezagados y errores estándar de Driscoll--Kraay; (ii)~instrumentos de competencia (choques de entrada/desregulación) si hay simultaneidad; (iii)~proyecciones locales para la respuesta dinámica. La inferencia se concentra en $\beta_4$, menos contaminada por la retroalimentación de nivel porque la heterogeneidad opera sobre $\HHI$ predeterminado a nivel país.
+El desafío es la simultaneidad del \textit{doom loop}. La estrategia es escalonada: (i)~efectos fijos país y tiempo con regresores rezagados y errores estándar de Driscoll--Kraay; (ii)~instrumentos de competencia (choques de entrada/desregulación, Sección~\ref{sec:npolitica}) si hay simultaneidad; (iii)~proyecciones locales para la respuesta dinámica. La inferencia se concentra en $\beta_4$, menos contaminada por la retroalimentación de nivel porque la heterogeneidad opera sobre $\HHI$ predeterminado a nivel país.
+
+\subsection{El DAG del mecanismo}\label{sec:dag}
+La Figura~\ref{fig:dag} resume la estructura causal. La \emph{cadena estructural}
+(columna izquierda) va de la política de competencia al spread por los canales que
+las Secciones~\ref{sec:sistemico}--\ref{sec:soberano} derivan. Sobre ella operan dos
+conjuntos de \emph{causas comunes}: el factor macro-financiero global $Z$ —tasas de
+EE.UU., aversión al riesgo, VIX— incide a la vez sobre $\JLoss$ y sobre $\GaR$ y es
+el origen de la correlación positiva y moderada entre ambos (aproximadamente $+0{,}2$
+en convención $D$); los fundamentos domésticos $X_{i,t}$ inciden sobre la fragilidad,
+la cola del crecimiento y el spread. Los efectos fijos de tiempo absorben $Z$ y los
+de país absorben la parte invariante de $X_{i,t}$; el vector de controles absorbe su
+parte variable. Quedan fuera del modelo las aristas de \emph{retroalimentación}
+(línea punteada): el spread alto deprime el crecimiento y golpea los balances
+bancarios, y una crisis induce consolidación. El cierre de un período trata esas
+aristas como agenda (Sección~\ref{sec:conclusion}). El DAG deja ver el punto central
+de la identificación de la interacción: $\JLoss$ llega al spread por un camino
+($\JLoss\!\to\!B\!\to\!DFL\!\to\!\Spread$) que \emph{no} pasa por $\GaR$, y $\GaR$ por
+otro ($\GaR\!\to\!d'\!\to\!DFL\!\to\!\Spread$) que no pasa por $\JLoss$ —son canales
+distintos aun cuando el Canal~I exista (Observación~\ref{rem:decouple}).
+
+\begin{figure}[t]
+\centering
+\shorthandoff{<>}% babel-spanish hace activos < y > (guillemets); tikz los necesita literales
+\begin{tikzpicture}[
+  >={Stealth[length=2mm]}, font=\footnotesize,
+  node distance=7mm and 34mm,
+  b/.style={draw, rounded corners=1.5pt, align=center, inner sep=3pt, minimum width=20mm, minimum height=6mm},
+  c/.style={draw, dashed, rounded corners=1.5pt, align=center, inner sep=3pt, fill=black!4},
+  lab/.style={font=\scriptsize, midway, fill=white, inner sep=1pt}
+]
+  \node[c] (pol) {política de entrada ($F$)};
+  \node[b, below=of pol] (n) {$n$};
+  \node[b, below=of n] (jl) {$\JLoss$};
+  \node[b, below=of jl] (gar) {$\GaR$\;\;($D\!\equiv\!-\GaR$)};
+  \node[b, below=of gar] (dfl) {$DFL=\bar d-d'$};
+  \node[b, below=of dfl] (sp) {$\Spread$};
+
+  \draw[->] (pol) -- (n);
+  \draw[->] (n)  -- node[lab]{$\rho(n),R_L^*,\PD,H$} (jl);
+  \draw[->] (jl) -- node[lab]{Canal I: $\Lambda(\JLoss;H)$} (gar);
+  \draw[->] (gar)-- node[lab]{$d'(\GaR)$} (dfl);
+  \draw[->] (dfl)-- node[lab]{$1-F_\eta(\cdot)$} (sp);
+  \draw[->] (jl.west) to[out=195,in=165,looseness=1.35]
+        node[lab, pos=0.1, left=1pt]{$B(\JLoss;H)$} (dfl.west);
+
+  \node[c, right=of jl] (Z) {$Z$, factores globales\\{\scriptsize(EF de tiempo)}};
+  \node[c, right=of dfl] (X) {fundamentos $X_{i,t}$\\{\scriptsize(EF de país + controles)}};
+  \draw[->, dashed] (Z) -- (jl);
+  \draw[->, dashed] (Z.south) to[out=250,in=25] (gar.east);
+  \draw[->, dashed] (X) -- (dfl);
+  \draw[->, dashed] (X.south) to[out=280,in=25] (sp.east);
+
+  \draw[->, dotted] (sp.south) to[out=340,in=345,looseness=2.6]
+        node[lab, pos=0.5, right=1pt]{retroalimentación} (jl.east);
+\end{tikzpicture}
+\shorthandon{<>}%
+\caption[El DAG del mecanismo]{Estructura causal del modelo. Cadena estructural
+(cajas sólidas); causas comunes absorbidas por los efectos fijos (cajas
+discontinuas); aristas de retroalimentación no modeladas (punteado). $\JLoss$ y
+$\GaR$ alcanzan el spread por caminos que no se cruzan, de modo que $\beta_1$ y
+$\beta_2^{D}$ identifican canales distintos.}
+\label{fig:dag}
+\end{figure}
 
 \subsection{Validación del diseño por Monte Carlo}
 Antes de estimar con datos reales se verificó que la especificación \eqref{eq:emp} recupera los efectos teóricos. Se simuló un panel desde el modelo estructural y se estimó por TWFE con errores estándar agrupados por país, sobre $R=3000$ réplicas. En la convención $D\equiv-\GaR$ de \eqref{eq:emp} los valores verdaderos son $\beta_3=+0{,}80$ y $\beta_4=+3{,}0$ (el mismo experimento en convención $\GaR$ tiene $\beta_3=-0{,}80$, $\beta_4=-3{,}0$: multiplicar el regresor por $-1$ invierte exactamente el coeficiente). Con $N=45$, $T=80$, las medias son $\hat\beta_3=+0{,}799$ y $\hat\beta_4=+3{,}001$ ---prácticamente insesgadas---, del signo predicho en el \textbf{100\%} de las réplicas, con potencia del 93\% al 5\% (Figura~\ref{fig:mc}). El OLS agrupado sin efectos fijos sesga fuertemente la triple interacción, lo que confirma la necesidad de los efectos fijos bidireccionales. Un barrido de tamaño muestral muestra que la potencia de $\beta_4$ crece monótonamente con los datos, de $\sim$24\% con 600 observaciones a $\sim$99\% con 6000, de modo que la potencia moderada de paneles cortos se resuelve ampliando la cobertura de países y la ventana temporal.
@@ -288,7 +436,7 @@ La validación Monte Carlo de la sección anterior confirma que la especificaci�
 
 \paragraph{H4a: la complementariedad.} Sobre el panel único de trece economías emergentes (Capítulo~\ref{chap:paper2}, Sección 5), el coeficiente de interacción de la especificación de nivel tiene el signo predicho pero no es significativo sobre la muestra completa ($\hat\beta_3=+0{,}16$, $p=0{,}26$; en convención $\GaR$, $\hat\theta=-0{,}16$). El Capítulo~\ref{chap:paper2} muestra que esa no significancia es \textbf{condicional}: la interacción sí es significativa ($\hat\beta_3=+0{,}47$, $t=2{,}29$, $p=0{,}023$) sobre el núcleo de once economías emergentes de financiamiento externo, y se diluye al añadir Polonia e India, dos economías con mercados de deuda local profundos —aunque, con solo dos economías en el grupo de contraste, la diferencia entre grupos no alcanza significancia estadística formal. Un modelo de umbral de panel corrobora la no linealidad (efecto de la fragilidad unas tres veces mayor en el régimen de cola severa). H4a es, por tanto, una regularidad de \textbf{signo y forma} respaldada de manera condicional —presente en las economías más expuestas al financiamiento externo—, no una regularidad universal. En la parametrización con la triple interacción (el término $\beta_3$ de \eqref{eq:emp}, estimado \emph{junto con} $\JLoss\times D\times\HHI$ y con $\HHI$ centrado) $\hat\beta_3$ \textbf{no está identificado}: sale con el signo predicho pero no significativo con los dos proxies de concentración del GFDD ($+32{,}5$ y $+23{,}3$, $|t|<0{,}6$) y no distinguible de cero con la concentración trimestral ($-4{,}0$, $t=-0{,}12$). El contraste con potencia de H4a es el término $\JLoss\times D$ sin $\HHI$ (arriba).
 
-\paragraph{H4b: la amplificación por concentración --- no identificada.} La predicción que distingue a este modelo de \citet{MMR2010} --que la propia complementariedad $\JLoss\times\GaR$ se intensifica en sistemas bancarios más concentrados-- se contrasta incorporando la triple interacción $\JLoss\times D\times\HHI$ (con $D\equiv-\GaR$). Sobre el panel anclado en Bloomberg, esta predicción \textbf{no puede contrastarse con potencia}: en la parametrización de nivel $D\equiv-\GaR$ (donde la predicción es $\beta_4>0$), el punto estimado de $\hat\beta_4$ es pequeño y muy impreciso con los tres proxies de concentración —$+139$ ($t=0{,}39$) con el $\HHI$ estructural del GFDD, $+171$ ($t=0{,}81$) con la serie anual, y $\approx 0$ ($t=-0{,}54$) con la concentración trimestral— y en los tres casos el \textit{bootstrap} de bloques por país deja el intervalo de confianza al 90\% cruzando el cero holgadamente ($P(\hat\beta_4>0)$ entre 43\,\% y 68\,\%). Con trece \textit{clusters} de país y un $\HHI$ casi invariante en el tiempo, el coeficiente \textbf{no está identificado}: no respalda ni refuta la predicción. Para descartar que el problema sea únicamente la falta de variación temporal del proxy del GFDD, se construyó además una concentración \textbf{trimestral} a partir de los mismos balances bancarios de Bloomberg que alimentan $\JLoss$ (activos de los tres mayores bancos cotizados sobre el total cotizado, por país y trimestre; correlación de $0{,}48$ con el GFDD anual). Con esa serie el resultado tampoco cambia: el intervalo robusto cruza el cero. Contrasta con la reconstrucción previa basada en datos regulatorios, en la que $\hat\beta_4=+721$ ($t=2{,}98$) sí confirmaba la predicción sobre una serie de fragilidad de dispersión transversal mucho mayor (Figura~\ref{fig:h4b}); la discrepancia se discute a continuación.
+\paragraph{H4b: la amplificación por concentración --- no identificada.} La predicción que distingue a este modelo de \citet{MMR2010} --que la propia complementariedad $\JLoss\times\GaR$ se intensifica en sistemas bancarios más concentrados-- se contrasta incorporando la triple interacción $\JLoss\times D\times\HHI$ (con $D\equiv-\GaR$). Sobre el panel anclado en Bloomberg, esta predicción \textbf{no puede contrastarse con potencia}: en la parametrización de nivel $D\equiv-\GaR$ (donde la predicción es $\beta_4>0$), el punto estimado de $\hat\beta_4$ es pequeño y muy impreciso con los tres proxies de concentración —$+139$ ($t=0{,}39$) con el $\HHI$ estructural del GFDD, $+171$ ($t=0{,}81$) con la serie anual, y $\approx 0$ ($t=-0{,}54$) con la concentración trimestral— y en los tres casos el \textit{bootstrap} de bloques por país deja el intervalo de confianza al 90\% cruzando el cero holgadamente ($P(\hat\beta_4>0)$ entre 43\,\% y 68\,\%). Con trece \textit{clusters} de país y un $\HHI$ casi invariante en el tiempo, el coeficiente \textbf{no está identificado}: no respalda ni refuta la predicción. La propia validación Monte Carlo lo anticipa: la potencia de $\beta_4$ crece de $\sim$24\% con 600 observaciones a $\sim$99\% con 6000, de modo que el efecto mínimo detectable sobre una muestra de este orden es varias veces la magnitud calibrada. H4b queda, por tanto, como una \textbf{predicción registrada del modelo} cuyo contraste con potencia exige un corte transversal sustancialmente más amplio; la prueba con potencia que sí ofrece este capítulo es la de H4a, el término $\JLoss\times D$ sin $\HHI$. Para descartar que el problema sea únicamente la falta de variación temporal del proxy del GFDD, se construyó además una concentración \textbf{trimestral} a partir de los mismos balances bancarios de Bloomberg que alimentan $\JLoss$ (activos de los tres mayores bancos cotizados sobre el total cotizado, por país y trimestre; correlación de $0{,}48$ con el GFDD anual). Con esa serie el resultado tampoco cambia: el intervalo robusto cruza el cero. Contrasta con la reconstrucción previa basada en datos regulatorios, en la que $\hat\beta_4=+721$ ($t=2{,}98$) sí confirmaba la predicción sobre una serie de fragilidad de dispersión transversal mucho mayor (Figura~\ref{fig:h4b}); la discrepancia se discute a continuación.
 
 \begin{figure}[t]
 \centering

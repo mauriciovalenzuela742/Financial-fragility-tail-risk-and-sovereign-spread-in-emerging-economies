@@ -303,6 +303,34 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
+> **Revisión de la línea teórica — Cap. 3 (2026-09-09).** Preparación de la reunión con el
+> profesor sobre el capítulo teórico. Plan e informe: `~/.claude/plans/arma-el-dag-de-moonlit-moonbeam.md`.
+> Sin cambios de números; ediciones de estructura y encuadre en `4_Redaccion/tesis/paper1_oi.tex`:
+> (i) box "Convención de signos" ($D\equiv-\GaR$) al inicio del capítulo;
+> (ii) nueva figura TikZ `fig:dag` (Fig. 3.3) + subsección "El DAG del mecanismo" (§3.5.4) —
+> requiere `\usepackage{tikz}` en `main.tex` y `envios/paper_teorico/main.tex`;
+> (iii) Cuadro `tab:estimandos` (Tabla 3.1) "Qué estima cada coeficiente" (§3.5.3);
+> (iv) subsección "$n$ como instrumento de política" (§2.6, `sec:npolitica`);
+> (v) Observación `rem:decouple` (Obs. 3.3): la derivada cruzada de la Prop. 5 no depende del Canal I;
+> (vi) párrafo de MDE en §5.4 — H4b como "predicción registrada del modelo".
+> Compila limpio: tesis 89 pp, `paper_teorico` standalone 31 pp.
+>
+> **Sincronización de los standalone de `modelo OI/` (2026-09-09).** `working_paper.tex` y
+> `apendice_matematico.tex` pasados de convención $\GaR$-primitiva a **$D\equiv-\GaR$**
+> ($\beta_1,\beta_2^{D},\beta_3,\beta_4>0$): box "Convención de signos", Prop. de la derivada
+> cruzada y de la amplificación enunciadas con el `iff` en $D$, `eq:emp` en $D$, captions de
+> figuras, validación Monte Carlo ($\beta_3=+0{,}80$, $\beta_4=+3{,}0$), y **§5.4 de
+> `working_paper.tex` reescrita a los resultados Bloomberg**: H4a condicional
+> ($\hat\theta=-0{,}16$ muestra completa; $\hat\beta_3=+0{,}47$, $p=0{,}023$ en el núcleo de
+> 11 EM) y **H4b NO identificado** (ya no reporta "$\hat\beta_4=+721$ confirma"). `apendice_matematico.tex`
+> añade la tabla $D/\GaR$ y una nota de numeración (Prop. 1–5 aquí $=$ Prop. 2–6 en la tesis;
+> la tesis antepone existencia y unicidad como Prop. 1). Requirió `\usepackage{mdframed}` en
+> `working_paper.tex`. Compilan limpio: `working_paper` 15 pp, `apendice_matematico` 7 pp,
+> `envios/paper_empirico` 44 pp. **Pendiente:** portar a `working_paper.tex` la figura DAG,
+> el cuadro de estimandos y la subsección "$n$ como instrumento de política".
+>
+> ---
+>
 > **★ DV = EMBI, 13 países (2026-09-02).** La variable dependiente del capítulo empírico es
 > el **EMBI Global Diversified (J.P. Morgan)**, como en Chari et al. (2024); el CDS 5A de
 > Bloomberg queda como **serie de robustez**. Fuente EMBI: `2_Datos/embi.xlsx`. **Hungría sale
