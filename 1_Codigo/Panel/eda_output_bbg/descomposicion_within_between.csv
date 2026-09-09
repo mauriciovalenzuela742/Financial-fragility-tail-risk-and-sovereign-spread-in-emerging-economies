@@ -1,0 +1,12 @@
+variable,sd_total,sd_between,sd_within,within/total
+Spread EMBI (pb),107.435,83.269,77.229,0.719
+Fragilidad bancaria JLoss,4.64,2.387,4.052,0.873
+Growth-at-Risk (q05),0.038,0.019,0.033,0.869
+Expected Shortfall,0.04,0.019,0.035,0.878
+Prob. crecim. negativo,0.213,0.062,0.204,0.955
+Deuda/PIB (%),20.649,18.967,11.277,0.546
+Balance fiscal/PIB (%),2.684,1.846,2.02,0.752
+Reservas/PIB (%),10.025,9.026,4.529,0.452
+Cuenta corriente/PIB (%),4.042,3.316,2.399,0.593
+Inflación YoY (%),7.557,4.316,6.149,0.814
+REER (índice),19.656,13.625,14.551,0.74
