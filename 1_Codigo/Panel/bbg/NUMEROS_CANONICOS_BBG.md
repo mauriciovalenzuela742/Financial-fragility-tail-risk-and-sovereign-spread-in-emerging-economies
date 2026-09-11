@@ -196,6 +196,37 @@ y baja dependencia de flujos de cartera externos.
   (p = 0,02)**; 2015–2019 −0,53 (p = 0,13); 2018–2022 −0,13 (p = 0,05); 2021–2025 −0,05 (n.s.).
 - `sin 2020–2021` (mantiene pre-2020 + 2022+): θ = **−0,719 (t = −2,14)**.
 
+### Interacción de crisis — SIN botar trimestres (2026-09-10, indicación del coguía)
+
+Especificación (D ≡ −GaR, toda la muestra):
+`EMBI = a_i + g_t + b1·JLoss + b2·D + b3·(JLoss×D) + b4·(JLoss×D×Crisis) + b5·(JLoss×Crisis) + b6·(D×Crisis) + [X]`.
+`b3` = complementariedad fuera de crisis; `b3+b4` = en crisis (predicción del coguía: `b3+b4 ≈ 0`).
+Fuente: `p9_crisis_interaccion.py` = `crisis_interaccion.R` (coinciden a 4 decimales); DK
+(`kernel bartlett` en Python / `vcovSCC` en R); FE país+tiempo (PT).
+Convención: **estos coeficientes están en β₃ = coef(JLoss×D) = −θ** (positivo = complementariedad).
+
+**Ventana de crisis:** GFC 2008Q4–2009Q4 (31 obs) + COVID 2020Q1–2021Q4 (80) + estrés EM
+2015Q3–2016Q1 (27). *Backstop* = GFC + COVID (con respaldos Fed/FMI/QE). *EMstress* = 2015–16.
+
+| Spec (PT) | N | β₃ (fuera crisis) | β₄ | β₃+β₄ | Wald p (H₀: β₃+β₄=0) |
+|---|---|---|---|---|---|
+| **Vector único**, +6 controles | 614 | **+0,811** (t=1,96, p=0,051) | −0,839 (t=−1,96) | −0,03 | **0,766** → no rechaza (se anula) |
+| Vector único, sin controles | 721 | +0,951 (t=2,77, p=0,006) | −1,192 (t=−3,18) | −0,24 | 0,118 |
+| **Backstop vs EMstress**, +6 controles | 614 | **+0,837** (t=2,02, p=0,044) | Backstop −0,942 (t=−2,23, p=0,026); EMstress +0,213 (t=0,43, n.s.) | Backstop −0,11; **EMstress +1,05** | Backstop **0,270** (se anula); EMstress **<0,001** (sigue presente) |
+| Backstop vs EMstress, sin controles | 721 | +0,973 (t=2,82) | Backstop −1,294 (t=−3,19); EMstress −0,212 (n.s.) | Backstop −0,32; EMstress +0,76 | Backstop 0,044; EMstress 0,028 |
+
+> **Lectura (headline).** La complementariedad (β₃ > 0) es real y significativa **fuera de
+> crisis** —el nulo de la muestra completa (β₃ = +0,16) es un promedio de regímenes—, **se
+> anula bajo `Backstop`** (GFC+COVID, β₃+β₄ ≈ 0, Wald no rechaza) y **sobrevive bajo
+> `EMstress`** (2015–16, β₃+β₄ ≈ +1,0, Wald rechaza al 1 %). Test de falsación: el canal se
+> apaga sólo donde hay respaldo oficial masivo, no en el estrés emergente sin respaldo.
+> Reemplaza al corte por submuestra (batería Panel B) como resultado principal de la
+> dimensión temporal; el Panel B queda como robustez.
+
+FE sólo país (P): β₃ (Backstop vs EMstress, +6 ctrl) = +0,672 (t=1,84); Backstop β₄ = −0,725
+(t=−1,97, p=0,049); EMstress β₄ = +0,766 (t=1,75, p=0,081). FE sólo tiempo (T): β₃ ≈ 0 (sin
+FE de país domina la varianza transversal — spec no informativa para la interacción).
+
 ### Modelo de umbral de Hansen (13 países)
 
 γ̂ (GaR pp) = +0,06; efecto de JLoss sobre el EMBI **+5,88 pb** en cola severa vs **+2,02** en
@@ -247,6 +278,55 @@ en la cola de la distribución nula.
 
 θ estable a perturbar GaR con ruido de hasta 25 % de su sd (−0,161); a 50 % atenúa a −0,151.
 El error de medición **atenúa** — el θ verdadero es, si acaso, más negativo.
+
+### Endogeneidad `Ryr` ↔ EMBI (2026-09-10, indicación del coguía)
+
+El rendimiento soberano 10Y (`Ryr`, moneda local) alimenta el FCI vía el subíndice de tasa
+`iRyr = (VRyr + CDIFF)/2`. `CDIFF` = (yield real local − yield real EE.UU.) menos su mínimo
+móvil de 2 años → el único objeto tipo-spread dentro del FCI (se solapa conceptualmente con
+el EMBI, la DV). `p9_diag_ryr.py` traza la atenuación del vínculo con el EMBI en cada paso
+(13 países del panel, N ≈ 701–721):
+
+| paso de construcción | corr con EMBI (pooled) | corr within-país |
+|---|---|---|
+| `Ryr` (nivel, %) | 0,60 | 0,23 |
+| `Ryr − Ryr_US` (spread crudo) | **0,68** | 0,37 |
+| contribución tipo-`CDIFF` a `iRyr` (estandarizada) | **0,07** | −0,08 |
+| `iRyr` (subíndice de tasa) | 0,14 | 0,12 |
+| `iRyr` sin `CDIFF` | 0,06 | 0,20 |
+| `FCI` | 0,22 | 0,23 |
+| `FCI` sin `CDIFF` | 0,19 | 0,26 |
+| `D = −GaR` (serie oficial) | 0,34 | 0,43 |
+
+> **Lectura.** El spread crudo `Ryr − Ryr_US` sí co-mueve con el EMBI (0,68), pero la
+> transformación de `CDIFF` (diferenciación + piso móvil + estandarización expansiva por
+> máximo) lo convierte en un objeto casi **ortogonal al EMBI (0,07)**. La circularidad
+> mecánica está en buena medida rota por la propia construcción del FCI antes de llegar al
+> GaR. `corr(FCI, FCI_sin_CDIFF) = 0,91`; `corr(iRyr, iRyr_sin_CDIFF) = 0,52`. El EMBI y el
+> CDS **nunca** entran al FCI ni al GaR (verificado en `fci_engine.py` / `gar_engine.py`).
+
+**Robustez (rehacer el GaR sin `CDIFF`) — θ ES ROBUSTO.** `build_fci_no_cdiff.py` regenera el
+FCI de los 18 países del pool con `iRyr = VRyr` (flag `drop_cdiff` en
+`fci_engine.compute_fci`) → `GaR_panel_all18_noCDIFF.xlsx`. `gar_insample_robustez.py`
+re-estima el GaR con un único ajuste sobre toda la muestra (in-sample, no ventana expansiva),
+con y sin CDIFF → `gar_insample_{base,noCDIFF}.csv`. **`corr(GaR_sin_CDIFF, GaR_con_CDIFF) =
+0,985`** (el FCI cambia con `corr = 0,91`, pero entra al GaR sólo como residuo ortogonalizado
+al VIX con coeficiente pequeño). Re-estimación de `p2`/`p9` (`p9_robustez_gar_nocdiff.py` →
+`robustez_gar_nocdiff.csv`):
+
+| serie de GaR | β₃ muestra completa | β₃ fuera de crisis (spec crisis) | Backstop β₃+β₄ (Wald p) | EMstress β₃+β₄ (Wald p) |
+|---|---|---|---|---|
+| oficial (ventana expansiva, con CDIFF) | +0,19 (t=1,18, n.s.) | +0,84 (t=2,0) | −0,11 (0,27) | +1,05 (<0,001) |
+| in-sample, con CDIFF | +0,22 (t=1,34, n.s.) | +0,82 (t=2,3) | −0,10 (0,21) | +1,03 (0,003) |
+| **in-sample, SIN CDIFF** | **+0,23** (t=1,34, n.s.) | **+0,86** (t=2,8) | **−0,11** (0,15) | **+1,15** (0,001) |
+
+> **Conclusión.** Quitar del GaR el único término que se solapa con el spread soberano
+> (`CDIFF`) **no mueve ningún resultado**: β₃ muestra completa +0,19 → +0,23; β₃ fuera de
+> crisis +0,84 → +0,86; la cancelación bajo `Backstop` y la supervivencia bajo `EMstress`
+> se mantienen. La preocupación de endogeneidad es conceptualmente válida pero
+> cuantitativamente inmaterial. La re-estimación completa en ventana expansiva
+> (`phase2_gar_panel_all18_noCDIFF.py` + `run_gar_all18_noCDIFF.sbatch`, NLHPC) queda
+> disponible pero, dado `corr = 0,985`, es muy improbable que cambie la conclusión.
 
 ### Coeficientes de control en M2 — advertencia
 

@@ -156,3 +156,44 @@ for (sname in names(muestras)) {
 #
 # Nota: Int = JLoss_c x D_c con D = -GaR. El coeficiente de Int es beta3 = -theta.
 # Si quieres la forma GaR clasica, usa Int_GaR (= JLoss_c x GaR_c) en su lugar.
+
+# ------------------------------------------------------------------------------
+# 6. Interaccion de crisis -- SIN botar trimestres (indicacion del coguia)
+#    EMBI ~ JLoss_c + D_c + Int + Int_cr + JLoss_cr + D_cr [+ 6 controles] + FE
+#    b3 = Int (fuera de crisis) ; b3 + b4 = en crisis (prediccion: ~ 0).
+#    Analisis completo (vector unico + descomposicion Backstop/EMstress) en
+#    `crisis_interaccion.R`. Aqui la spec de referencia (PT, +6 controles).
+# ------------------------------------------------------------------------------
+GFC      <- c("2008Q4","2009Q1","2009Q2","2009Q3","2009Q4")
+COVID    <- c("2020Q1","2020Q2","2020Q3","2020Q4","2021Q1","2021Q2","2021Q3","2021Q4")
+EM1516   <- c("2015Q3","2015Q4","2016Q1")
+BACKSTOP <- c(GFC, COVID)
+CTRLS_D  <- c("debt_gdp","fisc_bal","res_gdp","ca_gdp","infl_yoy","reer")
+
+dcr <- d_completa
+dcr$Backstop <- as.numeric(dcr$quarter %in% BACKSTOP)
+dcr$EMstress <- as.numeric(dcr$quarter %in% EM1516)
+for (nm in c("Backstop","EMstress")) {
+  dcr[[paste0("Int_",  nm)]] <- dcr$Int     * dcr[[nm]]
+  dcr[[paste0("JL_",   nm)]] <- dcr$JLoss_c * dcr[[nm]]
+  dcr[[paste0("D_",    nm)]] <- dcr$D_c     * dcr[[nm]]
+}
+dcr <- dcr[stats::complete.cases(dcr[, CTRLS_D]), ]
+f_cr <- as.formula(paste("EMBI_bps ~ JLoss_c + D_c + Int +",
+  "Int_Backstop + JL_Backstop + D_Backstop + Int_EMstress + JL_EMstress + D_EMstress +",
+  paste(CTRLS_D, collapse = " + ")))
+m_cr <- plm(f_cr, data = pdata.frame(dcr, index = c("country","quarter")),
+            model = "within", effect = "twoways")
+V_cr <- vcovSCC(m_cr); ct_cr <- coeftest(m_cr, vcov = V_cr)
+
+cat("\n\n================ INTERACCION DE CRISIS (Backstop vs EMstress, PT, +6 controles) ================\n")
+print(round(unclass(ct_cr)[c("Int","Int_Backstop","Int_EMstress","JL_Backstop","JL_EMstress"), ], 4))
+for (nm in c("Backstop","EMstress")) {
+  k  <- paste0("Int_", nm); sb <- ct_cr["Int",1] + ct_cr[k,1]
+  sse <- sqrt(V_cr["Int","Int"] + V_cr[k,k] + 2*V_cr["Int",k])
+  cat(sprintf("  b3 + b4 (%s) = %+.3f   (Wald H0: b3+b4=0  p = %.3f)\n",
+              nm, sb, 2*(1 - pnorm(abs(sb/sse)))))
+}
+cat("  Numeros de referencia (Python p9_crisis_interaccion.py, PT, +6 controles):\n")
+cat("    b3=+0.837  Int_Backstop=-0.942 -> b3+b4(Backstop)=-0.105 (Wald p=0.27)\n")
+cat("    Int_EMstress=+0.213 -> b3+b4(EMstress)=+1.051 (Wald p<0.001)\n")
