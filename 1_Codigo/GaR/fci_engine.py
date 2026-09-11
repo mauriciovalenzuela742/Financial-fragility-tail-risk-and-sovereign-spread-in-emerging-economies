@@ -222,10 +222,15 @@ def FCIS(iSTX, iRyr, iEER, cSR, cSE, cRE):
 # ----------------------------- Orquestador por pais --------------------------
 def compute_fci(country_dir, country, ref_dir, ref_country='US',
                 initial='1990-01-01', final='2024-03-31',
-                std_method='method_b_max'):
+                std_method='method_b_max', drop_cdiff=False):
     """Calcula la serie FCI mensual de un pais. country_dir/ref_dir son carpetas
     con los CSV (CPI/Ryr/STX/rEER y CPI/Ryr de referencia). Devuelve DataFrame
-    con DATES (fin de mes) y FCI."""
+    con DATES (fin de mes) y FCI.
+
+    drop_cdiff: robustez de endogeneidad Ryr<->EMBI. Si True, el subindice de
+    tasa iRyr = VRyr solamente (se elimina CDIFF, el diferencial de yields
+    reales local-EE.UU. que se solapa conceptualmente con el spread soberano).
+    Deja solo la volatilidad del cambio del yield real."""
     import glob, os
     def find(folder, prefix):
         f = glob.glob(os.path.join(folder, f'{prefix}*'))
@@ -274,7 +279,7 @@ def compute_fci(country_dir, country, ref_dir, ref_country='US',
         idx[col] = std(idx[col].to_numpy())
 
     idx['iSTX'] = (idx['VSTX'] + idx['CMAX']) / 2
-    idx['iRyr'] = (idx['VRyr'] + idx['CDIFF']) / 2
+    idx['iRyr'] = idx['VRyr'] if drop_cdiff else (idx['VRyr'] + idx['CDIFF']) / 2
     idx['iEER'] = (idx['VEER'] + idx['CUMUL']) / 2
 
     cSR = corr_EWMA(idx['iSTX'], idx['iRyr'])

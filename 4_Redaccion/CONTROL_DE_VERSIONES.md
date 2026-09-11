@@ -303,6 +303,48 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
+> **Interacción de crisis + endogeneidad `Ryr` (2026-09-10/11, indicaciones del coguía) —
+> línea teórica PAUSADA, foco 100% en Cap. 2.** Reunión con el profesor coguía: se acuerda no
+> avanzar en la teoría y cerrar el paper empírico. Dos indicaciones concretas + pendientes de
+> árbitro (bootstrap GaR, IV, Chari) quedan como alcance. Plan:
+> `~/.claude/plans/arma-el-dag-de-moonlit-moonbeam.md`.
+>
+> **(1) Vector de crisis en vez de botar trimestres.** Nueva especificación con toda la
+> muestra: `β₃` = complementariedad fuera de crisis, `β₄` = término triple con el vector de
+> crisis (GFC 2008Q4–2009Q4 + COVID 2020Q1–2021Q4 + estrés EM 2015Q3–2016Q1). Descompuesta en
+> *Backstop* (GFC+COVID, con respaldo oficial masivo) vs *EMstress* (2015–16, sin respaldo):
+> **β₃ ≈ +0,81 fuera de crisis (p=0,051); se anula bajo Backstop (β₃+β₄ ≈ 0, Wald p=0,77,
+> NO rechaza) y sobrevive bajo EMstress (β₃+β₄ ≈ +1,05, Wald p<0,001)** — test de falsación
+> directo del mecanismo (el canal se apaga sólo donde hay respaldo oficial). Corrido y
+> verificado idéntico en Python (`p9_crisis_interaccion.py`, `linearmodels`/DK) y R
+> (`crisis_interaccion.R`, `plm`+`vcovSCC`+`car::linearHypothesis`), y replicado en
+> `EDA_Panel_Final_bbg.ipynb` (§8) y `analisis_bloomberg.Rmd`. Reemplaza al corte por
+> submuestra (batería Panel B, "excluir trimestres de crisis") como resultado principal de la
+> dimensión temporal; el Panel B queda como robustez secundaria.
+>
+> **(2) Endogeneidad `Ryr` ↔ EMBI.** El `Ryr` (rendimiento soberano 10Y local) alimenta el FCI
+> vía `iRyr = (VRyr+CDIFF)/2`; `CDIFF` es el único término tipo-spread del FCI y se solapa
+> conceptualmente con el EMBI (DV). Diagnóstico por etapas (`p9_diag_ryr.py`): la correlación
+> con el EMBI se **atenúa de 0,68 (spread crudo) a 0,07 (contribución de CDIFF a iRyr)** por la
+> propia transformación (diferenciación + piso móvil + estandarización expansiva). Verificado
+> además por **reconstrucción real del GaR sin CDIFF** (`fci_engine.compute_fci(drop_cdiff=True)`,
+> `build_fci_no_cdiff.py`, `gar_insample_robustez.py`, `p9_robustez_gar_nocdiff.py`;
+> `corr(GaR_sin_CDIFF, GaR_con_CDIFF)=0,985`): **β₃ no se mueve de forma material** (+0,19→+0,23
+> muestra completa; +0,84→+0,86 fuera de crisis; cancelación Backstop y supervivencia EMstress
+> intactas). El EMBI/CDS nunca entran al FCI ni al GaR. Conclusión: preocupación conceptualmente
+> válida, cuantitativamente inmaterial.
+>
+> Fuente de verdad de ambos resultados: `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`
+> (secciones "Interacción de crisis — SIN botar trimestres" y "Endogeneidad `Ryr` ↔ EMBI").
+> Prosa: nuevas subsecciones `sec:crisis-interaccion` (§6.6.1) y `sec:ryr-endogeneidad` (§6.4.2)
+> en `paper2_empirico.tex`, más actualización del resumen del capítulo, síntesis, limitaciones
+> y del resumen de tesis en `main.tex`. Compila limpio (92 pp, 0 refs/citas indefinidas).
+> **Pendiente:** C1 (bootstrap de regresor generado re-estimando GaR por réplica), C2 (IV
+> reforzado), C3 (afinar posicionamiento vs. Chari et al. 2024), Parte D (limpieza de
+> consistencia: deriva de descriptivos, cohorte de β₄, figuras pendientes).
+>
+> ---
+>
 > **Revisión de la línea teórica — Cap. 3 (2026-09-09).** Preparación de la reunión con el
 > profesor sobre el capítulo teórico. Plan e informe:
 > `4_Redaccion/modelo OI/Plan_Revision_Linea_Teorica_2026-09.md`
