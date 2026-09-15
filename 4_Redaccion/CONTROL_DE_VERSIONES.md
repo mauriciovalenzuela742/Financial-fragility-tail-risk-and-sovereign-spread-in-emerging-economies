@@ -303,6 +303,26 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
+> **C3 — posicionamiento vs. Chari et al. (2024) (2026-09-16): verificado, ya estaba afilado;
+> se agregó la referencia cruzada al Canal~I.** Punto C3 del plan de árbitro: agudizar en la
+> introducción y en "Brecha en la literatura" (§3.6) la distinción cola doméstica endógena del
+> crecimiento ≠ ciclo financiero global exógeno. Al revisar `paper2_empirico.tex` se encontró
+> que esta distinción **ya estaba articulada con precisión** en tres lugares (Introducción
+> §1, Hipótesis §2.4, Brecha en la literatura §3.6) — trabajo de una revisión previa de
+> árbitro, no de esta sesión — nombrando explícitamente que Chari et al. (2024) interactúan
+> `JLoss` con factores financieros **globales** (VIX, tasa del Tesoro, *spreads* de alto
+> rendimiento) mientras este capítulo lo hace con una vulnerabilidad **doméstica y endógena**
+> (`GaR`) que la propia fragilidad bancaria contribuye a generar, con la distinción de
+> política ya explicitada ("la primera interacción indica cuándo un sistema bancario frágil
+> expone al soberano al ciclo financiero global; la segunda, cuándo lo expone a su propio
+> ciclo doméstico"). Único cambio hecho: la frase "canal de *credit crunch*" en §3.6 ahora
+> referencia explícitamente el **Canal I** del modelo estructural del Capítulo 1
+> (`paper1_oi.tex`, nueva etiqueta `\label{sec:canal1}` en la subsección homónima — cambio
+> puramente mecánico/aditivo, no avanza contenido de la línea teórica, que sigue pausada),
+> cerrando el vínculo teoría↔evidencia que pedía el plan. Compila limpio (93 pp).
+>
+> ---
+>
 > **C2 — IV reforzado con commodity ToT shift-share (2026-09-16): intentado, primera etapa
 > nula, no cierra la identificación.** Punto C2 del plan de árbitro: reforzar la IV de C2 con
 > un instrumento más exógeno que los dos existentes (`OnOffRun`, USD BIS — cuya "participación"
