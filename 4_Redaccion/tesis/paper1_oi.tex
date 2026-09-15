@@ -268,7 +268,7 @@ La Figura~\ref{fig:cal} calibra el cierre paramétrico (demanda lineal $R_L^*(n)
 
 Los canales se derivan sobre el propio \textit{Growth-at-Risk} $\GaR_\tau$ (el cuantil bajo del crecimiento, negativo en la cola), por comodidad algebraica. Para que los signos coincidan con los de las regresiones del Capítulo~\ref{chap:paper2} y de los \texttt{.Rmd} del panel —que reportan la interacción sobre el \textbf{riesgo de cola} $D\equiv-\GaR$ (un $D$ mayor = cola más adversa)— el mapeo final (Sección~\ref{sec:empirico}) reexpresa los coeficientes en esa convención, con $\beta_3^{D}=-\beta_3^{\GaR}$ y $\beta_4^{D}=-\beta_4^{\GaR}$. La predicción de complementariedad es $\beta_3>0$ en convención $D$ (equivalentemente $\theta=\beta_3^{\GaR}<0$).
 
-\subsection{Canal I: \texorpdfstring{$\JLoss\to\GaR$}{JLoss a GaR}}
+\subsection{Canal I: \texorpdfstring{$\JLoss\to\GaR$}{JLoss a GaR}}\label{sec:canal1}
 La pérdida sistémica contrae el crédito ($K=\bar K-\phi L_{\text{sys}}$) y desplaza a la baja el cuantil del crecimiento:
 \begin{equation}
 \GaR_\tau=\mu-\Lambda(\JLoss)\ \Longrightarrow\ \partial\GaR_\tau/\partial\JLoss=-\Lambda'(\JLoss)<0,
