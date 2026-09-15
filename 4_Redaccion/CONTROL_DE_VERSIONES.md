@@ -303,6 +303,38 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
+> **Parte D — limpieza de consistencia (2026-09-16).** Los cuatro puntos del plan de árbitro:
+>
+> 1. **Deriva de descriptivos de `JLoss` (sd 4,0 vs 4,6 vs 4,8)** — **ya reconciliada** en una
+>    revisión previa a esta sesión: las tres menciones vigentes (`paper2_empirico.tex` §2.4.1
+>    y §7.3, `paper1_oi.tex` §5.5) dicen consistentemente **media 4,8 / sd 4,6**, y coincide
+>    exacto con `Panel_bloomberg.csv` recalculado en vivo (`JLoss.describe()`: media 4,786,
+>    sd 4,592, N=721, 13 países). Sin cambios.
+> 2. **Cohorte de β₄ (+122/+152 vs +139/+171)** — reconciliada: +122/+152 era una fila de
+>    registro fechada 2026-09-02, **superada** desde entonces por `p3_causal_fase5.py` →
+>    `fase5_bbg.csv` (tras excluir Hungría y otras correcciones de *pipeline*); +139/+171/≈0
+>    es lo canónico (`NUMEROS_CANONICOS_BBG.md` "H4a/H4b") y lo que cita `paper1_oi.tex` —
+>    verificado re-ejecutando el script, reproduce exacto. Anotada la fila vieja como
+>    superada; ninguna conclusión cambia bajo ninguna de las dos cohortes.
+> 3. **Re-ejecución 2026-09-06 con Rusia (18 países en el pool de GaR)** — decisión
+>    reafirmada: **sigue sin propagarse** a la prosa ni al panel de estimación EMBI. El efecto
+>    es cuantitativamente inmaterial (|Δθ| ≤ 0,03, ninguna conclusión cambia) y Argentina
+>    sigue pendiente de Bloomberg — el plan siempre fue batchear ambas actualizaciones en una
+>    sola pasada. Todo el trabajo de esta sesión (crisis, `Ryr`, C1, C2) se construyó también
+>    sobre la base **all17** vigente, así que no hay mezcla de *vintages* dentro de la tesis.
+>    Detalle: `NUMEROS_CANONICOS_BBG.md`, sección "RE-EJECUCIÓN 2026-09-06".
+> 4. **`\graphicspath` y 3 figuras pendientes** — **obsoleto**: esos ítems (§6 de este
+>    documento, "Correcciones técnicas pendientes" 1-3) databan de la fase pre-Bloomberg
+>    (`EDA_Panel_Final_17.ipynb`, `Boceto_1_actualizado.tex`); el paper empírico fue reescrito
+>    muchas veces desde entonces sobre la base Bloomberg y `latexmk -pdf` compila sin ninguna
+>    advertencia de figura faltante. Marcados como hechos/superados en §6.
+>
+> Con esto se cierran los cuatro puntos de la Parte D del plan de árbitro. Compila limpio
+> (93 pp, 0 refs indefinidas) — sin cambios de prosa en esta entrada más allá de las
+> anotaciones de este documento.
+>
+> ---
+>
 > **C3 — posicionamiento vs. Chari et al. (2024) (2026-09-16): verificado, ya estaba afilado;
 > se agregó la referencia cruzada al Canal~I.** Punto C3 del plan de árbitro: agudizar en la
 > introducción y en "Brecha en la literatura" (§3.6) la distinción cola doméstica endógena del
@@ -456,7 +488,7 @@ y hubo que restaurarlos.
 > | θ — pre-2020 / término post-2020 | interacción de crisis | −1,0 (p=0,057) / +1,0 (p=0,12) |
 > | θ — ventana móvil 2012–2016 | — | −0,65 (t=−2,4, p=0,018) |
 > | umbral Hansen (efecto JLoss severo/benigno) | — | +5,9 / +2,0 pb, LR=27,5 |
-> | β₄ (JLoss×D×HHI, **H4b**) | 3 proxies HHI | +122 / +152 / ≈0 — **NO IDENTIFICADO** (signo inestable, IC boot cruza cero) |
+> | β₄ (JLoss×D×HHI, **H4b**) | 3 proxies HHI | +122 / +152 / ≈0 — **NO IDENTIFICADO** (signo inestable, IC boot cruza cero) — **superado, ver nota** |
 > | H1 causal | proyecciones locales | +4,6 pb (t=2,9) — respalda H1; IV *shift-share* F≈11, 2ª etapa n.s., Sargan rechaza |
 >
 > **El θ marginal negativo (−0,35, p=0,056) de la versión con CDS era específico del CDS** —
@@ -467,6 +499,15 @@ y hubo que restaurarlos.
 > + resumen de `main.tex`. Compila limpio (82 pp). Nuevo bloque de heterogeneidad en
 > `bbg/p5_robustez_arbitro.py`.
 >
+> **Nota (Parte D, 2026-09-16) — cohorte de β₄ reconciliada.** La fila de β₄ de arriba
+> (+122/+152/≈0, fechada 2026-09-02) queda **superada** por `p3_causal_fase5.py` →
+> `fase5_bbg.csv`, la corrida vigente desde entonces (tras la exclusión de Hungría y otras
+> correcciones del *pipeline*): **β₄ = +139 (estructural, t=+0,39) / +171 (anual, t=+0,81) /
+> ≈0 (trimestral, t=−0,54)**, documentado como canónico en la sección "H4a / H4b" de
+> `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md` y citado en `paper1_oi.tex`. Verificado
+> re-ejecutando `p3_causal_fase5.py` el 2026-09-16: reproduce +139/+171 exacto. La conclusión
+> cualitativa (H4b no identificado, IC de *bootstrap* cruza cero en los tres proxies) es la
+> misma bajo ambas cohortes de números — no cambia ninguna lectura de la tesis.
 > ---
 >
 > **Reancla en Bloomberg + panel único (2026-08-31, v3) [SUPERADO por lo anterior en la DV].** Toda la investigación empírica se
@@ -562,7 +603,16 @@ discrepancia en detalle en `NUMEROS_CANONICOS.md` §2 en vez de descartarla en s
 
 ### Correcciones técnicas pendientes
 
-1. Fijar el θ oficial (sección 5) — **bloqueante para escribir la prosa final** (Fase 2).
-2. Corregir `\graphicspath` al reescribir el paper empírico (Fase 4).
-3. Regenerar las 3 figuras desde la Sección 14 de `EDA_Panel_Final_17.ipynb` (Fase 2).
+1. ~~Fijar el θ oficial (sección 5) — bloqueante para escribir la prosa final (Fase 2)~~ —
+   **hecho** (verificado 2026-09-16, Parte D): la Sección 5 tiene un θ/β₃ oficial trazable
+   desde hace varias reescrituras del paper; toda la prosa vigente cita filas de
+   `NUMEROS_CANONICOS_BBG.md`.
+2. ~~Corregir `\graphicspath` al reescribir el paper empírico (Fase 4)~~ — **hecho**: el
+   paper empírico fue reescrito varias veces sobre la base Bloomberg; `latexmk -pdf` compila
+   sin ninguna advertencia de figura faltante (verificado 2026-09-16).
+3. ~~Regenerar las 3 figuras desde la Sección 14 de `EDA_Panel_Final_17.ipynb` (Fase 2)~~ —
+   **superado**: ese notebook (base `all17`, CDS) fue reemplazado por
+   `1_Codigo/Panel/bbg/EDA_Panel_Final_bbg.ipynb` (base Bloomberg, EMBI), cuya Sección 14 (y
+   la nueva Sección 8, interacción de crisis) generan todas las figuras vigentes en
+   `bbg/figuras/`, ya citadas sin error en la tesis.
 4. ~~Renombrar la plantilla U. de Chile para que `\documentclass{umemoria}` resuelva~~ — hecho.
