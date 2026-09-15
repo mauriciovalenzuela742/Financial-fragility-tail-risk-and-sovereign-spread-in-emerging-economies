@@ -303,6 +303,30 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
+> **C2 — IV reforzado con commodity ToT shift-share (2026-09-16): intentado, primera etapa
+> nula, no cierra la identificación.** Punto C2 del plan de árbitro: reforzar la IV de C2 con
+> un instrumento más exógeno que los dos existentes (`OnOffRun`, USD BIS — cuya "participación"
+> se estima regresando `JLoss` contra el choque). Nuevo instrumento: choque de términos de
+> intercambio por exposición sectorial a *commodities*, con participaciones de exportación
+> **pre-muestra** (Banco Mundial WDI, 1998–2003, antes de 2004Q1) ponderando el índice de
+> precio mundial de cada categoría (World Bank Pink Sheet) — la "participación" viene de datos
+> comerciales externos, exógena por construcción, no de una regresión contra `JLoss`. Nuevos:
+> `1_Codigo/Panel/bbg/p7b_iv_commodity_tot.py` (construcción) + `p7c_iv_reforzado.py`
+> (estimación) + `causal_core.iv_commodity_tot`/`iv_commodity_tot_plus_existentes`. Resultado:
+> primera etapa **prácticamente nula para `JLoss`** (`F≈0,03`) aunque el instrumento sí
+> co-mueve con el EMBI directamente (corr. *within* ≈ −0,16) — el ciclo de *commodities* es
+> relevante para el riesgo soberano agregado, no para la fragilidad *bancaria* específica.
+> Añadido a los 2 instrumentos existentes, el Sargan sobre-identificado sigue rechazando
+> (`p=0,0014`, vs. `p=0,0003` con 2). Conclusión (punto (b) del plan): **no forzar** — se
+> documenta el intento y se re-etiqueta la IV como evidencia que no cierra la identificación
+> bajo ninguno de los tres instrumentos probados; el peso de H1 sigue en OLS+EF y proyecciones
+> locales. Detalle: `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md` sección "IV reforzado —
+> commodity ToT shift-share (C2)". Prosa actualizada en `paper2_empirico.tex` §6.8
+> (Identificación causal), §7.3 (Limitaciones, punto octavo) y §7.4 (Agenda futura, punto vi).
+> Compila limpio.
+>
+> ---
+>
 > **C1 — bootstrap de regresor generado del GaR (2026-09-15): diseñado y validado,
 > ejecución movida a NLHPC.** Punto C1 del plan de árbitro: SE de `β₃` que propague el
 > error de primera etapa del `GaR` (block bootstrap por país, re-estimando la regresión

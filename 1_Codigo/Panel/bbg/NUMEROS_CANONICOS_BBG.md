@@ -251,7 +251,9 @@ cola severa apenas excluye el cero.
 | **Proyecciones locales (nivel, pico)** | **+4,62 pb (t = +2,85)** en h = 1 — respalda H1 (JLoss → EMBI) |
 | IV shift-share nivel — `OnOffRun_spread_log`, exp. pre-2012 | β_JLoss_IV = +7,46; F 1ª etapa = **11,4**; p = 0,34 (n.s.) |
 | IV shift-share nivel — shock USD amplio (BIS) | β_JLoss_IV = −12,50 (signo opuesto); F = 37,8; p = 0,43 |
-| IV sobre-identificado (2 instrumentos) | Sargan p = **0,0003 → RECHAZA** validez conjunta |
+| **IV shift-share nivel — ToT commodities (C2, 2026-09-16)** | F 1ª etapa ≈ **0,03** (prácticamente nula para `JLoss`) |
+| IV sobre-identificado (2 instrumentos, OnOffRun+USD) | Sargan p = **0,0003 → RECHAZA** validez conjunta |
+| IV sobre-identificado (3 instrumentos, +ToT commodities) | Sargan p = **0,0014 → RECHAZA** validez conjunta |
 | Triple interacción institucional (JxG × WGI) | +0,26 (t = +0,89), n.s. |
 
 > **H1 (nivel):** respaldada por OLS (β1 = +2,79, t = 2,74) y proyecciones locales
@@ -259,6 +261,43 @@ cola severa apenas excluye el cero.
 > el instrumento `OnOffRun` baja a F = 11,4 y su 2ª etapa no es significativa; el 2º
 > instrumento da signo opuesto y Sargan rechaza. **El efecto de nivel no está causalmente
 > cerrado con IV**; se apoya en OLS + proyecciones locales.
+
+### IV reforzado — commodity ToT shift-share (C2, 2026-09-16, plan de árbitro)
+
+Punto C2: intentar reforzar la IV con un instrumento **más exógeno por diseño** que los dos
+existentes — su "participación" (share) NO se estima regresando `JLoss` contra el choque (como
+`OnOffRun`/USD BIS), sino que viene de **datos comerciales pre-muestra**, exógenos por
+construcción:
+
+`CTOT_shock_{i,t} = Σ_k w_{i,k}(1998-2003) · log(P_{k,t})`
+
+donde `w_{i,k}` = participación de exportaciones de mercancías del país `i` en 4 categorías
+amplias (energía, minerales y metales, materias primas agrícolas, alimentos), promedio
+**1998-2003** (Banco Mundial WDI, `TX.VAL.{FUEL,MMTL,AGRI,FOOD}.ZS.UN`), y `P_{k,t}` = índice de
+precio mundial de esa categoría (World Bank Pink Sheet, "Monthly Indices"). Pesos usados (%,
+`ctot_pesos_pre2004.csv`): Chile 41,9% metales, Colombia 37,2% energía, Perú 32,7% metales,
+Indonesia 23,8% energía; China/Filipinas/México/Malasia con pesos comerciales bajos (<9% en
+cada categoría) — la heterogeneidad de exposición identifica el diseño *shift-share*.
+Construcción: `p7b_iv_commodity_tot.py` → `ctot_shock_bbg.csv` (mezclado en
+`Panel_bloomberg.csv`). IV: `causal_core.iv_commodity_tot` / `iv_commodity_tot_plus_existentes`
+→ `p7c_iv_reforzado.py` → `iv_reforzado_bbg.csv`.
+
+**Resultado — primera etapa prácticamente NULA para `JLoss`:** `F ≈ 0,03` (correlación
+*within*-país `CTOT_shock`↔`JLoss` ≈ −0,03), pese a que el mismo instrumento sí co-mueve con
+el EMBI directamente (correlación *within* ≈ −0,16, signo esperado: mejores términos de
+intercambio → menor spread). Añadido a los dos instrumentos existentes, la especificación
+sobre-identificada de **3** instrumentos sigue **rechazando Sargan** (`p = 0,0014`, vs.
+`p = 0,0003` con 2).
+
+> **Lectura.** El choque de términos de intercambio por *commodities* es relevante para el
+> **riesgo soberano agregado** (co-mueve con el EMBI) pero **no para la fragilidad bancaria
+> específica** que mide `JLoss` — un resultado económicamente coherente (`JLoss` depende de
+> apalancamiento/calidad de activos bancarios, no directamente del precio de las exportaciones
+> del país) y no un artefacto de construcción (el instrumento tiene variación temporal *within*
+> real, tabla de rangos en `ctot_shock_bbg.csv`). **No cierra la identificación causal del
+> canal de nivel** — igual que los dos instrumentos anteriores. Conclusión de C2: **no forzar**
+> más instrumentos; el peso de H1 sigue en OLS+EF y proyecciones locales (`paper2_empirico.tex`
+> §6.8, ya reescrito con este resultado).
 
 ### H4a / H4b (triple interacción con concentración) — no identificados
 
