@@ -328,6 +328,60 @@ al VIX con coeficiente pequeño). Re-estimación de `p2`/`p9` (`p9_robustez_gar_
 > (`phase2_gar_panel_all18_noCDIFF.py` + `run_gar_all18_noCDIFF.sbatch`, NLHPC) queda
 > disponible pero, dado `corr = 0,985`, es muy improbable que cambie la conclusión.
 
+### Bootstrap de regresor generado (C1, 2026-09-15) — DISEÑADO Y VALIDADO, EJECUCIÓN PENDIENTE EN NLHPC
+
+Objetivo (punto C1 del plan de árbitro): un SE de `β₃` que propague el error de estimación de
+la *primera etapa* del `GaR` (hoy el SE de Driscoll-Kraay trata al `GaR` como un dato fijo —
+el problema clásico de *generated regressors*, Pagan 1984).
+
+**Diseño — block bootstrap por país.** `c_hat(tau)`/`b_hat(tau)` (la función cuantil y la
+pendiente sobre `g_GDP, VIX, FCI_VIX_res`) son parámetros **compartidos** entre los 18 países
+del *pool* GaR; `a_hat_i` es específico de cada país y está bien identificado con ~125
+trimestres propios (no es el objeto de incertidumbre que este bootstrap busca propagar). En
+cada réplica: se remuestrean CON REEMPLAZO los 18 bloques-país completos (preservando su
+estructura temporal interna), se re-ajusta el LP de regresión cuantílica de panel
+(`gar_engine.fit_pfe`) → `c_hat*, b_hat*`; se proyecta el `GaR` de los 13 países del panel EMBI
+usando `c_hat*, b_hat*` + su PROPIO `a_hat_i` (de la corrida real, sin remuestrear); se
+re-estima `β₃` (M2, muestra completa) y `β₃+β₄` (Backstop/EMstress) sobre el panel Bloomberg
+real con ese `GaR`-réplica. `sd(β₃*_{1..B})` = SE bootstrap.
+
+**Validación de la aproximación de fidelidad reducida (`n_tau=19` en vez de 39, necesaria por
+costo — el LP escala ~cuadrático en `n_tau`; 39→~250s/ajuste, 19→~57s/ajuste; `tau_min =
+1/(19+1) = 0,05` coincide EXACTO con `GaR=Q(0,05)`, sin extrapolación):** un ajuste único (sin
+remuestrear) a `n_tau=19` reproduce de cerca los números oficiales —
+
+| | β₃ (M2, completa) | β₃ (fuera de crisis) | Backstop β₃+β₄ (p) | EMstress β₃+β₄ (p) |
+|---|---|---|---|---|
+| oficial (`n_tau=39`, GaR expansivo) | +0,16 (p=0,26) | +0,81 (p=0,051) | −0,03 (0,766) | +1,05 (<0,001) |
+| ajuste único `n_tau=19` (in-sample) | +0,22 (t=1,34) | +0,82 (t=2,28) | −0,10 (0,206) | +1,03 (0,003) |
+
+`1_Codigo/Panel/bbg/p10_boot_gar.py validar` → `bbg/gar_true_ntau19.csv`.
+
+**Ejecución local — DESCARTADA.** La máquina de desarrollo (8GB RAM, ~570–850MB libres de
+base con Chrome/VSCode/Claude Code/Defender/WSL ya corriendo) mató el proceso por falta de
+memoria **3 veces** (4 *workers*, 2 *workers*, e incluso 1 solo proceso en serie — este último
+murió en la primera réplica, justo después de que el mismo ajuste tuvo éxito como ancla,
+señal de que es presión de memoria del sistema, no un defecto del script). B=200 con 4
+*workers* alcanzó a completar 65/200 réplicas (48 min) antes de morir.
+
+**Camino elegido: NLHPC, fidelidad completa (decisión del usuario, 2026-09-15).**
+`1_Codigo/GaR/individuals/nlhpc_gar_all18/p10_boot_gar_nlhpc.py` (autocontenido, solo
+`numpy/scipy/pandas/openpyxl` — no requiere `linearmodels`, que `venv_gar/` no tiene) +
+`run_boot_gar_nlhpc.sbatch` (8 CPUs, 64GB, 24h, *checkpoint*/resume igual que
+`run_gar_all18_noCDIFF.sbatch`). Corre SOLO la primera etapa (`n_tau=39`, B=500) y escribe
+`gar_replicas_nlhpc.csv` (seed, country, quarter, GaR — una fila por país-trimestre-réplica).
+La lógica de remuestreo/proyección fue verificada end-to-end con un *dry run* barato
+(`n_tau=9`, réplica 0: 1400 filas, 18 países, esquema correcto). La segunda etapa
+(`β₃/β₄` por réplica, trivial en tiempo/memoria) se corre LOCAL sobre el resultado:
+`python 1_Codigo/Panel/bbg/p10_boot_gar.py segunda_etapa gar_replicas_nlhpc.csv` →
+`bbg/boot_gar_bbg.csv` (mismo esquema que hubiera producido el bootstrap local).
+
+**Pendiente:** transferir `GaR_panel_all18.xlsx` + `gar_engine.py` (ya están en el clúster) +
+`p10_boot_gar_nlhpc.py` + `run_boot_gar_nlhpc.sbatch` a NLHPC, `sbatch
+run_boot_gar_nlhpc.sbatch`, y al terminar traer `gar_replicas_nlhpc.csv` de vuelta para la
+segunda etapa local. Esta fila se actualiza con el SE bootstrap y el IC95 percentil una vez
+completada la corrida.
+
 ### Coeficientes de control en M2 — advertencia
 
 Bajo FE país + FE tiempo, los controles domésticos son interpolaciones lineales de datos
