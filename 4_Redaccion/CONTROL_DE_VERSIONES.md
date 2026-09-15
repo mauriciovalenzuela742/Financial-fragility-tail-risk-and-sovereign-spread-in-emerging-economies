@@ -303,6 +303,24 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
+> **C1 — bootstrap de regresor generado del GaR (2026-09-15): diseñado y validado,
+> ejecución movida a NLHPC.** Punto C1 del plan de árbitro: SE de `β₃` que propague el
+> error de primera etapa del `GaR` (block bootstrap por país, re-estimando la regresión
+> cuantílica de panel en cada réplica — detalle completo en
+> `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`, sección "Bootstrap de regresor generado
+> (C1)"). Tres intentos de correrlo LOCAL (4 *workers*, 2 *workers*, 1 proceso en serie)
+> murieron por falta de memoria del sistema (máquina de 8GB, ~600MB libres de base) — no es
+> un defecto del script: la metodología fue validada (ajuste único a fidelidad reducida
+> reproduce de cerca los números oficiales) y la lógica de remuestreo fue verificada
+> end-to-end con un *dry run* barato. Decisión del usuario: mover la ejecución a NLHPC con
+> fidelidad completa. Nuevos: `1_Codigo/GaR/individuals/nlhpc_gar_all18/p10_boot_gar_nlhpc.py`
+> + `run_boot_gar_nlhpc.sbatch` (primera etapa, cluster) y
+> `1_Codigo/Panel/bbg/p10_boot_gar.py segunda_etapa` (segunda etapa, local, trivial en
+> tiempo/memoria). **Pendiente:** el usuario corre el sbatch en NLHPC; al volver el resultado,
+> se completa el SE bootstrap y se actualiza esta sección + `paper2_empirico.tex` §6.8/§7.4.
+>
+> ---
+>
 > **Interacción de crisis + endogeneidad `Ryr` (2026-09-10/11, indicaciones del coguía) —
 > línea teórica PAUSADA, foco 100% en Cap. 2.** Reunión con el profesor coguía: se acuerda no
 > avanzar en la teoría y cerrar el paper empírico. Dos indicaciones concretas + pendientes de
