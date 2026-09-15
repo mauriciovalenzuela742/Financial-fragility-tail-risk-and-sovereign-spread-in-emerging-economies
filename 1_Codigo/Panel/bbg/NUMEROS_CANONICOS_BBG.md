@@ -50,6 +50,19 @@ conclusión cualitativa (muestra completa nula, sin-crisis fuerte, China pivote,
 junto con Argentina (bono 5Y, pendiente de Bloomberg). Las filas de abajo son todavía del
 estado all17; usar la tabla de arriba para los números de la re-ejecución.
 
+> **Decisión reafirmada (Parte D, 2026-09-16): sigue sin propagarse.** Todo el trabajo de
+> esta sesión (interacción de crisis, endogeneidad `Ryr`, *bootstrap* C1, IV reforzado C2)
+> se construyó también sobre la vigente base **all17** — la misma que documentan las tablas
+> de abajo —, así que no hay mezcla de vintages dentro de la tesis. Razones para NO propagar
+> todavía: (i) el efecto es cuantitativamente inmaterial (|Δθ| ≤ 0,03, ninguna conclusión
+> cambia); (ii) Argentina sigue pendiente de Bloomberg, y el plan original ya era batchear
+> ambas actualizaciones juntas; (iii) propagar ahora obligaría a re-correr TODO el *pipeline*
+> — incluida la especificación de crisis, la robustez de `Ryr`, y el *bootstrap* de GaR que
+> está a punto de correrse en NLHPC con la base all17 — por una corrección que no cambia
+> ninguna lectura. **Próximo paso, cuando Argentina esté lista:** una sola re-ejecución
+> completa de `bbg/p1..p10` sobre `gar_panel_all18.csv` + Argentina, reescribiendo esta
+> sección superior y toda la prosa de `paper2_empirico.tex` en una sola pasada — no antes.
+
 ---
 
 ## ★ DISEÑO VIGENTE (2026-09-02): DV = EMBI, 13 países, CDS a robustez
