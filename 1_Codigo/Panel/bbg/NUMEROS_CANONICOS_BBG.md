@@ -380,7 +380,7 @@ al VIX con coeficiente pequeño). Re-estimación de `p2`/`p9` (`p9_robustez_gar_
 > (`phase2_gar_panel_all18_noCDIFF.py` + `run_gar_all18_noCDIFF.sbatch`, NLHPC) queda
 > disponible pero, dado `corr = 0,985`, es muy improbable que cambie la conclusión.
 
-### Bootstrap de regresor generado (C1, 2026-09-15) — DISEÑADO Y VALIDADO, EJECUCIÓN PENDIENTE EN NLHPC
+### Bootstrap de regresor generado (C1, 2026-09-15/17) — COMPLETO, resultado: no cambia ninguna conclusión
 
 Objetivo (punto C1 del plan de árbitro): un SE de `β₃` que propague el error de estimación de
 la *primera etapa* del `GaR` (hoy el SE de Driscoll-Kraay trata al `GaR` como un dato fijo —
@@ -428,11 +428,51 @@ La lógica de remuestreo/proyección fue verificada end-to-end con un *dry run* 
 `python 1_Codigo/Panel/bbg/p10_boot_gar.py segunda_etapa gar_replicas_nlhpc.csv` →
 `bbg/boot_gar_bbg.csv` (mismo esquema que hubiera producido el bootstrap local).
 
-**Pendiente:** transferir `GaR_panel_all18.xlsx` + `gar_engine.py` (ya están en el clúster) +
-`p10_boot_gar_nlhpc.py` + `run_boot_gar_nlhpc.sbatch` a NLHPC, `sbatch
-run_boot_gar_nlhpc.sbatch`, y al terminar traer `gar_replicas_nlhpc.csv` de vuelta para la
-segunda etapa local. Esta fila se actualiza con el SE bootstrap y el IC95 percentil una vez
-completada la corrida.
+**Ejecución en NLHPC — completa (job 13095760, 2026-09-17).** `sbatch run_boot_gar_nlhpc.sbatch`
+en `~/nlhpc_gar_all18/`: **B=500 réplicas, fidelidad completa (n_tau=39), 8 *workers*, 500/500
+sin errores**, 171,9 min (2h52m). `gar_replicas_nlhpc.csv` (700.000 filas) traído de vuelta;
+segunda etapa corrida local (`p10_boot_gar.py segunda_etapa`, trivial en tiempo — segundos):
+
+| Cantidad | Punto (vigente\*) | SE segunda etapa (DK/Wald) | SE *bootstrap* (1ª etapa, C1) | **SE combinado** | **p combinado** |
+|---|---:|---:|---:|---:|---:|
+| β₃ (M2, muestra completa) | +0,188 | 0,159 | 0,032 | **0,162** | **0,248** (vs. 0,239 sin corregir) |
+| β₃ (fuera de crisis) | +0,838 | 0,414 | 0,087 | **0,423** | **0,048** (vs. 0,043) |
+| β₃+β₄ *Backstop* | −0,105 | 0,095 | 0,023 | **0,098** | **0,284** (vs. 0,270) — no rechaza |
+| β₃+β₄ *EMstress* | +1,051 | 0,283 | 0,159 | **0,324** | **0,0012** (vs. 0,0002) — sigue rechazando |
+
+\* Punto estimado usando el `GaR` **vigente** de `Panel_bloomberg.csv` (ventana expansiva, con
+Rusia en el *pool*, ver nota de vintage más abajo) — coincide con la fila "oficial (ventana
+expansiva, con CDIFF)" de la tabla de robustez `Ryr` de arriba (+0,19 redondeado). `SE_combinado
+= sqrt(SE_DK² + SE_boot²)` (Murphy–Topel/Pagan simplificado: como el diseño mantiene fija la
+segunda etapa —el panel EMBI real— entre réplicas, `sd(β₃*)` aísla la varianza que aporta
+*solo* la primera etapa, que se SUMA en cuadratura a la varianza de segunda etapa ya conocida,
+no la reemplaza).
+
+> **Conclusión de C1.** Propagar el error de estimación de la primera etapa del `GaR` **no
+> cambia ninguna conclusión cualitativa**: la contribución de la primera etapa a la varianza
+> total es pequeña frente a la de la segunda etapa (SE crece 2–15 % según la fila), y los
+> cuatro `p`-valores se mueven en la tercera cifra decimal. β₃ en muestra completa sigue sin
+> ser significativo; β₃ fuera de crisis sigue en el margen del 5 %; la cancelación bajo
+> *Backstop* sigue sin rechazarse; la supervivencia bajo *EMstress* sigue siendo claramente
+> significativa (p=0,0012). La inferencia DK/Wald ya reportada en el resto de este documento
+> **no estaba subestimando de forma material** la incertidumbre por tratar al `GaR` como dato.
+
+> **Nota de vintage (hallazgo de esta verificación, 2026-09-17).** Al anclar el punto estimado
+> del bootstrap se confirmó DIRECTAMENTE (no solo por la nota de la re-ejecución de arriba) que
+> `Panel_bloomberg.csv` **ya tiene el `GaR` de 18 países (con Rusia) desde antes de esta
+> sesión** (`git log` → commit `d4fcdef`; `GaR` de `Panel_bloomberg.csv` es byte-idéntico a
+> `gar_panel_all18.csv`). Por eso el β₃ M2 "vigente" (+0,188, re-ejecutando `p2_regresiones.py`
+> en vivo) difiere ligeramente del que cita la tabla "★ Resultado central — H3" de abajo
+> (+0,160) — esa tabla y la prosa de la tesis siguen sin actualizarse tras la re-ejecución
+> 2026-09-06, tal como advierte la nota de arriba, con exactamente la magnitud de deriva que
+> esa nota anticipaba (|Δ|≈0,03). No cambia la decisión de la Parte D (diferir la propagación
+> hasta tener Argentina) ni ninguna conclusión — se deja registrado aquí porque el trabajo de
+> C1 lo tocó directamente. Todo el trabajo de crisis-interacción y endogeneidad `Ryr` de esta
+> sesión (secciones de arriba) ya usaba el `GaR` vigente (con Rusia) vía `gar_panel_all18.csv`,
+> así que es internamente consistente con este resultado de C1.
+
+Archivos: `1_Codigo/GaR/individuals/nlhpc_gar_all18/gar_replicas_nlhpc.csv` (primera etapa, 700k
+filas) + `1_Codigo/Panel/bbg/boot_gar_bbg.csv` (segunda etapa, 500 filas: `seed,N,b3,t3,p3,...`).
 
 ### Coeficientes de control en M2 — advertencia
 
