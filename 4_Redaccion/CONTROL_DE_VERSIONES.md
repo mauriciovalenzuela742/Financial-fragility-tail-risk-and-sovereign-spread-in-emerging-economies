@@ -140,6 +140,7 @@ Rutas relativas desde `Jloss/`.
 | **Citado** | Corregido a natbib real (`\citep`/`\citet` + `\begin{thebibliography}`), igual que `paper1_oi.tex`; antes usaba citas de texto plano "(Autor, Año)" con una lista `itemize` manual, sin verificación de LaTeX. |
 | **Predecesor congelado** | `Boceto_1_actualizado.tex` (`4_Redaccion/`) — ya no se edita; superado por `paper2_empirico.tex`. Sus predecesores (`Boceto_1_v2.tex`, `Boceto 1.tex`, etc.) permanecen en `archive/`. |
 | **Acción** | Editar solo `4_Redaccion/tesis/paper2_empirico.tex`. No tocar `Boceto_1_actualizado.tex`. |
+| **Sincronía con el envío standalone** | `4_Redaccion/envios/paper_empirico/main.tex` reutiliza este archivo vía `\input`, pero su `\begin{abstract}` y su `cover_letter.md` son texto propio, no derivado del `\input`. Cualquier cambio de resultado central (signo, valor de $\hat\beta_3$/$\theta$, qué se reporta como hallazgo principal) debe replicarse a mano en esos dos archivos — no se actualizan solos. Sincronizados por última vez 2026-09-18 (abstract y carta realineados con la interacción de crisis Backstop/EMstress y la batería C1/C2/C3 como resultado vigente; antes citaban 14 países y el CDS como variable dependiente principal). |
 
 ### 3.4 Tesis ensamblada (plantilla oficial + capítulos)
 
@@ -647,3 +648,12 @@ discrepancia en detalle en `NUMEROS_CANONICOS.md` §2 en vez de descartarla en s
    la nueva Sección 8, interacción de crisis) generan todas las figuras vigentes en
    `bbg/figuras/`, ya citadas sin error en la tesis.
 4. ~~Renombrar la plantilla U. de Chile para que `\documentclass{umemoria}` resuelva~~ — hecho.
+5. ~~Auditoría de rigor del paper empírico para el envío standalone (2026-09-18)~~ — **hecho**:
+   revisión línea por línea de `paper2_empirico.tex` contra adjetivos no sustentados,
+   consistencia de notación y trazabilidad de cifras a `NUMEROS_CANONICOS_BBG.md`. Un
+   hallazgo real: en la sección "Identificación causal" (párrafo de *wild cluster bootstrap*),
+   el $p$-valor de $\beta_3$ en el panel completo estaba transcrito como $0{,}67$; el valor
+   canónico (`NUMEROS_CANONICOS_BBG.md`, línea ~263: `p_wildboot = 0,138`) y el propio
+   "Resumen del capítulo" del mismo archivo (línea 7) dan $p=0{,}14$ — corregido. El resto del
+   cuerpo (Introducción, Marco teórico, Estado del arte, Metodología, Datos, Resultados,
+   Discusión) pasó la auditoría sin hallazgos adicionales.
