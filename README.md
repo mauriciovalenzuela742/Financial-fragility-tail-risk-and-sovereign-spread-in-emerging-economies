@@ -87,34 +87,53 @@ financiamiento externo, no en el conjunto del panel. Las fronteras honestas:
 
 ## Reproducir
 
-Entorno: Python con `pandas`, `numpy`, `scipy`, `linearmodels`, `matplotlib`
-(`1_Codigo/JLoss_reconstruction/JLoss-pipeline/venv` para el motor JLoss; `.venv` del proyecto
-para las regresiones). Requiere acceso de red para IMF WEO / World Bank / GFDD.
+Entorno: Python con `pandas`, `numpy`, `scipy`, `linearmodels`, `matplotlib`, `statsmodels`
+(`1_Codigo/JLoss_reconstruction/JLoss-pipeline/venv` para el motor JLoss —
+`requirements.txt` en esa carpeta—; `.venv` del root para el resto —`requirements.txt` en la
+raíz—). MiKTeX o TeX Live completo para compilar la tesis. Requiere acceso de red solo si se
+quiere **refrescar** IMF Datamapper / World Bank / BIS — los CSV ya extraídos están commiteados,
+así que reproducir los números ya reportados **no** requiere red. Instructivo completo, con
+qué pasos no son reproducibles sin Bloomberg Terminal/NLHPC y por qué:
+[`4_Redaccion/REPRODUCIBILIDAD.md`](4_Redaccion/REPRODUCIBILIDAD.md).
 
 ```bash
-# 1. JLoss desde Bloomberg (una vez extraídos los CSV crudos a Bloomberg_extraction/output/)
+# 1. JLoss desde Bloomberg (una vez extraídos los CSV crudos a Bloomberg_extraction/output/,
+#    ya commiteados -- este paso NO requiere Bloomberg Terminal para reproducirse)
 cd 1_Codigo/JLoss_reconstruction
 mkdir -p _stage && for d in ../Bloomberg_extraction/output/*/; do c=$(basename "$d"); \
   cp "$d/balance_$c.csv" "$d/mktcap_$c.csv" _stage/; done
 JLoss-pipeline/venv/Scripts/python.exe jloss_engine.py --indir _stage \
   --out jloss_bloomberg/Panel_JLoss_v9_bloomberg.csv && rm -rf _stage
 
-# 2. Panel + análisis (desde 1_Codigo/Panel/)
-python bbg/p0_controles_all.py     # controles domésticos, todos los países
-python bbg/p1_build_panels.py      # -> bbg/Panel_bloomberg.csv, panel_real_bbg.csv, cobertura
+# 2. Panel + análisis (desde 1_Codigo/Panel/, con el .venv del root)
+python bbg/p0_controles_all.py     # controles domésticos, todos los países (red: IMF/World Bank)
+python bbg/p1_build_panels.py      # -> bbg/Panel_bloomberg.csv, panel_real_bbg.csv, cobertura (red: World Bank)
 python bbg/p2_regresiones.py       # theta (M1/M2/M3), robustez, umbral, efecto marginal
 python bbg/p6_concentracion_trimestral.py  # -> concentracion_trimestral_bbg.csv (HHI_q)
 python bbg/p7_iv_dolar_bis.py      # instrumento dólar BIS -> usd_neer_bbg.csv (red: stats.bis.org)
+python bbg/p7b_iv_commodity_tot.py # instrumento ToT commodities -> ctot_shock_bbg.csv (red: World Bank, frágil)
+python bbg/p7c_iv_reforzado.py     # IV con los 3 instrumentos (OnOffRun, USD BIS, ToT)
 python bbg/p3_causal_fase5.py      # batería causal (IV reforzado) + H4a/H4b (3 proxies de HHI)
 python bbg/p5_robustez_arbitro.py  # ventanas móviles, placebo, país influyente, regresor generado, GMM
-python bbg/p4_figuras.py           # figuras -> bbg/figuras/ (se copian a 4_Redaccion/tesis/imagenes/)
+python bbg/p8_bateria_regresiones.py  # batería 4x3x2 estilo Chari et al. (2024)
+python bbg/p9_crisis_interaccion.py   # Backstop vs EMstress (test de falsación, Sección 8 del EDA)
+python bbg/p9_diag_ryr.py             # diagnóstico de endogeneidad Ryr <-> EMBI
+python bbg/p9_robustez_gar_nocdiff.py # robustez: GaR reconstruido sin CDIFF
+python bbg/p4_figuras.py           # figuras -> bbg/figuras/ y copia a 4_Redaccion/tesis/imagenes/
 
 # 2b. Robustez a la censura del grid de JLoss (opcional, ~40 min de motor)
 cd ../JLoss_reconstruction && python _engine_wide.py    # -> Panel_JLoss_wide.csv (grid [0.01,0.20])
 cd ../Panel && python bbg/_robustez_widebounds.py       # -> robustez_widebounds_bbg.csv
 
+# 2c. Bootstrap de regresor generado C1 (opcional, ~172 min en cluster -- ya ejecutado, ver
+#     1_Codigo/GaR/individuals/nlhpc_gar_all18/gar_replicas_nlhpc.csv commiteado)
+python bbg/p10_boot_gar.py segunda_etapa ../GaR/individuals/nlhpc_gar_all18/gar_replicas_nlhpc.csv
+
+# 2d. Notebook EDA complementario (ejecutar con nbclient, no con `jupyter execute` -- ver instructivo)
+python -c "import nbformat; from nbclient import NotebookClient; nb=nbformat.read('bbg/EDA_Panel_Final_bbg.ipynb', as_version=4); NotebookClient(nb, timeout=600, kernel_name='python3', resources={'metadata': {'path': 'bbg'}}).execute(); nbformat.write(nb, 'bbg/EDA_Panel_Final_bbg.ipynb')"
+
 # 3. Documento de tesis (desde 4_Redaccion/tesis/)
-latexmk -pdf main.tex             # -> main.pdf, 82 pp, compila sin warnings
+latexmk -pdf main.tex             # -> main.pdf, 94 pp, compila sin errores (MiKTeX 25.12 / pdfTeX)
 ```
 
 ---

@@ -17,6 +17,8 @@ FIG = os.path.join(HERE, "figuras")
 os.makedirs(FIG, exist_ok=True)
 PANEL = os.path.dirname(HERE)
 PANEL_CSV = os.path.join(HERE, "Panel_bloomberg.csv")
+IMAGENES_TESIS = os.path.join(os.path.dirname(HERE), "..", "..",
+                               "4_Redaccion", "tesis", "imagenes")
 
 BLUE, ORANGE, RED = "#2a78d6", "#eb6834", "#e34948"
 INK, INK2, SURF, GRID = "#0b0b0b", "#52514e", "#fcfcfb", "#e7e6e2"
@@ -54,8 +56,10 @@ def _save(fig, name):
     fig.tight_layout()
     for ext in ("pdf", "png"):
         fig.savefig(os.path.join(FIG, f"{name}.{ext}"), dpi=150, bbox_inches="tight")
+    os.makedirs(IMAGENES_TESIS, exist_ok=True)
+    fig.savefig(os.path.join(IMAGENES_TESIS, f"{name}.pdf"), dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print(f"  {name}.pdf")
+    print(f"  {name}.pdf (+ copia en 4_Redaccion/tesis/imagenes/)")
 
 
 def fig_cobertura():
