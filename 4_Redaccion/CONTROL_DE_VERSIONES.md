@@ -303,6 +303,37 @@ y hubo que restaurarlos.
 
 ## 5. Números oficiales
 
+> **C1 — bootstrap de regresor generado: EJECUTADO en NLHPC, resultado final (2026-09-17).**
+> Job `13095760` (`gar_boot`), `~/nlhpc_gar_all18/`: **B=500 réplicas, fidelidad completa
+> (n_tau=39), 500/500 sin errores, 171,9 min**. Segunda etapa corrida local sobre
+> `gar_replicas_nlhpc.csv` (700.000 filas). Resultado: el SE combinado (segunda etapa DK/Wald
+> + primera etapa *bootstrap*, en cuadratura) crece apenas 2–15\,% según la fila, y **ningún
+> `p`-valor cambia de categoría** — β₃ muestra completa sigue no significativo (p: 0,239→0,248);
+> β₃ fuera de crisis sigue en el margen del 5\,% (0,043→0,048); *Backstop* sigue sin rechazar
+> cero (0,270→0,284); *EMstress* sigue significativo (0,0002→0,0012). La inferencia
+> Driscoll–Kraay/Wald ya reportada en la tesis no subestimaba de forma material la
+> incertidumbre de tratar al `GaR` como dato. Detalle completo (tabla, metodología de
+> combinación, y el hallazgo de *vintage* de abajo):
+> `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`, sección "Bootstrap de regresor generado (C1)".
+> Prosa: párrafo "Regresores generados" en `paper2_empirico.tex` §6.8 (nueva
+> `\label{sec:ident-causal}`), y §7.4 Agenda futura reescrita (el punto (v) —el propio
+> *bootstrap*— pasa de pendiente a hecho; el punto (iii) corregido: Rusia ya tiene `GaR`, solo
+> le falta EMBI). Cita nueva: Pagan (1984). Compila limpio (94 pp, 0 refs indefinidas).
+>
+> **Hallazgo colateral — el `GaR` vigente de `Panel_bloomberg.csv` YA es la versión con Rusia
+> (18 países)**, confirmado de forma directa (no solo por la nota de la re-ejecución
+> 2026-09-06): `git log` → commit `d4fcdef` (anterior a esta sesión) reconstruyó
+> `Panel_bloomberg.csv` con `gar_panel_all18.csv`, y son byte-idénticos donde coinciden. Esto
+> explica por qué β₃ (M2, muestra completa) re-ejecutado en vivo da **+0,188** en vez de los
+> +0,160 que cita la tabla "★ Resultado central — H3" (todavía sin actualizar, deriva de
+> exactamente la magnitud que esa nota anticipaba, |Δ|≈0,03) — y confirma que el trabajo de
+> esta sesión sobre interacción de crisis, endogeneidad `Ryr`, C1 y C2 es internamente
+> consistente entre sí (todos usan el `GaR` vigente con Rusia vía `gar_panel_all18.csv`), solo
+> la tabla superior y la prosa de la tesis siguen ancladas al estado pre-2026-09-06. No cambia
+> la decisión de la Parte D de abajo (diferir la propagación completa hasta tener Argentina).
+>
+> ---
+>
 > **Parte D — limpieza de consistencia (2026-09-16).** Los cuatro puntos del plan de árbitro:
 >
 > 1. **Deriva de descriptivos de `JLoss` (sd 4,0 vs 4,6 vs 4,8)** — **ya reconciliada** en una
