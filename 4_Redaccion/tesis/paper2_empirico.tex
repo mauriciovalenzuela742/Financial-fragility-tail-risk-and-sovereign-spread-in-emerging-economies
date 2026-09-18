@@ -273,6 +273,7 @@ $D\equiv-GaR$ (serie oficial) & 0,34 & 0,43 \\
 
 \begin{table}[t]
 \centering\small
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccc}
 \toprule
 Serie de $GaR$ & $\beta_3$ (muestra completa) & $\beta_3$ (fuera de crisis) & $\beta_3{+}\beta_4$ (Backstop) & $\beta_3{+}\beta_4$ (EMstress) \\
@@ -280,7 +281,8 @@ Serie de $GaR$ & $\beta_3$ (muestra completa) & $\beta_3$ (fuera de crisis) & $\
 Oficial (ventana expansiva) & $+0{,}19$ (n.s.) & $+0{,}84^{**}$ & $-0{,}11$ (Wald $p=0{,}27$) & $+1{,}05^{***}$ \\
 \textit{In-sample}, sin $CDIFF$ & $+0{,}23$ (n.s.) & $+0{,}86^{***}$ & $-0{,}11$ (Wald $p=0{,}15$) & $+1{,}15^{***}$ \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \caption[Robustez de $\beta_3$ al GaR sin $CDIFF$]{$\beta_3=\mathrm{coef}(JLoss\times D)$ reestimado sobre el $GaR$ reconstruido sin el término tipo-\textit{spread}. Las columnas 3--4 usan la especificación de interacción de crisis de la Sección~\ref{sec:crisis-interaccion} (Backstop = GFC+COVID; EMstress = 2015--16). Fuente: \texttt{bbg/p9\_robustez\_gar\_nocdiff.py}; detalle en \texttt{NUMEROS\_CANONICOS\_BBG.md}.}
 \label{tab:robustezryr}
 \end{table}
@@ -467,6 +469,7 @@ Se descompone además el vector de crisis en dos episodios de naturaleza distint
 
 \begin{table}[t]
 \centering\small
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrr}
 \toprule
 Especificación & $N$ & $\hat\beta_3$ (fuera de crisis) & $\hat\beta_4$ & $\hat\beta_3+\hat\beta_4$ & Wald $p$ ($H_0\!:\beta_3{+}\beta_4=0$) \\
@@ -477,7 +480,8 @@ Vector único ($Crisis$) & 614 & $+0{,}81$ \tst{1{,}96} & $-0{,}84$ \tst{-1{,}96
 \quad Backstop (GFC + COVID) & 614 & $+0{,}84$ \tst{2{,}02} & $-0{,}94$ \tst{-2{,}23} & $-0{,}11$ & $0{,}27$ \\
 \quad EMstress (2015--16)    & 614 & $+0{,}84$ \tst{2{,}02} & $+0{,}21$ \tst{0{,}43} & $+1{,}05$ & $<0{,}001$ \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \caption[Interacción de crisis: sin botar trimestres]{Ecuación~\eqref{eq:crisisint}, efectos fijos bidireccionales, seis controles domésticos, errores de Driscoll--Kraay. $\hat\beta_3$ es idéntico dentro de cada bloque (mismo término base); se repite por fila para lectura directa de $\hat\beta_3+\hat\beta_4$. Trazabilidad: \texttt{bbg/p9\_crisis\_interaccion.py} = \texttt{bbg/crisis\_interaccion.R} (coinciden a 4 decimales); reproducido también en el notebook Jupyter y en \texttt{analisis\_bloomberg.Rmd}.}
 \label{tab:crisis}
 \end{table}
@@ -602,7 +606,7 @@ Los resultados anteriores son asociaciones condicionales bajo un conjunto exigen
 
 \textbf{Regresores generados.} Tanto $JLoss$ como $GaR$ son variables \emph{estimadas}. El error de medición clásico en un regresor \textbf{atenúa} el coeficiente hacia cero: el $\hat\beta_3$ reportado —ya no significativo— es un límite conservador. Perturbando la serie de $GaR$ con ruido gaussiano, $\hat\beta_3$ es estable hasta perturbaciones del orden del 25\,\% de su desviación estándar y solo se atenúa levemente al 50\,\%, sin cambiar de signo. Más allá de esa perturbación sintética, un \textit{bootstrap} de bloques por país (500 réplicas) que re-estima la regresión cuantílica de panel completa —no solo perturba el $GaR$, sino que vuelve a resolverla— en cada réplica y propaga esa incertidumbre a $\hat\beta_3$ confirma la misma conclusión con la corrección propia del problema de \textit{generated regressors} \citep{Pagan1984}: el error estándar combinado (segunda etapa más primera etapa, en cuadratura) crece apenas 2--15\,\% según la especificación, y ningún $p$-valor cambia de categoría —$\hat\beta_3$ en la muestra completa sigue sin ser significativo, fuera de crisis sigue en el margen del 5\,\%, la cancelación bajo \textit{Backstop} sigue sin rechazarse y la supervivencia bajo \textit{EMstress} sigue siendo clara ($p=0{,}0012$). La inferencia de Driscoll--Kraay ya reportada en este capítulo no subestimaba de forma material la incertidumbre por tratar al $GaR$ como dato.
 
-\textbf{Wild cluster bootstrap} \citep{CameronGelbachMiller2008}. Con trece \textit{clusters} de país, la inferencia asintótica puede ser optimista. El $p$-valor de $\beta_3$ bajo \textit{wild cluster bootstrap} es $0{,}67$ en el panel completo, $\mathbf{0{,}015}$ en el núcleo de once economías, y $0{,}13$ en la muestra sin crisis. La dimensión transversal de la condicionalidad es la que sobrevive a la inferencia más conservadora.
+\textbf{Wild cluster bootstrap} \citep{CameronGelbachMiller2008}. Con trece \textit{clusters} de país, la inferencia asintótica puede ser optimista. El $p$-valor de $\beta_3$ bajo \textit{wild cluster bootstrap} es $0{,}14$ en el panel completo, $\mathbf{0{,}015}$ en el núcleo de once economías, y $0{,}13$ en la muestra sin crisis. La dimensión transversal de la condicionalidad es la que sobrevive a la inferencia más conservadora.
 
 \textbf{Triple interacción institucional.} La triple interacción $JLoss\times D\times$Institución (calidad de gobierno, WGI) no es significativa; los datos institucionales empleados son además provisionales.
 
