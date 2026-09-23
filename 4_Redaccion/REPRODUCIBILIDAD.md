@@ -127,7 +127,12 @@ Orden **obligatorio** (cada script lee el output del anterior):
     bajo EMstress ≈ **+1,05** (Wald rechaza, p<0,001).
 12. `p9_diag_ryr.py` y `p9_robustez_gar_nocdiff.py` — diagnóstico y robustez de la endogeneidad
     `Ryr`↔EMBI. Sin red. *(Tampoco estaban en la lista de README.)*
-13. `p4_figuras.py` — genera las 7 figuras `fig_*.pdf/.png` de la tesis. **Corregido en esta
+12b. `p9b_bateria_crisis.py` *(agregado 2026-09-23)* — extiende `p9_crisis_interaccion.py` a una
+    batería de 24 especificaciones (4 modelos anidados CM1–CM4 × 3 FE, 2 paneles: vector único
+    y Backstop/EMstress) → `bateria_crisis_bbg.csv`. Sin red. Verifica su propia replicación
+    contra `p9_crisis_interaccion.py` al ejecutarse (aborta con `SystemExit` si no coincide).
+13. `p4_figuras.py` — genera las 10 figuras `fig_*.pdf/.png` de la tesis (incluye
+    `fig_gar_paises()` y `fig_comovimiento()`, agregadas 2026-09-23). **Corregido en esta
     revisión**: antes solo guardaba en `bbg/figuras/`; el README decía que se copiaban a
     `4_Redaccion/tesis/imagenes/` pero el script no lo hacía (la sincronía era manual y quedó
     rota al menos una vez — las figuras de `imagenes/` tenían timestamp de 2026-09-02 mientras
@@ -183,6 +188,28 @@ debe dar 0). Dos *warnings* cosméticos esperados (sustitución de forma de fuen
 glue shrinkage*) no son bloqueantes. No requiere `bibtex`/`biber` — un solo `latexmk -pdf`
 alcanza (corre `pdflatex` internamente 2–3 veces para resolver referencias cruzadas y TOC).
 
+### Paso 3b — Envíos standalone (`4_Redaccion/envios/`)
+
+`paper_empirico/main.tex` y `paper_teorico/main.tex` reusan el cuerpo de la tesis vía
+`\input{../../tesis/paper2_empirico.tex}` / `paper1_oi.tex` (nunca diverge), pero cada uno
+tiene **su propia copia** de las figuras en `envios/<paper>/figuras/` — un tercer punto de
+sincronización manual, además de `tesis/imagenes/` (Paso 2, punto 13). Si se corrió el
+pipeline y las figuras de `tesis/imagenes/` cambiaron, hay que recopiarlas a mano a los dos
+`envios/`:
+
+```bash
+cp 4_Redaccion/tesis/imagenes/{fig_cobertura,fig_concordancia_jloss,fig_efecto_marginal,fig_forest_theta,fig_h4b,fig_jloss_paises,fig_umbral}.pdf \
+   1_Codigo/Panel/bbg/figuras/fig_ventanas_theta.pdf \
+   4_Redaccion/envios/paper_empirico/figuras/
+cp 4_Redaccion/tesis/imagenes/{fig_h4b,fig_jloss_paises}.pdf 4_Redaccion/envios/paper_teorico/figuras/
+cd 4_Redaccion/envios/paper_empirico && latexmk -pdf main.tex   # -> 49 pp, 0 errores
+cd ../paper_teorico && latexmk -pdf main.tex                    # -> 31 pp, 0 errores
+```
+
+El `\begin{abstract}` y `cover_letter.md` de `paper_empirico` son texto propio (no derivado
+del `\input`) y también deben revisarse a mano tras cualquier cambio de resultado central —
+ver la nota "Sincronía con el envío standalone" en `CONTROL_DE_VERSIONES.md` §3.3.
+
 ---
 
 ## 3. Cómo verificar que la reproducción fue exitosa
@@ -214,6 +241,7 @@ Todos los valores de referencia completos y trazables:
 | 3 | `p4_figuras.py` no copiaba sus 7 figuras a `4_Redaccion/tesis/imagenes/` pese a que el README decía que sí — la sincronía era manual y ya se había roto (figuras de `imagenes/` con timestamp de 3 días antes que las de `bbg/figuras/`). Riesgo: re-ejecutar el pipeline con datos actualizados no actualizaba la tesis. | `_save()` ahora escribe el PDF también en `4_Redaccion/tesis/imagenes/` en el mismo paso (mismo patrón que ya usaba `p5_robustez_arbitro.py` para `fig_ventanas_theta.pdf`). Verificado: `p4_figuras.py` re-ejecutado, las 7 figuras se actualizaron en ambas carpetas, y `latexmk -pdf main.tex` recompiló limpio (94 pp, 0 errores) contra las figuras nuevas. |
 | 4 | README "Reproducir" no mencionaba `p7b`/`p7c` (IV commodity ToT), `p8_bateria_regresiones.py`, `p9_crisis_interaccion.py`, `p9_diag_ryr.py`, `p9_robustez_gar_nocdiff.py` — todos vigentes y citados en `CONTROL_DE_VERSIONES.md`. | Añadidos a la lista de comandos de `../README.md`, en el orden correcto de dependencia. |
 | 5 | El notebook de EDA se perdió una sección al guardarse mal en una sesión anterior (`eda_08_efecto_marginal_regimen` quedó desactualizada). | Resuelto en la sesión previa a esta auditoría (commit `03cd8f3`): sección restaurada, notebook re-ejecutado con `nbclient` y guardado in-place. |
+| 6 *(2026-09-19)* | `4_Redaccion/envios/paper_empirico/figuras/` y `envios/paper_teorico/figuras/` — copias propias de las figuras, un tercer punto de sincronización manual (además de `tesis/imagenes/`) — estaban desactualizadas desde 2026-09-01, antes de varias re-ejecuciones del pipeline. | Recopiadas desde `tesis/imagenes/` ya actualizado; ambos `main.tex` recompilados limpios (`paper_empirico` 49 pp, `paper_teorico` 31 pp, 0 errores). Documentado como Paso 3b, sigue siendo manual — no se automatizó porque un envío ya presentado a revista no debería sobrescribirse solo. |
 
 Riesgos documentados pero **sin corregir** (decisión: no forman parte del resultado vigente o
 requieren decisión del usuario, no un cambio de código):

@@ -11,6 +11,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from linearmodels.panel import PanelOLS
+from scipy import stats
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FIG = os.path.join(HERE, "figuras")
@@ -204,6 +205,152 @@ def fig_concordancia():
     _save(fig, "fig_concordancia_jloss")
 
 
+GFC_Q = ["2008Q4", "2009Q1", "2009Q2", "2009Q3", "2009Q4"]
+COVID_Q = ["2020Q1", "2020Q2", "2020Q3", "2020Q4", "2021Q1", "2021Q2", "2021Q3", "2021Q4"]
+EM1516_Q = ["2015Q3", "2015Q4", "2016Q1"]              # estres EM 2015-16
+BACKSTOP_Q = GFC_Q + COVID_Q                            # crisis con respaldo oficial masivo
+
+
+def _fit_crisis(d, dummies, ctrls):
+    """JLoss x D x vector-de-crisis, FE pais+tiempo, DK -- misma especificacion
+    que p9_crisis_interaccion.py / celda 8 de EDA_Panel_Final_bbg.ipynb."""
+    cc = [c for c in ctrls if c in d.columns and d[c].notna().sum() > 50]
+    dd = d.dropna(subset=["EMBI_bps", "JLoss", "D_pp"] + cc).copy()
+    dd["JLoss_c"] = dd["JLoss"] - dd["JLoss"].mean()
+    dd["D_c"] = dd["D_pp"] - dd["D_pp"].mean()
+    dd["JxD"] = dd["JLoss_c"] * dd["D_c"]
+    rhs = ["JLoss_c", "D_c", "JxD"]
+    for nm, qs in dummies.items():
+        cr = dd["quarter"].isin(qs).astype(float)
+        dd[f"JxD_{nm}"] = dd["JxD"] * cr
+        dd[f"JLoss_{nm}"] = dd["JLoss_c"] * cr
+        dd[f"D_{nm}"] = dd["D_c"] * cr
+        rhs += [f"JxD_{nm}", f"JLoss_{nm}", f"D_{nm}"]
+    rhs += cc
+    f = "EMBI_bps ~ " + " + ".join(rhs) + " + EntityEffects + TimeEffects"
+    m = PanelOLS.from_formula(f, dd.set_index(["country", "t"])).fit(
+        cov_type="kernel", kernel="bartlett")
+    return m, dd
+
+
+def _lincom_crisis(m, names):
+    """coef, se, p (Wald H0=0) de la suma de varios parametros (delta method)."""
+    b = float(sum(m.params[n] for n in names))
+    V = m.cov
+    se = float(np.sqrt(sum(V.loc[i, j] for i in names for j in names)))
+    p = 2 * (1 - stats.norm.cdf(abs(b / se)))
+    return b, se, p
+
+
+def fig_crisis_regimen():
+    """Efecto marginal dEMBI/dJLoss vs D, por regimen de crisis (Backstop vs EMstress).
+    Reproduce la especificacion de p9_crisis_interaccion.py (interaccion JLoss x D x
+    vector-de-crisis, D=-GaR, FE pais+tiempo, errores Driscoll-Kraay bartlett):
+    Backstop = GFC 2008Q4-2009Q4 + COVID 2020Q1-2021Q4 (respaldo oficial masivo);
+    EMstress = 2015Q3-2016Q1 (sin respaldo)."""
+    d = _panel()
+    d["D_pp"] = -d["GaR_pp"]
+    dat = d.dropna(subset=["EMBI_bps", "JLoss", "GaR_pp"]).copy()
+    ctr = [c for c in CTRLS if c in dat.columns and dat[c].notna().sum() > 50]
+    dummies = {"bk": BACKSTOP_Q, "em": EM1516_Q}
+    m, dd = _fit_crisis(dat, dummies, ctr)
+
+    b3 = m.params["JxD"]
+    print(f"  fig_crisis_regimen: N={int(m.nobs)}, paises={int(m.entity_info.total)}")
+    print(f"    b3 (fuera de crisis)      = {b3:+.3f}  (t={m.tstats['JxD']:+.2f}, "
+          f"p={m.pvalues['JxD']:.3f})")
+    for nm, lbl in (("bk", "Backstop"), ("em", "EMstress")):
+        b4 = m.params[f"JxD_{nm}"]
+        sb, sse, sp = _lincom_crisis(m, ["JxD", f"JxD_{nm}"])
+        print(f"    b4 x {lbl:9s}            = {b4:+.3f}  (t={m.tstats[f'JxD_{nm}']:+.2f}, "
+              f"p={m.pvalues[f'JxD_{nm}']:.3f})")
+        print(f"    b3 + b4 ({lbl})           = {sb:+.3f}  (Wald p [H0: =0] = {sp:.3f})")
+
+    V = m.cov
+    Dbar = dat["D_pp"].mean()
+    grid = np.linspace(dat["D_pp"].quantile(.05), dat["D_pp"].quantile(.95), 80)
+    dev = grid - Dbar
+
+    regimenes = [
+        ("Fuera de crisis", ["JLoss_c"], ["JxD"], BLUE),
+        ("Backstop (GFC + COVID)", ["JLoss_c", "JLoss_bk"], ["JxD", "JxD_bk"], RED),
+        ("EMstress (2015-16)", ["JLoss_c", "JLoss_em"], ["JxD", "JxD_em"], ORANGE),
+    ]
+    fig, ax = plt.subplots(figsize=(7.2, 4.4))
+    ax.axhline(0, color=INK2, lw=0.8)
+    for lab, lvl, itr, col in regimenes:
+        me = sum(m.params[p] for p in lvl) + sum(m.params[p] for p in itr) * dev
+        se = np.array([
+            np.sqrt(
+                sum(V.loc[i, j] for i in lvl for j in lvl)
+                + 2 * dv * sum(V.loc[i, j] for i in lvl for j in itr)
+                + dv ** 2 * sum(V.loc[i, j] for i in itr for j in itr)
+            ) for dv in dev
+        ])
+        ax.fill_between(grid, me - 1.96 * se, me + 1.96 * se, color=col, alpha=0.12, lw=0)
+        ax.plot(grid, me, color=col, lw=2.2, label=lab)
+    ax.set_xlabel("D = -GaR (pp) — derecha = mayor riesgo de cola")
+    ax.set_ylabel(r"$\partial\,$EMBI$/\partial\,$JLoss  (pb por unidad)")
+    ax.set_title("Efecto marginal de la fragilidad bancaria según el riesgo de cola, por régimen\n"
+                 "(la pendiente se aplana bajo Backstop; se mantiene bajo EMstress)")
+    ax.legend(loc="upper left")
+    fig.text(0.5, -0.03,
+             "Banda: IC 95 % (Driscoll–Kraay). Interacción JLoss × D × vector-de-crisis, FE país+tiempo.",
+             ha="center", color=INK2, fontsize=8)
+    _save(fig, "fig_crisis_regimen")
+
+
+def fig_gar_paises():
+    """Evolucion de D = -GaR (pp) por pais, mismo estilo que fig_jloss_paises() pero
+    restringido a los 13 paises del panel de estimacion vigente (n_estimacion > 0 en
+    cobertura_panel_bbg.csv). Convencion D = -GaR: valores mas altos = cola mas severa."""
+    d = _panel()
+    d["D_pp"] = -d["GaR_pp"]
+    cov = pd.read_csv(os.path.join(HERE, "cobertura_panel_bbg.csv"))
+    cs = sorted(cov[cov["n_estimacion"] > 0]["country"])
+    n = len(cs); ncol = 5; nrow = int(np.ceil(n / ncol))
+    fig, axes = plt.subplots(nrow, ncol, figsize=(11, 2.0 * nrow), sharex=True)
+    for ax, c in zip(axes.ravel(), cs):
+        g = d[d.country == c].dropna(subset=["D_pp"]).sort_values("t")
+        ax.axhline(0, color=INK2, lw=0.6)
+        ax.plot(g["t"], g["D_pp"], color=BLUE, lw=1.4)
+        ax.fill_between(g["t"], 0, g["D_pp"], color=BLUE, alpha=0.12, lw=0)
+        ax.set_title(c, fontsize=8.5)
+    for ax in axes.ravel()[n:]:
+        ax.set_visible(False)
+    fig.suptitle("D = -GaR trimestral por país — riesgo de cola del crecimiento, datos Bloomberg "
+                 f"(n = {n} países del panel de estimación)", y=1.005, fontsize=11)
+    _save(fig, "fig_gar_paises")
+
+
+def fig_comovimiento():
+    """Co-movimiento agregado del panel: D=-GaR, JLoss y EMBI_bps, cada uno estandarizado
+    (z-score sobre el panel completo pais-trimestre) y agregado con la mediana transversal
+    por trimestre (mas robusta a la cola larga de JLoss que la media)."""
+    d = _panel()
+    d["D_pp"] = -d["GaR_pp"]
+
+    def z(s):
+        return (s - s.mean()) / s.std()
+
+    d["D_z"] = z(d["D_pp"])
+    d["JLoss_z"] = z(d["JLoss"])
+    d["EMBI_z"] = z(d["EMBI_bps"])
+    g = d.groupby("t")[["D_z", "JLoss_z", "EMBI_z"]].median().sort_index()
+    g = g.dropna(how="all")
+
+    fig, ax = plt.subplots(figsize=(9.4, 4.4))
+    ax.axhline(0, color=INK2, lw=0.8)
+    ax.plot(g.index, g["D_z"], color=BLUE, lw=1.8, label="D = -GaR (mediana, z-score)")
+    ax.plot(g.index, g["JLoss_z"], color=ORANGE, lw=1.8, label="JLoss (mediana, z-score)")
+    ax.plot(g.index, g["EMBI_z"], color=RED, lw=1.8, label="EMBI (mediana, z-score)")
+    ax.set_ylabel("desviaciones estándar (mediana transversal por trimestre)")
+    ax.set_title("Co-movimiento agregado del panel: riesgo de cola, fragilidad bancaria "
+                 "y spread soberano")
+    ax.legend(loc="upper left", fontsize=8.5)
+    _save(fig, "fig_comovimiento")
+
+
 def main():
     print("Figuras -> bbg/figuras/")
     fig_cobertura()
@@ -213,6 +360,9 @@ def main():
     fig_jloss_paises()
     fig_h4b()
     fig_concordancia()
+    fig_crisis_regimen()
+    fig_gar_paises()
+    fig_comovimiento()
 
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
 \chapter{Procedencia de los datos}
-\label{chap:anexoB}
+\label{chap:anexoA}
 
 \noindent Este anexo tabula el origen de todas las series usadas en la investigación empírica
-(Capítulo~\ref{chap:paper2}) y en la prueba de las predicciones distintivas del modelo
-(Capítulo~\ref{chap:paper1}, Sección~\ref{sec:datos_reales}). El panel se construye sobre el
+de esta tesis (Capítulo~\ref{chap:investigacion}), incluidas las de su subsección de agenda futura
+sobre concentración bancaria (Sección~7.4). El panel se construye sobre el
 principio de \textbf{homogeneidad de fuente}: todos los insumos de mercado provienen de la
 terminal Bloomberg, extraídos con un mismo protocolo para las veinte economías del universo
 objetivo; solo los componentes reales del índice de condiciones financieras que alimenta
@@ -43,7 +43,7 @@ consolidación reside en \texttt{1\_Codigo/Bloomberg\_extraction/} y \texttt{1\_
 
 \multicolumn{6}{l}{\textbf{\textit{Variable dependiente}}}\\
 \addlinespace
-EMBI Global Diversified & Diferencial del índice de bonos soberanos emergentes de J.P.\ Morgan frente al Tesoro de EE.\ UU.\ (\textbf{DV principal}, sigue a \citealp{Chari2024}) & J.P.\ Morgan & \texttt{embi.xlsx}; spread EMBI Global por país & Diaria & Media trimestral, pb \\
+EMBI Global Diversified & Diferencial del índice de bonos soberanos emergentes de J.P.\ Morgan frente al Tesoro de EE.\ UU.\ (\textbf{DV principal}, sigue a \citealp{Chari2024b}) & J.P.\ Morgan & \texttt{embi.xlsx}; spread EMBI Global por país & Diaria & Media trimestral, pb \\
 CDS soberano 5Y & \textit{Credit default swap} soberano a 5 años, USD, senior no garantizado (\textbf{robustez}) & Bloomberg & \texttt{<emisor> CDS USD SR 5Y Corp}; Markit \texttt{CCHIN1U5} para China & Diaria & Media trimestral, pb; corr.\ 0,86 con el EMBI \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Fragilidad bancaria --- $JLoss$}} (métrica compuesta; motor \texttt{jloss\_engine.py})}\\
@@ -56,7 +56,7 @@ Capital. bursátil & Valor de mercado del patrimonio, cotización local (nunca A
 Retornos accionarios & Retornos logarítmicos diarios del precio local & Bloomberg & \texttt{PX\_LAST} & Diaria & $\sigma_E=\sqrt{\sum_t r_t^2}$ por banco-trimestre (varianza realizada) \\
 Índice bursátil país & Factor sistémico único de la agregación de pérdidas & Bloomberg & índice de referencia por país (\texttt{COUNTRY\_INDEX}) & Diaria & Retornos $\to$ correlación $\rho_i$ banco-factor \\
 \addlinespace
-\multicolumn{6}{@{}l@{}}{\parbox{13.6cm}{\footnotesize\itshape Parámetros del motor (idénticos a \citealp{Chari2024}): LGD $=0{,}45$; $\rho=0{,}4$; 7 nodos de cuadratura Gauss--Hermite; factor sistémico $N(0,\,0{,}16\%)$; percentil 99; cota de pérdidas $[0{,}010,\,0{,}048]$; horizonte 1 trimestre.}}\\
+\multicolumn{6}{@{}l@{}}{\parbox{13.6cm}{\footnotesize\itshape Parámetros del motor (idénticos a \citealp{Chari2024b}): LGD $=0{,}45$; $\rho=0{,}4$; 7 nodos de cuadratura Gauss--Hermite; factor sistémico $N(0,\,0{,}16\%)$; percentil 99; cota de pérdidas $[0{,}010,\,0{,}048]$; horizonte 1 trimestre.}}\\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Riesgo de cola --- $GaR$}} (regresión cuantílica de panel; motor \texttt{gar\_engine.py}, \texttt{fci\_engine.py})}\\
 \addlinespace
@@ -105,7 +105,7 @@ con 54 trimestres (EMBI desde 2012Q4), y Filipinas, Indonesia y Sudáfrica con o
 (EMBI desde 2023Q3, aunque su CDS es de historia larga). Argentina, Egipto y Rusia tienen
 $JLoss$ pero no $GaR$; Pakistán tiene $JLoss$ y $GaR$ pero no EMBI. Corea del Sur, Bulgaria
 y Hungría se excluyen porque su $JLoss$ no es una medida válida a nivel de país —número de
-bancos cotizados insuficiente— (Capítulo~\ref{chap:paper2}, Sección~5.1). La
+bancos cotizados insuficiente— (Capítulo~\ref{chap:investigacion}, Sección~5.1). La
 Figura~\ref{fig:cobertura} traza esta cobertura.
 
 \vspace{1ex}
@@ -113,7 +113,7 @@ Figura~\ref{fig:cobertura} traza esta cobertura.
 \noindent La Tabla~\ref{tab:diagpais} resume, por país de la muestra de estimación, el número
 mediano de bancos cotizados que alimentan $JLoss$, los trimestres marcados con menos bancos
 que el mínimo requerido, y la mediana y el máximo de la serie de $JLoss$. Deja ver dos rasgos
-que el Capítulo~\ref{chap:paper2} discute: (i) nueve de los trece países tienen un $JLoss$
+que el Capítulo~\ref{chap:investigacion} discute: (i) nueve de los trece países tienen un $JLoss$
 mediano entre 2,2 y 2,6 —la variación transversal de la fragilidad la aportan Turquía, India,
 China y Brasil—; y (ii) Colombia y México descansan sobre pocas instituciones en una fracción
 de los trimestres, aunque sin llegar al caso de Bulgaria (un banco) o Hungría (dos, todos los

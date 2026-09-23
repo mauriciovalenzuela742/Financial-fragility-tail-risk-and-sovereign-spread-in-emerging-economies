@@ -2,14 +2,15 @@
 
 \depto{Departamento de Ingeniería Civil Industrial}
 \author{Mauricio Valenzuela Corvalán}
-\title{Fragilidad Bancaria Sistémica, Riesgo de Cola del Crecimiento y Organización Industrial Bancaria: Determinantes del Spread Soberano en Economías Emergentes}
+\title{Fragilidad Bancaria Sistémica y Riesgo de Cola del Crecimiento: Determinantes del Spread Soberano en Economías Emergentes}
 
 \tesis{Magíster en Economía Aplicada}
+\memoria{Ingeniero Civil Industrial}
 
+\guia{Juan Francisco Martínez Sepúlveda}
+\coguia{Ronald Fischer}
+\comision{Patricio Valenzuela, Alejandro Corvalán}
 % TODO (completar antes de la entrega final — no se puede inventar):
-% \guia{Nombre Completo Profesor(a) Guía}
-% \coguia{Nombre Completo Profesor(a) Co-Guía}  % opcional
-% \comision{Nombre Completo Miembro 1 \\ Nombre Completo Miembro 2}
 % \auspicio{Fuente de financiamiento, si corresponde}
 % \anho{2026}  % año del examen de grado; por defecto usa el año actual
 
@@ -20,30 +21,12 @@
 \usepackage{mdframed}
 \usepackage{longtable}
 \usepackage{array}
-\usepackage{pdflscape}   % la batería de regresiones (Tabla 2.3) va apaisada
-\usepackage{tikz}        % DAG del mecanismo (Cap. 3)
+\usepackage{pdflscape}   % las baterías de regresiones van apaisadas
+\usepackage{tikz}        % diagrama del mecanismo conceptual (Sección 1.3)
 \usetikzlibrary{arrows.meta,positioning}
 
-% Rutas de figuras: cada capítulo referencia imágenes en su carpeta fuente original
-\graphicspath{{../modelo OI/}{imagenes/}}
-
-% Entornos teoremáticos usados por los Capítulos 2-3 y el Anexo A
-% (nombres en inglés, distintos de prop/lema/defn que ya define umemoria.cls)
-\theoremstyle{plain}
-% Proposiciones con numeración global (1..5): son los resultados centrales del
-% Capítulo 3 y se citan por ese número en el resumen, el Anexo A y el Capítulo 2.
-\newtheorem{proposition}{Proposición}
-\newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
-\newtheorem{assumption}{Supuesto}[chapter]
-\newtheorem{remark}{Observación}[chapter]
-
-% Re-enunciado de una proposición del Capítulo 3 en el Anexo A (una sola fuente
-% de numeración: el número lo da \ref, no un contador propio del anexo).
-% Uso: \restateprop{prop:U}{enunciado}
-\newcommand{\restateprop}[2]{%
-  \par\medskip\noindent\textbf{Proposición~\ref{#1}.}\enspace\begingroup\itshape #2\endgroup\par\medskip}
+% Rutas de figuras
+\graphicspath{{imagenes/}}
 
 % Estadístico t bajo el coeficiente en las tablas de regresión (Cap. 2)
 \newcommand{\tst}[1]{\ensuremath{\scriptstyle(#1)}}
@@ -95,13 +78,11 @@
 \maketitle
 
 \begin{resumen}
-Esta tesis investiga por qué la coincidencia de fragilidad bancaria sistémica y riesgo a la baja del crecimiento amplifica el spread soberano de las economías emergentes por encima de la suma de sus efectos individuales, desde dos aristas complementarias.
+Esta tesis investiga, sobre un único panel de trece economías emergentes construido con un motor de datos propio, por qué la coincidencia de fragilidad bancaria sistémica y riesgo a la baja del crecimiento amplifica el spread soberano por encima de la suma de sus efectos individuales. La investigación retoma y precisa la hipótesis con la que se aprobó su tema en diciembre de 2025 (Informe de Taller de Tesis I): que el mercado penaliza de forma no lineal la coexistencia de fragilidad bancaria y vulnerabilidad macroeconómica.
 
-La arista empírica (Capítulo 2) estima, sobre \textbf{un único panel} de trece economías emergentes con la fragilidad bancaria construida desde la terminal Bloomberg (muestra de estimación 2004Q1--2026Q1, $N=721$; $N=614$ bajo la especificación con controles), el término de interacción entre la fragilidad bancaria sistémica —medida mediante la métrica \textit{Joint Loss} de Chari et al. (2024), construida a partir de probabilidades de incumplimiento de tipo Merton agregadas por punto de silla, con balances bancarios y precios accionarios de Bloomberg— y el riesgo a la baja del crecimiento —medido mediante \textit{Growth-at-Risk}, estimado por regresión cuantílica de panel siguiendo el marco de \textit{vulnerable growth} de Adrian, Boyarchenko y Giannone (2019)—, sobre el spread soberano medido, siguiendo a Chari et al.\ (2024), por el índice EMBI Global Diversified de J.P.\ Morgan (con el CDS a cinco años como robustez). El esqueleto de la evidencia es una batería de veinticuatro regresiones —cuatro modelos anidados ($JLoss$; $D=-GaR$; ambos; ambos más la interacción) por tres estructuras de efectos fijos por dos muestras—, estructurada al modo de Chari et al.\ (2024). Los canales de nivel están bien identificados en las doce especificaciones: la fragilidad bancaria ($\hat\beta_1>0$, siempre significativa al 1\%) y el riesgo de cola del crecimiento (coef.\ de $D=-GaR$ $>0$, equivalentemente $\hat\beta_2<0$) elevan cada uno el spread soberano. El coeficiente de interacción $\beta_3$ ($JLoss\times D$, $D=-GaR$; positivo bajo la hipótesis de amplificación, $\beta_3=-\theta$) tiene el signo predicho por el multiplicador de \textit{doom loop} pero \textbf{no es significativo sobre la muestra completa} ($\hat\beta_3=+0{,}16$, $p=0{,}26$; invariante a los efectos fijos y a la métrica del spread —EMBI y CDS arrojan el mismo coeficiente sobre la misma submuestra). Esa no significancia es un promedio de regímenes. La interacción \textbf{sí es positiva y significativa} en dos dimensiones: \textbf{transversal} —$\hat\beta_3=+0{,}47$ ($p=0{,}023$) en el núcleo de once economías emergentes de financiamiento externo, diluyéndose al añadir dos economías de deuda local profunda— y \textbf{temporal} —$\hat\beta_3\approx+1{,}2$ ($p<0{,}01$ bajo las tres estructuras de efectos fijos) al excluir los trimestres de la crisis financiera global y la pandemia, cuando los respaldos oficiales desacoplan el canal doméstico. Una especificación más exigente, que en vez de excluir esos trimestres interactúa la complementariedad con un vector de crisis manteniendo toda la muestra, confirma y precisa el resultado ($\hat\beta_3\approx+0{,}8$ fuera de crisis) y aporta un test de falsación directo del mecanismo: la complementariedad \textbf{se anula} bajo los episodios con respaldo oficial masivo (crisis financiera global y pandemia; $\hat\beta_3+\hat\beta_4\approx0$) pero \textbf{sobrevive} en el estrés emergente de 2015--2016, que no tuvo ese respaldo ($\hat\beta_3+\hat\beta_4\approx+1$, $p<0{,}001$). Combinando la dimensión transversal con el corte temporal simple, $\hat\beta_3=+0{,}94$ ($p=0{,}004$). Un modelo de umbral de Hansen corrobora la no linealidad, y una reconstrucción del $GaR$ sin el rendimiento soberano que lo alimenta descarta que estos resultados sean mecánicamente circulares con el EMBI. Las dos dimensiones apuntan al mismo mecanismo: el multiplicador de \textit{doom loop} se traslada al \emph{precio} de la deuda soberana cuando el mercado espera que el pasivo contingente bancario recaiga sobre un soberano \textbf{no respaldado} cuya deuda se fija al margen por inversores sensibles al riesgo —lo que no ocurre ni en las economías de deuda local profunda ni en los episodios de crisis con respaldo oficial—. La complementariedad fragilidad--crecimiento sobre el riesgo soberano se revela, por tanto, como un fenómeno \textbf{condicional}, no como una regularidad universal de los mercados emergentes.
+Esta tesis estima, sobre \textbf{un único panel} de trece economías emergentes con la fragilidad bancaria construida desde la terminal Bloomberg (muestra de estimación 2004Q1--2026Q1, $N=721$; $N=614$ bajo la especificación con controles), el término de interacción entre la fragilidad bancaria sistémica —medida mediante la métrica \textit{Joint Loss} de Chari et al. (2024), construida a partir de probabilidades de incumplimiento de tipo Merton agregadas por punto de silla, con balances bancarios y precios accionarios de Bloomberg— y el riesgo a la baja del crecimiento —medido mediante \textit{Growth-at-Risk}, estimado por regresión cuantílica de panel siguiendo el marco de \textit{vulnerable growth} de Adrian, Boyarchenko y Giannone (2019)—, sobre el spread soberano medido, siguiendo a Chari et al.\ (2024), por el índice EMBI Global Diversified de J.P.\ Morgan (con el CDS a cinco años como robustez). El esqueleto de la evidencia es una batería de veinticuatro regresiones —cuatro modelos anidados ($JLoss$; $D=-GaR$; ambos; ambos más la interacción) por tres estructuras de efectos fijos por dos muestras—, estructurada al modo de Chari et al.\ (2024). Los canales de nivel están bien identificados en las doce especificaciones: la fragilidad bancaria ($\hat\beta_1>0$, siempre significativa al 1\%) y el riesgo de cola del crecimiento (coef.\ de $D=-GaR$ $>0$, equivalentemente $\hat\beta_2<0$) elevan cada uno el spread soberano. El coeficiente de interacción $\beta_3$ ($JLoss\times D$, $D=-GaR$; positivo bajo la hipótesis de amplificación, $\beta_3=-\theta$) tiene el signo predicho por el multiplicador de \textit{doom loop} pero \textbf{no es significativo sobre la muestra completa} ($\hat\beta_3=+0{,}16$, $p=0{,}26$; invariante a los efectos fijos y a la métrica del spread —EMBI y CDS arrojan el mismo coeficiente sobre la misma submuestra). Esa no significancia es un promedio de regímenes. La interacción \textbf{sí es positiva y significativa} en dos dimensiones: \textbf{transversal} —$\hat\beta_3=+0{,}47$ ($p=0{,}023$) en el núcleo de once economías emergentes de financiamiento externo, diluyéndose al añadir dos economías de deuda local profunda— y \textbf{temporal} —$\hat\beta_3\approx+1{,}2$ ($p<0{,}01$ bajo las tres estructuras de efectos fijos) al excluir los trimestres de la crisis financiera global y la pandemia, cuando los respaldos oficiales desacoplan el canal doméstico. Una especificación más exigente, que en vez de excluir esos trimestres interactúa la complementariedad con un vector de crisis manteniendo toda la muestra, confirma y precisa el resultado ($\hat\beta_3\approx+0{,}8$ fuera de crisis) y aporta un test de falsación directo del mecanismo: la complementariedad \textbf{se anula} bajo los episodios con respaldo oficial masivo (crisis financiera global y pandemia; $\hat\beta_3+\hat\beta_4\approx0$) pero \textbf{sobrevive} en el estrés emergente de 2015--2016, que no tuvo ese respaldo ($\hat\beta_3+\hat\beta_4\approx+1$, $p<0{,}001$). Combinando la dimensión transversal con el corte temporal simple, $\hat\beta_3=+0{,}94$ ($p=0{,}004$). Un modelo de umbral de Hansen corrobora la no linealidad, y una reconstrucción del $GaR$ sin el rendimiento soberano que lo alimenta descarta que estos resultados sean mecánicamente circulares con el EMBI. Las dos dimensiones apuntan al mismo mecanismo: el multiplicador de \textit{doom loop} se traslada al \emph{precio} de la deuda soberana cuando el mercado espera que el pasivo contingente bancario recaiga sobre un soberano \textbf{no respaldado} cuya deuda se fija al margen por inversores sensibles al riesgo —lo que no ocurre ni en las economías de deuda local profunda ni en los episodios de crisis con respaldo oficial—. La complementariedad fragilidad--crecimiento sobre el riesgo soberano se revela, por tanto, como un fenómeno \textbf{condicional}, no como una regularidad universal de los mercados emergentes.
 
-La arista teórica (Capítulo 3) desarrolla un modelo de organización industrial bancaria —competencia à la Cournot, responsabilidad limitada y seguro de depósitos— en el que la estructura de mercado bancario es el parámetro profundo que gobierna la cadena que va desde la fragilidad sistémica hasta el riesgo soberano. El modelo deriva la complementariedad estimada empíricamente desde primeros principios y genera una predicción distintiva frente a la organización industrial bancaria estándar: que dicha complementariedad se amplifica en sistemas bancarios más concentrados. Puesta a prueba sobre el mismo panel, esta predicción \textbf{no puede contrastarse con potencia}: con trece países, el punto estimado de la triple interacción no tiene signo estable entre proxies de concentración y su intervalo de confianza robusto cruza el cero con todos ellos, incluida una serie trimestral construida de los mismos bancos que la métrica de fragilidad. Se reporta este resultado con la misma franqueza que el resto de la evidencia: descartada la falta de variación temporal del proxy como explicación única, el peso de la evidencia se inclina hacia la homogeneidad transversal de la métrica de fragilidad con datos de una sola fuente y hacia una amplificación genuinamente más débil que la calibración del modelo; se traza la agenda de datos —sobre todo, más corte transversal— que permitiría dirimir la cuestión.
-
-En conjunto, esta tesis (i)~articula como un solo mecanismo dos canales que la literatura trataba por separado; (ii)~muestra que su complementariedad —el multiplicador de \textit{doom loop}— aparece en los precios soberanos de forma condicional, con un mecanismo económico que explica por qué se apaga en las economías de deuda local profunda; (iii)~deja dos advertencias sobre la medición (la variable dependiente EMBI o CDS no altera el resultado; la métrica de fragilidad está censurada por arriba y debe leerse de forma ordinal); (iv)~deriva la complementariedad de un modelo estructural de organización industrial bancaria, con un resultado deductivo nuevo de política de competencia que no depende de la econometría; y (v)~lo hace sobre un \textit{pipeline} reproducible. El hilo común es la delimitación precisa de qué está establecido y qué no —una contribución a la credibilidad de la evidencia, no solo a su volumen—. El Anexo~\ref{chap:anexoB} tabula la procedencia de todas las series.
+En conjunto, esta tesis (i)~articula como un solo mecanismo dos canales que la literatura trataba por separado —el nexo banca-soberano y el riesgo de cola del crecimiento—; (ii)~muestra que su complementariedad —el multiplicador de \textit{doom loop}— aparece en los precios soberanos de forma condicional, con un mecanismo económico que explica por qué se apaga en las economías de deuda local profunda y en los episodios de crisis con respaldo oficial masivo; (iii)~deja dos advertencias sobre la medición (la variable dependiente EMBI o CDS no altera el resultado; la métrica de fragilidad está censurada por arriba y debe leerse de forma ordinal); y (iv)~lo hace sobre un \textit{pipeline} reproducible. El hilo común es la delimitación precisa de qué está establecido y qué no —una contribución a la credibilidad de la evidencia, no solo a su volumen—. El Anexo~\ref{chap:anexoA} tabula la procedencia de todas las series.
 \end{resumen}
 
 % Índice hasta subsección: los subsubsections abultan el índice sin aportar navegación
@@ -112,16 +93,9 @@ En conjunto, esta tesis (i)~articula como un solo mecanismo dos canales que la l
 
 \mainmatter
 
-\input{introduccion_general}
-
-\input{paper2_empirico}
-
-\input{paper1_oi}
-
-\input{discusion_general}
+\input{investigacion}
 
 \begin{appendices}
-\input{anexoA_matematico}
 \input{anexoB_datos}
 \end{appendices}
 

@@ -259,7 +259,7 @@
 
 		\vspace{2cm}
 			\foreach \x [count=\xi] in \@guia {
-				PROFESORA GUÍA\ifnum\xi>1 \ \xi \fi:\\ \MakeUppercase\x\\
+				PROFESOR GUÍA\ifnum\xi>1 \ \xi \fi:\\ \MakeUppercase\x\\
 			}
 
 		\vspace{1cm}
