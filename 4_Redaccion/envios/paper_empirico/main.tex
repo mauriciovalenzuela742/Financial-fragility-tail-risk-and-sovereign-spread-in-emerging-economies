@@ -3,7 +3,7 @@
 %  Fragilidad bancaria sistémica, riesgo de cola del crecimiento y
 %  spread soberano en economías emergentes
 %
-%  Reutiliza el cuerpo del Capítulo 2 de la tesis (../../tesis/paper2_empirico.tex)
+%  Reutiliza el cuerpo del capítulo único de la tesis (../../tesis/investigacion.tex)
 %  con remapeo de \chapter->\section y los entornos teoremáticos redefinidos.
 %  Revistas objetivo (español): Latin American Journal of Central Banking,
 %  Economía Chilena (BCCh), Estudios de Economía (U. de Chile), El Trimestre
@@ -19,6 +19,8 @@
 \usepackage{array}
 \usepackage{pdflscape}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
 \newcommand{\tst}[1]{\ensuremath{\scriptstyle(#1)}}
 \usepackage{setspace}
 \usepackage[margin=1in]{geometry}
@@ -55,15 +57,13 @@
 
 % --- remapeos para reusar el archivo de capítulo sin editarlo ---
 \let\chapter\section
-% referencias cruzadas a otros capítulos de la tesis -> texto neutro
+% El capítulo único (investigacion.tex) ya no referencia otros capítulos de la
+% tesis (esa arista se eliminó); solo cita su propio anexo de datos, que este
+% envío standalone no incluye -- se neutraliza a texto plano en su lugar.
 \makeatletter
 \newcommand{\definelabel}[2]{\expandafter\gdef\csname r@#1\endcsname{{#2}{}{}{}{}}}
 \makeatother
-\definelabel{chap:paper1}{el trabajo teórico complementario}
-\definelabel{chap:anexoB}{el anexo de procedencia de datos}
-\definelabel{chap:discusion}{la discusión general de la tesis}
-\definelabel{chap:anexoA}{el anexo matemático}
-\definelabel{sec:canal1}{la sección correspondiente del trabajo teórico complementario}
+\definelabel{chap:anexoA}{el anexo de procedencia de datos de la tesis}
 
 \title{Fragilidad bancaria sistémica, riesgo de cola del crecimiento y
 \textit{spread} soberano en economías emergentes}
@@ -104,6 +104,6 @@ al régimen de respaldo oficial, no una regularidad universal.\\[4pt]
 G21, G15, H63, E44.
 \end{abstract}
 
-\input{../../tesis/paper2_empirico.tex}
+\input{../../tesis/investigacion.tex}
 
 \end{document}

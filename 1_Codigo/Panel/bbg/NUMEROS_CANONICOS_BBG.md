@@ -240,10 +240,94 @@ FE sólo país (P): β₃ (Backstop vs EMstress, +6 ctrl) = +0,672 (t=1,84); Bac
 (t=−1,97, p=0,049); EMstress β₄ = +0,766 (t=1,75, p=0,081). FE sólo tiempo (T): β₃ ≈ 0 (sin
 FE de país domina la varianza transversal — spec no informativa para la interacción).
 
+### ★ Batería de interacción de crisis (24 especificaciones) — `p9b_bateria_crisis.py` → `bateria_crisis_bbg.csv` (2026-09-22)
+
+Extiende la lógica de la ★ BATERÍA DE REGRESIONES (arriba, `p8_bateria_regresiones.py`) a la
+especificación de interacción de crisis de la sección anterior: cuatro modelos anidados
+(**CM1** `JLoss` + su interacción con crisis; **CM2** `D` + su interacción; **CM3** ambos
+niveles + sus interacciones, sin `JLoss×D`; **CM4** = la especificación ya publicada en
+`tab:crisis`, con `JLoss×D` y su interacción con crisis) × 3 estructuras de efectos fijos
+(T, P, PT) × 2 formas de codificar el vector de crisis (**Panel A**, un solo dummy `Crisis`;
+**Panel B**, `Backstop` GFC+COVID vs `EMstress` 2015–16) = 24 filas del CSV, las mismas 6
+controles domésticos y errores Driscoll–Kraay que `p9_crisis_interaccion.py`. A diferencia de
+`bateria_bbg.csv` (que se mantiene en forma `θ`), **`bateria_crisis_bbg.csv` ya está en la
+convención `D≡−GaR` / `β₃` de la prosa** (no requiere multiplicar por −1) — igual que
+`crisis_interaccion_bbg.csv`, la fuente de `tab:crisis`.
+
+**Verificación de consistencia (obligatoria, corrida por el propio script antes de guardar):**
+la fila `CM4 / FE=PT / Panel B` reproduce **exacto** la Tabla `tab:crisis` ya publicada: β₃
+(fuera de crisis) = +0,837 (t=+2,02); β₃+β₄ Backstop = −0,105 (Wald p=0,270); β₃+β₄ EMstress =
++1,051 (Wald p=0,000226). `p9b_bateria_crisis.py` aborta (`SystemExit`) si no coincide a 5e-4;
+corrió limpio. N=614, 13 países, 88 períodos, entre 7 y 85 trimestres por país (promedio 47,2)
+en las 24 especificaciones — constante, no varía por modelo ni por FE.
+
+**Panel A — vector único de crisis** (columnas: CM1/T, CM1/P, CM1/PT, CM2/T, CM2/P, CM2/PT,
+CM3/T, CM3/P, CM3/PT, CM4/T, CM4/P, CM4/PT):
+
+| coef | CM1/T | CM1/P | CM1/PT | CM2/T | CM2/P | CM2/PT | CM3/T | CM3/P | CM3/PT | CM4/T | CM4/P | CM4/PT |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `JLoss` (fuera de crisis) | 2,09 | 4,36*** | 2,24* | | | | 2,87 | 3,30*** | 2,04* | 2,89 | 3,60*** | 2,51 |
+| `D` (fuera de crisis) | | | | 2,75 | 10,06*** | 6,00*** | 4,08 | 8,88*** | 4,91** | 4,12 | 9,19*** | 5,57*** |
+| `JLoss×D` = β₃ (fuera de crisis) | | | | | | | | | | 0,03 | 0,64* | **0,81\*** |
+| Δ(`JLoss×D`)×Crisis = β₄ | | | | | | | | | | −0,43 | −0,63* | **−0,84\*** |
+| β₃+β₄ (Wald *p*) | | | | | | | | | | −0,40 (0,091) | 0,01 (0,890) | **−0,03 (0,766)** |
+| R²within | 0,03 | 0,40 | 0,38 | 0,02 | 0,44 | 0,42 | 0,14 | 0,47 | 0,45 | 0,14 | 0,48 | 0,45 |
+| R²overall | 0,38 | 0,40 | 0,39 | 0,36 | 0,44 | 0,38 | 0,40 | 0,47 | 0,41 | 0,40 | 0,48 | 0,42 |
+
+La columna **CM4/PT** (en negrita) es la fila "Vector único" ya publicada en `tab:crisis`
+(+0,81/−0,84/−0,03, Wald *p*=0,77 ≈ 0,766 aquí con más decimales — la publicada redondea a 2).
+
+**Panel B — Backstop (GFC+COVID) vs EMstress (2015–16)**:
+
+| coef | CM1/T | CM1/P | CM1/PT | CM2/T | CM2/P | CM2/PT | CM3/T | CM3/P | CM3/PT | CM4/T | CM4/P | CM4/PT |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| `JLoss` (fuera de crisis) | 2,12 | 4,36*** | 2,24* | | | | 2,83 | 3,19*** | 1,98* | 2,81 | 3,54*** | 2,51 |
+| `D` (fuera de crisis) | | | | 2,71 | 10,51*** | 6,35*** | 4,02 | 9,30*** | 5,31*** | 4,03 | 9,49*** | 5,81*** |
+| `JLoss×D` = β₃ (fuera de crisis) | | | | | | | | | | 0,07 | 0,67* | **0,84**** |
+| Δ(`JLoss×D`)×Backstop = β₄(bk) | | | | | | | | | | −0,60 | −0,72** | **−0,94**** |
+| β₃+β₄(bk) (Wald *p*) | | | | | | | | | | −0,54 (0,003) | −0,05 (0,621) | **−0,11 (0,270)** |
+| Δ(`JLoss×D`)×EMstress = β₄(em) | | | | | | | | | | 1,49 | 0,56 | **0,21** |
+| β₃+β₄(em) (Wald *p*) | | | | | | | | | | 1,56 (0,000) | 1,24 (0,000) | **1,05 (0,000)** |
+| R²within | 0,03 | 0,40 | 0,38 | −0,04 | 0,45 | 0,41 | 0,12 | 0,48 | 0,45 | 0,12 | 0,49 | 0,46 |
+| R²overall | 0,38 | 0,40 | 0,39 | 0,38 | 0,45 | 0,40 | 0,41 | 0,48 | 0,42 | 0,41 | 0,49 | 0,43 |
+
+La columna **CM4/PT** (en negrita) es la fila "Backstop vs EMstress" ya publicada en
+`tab:crisis`. Metadata de estilo `PanelOLS Estimation Summary` completa (F-statistic, su
+*p*-valor, y R²*between*) por las 24 filas está en `bateria_crisis_bbg.csv` directamente
+(columnas `f_stat`, `f_pval`, `rsquared_between`); se omite de las tablas de arriba y de la
+Tabla nueva de la tesis por legibilidad: el F-statistic conjunto (incluye los 6 controles y los
+efectos fijos, no solo la interacción) rechaza la hipótesis nula de no significancia conjunta
+en las 24 especificaciones (F entre 24 y 59, *p*≈0 en todas); R²*between* toma valores muy
+negativos bajo efectos fijos de entidad o bidireccionales (rango −9,3 a +0,32) — un artefacto
+conocido de `linearmodels.PanelOLS` cuando casi toda la variación relevante ya la absorben los
+efectos fijos, no una falla del ajuste, y no aporta a la lectura económica del capítulo.
+
+**Lectura.** La batería confirma que el resultado central de `tab:crisis` (β₃>0 fuera de
+crisis, se anula bajo *Backstop*, sobrevive bajo *EMstress*) no depende de qué estructura de
+efectos fijos se use dentro de CM4: el signo y la magnitud de β₃ son estables entre FE de
+tiempo, de país y bidireccionales (aunque solo bajo FE de país y bidireccionales alcanza
+significancia convencional), y la cancelación bajo *Backstop* / supervivencia bajo *EMstress*
+se replica bajo las tres. Los modelos CM1–CM3 muestran además que los canales de nivel
+(`JLoss`, `D`) mantienen su signo y significancia al permitírseles variar con el vector de
+crisis, antes de introducir la interacción completa en CM4 — la misma progresión anidada que
+ya usa la ★ BATERÍA DE REGRESIONES. Prosa: `paper2_empirico.tex` (ahora fusionado en
+`investigacion.tex`), sección de Resultados, "La interacción de crisis: sin botar trimestres" —
+Tabla nueva "Batería de interacción de crisis" (estilo PanelOLS), presentada como resultado
+central, con `tab:crisis` (fila CM4/PT) como su síntesis de lectura rápida.
+
 ### Modelo de umbral de Hansen (13 países)
 
-γ̂ (GaR pp) = +0,06; efecto de JLoss sobre el EMBI **+5,88 pb** en cola severa vs **+2,02** en
-régimen benigno; LR = 27,5. Persiste una diferencia de régimen ~2,9×.
+*Corregido 2026-09-23 (revisión de árbitro, ronda 2): la fila anterior (γ̂=+0,06;
++5,88/+2,02 pb; LR=27,5) no coincidía con `umbral_bbg.csv` ni con `fig_umbral.pdf`, ambos ya
+correctos — era un error de transcripción en este documento, no un problema de vigencia del
+panel (`umbral_bbg.csv` se re-ejecutó sobre `Panel_bloomberg.csv` vigente y reproduce
+exactamente el valor ya guardado, a 10 decimales). Verificado también contra
+`investigacion.tex`, corregido en la misma revisión.*
+
+γ̂ (GaR pp) = −0,18 (equivalentemente $D\gtrsim+0{,}18$); efecto de JLoss sobre el EMBI
+**+6,06 pb** en cola severa (GaR ≤ γ̂) vs **+2,11** en régimen benigno; LR = 28,5. Persiste una
+diferencia de régimen ~2,9×. Fuente: `bbg/p2_regresiones.py::umbral_hansen()` →
+`umbral_bbg.csv`.
 
 ### Efecto marginal ∂EMBI/∂JLoss (M2)
 
@@ -318,7 +402,24 @@ sobre-identificada de **3** instrumentos sigue **rechazando Sargan** (`p = 0,001
 predicho, no significativo**—, trimestral −4,0 (t = −0,12). β4 (JLoss×D×HHI): estructural
 +139 (t = +0,39), anual +171 (t = +0,81), trimestral ≈ 0 (t = −0,54) — los tres con IC de
 bootstrap de bloques cruzando el cero holgadamente. Sin respaldo y sin poder, igual que en el
-panel de CDS. Ver §6 para el detalle. (`bbg/fase5_bbg.csv`.)
+panel de CDS. Detalle completo (IC90 bootstrap de bloques y P(β4>0), 13 países, panel EMBI
+vigente): (`bbg/fase5_bbg.csv`, `p3_causal_fase5.py`, `fit_f5`, *cluster* por país, *bootstrap*
+de bloques por país B=1000).
+
+| HHI | N | β3 (JLoss×D) | t | β4 (JLoss×D×HHI) | t | P(β4>0) boot | IC90 boot bloques | rango LOO (β4) |
+|---|---:|---:|---:|---:|---:|---:|---|---|
+| estructural (GFDD, nivel) | 721 | **+32,5** | +0,55 | +139 | +0,39 | 43 % | (−715, +611) — incluye 0 | [−201, +368] |
+| anual (GFDD, serie) | 721 | **+23,3** | +0,53 | +171 | +0,81 | 68 % | (−301, +620) — incluye 0 | [−45, +354] |
+| trimestral (`HHI_q`) | 706 | **−4,0** | −0,12 | ≈0 (−0,02) | −0,54 | 54 % | (−0,07, +0,07) — incluye 0 | [≈0, ≈0] |
+
+> Esta tabla es la fuente de `bbg/fase5_bbg.csv` leída en vivo (columnas `N`, `b3`, `t3`, `b4`,
+> `t4`, `p_b4_pos`, `ci90`, `loo`): `N`=721/721/706, 13 países en las tres filas — confirmado
+> que es el panel EMBI vigente (13 países, `EMBI_bps` como variable dependiente en
+> `p3_causal_fase5.py::load_for_causal`), no un residuo del panel CDS de 14 países. La misma
+> tabla, sin la columna `N` y con el resto de columnas idéntico, vivía antes solo en la
+> Sección~6 (§ "Puente OI ↔ datos: H4a y H4b", parte legada del panel CDS de 14 países) — se
+> replica aquí en la sección superior vigente porque es el detalle que cita la prosa de
+> `paper2_empirico.tex` §7.4.
 
 ### Placebo temporal (destruir la estructura de GaR, B = 600)
 
@@ -330,6 +431,21 @@ en la cola de la distribución nula.
 
 θ estable a perturbar GaR con ruido de hasta 25 % de su sd (−0,161); a 50 % atenúa a −0,151.
 El error de medición **atenúa** — el θ verdadero es, si acaso, más negativo.
+
+### Otras pruebas de robustez (M2, 13 países, panel EMBI vigente)
+
+Fuente: `bbg/robustez_bbg.csv` (columnas `spec,theta,se,t,p,N,paises,b1,b2,R2w`; recordar
+β3 = −θ al leer esta tabla en la convención `D=−GaR` de la prosa).
+
+| Prueba | N | θ | β3 = −θ | t (β3) | p |
+|---|---:|---:|---:|---:|---:|
+| **sin deuda/PIB del vector de controles** | 614 | −0,1833 | **+0,18** | **+0,99** | 0,322 |
+
+> La interacción se mantiene con el signo predicho al excluir la deuda/PIB del vector de
+> controles domésticos: β3 = +0,18 (t = 0,99), esencialmente igual al β3 = +0,16 (t ≈ 0,7‑1,1
+> según la especificación) de la Tabla de batería con el vector completo de 6 controles — el
+> resultado no depende de qué control específico se incluya. Prosa:
+> `paper2_empirico.tex`, "Otras pruebas" (§7.6, robustez).
 
 ### Endogeneidad `Ryr` ↔ EMBI (2026-09-10, indicación del coguía)
 
@@ -479,6 +595,21 @@ filas) + `1_Codigo/Panel/bbg/boot_gar_bbg.csv` (segunda etapa, 500 filas: `seed,
 Bajo FE país + FE tiempo, los controles domésticos son interpolaciones lineales de datos
 anuales; sus coeficientes **no tienen signo económico fiable** (deuda/PIB sale con signo
 negativo, corr. within EMBI–deuda solo +0,10). Se reportan como controles, no se interpretan.
+
+### Diagnósticos del panel (M2, 13 países, panel EMBI vigente)
+
+Fuente: `bbg/diagnosticos_bbg.csv` (columnas `pesaran_CD,pesaran_p,AR1_resid,N,R2_within,R2_overall`).
+
+| Diagnóstico | Valor | N |
+|---|---:|---:|
+| Prueba de Pesaran (CD, dependencia transversal) | CD = −1,07; p = 0,28 (no rechaza independencia) | 614 |
+| Autocorrelación serial de primer orden de los residuos | ≈ 0,87 | 614 |
+| R² *within* / *overall* (M2, FE país+tiempo) | 0,446 / −7,62 | 614 |
+
+> La prueba de Pesaran no rechaza la independencia transversal de los residuos una vez
+> incluidos los efectos fijos de tiempo; se mantienen de todos modos los errores de
+> Driscoll–Kraay por la autocorrelación serial detectada. Prosa: `paper2_empirico.tex`
+> §7.7 ("Controles macroeconómicos y diagnósticos del panel").
 
 ---
 

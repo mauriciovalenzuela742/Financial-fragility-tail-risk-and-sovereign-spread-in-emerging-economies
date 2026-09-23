@@ -140,7 +140,7 @@ Rutas relativas desde `Jloss/`.
 | **Citado** | Corregido a natbib real (`\citep`/`\citet` + `\begin{thebibliography}`), igual que `paper1_oi.tex`; antes usaba citas de texto plano "(Autor, Año)" con una lista `itemize` manual, sin verificación de LaTeX. |
 | **Predecesor congelado** | `Boceto_1_actualizado.tex` (`4_Redaccion/`) — ya no se edita; superado por `paper2_empirico.tex`. Sus predecesores (`Boceto_1_v2.tex`, `Boceto 1.tex`, etc.) permanecen en `archive/`. |
 | **Acción** | Editar solo `4_Redaccion/tesis/paper2_empirico.tex`. No tocar `Boceto_1_actualizado.tex`. |
-| **Sincronía con el envío standalone** | `4_Redaccion/envios/paper_empirico/main.tex` reutiliza este archivo vía `\input`, pero su `\begin{abstract}` y su `cover_letter.md` son texto propio, no derivado del `\input`. Cualquier cambio de resultado central (signo, valor de $\hat\beta_3$/$\theta$, qué se reporta como hallazgo principal) debe replicarse a mano en esos dos archivos — no se actualizan solos. Sincronizados por última vez 2026-09-18 (abstract y carta realineados con la interacción de crisis Backstop/EMstress y la batería C1/C2/C3 como resultado vigente; antes citaban 14 países y el CDS como variable dependiente principal). |
+| **Sincronía con el envío standalone** | `4_Redaccion/envios/paper_empirico/main.tex` (y `paper_teorico/main.tex`) reutilizan `paper2_empirico.tex`/`paper1_oi.tex` vía `\input` — el cuerpo nunca diverge. Lo que **sí** puede divergir, porque no se actualiza solo: (a) `\begin{abstract}` y `cover_letter.md`, texto propio; (b) `envios/paper_empirico/figuras/` y `envios/paper_teorico/figuras/`, **copias propias** de los PDF de `bbg/figuras/` / `tesis/imagenes/` — un tercer punto de sincronización manual además de `tesis/imagenes/` (ver §3.5 y la nota de `p4_figuras.py` sobre `_save()`). Cualquier cambio de resultado central o de figura debe replicarse a mano en los tres. **Auditoría 2026-09-19:** las figuras de ambos `envios/` estaban desactualizadas (databan del 2026-09-01, previas a varias re-ejecuciones del pipeline) — recopiadas desde `tesis/imagenes/` y ambos `main.tex` recompilados limpios (`paper_empirico` 49 pp, `paper_teorico` 31 pp); el abstract y `cover_letter.md` de `paper_empirico` seguían vigentes (última sincronía textual 2026-09-18: interacción de crisis Backstop/EMstress y batería C1/C2/C3 como resultado vigente; antes citaban 14 países y el CDS como variable dependiente principal). Este resync de figuras es manual y no quedó automatizado — revisar de nuevo tras la próxima corrida de `p4_figuras.py`/`p5_robustez_arbitro.py` que cambie una figura vigente. |
 
 ### 3.4 Tesis ensamblada (plantilla oficial + capítulos)
 
@@ -303,6 +303,169 @@ y hubo que restaurarlos.
 ---
 
 ## 5. Números oficiales
+
+> **Segunda ronda: capítulo único, batería de crisis, doble titulación, figuras nuevas
+> (2026-09-23).** Tras ver el PDF de la reescritura del 2026-09-22, el autor pidió una
+> segunda ronda de ajustes:
+>
+> - **Fusión a un solo capítulo continuo.** `introduccion_general.tex`, `paper2_empirico.tex`
+>   y `discusion_general.tex` se fusionan en `4_Redaccion/tesis/investigacion.tex`
+>   (`\label{chap:investigacion}`), resolviendo la redundancia entre la discusión general y la
+>   discusión del capítulo que ya había señalado el árbitro. Los tres archivos originales se
+>   archivan en `4_Redaccion/archive/` con prefijo `2026-09-23_` (no se borran). `main.tex`
+>   ahora hace un solo `\input{investigacion}` antes del apéndice. Se actualizó
+>   `4_Redaccion/envios/paper_empirico/main.tex` (`\input` + su mecanismo `\definelabel`, que
+>   además tenía un defecto silencioso arrastrado de la ronda anterior: seguía neutralizando
+>   `chap:anexoB`, un label ya renombrado a `chap:anexoA` desde el 2026-09-22 — corregido) y se
+>   copiaron las figuras nuevas a `envios/paper_empirico/figuras/`.
+> - **Doble titulación y comisión.** `main.tex` ahora declara `\memoria{Ingeniero Civil
+>   Industrial}` junto a `\tesis{Magíster en Economía Aplicada}` (la clase `umemoria.cls` ya
+>   soportaba ambas simultáneas, sin hack) y `\comision{Patricio Valenzuela, Alejandro
+>   Corvalán}` (con coma — el TODO comentado original usaba `\\`, que `pgffor` no separa como
+>   lista; corregido de paso).
+> - **Batería de interacción de crisis (24 especificaciones nuevas).** Extiende la
+>   especificación de crisis (antes una sola fila fija) a cuatro modelos anidados CM1–CM4 ×
+>   tres estructuras de efectos fijos, en dos paneles (vector único; Backstop/EMstress) — script
+>   nuevo `1_Codigo/Panel/bbg/p9b_bateria_crisis.py` → `bateria_crisis_bbg.csv`, que **verifica
+>   su propia replicación** contra `p9_crisis_interaccion.py` al ejecutarse (`SystemExit` si no
+>   coincide a 5e-4) y coincidió exacto. Presentada como Tablas 1.6–1.7 con metadata de
+>   `PanelOLS Estimation Summary` (entidades, R² *within/overall*, F-statistic en caption) —
+>   estilo pedido por el autor, con el acabado tipográfico de la batería principal en vez del
+>   *screenshot* de consola del `Informe_Taller_Tesis_I.pdf`. Canonicalizado en
+>   `NUMEROS_CANONICOS_BBG.md`, sección "★ Batería de interacción de crisis".
+> - **Dos figuras nuevas** en `p4_figuras.py`: `fig_gar_paises()` (evolución de `D=-GaR` por
+>   país, mismo patrón que `fig_jloss_paises()`) y `fig_comovimiento()` (co-movimiento agregado
+>   del panel: `D=-GaR`, `JLoss` y `EMBI` estandarizados —z-score—, mediana transversal por
+>   trimestre), en la línea de las Figuras 2–4 del `Informe_Taller_Tesis_I.pdf` original.
+> - **Diagrama conceptual recuperado.** La Figura 1 del informe original (estructura de
+>   mercado → conducta bancaria → externalidades → `JLoss` → spread, con retroalimentación) se
+>   recreó como diagrama TikZ (`\usepackage{tikz}` reintroducido en `main.tex`, solo para esta
+>   figura) en la nueva Sección 1.1.3 ("El mecanismo conceptual"), con encuadre honesto: se
+>   presenta como mapa intuitivo que motiva la investigación, no como una predicción derivada
+>   de un modelo formal (el capítulo teórico que lo derivaba ya no está en el documento).
+> - **Fix de la Figura 1.10 (antes 2.7), el *forest plot* de robustez de θ/β₃.** Caption y
+>   prosa reescritos para que sea imposible leer el cruce por cero de los intervalos de
+>   confianza como "el signo no es robusto": el punto estimado tiene el signo predicho en
+>   **24 de 25 filas (96%)**; la única excepción (M3, FE país + factores globales) tiene un
+>   coeficiente de apenas +0,01, estadísticamente indistinguible de cero, no una reversión de
+>   signo — diagnóstico verificado directamente sobre `tabla_theta_bbg.csv`/`robustez_bbg.csv`.
+> - Verificado: `latexmk -pdf main.tex` compila limpio, **67 páginas** (antes 67 — el volumen
+>   de contenido nuevo compensa la fusión de portadas/preámbulos redundantes de los tres
+>   capítulos separados); `envios/paper_empirico/main.tex` compila limpio, 60 páginas.
+>
+> ---
+>
+> **Reescritura estructural: se saca la arista teórica del documento ensamblado (2026-09-22).**
+> Por decisión del autor, la tesis queda **solo con la arista empírica**. Cambios:
+>
+> - **`paper1_oi.tex` y `anexoA_matematico.tex` (Cap. 3 "Organización industrial bancaria" y
+>   Anexo A matemático), y la carpeta `4_Redaccion/modelo OI/`: se CONSERVAN íntegros en
+>   disco** (no se editan, no se borran) — quedan como **legado/pausado**, fuera del
+>   ensamblado. Se sacan únicamente del `\input` de `main.tex` (antes: introducción →
+>   paper2\_empirico → paper1\_oi → discusión → anexoA\_matematico → anexoB\_datos; ahora:
+>   introducción → paper2\_empirico → discusión → anexoB\_datos). Si en el futuro se retoma la
+>   arista teórica, basta reinsertar esos dos `\input` y los `\newtheorem`/`\restateprop` del
+>   preámbulo (removidos de `main.tex` porque solo esos dos archivos los usaban — verificado
+>   por grep sobre los cuatro archivos que sí siguen en el `\input`).
+> - **Título** de `main.tex`: pierde "y Organización Industrial Bancaria". Nuevo: *"Fragilidad
+>   Bancaria Sistémica y Riesgo de Cola del Crecimiento: Determinantes del Spread Soberano en
+>   Economías Emergentes"*, convergiendo con el título ya aprobado por el comité en
+>   `Informe_Taller_Tesis_I.pdf` ("Fragilidad financiera, riesgo de cola y spread soberano en
+>   economías emergentes"), manteniendo "bancaria sistémica" por precisión.
+> - **`\guia{Juan Francisco Martínez Sepúlveda}` y `\coguia{Ronald Fischer}`** completados
+>   (antes comentados con TODO "no se puede inventar" — ya confirmados por el usuario).
+> - **`H4a/H4b`** (amplificación de la complementariedad por concentración bancaria, HHI; los
+>   tres proxies no identificados — `NUMEROS_CANONICOS_BBG.md` §6/"H4a y H4b") **se reintegran
+>   a `paper2_empirico.tex`**, pero solo en una nueva subsección dentro de "Agenda futura"
+>   (§7.4), motivada desde la literatura de competencia-fragilidad bancaria
+>   (Martínez-Miera & Repullo 2010; Boyd & De Nicolò 2005 — cita nueva, agregada a la
+>   bibliografía del capítulo) y sin mencionar el modelo de Cournot ni "el Capítulo 3". Se
+>   explicita que es agenda futura, no hallazgo principal.
+> - **`paper2_empirico.tex`**: reescritura de prosa (no solo recorte) para dar arco narrativo
+>   al capítulo — abre re-anclando en el objetivo general, la hipótesis central y los
+>   resultados de la muestra piloto de `Informe_Taller_Tesis_I.pdf` (dic-2025, no citado antes
+>   en ningún lado de la tesis), narra la traducción de convención de signo (β₃<0 bajo `GaR`
+>   original ⇔ θ=−β₃, es decir β₃>0 bajo `D≡−GaR`), y narra el hallazgo condicional (H3) como
+>   una versión más precisa —no una retractación— del hallazgo preliminar del informe. Se
+>   eliminan las 8 referencias cruzadas al Capítulo 3 (resumen, introducción ×2, estado del
+>   arte ×2, descriptivos, limitaciones, conclusión). Se integra la figura nueva
+>   `fig_crisis_regimen.pdf` (generada por `p4_figuras.py`, función `fig_crisis_regimen()`) en
+>   `sec:crisis-interaccion`, antes sin figura. Ningún número económico ni tabla existente se
+>   modificó.
+> - **`main.tex`**: resumen reescrito a una sola arista (párrafo 2 sobre el modelo de Cournot
+>   eliminado; párrafo 3 pierde el punto (iv) sobre el microfundamento estructural, aportes
+>   renumerados de 5 a 4); preámbulo pierde `tikz`/`tikzlibrary`, `{../modelo OI/}` del
+>   `\graphicspath`, y los `\newtheorem`/`\restateprop` exclusivos del Cap. 3/Anexo A.
+> - **`introduccion_general.tex`**: reescritura completa. "Dos aristas de una misma
+>   investigación" pasa a "El objetivo de esta investigación", anclado explícitamente en
+>   `Informe_Taller_Tesis_I.pdf`. El aporte "cuarto, un microfundamento estructural" se
+>   elimina; queda en 4 aportes (antes 5).
+> - **`discusion_general.tex`**: reescritura completa y considerablemente más corta —la
+>   síntesis de "dos aristas" se reemplaza por una síntesis breve que cierra el círculo con el
+>   informe de Taller de Tesis I sin repetir en detalle la batería de 24 regresiones (que ya
+>   vive en el Cap. 2); implicancias de política pierden la dimensión de organización
+>   industrial/Cournot; limitaciones y agenda futura pierden los ítems 100% teóricos (extensión
+>   de dos períodos del bloque soberano, microfundamento de ρ(n)) y quedan como síntesis de
+>   alto nivel para no duplicar la lista de 8 ítems ya en `paper2_empirico.tex` §7.3.
+> - **`anexoB_datos.tex`**: cambio mínimo en el párrafo de apertura (ya no remite al
+>   Capítulo~1/`sec:datos_reales`); la sección "Concentración bancaria e instituciones" (HHI,
+>   `HHI_q`, rating S&P, WGI) se conserva íntegra porque H4a/H4b sigue vigente, solo reubicado.
+> - **Hallazgo colateral, corregido en el mismo commit:** `introduccion_general.tex` y
+>   `anexoB_datos.tex` citaban con `\citep`/`\citet`/`\citealp` las claves sin sufijo
+>   (`Chari2024`, `ABG2019`, `FarhiTirole2018`, `AcharyaDrechslerSchnabl2014`), que **nunca
+>   estuvieron definidas** (no hay `\bibliography` global; cada capítulo trae su propio
+>   `thebibliography` con claves sufijadas `...b`) — el PDF las renderizaba como signos de
+>   interrogación literales ("?", "??") desde antes de esta sesión. Corregidas a las claves
+>   sufijadas (`Chari2024b`, `ABG2019b`, etc., ya definidas en la bibliografía de
+>   `paper2_empirico.tex`, capítulo que se `\input`ea antes en el documento). `MMR2010`
+>   (sin sufijo) dejó de usarse al eliminar los párrafos sobre el modelo de Cournot.
+> - **Compilación**: `latexmk -pdf main.tex` limpia — **0 errores** (`grep -c "^! " main.log`
+>   = 0), **0 citas/referencias indefinidas**. Página: **94 → 67** páginas (la reducción es
+>   sobre todo la salida del Cap. 3 teórico y el Anexo A matemático, ambos con muchas
+>   proposiciones/demostraciones/figuras).
+>
+> Prosa: los 5 archivos de `4_Redaccion/tesis/` listados arriba. Números citados en las partes
+> nuevas: sección H4a/H4b nueva (`NUMEROS_CANONICOS_BBG.md` §6, filas de los tres proxies de
+> HHI); hipótesis y resultados de la muestra piloto (`Informe_Taller_Tesis_I.pdf`, páginas
+> 2 y 10-12); resto, cifras ya vigentes en el capítulo, sin cambios.
+>
+> **Adenda — revisión menor del árbitro senior, 8 puntos corregidos (2026-09-22, mismo día).**
+> 1. `umemoria.cls` líneas 261-263: bug de plantilla, imprimía "PROFESORA GUÍA" hardcodeado sin
+>    importar el nombre del profesor. Corregido a "PROFESOR GUÍA" (cambio directo de string; la
+>    clase no tenía mecanismo de género).
+> 2. `paper2_empirico.tex`, resumen del capítulo: "un panel quince veces mayor" que la muestra
+>    piloto era aritméticamente incorrecto (13/4≈3,25×; 721/234≈3,1×) e inconsistente con "más
+>    del triple" diez líneas después. Unificado a "más del triple".
+> 3. Robustez "sin deuda/PIB": estaba transcrita como β₃=+0,16 (t=0,96); el valor correcto de
+>    `1_Codigo/Panel/bbg/robustez_bbg.csv` (fila `sin deuda/PIB`) es θ=−0,1833 ⇒ β₃=+0,18,
+>    t=+0,99. Corregido en la prosa y **canonicalizada por primera vez** en
+>    `NUMEROS_CANONICOS_BBG.md` (sección superior vigente, nueva subsección "Otras pruebas de
+>    robustez (M2, 13 países, panel EMBI vigente)").
+> 4. La cita de detalle de H4a/H4b (IC90 *bootstrap* y P(β₄>0) por proxy) apuntaba a la
+>    "Sección 6" del canónico, que es parte **legada** del panel CDS de 14 países (el propio
+>    archivo indica no citarla en prosa). Verificado contra `fase5_bbg.csv` directamente
+>    (columnas `N,paises`: 721/721/706, 13 países, DV `EMBI_bps` en
+>    `p3_causal_fase5.py::load_for_causal`) que ese detalle **sí es vigente** para el panel EMBI
+>    actual, no un residuo CDS. Se replicó la tabla completa (con columna `N` añadida) en el
+>    bloque vigente "H4a / H4b ... no identificados" de la sección superior, y se actualizó la
+>    cita en `paper2_empirico.tex` §7.4 para apuntar ahí en vez de a la Sección 6 legada.
+> 5. El t de proyecciones locales (canónico +2,85) aparecía redondeado de forma inconsistente:
+>    2,9 en el resumen del capítulo, 2,8 en el cuerpo (§6.8) y en Limitaciones (§7.3, ítem 8).
+>    Unificado a 2,9 en las tres apariciones.
+> 6. La prueba de Pesaran (CD=−1,07, p=0,28, `diagnosticos_bbg.csv`) no estaba canonicalizada.
+>    Agregada como nueva subsección "Diagnósticos del panel (M2, 13 países, panel EMBI
+>    vigente)" en `NUMEROS_CANONICOS_BBG.md`, junto a "Coeficientes de control en M2".
+> 7. "...como se muestra en la Sección 6..." (referencia a EMBI vs. CDS) era texto plano en vez
+>    de `\ref{}`. Se agregó `\label{sec:embi-cds}` a la subsección "El spread: EMBI o CDS, la
+>    métrica no cambia el resultado" y se reemplazó por `\ref{sec:embi-cds}`.
+> 8. El único apéndice usaba `\label{chap:anexoB}` pero se despliega como "Anexo A" (residuo del
+>    Anexo A del capítulo teórico eliminado). Todas las referencias vivían en los 5 archivos de
+>    mi scope (`anexoB_datos.tex`, `main.tex`, `introduccion_general.tex`,
+>    `paper2_empirico.tex` ×6) — ninguna en `paper1_oi.tex`/`anexoA_matematico.tex` — así que se
+>    renombró a `\label{chap:anexoA}` en las 9 ocurrencias.
+>
+> Recompilado: `latexmk -pdf main.tex` — 0 errores, 0 citas/referencias indefinidas, **67
+> páginas** (sin cambio respecto de la versión anterior).
 
 > **C1 — bootstrap de regresor generado: EJECUTADO en NLHPC, resultado final (2026-09-17).**
 > Job `13095760` (`gar_boot`), `~/nlhpc_gar_all18/`: **B=500 réplicas, fidelidad completa
