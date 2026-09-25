@@ -22,7 +22,8 @@ from linearmodels.panel import PanelOLS
 from scipy import stats
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PANEL_CSV = os.path.join(HERE, "Panel_bloomberg.csv")
+# JLOSS_PANEL_CSV permite estimar sobre un panel paralelo (p.ej. Panel_bloomberg_embiext.csv)
+PANEL_CSV = os.environ.get("JLOSS_PANEL_CSV", os.path.join(HERE, "Panel_bloomberg.csv"))
 CTRLS = ["debt_gdp", "fisc_bal", "res_gdp", "ca_gdp", "infl_yoy", "reer"]
 GLOB = ["VIX", "UST10Y_log", "US_HY_spread_log"]
 

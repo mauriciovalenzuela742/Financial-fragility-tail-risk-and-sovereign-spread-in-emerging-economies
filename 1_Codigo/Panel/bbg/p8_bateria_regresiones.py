@@ -36,7 +36,8 @@ warnings.filterwarnings("ignore")
 from linearmodels.panel import PanelOLS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PANEL_CSV = os.path.join(HERE, "Panel_bloomberg.csv")
+# JLOSS_PANEL_CSV permite estimar sobre un panel paralelo (p.ej. Panel_bloomberg_embiext.csv)
+PANEL_CSV = os.environ.get("JLOSS_PANEL_CSV", os.path.join(HERE, "Panel_bloomberg.csv"))
 
 CRISIS_Q = (
     [f"2008Q{k}" for k in (4,)] + [f"2009Q{k}" for k in (1, 2, 3, 4)]

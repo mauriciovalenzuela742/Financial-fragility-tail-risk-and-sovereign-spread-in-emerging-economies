@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{pdflscape}
+\usepackage{amsmath}
+
+\begin{document}
+
+\begin{landscape}
+\begin{table}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.08}
+\caption[Spread soberano, fragilidad bancaria y riesgo de cola (EMBI extendido)]{\textbf{Spread soberano, fragilidad bancaria y riesgo de cola (EMBI extendido).}}
+\label{tab:bateria-se-embiext}
+\begin{tabular}{l c ccc ccc ccc cc}
+\toprule
+EMBI (pb)
+& \multicolumn{1}{c}{Referencia} & \multicolumn{3}{c}{M1} & \multicolumn{3}{c}{M2} & \multicolumn{3}{c}{M3} & \multicolumn{2}{c}{M4} \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}\cmidrule(lr){12-13}
+& (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9) & (10) & (11) & (12) \\
+\midrule
+\multicolumn{13}{l}{\textit{Panel A. Muestra completa}} \\[2pt]
+$JLoss$ & $4{,}724^{***}$ & $7{,}316^{***}$ & $8{,}174^{***}$ & $5{,}103^{***}$ &  &  &  & $8{,}542^{***}$ & $6{,}065^{***}$ & $4{,}701^{***}$ & $8{,}525^{***}$ & $6{,}115^{***}$ \\
+ & $(1{,}069)$ & $(1{,}551)$ & $(1{,}255)$ & $(1{,}193)$ &  &  &  & $(1{,}421)$ & $(1{,}180)$ & $(1{,}126)$ & $(1{,}410)$ & $(1{,}141)$ \\
+$D=-GaR$ & $3{,}944$ &  &  &  & $8{,}009^{***}$ & $9{,}483^{***}$ & $6{,}126^{*}$ & $10{,}322^{***}$ & $6{,}304^{***}$ & $4{,}147$ & $10{,}231^{***}$ & $5{,}786^{***}$ \\
+ & $(2{,}916)$ &  &  &  & $(2{,}586)$ & $(1{,}780)$ & $(3{,}153)$ & $(2{,}754)$ & $(1{,}612)$ & $(2{,}981)$ & $(2{,}658)$ & $(1{,}683)$ \\
+$JLoss\times D$ & $0{,}177$ &  &  &  &  &  &  &  &  &  & $0{,}178$ & $0{,}221$ \\
+ & $(0{,}259)$ &  &  &  &  &  &  &  &  &  & $(0{,}483)$ & $(0{,}248)$ \\
+\addlinespace
+Observaciones & 761 & 761 & 761 & 761 & 761 & 761 & 761 & 761 & 761 & 761 & 761 & 761 \\
+Países & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 \\
+$R^2$ \textit{within} & $0{,}240$ & $0{,}192$ & $0{,}194$ & $0{,}166$ & $0{,}162$ & $0{,}167$ & $0{,}146$ & $0{,}187$ & $0{,}254$ & $0{,}235$ & $0{,}185$ & $0{,}257$ \\
+\midrule
+\multicolumn{13}{l}{\textit{Panel B. Sin trimestres de crisis (excluye 2008Q4--2009Q4 y 2020Q1--2021Q4)}} \\[2pt]
+$JLoss$ & $4{,}462^{***}$ & $6{,}556^{***}$ & $7{,}092^{***}$ & $4{,}771^{***}$ &  &  &  & $8{,}051^{***}$ & $5{,}253^{***}$ & $4{,}016^{***}$ & $8{,}264^{***}$ & $5{,}576^{***}$ \\
+ & $(1{,}272)$ & $(2{,}064)$ & $(1{,}376)$ & $(1{,}538)$ &  &  &  & $(1{,}951)$ & $(1{,}383)$ & $(1{,}319)$ & $(1{,}779)$ & $(1{,}207)$ \\
+$D=-GaR$ & $6{,}047^{**}$ &  &  &  & $8{,}926^{***}$ & $10{,}087^{***}$ & $9{,}219^{***}$ & $11{,}111^{***}$ & $7{,}006^{***}$ & $7{,}324^{***}$ & $10{,}574^{***}$ & $6{,}427^{**}$ \\
+ & $(2{,}692)$ &  &  &  & $(2{,}822)$ & $(2{,}775)$ & $(3{,}097)$ & $(3{,}260)$ & $(2{,}656)$ & $(2{,}817)$ & $(2{,}859)$ & $(2{,}576)$ \\
+$JLoss\times D$ & $1{,}182^{***}$ &  &  &  &  &  &  &  &  &  & $1{,}751^{***}$ & $1{,}174^{***}$ \\
+ & $(0{,}343)$ &  &  &  &  &  &  &  &  &  & $(0{,}397)$ & $(0{,}301)$ \\
+\addlinespace
+Observaciones & 650 & 650 & 650 & 650 & 650 & 650 & 650 & 650 & 650 & 650 & 650 & 650 \\
+Países & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 13 \\
+$R^2$ \textit{within} & $0{,}211$ & $0{,}133$ & $0{,}134$ & $0{,}119$ & $0{,}119$ & $0{,}121$ & $0{,}120$ & $0{,}126$ & $0{,}183$ & $0{,}179$ & $0{,}152$ & $0{,}215$ \\
+\midrule
+EF de país & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ \\
+EF de tiempo & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO \\
+Controles domésticos & NO & NO & NO & NO & NO & NO & NO & NO & NO & NO & NO & NO \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} La tabla reporta estimaciones de panel del spread soberano (EMBI Global Diversified, puntos básicos) sobre la fragilidad bancaria sistémica ($JLoss$), el riesgo de cola del crecimiento ($D=-GaR$, percentil 5\% del crecimiento con signo invertido, en puntos porcentuales; un $D$ mayor indica una cola más adversa) y su interacción. La columna (1) es la especificación que se busca contrastar, $\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1 JLoss_{i,t}+\beta_2 D_{i,t}+\beta_3(JLoss\times D)_{i,t}+\varepsilon_{i,t}$, con efectos fijos de país y de tiempo. EMBI de Indonesia y Sudáfrica en 2010Q1--2014Q4 completado con la serie trimestral del FMI (GFSR), sin reescalar (correlación 0,94 y ratio mediano 1,02 frente a J.P.\ Morgan en 80 trimestres de solape); resto de la muestra idéntico al panel principal. Las columnas (2)--(12) completan la batería de cuatro modelos anidados (M1: $JLoss$; M2: $D$; M3: $JLoss+D$; M4: $JLoss+D+JLoss\times D$) bajo efectos fijos solo de tiempo, solo de país, o de ambos. $JLoss$ y $D$ están centrados en su media muestral; $JLoss\times D$ es el producto de ambos centrados. Sin controles domésticos. Errores estándar de Driscoll--Kraay (kernel de Bartlett) entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%, respectivamente. Fuente: \texttt{p8\_bateria\_regresiones.py}.}
+\end{table}
+\end{landscape}
+
+\clearpage
+
+\begin{landscape}
+\begin{table}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.8pt}
+\renewcommand{\arraystretch}{0.86}
+\caption[Spread soberano e interacción con el vector de crisis (EMBI extendido)]{\textbf{Spread soberano e interacción con el vector de crisis (EMBI extendido).}}
+\label{tab:crisis-se-embiext}
+\begin{tabular}{l c ccc ccc ccc cc}
+\toprule
+EMBI (pb)
+& \multicolumn{1}{c}{Referencia} & \multicolumn{3}{c}{CM1} & \multicolumn{3}{c}{CM2} & \multicolumn{3}{c}{CM3} & \multicolumn{2}{c}{CM4} \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}\cmidrule(lr){12-13}
+& (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9) & (10) & (11) & (12) \\
+\midrule
+\multicolumn{13}{l}{\textit{Panel A. Vector único de crisis} ($Crisis$: 2008Q4--2009Q4, 2015Q3--2016Q1, 2020Q1--2021Q4)} \\[2pt]
+$JLoss$ & $2{,}043$ & $1{,}754$ & $4{,}242^{***}$ & $1{,}750^{*}$ &  &  &  & $2{,}482$ & $3{,}249^{***}$ & $1{,}576^{*}$ & $2{,}580$ & $3{,}540^{***}$ \\
+ & $(1{,}418)$ & $(1{,}920)$ & $(1{,}114)$ & $(1{,}030)$ &  &  &  & $(2{,}164)$ & $(1{,}078)$ & $(0{,}940)$ & $(2{,}680)$ & $(1{,}324)$ \\
+$D=-GaR$ & $5{,}080^{**}$ &  &  &  & $2{,}559$ & $9{,}391^{***}$ & $5{,}612^{***}$ & $3{,}766$ & $8{,}253^{***}$ & $4{,}539^{**}$ & $3{,}875$ & $8{,}491^{***}$ \\
+ & $(2{,}025)$ &  &  &  & $(2{,}246)$ & $(1{,}570)$ & $(2{,}083)$ & $(2{,}601)$ & $(1{,}444)$ & $(2{,}072)$ & $(2{,}909)$ & $(1{,}379)$ \\
+$JLoss\times D$ ($\beta_3$) & $0{,}804^{*}$ &  &  &  &  &  &  &  &  &  & $0{,}132$ & $0{,}629$ \\
+ & $(0{,}448)$ &  &  &  &  &  &  &  &  &  & $(0{,}917)$ & $(0{,}388)$ \\
+$JLoss\times Crisis$ & $1{,}834$ & $3{,}718^{**}$ & $1{,}556$ & $2{,}501^{**}$ &  &  &  & $3{,}698^{*}$ & $1{,}027$ & $2{,}284^{**}$ & $4{,}224^{*}$ & $0{,}609$ \\
+ & $(1{,}284)$ & $(1{,}868)$ & $(1{,}183)$ & $(1{,}138)$ &  &  &  & $(1{,}920)$ & $(1{,}051)$ & $(1{,}141)$ & $(2{,}299)$ & $(1{,}185)$ \\
+$D\times Crisis$ & $-1{,}063$ &  &  &  & $2{,}124$ & $-2{,}615$ & $-1{,}465$ & $2{,}369$ & $-2{,}656$ & $-0{,}693$ & $3{,}571$ & $-3{,}051^{*}$ \\
+ & $(2{,}828)$ &  &  &  & $(4{,}823)$ & $(1{,}993)$ & $(3{,}336)$ & $(4{,}492)$ & $(1{,}664)$ & $(2{,}877)$ & $(4{,}225)$ & $(1{,}802)$ \\
+$JLoss\times D\times Crisis$ ($\beta_4$) & $-0{,}849^{*}$ &  &  &  &  &  &  &  &  &  & $-0{,}523$ & $-0{,}615$ \\
+ & $(0{,}462)$ &  &  &  &  &  &  &  &  &  & $(0{,}930)$ & $(0{,}397)$ \\
+$\beta_3+\beta_4$ & $-0{,}045$ &  &  &  &  &  &  &  &  &  & $-0{,}391$ & $0{,}014$ \\
+ & $(0{,}107)$ &  &  &  &  &  &  &  &  &  & $(0{,}248)$ & $(0{,}109)$ \\
+ & $[p=0{,}673]$ &  &  &  &  &  &  &  &  &  & $[p=0{,}114]$ & $[p=0{,}901]$ \\
+\addlinespace
+Observaciones & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 \\
+$R^2$ \textit{within} & $0{,}421$ & $0{,}036$ & $0{,}384$ & $0{,}369$ & $0{,}028$ & $0{,}413$ & $0{,}390$ & $0{,}138$ & $0{,}442$ & $0{,}416$ & $0{,}139$ & $0{,}447$ \\
+\midrule
+\multicolumn{13}{l}{\textit{Panel B. Backstop (2008Q4--2009Q4, 2020Q1--2021Q4) vs.\ EMstress (2015Q3--2016Q1)}} \\[2pt]
+$JLoss$ & $2{,}049$ & $1{,}786$ & $4{,}245^{***}$ & $1{,}752^{*}$ &  &  &  & $2{,}464$ & $3{,}148^{***}$ & $1{,}516$ & $2{,}528$ & $3{,}485^{***}$ \\
+ & $(1{,}442)$ & $(1{,}929)$ & $(1{,}114)$ & $(1{,}030)$ &  &  &  & $(2{,}159)$ & $(1{,}065)$ & $(0{,}926)$ & $(2{,}700)$ & $(1{,}340)$ \\
+$D=-GaR$ & $5{,}293^{**}$ &  &  &  & $2{,}533$ & $9{,}827^{***}$ & $5{,}951^{***}$ & $3{,}715$ & $8{,}656^{***}$ & $4{,}935^{**}$ & $3{,}787$ & $8{,}772^{***}$ \\
+ & $(2{,}114)$ &  &  &  & $(2{,}227)$ & $(1{,}656)$ & $(2{,}207)$ & $(2{,}592)$ & $(1{,}539)$ & $(2{,}178)$ & $(2{,}913)$ & $(1{,}443)$ \\
+$JLoss\times D$ ($\beta_3$) & $0{,}831^{*}$ &  &  &  &  &  &  &  &  &  & $0{,}170$ & $0{,}660^{*}$ \\
+ & $(0{,}447)$ &  &  &  &  &  &  &  &  &  & $(0{,}924)$ & $(0{,}387)$ \\
+$JLoss\times Backstop$ & $1{,}650$ & $3{,}450^{*}$ & $1{,}506$ & $2{,}420^{**}$ &  &  &  & $3{,}247$ & $1{,}052$ & $2{,}017^{*}$ & $3{,}974$ & $0{,}715$ \\
+ & $(1{,}436)$ & $(1{,}895)$ & $(1{,}209)$ & $(1{,}141)$ &  &  &  & $(1{,}991)$ & $(1{,}038)$ & $(1{,}205)$ & $(2{,}430)$ & $(1{,}194)$ \\
+$D\times Backstop$ & $-3{,}026$ &  &  &  & $-2{,}331$ & $-3{,}468$ & $-4{,}007$ & $-1{,}515$ & $-3{,}393^{*}$ & $-2{,}859$ & $-0{,}028$ & $-3{,}440^{*}$ \\
+ & $(2{,}761)$ &  &  &  & $(3{,}128)$ & $(2{,}162)$ & $(3{,}016)$ & $(3{,}343)$ & $(1{,}831)$ & $(2{,}836)$ & $(3{,}520)$ & $(1{,}944)$ \\
+$JLoss\times D\times Backstop$ ($\beta_4^{bk}$) & $-0{,}958^{**}$ &  &  &  &  &  &  &  &  &  & $-0{,}701$ & $-0{,}714^{*}$ \\
+ & $(0{,}458)$ &  &  &  &  &  &  &  &  &  & $(0{,}946)$ & $(0{,}389)$ \\
+$JLoss\times EMstress$ & $-0{,}079$ & $6{,}051^{**}$ & $2{,}187$ & $3{,}241^{*}$ &  &  &  & $2{,}217$ & $0{,}859$ & $1{,}380$ & $0{,}637$ & $-0{,}534$ \\
+ & $(1{,}511)$ & $(2{,}460)$ & $(1{,}618)$ & $(1{,}877)$ &  &  &  & $(2{,}178)$ & $(1{,}282)$ & $(1{,}515)$ & $(2{,}401)$ & $(1{,}459)$ \\
+$D\times EMstress$ & $0{,}530$ &  &  &  & $17{,}194^{***}$ & $4{,}826^{***}$ & $6{,}841^{***}$ & $15{,}396^{***}$ & $3{,}761^{**}$ & $6{,}117^{***}$ & $7{,}319^{**}$ & $-2{,}083$ \\
+ & $(1{,}809)$ &  &  &  & $(2{,}525)$ & $(1{,}553)$ & $(1{,}861)$ & $(2{,}892)$ & $(1{,}705)$ & $(1{,}973)$ & $(2{,}992)$ & $(1{,}964)$ \\
+$JLoss\times D\times EMstress$ ($\beta_4^{em}$) & $0{,}324$ &  &  &  &  &  &  &  &  &  & $1{,}584$ & $0{,}616$ \\
+ & $(0{,}514)$ &  &  &  &  &  &  &  &  &  & $(1{,}046)$ & $(0{,}460)$ \\
+$\beta_3+\beta_4^{bk}$ & $-0{,}127$ &  &  &  &  &  &  &  &  &  & $-0{,}532^{***}$ & $-0{,}054$ \\
+ & $(0{,}112)$ &  &  &  &  &  &  &  &  &  & $(0{,}177)$ & $(0{,}111)$ \\
+ & $[p=0{,}255]$ &  &  &  &  &  &  &  &  &  & $[p=0{,}003]$ & $[p=0{,}624]$ \\
+$\beta_3+\beta_4^{em}$ & $1{,}155^{***}$ &  &  &  &  &  &  &  &  &  & $1{,}754^{***}$ & $1{,}276^{***}$ \\
+ & $(0{,}314)$ &  &  &  &  &  &  &  &  &  & $(0{,}376)$ & $(0{,}251)$ \\
+ & $[p<0{,}001]$ &  &  &  &  &  &  &  &  &  & $[p<0{,}001]$ & $[p<0{,}001]$ \\
+\addlinespace
+Observaciones & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 & 654 \\
+$R^2$ \textit{within} & $0{,}424$ & $0{,}033$ & $0{,}384$ & $0{,}369$ & $-0{,}030$ & $0{,}419$ & $0{,}386$ & $0{,}112$ & $0{,}446$ & $0{,}416$ & $0{,}115$ & $0{,}454$ \\
+\midrule
+EF de país & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ \\
+EF de tiempo & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO \\
+Controles domésticos & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} La columna (1) es la Ecuación de interacción de crisis completa, $\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1 JLoss+\beta_2 D+\beta_3(JLoss\times D)+\beta_4(JLoss\times D\times Crisis)+\beta_5(JLoss\times Crisis)+\beta_6(D\times Crisis)+\omega'X_{i,t}+\varepsilon_{i,t}$, con efectos fijos de país y de tiempo. EMBI de Indonesia y Sudáfrica 2010Q1--2014Q4 completado con FMI (GFSR). Las columnas (2)--(12) completan la batería de cuatro modelos anidados: CM1, $JLoss$ y su interacción con el vector de crisis; CM2, lo mismo con $D$; CM3, ambos niveles y sus interacciones, sin $JLoss\times D$; CM4, la especificación completa. $Crisis$ sola queda absorbida por los efectos fijos de tiempo cuando estos se incluyen. $\beta_3$ mide la complementariedad fuera de crisis y $\beta_3+\beta_4$ dentro de crisis (error estándar por método delta; entre corchetes, $p$ del test de Wald $H_0\!:\beta_3+\beta_4=0$). Todas las columnas incluyen seis controles domésticos (deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación y tipo de cambio real efectivo). $JLoss$ y $D$ centrados. Errores estándar de Driscoll--Kraay entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%, respectivamente. Fuente: \texttt{p9b\_bateria\_crisis.py}.}
+\end{table}
+\end{landscape}
+
+\end{document}

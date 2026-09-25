@@ -29,8 +29,10 @@ Salidas -> 1_Codigo/Panel/bbg/
   panel_real_bbg.csv            plantilla fase5 (H4a/H4b): country,time,quarter,EMBI,JLoss,D,
                                 HHI,HHI_anual,debt,growth_q,gfac
 """
+import glob as _glob
 import json
 import os
+import sys
 import urllib.request
 import numpy as np
 import pandas as pd
@@ -43,6 +45,19 @@ JLOSS_BBG = os.path.join(COD, "JLoss_reconstruction", "jloss_bloomberg",
                          "Panel_JLoss_v9_bloomberg.csv")
 EMBI_XLSX = os.path.join(COD, "..", "2_Datos", "embi.xlsx")
 OUT = HERE
+
+# --embi-ext: panel PARALELO con el EMBI completado por fuentes secundarias (no toca los canonicos).
+#   GFSR  : 2_Datos/EMBI_real_8countries_2006_2014.csv (FMI GFSR, trimestral 2010Q1-2014Q4)
+#   extra : 2_Datos/embi_extra_<fuente>.csv, formato country,date,EMBI_bps (diario o mensual),
+#           p.ej. subindices JPM EMBI GD bajados de Bloomberg. Prioridad: xlsx > extra > GFSR.
+# Las fuentes secundarias solo llenan trimestres sin dato en embi.xlsx.
+EMBI_EXT = "--embi-ext" in sys.argv
+SFX = "_embiext" if EMBI_EXT else ""
+DATOS = os.path.join(COD, "..", "2_Datos")
+EMBI_GFSR = os.path.join(DATOS, "EMBI_real_8countries_2006_2014.csv")
+RATIO_BANDA = (0.95, 1.05)   # sin reescalar si la mediana xlsx/fuente cae en esta banda
+MIN_SOLAPE = 4               # trimestres de solape minimos para estimar el ratio
+MIN_CORR = 0.8               # fuente descartada si la correlacion en el solape es menor
 
 # nombre de columna (xlsx, en espanol) -> country (en ingles, minusculas)
 EMBI_MAP = {
@@ -88,6 +103,68 @@ def cds_quarterly():
     return pd.concat(rows, ignore_index=True)
 
 
+def embi_extra_sources():
+    """Fuentes secundarias de EMBI -> (country, quarter, EMBI_bps, embi_source), trimestral.
+    Orden de la lista = prioridad (la primera gana si dos fuentes cubren el mismo trimestre)."""
+    out = []
+    for f in sorted(_glob.glob(os.path.join(DATOS, "embi_extra_*.csv"))):
+        name = os.path.splitext(os.path.basename(f))[0].replace("embi_extra_", "")
+        s = pd.read_csv(f)
+        s["date"] = pd.to_datetime(s["date"], errors="coerce")
+        s = s.dropna(subset=["date", "EMBI_bps"])
+        s = s[s["EMBI_bps"] > 0]
+        s["quarter"] = s["date"].dt.to_period("Q").astype(str)
+        q = s.groupby(["country", "quarter"])["EMBI_bps"].mean().reset_index()
+        q["embi_source"] = name
+        out.append(q)
+    g = pd.read_csv(EMBI_GFSR)
+    g = g[g["freq"] == "quarterly"].rename(columns={"period": "quarter"})
+    g = g[["country", "quarter", "EMBI_bps"]].dropna()
+    g["embi_source"] = "GFSR"
+    out.append(g)
+    return out
+
+
+def splice_embi(base, extras):
+    """Completa `base` (xlsx) con las fuentes de `extras`, solo en trimestres sin dato.
+    Por fuente: ratio mediano xlsx/fuente y correlacion en el solape (pooled entre paises,
+    porque los paises a completar no suelen solapar con el xlsx). Reescala si el ratio
+    cae fuera de RATIO_BANDA; descarta la fuente si corr < MIN_CORR."""
+    base = base.copy()
+    base["embi_source"] = "JPM_GD_xlsx"
+    diag, filled = [], base
+    for ex in extras:
+        src = ex["embi_source"].iloc[0]
+        ov = ex.merge(base[["country", "quarter", "EMBI_bps"]], on=["country", "quarter"],
+                      suffixes=("_src", "_xlsx"))
+        for c, gc in list(ov.groupby("country")) + [("POOLED", ov)]:
+            diag.append(dict(fuente=src, country=c, n_solape=len(gc),
+                             corr=gc["EMBI_bps_src"].corr(gc["EMBI_bps_xlsx"]) if len(gc) > 2 else np.nan,
+                             ratio_mediano=(gc["EMBI_bps_xlsx"] / gc["EMBI_bps_src"]).median()
+                             if len(gc) else np.nan))
+        n, corr = len(ov), ov["EMBI_bps_src"].corr(ov["EMBI_bps_xlsx"]) if len(ov) > 2 else np.nan
+        ratio = (ov["EMBI_bps_xlsx"] / ov["EMBI_bps_src"]).median() if n else np.nan
+        if n >= MIN_SOLAPE and corr < MIN_CORR:
+            print(f"  [!] fuente {src} descartada: corr={corr:.2f} en {n} trimestres de solape")
+            decision = "descartada"
+        else:
+            if n >= MIN_SOLAPE and not (RATIO_BANDA[0] <= ratio <= RATIO_BANDA[1]):
+                ex = ex.assign(EMBI_bps=ex["EMBI_bps"] * ratio)
+                decision = f"reescalada x{ratio:.3f}"
+            else:
+                decision = "sin reescalar"
+            new = ex.merge(filled[["country", "quarter"]], on=["country", "quarter"],
+                           how="left", indicator=True)
+            new = new[new["_merge"] == "left_only"].drop(columns="_merge")
+            filled = pd.concat([filled, new], ignore_index=True)
+            print(f"  fuente {src}: {decision}; solape n={n}, corr={corr:.2f}, ratio={ratio:.3f}; "
+                  f"+{len(new)} trimestres ({', '.join(f'{k}:{v}' for k, v in new.country.value_counts().sort_index().items())})")
+        diag.append(dict(fuente=src, country="DECISION", n_solape=n, corr=corr,
+                         ratio_mediano=ratio, decision=decision))
+    pd.DataFrame(diag).to_csv(os.path.join(OUT, "embi_empalme_diag_bbg.csv"), index=False)
+    return filled
+
+
 def embi_quarterly():
     """Spread EMBI Global Diversified diario (pb) -> media trimestral, por pais.
     Variable dependiente PRINCIPAL (Chari et al. 2024)."""
@@ -102,10 +179,12 @@ def embi_quarterly():
     long = (q.melt(id_vars="quarter", var_name="country", value_name="EMBI_bps")
             .dropna(subset=["EMBI_bps"]))
     long = long[long["EMBI_bps"] > 0]
+    if EMBI_EXT:
+        long = splice_embi(long, embi_extra_sources())
 
     cds = cds_quarterly()
     both = long.merge(cds, on=["country", "quarter"], how="outer").sort_values(["country", "quarter"])
-    both.to_csv(os.path.join(OUT, "embi_bbg_quarterly.csv"), index=False)
+    both.to_csv(os.path.join(OUT, f"embi_bbg_quarterly{SFX}.csv"), index=False)
 
     cov = []
     for c, g in both.groupby("country"):
@@ -118,7 +197,8 @@ def embi_quarterly():
                         cds_cobertura=("continua" if nc >= MIN_Q_CDS_UTIL else
                                        "rala" if nc >= 5 else "sin serie")))
     covdf = pd.DataFrame(cov).sort_values("embi_q", ascending=False)
-    return both[["country", "quarter", "EMBI_bps", "CDS_bps"]], covdf
+    keep = ["country", "quarter", "EMBI_bps", "CDS_bps"] + (["embi_source"] if EMBI_EXT else [])
+    return both[keep], covdf
 
 
 def load_jloss():
@@ -228,7 +308,7 @@ def main():
     p["JLoss_x_GaR"] = (p["JLoss"] - jc) * (p["GaR_pp"] - gc)
     p["pi"] = pd.PeriodIndex(p["quarter"], freq="Q")
     p = p.sort_values(["country", "pi"]).drop(columns="pi").reset_index(drop=True)
-    p.to_csv(os.path.join(OUT, "Panel_bloomberg.csv"), index=False)
+    p.to_csv(os.path.join(OUT, f"Panel_bloomberg{SFX}.csv"), index=False)
 
     # --- cobertura por pais ---
     est = p.dropna(subset=["EMBI_bps", "JLoss", "GaR"])       # muestra de estimacion: EMBI + JLoss + GaR
@@ -248,7 +328,11 @@ def main():
             n_est_cds=len(est_cds[est_cds.country == c]),
             ventana_est=f"{e['quarter'].min()}..{e['quarter'].max()}" if len(e) else "-"))
     covdf = pd.DataFrame(covrows).sort_values("n_estimacion", ascending=False)
-    covdf.to_csv(os.path.join(OUT, "cobertura_panel_bbg.csv"), index=False)
+    covdf.to_csv(os.path.join(OUT, f"cobertura_panel_bbg{SFX}.csv"), index=False)
+    if EMBI_EXT:   # la plantilla fase5 y el reporte de solo-canonico no se generan en el panel paralelo
+        print(f"\nPanel_bloomberg{SFX}.csv: {len(p)} filas; estimacion {len(est)} obs")
+        print(covdf.to_string(index=False))
+        return
 
     # --- plantilla fase5 (un solo archivo) ---
     d = p.copy()

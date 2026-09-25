@@ -951,3 +951,31 @@ estático de EF bidireccionales es el apropiado** dada la forma del panel.
   cruzando el cero holgadamente con los tres proxies de concentración (β4 = +139, +171, ≈0;
   |t| < 1; P(β4>0) 43 %–68 %), incluida la concentración **trimestral** construida de los
   mismos bancos de `JLoss`. No se afirma dirección. Ver §6.
+
+## 8. EMBI extendido — panel PARALELO, no canónico (2026-09-25)
+
+`p1_build_panels.py --embi-ext` → `Panel_bloomberg_embiext.csv`, `embi_bbg_quarterly_embiext.csv`,
+`cobertura_panel_bbg_embiext.csv`, `embi_empalme_diag_bbg.csv`. No toca el panel canónico
+(el modo canónico reproduce las 35 columnas de `Panel_bloomberg.csv` idénticas).
+
+- **Fuentes revisadas:** `2_Datos/embi.xlsx` ya era la fuente vigente (JPM EMBI GD diario).
+  `2_Datos/EMBI_real_8countries_2006_2014.csv` (FMI GFSR, trimestral 2010Q1–2014Q4) se empalma
+  **solo donde el xlsx no tiene dato**. `1_Codigo/Panel/Serie_Historica_Spread_del_EMBI.xlsx`
+  (subíndices EMBI GD LatAm, en %) no aporta trimestres nuevos: LatAm ya está cubierta y
+  Argentina no tiene GaR. El World Bank GEM ya no publica el EMBI por país (API revisada
+  2026-09-25: 36 series, ninguna de spreads).
+- **Empalme GFSR:** solape con el xlsx en 80 trimestres (China, Hungría, Polonia, Turquía);
+  corr pooled **0,94** (0,82–0,90 por país), ratio mediano xlsx/GFSR **1,02** → sin reescalar.
+- **Ganancia:** Indonesia y Sudáfrica +20 trimestres cada una (2010Q1–2014Q4). Pakistán y
+  Bulgaria también se llenan pero no aportan (sin GaR en 2010–14 / excluida por JLoss).
+  Muestra de estimación 721 → **761** (Tabla 1 niveles), 614 → **654** (crisis con controles).
+- **Resultados en niveles (M4 / CM4, FE país+tiempo) vs canónico:** sin crisis β₃ = +1,182***
+  (canónico +1,171***); completa +0,177 n.s. (+0,176); crisis vector único β₃ = +0,804*
+  (+0,811*), β₃+β₄ = −0,045 (p=0,67); Backstop β₃+β₄ = −0,127 (p=0,26; canónico −0,105, p=0,27);
+  EMstress +1,155 (p<0,001; canónico +1,051). **Ningún resultado cambia de lectura.**
+- Estimar sobre este panel: `JLOSS_PANEL_CSV=<ruta>/Panel_bloomberg_embiext.csv python p11_tablas_latex.py`
+  (y `p12_tablas_latex_lnlag.py`) → `4_Redaccion/tablas_regresiones/*_embiext.tex`.
+- **Pendiente para cerrar el hueco grande** (IDN/PHL/ZAF 2004–2009 y 2015–2023Q2; India
+  2007Q2–2012Q3): bajar de Bloomberg los subíndices J.P. Morgan EMBI GD por país y dejarlos en
+  `2_Datos/embi_extra_<fuente>.csv` (`country,date,EMBI_bps`); `p1 --embi-ext` los toma solo,
+  con prioridad sobre GFSR y el mismo diagnóstico de empalme.
