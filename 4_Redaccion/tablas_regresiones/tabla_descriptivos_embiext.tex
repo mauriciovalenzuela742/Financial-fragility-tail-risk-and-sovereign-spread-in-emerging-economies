@@ -1,0 +1,78 @@
+\begin{table}[htbp]
+\centering
+\small
+\caption{Estadísticos descriptivos de la muestra de estimación (13 economías, 2004Q2--2026Q2, $N=765$)}
+\label{tab:descriptivos}
+\begin{tabular}{lrrrrrr}
+\toprule
+Variable & $N$ & Media & Desv. & Mín & Mediana & Máx \\
+\midrule
+Spread EMBI (pb) & 765 & 197{,}71 & 102{,}90 & 15{,}00 & 176{,}66 & 660{,}59 \\
+$\ln$ EMBI & 765 & 5{,}15 & 0{,}56 & 2{,}71 & 5{,}17 & 6{,}49 \\
+$JLoss_{t-1}$ & 765 & 4{,}65 & 4{,}49 & 1{,}43 & 2{,}67 & 28{,}97 \\
+$\ln JLoss_{t-1}$ & 765 & 1{,}28 & 0{,}64 & 0{,}36 & 0{,}98 & 3{,}37 \\
+$D_{t-1}=-GaR_{t-1}$ (pp) & 765 & -1{,}54 & 3{,}70 & -13{,}28 & -1{,}46 & 17{,}67 \\
+\textit{Expected Shortfall}$_{t-1}$ (pp) & 765 & 0{,}63 & 3{,}90 & -17{,}87 & 0{,}67 & 11{,}87 \\
+Deuda/PIB (\%) & 686 & 49{,}85 & 21{,}26 & 6{,}50 & 47{,}21 & 104{,}97 \\
+Balance fiscal/PIB (\%) & 686 & -3{,}74 & 2{,}59 & -13{,}20 & -3{,}42 & 2{,}77 \\
+Reservas/PIB (\%) & 670 & 19{,}55 & 8{,}10 & 9{,}52 & 16{,}36 & 47{,}27 \\
+Cuenta corriente/PIB (\%) & 662 & -1{,}66 & 2{,}87 & -8{,}85 & -2{,}00 & 9{,}80 \\
+Inflación interanual (\%) & 663 & 5{,}80 & 8{,}91 & -1{,}89 & 3{,}81 & 83{,}45 \\
+TCR efectivo (índice) & 686 & 109{,}23 & 19{,}09 & 69{,}64 & 103{,}42 & 180{,}00 \\
+VIX & 765 & 19{,}02 & 6{,}61 & 10{,}31 & 17{,}36 & 58{,}60 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{0.92\linewidth}{\footnotesize \textit{Nota:} $JLoss$, $D$ y ES rezagados un trimestre, como entran a la regresión principal; controles contemporáneos (su $N$ es menor por cobertura). Fuentes: EMBI Global Diversified (J.P.\ Morgan; Indonesia y Sudáfrica 2010--2014, FMI GFSR); $JLoss$ y $GaR$, estimación propia sobre datos Bloomberg; controles, FMI y Banco Mundial.}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Medias por país de la muestra de estimación}
+\label{tab:mediaspais}
+\begin{tabular}{lrrrrl}
+\toprule
+País & $N$ & EMBI (pb) & $JLoss_{t-1}$ & $D_{t-1}$ (pp) & Ventana \\
+\midrule
+Brasil & 75 & 258 & 4{,}95 & 0{,}37 & 2007Q4--2026Q2 \\
+Chile & 75 & 155 & 3{,}29 & -0{,}30 & 2007Q4--2026Q2 \\
+China & 79 & 152 & 6{,}82 & -5{,}63 & 2006Q4--2026Q2 \\
+Colombia & 70 & 244 & 3{,}95 & -0{,}37 & 2009Q1--2026Q2 \\
+India & 55 & 155 & 8{,}41 & -3{,}84 & 2012Q4--2026Q2 \\
+Indonesia & 32 & 187 & 2{,}52 & -3{,}17 & 2010Q1--2026Q2 \\
+Malasia & 40 & 117 & 2{,}41 & -1{,}45 & 2016Q3--2026Q2 \\
+México & 77 & 274 & 3{,}28 & 1{,}28 & 2007Q1--2026Q1 \\
+Perú & 66 & 167 & 2{,}53 & -1{,}84 & 2010Q1--2026Q2 \\
+Filipinas & 12 & 76 & 2{,}94 & -1{,}71 & 2023Q3--2026Q2 \\
+Polonia & 89 & 100 & 3{,}92 & -1{,}12 & 2004Q2--2026Q2 \\
+Sudáfrica & 32 & 242 & 2{,}38 & 0{,}30 & 2010Q1--2026Q2 \\
+Turquía & 63 & 354 & 9{,}63 & -3{,}36 & 2010Q4--2026Q2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Descomposición de la varianza \textit{within/between}}
+\label{tab:varianza}
+\begin{tabular}{lrrr}
+\toprule
+Variable & Desv. total & Desv. \textit{within} & \textit{within}/total \\
+\midrule
+Spread EMBI (pb) & 102{,}90 & 71{,}15 & 0{,}69 \\
+$\ln$ EMBI & 0{,}56 & 0{,}38 & 0{,}67 \\
+$JLoss_{t-1}$ & 4{,}49 & 3{,}88 & 0{,}86 \\
+$\ln JLoss_{t-1}$ & 0{,}64 & 0{,}52 & 0{,}82 \\
+$D_{t-1}=-GaR_{t-1}$ (pp) & 3{,}70 & 3{,}10 & 0{,}84 \\
+\textit{Expected Shortfall}$_{t-1}$ (pp) & 3{,}90 & 3{,}32 & 0{,}85 \\
+Deuda/PIB (\%) & 21{,}26 & 11{,}28 & 0{,}53 \\
+Balance fiscal/PIB (\%) & 2{,}59 & 2{,}02 & 0{,}78 \\
+Reservas/PIB (\%) & 8{,}10 & 4{,}22 & 0{,}52 \\
+Cuenta corriente/PIB (\%) & 2{,}87 & 1{,}76 & 0{,}61 \\
+Inflación interanual (\%) & 8{,}91 & 6{,}86 & 0{,}77 \\
+TCR efectivo (índice) & 19{,}09 & 14{,}69 & 0{,}77 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{0.8\linewidth}{\footnotesize \textit{Nota:} la desviación \textit{within} es la de la variable en desvíos respecto de la media de cada país; bajo efectos fijos de país es la única variación que identifica los coeficientes.}
+\end{table}

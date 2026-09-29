@@ -144,25 +144,56 @@ LEVELS = dict(
 )
 
 
+def fit_ctrl(d, model, fe, ctr):
+    """Igual que p8.fit_one (mismo centrado y nombres JLoss_c/GaR_c/Int, mismo DK) pero con los
+    controles domesticos `ctr` en el lado derecho. La muestra es la que tiene todos los controles."""
+    from linearmodels.panel import PanelOLS
+    dd = d.dropna(subset=ctr).copy()
+    dd["JLoss_c"] = dd["JLoss"] - dd["JLoss"].mean()
+    dd["GaR_c"] = dd["GaR_pp"] - dd["GaR_pp"].mean()
+    dd["Int"] = dd["JLoss_c"] * dd["GaR_c"]
+    rhs = {"M1": ["JLoss_c"], "M2": ["GaR_c"], "M3": ["JLoss_c", "GaR_c"],
+           "M4": ["JLoss_c", "GaR_c", "Int"]}[model] + ctr
+    eff = {"T": "TimeEffects", "P": "EntityEffects", "PT": "EntityEffects + TimeEffects"}[fe]
+    md = dd.set_index(["country", "t"])
+    m = PanelOLS.from_formula(f"EMBI_bps ~ {' + '.join(rhs)} + {eff}", md).fit(
+        cov_type="kernel", kernel="bartlett")
+
+    def g(name):
+        if name in m.params.index:
+            return dict(b=float(m.params[name]), se=float(m.std_errors[name]),
+                        t=float(m.tstats[name]), p=float(m.pvalues[name]))
+        return dict(b=np.nan, se=np.nan, t=np.nan, p=np.nan)
+
+    return dict(model=model, fe=fe, JLoss=g("JLoss_c"), GaR=g("GaR_c"), Int=g("Int"),
+                N=int(m.nobs), paises=int(md.reset_index()["country"].nunique()),
+                r2=float(m.rsquared), r2w=float(m.rsquared_within), fit=m)
+
+
 # ---------------------------------------------------------------- Tabla 1
 def tabla_bateria(spec=LEVELS):
     d = spec["prep_bat"]()
     samples = {"completa": d, "sin crisis": d[~d["quarter"].isin(p8.CRISIS_Q)].copy()}
+    con_ctrl = spec.get("panel_controles", False)
+    if con_ctrl:
+        samples["con controles"] = d
+    ctr = [c for c in CTRLS if c in d.columns and d[c].notna().sum() > 50]
     models = ["M1", "M2", "M3", "M4"]
     cols = col_order(models)
     res = {}
     for sname, ds in samples.items():
         for m in models:
             for fe in FES:
-                r = p8.fit_one(ds, m, fe)
+                r = fit_ctrl(ds, m, fe, ctr) if sname == "con controles" else p8.fit_one(ds, m, fe)
                 # D = -GaR  =>  coef(D) = -coef(GaR); coef(JLoss x D) = -coef(JLoss x GaR)
                 for k in ("GaR", "Int"):
                     r[k]["b"] = -r[k]["b"]
                 res[(sname, m, fe)] = r
 
     L = []
-    L += [r"\begin{landscape}", r"\begin{table}", r"\centering", r"\footnotesize",
-          r"\setlength{\tabcolsep}{3.2pt}", r"\renewcommand{\arraystretch}{1.08}",
+    font, stretch = (r"\scriptsize", "0.84") if con_ctrl else (r"\footnotesize", "1.08")  # 3 paneles
+    L += [r"\begin{landscape}", r"\begin{table}", r"\centering", font,
+          r"\setlength{\tabcolsep}{3.2pt}", rf"\renewcommand{{\arraystretch}}{{{stretch}}}",
           rf"\caption[{spec['cap_bat']}]{{\textbf{{{spec['cap_bat']}.}}}}",
           rf"\label{{{spec['lab_bat']}}}",
           r"\begin{tabular}{l c ccc ccc ccc cc}",
@@ -173,6 +204,9 @@ def tabla_bateria(spec=LEVELS):
 
     panels = [("completa", r"\textit{Panel A. Muestra completa}"),
               ("sin crisis", r"\textit{Panel B. Sin trimestres de crisis (excluye 2008Q4--2009Q4 y 2020Q1--2021Q4)}")]
+    if con_ctrl:
+        panels.append(("con controles", r"\textit{Panel C. Muestra completa con los seis controles "
+                                        r"domésticos (robustez)}"))
     for pi, (sname, title) in enumerate(panels):
         if pi:
             L.append(r"\midrule")
@@ -186,9 +220,18 @@ def tabla_bateria(spec=LEVELS):
         L.append(row("Países", [str(res[(sname, m, fe)]["paises"]) for m, fe in cols]))
         L.append(row(r"$R^2$ \textit{within}",
                      [num(res[(sname, m, fe)]["r2w"]) for m, fe in cols]))
+        if con_ctrl:
+            L.append(row("Controles domésticos",
+                         [("SÍ" if sname == "con controles" else "NO")] * len(cols)))
     L.append(r"\midrule")
     L += fe_rows(cols)
-    L.append(row("Controles domésticos", ["NO"] * len(cols)))
+    if con_ctrl:   # la fila de controles va dentro de cada panel
+        nota_ctrl = (r" Paneles A y B sin controles domésticos; el Panel C añade deuda/PIB, balance "
+                     r"fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación y tipo de cambio real "
+                     r"efectivo (contemporáneos).")
+    else:
+        L.append(row("Controles domésticos", ["NO"] * len(cols)))
+        nota_ctrl = " Sin controles domésticos."
     L.append(r"\bottomrule")
     L.append(r"\end{tabular}")
     L.append(
@@ -196,11 +239,11 @@ def tabla_bateria(spec=LEVELS):
         r" Las columnas (2)--(12) completan la batería de cuatro modelos "
         r"anidados (M1: $JLoss$; M2: $D$; M3: $JLoss+D$; M4: $JLoss+D+JLoss\times D$) bajo efectos fijos solo de "
         r"tiempo, solo de país, o de ambos. $JLoss$ y $D$ están centrados en su media muestral; $JLoss\times D$ "
-        r"es el producto de ambos centrados. Sin controles domésticos. Errores estándar de Driscoll--Kraay "
+        r"es el producto de ambos centrados." + nota_ctrl + r" Errores estándar de Driscoll--Kraay "
         r"(kernel de Bartlett) entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%, "
         r"respectivamente. Fuente: " + spec["src_bat"] + ".}")
     L += [r"\end{table}", r"\end{landscape}"]
-    return "\n".join(L), res
+    return _ajustar("\n".join(L), spec), res
 
 
 # ---------------------------------------------------------------- Tabla 2
@@ -300,7 +343,7 @@ def tabla_crisis(spec=LEVELS):
         r"Driscoll--Kraay entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%, "
         r"respectivamente. Fuente: " + spec["src_cr"] + ".}")
     L += [r"\end{table}", r"\end{landscape}"]
-    return "\n".join(L), fits
+    return _ajustar("\n".join(L), spec), fits
 
 
 PREAMBLE = r"""\documentclass[11pt]{article}
@@ -332,12 +375,31 @@ def panel_variant(spec):
     return "_embiext", spec
 
 
+def _ajustar(tex, spec):
+    """Si spec['ajustar']: encierra el tabular en un adjustbox con ancho y alto maximos, para
+    que la tabla quepa en paginas mas angostas que la del documento standalone (p.ej. el paper,
+    carta 12pt, o la tesis). Requiere \\usepackage{adjustbox} en el documento que la incluye."""
+    if not spec.get("ajustar"):
+        return tex
+    tex = tex.replace(r"\begin{tabular}",
+                      r"\begin{adjustbox}{max width=\linewidth, max totalheight=0.66\textheight}" "\n"
+                      r"\begin{tabular}", 1)
+    return tex.replace(r"\end{tabular}", r"\end{tabular}" "\n" r"\end{adjustbox}", 1)
+
+
 def write_tex(name, t1, t2):
     os.makedirs(OUT_DIR, exist_ok=True)
     out = os.path.join(OUT_DIR, name)
+    pre = PREAMBLE
+    if "adjustbox" in t1 + t2:
+        pre = pre.replace(r"\usepackage{booktabs}", r"\usepackage{booktabs}" "\n" r"\usepackage{adjustbox}")
     with open(out, "w", encoding="utf-8") as fh:
-        fh.write(PREAMBLE + "\n" + t1 + "\n\n\\clearpage\n\n" + t2 + "\n\n\\end{document}\n")
+        fh.write(pre + "\n" + t1 + "\n\n\\clearpage\n\n" + t2 + "\n\n\\end{document}\n")
     print("Guardado:", out)
+    # solo los bloques landscape, para hacer \input desde el paper / la tesis
+    for k, t in (("t1", t1), ("t2", t2)):
+        with open(out.replace(".tex", f"_{k}.tex"), "w", encoding="utf-8") as fh:
+            fh.write(t + "\n")
 
 
 def run():
