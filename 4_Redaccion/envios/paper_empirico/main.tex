@@ -3,8 +3,8 @@
 %  Fragilidad bancaria sistémica, riesgo de cola del crecimiento y
 %  spread soberano en economías emergentes
 %
-%  Reutiliza el cuerpo del capítulo único de la tesis (../../tesis/investigacion.tex)
-%  con remapeo de \chapter->\section y los entornos teoremáticos redefinidos.
+%  Cuerpo propio: cuerpo.tex (especificación log-log rezagada, panel con EMBI
+%  extendido). La tesis incluye este mismo archivo como su capítulo.
 %  Revistas objetivo (español): Latin American Journal of Central Banking,
 %  Economía Chilena (BCCh), Estudios de Economía (U. de Chile), El Trimestre
 %  Económico.
@@ -19,6 +19,7 @@
 \usepackage{array}
 \usepackage{pdflscape}
 \usepackage{graphicx}
+\usepackage{adjustbox}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
 \newcommand{\tst}[1]{\ensuremath{\scriptstyle(#1)}}
@@ -29,6 +30,7 @@
 \bibliographystyle{apalike}
 
 \graphicspath{{figuras/}}
+\newcommand{\tablasdir}{../../tablas_regresiones}   % tablas generadas por p12/p13
 \setlength{\emergencystretch}{3em}
 \onehalfspacing
 
@@ -77,33 +79,30 @@
 \begin{abstract}
 \noindent
 Este trabajo evalúa si la fragilidad sistémica del sector bancario y el riesgo de la
-cola izquierda del crecimiento determinan de forma \emph{complementaria} —no aditiva—
-el riesgo de crédito soberano en economías emergentes. La fragilidad se mide con
-\textit{Joint Loss} ($\JLoss$), agregación de punto de silla de probabilidades de
-incumplimiento tipo Merton sobre 113 bancos extraídos homogéneamente de Bloomberg; el
-riesgo de cola del crecimiento, con \textit{Growth-at-Risk} ($\GaR$) por regresión
-cuantílica de panel; el \textit{spread} soberano, por el EMBI Global Diversified de
-J.P.\ Morgan. Sobre un panel único de trece economías emergentes (2004--2026, $N=721$),
-los canales de nivel están bien identificados ($\hat\beta_1>0$ para $\JLoss$;
-coeficiente positivo de $D\equiv-\GaR$). La interacción $\JLoss\times D$ tiene el signo
-predicho por el mecanismo de \textit{doom loop} pero no es significativa sobre la
-muestra completa ($\hat\beta_3=+0{,}16$, $p=0{,}26$). \textbf{Sí lo es} en dos
-dimensiones: transversal, en el núcleo de once economías emergentes de financiamiento
-externo ($\hat\beta_3=+0{,}47$, $p=0{,}023$); y temporal —interactuando la
-complementariedad con un vector de crisis sin excluir observaciones, se \textbf{anula}
-bajo respaldo oficial masivo (crisis financiera global, pandemia) y \textbf{sobrevive}
-en el estrés emergente de 2015--2016 sin ese respaldo ($p<0{,}001$), un test de
-falsación directo del mecanismo. El resultado es robusto a tratar $\JLoss$ y $\GaR$
-como regresores generados y a la inferencia por \textit{wild cluster bootstrap}; la
-identificación causal del canal de nivel, en cambio, no queda cerrada por variables
-instrumentales. La complementariedad fragilidad--crecimiento sobre el riesgo soberano
-es, así, un fenómeno \textbf{condicional} a la exposición al financiamiento externo y
-al régimen de respaldo oficial, no una regularidad universal.\\[4pt]
+cola izquierda del crecimiento determinan de forma \emph{complementaria} el riesgo de
+crédito soberano en economías emergentes. La fragilidad se mide con \textit{Joint Loss}
+($\JLoss$), agregación de punto de silla de probabilidades de incumplimiento tipo Merton
+sobre 113 bancos extraídos homogéneamente de Bloomberg; el riesgo de cola, con
+\textit{Growth-at-Risk} ($\GaR$) por regresión cuantílica de panel; el \textit{spread}
+soberano, por el EMBI Global Diversified. Sobre un panel de trece economías emergentes
+(2004--2026, $N=765$), se regresa el logaritmo del spread sobre el logaritmo de $\JLoss$
+y el riesgo de cola $D\equiv-\GaR$, ambos rezagados un trimestre para mitigar la
+causalidad inversa, y su producto, con efectos fijos de país y de tiempo. La elasticidad
+del spread a la fragilidad es $0{,}10$ ($p=0{,}003$) y un punto porcentual adicional de
+riesgo de cola lo eleva en torno a un 3\% ($p=0{,}03$); el efecto de la fragilidad no
+sobrevive a los controles fiscales y cambiarios, plausiblemente canales del propio
+mecanismo. La interacción no es significativa ($-0{,}011$, $p=0{,}11$): la
+complementariedad en puntos básicos existe, pero es la que implica una estructura
+multiplicativa ($+0{,}19$ pb, IC 95\% $[0{,}01;\,0{,}42]$). La amplificación adicional
+aparece solo donde la predice el mecanismo de \textit{doom loop}: es positiva en el
+estrés emergente de 2015--2016, sin respaldo oficial, y negativa en la crisis
+financiera global y la pandemia, con respaldo masivo. La identificación causal del canal
+de nivel no queda cerrada por variables instrumentales.\\[4pt]
 \noindent\textbf{Palabras clave:} riesgo soberano, fragilidad bancaria, \textit{Growth-at-Risk},
 \textit{doom loop}, crisis financiera, economías emergentes.\quad\textbf{JEL:} F34, G01,
 G21, G15, H63, E44.
 \end{abstract}
 
-\input{../../tesis/investigacion.tex}
+\input{cuerpo}
 
 \end{document}

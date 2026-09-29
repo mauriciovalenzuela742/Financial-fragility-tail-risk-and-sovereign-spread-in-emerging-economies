@@ -979,3 +979,31 @@ estático de EF bidireccionales es el apropiado** dada la forma del panel.
   2007Q2–2012Q3): bajar de Bloomberg los subíndices J.P. Morgan EMBI GD por país y dejarlos en
   `2_Datos/embi_extra_<fuente>.csv` (`country,date,EMBI_bps`); `p1 --embi-ext` los toma solo,
   con prioridad sobre GFSR y el mismo diagnóstico de empalme.
+
+## 10. Especificación PRINCIPAL del paper: log-log rezagada sobre el panel embiext (2026-09-29)
+
+Base de `4_Redaccion/envios/paper_empirico/cuerpo.tex`, que es también el capítulo de la tesis
+(`tesis/main.tex` lo incluye; `investigacion.tex` queda como versión anterior, sin compilar).
+Panel: `Panel_bloomberg_embiext.csv` (13 países, sin Argentina; IDN/ZAF 2010–14 con FMI GFSR).
+
+    ln EMBI_it = a_i + d_t + b1 ln JLoss_i,t-1 + b2 D_i,t-1 + b3 ln JLoss_i,t-1 x D_i,t-1 (+ w'X_it) + e
+    D = -GaR (pp); ln JLoss y D centrados; DK (Bartlett).
+
+Reproducir: `JLOSS_PANEL_CSV=<ruta>/Panel_bloomberg_embiext.csv python p12_tablas_latex_lnlag.py`
+(Tablas 1–2, con Panel C de controles) y `python p13_figuras_paper.py` (20 figuras, cuadros
+descriptivos y **`paper_lnlag_numeros.csv`, fuente de toda cifra del texto**).
+
+| Cantidad (M4, FE país+tiempo) | Valor |
+|---|---|
+| Principal (Panel A col. 1, sin controles, N=765): b1 / b2 / b3 | +0,0985*** / +0,0324** / −0,0112 (p=0,112) |
+| Sin crisis (Panel B, N=656) | +0,0866** / +0,0502*** / +0,0045 (p=0,67) |
+| Con 6 controles (Panel C, N=649) | −0,0076 (p=0,86) / +0,0281** / −0,0065 |
+| Misma muestra N=649 sin controles | b1 = +0,107 (p=0,008) → la absorción es de los controles, conjunta |
+| Crisis CM4, Backstop b3+b4 | −0,0146 (p=0,03) |
+| Crisis CM4, EMstress b3+b4 (FE PT / T / P) | +0,026 (p=0,08) / +0,036 (p=0,04) / +0,036 (p=0,001) |
+| Complementariedad implícita en niveles con b3=0 | +0,19 pb [0,01; 0,42] |
+| b3 niveles/logs × contemporáneo/rezagado, sin crisis | +1,18*** / +1,29*** / −0,005 / +0,0045 |
+
+**Lectura:** H1 y H2 se sostienen sin controles; H3 en elasticidades no (la complementariedad en
+pb es la de la forma multiplicativa). Lo que elimina la interacción de niveles es el logaritmo,
+no el rezago. La amplificación adicional aparece solo en EMstress 2015–16.

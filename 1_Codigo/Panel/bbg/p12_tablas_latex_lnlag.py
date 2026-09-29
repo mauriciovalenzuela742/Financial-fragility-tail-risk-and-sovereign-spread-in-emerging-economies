@@ -90,7 +90,9 @@ LNLAG = dict(
         r"($D=-GaR$, percentil 5\% del crecimiento con signo invertido, en puntos porcentuales) y su "
         r"interacción. La columna (1) es la especificación que se busca contrastar, "
         r"$\ln\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1\ln JLoss_{i,t-1}+\beta_2 D_{i,t-1}"
-        r"+\beta_3(\ln JLoss_{i,t-1}\times D_{i,t-1})+\varepsilon_{i,t}$, con efectos fijos de país y de tiempo."),
+        r"+\beta_3(\ln JLoss_{i,t-1}\times D_{i,t-1})+\omega'X_{i,t}+\varepsilon_{i,t}$, con efectos fijos de "
+        r"país y de tiempo. La regresión principal es la columna (1) del Panel A, sin controles "
+        r"($\omega=0$); el Panel C la reestima con los seis controles domésticos como robustez."),
     intro_cr=(
         r"La columna (1) es la Ecuación de interacción de crisis completa en la versión log-log rezagada, "
         r"$\ln\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1\ln JLoss_{t-1}+\beta_2 D_{t-1}+\beta_3(\ln JLoss_{t-1}\times D_{t-1})"
@@ -101,6 +103,8 @@ LNLAG = dict(
     extra_note=EXTRA, extra_note_cr=EXTRA_CR,
     src_bat=r"\texttt{p12\_tablas\_latex\_lnlag.py} (ajuste de \texttt{p8\_bateria\_regresiones.py})",
     src_cr=r"\texttt{p12\_tablas\_latex\_lnlag.py} (ajuste de \texttt{p9b\_bateria\_crisis.py})",
+    panel_controles=True,   # Panel C: misma bateria con los 6 controles (robustez)
+    ajustar=True,           # adjustbox: la tabla entra en el paper (carta 12pt) y en la tesis
 )
 
 
