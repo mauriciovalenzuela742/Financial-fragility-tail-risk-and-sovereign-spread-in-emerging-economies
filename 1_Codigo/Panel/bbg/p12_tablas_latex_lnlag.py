@@ -105,6 +105,7 @@ LNLAG = dict(
     src_cr=r"\texttt{p12\_tablas\_latex\_lnlag.py} (ajuste de \texttt{p9b\_bateria\_crisis.py})",
     panel_controles=True,   # Panel C: misma bateria con los 6 controles (robustez)
     ajustar=True,           # adjustbox: la tabla entra en el paper (carta 12pt) y en la tesis
+    dividir_crisis=True,    # Tabla 2 en dos: vector unico / Backstop-EMstress (legible a tamano carta)
 )
 
 

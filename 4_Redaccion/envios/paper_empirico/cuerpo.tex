@@ -58,17 +58,17 @@ El mapa organiza la intuición de los tres pilares del marco teórico; no introd
 
 Sobre un panel de trece economías emergentes (2004Q2--2026Q2, $N=765$), la evidencia se ordena en tres resultados.
 
-\textbf{Primero, los dos canales de nivel se identifican.} La elasticidad del spread a la fragilidad bancaria rezagada es $\hat\beta_1=0{,}099$ ($p=0{,}003$): un aumento de 10\% en $JLoss$ se asocia con un spread un 1\% mayor el trimestre siguiente. Un punto porcentual adicional de riesgo de cola del crecimiento ($D\equiv-GaR$) eleva el spread en torno a un 3,3\% ($p=0{,}033$). Ambos efectos son positivos y significativos en todas las columnas de la batería sin controles.
+\textbf{Primero, la fragilidad bancaria y el riesgo de cola se asocian con el spread.} En regresiones de panel con efectos fijos de país y de tiempo, la elasticidad del spread a la fragilidad bancaria rezagada es $0{,}099$ y un punto porcentual adicional de riesgo de cola del crecimiento ($D\equiv-GaR$) se asocia con un spread en torno a un 3,3\% mayor. La asociación de la fragilidad es estable frente al conjunto de controles de \citet{Chari2024b} disponible en este panel ---con ellos su elasticidad oscila entre 0,11 y 0,16, del orden del coeficiente de la primera columna de su Tabla 4--- y frente a tratar $JLoss$ y $GaR$ como regresores generados.
 
-\textbf{Segundo, la interacción no aporta amplificación adicional en elasticidades.} El coeficiente de $\ln JLoss_{t-1}\times D_{t-1}$ es $-0{,}011$ ($p=0{,}11$) en la muestra completa y $+0{,}005$ ($p=0{,}67$) al excluir los trimestres de crisis; su signo es negativo en once de quince especificaciones y en ninguna es significativamente positivo. Este resultado debe leerse con cuidado, porque en un modelo log-log la complementariedad en puntos básicos ya viene dada por la forma funcional: con $\beta_3=0$, el efecto de la fragilidad sobre el spread en niveles crece con el riesgo de cola en $+0{,}19$ puntos básicos por unidad de $JLoss$ y punto porcentual de $D$ (IC 95\%: $[0{,}01;\,0{,}42]$), del mismo orden que la interacción estimada en la especificación en niveles sobre la muestra completa. Lo que los datos rechazan no es que la fragilidad y el riesgo de cola se potencien en puntos básicos, sino que lo hagan \emph{más} de lo que implica una estructura multiplicativa.
+\textbf{Segundo, esa asociación no puede interpretarse como un efecto causal con estos datos.} El spread y la fragilidad son muy persistentes (autocorrelación trimestral del spread de 0,94) y se retroalimentan: el spread rezagado predice la fragilidad del trimestre siguiente (elasticidad de 0,17, $p=0{,}009$), que es el bucle de \citet{FarhiTirole2018b}. Cuando la regresión incorpora esa dinámica ---el spread rezagado, o la fragilidad adelantada---, el efecto de la fragilidad deja de ser distinguible de cero; las proyecciones locales son planas; con inferencia \textit{wild cluster bootstrap} sobre trece países, ni la fragilidad ($p=0{,}33$) ni el riesgo de cola ($p=0{,}20$) son significativos; y las variables instrumentales, con primeras etapas razonables, dan estimaciones imprecisas y de signo inestable.
 
-\textbf{Tercero, la amplificación adicional aparece donde el mecanismo la predice.} Interactuando la especificación con un vector de crisis sin excluir observaciones, la interacción se vuelve \emph{negativa} bajo los episodios con respaldo oficial masivo (crisis financiera global y pandemia: $\hat\beta_3+\hat\beta_4=-0{,}015$, $p=0{,}03$) y \emph{positiva} en el estrés emergente de 2015--2016, que no tuvo ese respaldo ($+0{,}026$, $+0{,}036$ y $+0{,}036$ bajo las tres estructuras de efectos fijos; $p$ entre 0,001 y 0,08).
+\textbf{Tercero, no hay evidencia de una amplificación por encima de la multiplicativa.} La interacción de $\ln JLoss_{t-1}\times D_{t-1}$ es $-0{,}011$ ($p=0{,}11$) y no es significativamente positiva en ninguna especificación. En un modelo log-log la complementariedad en puntos básicos ya viene dada por la forma funcional ---$+0{,}19$ puntos básicos por unidad de $JLoss$ y punto porcentual de $D$---, y es del mismo orden que la interacción estimada en niveles: lo que los datos no respaldan es que los dos riesgos se potencien \emph{más} de lo que implica una estructura proporcional. La amplificación que una versión anterior encontraba en el estrés emergente de 2015--2016 no resiste una prueba de permutación ---ese episodio queda en el lugar 20 de 51 ventanas comparables---, ni la ampliación a otros episodios sin respaldo oficial. La interacción negativa en las crisis con respaldo oficial masivo, significativa con errores de Driscoll--Kraay, tampoco lo es con errores agrupados por país ($p=0{,}40$).
 
-Dos advertencias acompañan estos resultados. El efecto de nivel de $JLoss$ no sobrevive a la inclusión simultánea de los seis controles domésticos, que la absorben conjuntamente; la Sección~\ref{sec:bateria} discute por qué varios de ellos son canales del propio mecanismo (``malos controles'') y no factores de confusión. Y la identificación causal del canal de nivel no está cerrada por variables instrumentales (Sección~\ref{sec:ident-causal}).
+La conclusión es, por tanto, más modesta que la hipótesis de partida: el panel documenta asociaciones compatibles con el mecanismo, pero no permite separarlas de la persistencia del spread y de su efecto sobre la propia fragilidad. La Sección~\ref{sec:identificacion} reporta esas pruebas y la Sección~\ref{sec:agenda-futura}, los datos que harían falta para ir más allá.
 
 \subsection{Contribución y hoja de ruta}
 
-La contribución es de tres tipos. Conceptual: articular como un solo mecanismo dos canales que la literatura trata por separado. Empírica: mostrar, con una especificación que mitiga la causalidad inversa, que ambos canales operan sobre el spread y que su complementariedad es la que implica una estructura multiplicativa, salvo en el episodio de estrés sin respaldo oficial, donde es mayor. Y metodológica: un \textit{pipeline} reproducible de extracción de balances de 113 bancos desde Bloomberg y de estimación del $GaR$ en pseudo--tiempo real, con cada cifra del texto trazable a un archivo del repositorio.
+La contribución es de tres tipos. Conceptual: articular como un solo mecanismo dos canales que la literatura trata por separado, y mostrar que una estructura de intensidad de incumplimiento proporcional ya implica su complementariedad en puntos básicos. Empírica: construir las dos métricas para trece economías emergentes, replicar con ellas la asociación entre fragilidad bancaria y spread que documentan \citet{Chari2024b}, y someterla a las pruebas de dinámica, inferencia con pocos \textit{clusters}, identificación y forma funcional que exige un panel de estas características, delimitando con precisión qué resiste y qué no. Y metodológica: un \textit{pipeline} reproducible de extracción de balances de 113 bancos desde Bloomberg y de estimación del $GaR$ en pseudo--tiempo real, con cada cifra del texto trazable a un archivo del repositorio.
 
 La Sección~\ref{sec:marco} desarrolla el marco teórico y las hipótesis; la Sección~\ref{sec:literatura} sitúa el trabajo en la literatura; la Sección~\ref{sec:metodologia} detalla la construcción de $JLoss$ y $GaR$ y la estrategia econométrica; la Sección~\ref{sec:datos} describe el panel; la Sección~\ref{sec:resultados} reporta los resultados, su robustez y el alcance de la identificación causal; y la Sección~\ref{sec:discusion} discute y concluye.
 
@@ -101,7 +101,15 @@ El riesgo de cola se mide por $D_{i,t}\equiv-GaR_{i,t}$, de modo que un $D$ mayo
 \[
 \frac{\partial^2\,\mathrm{Spread}}{\partial JLoss\;\partial D}=\beta_1\beta_2\,\frac{\mathrm{Spread}}{JLoss}>0,
 \]
-sin que haga falta ningún término de interacción. La segunda exige, además, un coeficiente de interacción positivo en la especificación log-log. Es, por tanto, la versión más exigente de la hipótesis, y la que contrasta la especificación principal de este trabajo. Las hipótesis son:
+sin que haga falta ningún término de interacción. La segunda exige, además, un coeficiente de interacción positivo en la especificación log-log.
+
+La forma multiplicativa tiene un fundamento directo en los modelos de intensidad de incumplimiento \citep{DuffieSingleton1999}: el spread de un bono con pérdida en caso de incumplimiento $L$ es, en primera aproximación, $\mathrm{Spread}\approx\lambda\,L$, donde $\lambda$ es la intensidad (neutral al riesgo) de incumplimiento. Si la intensidad responde de forma proporcional al pasivo contingente bancario y exponencial al riesgo de cola del crecimiento,
+\[
+\lambda_{i,t}=\lambda_0\,JLoss_{i,t-1}^{\beta_1}\,e^{\beta_2D_{i,t-1}}
+\quad\Longrightarrow\quad
+\ln\mathrm{Spread}_{i,t}=\ln(\lambda_0L)+\beta_1\ln JLoss_{i,t-1}+\beta_2D_{i,t-1},
+\]
+que es la especificación principal con $\beta_3=0$; la forma log-normal de la intensidad es además la habitual en la valoración de riesgo soberano \citep{PanSingleton2008}. En esta lectura, la complementariedad en niveles es la consecuencia natural de que ambos riesgos escalen la misma intensidad de incumplimiento, y el coeficiente $\beta_3$ mide un canal \emph{adicional}: que el riesgo de cola eleve la elasticidad de la intensidad al pasivo contingente, como lo haría el multiplicador de \citet{FarhiTirole2018b} si su magnitud creciera con la severidad del estado adverso. $\beta_3=0$ no contradice el marco teórico: es su versión proporcional. Es, por tanto, la versión más exigente de la hipótesis, y la que contrasta la especificación principal de este trabajo. Las hipótesis son:
 
 \begin{itemize}
     \item \textbf{H1 (canal bancario).} La fragilidad bancaria sistémica eleva el spread soberano: $\beta_1>0$.
@@ -221,9 +229,11 @@ La especificación principal es
 \end{equation}
 donde $\alpha_i$ y $\delta_t$ son efectos fijos de país y de tiempo y $X_{i,t}$ es un vector de controles domésticos. Los coeficientes se reportan sobre $D_{i,t-1}\equiv-GaR_{i,t-1}$, de modo que un coeficiente positivo sobre el riesgo de cola, y sobre la interacción, señale mayor spread y amplificación: con esa convención, $\beta_2^D=-\beta_2$ y $\beta_3^D=-\beta_3$; los coeficientes cambian de signo, no de magnitud ni de significancia. En lo que sigue, $\beta_2$ y $\beta_3$ denotan los coeficientes en la forma $D$. $\ln JLoss_{t-1}$ y $D_{t-1}$ se centran en su media muestral, de modo que $\beta_1$ es la elasticidad de la fragilidad evaluada en el riesgo de cola medio y $\beta_2$ la semielasticidad del riesgo de cola evaluada en la fragilidad media.
 
-\textbf{Por qué rezagos.} El spread soberano no es solo resultado de la fragilidad bancaria y del riesgo de cola: también los afecta. Un aumento del spread deprecia los bonos soberanos que los bancos tienen en balance, encarece su fondeo y reduce su valor de mercado, lo que eleva sus probabilidades de incumplimiento de Merton y, con ellas, $JLoss$; es la retroalimentación de \citet{FarhiTirole2018b}. Del mismo modo, un spread más alto endurece las condiciones financieras domésticas y deteriora el FCI con el que se estima el $GaR$. En una regresión contemporánea, esos efectos del spread sobre sus determinantes se confunden con los que se quiere medir. Rezagar un trimestre ambos regresores los hace predeterminados respecto de los choques al spread del trimestre corriente: $JLoss_{t-1}$ y $GaR_{t-1}$ se construyen con información que no incluye el spread de $t$. El rezago no elimina toda fuente de endogeneidad ---el spread es persistente, y un factor omitido persistente puede mover a la vez la fragilidad pasada y el spread presente---, pero sí la vía de causalidad inversa más directa. \citet{Chari2024b} también rezagan $JLoss$ un trimestre.
+\textbf{Por qué rezagos.} El spread soberano no es solo resultado de la fragilidad bancaria y del riesgo de cola: también los afecta. Un aumento del spread deprecia los bonos soberanos que los bancos tienen en balance, encarece su fondeo y reduce su valor de mercado, lo que eleva sus probabilidades de incumplimiento de Merton y, con ellas, $JLoss$; es la retroalimentación de \citet{FarhiTirole2018b}. Del mismo modo, un spread más alto endurece las condiciones financieras domésticas y deteriora el FCI con el que se estima el $GaR$. En una regresión contemporánea, esos efectos del spread sobre sus determinantes se confunden con los que se quiere medir. Rezagar un trimestre ambos regresores los hace predeterminados respecto de los choques al spread del trimestre corriente: $JLoss_{t-1}$ y $GaR_{t-1}$ se construyen con información que no incluye el spread de $t$. El rezago no elimina toda fuente de endogeneidad ---el spread es persistente, y un factor omitido persistente puede mover a la vez la fragilidad pasada y el spread presente---, pero sí la vía de causalidad inversa más directa. \citet{Chari2024b} también rezagan $JLoss$ un trimestre. La Sección~\ref{sec:identificacion} contrasta hasta dónde llega el rezago: en este panel, la persistencia del spread y su retroalimentación sobre la fragilidad resultan ser precisamente el límite de la identificación.
 
 \textbf{Por qué logaritmos.} Primero, el EMBI y $JLoss$ tienen distribuciones muy asimétricas (asimetría de 1,20 y 2,79 en niveles; $-0{,}74$ y 1,34 en logaritmos; Figura~\ref{fig:distribuciones}), con episodios de estrés que en niveles dominan la estimación. Segundo, los coeficientes se leen como elasticidades, comparables entre países con niveles de spread muy distintos. Tercero, como $JLoss$ es una medida ordinal, su logaritmo es invariante a reescalamientos. $D$ entra en niveles porque el $GaR$ toma valores negativos y su logaritmo no está definido; su coeficiente es una semielasticidad.
+
+\textbf{De las versiones anteriores a esta.} El Informe de Taller de Tesis I y la versión previa de este capítulo estimaban la ecuación en niveles ---el spread en puntos básicos sobre $JLoss$ y $D$--- con regresores contemporáneos. Esta versión cambia ambas cosas a la vez, y conviene separarlas porque el resultado de la interacción depende de una de ellas: la Sección~\ref{sec:niveles-logs} reporta las cuatro combinaciones sobre el mismo panel.
 
 \textbf{Controles.} La regresión principal no incluye controles ($\omega=0$); la Tabla~\ref{tab:bateria-lnlag-embiext} la reestima con los seis controles domésticos (deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación y tipo de cambio real efectivo) como robustez. La elección responde a que varios de esos controles son plausiblemente canales del propio mecanismo: el costo esperado del rescate bancario deteriora el balance fiscal, y la tensión bancaria se transmite al tipo de cambio y a la inflación. Condicionar en ellos mide el efecto de la fragilidad \emph{neto} de los canales por los que opera, un problema de ``mal control''. Los controles son además interpolaciones de series anuales, con escasa variación intra-anual bajo efectos fijos. Los efectos fijos de tiempo absorben los factores globales (VIX, tasa del Tesoro, spreads de alto rendimiento), que por eso no se incluyen.
 
@@ -347,83 +357,85 @@ La Figura~\ref{fig:comovimiento} agrega las tres series por la mediana transvers
 \section{Resultados}
 \label{sec:resultados}
 
-\subsection{La batería de especificaciones}
+Los resultados se ordenan de lo que el panel muestra a lo que permite afirmar. La Sección~\ref{sec:bateria} reporta las asociaciones condicionales de la especificación principal; la Sección~\ref{sec:identificacion}, las pruebas que determinan si esas asociaciones pueden leerse como efectos; y las Secciones~\ref{sec:crisis-interaccion} a~\ref{sec:robustez}, lo que el panel dice sobre la complementariedad.
+
+\subsection{Asociaciones condicionales: la batería de especificaciones}
 \label{sec:bateria}
 
-La Tabla~\ref{tab:bateria-lnlag-embiext} reúne las 36 regresiones: cuatro modelos anidados por tres estructuras de efectos fijos por tres muestras. La columna (1) del Panel A es la regresión principal, la ecuación~\eqref{eq:principal} sin controles con efectos fijos de país y de tiempo.
+La Tabla~\ref{tab:bateria-lnlag-embiext} reúne 36 regresiones: cuatro modelos anidados por tres estructuras de efectos fijos por tres muestras. La columna (1) del Panel A es la regresión principal, la ecuación~\eqref{eq:principal} sin controles con efectos fijos de país y de tiempo.
 
 \input{\tablasdir/tablas_regresiones_lnlag_embiext_t1}
 
-\textbf{H1 (canal bancario) se sostiene sin controles.} La elasticidad del spread a la fragilidad bancaria rezagada es positiva y significativa al 1\% en las nueve columnas del Panel A que la incluyen: entre $0{,}097$ y $0{,}245$ según el modelo y los efectos fijos, y $\hat\beta_1=0{,}099$ ($p=0{,}003$) en la regresión principal. Duplicar $JLoss$ ---un aumento de $\ln JLoss$ de 0,69, algo más que su desviación estándar--- se asocia con un spread en torno a un 7\% mayor el trimestre siguiente, unos 14 puntos básicos sobre el spread medio. La magnitud decrece al añadir efectos fijos, de 0,20--0,24 con solo efectos de tiempo a 0,10--0,13 con los bidireccionales: parte de la asociación es transversal y la absorben los efectos de país. Al excluir los trimestres de crisis (Panel B) el patrón se mantiene ($0{,}087$, $p<0{,}05$, en la columna 1).
+\textbf{Fragilidad bancaria.} Sin controles, la elasticidad del spread a la fragilidad bancaria rezagada es positiva y significativa al 1\% en las nueve columnas del Panel A que la incluyen, entre $0{,}097$ y $0{,}245$, y $0{,}099$ en la regresión principal: duplicar $JLoss$ se asocia con un spread en torno a un 7\% mayor el trimestre siguiente, unos 14 puntos básicos sobre el spread medio. La magnitud cae de 0,20--0,24 con solo efectos de tiempo a 0,10--0,13 con los bidireccionales, porque parte de la asociación es transversal. Al excluir los trimestres de crisis (Panel B) se mantiene ($0{,}087$, $p<0{,}05$).
 
-\textbf{H2 (canal de crecimiento) se sostiene en las tres muestras.} El coeficiente de $D_{t-1}$ es positivo en las 27 columnas en que aparece y significativo en 23 de ellas, incluidas las nueve del Panel A. En la regresión principal, un punto porcentual adicional de riesgo de cola eleva el spread en torno a un 3,3\% ($p=0{,}033$); una desviación estándar de $D$ (3,7 puntos) lo eleva en torno a un 13\%, unos 25 puntos básicos. Al excluir los trimestres de crisis la semielasticidad sube a 0,050: el canal no depende de los episodios extremos.
+\textbf{Riesgo de cola.} El coeficiente de $D_{t-1}$ es positivo en las 27 columnas en que aparece y significativo en 23: en la regresión principal, un punto porcentual adicional de riesgo de cola se asocia con un spread en torno a un 3,3\% mayor, y una desviación estándar de $D$ (3,7 puntos) con uno en torno a un 13\% mayor, unos 25 puntos básicos.
 
-\textbf{H3 (amplificación en elasticidades) no se sostiene.} El coeficiente de interacción es negativo y no significativo en la regresión principal ($-0{,}011$, $p=0{,}11$) y en las otras dos columnas de M4 del Panel A ($-0{,}016$ y $-0{,}006$). Al excluir los trimestres de crisis cambia a positivo pero sigue siendo indistinguible de cero ($+0{,}005$, $p=0{,}67$; $+0{,}015$ y $+0{,}009$ bajo los otros efectos fijos). En ninguna de las nueve columnas de M4 la interacción es significativamente positiva. La Sección~\ref{sec:niveles-logs} discute qué implica este resultado para la hipótesis de complementariedad.
+\textbf{Interacción.} El coeficiente de $\ln JLoss_{t-1}\times D_{t-1}$ es negativo y no significativo en la regresión principal ($-0{,}011$, $p=0{,}11$) y en las otras dos columnas de M4 del Panel A; al excluir los trimestres de crisis es positivo pero indistinguible de cero ($+0{,}005$, $p=0{,}67$). En ninguna de las nueve columnas de M4 es significativamente positivo.
 
-\textbf{Con controles (Panel C), el canal bancario desaparece.} Con los seis controles domésticos, la elasticidad de la fragilidad en la columna (1) cae a $-0{,}008$ ($p=0{,}86$), mientras el riesgo de cola sigue siendo significativo ($0{,}028$, $p=0{,}046$). La caída no se debe a la muestra: sobre las mismas 649 observaciones sin controles, la elasticidad es $0{,}107$ ($p=0{,}008$). Es la inclusión de los controles la que la absorbe, y lo hace de forma conjunta. Añadidos de a uno, el balance fiscal y el tipo de cambio real la reducen a la mitad (0,056 y 0,059) y le quitan significancia; pero quitar cualquiera de ellos del conjunto no la restituye, y rezagarlos un trimestre tampoco ($-0{,}004$). La absorción se explica por la correlación de $\ln JLoss_{t-1}$, en la muestra con controles, con el balance fiscal ($-0{,}50$), la inflación ($+0{,}40$) y la deuda ($+0{,}34$). La lectura que propone este trabajo ---sin poder probarla con estos datos--- es que esos controles son en buena medida canales del mecanismo: la fragilidad bancaria deteriora el balance fiscal por el costo esperado del rescate y se transmite al tipo de cambio y a la inflación. Si es así, el Panel C mide el efecto de la fragilidad neto de los canales por los que opera, y la columna (1) del Panel A es la especificación relevante. La lectura alternativa ---que los controles capturan un fundamento macroeconómico común que mueve a la vez la fragilidad y el spread--- no puede descartarse, y por eso H1 se reporta como condicional a esa elección.
+\textbf{Controles.} Con los seis controles domésticos del Panel C, la elasticidad de la fragilidad en la columna (1) cae a $-0{,}008$ ($p=0{,}86$), mientras el riesgo de cola se mantiene ($0{,}028$, $p=0{,}046$). La caída se debe a los controles y no a la muestra: sobre las mismas 649 observaciones sin controles, la elasticidad es $0{,}107$ ($p=0{,}008$). La absorción es conjunta ---ningún control la explica por sí solo--- y la concentran el balance fiscal, la inflación y el tipo de cambio real, que correlacionan con $\ln JLoss_{t-1}$ en $-0{,}50$, $+0{,}40$ y $-0{,}21$. Esos tres controles son a su vez predichos por la fragilidad rezagada: con efectos fijos de país y de tiempo, un aumento de $\ln JLoss_{t-1}$ anticipa un balance fiscal más deficitario ($-0{,}69$ puntos del PIB por unidad, $p=0{,}005$), una apreciación real menor ($-4{,}8$ puntos del índice, $p<0{,}001$), más inflación ($+3{,}3$ puntos, $p=0{,}005$) y más deuda ($+3{,}8$ puntos del PIB, $p=0{,}02$). El patrón es el que se esperaría si esos controles fueran canales por los que la fragilidad opera ---el costo esperado del rescate deteriora las cuentas fiscales---, en cuyo caso incluirlos subestima su efecto. Pero también es compatible con un fundamento macroeconómico común que mueve a la vez la fragilidad, las cuentas fiscales y el spread. Medidos cuatro trimestres antes, fuera del alcance de esa retroalimentación, los controles dejan una elasticidad de $0{,}062$ ($p=0{,}17$): menor y no significativa.
+
+La Tabla~\ref{tab:chari-arb} reproduce, con los datos de este trabajo, la estructura de la Tabla 4 de \citet{Chari2024b}: la fragilidad rezagada y un conjunto de controles que se añaden progresivamente. Con los controles de ese trabajo disponibles aquí ---volatilidad cambiaria, margen de utilidad bancario, deuda, reservas, cuenta corriente y, sin efectos fijos de tiempo, los factores financieros globales---, la elasticidad de la fragilidad es estable entre $0{,}107$ y $0{,}164$ y significativa al 1\% en las seis columnas, del orden del coeficiente que reporta ese trabajo. La asociación entre fragilidad bancaria y spread que documentan \citet{Chari2024b} se replica, por tanto, con una métrica construida de forma independiente; lo que la debilita no son esos controles, sino los que plausiblemente median el mecanismo.
+
+\input{\tablasdir/tabla_arbitro_chari}
+
+\subsection{¿Efecto o persistencia? Las pruebas de identificación}
+\label{sec:identificacion}
+
+El rezago de un trimestre hace a los regresores predeterminados respecto del choque al spread del trimestre corriente, pero no los hace exógenos si el spread y la fragilidad son persistentes y se retroalimentan. La Tabla~\ref{tab:arbitro} reúne las pruebas que acotan esa posibilidad, sobre la muestra y la especificación de la regresión principal.
+
+\input{\tablasdir/tabla_arbitro_resumen}
+
+\textbf{La retroalimentación existe y es fuerte.} El spread rezagado predice la fragilidad del trimestre siguiente, condicionando en el riesgo de cola y en los efectos fijos: la elasticidad de $JLoss_t$ al spread de $t-1$ es $0{,}17$ ($p=0{,}009$), mayor que la de la dirección que el trabajo busca medir. Es el bucle de \citet{FarhiTirole2018b} visto desde el otro extremo: un spread más alto deprecia los bonos soberanos en el balance de los bancos y eleva su probabilidad de incumplimiento.
+
+\textbf{La dinámica absorbe el efecto de la fragilidad.} El spread es muy persistente: su coeficiente autorregresivo trimestral es $0{,}94$. Con el spread rezagado como regresor, la elasticidad de corto plazo de la fragilidad cae a $0{,}005$ ($p=0{,}76$) y la de largo plazo, $\beta_1/(1-\rho)=0{,}078$, tiene un error estándar de $0{,}22$ ($p=0{,}72$). Con $T\approx88$ trimestres el sesgo de \citet{Nickell1981} es del orden de $1/T$, de modo que el colapso no es un artefacto del estimador. Agregar la fragilidad \emph{adelantada} lleva a la misma conclusión: la elasticidad de $JLoss_{t-1}$ cae a $0{,}058$ ($p=0{,}18$) y la de $JLoss_{t+1}$ es de magnitud similar ($0{,}051$, $p=0{,}23$), lo que indica que la regresión principal captura un componente persistente común más que una respuesta del spread a la fragilidad pasada.
+
+\textbf{Las proyecciones locales son planas.} La respuesta de $\ln$ EMBI$_{t+h}$ a la fragilidad de $t-1$, controlando por el spread de $t-1$, es indistinguible de cero en todos los horizontes entre 0 y 6 trimestres (Figura~\ref{fig:lp}); la del riesgo de cola es positiva pero solo marginal a los dos trimestres ($p=0{,}08$). La evidencia de proyecciones locales que una versión anterior reportaba en niveles ($+4{,}6$ puntos básicos un trimestre después) no se reproduce en esta especificación.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_lp_lnlag_arb.pdf}
+\caption[Proyecciones locales]{Proyecciones locales: respuesta de $\ln$ EMBI$_{t+h}$ a $\ln JLoss_{t-1}$ (izquierda) y a $D_{t-1}$ (derecha), controlando por $\ln$ EMBI$_{t-1}$ y efectos fijos de país y de tiempo. Banda: IC 95\% (Driscoll--Kraay).}
+\label{fig:lp}
+\end{figure}
+
+\textbf{Con trece países, la inferencia de Driscoll--Kraay es optimista.} Los errores de Driscoll--Kraay de la regresión principal son estables frente al ancho de banda (el $p$ de la fragilidad está entre 0,001 y 0,011 con 2, 4 y 8 rezagos), pero con trece \textit{clusters} esa inferencia asintótica puede ser engañosa \citep{CameronGelbachMiller2008}. Con \textit{wild cluster bootstrap} (pesos de Webb, 1\,999 réplicas) ni la fragilidad ($p=0{,}33$) ni el riesgo de cola ($p=0{,}20$) son significativos, y la interacción está lejos de serlo ($p=0{,}89$). Las asociaciones de la Tabla~\ref{tab:bateria-lnlag-embiext} descansan, por tanto, en supuestos de inferencia que el tamaño del corte transversal no permite garantizar.
+
+\textbf{Las variables instrumentales no cierran la identificación.} Instrumentando la fragilidad rezagada con choques rezagados de liquidez del Tesoro estadounidense y del dólar amplio ponderados por la exposición pre-muestral de cada país \citep{GoldsmithPinkhamSorkinSwift2020}, o con un choque de términos de intercambio con participaciones pre-muestra, las primeras etapas son razonables ($F$ entre 9 y 11), pero las estimaciones son imprecisas y cambian de signo entre instrumentos ($+0{,}35$, $-2{,}18$ y $+0{,}15$; ninguna significativa), y la especificación sobreidentificada rechaza la prueba de Sargan ($p<0{,}001$): los instrumentos no identifican el mismo parámetro.
+
+\textbf{El carácter estimado del $GaR$ no es el problema.} Reestimando la regresión principal sobre 500 réplicas \textit{bootstrap} de la primera etapa del $GaR$ \citep{Pagan1984}, los errores estándar combinados apenas crecen y las conclusiones de Driscoll--Kraay se mantienen ($p=0{,}003$ para la fragilidad, $0{,}049$ para el riesgo de cola, $0{,}12$ para la interacción). La fragilidad de la evidencia viene de la dinámica y del número de países, no de la medición del riesgo de cola.
 
 \subsection{La interacción con el vector de crisis}
 \label{sec:crisis-interaccion}
 
-La Tabla~\ref{tab:crisis-lnlag-embiext} estima la ecuación~\eqref{eq:crisisint} en cuatro modelos anidados (CM1: $\ln JLoss$ y su interacción con crisis; CM2: lo mismo con $D$; CM3: ambos niveles y sus interacciones; CM4: la especificación completa) bajo las tres estructuras de efectos fijos, con el vector de crisis único (Panel A) y descompuesto en \textit{Backstop} y \textit{EMstress} (Panel B).
+Las Tablas~\ref{tab:crisis-lnlag-embiext} y~\ref{tab:crisis-lnlag-embiext-b} estiman la ecuación~\eqref{eq:crisisint} en cuatro modelos anidados (CM1: $\ln JLoss$ y su interacción con crisis; CM2: lo mismo con $D$; CM3: ambos niveles y sus interacciones; CM4: la especificación completa) bajo las tres estructuras de efectos fijos, con el vector de crisis único (Tabla~\ref{tab:crisis-lnlag-embiext}) y descompuesto en \textit{Backstop} y \textit{EMstress} (Tabla~\ref{tab:crisis-lnlag-embiext-b}).
 
 \input{\tablasdir/tablas_regresiones_lnlag_embiext_t2}
 
-Fuera de crisis, la interacción es indistinguible de cero bajo todas las estructuras de efectos fijos ($\hat\beta_3$ entre $-0{,}002$ y $+0{,}013$ en CM4). Dentro de crisis la imagen depende del tipo de episodio, y es la que predice el mecanismo:
+Fuera de crisis, la interacción es indistinguible de cero ($\hat\beta_3$ entre $-0{,}002$ y $+0{,}013$ en CM4). Bajo \textit{Backstop} ---crisis financiera global y pandemia--- la suma $\hat\beta_3+\hat\beta_4$ es negativa ($-0{,}015$, $p=0{,}03$ con efectos fijos de país y de tiempo) y bajo \textit{EMstress} ---2015--2016--- positiva ($+0{,}026$, $p=0{,}08$). Tomado al pie de la letra, es el patrón que predice el mecanismo: la amplificación aparecería cuando el soberano enfrenta el estrés sin respaldo externo y desaparecería cuando la Reserva Federal, el FMI y los bancos centrales intervienen. Tres pruebas indican que el panel no sostiene esa lectura.
 
-\begin{itemize}
-    \item Bajo \textbf{\textit{Backstop}} ---crisis financiera global y pandemia---, la amplificación se vuelve \emph{negativa}: $\hat\beta_3+\hat\beta_4=-0{,}015$ ($p=0{,}03$) con efectos fijos de país y de tiempo, $-0{,}029$ ($p<0{,}01$) con solo efectos de tiempo, y $-0{,}007$, no significativo, con solo efectos de país. En esos episodios, un mismo nivel de fragilidad se traduce en un spread proporcionalmente \emph{menor} cuanto más adverso es el riesgo de cola.
-    \item Bajo \textbf{\textit{EMstress}} ---2015--2016, sin respaldo oficial comparable---, la amplificación es \emph{positiva} bajo las tres estructuras de efectos fijos: $+0{,}026$ ($p<0{,}10$), $+0{,}036$ ($p<0{,}05$) y $+0{,}036$ ($p<0{,}01$).
-\end{itemize}
+\textbf{Primero, errores agrupados por país.} Con errores \textit{cluster} por país en lugar de Driscoll--Kraay, ninguna de las dos sumas es significativa: $-0{,}015$ con $p=0{,}40$ bajo \textit{Backstop} y $+0{,}026$ con $p=0{,}11$ bajo \textit{EMstress}.
 
-Es el patrón del test de falsación: la fragilidad bancaria y el riesgo de cola se potencian por encima de la estructura multiplicativa precisamente en el episodio en que el soberano enfrentó el estrés sin respaldo externo, y se desacoplan cuando la Reserva Federal, el FMI y los bancos centrales domésticos intervinieron masivamente. Con respaldo oficial, el pasivo contingente bancario deja de recaer sobre el soberano y su riesgo de cola deja de amplificar la transmisión. La advertencia es que el resultado descansa en un único episodio de \textit{EMstress}, de tres trimestres. La Figura~\ref{fig:crisisregimen} traza la elasticidad de la fragilidad en función de $D$ en cada régimen.
+\textbf{Segundo, otros episodios sin respaldo.} Si el mecanismo opera en el estrés emergente sin respaldo oficial, debería aparecer también en los otros episodios de ese tipo en la muestra: el \textit{taper tantrum} (2013Q2--Q3) y la venta masiva de activos emergentes de 2018 (2018Q2--Q3). No aparece: la suma es $-0{,}020$ ($p=0{,}68$) en el primero y $+0{,}037$ ($p=0{,}42$) en el segundo, y con los tres episodios juntos es $+0{,}013$ ($p=0{,}25$).
+
+\textbf{Tercero, permutación.} Reestimando la especificación con cada una de las 51 ventanas de tres trimestres consecutivos fuera de \textit{Backstop} (con al menos cinco economías en la muestra) en lugar del episodio de 2015--2016, la suma observada ocupa el lugar 20: una de cada tres ventanas elegidas al azar produce una amplificación igual o mayor ($p=0{,}39$; Figura~\ref{fig:permutacion}). El estrés emergente de 2015--2016 no es un episodio especial en esta dimensión.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{fig_permutacion_emstress_arb.pdf}
+\caption[Prueba de permutación del episodio EMstress]{Distribución de $\hat\beta_3+\hat\beta_4$ al reemplazar el episodio \textit{EMstress} por cada ventana de tres trimestres consecutivos fuera de \textit{Backstop} (CM4, efectos fijos de país y de tiempo, seis controles). Línea roja: 2015Q3--2016Q1; líneas discontinuas: \textit{taper tantrum} y 2018.}
+\label{fig:permutacion}
+\end{figure}
+
+La Figura~\ref{fig:crisisregimen} traza la elasticidad de la fragilidad en función de $D$ en cada régimen. Las pendientes tienen los signos del patrón descrito, pero sus bandas se superponen en todo el soporte.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig_crisis_regimen_lnlag.pdf}
-\caption[Efecto marginal por régimen de crisis]{Elasticidad del spread a $JLoss_{t-1}$ en función de $D_{t-1}$, por régimen (CM4 del Panel B, efectos fijos de país y de tiempo, seis controles). La pendiente es positiva fuera de crisis y bajo \textit{EMstress}, y negativa bajo \textit{Backstop}. Banda: IC 95\% (Driscoll--Kraay).}
+\caption[Efecto marginal por régimen de crisis]{Elasticidad del spread a $JLoss_{t-1}$ en función de $D_{t-1}$, por régimen (CM4 de la Tabla~\ref{tab:crisis-lnlag-embiext-b}, efectos fijos de país y de tiempo, seis controles). Banda: IC 95\% (Driscoll--Kraay).}
 \label{fig:crisisregimen}
 \end{figure}
 
-\subsection{Magnitud económica}
-
-La Figura~\ref{fig:efmarg} traza la elasticidad del spread a la fragilidad en la regresión principal a lo largo de la distribución del riesgo de cola. Es positiva y significativa en casi todo el soporte, pero decreciente: $0{,}145$ en el percentil 10 de $D$ (cola benigna), $0{,}098$ en la mediana y $0{,}054$ en el percentil 90, donde su intervalo ya incluye el cero. La pendiente negativa es la interacción de la Tabla~\ref{tab:bateria-lnlag-embiext}, y su imprecisión es la de ese coeficiente.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.82\textwidth]{fig_efecto_marginal_lnlag.pdf}
-\caption[Efecto marginal de la fragilidad]{Elasticidad del spread a $JLoss_{t-1}$ según el riesgo de cola $D_{t-1}$ (regresión principal). Puntos: percentiles 10, 50 y 90 de $D$. Banda: IC 95\% (Driscoll--Kraay). Marcas inferiores: observaciones.}
-\label{fig:efmarg}
-\end{figure}
-
-La Figura~\ref{fig:superficie} traslada la regresión al plano $(JLoss,D)$: el aporte conjunto de la fragilidad, el riesgo de cola y su interacción al spread, en porcentaje. Las iso-curvas son casi paralelas y crecientes en ambas direcciones: los dos canales suben el spread, y no se ``doblan'' hacia la esquina de alta fragilidad y cola severa como lo harían con una amplificación en elasticidades. El \textit{binscatter} de la Figura~\ref{fig:binscatter}, sin efectos fijos, muestra lo mismo desde los datos agrupados: la relación entre $\ln$ EMBI y $\ln JLoss_{t-1}$ tiene una pendiente de 0,12 en el tercil benigno de $D$, 0,33 en el intermedio y 0,13 en el de cola severa. El nivel del spread es mayor en el tercil de cola severa, pero la pendiente no crece de forma monótona con $D$.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.82\textwidth]{fig_superficie_lnlag.pdf}
-\caption[Superficie de complementariedad]{Aporte de $\ln JLoss_{t-1}$, $D_{t-1}$ y su interacción al spread (en \% respecto del spread medio), regresión principal. Puntos: observaciones.}
-\label{fig:superficie}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.78\textwidth]{fig_binscatter_lnlag.pdf}
-\caption[\textit{Binscatter} por régimen de riesgo de cola]{\textit{Binscatter} de $\ln$ EMBI sobre $\ln JLoss_{t-1}$ por tercil de $D_{t-1}$ (agrupado, sin efectos fijos; ocho bins por tercil) y recta de MCO por tercil.}
-\label{fig:binscatter}
-\end{figure}
-
-\subsection{No linealidad: el modelo de umbral}
-
-El modelo de umbral no impone que la elasticidad cambie linealmente con $D$ (Figura~\ref{fig:umbral}). El umbral estimado es $\hat\gamma=0{,}12$ puntos porcentuales de $D$ ---cerca del punto en que el cuantil 5\% del crecimiento se vuelve negativo---, pero el perfil de razón de verosimilitud es plano: su intervalo al 95\% cubre toda la grilla evaluada, y el contraste frente al modelo lineal ($LR=6{,}0$) no alcanza el valor crítico. Con esa salvedad, la elasticidad de la fragilidad es $0{,}141$ ($p<0{,}001$) en el régimen de cola severa y $0{,}079$ ($p=0{,}017$) en el benigno; la diferencia, $0{,}062$, es marginal ($p=0{,}08$). El umbral apunta, por tanto, a una elasticidad algo mayor en la cola severa ---lo contrario de la pendiente lineal negativa de la Figura~\ref{fig:efmarg}---, pero ninguno de los dos contrastes identifica la no linealidad con precisión.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{fig_umbral_lnlag.pdf}
-\caption[Modelo de umbral de Hansen]{Modelo de umbral \citep{Hansen2000} en logaritmos. Izquierda: perfil del estadístico $LR(\gamma)$, umbral estimado e IC 95\%. Derecha: elasticidad del spread a $JLoss_{t-1}$ en cada régimen (IC 95\%, Driscoll--Kraay).}
-\label{fig:umbral}
-\end{figure}
-
-\subsection{¿Por qué la interacción en niveles no sobrevive en logaritmos?}
+\subsection{Forma funcional: niveles y logaritmos}
 \label{sec:niveles-logs}
 
 Una versión anterior de esta investigación, estimada en niveles y con regresores contemporáneos, encontraba una interacción positiva y significativa al excluir los trimestres de crisis. La especificación principal cambia dos cosas a la vez ---los logaritmos y los rezagos---, y la Tabla~\ref{tab:nivlogs} las separa sobre el mismo panel.
@@ -447,14 +459,53 @@ Logaritmos ($\ln$ EMBI, $\ln JLoss$) & contemporáneos & $-0{,}0145^{**}$ \tst{-
 \par\smallskip\parbox{0.9\linewidth}{\footnotesize \textit{Nota:} $D=-GaR$ en puntos porcentuales en todas las filas. En niveles, el coeficiente está en puntos básicos por unidad de $JLoss$ y por punto porcentual de $D$; en logaritmos, es el cambio de la elasticidad por punto porcentual de $D$. Muestra sin crisis: excluye 2008Q4--2009Q4 y 2020Q1--2021Q4. Fuente: \texttt{p13\_figuras\_paper.py}, \texttt{paper\_lnlag\_numeros.csv}.}
 \end{table}
 
-El resultado es nítido: \textbf{el rezago no es lo que elimina la interacción; lo es el logaritmo}. En niveles, rezagar los regresores deja la interacción sin crisis intacta, e incluso la refuerza ($t$ de 3,45 a 4,81): la amplificación en niveles no es un artefacto de causalidad inversa contemporánea. En logaritmos, la interacción es nula o negativa con o sin rezago.
+\textbf{Lo que elimina la interacción es el logaritmo, no el rezago.} En niveles, rezagar los regresores deja intacta la interacción sin crisis ($t$ de 3,45 a 4,81); en logaritmos es nula o negativa con o sin rezago. La razón es la que anticipó la Sección~\ref{sec:sintesis-pilares}: una especificación log-log impone una estructura multiplicativa, bajo la cual el efecto de la fragilidad en puntos básicos crece automáticamente con el riesgo de cola. Evaluada con los coeficientes de la regresión principal y $\beta_3=0$, esa complementariedad implícita es de $+0{,}19$ puntos básicos por unidad de $JLoss$ y punto porcentual de $D$ (IC 95\%: $[0{,}01;\,0{,}42]$), del mismo orden que la interacción en niveles sobre la muestra completa ($+0{,}18$ y $+0{,}25$). La interacción de $+1{,}2$ en niveles sin crisis es, en cambio, bastante mayor de lo que implica la forma proporcional.
 
-La razón es la que anticipó la Sección~\ref{sec:sintesis-pilares}. Una especificación log-log sin interacción impone una estructura multiplicativa, bajo la cual el efecto de la fragilidad sobre el spread en puntos básicos crece automáticamente con el riesgo de cola. Evaluada con los coeficientes de la regresión principal y con $\beta_3=0$, esa complementariedad implícita es de $+0{,}19$ puntos básicos por unidad de $JLoss$ y punto porcentual de $D$ (IC 95\%: $[0{,}01;\,0{,}42]$), del mismo orden que la interacción en niveles sobre la muestra completa ($+0{,}18$ contemporánea, $+0{,}25$ rezagada). La complementariedad en niveles es, en esa medida, la de una estructura multiplicativa: los dos canales se potencian en puntos básicos porque actúan sobre el spread de forma proporcional, no porque haya una amplificación adicional. Lo que el panel no respalda es la versión fuerte de H3, una complementariedad por encima de la multiplicativa, salvo en el episodio de \textit{EMstress}. La interacción de $+1{,}2$ en niveles sin crisis, bastante mayor de lo que implica la forma multiplicativa, sí sugiere que en los períodos normales las observaciones de spread alto pesan más de lo que admite el modelo proporcional; en logaritmos esa diferencia desaparece.
+\textbf{Los datos prefieren los logaritmos a los niveles, pero no los logaritmos exactos.} La prueba PE de \citet{MacKinnonWhiteDavidson1983}, con efectos fijos de país y de tiempo, rechaza el modelo en niveles frente al logarítmico ($t=-3{,}56$, $p<0{,}001$) y no rechaza el logarítmico frente al de niveles ($t=1{,}04$, $p=0{,}30$). Pero el perfil de Box--Cox del spread (Figura~\ref{fig:boxcox}) sitúa la transformación óptima en $\hat\lambda=0{,}44$, con un intervalo al 95\% de $[0{,}38;\,0{,}50]$ que excluye tanto el logaritmo ($\lambda=0$) como los niveles ($\lambda=1$). La especificación logarítmica es la más defendible de las dos consideradas, pero la interacción que aparece en niveles y desaparece en logaritmos depende de una elección de forma funcional que los datos no zanjan por completo.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.72\textwidth]{fig_boxcox_arb.pdf}
+\caption[Perfil de Box--Cox]{Log-verosimilitud concentrada de la transformación de Box--Cox del spread, con los regresores de la especificación principal y efectos fijos de país y de tiempo. Línea discontinua: umbral del IC 95\%.}
+\label{fig:boxcox}
+\end{figure}
+
+\subsection{Magnitud y no linealidad}
+
+La Figura~\ref{fig:efmarg} traza la elasticidad de la fragilidad en la regresión principal a lo largo de la distribución del riesgo de cola: $0{,}145$ en el percentil 10 de $D$, $0{,}098$ en la mediana y $0{,}054$ en el percentil 90, donde su intervalo ya incluye el cero. La Figura~\ref{fig:superficie} traslada la regresión al plano $(JLoss,D)$: las iso-curvas son casi paralelas, sin la curvatura hacia la esquina de alta fragilidad y cola severa que produciría una amplificación en elasticidades. El \textit{binscatter} de la Figura~\ref{fig:binscatter}, sin efectos fijos, no muestra una pendiente creciente con $D$ (0,12, 0,33 y 0,13 en los terciles benigno, intermedio y severo). El modelo de umbral (Figura~\ref{fig:umbral}) estima un umbral en $D=0{,}12$ con una elasticidad algo mayor en la cola severa ($0{,}141$ frente a $0{,}079$; diferencia con $p=0{,}08$), pero el perfil de verosimilitud es plano y el contraste frente al modelo lineal ($LR=6{,}0$) no alcanza el valor crítico. Todas estas magnitudes describen la asociación de la Sección~\ref{sec:bateria} y heredan sus límites de identificación.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{fig_efecto_marginal_lnlag.pdf}
+\caption[Efecto marginal de la fragilidad]{Elasticidad del spread a $JLoss_{t-1}$ según el riesgo de cola $D_{t-1}$ (regresión principal). Puntos: percentiles 10, 50 y 90 de $D$. Banda: IC 95\% (Driscoll--Kraay). Marcas inferiores: observaciones.}
+\label{fig:efmarg}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{fig_superficie_lnlag.pdf}
+\caption[Superficie de complementariedad]{Aporte de $\ln JLoss_{t-1}$, $D_{t-1}$ y su interacción al spread (en \% respecto del spread medio), regresión principal. Puntos: observaciones.}
+\label{fig:superficie}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{fig_binscatter_lnlag.pdf}
+\caption[\textit{Binscatter} por régimen de riesgo de cola]{\textit{Binscatter} de $\ln$ EMBI sobre $\ln JLoss_{t-1}$ por tercil de $D_{t-1}$ (agrupado, sin efectos fijos; ocho bins por tercil) y recta de MCO por tercil.}
+\label{fig:binscatter}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_umbral_lnlag.pdf}
+\caption[Modelo de umbral de Hansen]{Modelo de umbral \citep{Hansen2000} en logaritmos. Izquierda: perfil del estadístico $LR(\gamma)$, umbral estimado e IC 95\%. Derecha: elasticidad del spread a $JLoss_{t-1}$ en cada régimen (IC 95\%, Driscoll--Kraay).}
+\label{fig:umbral}
+\end{figure}
 
 \subsection{Robustez}
 \label{sec:robustez}
 
-La Figura~\ref{fig:forest} reúne el coeficiente de interacción en quince especificaciones: la batería con sus tres estructuras de efectos fijos en las tres muestras, errores con \textit{clustering} por país y por tiempo, el \textit{Expected Shortfall} como medida de cola en lugar del $GaR$, el núcleo de once economías sin Polonia ni India, la muestra sin China y la muestra sin los trimestres de EMBI empalmados del FMI. El coeficiente es negativo en once de las quince y positivo en cuatro, todas sin significancia; las tres que son significativas al 5\% son negativas (\textit{clustering} por tiempo, sin China y con controles y efectos fijos de país). Excluir los 40 trimestres empalmados del FMI no cambia nada ($-0{,}012$ frente a $-0{,}011$), y medir la cola por el \textit{Expected Shortfall} tampoco ($-0{,}010$).
+\textbf{Interacción.} La Figura~\ref{fig:forest} reúne el coeficiente de interacción en quince especificaciones. Es negativo en once y positivo en cuatro, estas últimas sin significancia; las tres significativas al 5\% son negativas. Excluir los 40 trimestres de EMBI empalmados del FMI ($-0{,}012$) o medir la cola por el \textit{Expected Shortfall} ($-0{,}010$) no cambia nada. En el \textit{leave-one-country-out} (Figura~\ref{fig:loo}) el coeficiente queda entre $-0{,}017$ y $-0{,}010$ en doce de las trece exclusiones; solo al excluir Polonia se vuelve positivo, sin significancia ($+0{,}008$, $p=0{,}19$). Las ventanas móviles de cinco años (Figura~\ref{fig:ventanas}) muestran un coeficiente positivo en las ventanas 2011--2015 y 2012--2016 y cercano a cero o negativo en el resto; dada la prueba de permutación, esa señal local no se distingue de la variación entre ventanas.
 
 \begin{figure}[htbp]
 \centering
@@ -463,16 +514,12 @@ La Figura~\ref{fig:forest} reúne el coeficiente de interacción en quince espec
 \label{fig:forest}
 \end{figure}
 
-El \textit{leave-one-country-out} (Figura~\ref{fig:loo}) muestra que el signo negativo de la regresión principal no lo arrastra un país: el coeficiente queda entre $-0{,}017$ (sin China) y $-0{,}010$ (sin Turquía) en doce de las trece exclusiones. La excepción es Polonia: sin ella, la interacción se vuelve positiva ($+0{,}008$, $p=0{,}19$). Polonia, con 89 trimestres, es la economía con más historia del panel y una de las dos ---con India--- de mercado de deuda local profundo, lo que conecta con la heterogeneidad transversal documentada en la versión en niveles: la amplificación, si existe fuera del \textit{EMstress}, se concentra en las economías de financiamiento externo. En el núcleo de once economías el coeficiente es $+0{,}011$ ($p=0{,}16$), positivo pero impreciso.
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.78\textwidth]{fig_loo_lnlag.pdf}
 \caption[\textit{Leave-one-country-out}]{Coeficiente de interacción de la regresión principal excluyendo cada país (IC 95\%).}
 \label{fig:loo}
 \end{figure}
-
-Las ventanas móviles de cinco años (Figura~\ref{fig:ventanas}) sitúan en el tiempo la única señal positiva: la interacción es positiva y significativa en las ventanas 2011--2015 ($+0{,}032$, $t=3{,}2$) y 2012--2016 ($+0{,}024$, $t=2{,}5$), las que contienen el estrés emergente de 2015--2016, y cercana a cero o negativa en el resto (en 2021--2025, $-0{,}026$, $t=-2{,}4$). Es la misma conclusión que el vector de crisis: la amplificación en elasticidades es un fenómeno del episodio sin respaldo oficial, no una regularidad del panel.
 
 \begin{figure}[htbp]
 \centering
@@ -481,9 +528,11 @@ Las ventanas móviles de cinco años (Figura~\ref{fig:ventanas}) sitúan en el t
 \label{fig:ventanas}
 \end{figure}
 
-\subsection{Contabilidad del spread y prima de amplificación}
+\textbf{Medición de la fragilidad.} Como la cota de la malla de pérdidas es activa en casi todas las observaciones, $JLoss$ es una medida ordinal. Reemplazando $\ln JLoss_{t-1}$ por su percentil en la muestra, la asociación de la fragilidad se mantiene ($0{,}27$ por cada 100 percentiles, $p=0{,}002$). Recalculando la métrica con una malla más ancha, que correlaciona 0,80 con la base en logaritmos, la elasticidad cae a $0{,}067$ y deja de ser significativa ($p=0{,}22$). La asociación descansa, por tanto, en el ordenamiento de la fragilidad más que en su nivel, y es sensible a la calibración del motor.
 
-La Figura~\ref{fig:contabilidad} descompone el cambio del spread en el choque de la pandemia (2019Q4 a 2020Q2) en los aportes de la fragilidad, el riesgo de cola y la interacción, según la regresión principal, para las diez economías con ambos trimestres. En promedio, el spread subió 63 log-puntos (×100); el modelo predice 24, de los cuales 21 provienen del riesgo de cola, 10 de la fragilidad y $-7$ de la interacción. El riesgo de cola del crecimiento es el canal dominante en el choque, y la interacción lo \emph{atenúa}, coherente con el signo negativo bajo \textit{Backstop}. La mayor parte del salto no la explican los determinantes domésticos, sino el componente global común que absorben los efectos fijos de tiempo.
+\subsection{Contabilidad del spread}
+
+La Figura~\ref{fig:contabilidad} descompone el cambio del spread en el choque de la pandemia (2019Q4 a 2020Q2) según la regresión principal, para las diez economías con ambos trimestres. El spread subió en promedio 63 log-puntos (×100) y el modelo predice 24: 21 del riesgo de cola, 10 de la fragilidad y $-7$ de la interacción. La mayor parte del salto corresponde al componente global común que absorben los efectos fijos de tiempo, y la parte atribuida a los determinantes domésticos hereda los límites de identificación de la Sección~\ref{sec:identificacion}. La Figura~\ref{fig:prima} traza el aporte del término de interacción al spread predicho: es pequeño en el trimestre típico (1,7\% del spread en valor absoluto) y cambia de signo según el episodio.
 
 \begin{figure}[htbp]
 \centering
@@ -492,8 +541,6 @@ La Figura~\ref{fig:contabilidad} descompone el cambio del spread en el choque de
 \label{fig:contabilidad}
 \end{figure}
 
-La Figura~\ref{fig:prima} traza, por país, la prima de amplificación: el aporte del término de interacción al spread predicho, $\hat\beta_3(\ln JLoss_c\times D_c)$. Es pequeña en el trimestre típico (1,7\% del spread en valor absoluto) y cambia de signo según el episodio: es positiva en el 47\% de las observaciones, negativa en los picos simultáneos de fragilidad y cola de 2008--09 y 2020 ---hasta $-29$\%, en India---, y positiva en los episodios en que la fragilidad subió sin un deterioro simultáneo de la cola.
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig_prima_lnlag.pdf}
@@ -501,56 +548,45 @@ La Figura~\ref{fig:prima} traza, por país, la prima de amplificación: el aport
 \label{fig:prima}
 \end{figure}
 
-\subsection{Identificación causal: qué se puede afirmar}
-\label{sec:ident-causal}
+\subsection{Síntesis}
 
-Los resultados son asociaciones condicionales con regresores predeterminados y efectos fijos bidireccionales. El rezago mitiga la causalidad inversa contemporánea, pero no convierte la regresión en un diseño causal. Las estrategias adicionales disponibles se implementaron sobre la especificación en niveles; se reportan aquí porque acotan el alcance causal del canal de nivel en ambas especificaciones.
-
-\textbf{Proyecciones locales} \citep{Jorda2005}. La respuesta del spread a un choque de fragilidad bancaria alcanza un pico de $+4{,}6$ puntos básicos por unidad de $JLoss$ un trimestre después del choque ($t=2{,}9$), con el signo esperado y la dirección banca$\to$soberano, coherente con el rezago de un trimestre de la especificación principal.
-
-\textbf{Variables instrumentales por \textit{shift-share}} \citep{GoldsmithPinkhamSorkinSwift2020}. Instrumentando $JLoss$ con el diferencial de liquidez del Tesoro estadounidense interactuado con la exposición pre-muestral de cada país, la primera etapa es aceptable ($F\approx11$), pero la segunda no es significativa ($p=0{,}34$). Un segundo instrumento (el dólar amplio del BIS) da el signo opuesto y la especificación sobreidentificada rechaza Sargan ($p<0{,}001$). Un tercero, un choque de términos de intercambio con participaciones sectoriales pre-muestra (1998--2003), tiene primera etapa nula para $JLoss$ ($F\approx0{,}03$). \textbf{Las variables instrumentales no cierran la identificación causal} del canal de nivel.
-
-\textbf{Regresores generados.} $JLoss$ y $GaR$ son estimados. Un \textit{bootstrap} de bloques por país (500 réplicas) que reestima la regresión cuantílica completa en cada réplica eleva el error estándar de la interacción entre 2\% y 15\%, sin cambiar ninguna conclusión \citep{Pagan1984}.
-
-\textbf{Pocos \textit{clusters}.} Con trece países, la inferencia asintótica puede ser optimista \citep{CameronGelbachMiller2008}. En la regresión principal, el \textit{clustering} por país ya amplía el intervalo de la interacción de forma sustancial (Figura~\ref{fig:forest}), sin cambiar la conclusión de que no es distinguible de cero.
-
-\textbf{Síntesis.} Lo defendible es: (i) el riesgo de cola del crecimiento rezagado eleva el spread: su coeficiente es positivo en todas las especificaciones y significativo en 23 de 27, incluida la especificación con controles; (ii) la fragilidad bancaria rezagada eleva el spread sin controles, con respaldo dinámico de las proyecciones locales, pero ese efecto no sobrevive a los controles domésticos, plausiblemente por ser canales del mecanismo; (iii) no hay amplificación en elasticidades en el panel, salvo en el estrés emergente de 2015--2016, y su ausencia es coherente con una estructura multiplicativa que ya implica complementariedad en puntos básicos; y (iv) la identificación causal por variables instrumentales no está cerrada.
+El panel establece cuatro cosas. (i) La fragilidad bancaria y el riesgo de cola del crecimiento, medidos un trimestre antes, se asocian positivamente con el spread soberano en regresiones con efectos fijos de país y de tiempo, y la asociación de la fragilidad replica, con una métrica construida de forma independiente, la que documentan \citet{Chari2024b}. (ii) Esas asociaciones no pueden leerse como efectos causales: el spread retroalimenta a la fragilidad, ambos son muy persistentes, y el efecto de la fragilidad desaparece al modelar esa dinámica; con inferencia apropiada para trece países tampoco es significativo, y las variables instrumentales no cierran la identificación. (iii) No hay evidencia de complementariedad por encima de la que implica una estructura proporcional, que es la versión que predice un modelo de intensidad de incumplimiento; las asimetrías por régimen de crisis no resisten los errores agrupados por país ni la prueba de permutación. (iv) La interacción que la especificación en niveles encontraba depende de la forma funcional, y los datos prefieren los logaritmos a los niveles.
 
 % =====================================================================
 \section{Discusión y conclusiones}
 \label{sec:discusion}
 
-\subsection{Interpretación económica}
+\subsection{Interpretación}
 
-La fragilidad bancaria y el riesgo de cola del crecimiento, medidos un trimestre antes, se asocian con un mayor spread soberano. Ambas cosas son coherentes con el marco: la fragilidad aproxima el pasivo contingente que el soberano podría asumir con un rescate, y el riesgo de cola deteriora la capacidad fiscal en los estados en que el incumplimiento se vuelve probable. Que la relación se sostenga con regresores rezagados indica que no es solo el reflejo de la retroalimentación contemporánea del spread sobre sus determinantes.
+La hipótesis de partida era que el mercado penaliza de forma no lineal la coexistencia de fragilidad bancaria y riesgo de cola del crecimiento. El panel es compatible con una versión proporcional de esa hipótesis ---ambos riesgos se asocian con un spread mayor y, en puntos básicos, se potencian como lo haría una intensidad de incumplimiento que responde a los dos---, pero no permite afirmar ni que la fragilidad cause el spread ni que exista una amplificación adicional. La razón principal no es la ausencia de relación, sino que la relación opera en ambas direcciones y con mucha persistencia: el mismo bucle de \citet{FarhiTirole2018b} que motiva la hipótesis hace que, con series trimestrales de trece países, el efecto de la fragilidad sobre el spread no pueda separarse del efecto del spread sobre la fragilidad ni del componente persistente que ambos comparten.
 
-La lectura de la complementariedad es más matizada que en la versión en niveles. Los dos canales actúan sobre el spread de forma proporcional ---una elasticidad para la fragilidad, una semielasticidad para el riesgo de cola---, y esa sola estructura implica que, en puntos básicos, el efecto de la fragilidad crece con el riesgo de cola. Esa es la complementariedad que los datos respaldan. Lo que no respaldan, en promedio, es una amplificación mayor que esa: el multiplicador de \textit{doom loop} no aparece como una elasticidad creciente en el riesgo de cola en el conjunto del panel. Aparece en un único lugar, el estrés emergente de 2015--2016, y se invierte en las crisis con respaldo oficial masivo. La interpretación coherente con ambos hechos es la del mecanismo: el multiplicador opera cuando el mercado espera que el pasivo contingente bancario recaiga sobre un soberano que enfrenta el estrés sin respaldo; cuando el respaldo existe, el riesgo de cola doméstico deja de trasladarse al precio de la deuda.
+Dos resultados secundarios ayudan a leer la evidencia previa. El primero es que la interacción significativa de la especificación en niveles depende de la forma funcional: una parte es la complementariedad implícita en una estructura multiplicativa, y el resto se concentra en los trimestres de spread alto que la transformación logarítmica comprime. El segundo es que las asimetrías por régimen de crisis ---la interacción negativa bajo respaldo oficial y positiva en el estrés emergente de 2015--2016--- son las que se esperarían del mecanismo, pero son también las que produciría la variación entre ventanas de tres trimestres; con trece países, el panel no tiene la potencia para distinguirlas.
 
-\subsection{Implicancias de política}
+\subsection{Implicancias}
 
-El riesgo de cola del crecimiento es el determinante doméstico más robusto del spread soberano en este panel, y su vigilancia es, por tanto, relevante para el costo de financiamiento soberano, no solo para la estabilidad del producto. La fragilidad bancaria importa en la medida en que se transmite por las cuentas fiscales y externas; su monitoreo conjunto con el riesgo de cola es relevante sobre todo en episodios de estrés sin respaldo externo, donde la evidencia de amplificación es más clara. Y la neutralización de la amplificación en las crisis con líneas de \textit{swap} y financiamiento multilateral sugiere que esos respaldos cortan, en los hechos, el canal por el que la fragilidad bancaria doméstica encarece la deuda soberana.
+Las implicancias de política deben leerse con esa cautela. El riesgo de cola del crecimiento y la fragilidad bancaria son indicadores que se asocian con el costo de financiamiento soberano, y su seguimiento conjunto es informativo: ambos adelantan, en promedio, un spread más alto. Pero la evidencia no permite cuantificar cuánto bajaría el spread si se redujera la fragilidad bancaria, ni sostener que la coincidencia de ambos riesgos sea más costosa de lo que implica su efecto proporcional.
 
 \subsection{Limitaciones}
 
 \begin{enumerate}
-\item H3 en su versión fuerte ---amplificación en elasticidades--- no se sostiene en el panel; solo aparece en el estrés emergente de 2015--2016, un episodio de tres trimestres.
-\item El efecto de nivel de la fragilidad no sobrevive a los controles domésticos. La interpretación de ``mal control'' es plausible pero no puede contrastarse con estos datos.
-\item La identificación causal del canal de nivel no está cerrada por variables instrumentales, y las estrategias adicionales se implementaron sobre la especificación en niveles.
-\item Nueve de las trece economías tienen poca variación de $JLoss$ (mediana entre 2,2 y 2,6), y la cota de la malla de pérdidas, activa en el 98\% de las observaciones, hace que la métrica deba leerse de forma ordinal.
+\item El corte transversal es de trece economías; con ese número de \textit{clusters}, la inferencia asintótica es optimista y la inferencia robusta no rechaza la ausencia de efectos.
+\item El spread y la fragilidad son muy persistentes y se retroalimentan; ni el rezago de los regresores, ni la especificación dinámica, ni las variables instrumentales disponibles separan la dirección de interés.
+\item La forma funcional no está completamente determinada: los datos prefieren los logaritmos a los niveles, pero la transformación de Box--Cox óptima es intermedia.
+\item $JLoss$ es ordinal por la calibración del motor, y la asociación es sensible a una malla de pérdidas más ancha.
+\item Los controles domésticos son interpolaciones de series anuales y plausiblemente median el mecanismo; faltan la calificación soberana histórica y el PIB per cápita que usan \citet{Chari2024b}.
 \item La cobertura del EMBI es desigual: Filipinas aporta 12 trimestres, e Indonesia y Sudáfrica 32 cada una, 20 de ellos de la serie del FMI.
-\item Los controles son interpolaciones de series anuales, con escasa variación intra-anual bajo efectos fijos.
 \end{enumerate}
 
-\subsection{Agenda futura}
+\subsection{Qué haría falta para ir más allá}
 \label{sec:agenda-futura}
 
-La agenda se desprende de las limitaciones: (i) completar el EMBI de Indonesia, Filipinas y Sudáfrica entre 2004 y 2023, y el de India antes de 2012, con los subíndices de J.P.\ Morgan por país; (ii) incorporar a Argentina, cuyo $GaR$ exploratorio ya se construyó sin el bloque de tasas; (iii) medir directamente la participación extranjera en la deuda soberana, para contrastar si la amplificación depende de quién fija el precio de esa deuda; (iv) reemplazar los controles anuales interpolados por series trimestrales y modelar explícitamente los canales fiscal y cambiario, para separar el efecto de la fragilidad de sus vías de transmisión; y (v) un instrumento con relevancia específicamente bancaria.
+La agenda se desprende de lo que el panel no permite: (i) \textbf{más economías}, para que la inferencia no dependa de trece \textit{clusters}: completar el EMBI de Indonesia, Filipinas y Sudáfrica entre 2004 y 2023 y el de India antes de 2012, e incorporar a Argentina, cuyas tablas ya se estimaron sin cambios en las conclusiones; (ii) \textbf{variación exógena específicamente bancaria}, como cambios regulatorios o choques de fondeo idiosincrásicos a bancos grandes, que desplacen la fragilidad sin pasar por el spread; (iii) \textbf{mayor frecuencia}, porque con datos diarios o semanales de precios bancarios y spreads la secuencia temporal permitiría separar la dirección de la retroalimentación mejor que con trimestres; (iv) \textbf{la participación extranjera en la deuda soberana}, para contrastar si la amplificación depende de quién fija su precio; y (v) \textbf{controles trimestrales y la calificación soberana histórica}, para completar la réplica de \citet{Chari2024b} y separar los canales fiscal y cambiario del efecto de la fragilidad.
 
-Una pregunta adicional es si la concentración bancaria amplifica la complementariedad. La teoría no tiene una predicción unívoca: una mayor competencia erosiona el valor de franquicia e incentiva la toma de riesgo \citep{MMR2010b}, pero la concentración eleva las tasas que pagan los deudores y el riesgo de las carteras \citep{BoydDeNicolo2005}. Una triple interacción con tres medidas de concentración, estimada en la especificación en niveles, no identifica ningún efecto; ampliar el corte transversal es la vía para dirimirla.
+Una pregunta adicional es si la concentración bancaria amplifica la complementariedad. La teoría no tiene una predicción unívoca \citep{MMR2010b,BoydDeNicolo2005}, y una triple interacción con tres medidas de concentración, estimada en la especificación en niveles, no identifica ningún efecto.
 
 \subsection{Conclusión}
 
-Este trabajo articula en un solo marco empírico dos literaturas que se han mantenido separadas: la del nexo banca--soberano y la del riesgo a la baja del crecimiento. Sobre un panel de trece economías emergentes, con la fragilidad bancaria construida homogéneamente desde Bloomberg y una especificación que rezaga los regresores para mitigar la causalidad inversa, la evidencia muestra que el riesgo de cola del crecimiento eleva el spread soberano de forma robusta, y que la fragilidad bancaria también lo hace, aunque ese efecto se confunde con los canales fiscal y cambiario por los que opera. La complementariedad entre ambos existe en puntos básicos, pero es la que implica una estructura multiplicativa: los datos no respaldan una amplificación mayor en el conjunto del panel. La amplificación adicional aparece en el estrés emergente de 2015--2016 y se invierte en las crisis con respaldo oficial masivo, que es lo que predice el mecanismo cuando el pasivo contingente bancario recae, o no, sobre el soberano. La hipótesis con la que se aprobó esta investigación ---que el mercado penaliza de forma no lineal la coexistencia de fragilidad bancaria y vulnerabilidad macroeconómica--- queda así precisada: la penalización es proporcional en el caso general y se amplifica solo cuando el soberano enfrenta el estrés sin respaldo. Los archivos de reproducción están en \texttt{1\_Codigo/Panel/bbg/} y cada cifra del texto se traza a \texttt{paper\_lnlag\_numeros.csv} y a \texttt{NUMEROS\_CANONICOS\_BBG.md}.
+Este trabajo articula en un solo marco dos literaturas que se han mantenido separadas ---la del nexo banca--soberano y la del riesgo a la baja del crecimiento--- y construye, para trece economías emergentes, las dos métricas que lo operacionalizan: la fragilidad bancaria sistémica a partir de 113 bancos extraídos homogéneamente de Bloomberg, y el riesgo de cola del crecimiento por regresión cuantílica en pseudo--tiempo real. Con ellas, el trabajo replica la asociación entre fragilidad bancaria y spread soberano que documenta la literatura más próxima y encuentra una asociación análoga para el riesgo de cola del crecimiento. Pero al someter esas asociaciones a las pruebas que exige un panel corto en países y largo en persistencia, no resisten como efectos causales, y la complementariedad entre ambos riesgos no va más allá de la que implica una estructura proporcional. La hipótesis con la que se aprobó esta investigación queda, así, sin respaldo en su versión fuerte y compatible con los datos en su versión proporcional. El aporte del trabajo es, en buena medida, delimitar con precisión esa distinción, mostrar por qué el diseño disponible no permite ir más allá, y dejar construida la infraestructura de datos ---reproducible y trazable, en \texttt{1\_Codigo/Panel/bbg/}--- sobre la que un diseño con más economías, más frecuencia o variación exógena podría hacerlo.
 
 % =====================================================================
 \section*{Referencias}
@@ -583,6 +619,7 @@ Este trabajo articula en un solo marco empírico dos literaturas que se han mant
 \bibitem[Csonto \& Ivaschenko(2013)]{CsontoIvaschenko2013} Csonto, B., \& Ivaschenko, I. (2013). Determinants of Sovereign Bond Spreads in Emerging Markets. \textit{IMF Working Paper} 13/164.
 \bibitem[Dieckmann \& Plank(2012)]{DieckmannPlank2012} Dieckmann, S., \& Plank, T. (2012). Default Risk of Advanced Economies: An Empirical Analysis of CDS during the Financial Crisis. \textit{Review of Finance}, 16(4), 903--934.
 \bibitem[Driscoll \& Kraay(1998)]{DriscollKraay1998} Driscoll, J. C., \& Kraay, A. C. (1998). Consistent Covariance Matrix Estimation with Spatially Dependent Panel Data. \textit{Review of Economics and Statistics}, 80(4), 549--560.
+\bibitem[Duffie \& Singleton(1999)]{DuffieSingleton1999} Duffie, D., \& Singleton, K. J. (1999). Modeling Term Structures of Defaultable Bonds. \textit{Review of Financial Studies}, 12(4), 687--720.
 \bibitem[Edwards(1984)]{Edwards1984} Edwards, S. (1984). LDC Foreign Borrowing and Default Risk: An Empirical Investigation, 1976--80. \textit{American Economic Review}, 74(4), 726--734.
 \bibitem[Farhi \& Tirole(2018)]{FarhiTirole2018b} Farhi, E., \& Tirole, J. (2018). Deadly Embrace: Sovereign and Financial Balance Sheets Doom Loops. \textit{Review of Economic Studies}, 85(3), 1781--1823.
 \bibitem[Fratzscher \& Rieth(2019)]{FratzscherRieth2019} Fratzscher, M., \& Rieth, M. (2019). Monetary Policy, Bank Bailouts and the Sovereign-Bank Risk Nexus in the Euro Area. \textit{Review of Finance}, 23(4), 745--775.
@@ -607,14 +644,17 @@ Este trabajo articula en un solo marco empírico dos literaturas que se han mant
 \bibitem[Laeven \& Valencia(2020)]{LaevenValencia2020} Laeven, L., \& Valencia, F. (2020). Systemic Banking Crises Database II. \textit{IMF Economic Review}, 68(2), 307--361.
 \bibitem[Leonello(2018)]{Leonello2018} Leonello, A. (2018). Government Guarantees and the Two-Way Feedback between Banking and Sovereign Debt Crises. \textit{Journal of Financial Economics}, 130(3), 592--619.
 \bibitem[Longstaff et al.(2011)]{LongstaffEtAl2011} Longstaff, F. A., Pan, J., Pedersen, L. H., \& Singleton, K. J. (2011). How Sovereign Is Sovereign Credit Risk? \textit{American Economic Journal: Macroeconomics}, 3(2), 75--103.
+\bibitem[MacKinnon et al.(1983)]{MacKinnonWhiteDavidson1983} MacKinnon, J. G., White, H., \& Davidson, R. (1983). Tests for Model Specification in the Presence of Alternative Hypotheses: Some Further Results. \textit{Journal of Econometrics}, 21(1), 53--70.
 \bibitem[Machado \& Santos Silva(2019)]{MachadoSantosSilva2019} Machado, J. A. F., \& Santos Silva, J. M. C. (2019). Quantiles via Moments. \textit{Journal of Econometrics}, 213(1), 145--173.
 \bibitem[Martin et al.(2001)]{MartinThompsonBrowne2001} Martin, R., Thompson, K., \& Browne, C. (2001). Taking to the Saddle. \textit{Risk}, 14(6), 91--94.
 \bibitem[Martínez-Miera \& Repullo(2010)]{MMR2010b} Martínez-Miera, D., \& Repullo, R. (2010). Does Competition Reduce the Risk of Bank Failure? \textit{Review of Financial Studies}, 23(10), 3638--3664.
 \bibitem[Merton(1974)]{Merton1974b} Merton, R. C. (1974). On the Pricing of Corporate Debt. \textit{Journal of Finance}, 29(2), 449--470.
 \bibitem[Miranda-Agrippino \& Rey(2022)]{MirandaAgrippinoRey2022} Miranda-Agrippino, S., \& Rey, H. (2022). The Global Financial Cycle. \textit{Handbook of International Economics}, Vol.\ 6.
 \bibitem[Mody \& Sandri(2012)]{ModySandri2012} Mody, A., \& Sandri, D. (2012). The Eurozone Crisis: How Banks and Sovereigns Came to Be Joined at the Hip. \textit{Economic Policy}, 27(70), 199--230.
+\bibitem[Nickell(1981)]{Nickell1981} Nickell, S. (1981). Biases in Dynamic Models with Fixed Effects. \textit{Econometrica}, 49(6), 1417--1426.
 \bibitem[Ossandon Busch et al.(2022)]{OssandonBusch2022} Ossandon Busch, M., Sánchez-Martínez, J. M., Rodríguez-Martínez, A., Montañez-Enríquez, R., \& Martínez-Jaramillo, S. (2022). Growth at Risk: Methodology and Applications in an Open-Source Platform. \textit{Latin American Journal of Central Banking}, 3, 100068.
 \bibitem[Pagan(1984)]{Pagan1984} Pagan, A. (1984). Econometric Issues in the Analysis of Regressions with Generated Regressors. \textit{International Economic Review}, 25(1), 221--247.
+\bibitem[Pan \& Singleton(2008)]{PanSingleton2008} Pan, J., \& Singleton, K. J. (2008). Default and Recovery Implicit in the Term Structure of Sovereign CDS Spreads. \textit{Journal of Finance}, 63(5), 2345--2384.
 \bibitem[Prasad et al.(2019)]{PrasadEtAl2019} Prasad, A., et al. (2019). Growth at Risk: Concept and Application in IMF Country Surveillance. \textit{IMF Working Paper} 2019/036.
 \bibitem[Reinhart \& Rogoff(2009)]{ReinhartRogoff2009} Reinhart, C. M., \& Rogoff, K. S. (2009). \textit{This Time Is Different: Eight Centuries of Financial Folly}. Princeton University Press.
 \bibitem[Reinhart \& Rogoff(2011)]{ReinhartRogoff2011} Reinhart, C. M., \& Rogoff, K. S. (2011). From Financial Crash to Debt Crisis. \textit{American Economic Review}, 101(5), 1676--1706.
