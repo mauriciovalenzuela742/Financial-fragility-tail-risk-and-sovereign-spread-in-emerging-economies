@@ -8,6 +8,8 @@ serie secundaria para robustez.
 
 Insumos primarios:
   - EMBI   : 2_Datos/embi.xlsx  (spread EMBI Global por pais, diario 2000-2026) -> EMBI_bps
+             + Argentina desde Serie_Historica_Spread_del_EMBI.xlsx (misma familia JPM EMBI
+             GD subindices, no incluida en embi.xlsx; ver embi_argentina_diag_bbg.csv)
   - CDS 5Y : output_macro/<pais>/EMBI_<pais>.csv (Bloomberg) -> CDS_bps  (robustez)
   - JLoss  : Panel_JLoss_v9_bloomberg.csv  (motor v8/v9, PD Merton/KMV, datos Bloomberg)
   - global : VIX, UST10Y, US HY spread de Bloomberg (output_macro/GLOBAL/)
@@ -44,6 +46,7 @@ BBG_MACRO = os.path.join(COD, "Bloomberg_extraction", "output_macro")
 JLOSS_BBG = os.path.join(COD, "JLoss_reconstruction", "jloss_bloomberg",
                          "Panel_JLoss_v9_bloomberg.csv")
 EMBI_XLSX = os.path.join(COD, "..", "2_Datos", "embi.xlsx")
+SERIE_HIST_XLSX = os.path.join(PANEL, "Serie_Historica_Spread_del_EMBI.xlsx")
 OUT = HERE
 
 # --embi-ext: panel PARALELO con el EMBI completado por fuentes secundarias (no toca los canonicos).
@@ -165,6 +168,47 @@ def splice_embi(base, extras):
     return filled
 
 
+def diag_serie_historica_scale():
+    """Verifica el factor de escala entre Serie_Historica_Spread_del_EMBI.xlsx (porcentaje)
+    y embi.xlsx (pb, canonico) en el solape diario, usando los paises presentes en ambos
+    archivos (Brasil, Mexico, Chile, ...) -- confirma que multiplicar x100 es correcto antes
+    de usar la columna Argentina (que solo existe en el archivo de la serie historica)."""
+    a = pd.read_excel(EMBI_XLSX).rename(columns={"Fecha": "date"})
+    a["date"] = pd.to_datetime(a["date"], errors="coerce")
+    b = pd.read_excel(SERIE_HIST_XLSX, sheet_name="Serie Histórica", header=1)
+    b = b.rename(columns={"Fecha": "date", **{k: f"{v}_hist" for k, v in
+                {"Brasil": "Brasil", "México": "Mexico"}.items()}})
+    b["date"] = pd.to_datetime(b["date"], errors="coerce")
+    rows = []
+    for col_a, col_b in [("Brasil", "Brasil_hist"), ("Mexico", "Mexico_hist")]:
+        j = a[["date", col_a]].merge(b[["date", col_b]], on="date").dropna()
+        j[col_b] = pd.to_numeric(j[col_b], errors="coerce")
+        j = j.dropna()
+        ratio = (j[col_a] / j[col_b]).median()
+        corr = j[col_a].corr(j[col_b])
+        rows.append(dict(country=col_a, n_solape=len(j), ratio_mediano=ratio, corr=corr))
+    pd.DataFrame(rows).to_csv(os.path.join(OUT, "embi_argentina_diag_bbg.csv"), index=False)
+
+
+def embi_argentina_quarterly():
+    """Spread EMBI Argentina, tomado de Serie_Historica_Spread_del_EMBI.xlsx (misma familia
+    JPM EMBI Global Diversified subindices que 2_Datos/embi.xlsx: Brasil y Mexico coinciden
+    entre ambos archivos a un factor exacto x100 y corr=0.9999 en el solape 2007-2026, ver
+    embi_argentina_diag_bbg.csv). embi.xlsx no incluye Argentina en su recorte de paises;
+    la serie historica original si trae esa columna. Unidad: el archivo esta en PORCENTAJE
+    (no en pb) -> se multiplica x100 para llevarlo a EMBI_bps, igual que el resto del panel."""
+    x = pd.read_excel(SERIE_HIST_XLSX, sheet_name="Serie Histórica", header=1)
+    x = x.rename(columns={"Fecha": "date"})[["date", "Argentina"]].copy()
+    x["date"] = pd.to_datetime(x["date"], errors="coerce")
+    x["EMBI_bps"] = pd.to_numeric(x["Argentina"], errors="coerce") * 100.0
+    x = x.dropna(subset=["date", "EMBI_bps"])
+    x = x[x["EMBI_bps"] > 0]
+    x["quarter"] = x["date"].dt.to_period("Q").astype(str)
+    q = x.groupby("quarter")["EMBI_bps"].mean().reset_index()
+    q["country"] = "argentina"
+    return q[["country", "quarter", "EMBI_bps"]]
+
+
 def embi_quarterly():
     """Spread EMBI Global Diversified diario (pb) -> media trimestral, por pais.
     Variable dependiente PRINCIPAL (Chari et al. 2024)."""
@@ -179,6 +223,7 @@ def embi_quarterly():
     long = (q.melt(id_vars="quarter", var_name="country", value_name="EMBI_bps")
             .dropna(subset=["EMBI_bps"]))
     long = long[long["EMBI_bps"] > 0]
+    long = pd.concat([long, embi_argentina_quarterly()], ignore_index=True)
     if EMBI_EXT:
         long = splice_embi(long, embi_extra_sources())
 
@@ -284,6 +329,7 @@ def build_hhi(roster):
 # ----------------------------------------------------------------------
 def main():
     print("=" * 72)
+    diag_serie_historica_scale()
     embi, cov = embi_quarterly()
     jl = load_jloss()
     gar = load_gar()

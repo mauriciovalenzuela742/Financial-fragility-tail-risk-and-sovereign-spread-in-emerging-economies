@@ -980,6 +980,83 @@ estático de EF bidireccionales es el apropiado** dada la forma del panel.
   `2_Datos/embi_extra_<fuente>.csv` (`country,date,EMBI_bps`); `p1 --embi-ext` los toma solo,
   con prioridad sobre GFSR y el mismo diagnóstico de empalme.
 
+## 9. EMBI Argentina en el panel CANÓNICO (2026-09-25)
+
+La entrada §8 (misma fecha) descartó `Serie_Historica_Spread_del_EMBI.xlsx` para el panel
+**paralelo** `--embi-ext` porque en ese momento Argentina no tenía GaR y por tanto no aportaba
+a la muestra de estimación. Petición separada del usuario: agregar el EMBI de Argentina al
+panel **canónico** igual, como paso preparatorio para incorporarla a las regresiones. Esto
+**no** contradice §8: son dos peticiones distintas en el mismo día.
+
+**Actualización (mismo día): el GaR también se integró.** `_merge_gar_argentina_sinRyr.py`
+agregó las 84 filas de ARGENTINA de `gar_panel_all19_ARGsinRyr.csv` (GaR sin bloque Ryr,
+ventana VSTX acortada — ver la sección de esta conversación / `_fci_sin_ryr.py`) a
+`gar_panel_all18.csv` (el archivo que `p1_build_panels.py::load_gar()` lee), sin tocar las
+filas de los 18 países existentes. Con EMBI + GaR ya presentes, **Argentina entra a la
+muestra de estimación: 35 observaciones, 2017Q2–2025Q4** (`n_estimacion` pasó de 0 a 35;
+la muestra principal EMBI+JLoss+GaR pasó de 721 a **756** obs, de 13 a **14** países).
+Nótese que esta es la desviación metodológica documentada arriba (ventana ~9.4 años en vez
+de ~10 años, solo para Argentina) — cualquier regresión que incluya a Argentina hereda esa
+salvedad y debe mencionarla si se usa en la tesis.
+
+- **Cambio en `p1_build_panels.py`:** nueva función `embi_argentina_quarterly()`, corre en el
+  modo canónico (sin `--embi-ext`) además del paralelo. Fuente: columna `Argentina` de
+  `Serie_Historica_Spread_del_EMBI.xlsx` (misma familia JPM EMBI Global Diversified subíndices
+  que `2_Datos/embi.xlsx`, que no incluye Argentina en su recorte de países).
+- **Escala:** el archivo está en **porcentaje**, no en pb. Verificado con Brasil y México
+  (ambos presentes en los dos archivos, solape 2007-10-29..2025-12-17, n=4514 días): ratio
+  mediano xlsx/serie-histórica = **100,00** (99,996–100,001), corr = **0,99999** en los dos
+  países → se multiplica x100 sin reescalar. Diagnóstico: `embi_argentina_diag_bbg.csv`.
+- **Cobertura resultante:** `EMBI_bps` Argentina 2007Q4–2025Q4 (73 trimestres, "continua").
+  Valores en trimestres de crisis conocidos, para trazabilidad: 2008Q4 = 1697 pb (GFC),
+  2014Q3 = 709 pb (default selectivo "Griesafault"), 2019Q3 = 1489 pb (shock post-PASO),
+  2020Q2 = 3108 pb (pico COVID + renegociación de deuda), 2023Q3 = 2102 pb (sequía/crisis
+  pre-Milei).
+- **En este primer paso (solo EMBI) no cambió ningún número publicado:** Argentina aún no
+  tenía GaR, así que `n_estimacion` seguía en 0 y ninguna fila de ningún otro país cambió
+  (verificado celda a celda; las únicas discrepancias de texto eran ruido de re-serialización
+  de punto flotante en `USD_NEER`/`CTOT_shock`/`JLoss_x_GaR`, revertidas a los valores ya
+  committeados para mantener el diff acotado). Ver la actualización de arriba: el GaR se
+  integró después, en el mismo día, y **eso sí** agrega 35 observaciones nuevas a la muestra
+  de estimación principal.
+
+**Segunda actualización (mismo día): controles domésticos + batería con Argentina.**
+`p0_controles_all.py` se extendió (Argentina agregada a la lista `NEW`, ISO3=ARG) para traer
+deuda/PIB y balance fiscal (IMF WEO), cuenta corriente y reservas/PIB (World Bank), e
+inflación YoY / REER (desde `CPI_ARGENTINA.csv` / `rEER_ARGENTINA.csv`, mismo mecanismo que
+el resto de `NEW`). Cobertura: debt_gdp/fisc_bal 108 trimestres (2000Q1 en adelante),
+infl_yoy solo 35 (limitado por el mismo CPI oficial corto). Valores verificados por
+plausibilidad histórica: deuda/PIB 147 % en 2002Q3 (post-default), 40 % en 2012Q3, 97 % en
+2020Q1 (COVID); inflación 25–48 % interanual durante la crisis 2018–19, ~31–39 % en 2025–26.
+Filas de los 17 países existentes: 0 diferencias tras re-ejecutar (mismo vintage IMF/WB).
+
+Con EMBI + GaR + controles ya presentes, Argentina **entra también a la batería de crisis**
+(`p9b_bateria_crisis.py`, que antes la excluía por completo al faltarle los 6 controles):
+N pasa de 614 a **647** (+33 obs). Esto **sí cambia lectura** del resultado ya publicado en
+`tab:crisis` (CM4, FE país+tiempo, Panel B Backstop/EMstress):
+
+| | publicado (17 países) | con Argentina (N=647) |
+|---|---|---|
+| β₃ (JxD, fuera de crisis) | +0,837 (t=+2,02, p=0,044) | +0,609 (t=+0,49, **p=0,624 — ya no significativo**) |
+| β₃+β₄ Backstop | −0,105 (p=0,270, n.s.) | +0,710 (p=0,124, sigue n.s., **cambia de signo**) |
+| β₃+β₄ EMstress | +1,051 (p=0,0002) | +1,428 (**p=0,024, sigue significativo pero mucho más débil**) |
+
+Mismo patrón en Panel A (vector único de crisis) y en las otras estructuras de FE (T, P): el
+coeficiente "fuera de crisis" pierde significancia en FE=T y FE=PT; EMstress se mantiene
+significativo en casi todas las combinaciones pero con p mayor; Backstop se vuelve
+marginalmente significativo en FE=P (p=0,032) donde antes no lo era (p=0,62) — resultado
+mixto, no unidireccional.
+
+El chequeo de auto-verificación de `p9b_bateria_crisis.py` (comparación exacta con
+`tab:crisis`) **falla intencionalmente** con esta muestra — es el comportamiento esperado al
+cambiar deliberadamente la muestra, no un bug; el CSV se guarda de todas formas antes de la
+verificación. `bateria_bbg.csv` y `bateria_crisis_bbg.csv` quedaron sobrescritos con estos
+números (con Argentina); las versiones previas (17 países) se conservaron como
+`_bateria_bbg_old.csv` / `_bateria_crisis_bbg_old.csv` para comparación. **Nada de esto se
+propagó todavía a `4_Redaccion/` ni a `tab:crisis`** — requiere rerun explícito de
+`p11_tablas_latex.py`/`p12_tablas_latex_lnlag.py` y una decisión editorial sobre si adoptar
+esta muestra ampliada en la tesis.
+
 ## 10. Especificación PRINCIPAL del paper: log-log rezagada sobre el panel embiext (2026-09-29)
 
 Base de `4_Redaccion/envios/paper_empirico/cuerpo.tex`, que es también el capítulo de la tesis

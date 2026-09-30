@@ -76,9 +76,18 @@ def fig_cobertura():
                 color=GRID, ms=7, mew=2)
         ax.plot(cds["t"], [i] * len(cds), "|", color="#9ec5f4", ms=7, mew=2)
         ax.plot(est["t"], [i] * len(est), "|", color=BLUE, ms=7, mew=2)
-    ax.set_yticks(range(len(order))); ax.set_yticklabels(order, fontsize=8)
+    ax.set_yticks(range(len(order)))
+    ax.set_yticklabels([f"{c} ({n})" for c, n in
+                        zip(order, cov.set_index("country").loc[order, "n_estimacion"])], fontsize=8)
     ax.grid(axis="y", visible=False)
-    ax.set_title("Cobertura del panel — gris: JLoss · celeste: + EMBI soberano · azul: muestra de estimación (EMBI+JLoss+GaR)")
+    from matplotlib.lines import Line2D
+    ax.legend(handles=[Line2D([], [], color=col, marker="|", ls="", ms=9, mew=2.5, label=lab)
+                       for col, lab in ((GRID, "JLoss"), ("#9ec5f4", "+ EMBI soberano"),
+                                        (BLUE, "muestra de estimación (EMBI + JLoss + GaR)"))],
+              loc="upper center", bbox_to_anchor=(0.5, -0.07), ncol=3, fontsize=8)
+    ax.set_title(f"Cobertura del panel: {int((cov.n_estimacion > 0).sum())} economías en la estimación, "
+                 f"{int(cov.n_estimacion.sum())} observaciones país-trimestre "
+                 "(entre paréntesis, trimestres por país)", fontsize=9)
     _save(fig, "fig_cobertura")
 
 
