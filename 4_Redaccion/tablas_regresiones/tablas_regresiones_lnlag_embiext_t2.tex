@@ -4,7 +4,7 @@
 \scriptsize
 \setlength{\tabcolsep}{2.8pt}
 \renewcommand{\arraystretch}{0.86}
-\caption[Spread soberano e interacción con el vector de crisis: log-log rezagada (EMBI extendido)]{\textbf{Spread soberano e interacción con el vector de crisis: log-log rezagada (EMBI extendido).}}
+\caption[Spread soberano e interacción con el vector de crisis: log-log rezagada (EMBI extendido) (vector único)]{\textbf{Spread soberano e interacción con el vector de crisis: log-log rezagada (EMBI extendido) (vector único).}}
 \label{tab:crisis-lnlag-embiext}
 \begin{adjustbox}{max width=\linewidth, max totalheight=0.66\textheight}
 \begin{tabular}{l c ccc ccc ccc cc}
@@ -33,6 +33,32 @@ $\beta_3+\beta_4$ & $-0{,}0121^{**}$ &  &  &  &  &  &  &  &  &  & $-0{,}0252^{**
 \addlinespace
 Observaciones & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 \\
 $R^2$ \textit{within} & $0{,}126$ & $-0{,}046$ & $0{,}210$ & $0{,}122$ & $-0{,}028$ & $0{,}246$ & $0{,}134$ & $-0{,}019$ & $0{,}250$ & $0{,}130$ & $-0{,}023$ & $0{,}250$ \\
+\midrule
+EF de país & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ \\
+EF de tiempo & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO \\
+Controles domésticos & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} La columna (1) es la Ecuación de interacción de crisis completa en la versión log-log rezagada, $\ln\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1\ln JLoss_{t-1}+\beta_2 D_{t-1}+\beta_3(\ln JLoss_{t-1}\times D_{t-1})+\beta_4(\ln JLoss_{t-1}\times D_{t-1}\times Crisis_t)+\beta_5(\ln JLoss_{t-1}\times Crisis_t)+\beta_6(D_{t-1}\times Crisis_t)+\omega'X_{i,t}+\varepsilon_{i,t}$, con efectos fijos de país y de tiempo; controles y vector de crisis contemporáneos. $\ln\mathrm{EMBI}$ como variable dependiente; $\ln(JLoss)$ y $D=-GaR$ (pp, en niveles) rezagados un trimestre, como en la Tabla~\ref{tab:bateria-lnlag-embiext}. EMBI de Indonesia y Sudáfrica 2010Q1--2014Q4 completado con FMI (GFSR). Las columnas (2)--(12) completan la batería de cuatro modelos anidados: CM1, $JLoss$ y su interacción con el vector de crisis; CM2, lo mismo con $D$; CM3, ambos niveles y sus interacciones, sin $JLoss\times D$; CM4, la especificación completa. $Crisis$ sola queda absorbida por los efectos fijos de tiempo cuando estos se incluyen. $\beta_3$ mide la complementariedad fuera de crisis y $\beta_3+\beta_4$ dentro de crisis (error estándar por método delta; entre corchetes, $p$ del test de Wald $H_0\!:\beta_3+\beta_4=0$). Todas las columnas incluyen seis controles domésticos (deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación y tipo de cambio real efectivo). $JLoss$ y $D$ centrados. Errores estándar de Driscoll--Kraay entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%, respectivamente. Fuente: \texttt{p12\_tablas\_latex\_lnlag.py} (ajuste de \texttt{p9b\_bateria\_crisis.py}).}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.8pt}
+\renewcommand{\arraystretch}{0.86}
+\caption[Spread soberano e interacción con el vector de crisis: log-log rezagada (EMBI extendido) (Backstop y EMstress)]{\textbf{Spread soberano e interacción con el vector de crisis: log-log rezagada (EMBI extendido) (Backstop y EMstress).}}
+\label{tab:crisis-lnlag-embiext-b}
+\begin{adjustbox}{max width=\linewidth, max totalheight=0.66\textheight}
+\begin{tabular}{l c ccc ccc ccc cc}
+\toprule
+$\ln(\mathrm{EMBI})$
+& \multicolumn{1}{c}{Referencia} & \multicolumn{3}{c}{CM1} & \multicolumn{3}{c}{CM2} & \multicolumn{3}{c}{CM3} & \multicolumn{2}{c}{CM4} \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}\cmidrule(lr){12-13}
+& (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9) & (10) & (11) & (12) \\
 \midrule
 \multicolumn{13}{l}{\textit{Panel B. Backstop (2008Q4--2009Q4, 2020Q1--2021Q4) vs.\ EMstress (2015Q3--2016Q1)}} \\[2pt]
 $\ln(JLoss)_{t-1}$ & $-0{,}0189$ & $0{,}0037$ & $0{,}1034^{*}$ & $-0{,}0092$ &  &  &  & $0{,}0313$ & $0{,}0560$ & $-0{,}0217$ & $0{,}0299$ & $0{,}0561$ \\
@@ -69,6 +95,6 @@ Controles domésticos & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & S�
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} La columna (1) es la Ecuación de interacción de crisis completa en la versión log-log rezagada, $\ln\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1\ln JLoss_{t-1}+\beta_2 D_{t-1}+\beta_3(\ln JLoss_{t-1}\times D_{t-1})+\beta_4(\ln JLoss_{t-1}\times D_{t-1}\times Crisis_t)+\beta_5(\ln JLoss_{t-1}\times Crisis_t)+\beta_6(D_{t-1}\times Crisis_t)+\omega'X_{i,t}+\varepsilon_{i,t}$, con efectos fijos de país y de tiempo; controles y vector de crisis contemporáneos. $\ln\mathrm{EMBI}$ como variable dependiente; $\ln(JLoss)$ y $D=-GaR$ (pp, en niveles) rezagados un trimestre, como en la Tabla~\ref{tab:bateria-lnlag-embiext}. EMBI de Indonesia y Sudáfrica 2010Q1--2014Q4 completado con FMI (GFSR). Las columnas (2)--(12) completan la batería de cuatro modelos anidados: CM1, $JLoss$ y su interacción con el vector de crisis; CM2, lo mismo con $D$; CM3, ambos niveles y sus interacciones, sin $JLoss\times D$; CM4, la especificación completa. $Crisis$ sola queda absorbida por los efectos fijos de tiempo cuando estos se incluyen. $\beta_3$ mide la complementariedad fuera de crisis y $\beta_3+\beta_4$ dentro de crisis (error estándar por método delta; entre corchetes, $p$ del test de Wald $H_0\!:\beta_3+\beta_4=0$). Todas las columnas incluyen seis controles domésticos (deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación y tipo de cambio real efectivo). $JLoss$ y $D$ centrados. Errores estándar de Driscoll--Kraay entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%, respectivamente. Fuente: \texttt{p12\_tablas\_latex\_lnlag.py} (ajuste de \texttt{p9b\_bateria\_crisis.py}).}
+\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} mismas especificaciones, controles y convenciones que la Tabla~\ref{tab:crisis-lnlag-embiext}, con el vector de crisis descompuesto en episodios con respaldo oficial masivo (\textit{Backstop}) y el estrés emergente de 2015--2016 sin ese respaldo (\textit{EMstress}).}
 \end{table}
 \end{landscape}

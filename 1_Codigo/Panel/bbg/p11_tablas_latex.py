@@ -282,55 +282,46 @@ def tabla_crisis(spec=LEVELS):
                 cells_b.append(""); cells_se.append(""); cells_p.append("")
         return [row(lbl, cells_b), row("", cells_se), row("", cells_p)]
 
-    L = []
-    L += [r"\begin{landscape}", r"\begin{table}", r"\centering", r"\scriptsize",
-          r"\setlength{\tabcolsep}{2.8pt}", r"\renewcommand{\arraystretch}{0.86}",
-          rf"\caption[{spec['cap_cr']}]{{\textbf{{{spec['cap_cr']}.}}}}",
-          rf"\label{{{spec['lab_cr']}}}",
-          r"\begin{tabular}{l c ccc ccc ccc cc}",
-          r"\toprule",
-          spec["dv"]]
-    L += header(cols, models)
-    L.append(r"\midrule")
+    def cabecera(cap, lab):
+        return [r"\begin{landscape}", r"\begin{table}", r"\centering", r"\scriptsize",
+                r"\setlength{\tabcolsep}{2.8pt}", r"\renewcommand{\arraystretch}{0.86}",
+                rf"\caption[{cap}]{{\textbf{{{cap}.}}}}", rf"\label{{{lab}}}",
+                r"\begin{tabular}{l c ccc ccc ccc cc}", r"\toprule", spec["dv"]] + header(cols, models) + [r"\midrule"]
 
     common = [("JLoss_c", spec["jl"]), ("D_c", spec["dd"]), ("JxD", spec["jxd"] + r" ($\beta_3$)")]
     # Panel A
     pA = "A_vector_unico"
-    L.append(rf"\multicolumn{{{len(cols) + 1}}}{{l}}{{\textit{{Panel A. Vector único de crisis}} "
-             r"($Crisis$: 2008Q4--2009Q4, 2015Q3--2016Q1, 2020Q1--2021Q4)} \\[2pt]")
+    LA = [rf"\multicolumn{{{len(cols) + 1}}}{{l}}{{\textit{{Panel A. Vector único de crisis}} "
+          r"($Crisis$: 2008Q4--2009Q4, 2015Q3--2016Q1, 2020Q1--2021Q4)} \\[2pt]"]
     for n, lbl in common:
-        L += coef_rows(pA, n, lbl)
-    L += coef_rows(pA, "JLoss_cr", rf"${J}\times Crisis$")
-    L += coef_rows(pA, "D_cr", rf"${D}\times Crisis$")
-    L += coef_rows(pA, "JxD_cr", rf"${J}\times {D}\times Crisis$ ($\beta_4$)")
-    L += sum_rows(pA, "cr", r"$\beta_3+\beta_4$")
-    L.append(r"\addlinespace")
-    L.append(row("Observaciones", [str(int(fits[(pA, m, fe)].nobs)) for m, fe in cols]))
-    L.append(row(r"$R^2$ \textit{within}", [num(float(fits[(pA, m, fe)].rsquared_within)) for m, fe in cols]))
+        LA += coef_rows(pA, n, lbl)
+    LA += coef_rows(pA, "JLoss_cr", rf"${J}\times Crisis$")
+    LA += coef_rows(pA, "D_cr", rf"${D}\times Crisis$")
+    LA += coef_rows(pA, "JxD_cr", rf"${J}\times {D}\times Crisis$ ($\beta_4$)")
+    LA += sum_rows(pA, "cr", r"$\beta_3+\beta_4$")
+    LA.append(r"\addlinespace")
+    LA.append(row("Observaciones", [str(int(fits[(pA, m, fe)].nobs)) for m, fe in cols]))
+    LA.append(row(r"$R^2$ \textit{within}", [num(float(fits[(pA, m, fe)].rsquared_within)) for m, fe in cols]))
     # Panel B
     pB = "B_backstop_emstress"
-    L.append(r"\midrule")
-    L.append(rf"\multicolumn{{{len(cols) + 1}}}{{l}}{{\textit{{Panel B. Backstop (2008Q4--2009Q4, 2020Q1--2021Q4) "
-             r"vs.\ EMstress (2015Q3--2016Q1)}} \\[2pt]")
+    LB = [rf"\multicolumn{{{len(cols) + 1}}}{{l}}{{\textit{{Panel B. Backstop (2008Q4--2009Q4, 2020Q1--2021Q4) "
+          r"vs.\ EMstress (2015Q3--2016Q1)}} \\[2pt]"]
     for n, lbl in common:
-        L += coef_rows(pB, n, lbl)
-    L += coef_rows(pB, "JLoss_bk", rf"${J}\times Backstop$")
-    L += coef_rows(pB, "D_bk", rf"${D}\times Backstop$")
-    L += coef_rows(pB, "JxD_bk", rf"${J}\times {D}\times Backstop$ ($\beta_4^{{bk}}$)")
-    L += coef_rows(pB, "JLoss_em", rf"${J}\times EMstress$")
-    L += coef_rows(pB, "D_em", rf"${D}\times EMstress$")
-    L += coef_rows(pB, "JxD_em", rf"${J}\times {D}\times EMstress$ ($\beta_4^{{em}}$)")
-    L += sum_rows(pB, "bk", r"$\beta_3+\beta_4^{bk}$")
-    L += sum_rows(pB, "em", r"$\beta_3+\beta_4^{em}$")
-    L.append(r"\addlinespace")
-    L.append(row("Observaciones", [str(int(fits[(pB, m, fe)].nobs)) for m, fe in cols]))
-    L.append(row(r"$R^2$ \textit{within}", [num(float(fits[(pB, m, fe)].rsquared_within)) for m, fe in cols]))
-    L.append(r"\midrule")
-    L += fe_rows(cols)
-    L.append(row("Controles domésticos", ["SÍ"] * len(cols)))
-    L.append(r"\bottomrule")
-    L.append(r"\end{tabular}")
-    L.append(
+        LB += coef_rows(pB, n, lbl)
+    LB += coef_rows(pB, "JLoss_bk", rf"${J}\times Backstop$")
+    LB += coef_rows(pB, "D_bk", rf"${D}\times Backstop$")
+    LB += coef_rows(pB, "JxD_bk", rf"${J}\times {D}\times Backstop$ ($\beta_4^{{bk}}$)")
+    LB += coef_rows(pB, "JLoss_em", rf"${J}\times EMstress$")
+    LB += coef_rows(pB, "D_em", rf"${D}\times EMstress$")
+    LB += coef_rows(pB, "JxD_em", rf"${J}\times {D}\times EMstress$ ($\beta_4^{{em}}$)")
+    LB += sum_rows(pB, "bk", r"$\beta_3+\beta_4^{bk}$")
+    LB += sum_rows(pB, "em", r"$\beta_3+\beta_4^{em}$")
+    LB.append(r"\addlinespace")
+    LB.append(row("Observaciones", [str(int(fits[(pB, m, fe)].nobs)) for m, fe in cols]))
+    LB.append(row(r"$R^2$ \textit{within}", [num(float(fits[(pB, m, fe)].rsquared_within)) for m, fe in cols]))
+    pie = [r"\midrule"] + fe_rows(cols) + [row("Controles domésticos", ["SÍ"] * len(cols)),
+                                            r"\bottomrule", r"\end{tabular}"]
+    nota = (
         r"\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} " + spec["intro_cr"] + spec["extra_note_cr"] +
         r" Las columnas (2)--(12) completan la batería de cuatro modelos "
         r"anidados: CM1, $JLoss$ y su interacción con el vector de crisis; CM2, lo mismo con $D$; CM3, ambos "
@@ -342,7 +333,17 @@ def tabla_crisis(spec=LEVELS):
         r"inflación y tipo de cambio real efectivo). $JLoss$ y $D$ centrados. Errores estándar de "
         r"Driscoll--Kraay entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%, "
         r"respectivamente. Fuente: " + spec["src_cr"] + ".}")
-    L += [r"\end{table}", r"\end{landscape}"]
+    fin = [r"\end{table}", r"\end{landscape}"]
+    if spec.get("dividir_crisis"):
+        lab_b = spec["lab_cr"] + "-b"
+        nota_b = (r"\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} mismas especificaciones, "
+                  r"controles y convenciones que la Tabla~\ref{" + spec["lab_cr"] + r"}, con el vector de crisis "
+                  r"descompuesto en episodios con respaldo oficial masivo (\textit{Backstop}) y el estrés emergente "
+                  r"de 2015--2016 sin ese respaldo (\textit{EMstress}).}")
+        ta = cabecera(spec["cap_cr"] + " (vector único)", spec["lab_cr"]) + LA + pie + [nota] + fin
+        tb = cabecera(spec["cap_cr"] + " (Backstop y EMstress)", lab_b) + LB + pie + [nota_b] + fin
+        return _ajustar("\n".join(ta), spec) + "\n\n" + _ajustar("\n".join(tb), spec), fits
+    L = cabecera(spec["cap_cr"], spec["lab_cr"]) + LA + [r"\midrule"] + LB + pie + [nota] + fin
     return _ajustar("\n".join(L), spec), fits
 
 

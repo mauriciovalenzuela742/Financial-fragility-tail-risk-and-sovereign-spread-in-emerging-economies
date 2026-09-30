@@ -1,0 +1,40 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption[Pruebas de identificación, inferencia y medición]{Pruebas de identificación, inferencia y medición sobre la especificación principal}
+\label{tab:arbitro}
+\begin{tabular}{lcc}
+\toprule
+Prueba & Coeficiente & $p$ \\
+\midrule
+\multicolumn{3}{l}{\textit{Causalidad inversa y dinámica}} \\
+Canal inverso: $\ln JLoss_t$ sobre $\ln$ EMBI$_{t-1}$ & $0{,}1706^{***}$ & $0{,}009$ \\
+Principal $+$ adelantos: $\ln JLoss_{t-1}$ & $0{,}0583$ & $0{,}179$ \\
+\quad adelanto $\ln JLoss_{t+1}$ & $0{,}0514$ & $0{,}234$ \\
+Dinámica ($+\ln$ EMBI$_{t-1}$): $\ln JLoss_{t-1}$ corto plazo & $0{,}0049$ & $0{,}756$ \\
+\quad persistencia $\rho$ & $0{,}9381^{***}$ & $0{,}000$ \\
+\quad efecto de largo plazo $\beta_1/(1-\rho)$ & $0{,}0784$ & $0{,}725$ \\
+\multicolumn{3}{l}{\textit{Inferencia (regresión principal)}} \\
+\textit{Wild cluster bootstrap} $p$: $\beta_1$ / $\beta_2$ / $\beta_3$ & & $0{,}332$ / $0{,}203$ / $0{,}891$ \\
+\multicolumn{3}{l}{\textit{Identificación en logs}} \\
+Proyección local $h=0$: $\ln JLoss_{t-1}$ & $0{,}0053$ & $0{,}740$ \\
+Proyección local $h=4$: $\ln JLoss_{t-1}$ & $-0{,}0344$ & $0{,}480$ \\
+IV on/off-the-run ($F$ primera etapa) & $0{,}3506$ \;[$F=9{,}4$] & $0{,}716$ \\
+IV dólar amplio & $-2{,}1780$ \;[$F=11{,}0$] & $0{,}291$ \\
+IV términos de intercambio & $0{,}1545$ \;[$F=10{,}2$] & $0{,}583$ \\
+\multicolumn{3}{l}{\textit{Regresor generado (500 réplicas del GaR)}} \\
+$p$ combinado: $\beta_1$ / $\beta_2$ / $\beta_3$ & & $0{,}003$ / $0{,}049$ / $0{,}122$ \\
+\multicolumn{3}{l}{\textit{Controles}} \\
+Controles en $t-4$: $\ln JLoss_{t-1}$ & $0{,}0618$ & $0{,}174$ \\
+Canal: balance fiscal$_t$ sobre $\ln JLoss_{t-1}$ & $-0{,}6874^{***}$ & $0{,}005$ \\
+Canal: TCR$_t$ sobre $\ln JLoss_{t-1}$ & $-4{,}7881^{***}$ & $0{,}000$ \\
+Canal: inflación$_t$ sobre $\ln JLoss_{t-1}$ & $3{,}3439^{***}$ & $0{,}005$ \\
+\multicolumn{3}{l}{\textit{Medición de $JLoss$}} \\
+Malla ancha: $\beta_1$ & $0{,}0671$ & $0{,}220$ \\
+Malla ancha: $\beta_3$ & $0{,}0016$ & $0{,}906$ \\
+Percentil de $JLoss_{t-1}$: $\beta_1$ & $0{,}2660^{***}$ & $0{,}002$ \\
+Percentil de $JLoss_{t-1}$: $\beta_3$ & $-0{,}0150$ & $0{,}388$ \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{0.92\linewidth}{\scriptsize \textit{Nota:} Todas las filas usan la muestra y la especificación de la regresión principal salvo indicación (errores de Driscoll--Kraay). \textit{Wild cluster bootstrap}: pesos de Webb, 1\,999 réplicas, 13 \textit{clusters}. Proyecciones locales: $\ln$ EMBI$_{t+h}$ sobre $\ln JLoss_{t-1}$, $D_{t-1}$ y $\ln$ EMBI$_{t-1}$. IV: $\ln JLoss_{t-1}$ instrumentado con un \textit{shift-share} de exposición pre-2012, errores \textit{cluster} por país. Regresor generado: error estándar de Driscoll--Kraay combinado en cuadratura con la dispersión de 500 réplicas \textit{bootstrap} de la primera etapa del $GaR$. Fuente: \texttt{p14\_arbitro\_lnlag.py}.}
+\end{table}

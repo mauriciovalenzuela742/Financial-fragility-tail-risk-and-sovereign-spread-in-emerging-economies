@@ -1105,3 +1105,29 @@ no el rezago. La amplificación adicional aparece solo en EMstress 2015–16.
 sostenerse en promedio; Backstop sigue negativo. EMstress se refuerza con FE de tiempo y de país,
 pero con FE país+tiempo pierde significancia (p=0,13). Argentina hereda la salvedad de su GaR
 (sin bloque Ryr, ventana corta).
+
+## 12. Pruebas de árbitro sobre la especificación principal (2026-09-30)
+
+`python p14_arbitro_lnlag.py` (panel embiext, 13 países) → `paper_arbitro_numeros.csv` (todas las
+cifras), `tabla_arbitro_resumen.tex`, `tabla_arbitro_chari.tex`, figuras `*_arb`. El paper
+(`cuerpo.tex`) se reescribió con esta evidencia: las asociaciones se reportan como tales, no
+como efectos causales.
+
+| Prueba | Resultado |
+|---|---|
+| Validación del wild bootstrap contra `p2.wild_boot` | idéntico (p = 0,143) |
+| Canal inverso: ln JLoss_t ~ ln EMBI_{t-1} | +0,171 (p=0,009) |
+| + adelantos: ln JLoss_{t-1} / ln JLoss_{t+1} | +0,058 (p=0,18) / +0,051 (p=0,23) |
+| + ln EMBI_{t-1}: b1 corto / ρ / largo plazo | +0,005 (p=0,76) / 0,94 / +0,078 (p=0,72) |
+| Wild cluster bootstrap (Webb, G=13): b1 / b2 / b3 | p = 0,33 / 0,20 / 0,89 |
+| Proyecciones locales ln JLoss_{t-1}, h=0..6 | todas n.s. |
+| IV on/off, USD, CTOT (F≈9–11) | +0,35 / −2,18 / +0,15, todas n.s.; Sargan p<0,001 |
+| Bootstrap del GaR (500 réplicas): p combinado b1/b2/b3 | 0,003 / 0,049 / 0,122 |
+| Backstop b3+b4, cluster país | −0,015 (p=0,40) — no significativo |
+| EMstress extendido (taper + 2015-16 + 2018) | +0,013 (p=0,25); permutación p=0,39 (lugar 20/51) |
+| Controles en t−4: b1 | +0,062 (p=0,17) |
+| Canal JLoss_{t-1} → fisc_bal / reer / inflación / deuda | −0,69*** / −4,79*** / +3,34*** / +3,79** |
+| Tabla estilo Chari: ln JLoss_{t-1} en 6 columnas | 0,107–0,164, todas p<0,01 |
+| PE: H0 lineal / H0 log | rechaza (p<0,001) / no rechaza (p=0,30) |
+| Box–Cox λ | 0,44 [0,38; 0,50] (excluye 0 y 1) |
+| JLoss malla ancha: b1 / percentil: b1 | +0,067 (p=0,22) / +0,266 (p=0,002) |
