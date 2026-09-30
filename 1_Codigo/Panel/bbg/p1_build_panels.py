@@ -55,7 +55,10 @@ OUT = HERE
 #           p.ej. subindices JPM EMBI GD bajados de Bloomberg. Prioridad: xlsx > extra > GFSR.
 # Las fuentes secundarias solo llenan trimestres sin dato en embi.xlsx.
 EMBI_EXT = "--embi-ext" in sys.argv
-SFX = "_embiext" if EMBI_EXT else ""
+# JLOSS_PANEL_SFX cambia el sufijo del panel paralelo. Panel_bloomberg_embiext.csv (base del paper,
+# commit 20a46c9) se construyo ANTES de integrar Argentina; el panel extendido con Argentina se
+# escribe como Panel_bloomberg_embiext_arg.csv (JLOSS_PANEL_SFX=_embiext_arg) para no pisarlo.
+SFX = os.environ.get("JLOSS_PANEL_SFX", "_embiext") if EMBI_EXT else ""
 DATOS = os.path.join(COD, "..", "2_Datos")
 EMBI_GFSR = os.path.join(DATOS, "EMBI_real_8countries_2006_2014.csv")
 RATIO_BANDA = (0.95, 1.05)   # sin reescalar si la mediana xlsx/fuente cae en esta banda

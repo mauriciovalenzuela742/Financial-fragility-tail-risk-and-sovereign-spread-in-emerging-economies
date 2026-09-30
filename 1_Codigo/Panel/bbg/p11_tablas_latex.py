@@ -367,12 +367,23 @@ def panel_variant(spec):
             r"del FMI (GFSR), sin reescalar (correlación 0,94 y ratio mediano 1,02 frente a J.P.\ Morgan "
             r"en 80 trimestres de solape); resto de la muestra idéntico al panel principal.")
     nota_cr = r" EMBI de Indonesia y Sudáfrica 2010Q1--2014Q4 completado con FMI (GFSR)."
-    lab_bat = spec["lab_bat"] + "-embiext"
-    spec = dict(spec, lab_bat=lab_bat, lab_cr=spec["lab_cr"] + "-embiext",
-                cap_bat=spec["cap_bat"] + " (EMBI extendido)", cap_cr=spec["cap_cr"] + " (EMBI extendido)",
+    base = os.path.basename(p8.PANEL_CSV)
+    sfx = base.replace("Panel_bloomberg", "").replace(".csv", "")      # _embiext | _embiext_arg
+    con_arg = sfx.endswith("_arg")
+    etiqueta = " (EMBI extendido, con Argentina)" if con_arg else " (EMBI extendido)"
+    if con_arg:
+        nota = nota.replace("; resto de la muestra idéntico al panel principal.", ".") + (
+            r" Incluye Argentina (2017Q2--2025Q4): EMBI de la serie de subíndices J.P.\ Morgan EMBI "
+            r"Global Diversified (en \%, llevada a pb), $GaR$ estimado sin el bloque de tasas del FCI y con "
+            r"ventana de estandarización acortada por la corta historia del IPC oficial, y controles del FMI "
+            r"y el Banco Mundial; sus coeficientes heredan esa salvedad metodológica.")
+        nota_cr += r" Incluye Argentina ($GaR$ sin bloque de tasas del FCI)."
+    lab_bat = spec["lab_bat"] + sfx.replace("_", "-")
+    spec = dict(spec, lab_bat=lab_bat, lab_cr=spec["lab_cr"] + sfx.replace("_", "-"),
+                cap_bat=spec["cap_bat"] + etiqueta, cap_cr=spec["cap_cr"] + etiqueta,
                 extra_note=spec["extra_note"] + nota,
                 extra_note_cr=spec["extra_note_cr"].replace(spec["lab_bat"], lab_bat) + nota_cr)
-    return "_embiext", spec
+    return sfx, spec
 
 
 def _ajustar(tex, spec):

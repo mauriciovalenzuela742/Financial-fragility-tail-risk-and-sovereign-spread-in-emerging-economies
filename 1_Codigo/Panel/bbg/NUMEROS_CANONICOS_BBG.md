@@ -1084,3 +1084,24 @@ descriptivos y **`paper_lnlag_numeros.csv`, fuente de toda cifra del texto**).
 **Lectura:** H1 y H2 se sostienen sin controles; H3 en elasticidades no (la complementariedad en
 pb es la de la forma multiplicativa). Lo que elimina la interacción de niveles es el logaritmo,
 no el rezago. La amplificación adicional aparece solo en EMstress 2015–16.
+
+## 11. Especificación log-log rezagada CON Argentina (panel embiext_arg, 2026-09-29)
+
+`JLOSS_PANEL_SFX=_embiext_arg python p1_build_panels.py --embi-ext` → `Panel_bloomberg_embiext_arg.csv`
+(panel extendido de §8 + Argentina de §9; 14 países). No reemplaza al panel del paper
+(`Panel_bloomberg_embiext.csv`, 13 países, verificado byte-idéntico). Tablas:
+`JLOSS_PANEL_CSV=<ruta>/Panel_bloomberg_embiext_arg.csv python p12_tablas_latex_lnlag.py` →
+`4_Redaccion/tablas_regresiones/tablas_regresiones_lnlag_embiext_arg.tex` (+ `_t1`, `_t2`, pdf).
+
+| M4, FE país+tiempo | sin Argentina (paper, §10) | con Argentina |
+|---|---|---|
+| Panel A (N) — b1 / b2 / b3 | 765 — +0,0985*** / +0,0324** / −0,0112 (p=0,11) | 799 — +0,0964*** / +0,0326** / −0,0082 (p=0,28) |
+| Panel B sin crisis | +0,0866** / +0,0502*** / +0,0045 | 682 — +0,0889** / +0,0485*** / +0,0071 (p=0,57) |
+| Panel C con controles | −0,0076 / +0,0281** / −0,0065 | 682 — −0,0392 (p=0,44) / +0,0267** / −0,0039 |
+| CM4 Backstop b3+b4 (PT) | −0,0146 (p=0,03) | −0,0120 (p=0,03) |
+| CM4 EMstress b3+b4 (PT / T / P) | +0,026 / +0,036 / +0,036 | +0,024 (p=0,13) / +0,055 (p=0,01) / +0,054 (p<0,001) |
+
+**Lectura:** Argentina no cambia ninguna conclusión del paper. H1 y H2 igual; H3 sigue sin
+sostenerse en promedio; Backstop sigue negativo. EMstress se refuerza con FE de tiempo y de país,
+pero con FE país+tiempo pierde significancia (p=0,13). Argentina hereda la salvedad de su GaR
+(sin bloque Ryr, ventana corta).
