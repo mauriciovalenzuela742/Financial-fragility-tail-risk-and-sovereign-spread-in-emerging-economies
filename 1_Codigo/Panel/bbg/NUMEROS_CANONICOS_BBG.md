@@ -1131,3 +1131,29 @@ como efectos causales.
 | PE: H0 lineal / H0 log | rechaza (p<0,001) / no rechaza (p=0,30) |
 | Box–Cox λ | 0,44 [0,38; 0,50] (excluye 0 y 1) |
 | JLoss malla ancha: b1 / percentil: b1 | +0,067 (p=0,22) / +0,266 (p=0,002) |
+
+## 13. Robustez a la forma funcional: especificación en niveles (2026-10-03)
+
+Misma muestra (embiext, 13 países, N=765) y mismos rezagos, con EMBI en pb y JLoss_{t-1} en niveles.
+Reproducir: `p12_tablas_latex_lnlag.py --niveles` (tablas `tablas_regresiones_nivlag_embiext*`),
+`JLOSS_FORMA=nivlag python p13_figuras_paper.py` (figuras `*_nivlag`, `paper_nivlag_numeros.csv`),
+`JLOSS_FORMA=nivlag python p14_arbitro_lnlag.py` (`paper_arbitro_nivlag_numeros.csv`) y
+`python p15_comparacion_formas.py` (`tabla_robustez_niveles.tex`). El modo por defecto (lnlag)
+reproduce byte a byte sus salidas anteriores.
+
+| Prueba | Log-log (principal) | Niveles (pb) |
+|---|---|---|
+| β1 / β2 / β3 principal | 0,0985*** / 0,0324** / −0,0112 | 4,73*** / 3,24 (p=0,27) / 0,246 (p=0,34) |
+| β3 sin crisis | 0,0045 | 1,294*** |
+| β1 con 6 controles / controles t−4 | −0,008 / 0,062 | 2,74*** / 4,27*** |
+| Canal inverso | 0,171*** | 0,014*** (100 pb → +1,4 JLoss) |
+| β1 dinámica corto / largo plazo | 0,005 / 0,078 | 0,49 (p=0,07) / 5,19 (p=0,11) |
+| Wild bootstrap p (β1/β2/β3) | 0,33 / 0,20 / 0,89 | 0,31 / 0,42 / 0,49 |
+| EMstress 2015-16 (DK / cluster) | 0,026 (0,08 / 0,11) | 1,21 (<0,001 / 0,009) |
+| Permutación EMstress | p=0,39 | p=0,41 |
+| Backstop (DK) | −0,015 (0,03) | −0,085 (0,46) |
+
+**Lectura:** en niveles la fragilidad resiste los controles y la amplificación aparece sin crisis y
+en EMstress (incluso con cluster país), pero ningún coeficiente resiste el wild bootstrap y EMstress
+no se distingue de ventanas al azar. Conclusión del paper sin cambios; la absorción por controles
+es propia de los logaritmos.

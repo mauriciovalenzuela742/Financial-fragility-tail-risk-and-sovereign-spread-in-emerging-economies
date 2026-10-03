@@ -109,18 +109,72 @@ LNLAG = dict(
 )
 
 
-def run():
-    p11.DEC = 4  # coeficientes de D e interaccion del orden de 0,01
-    sfx, spec = p11.panel_variant(LNLAG)
+# ---------------------------------------------------------------- especificacion en NIVELES (robustez)
+# Misma muestra y mismos rezagos que la log-log (_base_lag), pero el spread en puntos basicos y
+# JLoss_{t-1} en niveles: los coeficientes se leen directamente en pb.
+def prep_bat_niv():
+    d = _base_lag()
+    d["JLoss"] = d["JLoss_l1"]           # EMBI_bps queda en pb
+    d["GaR_pp"] = d["GaR_pp_l1"]
+    d["t"] = pd.PeriodIndex(d["quarter"], freq="Q").astype("int64")
+    return d
+
+
+def prep_cr_niv():
+    d = _base_lag()
+    d["_DV"] = d["EMBI_bps"]
+    d["JLoss"] = d["JLoss_l1"]
+    d["D_pp"] = -d["GaR_pp_l1"]
+    d["t"] = pd.PeriodIndex(d["quarter"], freq="Q").to_timestamp()
+    return d
+
+
+NIVLAG = dict(
+    LNLAG,
+    prep_bat=prep_bat_niv,
+    prep_cr=prep_cr_niv,
+    dv="EMBI (pb)",
+    jl=r"$JLoss_{t-1}$", dd=r"$D_{t-1}=-GaR_{t-1}$", jxd=r"$JLoss_{t-1}\times D_{t-1}$",
+    jm=r"JLoss_{t-1}", dm="D_{t-1}",
+    cap_bat="Spread soberano, fragilidad bancaria y riesgo de cola: especificación en niveles rezagada",
+    cap_cr="Spread soberano e interacción con el vector de crisis: especificación en niveles rezagada",
+    lab_bat="tab:bateria-nivlag", lab_cr="tab:crisis-nivlag",
+    intro_bat=(
+        r"La tabla reporta la especificación principal estimada en niveles: el spread soberano (EMBI Global "
+        r"Diversified, puntos básicos) sobre la fragilidad bancaria sistémica ($JLoss$) y el riesgo de cola del "
+        r"crecimiento ($D=-GaR$, pp), ambos rezagados un trimestre, y su interacción. La columna (1) del Panel A "
+        r"es $\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1 JLoss_{i,t-1}+\beta_2 D_{i,t-1}"
+        r"+\beta_3(JLoss_{i,t-1}\times D_{i,t-1})+\varepsilon_{i,t}$, con efectos fijos de país y de tiempo; el "
+        r"Panel C añade los seis controles domésticos."),
+    intro_cr=(
+        r"La columna (1) es la Ecuación de interacción de crisis completa en niveles, "
+        r"$\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1 JLoss_{t-1}+\beta_2 D_{t-1}+\beta_3(JLoss_{t-1}\times D_{t-1})"
+        r"+\beta_4(JLoss_{t-1}\times D_{t-1}\times Crisis_t)+\beta_5(JLoss_{t-1}\times Crisis_t)"
+        r"+\beta_6(D_{t-1}\times Crisis_t)+\omega'X_{i,t}+\varepsilon_{i,t}$, con efectos fijos de país y de "
+        r"tiempo; controles y vector de crisis contemporáneos."),
+    extra_note=(r" Robustez de la especificación principal sin transformación logarítmica: los coeficientes "
+                r"están en puntos básicos ($\beta_1$ por unidad de $JLoss$; $\beta_2$ por punto porcentual de $D$; "
+                r"$\beta_3$ por unidad de $JLoss$ y punto porcentual de $D$). Misma muestra y rezagos que la "
+                r"especificación logarítmica."),
+    extra_note_cr=(r" EMBI en puntos básicos; $JLoss$ y $D=-GaR$ (pp) en niveles, rezagados un trimestre, "
+                   r"como en la Tabla~\ref{tab:bateria-nivlag}."),
+    src_bat=r"\texttt{p12\_tablas\_latex\_lnlag.py --niveles} (ajuste de \texttt{p8\_bateria\_regresiones.py})",
+    src_cr=r"\texttt{p12\_tablas\_latex\_lnlag.py --niveles} (ajuste de \texttt{p9b\_bateria\_crisis.py})",
+)
+
+
+def run(niveles=False):
+    p11.DEC = 3 if niveles else 4  # en pb los coeficientes son de orden 0,1-10; en logs de orden 0,01
+    sfx, spec = p11.panel_variant(NIVLAG if niveles else LNLAG)
     t1, r1 = p11.tabla_bateria(spec)
     t2, f2 = p11.tabla_crisis(spec)
-    p11.write_tex(f"tablas_regresiones_lnlag{sfx}.tex", t1, t2)
+    p11.write_tex(f"tablas_regresiones_{'nivlag' if niveles else 'lnlag'}{sfx}.tex", t1, t2)
 
     # resumen en consola: columna de referencia y M4/CM4 por FE
     for s in ("completa", "sin crisis"):
         for fe in p11.FES:
             r = r1[(s, "M4", fe)]
-            print(f"M4 {s:10s} {fe:2s} N={r['N']}  lnJ={r['JLoss']['b']:+.3f} (p={r['JLoss']['p']:.3f})"
+            print(f"M4 {s:10s} {fe:2s} N={r['N']}  J={r['JLoss']['b']:+.3f} (p={r['JLoss']['p']:.3f})"
                   f"  D={r['GaR']['b']:+.4f} (p={r['GaR']['p']:.3f})  JxD={r['Int']['b']:+.4f} (p={r['Int']['p']:.3f})")
     for pn, nms in (("A_vector_unico", ["cr"]), ("B_backstop_emstress", ["bk", "em"])):
         for fe in p11.FES:
@@ -133,4 +187,5 @@ def run():
 
 
 if __name__ == "__main__":
-    run()
+    import sys
+    run(niveles="--niveles" in sys.argv)

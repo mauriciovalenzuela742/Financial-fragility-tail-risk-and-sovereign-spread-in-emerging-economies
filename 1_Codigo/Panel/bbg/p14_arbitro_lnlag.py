@@ -58,6 +58,8 @@ EM2018 = ["2018Q2", "2018Q3"]         # venta masiva EM 2018 (Argentina, Turquia
 EMSTRESS_EXT = TAPER + EM1516 + EM2018
 
 NUM = {}
+NIV = p13.NIV          # JLOSS_FORMA=nivlag: misma bateria sin logaritmos (EMBI en pb, JLoss en niveles)
+SFXF = "_nivlag" if NIV else ""
 
 
 def num(k, v):
@@ -91,6 +93,9 @@ def raw_panel():
     r["D_pp"] = -r["GaR_pp"]
     r["ln_EMBI"] = np.log(r["EMBI_bps"].where(r["EMBI_bps"] > 0))
     r["ln_JLoss"] = np.log(r["JLoss"].where(r["JLoss"] > 0))
+    if NIV:
+        r["ln_EMBI"] = r["EMBI_bps"]
+        r["ln_JLoss"] = r["JLoss"]
     c = pd.read_csv(CANON)[["country", "quarter", "USD_NEER_log", "CTOT_shock"]]
     return r.merge(c, on=["country", "quarter"], how="left")
 
@@ -121,7 +126,8 @@ def base():
 
 def check_principal(d):
     m, dd = p13.fit(d)
-    assert int(m.nobs) == 765 and abs(m.params["JxT"] + 0.0112) < 5e-4, (m.nobs, m.params["JxT"])
+    ref = 0.2464 if NIV else -0.0112
+    assert int(m.nobs) == 765 and abs(m.params["JxT"] - ref) < 5e-4, (m.nobs, m.params["JxT"])
     return m, dd
 
 
@@ -228,12 +234,12 @@ def bloque_lp(d, raw, H=6):
         num(f"arb_lp_h{h}_D", m.params["D_l1"]); num(f"arb_lp_h{h}_D_p", m.pvalues["D_l1"])
     t = pd.DataFrame(rows, columns=["h", "bJ", "seJ", "bD", "seD", "N"])
     fig, axes = plt.subplots(1, 2, figsize=(10, 3.8))
-    for ax, b, se, lab, col in ((axes[0], "bJ", "seJ", r"ln JLoss$_{t-1}$", BLUE),
+    for ax, b, se, lab, col in ((axes[0], "bJ", "seJ", p13.LAB["x"], BLUE),
                                 (axes[1], "bD", "seD", r"D$_{t-1}$", ORANGE)):
         ax.axhline(0, color=INK2, lw=0.8)
         ax.fill_between(t.h, t[b] - 1.96 * t[se], t[b] + 1.96 * t[se], color=col, alpha=0.15, lw=0)
         ax.plot(t.h, t[b], "o-", color=col, lw=1.8)
-        ax.set_xlabel("horizonte h (trimestres)"); ax.set_title(f"Respuesta de ln EMBI$_{{t+h}}$ a {lab}", fontsize=9.5)
+        ax.set_xlabel("horizonte h (trimestres)"); ax.set_title(f"Respuesta de {'EMBI' if NIV else 'ln EMBI'}$_{{t+h}}$ a {lab}", fontsize=9.5)
     axes[0].set_ylabel("coeficiente (IC 95 %)")
     p13.save(fig, "fig_lp_lnlag_arb")
     return t
@@ -298,7 +304,7 @@ def bloque_boot_gar(d0, m0, raw):
 
 # ================================================================ 5. EMstress extendido y permutacion
 def bloque_emstress():
-    dc = p12.prep_cr()
+    dc = (p12.prep_cr_niv if NIV else p12.prep_cr)()
     ctr = [c for c in CTRLS if c in dc.columns and dc[c].notna().sum() > 50]
     out = {}
     for lab, dums in (("ext", {"bk": p9b.BACKSTOP_Q, "em": EMSTRESS_EXT}),
@@ -418,7 +424,7 @@ def tabla_chari(d):
                  "VIX", "UST10Y_log", "US_HY_spread_log", "OnOffRun_spread_log"], "P"),
         ("(6)", ["ln_JLoss_l1", "D_l1", "fx_vol", "prof_margin", "debt_gdp", "res_gdp", "ca_gdp"], "PT"),
     ]
-    lab = {"ln_JLoss_l1": r"$\ln JLoss_{t-1}$", "D_l1": r"$D_{t-1}=-GaR_{t-1}$",
+    lab = {"ln_JLoss_l1": r"$JLoss_{t-1}$" if NIV else r"$\ln JLoss_{t-1}$", "D_l1": r"$D_{t-1}=-GaR_{t-1}$",
            "fx_vol": "Volatilidad cambiaria", "prof_margin": r"Margen de utilidad bancario (\%)",
            "debt_gdp": r"Deuda/PIB (\%)", "res_gdp": r"Reservas/PIB (\%)", "ca_gdp": r"Cuenta corriente/PIB (\%)",
            "VIX": "VIX", "UST10Y_log": r"$\ln$ tasa Tesoro EE.UU.\ 10 años",
@@ -434,8 +440,9 @@ def tabla_chari(d):
     order = list(lab)
     L = [r"\begin{table}[htbp]", r"\centering", r"\footnotesize", r"\setlength{\tabcolsep}{4pt}",
          r"\caption[Batería estilo Chari et al.\ (2024)]{Spread soberano y fragilidad bancaria: batería de "
-         r"controles al estilo de la Tabla 4 de \citet{Chari2024b} (variable dependiente: $\ln$ EMBI)}",
-         r"\label{tab:chari-arb}", r"\begin{tabular}{l" + "c" * len(fits) + "}", r"\toprule",
+         r"controles al estilo de la Tabla 4 de \citet{Chari2024b} (variable dependiente: "
+         + ("EMBI en pb" if NIV else r"$\ln$ EMBI") + ")}",
+         r"\label{tab:chari-arb" + SFXF.replace("_", "-") + "}", r"\begin{tabular}{l" + "c" * len(fits) + "}", r"\toprule",
          " & " + " & ".join(n for n, _, _ in fits) + r" \\", r"\midrule"]
     for v in order:
         if not any(v in m.params.index for _, _, m in fits):
@@ -458,9 +465,9 @@ def tabla_chari(d):
           r"\citet{Chari2024b} también incluyen. Errores de Driscoll--Kraay entre paréntesis. ***, ** y * indican "
           r"significancia al 1\%, 5\% y 10\%. Fuente: \texttt{p14\_arbitro\_lnlag.py}.}",
           r"\end{table}"]
-    with open(os.path.join(TAB, "tabla_arbitro_chari.tex"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(TAB, f"tabla_arbitro_chari{SFXF}.tex"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(L) + "\n")
-    print("  tabla_arbitro_chari.tex")
+    print(f"  tabla_arbitro_chari{SFXF}.tex")
 
 
 # ================================================================ 7. forma funcional
@@ -517,7 +524,7 @@ def bloque_forma(d):
 def bloque_jloss(d, raw):
     w = pd.read_csv(WIDE); w["country"] = w["countryname"].str.lower()
     q = pd.PeriodIndex(w["quarter"], freq="Q"); w["_qn"] = q.year * 4 + q.quarter + 1
-    w["ln_JLoss_wide_l1"] = np.log(w["JLoss"])
+    w["ln_JLoss_wide_l1"] = w["JLoss"] if NIV else np.log(w["JLoss"])
     dd = d.merge(w[["country", "_qn", "ln_JLoss_wide_l1"]], on=["country", "_qn"], how="left")
     num("arb_wide_corr", dd[["ln_JLoss_l1", "ln_JLoss_wide_l1"]].corr().iloc[0, 1])
     x = dd.dropna(subset=["ln_JLoss_wide_l1"]).copy()
@@ -566,7 +573,8 @@ def tabla_resumen():
     ]
     L = [r"\begin{table}[htbp]", r"\centering", r"\footnotesize",
          r"\caption[Pruebas de identificación, inferencia y medición]{Pruebas de identificación, inferencia y "
-         r"medición sobre la especificación principal}", r"\label{tab:arbitro}",
+         r"medición sobre la especificación principal" + (" en niveles (pb)" if NIV else "") + "}",
+         r"\label{tab:arbitro" + SFXF.replace("_", "-") + "}",
          r"\begin{tabular}{lcc}", r"\toprule", r"Prueba & Coeficiente & $p$ \\", r"\midrule"]
     for lab, keys in filas:
         if keys is None:
@@ -587,9 +595,12 @@ def tabla_resumen():
           r"error estándar de Driscoll--Kraay combinado en cuadratura con la dispersión de 500 réplicas "
           r"\textit{bootstrap} de la primera etapa del $GaR$. Fuente: \texttt{p14\_arbitro\_lnlag.py}.}",
           r"\end{table}"]
-    with open(os.path.join(TAB, "tabla_arbitro_resumen.tex"), "w", encoding="utf-8") as fh:
-        fh.write("\n".join(L) + "\n")
-    print("  tabla_arbitro_resumen.tex")
+    tex = "\n".join(L) + "\n"
+    if NIV:
+        tex = tex.replace(r"$\ln JLoss", r"$JLoss").replace(r"$\ln$ EMBI", "EMBI").replace(r"$+\ln$ EMBI", "$+$EMBI")
+    with open(os.path.join(TAB, f"tabla_arbitro_resumen{SFXF}.tex"), "w", encoding="utf-8") as fh:
+        fh.write(tex)
+    print(f"  tabla_arbitro_resumen{SFXF}.tex")
 
 
 def main():
@@ -599,7 +610,7 @@ def main():
     d, raw = base()
     m0, dd0 = check_principal(d)
     print("  principal reproducida (N=765, b3=-0,0112)")
-    out = os.path.join(HERE, "paper_arbitro_numeros.csv")
+    out = os.path.join(HERE, f"paper_arbitro{SFXF}_numeros.csv")
 
     def guardar(msg):   # se guarda tras cada bloque: un fallo posterior no borra lo ya calculado
         pd.Series(NUM, name="valor").rename_axis("clave").to_csv(out)
@@ -611,7 +622,8 @@ def main():
     bloque_boot_gar(d, m0, raw); guardar("4. regresor generado")
     bloque_emstress(); guardar("5. EMstress")
     bloque_controles(d); tabla_chari(d); guardar("6. controles")
-    bloque_forma(d); guardar("7. forma funcional")
+    if not NIV:   # PE y Box-Cox comparan ambas formas: no dependen del modo
+        bloque_forma(d); guardar("7. forma funcional")
     bloque_jloss(d, raw); guardar("8. medicion JLoss")
     tabla_resumen(); guardar("tabla resumen")
 

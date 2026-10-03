@@ -1,0 +1,41 @@
+\begin{table}[htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption[Batería estilo Chari et al.\ (2024)]{Spread soberano y fragilidad bancaria: batería de controles al estilo de la Tabla 4 de \citet{Chari2024b} (variable dependiente: EMBI en pb)}
+\label{tab:chari-arb-nivlag}
+\begin{tabular}{lcccccc}
+\toprule
+ & (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+$JLoss_{t-1}$ & $5{,}039^{***}$ & $4{,}430^{***}$ & $5{,}953^{***}$ & $6{,}721^{***}$ & $6{,}105^{***}$ & $5{,}550^{***}$ \\
+ & $(1{,}229)$ & $(1{,}244)$ & $(1{,}118)$ & $(1{,}040)$ & $(0{,}888)$ & $(0{,}985)$ \\
+$D_{t-1}=-GaR_{t-1}$ &  &  &  &  & $4{,}091^{**}$ & $5{,}365^{**}$ \\
+ &  &  &  &  & $(1{,}607)$ & $(2{,}480)$ \\
+Volatilidad cambiaria &  & $792{,}869^{***}$ & $746{,}901^{***}$ & $908{,}165^{***}$ & $890{,}143^{***}$ & $708{,}965^{***}$ \\
+ &  & $(207{,}073)$ & $(224{,}122)$ & $(243{,}974)$ & $(230{,}629)$ & $(205{,}761)$ \\
+Margen de utilidad bancario (\%) &  & $1{,}387^{*}$ & $2{,}093^{***}$ & $1{,}668^{***}$ & $2{,}154^{***}$ & $2{,}276^{***}$ \\
+ &  & $(0{,}816)$ & $(0{,}645)$ & $(0{,}574)$ & $(0{,}581)$ & $(0{,}648)$ \\
+Deuda/PIB (\%) &  &  & $-0{,}728$ & $-0{,}099$ & $-0{,}452$ & $-0{,}788$ \\
+ &  &  & $(0{,}617)$ & $(0{,}350)$ & $(0{,}351)$ & $(0{,}621)$ \\
+Reservas/PIB (\%) &  &  & $2{,}215$ & $2{,}822^{**}$ & $2{,}569^{**}$ & $2{,}286$ \\
+ &  &  & $(1{,}429)$ & $(1{,}357)$ & $(1{,}248)$ & $(1{,}443)$ \\
+Cuenta corriente/PIB (\%) &  &  & $-4{,}260^{**}$ & $-3{,}207^{**}$ & $-3{,}858^{***}$ & $-4{,}623^{***}$ \\
+ &  &  & $(1{,}797)$ & $(1{,}347)$ & $(1{,}226)$ & $(1{,}608)$ \\
+VIX &  &  &  & $1{,}319$ & $0{,}957$ &  \\
+ &  &  &  & $(0{,}945)$ & $(0{,}861)$ &  \\
+$\ln$ tasa Tesoro EE.UU.\ 10 años &  &  &  & $-8{,}026$ & $-5{,}082$ &  \\
+ &  &  &  & $(9{,}059)$ & $(9{,}274)$ &  \\
+$\ln$ spread alto rendimiento EE.UU. &  &  &  & $42{,}929^{**}$ & $35{,}121^{*}$ &  \\
+ &  &  &  & $(17{,}286)$ & $(19{,}690)$ &  \\
+$\ln$ spread on/off-the-run &  &  &  & $99{,}107^{**}$ & $81{,}162^{**}$ &  \\
+ &  &  &  & $(40{,}540)$ & $(37{,}390)$ &  \\
+\midrule
+Observaciones & 765 & 765 & 662 & 662 & 662 & 662 \\
+$R^2$ \textit{within} & $0{,}158$ & $0{,}289$ & $0{,}295$ & $0{,}388$ & $0{,}408$ & $0{,}368$ \\
+EF de país & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ \\
+EF de tiempo & SÍ & SÍ & SÍ & NO & NO & SÍ \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{0.95\linewidth}{\scriptsize \textit{Nota:} Réplica de la estructura de la Tabla 4 de \citet{Chari2024b} con los datos de este trabajo: $JLoss$ rezagado un trimestre y controles que se incorporan progresivamente; las columnas (4) y (5) reemplazan los efectos fijos de tiempo por factores financieros globales. Volatilidad cambiaria y margen de utilidad del sistema bancario de Bloomberg; no se dispone de la serie histórica de la calificación soberana ni del PIB per cápita, que \citet{Chari2024b} también incluyen. Errores de Driscoll--Kraay entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%. Fuente: \texttt{p14\_arbitro\_lnlag.py}.}
+\end{table}
