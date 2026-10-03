@@ -64,6 +64,31 @@ NOMBRE = {"brazil": "Brasil", "chile": "Chile", "china": "China", "colombia": "C
           "argentina": "Argentina", "pakistan": "Pakistán"}
 NUM = {}                                           # cifras citadas en el texto -> csv
 
+# JLOSS_FORMA=nivlag: misma especificacion SIN logaritmos (EMBI en pb, JLoss_{t-1} en niveles), como
+# robustez. Se implementa sobrescribiendo ln_EMBI/ln_JLoss_l1 con sus niveles en datos(): todas las
+# funciones de estimacion se reutilizan tal cual; cambian rotulos, unidades y nombres de salida.
+FORMA = os.environ.get("JLOSS_FORMA", "lnlag")
+NIV = FORMA == "nivlag"
+ESC = 1.0 if NIV else 100.0       # aportes: pb (niveles) o log-puntos x 100 (logs)
+LAB = dict(
+    y="EMBI$_t$ (pb)" if NIV else "ln EMBI$_t$",
+    x="JLoss$_{t-1}$" if NIV else "ln JLoss$_{t-1}$",
+    me=(r"$\partial\,$EMBI$/\partial\,$JLoss$_{t-1}$  (pb por unidad)" if NIV
+        else r"$\partial\,\ln$EMBI$/\partial\,\ln$JLoss$_{t-1}$  (elasticidad)"),
+    spec="niveles rezagada" if NIV else "log-log rezagada",
+    inter=r"$JLoss_{t-1}\times D_{t-1}$" if NIV else r"$\ln JLoss_{t-1}\times D_{t-1}$",
+    aporte="aporte al spread (pb)" if NIV else "aporte al spread (%)",
+    sup_t=("(pb; iso-curvas paralelas = sin amplificación)" if NIV
+           else "(% respecto del spread medio; iso-curvas paralelas = sin amplificación)"),
+    umbral=("pb de EMBI por unidad de JLoss$_{t-1}$" if NIV else "elasticidad de EMBI a JLoss$_{t-1}$"),
+    contab_x=("aporte al cambio del spread (pb)" if NIV
+              else "aporte al cambio del spread (log-puntos × 100 ≈ %)"),
+    contab_obs="Δ EMBI observado (pb)" if NIV else "Δ ln EMBI observado (× 100)",
+    prima=(r"Prima de amplificación $\hat\beta_3(JLoss_c\times D_c)$ — pb del spread atribuibles a la "
+           if NIV else
+           r"Prima de amplificación $\hat\beta_3(\ln JLoss_c\times D_c)$ — % del spread atribuible a la "),
+)
+
 
 def num(key, value):
     NUM[key] = float(value)
@@ -71,6 +96,8 @@ def num(key, value):
 
 
 def save(fig, name):
+    if NIV:
+        name = name.replace("_lnlag", "_nivlag") if "_lnlag" in name else name + "_nivlag"
     fig.tight_layout()
     for ext in ("pdf", "png"):
         out = os.path.join(FIG, f"{name}.{ext}")
@@ -100,6 +127,9 @@ def datos():
     raw["prob_neg_l1"] = gr["prob_neg"].shift(1).where(consec)
     d = d.merge(raw[["country", "quarter", "ES_l1", "prob_neg_l1"]], on=["country", "quarter"], how="left")
     d["DES_l1"] = -d["ES_l1"]      # cola con Expected Shortfall en forma D (mayor = cola mas adversa)
+    if NIV:                        # especificacion en niveles: mismas columnas, sin logaritmo
+        d["ln_EMBI"] = d["EMBI_bps"]
+        d["ln_JLoss_l1"] = d["JLoss_l1"]
     return d
 
 
@@ -123,7 +153,8 @@ def fit(dd, fe="PT", tail="D_l1", ctr=(), cov="dk", extra=None):
 def estimar_principal(d):
     m, dd = fit(d)
     # debe reproducir la columna (1) del Panel A de la Tabla 1 (p12 / p8.fit_one en forma GaR)
-    assert int(m.nobs) == 765 and abs(m.params["JxT"] - (-0.0112)) < 5e-4, (m.nobs, m.params["JxT"])
+    ref = 0.2464 if NIV else -0.0112   # columna (1) del Panel A de la tabla de la forma respectiva
+    assert int(m.nobs) == 765 and abs(m.params["JxT"] - ref) < 5e-4, (m.nobs, m.params["JxT"])
     for k, n in (("b1", "J_c"), ("b2", "T_c"), ("b3", "JxT")):
         num(f"principal_{k}", m.params[n]); num(f"principal_{k}_se", m.std_errors[n])
         num(f"principal_{k}_p", m.pvalues[n])
@@ -442,9 +473,9 @@ def fig_efecto_marginal(m, dd):
         num(f"me_p{pc}", y[0]); num(f"me_p{pc}_se", s[0]); num(f"me_p{pc}_D", x)
     ax.plot(dd["D_l1"], np.full(len(dd), ax.get_ylim()[0]), "|", color=INK2, alpha=0.3, ms=6)
     ax.set_xlabel("D$_{t-1}$ = −GaR$_{t-1}$ (pp) — derecha = cola más adversa")
-    ax.set_ylabel(r"$\partial\,\ln$EMBI$/\partial\,\ln$JLoss$_{t-1}$  (elasticidad)")
+    ax.set_ylabel(LAB["me"])
     ax.set_title("Efecto marginal de la fragilidad bancaria según el riesgo de cola\n"
-                 "(regresión principal: log-log rezagada, FE país + tiempo)", fontsize=9.5)
+                 f"(regresión principal: {LAB['spec']}, FE país + tiempo)", fontsize=9.5)
     ax.legend(loc="upper right", fontsize=8)
     save(fig, "fig_efecto_marginal_lnlag")
 
@@ -454,19 +485,20 @@ def fig_superficie(m, dd):
     dg = np.linspace(dd["D_l1"].quantile(.02), dd["D_l1"].quantile(.98), 120)
     JJ, DD = np.meshgrid(jg, dg)
     Jc, Dc = JJ - dd["ln_JLoss_l1"].mean(), DD - dd["D_l1"].mean()
-    S = 100 * (m.params["J_c"] * Jc + m.params["T_c"] * Dc + m.params["JxT"] * Jc * Dc)
+    S = ESC * (m.params["J_c"] * Jc + m.params["T_c"] * Dc + m.params["JxT"] * Jc * Dc)
     fig, ax = plt.subplots(figsize=(7.8, 5.6))
     lim = np.abs(S).max()
-    cf = ax.contourf(np.exp(JJ), DD, S, levels=18, cmap="RdYlBu_r", vmin=-lim, vmax=lim)
-    cs = ax.contour(np.exp(JJ), DD, S, levels=10, colors="k", linewidths=0.5, alpha=0.5)
+    XJ = JJ if NIV else np.exp(JJ)
+    cf = ax.contourf(XJ, DD, S, levels=18, cmap="RdYlBu_r", vmin=-lim, vmax=lim)
+    cs = ax.contour(XJ, DD, S, levels=10, colors="k", linewidths=0.5, alpha=0.5)
     ax.clabel(cs, inline=True, fontsize=7, fmt="%.0f")
-    ax.scatter(np.exp(dd["ln_JLoss_l1"]), dd["D_l1"], s=6, color=INK, alpha=0.25)
+    ax.scatter(dd["ln_JLoss_l1"] if NIV else np.exp(dd["ln_JLoss_l1"]), dd["D_l1"], s=6, color=INK, alpha=0.25)
     ax.set_xscale("log")
     ax.set_xlabel("JLoss$_{t-1}$ (escala logarítmica)")
     ax.set_ylabel("D$_{t-1}$ = −GaR (pp) — arriba = cola más adversa")
     ax.set_title("Superficie de complementariedad: aporte de JLoss, D y su interacción al spread\n"
-                 "(% respecto del spread medio; iso-curvas paralelas = sin amplificación)", fontsize=9.5)
-    fig.colorbar(cf, ax=ax, label="aporte al spread (%)")
+                 + LAB["sup_t"], fontsize=9.5)
+    fig.colorbar(cf, ax=ax, label=LAB["aporte"])
     save(fig, "fig_superficie_lnlag")
 
 
@@ -484,8 +516,8 @@ def fig_binscatter(dd):
         ax.scatter(bs["J"], bs["E"], color=pal[terc], s=45, zorder=4)
         ax.plot(xs, np.polyval(b, xs), color=pal[terc], lw=2, label=f"{terc}: pendiente {b[0]:.2f}")
         num(f"binscatter_pendiente_{terc.replace(' ', '_')}", b[0])
-    ax.set_xlabel("ln JLoss$_{t-1}$"); ax.set_ylabel("ln EMBI$_t$")
-    ax.set_title("Binscatter de ln EMBI sobre ln JLoss$_{t-1}$ por tercil de D$_{t-1}$\n"
+    ax.set_xlabel(LAB["x"]); ax.set_ylabel(LAB["y"])
+    ax.set_title(f"Binscatter de {LAB['y']} sobre {LAB['x']} por tercil de D$_{{t-1}}$\n"
                  "(agrupado, sin efectos fijos; 8 bins por tercil)", fontsize=9.5)
     ax.legend(fontsize=8)
     save(fig, "fig_binscatter_lnlag")
@@ -551,7 +583,7 @@ def fig_umbral(dd):
     axes[1].set_xticks([0, 1]); axes[1].set_xticklabels(["cola severa\n(D > γ̂)", "benigno\n(D ≤ γ̂)"])
     for k, v in enumerate(vals):
         axes[1].annotate(f"{v:+.3f}", (k, v), ha="center", va="bottom" if v >= 0 else "top", fontsize=9)
-    axes[1].set_ylabel("elasticidad de EMBI a JLoss$_{t-1}$")
+    axes[1].set_ylabel(LAB["umbral"])
     axes[1].set_title("Efecto por régimen (IC 95 %)", fontsize=9.5)
     save(fig, "fig_umbral_lnlag")
 
@@ -588,7 +620,7 @@ def fig_forest(d, m0):
         ax.plot(b, i, "o", color=col, ms=5)
     ax.axvline(0, color=INK2, lw=0.8)
     ax.set_yticks(range(len(rows))); ax.set_yticklabels([f"{r[0]} (N={r[3]})" for r in rows], fontsize=7.8)
-    ax.set_xlabel(r"$\hat\beta_3$  ($\ln JLoss_{t-1}\times D_{t-1}$), IC 95 %")
+    ax.set_xlabel(r"$\hat\beta_3$  (" + LAB["inter"] + "), IC 95 %")
     ax.set_title("Coeficiente de interacción por especificación (azul: signo de amplificación)", fontsize=9.5)
     npos = sum(1 for r in rows if r[1] > 0)
     nsig = sum(1 for r in rows if abs(r[1] / r[2]) > 1.96)
@@ -641,7 +673,7 @@ def fig_ventanas(d):
 
 
 def fig_crisis_regimen():
-    dc = p12.prep_cr()
+    dc = (p12.prep_cr_niv if NIV else p12.prep_cr)()
     ctr = [c for c in CTRLS if c in dc.columns and dc[c].notna().sum() > 50]
     m, dd, _ = p9b.fit_crisis_model(dc, "CM4", {"bk": p9b.BACKSTOP_Q, "em": EM1516}, "PT", ctr)
     assert int(m.nobs) == 649
@@ -664,7 +696,7 @@ def fig_crisis_regimen():
         b, s_ = p9b._lincom(m, lv)[:2]
         num(f"crisis_nivel_{lab.split()[0]}", b); num(f"crisis_nivel_{lab.split()[0]}_se", s_)
     ax.set_xlabel("D$_{t-1}$ = −GaR (pp) — derecha = cola más adversa")
-    ax.set_ylabel(r"$\partial\,\ln$EMBI$/\partial\,\ln$JLoss$_{t-1}$")
+    ax.set_ylabel(LAB["me"])
     ax.set_title("Efecto marginal de la fragilidad según el riesgo de cola, por régimen de crisis\n"
                  "(CM4, FE país + tiempo, seis controles)", fontsize=9.5)
     ax.legend(loc="upper left", fontsize=8)
@@ -678,22 +710,22 @@ def fig_contabilidad(m, dd, q0="2019Q4", q1="2020Q2"):
         a, b = g[g.quarter == q0], g[g.quarter == q1]
         if len(a) and len(b):
             a, b = a.iloc[0], b.iloc[0]
-            rows.append(dict(c=NOMBRE[c], J=100 * b1 * (b.J_c - a.J_c), D=100 * b2 * (b.T_c - a.T_c),
-                             I=100 * b3 * (b.J_c * b.T_c - a.J_c * a.T_c),
-                             obs=100 * (b.ln_EMBI - a.ln_EMBI)))
+            rows.append(dict(c=NOMBRE[c], J=ESC * b1 * (b.J_c - a.J_c), D=ESC * b2 * (b.T_c - a.T_c),
+                             I=ESC * b3 * (b.J_c * b.T_c - a.J_c * a.T_c),
+                             obs=ESC * (b.ln_EMBI - a.ln_EMBI)))
     t = pd.DataFrame(rows).sort_values("obs")
     fig, ax = plt.subplots(figsize=(8.4, 0.42 * len(t) + 1.4))
     y = np.arange(len(t))
-    for col, key, lab in ((RED, "J", "ln JLoss$_{t-1}$"), (GREEN, "D", "D$_{t-1}$"), ("#8e44ad", "I", "interacción")):
+    for col, key, lab in ((RED, "J", LAB["x"]), (GREEN, "D", "D$_{t-1}$"), ("#8e44ad", "I", "interacción")):
         pos = t[key].clip(lower=0); neg = t[key].clip(upper=0)
         left_p = t[[k for k in ("J", "D", "I")][: ["J", "D", "I"].index(key)]].clip(lower=0).sum(axis=1)
         left_n = t[[k for k in ("J", "D", "I")][: ["J", "D", "I"].index(key)]].clip(upper=0).sum(axis=1)
         ax.barh(y, pos, left=left_p, color=col, label=lab, height=0.6)
         ax.barh(y, neg, left=left_n, color=col, height=0.6)
-    ax.plot(t["obs"], y, "D", color=INK, ms=5, label="Δ ln EMBI observado (× 100)")
+    ax.plot(t["obs"], y, "D", color=INK, ms=5, label=LAB["contab_obs"])
     ax.axvline(0, color=INK2, lw=0.8)
     ax.set_yticks(y); ax.set_yticklabels(t["c"], fontsize=8)
-    ax.set_xlabel("aporte al cambio del spread (log-puntos × 100 ≈ %)")
+    ax.set_xlabel(LAB["contab_x"])
     ax.set_title(f"Contabilidad del spread en el choque COVID ({q0} → {q1})", fontsize=9.5)
     ax.legend(fontsize=7.5, loc="lower right")
     num("contab_obs_media", t["obs"].mean())
@@ -705,7 +737,7 @@ def fig_contabilidad(m, dd, q0="2019Q4", q1="2020Q2"):
 
 def fig_prima(m, dd):
     dd = dd.copy()
-    dd["prima"] = 100 * m.params["JxT"] * dd["J_c"] * dd["T_c"]
+    dd["prima"] = ESC * m.params["JxT"] * dd["J_c"] * dd["T_c"]
     cs = sorted(dd.country.unique())
     fig, axes = _grid(len(cs), h=2.0)
     for ax, c in zip(axes, cs):
@@ -716,8 +748,8 @@ def fig_prima(m, dd):
         ax.set_title(NOMBRE[c], fontsize=8.5)
     for ax in axes[len(cs):]:
         ax.set_visible(False)
-    fig.suptitle(r"Prima de amplificación $\hat\beta_3(\ln JLoss_c\times D_c)$ — % del spread atribuible a la "
-                 "interacción (rojo: amplifica; verde: atenúa)", y=1.005, fontsize=10)
+    fig.suptitle(LAB["prima"]
+                 + "interacción (rojo: amplifica; verde: atenúa)", y=1.005, fontsize=10)
     num("prima_media_abs", dd["prima"].abs().mean()); num("prima_max", dd["prima"].max())
     num("prima_min", dd["prima"].min()); num("prima_share_pos", (dd["prima"] > 0).mean())
     save(fig, "fig_prima_lnlag")
@@ -816,15 +848,16 @@ def main():
     d = dd  # muestra de estimacion de la regresion principal (N=765)
     print(f"  principal: N={int(m0.nobs)}  b1={m0.params['J_c']:+.4f}  b2={m0.params['T_c']:+.4f}  "
           f"b3={m0.params['JxT']:+.4f} (p={m0.pvalues['JxT']:.3f})")
-    fig_cobertura(d)
-    fig_jloss_d_paises(d)
-    fig_comovimiento(d)
-    fig_distribuciones(d)
-    fig_correlaciones(d)
-    fig_comov_pais(d)
-    fig_skewt_chile()
-    fig_series_pais(d)
-    tabla_descriptivos(d)
+    if not NIV:   # descriptivas: no dependen de la transformacion (se citan las de la version log)
+        fig_cobertura(d)
+        fig_jloss_d_paises(d)
+        fig_comovimiento(d)
+        fig_distribuciones(d)
+        fig_correlaciones(d)
+        fig_comov_pais(d)
+        fig_skewt_chile()
+        fig_series_pais(d)
+        tabla_descriptivos(d)
     fig_efecto_marginal(m0, dd)
     fig_superficie(m0, dd)
     fig_binscatter(dd)
@@ -835,10 +868,11 @@ def main():
     fig_crisis_regimen()
     fig_contabilidad(m0, dd)
     fig_prima(m0, dd)
-    descomposicion_especificacion(d)
-    complementariedad_implicita(m0, dd)
+    if not NIV:   # la descomposicion 2x2 no depende del modo; la complementariedad implicita es solo de logs
+        descomposicion_especificacion(d)
+        complementariedad_implicita(m0, dd)
     diagnostico_controles(d)
-    out = os.path.join(HERE, "paper_lnlag_numeros.csv")
+    out = os.path.join(HERE, f"paper_{FORMA}_numeros.csv")
     pd.Series(NUM, name="valor").rename_axis("clave").to_csv(out)
     print(f"  {len(NUM)} cifras -> {os.path.basename(out)}")
 

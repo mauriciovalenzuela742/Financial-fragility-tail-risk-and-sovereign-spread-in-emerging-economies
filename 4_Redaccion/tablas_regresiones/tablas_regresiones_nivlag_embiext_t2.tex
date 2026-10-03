@@ -1,0 +1,100 @@
+\begin{landscape}
+\begin{table}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.8pt}
+\renewcommand{\arraystretch}{0.86}
+\caption[Spread soberano e interacción con el vector de crisis: especificación en niveles rezagada (EMBI extendido) (vector único)]{\textbf{Spread soberano e interacción con el vector de crisis: especificación en niveles rezagada (EMBI extendido) (vector único).}}
+\label{tab:crisis-nivlag-embiext}
+\begin{adjustbox}{max width=\linewidth, max totalheight=0.66\textheight}
+\begin{tabular}{l c ccc ccc ccc cc}
+\toprule
+EMBI (pb)
+& \multicolumn{1}{c}{Referencia} & \multicolumn{3}{c}{CM1} & \multicolumn{3}{c}{CM2} & \multicolumn{3}{c}{CM3} & \multicolumn{2}{c}{CM4} \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}\cmidrule(lr){12-13}
+& (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9) & (10) & (11) & (12) \\
+\midrule
+\multicolumn{13}{l}{\textit{Panel A. Vector único de crisis} ($Crisis$: 2008Q4--2009Q4, 2015Q3--2016Q1, 2020Q1--2021Q4)} \\[2pt]
+$JLoss_{t-1}$ & $2{,}192^{*}$ & $1{,}597$ & $4{,}047^{***}$ & $2{,}093^{**}$ &  &  &  & $2{,}291$ & $3{,}292^{***}$ & $1{,}868^{**}$ & $2{,}592$ & $3{,}492^{***}$ \\
+ & $(1{,}256)$ & $(1{,}949)$ & $(1{,}070)$ & $(1{,}028)$ &  &  &  & $(2{,}105)$ & $(1{,}019)$ & $(0{,}914)$ & $(2{,}532)$ & $(1{,}278)$ \\
+$D_{t-1}=-GaR_{t-1}$ & $4{,}790^{**}$ &  &  &  & $3{,}384$ & $8{,}676^{***}$ & $5{,}784^{***}$ & $4{,}376^{*}$ & $7{,}544^{***}$ & $4{,}808^{**}$ & $4{,}567^{*}$ & $7{,}483^{***}$ \\
+ & $(1{,}902)$ &  &  &  & $(2{,}371)$ & $(1{,}570)$ & $(2{,}144)$ & $(2{,}607)$ & $(1{,}465)$ & $(2{,}009)$ & $(2{,}590)$ & $(1{,}315)$ \\
+$JLoss_{t-1}\times D_{t-1}$ ($\beta_3$) & $0{,}860^{**}$ &  &  &  &  &  &  &  &  &  & $0{,}586$ & $0{,}710^{*}$ \\
+ & $(0{,}388)$ &  &  &  &  &  &  &  &  &  & $(0{,}658)$ & $(0{,}393)$ \\
+$JLoss_{t-1}\times Crisis$ & $2{,}160$ & $3{,}812^{**}$ & $1{,}945$ & $2{,}510^{**}$ &  &  &  & $3{,}978^{**}$ & $1{,}805$ & $2{,}437^{*}$ & $4{,}231^{*}$ & $1{,}417$ \\
+ & $(1{,}484)$ & $(1{,}863)$ & $(1{,}418)$ & $(1{,}271)$ &  &  &  & $(2{,}021)$ & $(1{,}216)$ & $(1{,}375)$ & $(2{,}345)$ & $(1{,}353)$ \\
+$D_{t-1}\times Crisis$ & $-1{,}100$ &  &  &  & $-0{,}188$ & $-4{,}277^{**}$ & $-2{,}044$ & $0{,}778$ & $-4{,}373^{**}$ & $-1{,}040$ & $1{,}694$ & $-4{,}798^{***}$ \\
+ & $(3{,}253)$ &  &  &  & $(4{,}937)$ & $(2{,}152)$ & $(3{,}630)$ & $(4{,}829)$ & $(1{,}874)$ & $(3{,}403)$ & $(4{,}449)$ & $(1{,}844)$ \\
+$JLoss_{t-1}\times D_{t-1}\times Crisis$ ($\beta_4$) & $-0{,}897^{**}$ &  &  &  &  &  &  &  &  &  & $-0{,}985$ & $-0{,}627$ \\
+ & $(0{,}420)$ &  &  &  &  &  &  &  &  &  & $(0{,}699)$ & $(0{,}440)$ \\
+$\beta_3+\beta_4$ & $-0{,}037$ &  &  &  &  &  &  &  &  &  & $-0{,}399^{*}$ & $0{,}083$ \\
+ & $(0{,}119)$ &  &  &  &  &  &  &  &  &  & $(0{,}220)$ & $(0{,}139)$ \\
+ & $[p=0{,}754]$ &  &  &  &  &  &  &  &  &  & $[p=0{,}070]$ & $[p=0{,}549]$ \\
+\addlinespace
+Observaciones & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 \\
+$R^2$ \textit{within} & $0{,}414$ & $0{,}028$ & $0{,}388$ & $0{,}378$ & $-0{,}002$ & $0{,}390$ & $0{,}375$ & $0{,}109$ & $0{,}426$ & $0{,}406$ & $0{,}121$ & $0{,}434$ \\
+\midrule
+EF de país & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ \\
+EF de tiempo & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO \\
+Controles domésticos & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} La columna (1) es la Ecuación de interacción de crisis completa en niveles, $\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1 JLoss_{t-1}+\beta_2 D_{t-1}+\beta_3(JLoss_{t-1}\times D_{t-1})+\beta_4(JLoss_{t-1}\times D_{t-1}\times Crisis_t)+\beta_5(JLoss_{t-1}\times Crisis_t)+\beta_6(D_{t-1}\times Crisis_t)+\omega'X_{i,t}+\varepsilon_{i,t}$, con efectos fijos de país y de tiempo; controles y vector de crisis contemporáneos. EMBI en puntos básicos; $JLoss$ y $D=-GaR$ (pp) en niveles, rezagados un trimestre, como en la Tabla~\ref{tab:bateria-nivlag-embiext}. EMBI de Indonesia y Sudáfrica 2010Q1--2014Q4 completado con FMI (GFSR). Las columnas (2)--(12) completan la batería de cuatro modelos anidados: CM1, $JLoss$ y su interacción con el vector de crisis; CM2, lo mismo con $D$; CM3, ambos niveles y sus interacciones, sin $JLoss\times D$; CM4, la especificación completa. $Crisis$ sola queda absorbida por los efectos fijos de tiempo cuando estos se incluyen. $\beta_3$ mide la complementariedad fuera de crisis y $\beta_3+\beta_4$ dentro de crisis (error estándar por método delta; entre corchetes, $p$ del test de Wald $H_0\!:\beta_3+\beta_4=0$). Todas las columnas incluyen seis controles domésticos (deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación y tipo de cambio real efectivo). $JLoss$ y $D$ centrados. Errores estándar de Driscoll--Kraay entre paréntesis. ***, ** y * indican significancia al 1\%, 5\% y 10\%, respectivamente. Fuente: \texttt{p12\_tablas\_latex\_lnlag.py --niveles} (ajuste de \texttt{p9b\_bateria\_crisis.py}).}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.8pt}
+\renewcommand{\arraystretch}{0.86}
+\caption[Spread soberano e interacción con el vector de crisis: especificación en niveles rezagada (EMBI extendido) (Backstop y EMstress)]{\textbf{Spread soberano e interacción con el vector de crisis: especificación en niveles rezagada (EMBI extendido) (Backstop y EMstress).}}
+\label{tab:crisis-nivlag-embiext-b}
+\begin{adjustbox}{max width=\linewidth, max totalheight=0.66\textheight}
+\begin{tabular}{l c ccc ccc ccc cc}
+\toprule
+EMBI (pb)
+& \multicolumn{1}{c}{Referencia} & \multicolumn{3}{c}{CM1} & \multicolumn{3}{c}{CM2} & \multicolumn{3}{c}{CM3} & \multicolumn{2}{c}{CM4} \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}\cmidrule(lr){12-13}
+& (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9) & (10) & (11) & (12) \\
+\midrule
+\multicolumn{13}{l}{\textit{Panel B. Backstop (2008Q4--2009Q4, 2020Q1--2021Q4) vs.\ EMstress (2015Q3--2016Q1)}} \\[2pt]
+$JLoss_{t-1}$ & $2{,}173^{*}$ & $1{,}662$ & $4{,}071^{***}$ & $2{,}116^{**}$ &  &  &  & $2{,}342$ & $3{,}168^{***}$ & $1{,}839^{**}$ & $2{,}587$ & $3{,}350^{***}$ \\
+ & $(1{,}263)$ & $(1{,}957)$ & $(1{,}075)$ & $(1{,}032)$ &  &  &  & $(2{,}106)$ & $(0{,}992)$ & $(0{,}891)$ & $(2{,}549)$ & $(1{,}276)$ \\
+$D_{t-1}=-GaR_{t-1}$ & $5{,}197^{**}$ &  &  &  & $3{,}349$ & $9{,}351^{***}$ & $6{,}303^{***}$ & $4{,}314^{*}$ & $8{,}170^{***}$ & $5{,}317^{**}$ & $4{,}456^{*}$ & $7{,}948^{***}$ \\
+ & $(2{,}041)$ &  &  &  & $(2{,}343)$ & $(1{,}711)$ & $(2{,}340)$ & $(2{,}588)$ & $(1{,}605)$ & $(2{,}178)$ & $(2{,}580)$ & $(1{,}405)$ \\
+$JLoss_{t-1}\times D_{t-1}$ ($\beta_3$) & $0{,}885^{**}$ &  &  &  &  &  &  &  &  &  & $0{,}617$ & $0{,}750^{*}$ \\
+ & $(0{,}385)$ &  &  &  &  &  &  &  &  &  & $(0{,}663)$ & $(0{,}388)$ \\
+$JLoss_{t-1}\times Backstop$ & $1{,}580$ & $3{,}320^{*}$ & $1{,}760$ & $2{,}212^{*}$ &  &  &  & $3{,}029$ & $1{,}735$ & $1{,}828$ & $3{,}350$ & $1{,}466$ \\
+ & $(1{,}470)$ & $(1{,}782)$ & $(1{,}485)$ & $(1{,}173)$ &  &  &  & $(1{,}885)$ & $(1{,}305)$ & $(1{,}339)$ & $(2{,}300)$ & $(1{,}475)$ \\
+$D_{t-1}\times Backstop$ & $-3{,}540$ &  &  &  & $-4{,}830^{*}$ & $-5{,}446^{**}$ & $-4{,}874$ & $-3{,}534$ & $-5{,}388^{***}$ & $-3{,}575$ & $-2{,}456$ & $-5{,}461^{***}$ \\
+ & $(2{,}934)$ &  &  &  & $(2{,}686)$ & $(2{,}275)$ & $(3{,}116)$ & $(3{,}068)$ & $(1{,}998)$ & $(3{,}245)$ & $(2{,}773)$ & $(1{,}953)$ \\
+$JLoss_{t-1}\times D_{t-1}\times Backstop$ ($\beta_4^{bk}$) & $-0{,}970^{**}$ &  &  &  &  &  &  &  &  &  & $-1{,}090$ & $-0{,}728^{*}$ \\
+ & $(0{,}408)$ &  &  &  &  &  &  &  &  &  & $(0{,}697)$ & $(0{,}426)$ \\
+$JLoss_{t-1}\times EMstress$ & $0{,}327$ & $9{,}531^{***}$ & $4{,}722^{**}$ & $6{,}021^{***}$ &  &  &  & $4{,}533^{**}$ & $2{,}129$ & $3{,}142^{*}$ & $0{,}437$ & $-2{,}701$ \\
+ & $(1{,}840)$ & $(3{,}041)$ & $(1{,}878)$ & $(2{,}073)$ &  &  &  & $(2{,}303)$ & $(1{,}437)$ & $(1{,}776)$ & $(2{,}087)$ & $(2{,}150)$ \\
+$D_{t-1}\times EMstress$ & $3{,}444^{**}$ &  &  &  & $18{,}458^{***}$ & $7{,}170^{***}$ & $8{,}730^{***}$ & $16{,}459^{***}$ & $5{,}549^{***}$ & $7{,}350^{***}$ & $10{,}713^{***}$ & $-1{,}478$ \\
+ & $(1{,}457)$ &  &  &  & $(2{,}561)$ & $(1{,}729)$ & $(1{,}830)$ & $(2{,}381)$ & $(1{,}481)$ & $(1{,}446)$ & $(2{,}322)$ & $(1{,}884)$ \\
+$JLoss_{t-1}\times D_{t-1}\times EMstress$ ($\beta_4^{em}$) & $0{,}322$ &  &  &  &  &  &  &  &  &  & $1{,}112$ & $1{,}524^{**}$ \\
+ & $(0{,}500)$ &  &  &  &  &  &  &  &  &  & $(0{,}909)$ & $(0{,}614)$ \\
+$\beta_3+\beta_4^{bk}$ & $-0{,}085$ &  &  &  &  &  &  &  &  &  & $-0{,}473^{***}$ & $0{,}022$ \\
+ & $(0{,}116)$ &  &  &  &  &  &  &  &  &  & $(0{,}157)$ & $(0{,}138)$ \\
+ & $[p=0{,}461]$ &  &  &  &  &  &  &  &  &  & $[p=0{,}003]$ & $[p=0{,}873]$ \\
+$\beta_3+\beta_4^{em}$ & $1{,}207^{***}$ &  &  &  &  &  &  &  &  &  & $1{,}729^{***}$ & $2{,}274^{***}$ \\
+ & $(0{,}246)$ &  &  &  &  &  &  &  &  &  & $(0{,}379)$ & $(0{,}461)$ \\
+ & $[p<0{,}001]$ &  &  &  &  &  &  &  &  &  & $[p<0{,}001]$ & $[p<0{,}001]$ \\
+\addlinespace
+Observaciones & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 & 649 \\
+$R^2$ \textit{within} & $0{,}430$ & $0{,}021$ & $0{,}388$ & $0{,}378$ & $-0{,}057$ & $0{,}401$ & $0{,}384$ & $0{,}083$ & $0{,}434$ & $0{,}419$ & $0{,}101$ & $0{,}447$ \\
+\midrule
+EF de país & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ \\
+EF de tiempo & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO & SÍ & SÍ & NO \\
+Controles domésticos & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ & SÍ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{\linewidth}{\scriptsize \textit{Nota:} mismas especificaciones, controles y convenciones que la Tabla~\ref{tab:crisis-nivlag-embiext}, con el vector de crisis descompuesto en episodios con respaldo oficial masivo (\textit{Backstop}) y el estrés emergente de 2015--2016 sin ese respaldo (\textit{EMstress}).}
+\end{table}
+\end{landscape}
