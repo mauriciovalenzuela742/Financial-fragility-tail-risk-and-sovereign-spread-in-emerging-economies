@@ -3,7 +3,7 @@
 
 \noindent Este anexo tabula el origen de todas las series usadas en la investigación empírica
 de esta tesis (Capítulo~\ref{chap:investigacion}), incluidas las de su subsección de agenda futura
-sobre concentración bancaria (Sección~7.4). El panel se construye sobre el
+sobre concentración bancaria (Sección~\ref{sec:agenda-futura}). El panel se construye sobre el
 principio de \textbf{homogeneidad de fuente}: todos los insumos de mercado provienen de la
 terminal Bloomberg, extraídos con un mismo protocolo para las veinte economías del universo
 objetivo; solo los componentes reales del índice de condiciones financieras que alimenta
@@ -43,7 +43,8 @@ consolidación reside en \texttt{1\_Codigo/Bloomberg\_extraction/} y \texttt{1\_
 
 \multicolumn{6}{l}{\textbf{\textit{Variable dependiente}}}\\
 \addlinespace
-EMBI Global Diversified & Diferencial del índice de bonos soberanos emergentes de J.P.\ Morgan frente al Tesoro de EE.\ UU.\ (\textbf{DV principal}, sigue a \citealp{Chari2024b}) & J.P.\ Morgan & \texttt{embi.xlsx}; spread EMBI Global por país & Diaria & Media trimestral, pb \\
+EMBI Global Diversified & Diferencial del índice de bonos soberanos emergentes de J.P.\ Morgan frente al Tesoro de EE.\ UU.\ (\textbf{DV principal}, sigue a \citealp{Chari2024b}) & J.P.\ Morgan & \texttt{embi.xlsx}; spread EMBI Global por país & Diaria & Media trimestral, pb; en logaritmo en la especificación principal \\
+EMBI, complemento & Spread soberano trimestral, usado solo para Indonesia y Sudáfrica en 2010Q1--2014Q4, donde la serie de J.P.\ Morgan no tiene dato & FMI, \textit{Global Financial Stability Report} & \texttt{EMBI\_real\_\allowbreak 8countries\_\allowbreak 2006\_2014.csv} & Trimestral & Sin reescalar: corr.\ 0,94 y razón mediana 1,02 con J.P.\ Morgan en 80 trimestres de solapamiento \\
 CDS soberano 5Y & \textit{Credit default swap} soberano a 5 años, USD, senior no garantizado (\textbf{robustez}) & Bloomberg & \texttt{<emisor> CDS USD SR 5Y Corp}; Markit \texttt{CCHIN1U5} para China & Diaria & Media trimestral, pb; corr.\ 0,86 con el EMBI \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Fragilidad bancaria --- $JLoss$}} (métrica compuesta; motor \texttt{jloss\_engine.py})}\\
@@ -74,7 +75,7 @@ Tasa del Tesoro 10Y & Rendimiento del bono del Tesoro estadounidense a 10 años 
 \textit{Spread} HY EE.UU. & \textit{Option-adjusted spread} del \textit{high yield} corporativo estadounidense (equivale a FRED \texttt{BAMLH0A0HYM2}) & Bloomberg & \texttt{LF98OAS Index} & Diaria & Media trimestral; en logaritmo \\
 \textit{Spread} on/off-run & Diferencial de liquidez del Tesoro (instrumento \textit{shift-share} principal) & Serie previa del proyecto & \texttt{global\_controls\_} \texttt{quarterly.csv} & Trimestral & En logaritmo \\
 Dólar efectivo amplio & Tipo de cambio efectivo nominal de EE.\ UU., canasta de 64 economías (instrumento \textit{shift-share} secundario) & BIS, \textit{Effective Exchange Rate Indices} & \texttt{WS\_\allowbreak EER}, \texttt{M.N.B.US} & Mensual & Media trimestral; en logaritmo \\
-Términos de intercambio (\textit{commodities}) & Choque de precios mundiales de energía, metales, materias primas agrícolas y alimentos, ponderado por la participación de exportación pre-muestra de cada país (instrumento \textit{shift-share} adicional, exógeno por diseño) & Participaciones: Banco Mundial, \textit{World Development Indicators}; precios: Banco Mundial, \textit{Pink Sheet} & \texttt{TX.\allowbreak VAL.\allowbreak \{FUEL,MMTL,AGRI,FOOD\}.\allowbreak ZS.\allowbreak UN} (1998--2003); \texttt{CMO-\allowbreak Historical-\allowbreak Data-\allowbreak Monthly.xlsx}, hoja \textit{Monthly Indices} & Anual (pesos, fijos) / mensual (precios) & Pesos pre-muestra $\times$ log del índice mundial, media trimestral \\
+Términos de intercambio (\textit{commodities}) & Choque de precios mundiales de energía, metales, materias primas agrícolas y alimentos, ponderado por la participación de exportación pre-muestra de cada país (instrumento \textit{shift-share} adicional, exógeno por diseño) & Participaciones: Banco Mundial, \textit{World Development Indicators}; precios: Banco Mundial, \textit{Pink Sheet} & \texttt{TX.\allowbreak VAL.\allowbreak \{FUEL,\allowbreak MMTL,\allowbreak AGRI,\allowbreak FOOD\}.\allowbreak ZS.\allowbreak UN} (1998--2003); \texttt{CMO-\allowbreak Historical-\allowbreak Data-\allowbreak Monthly.xlsx}, hoja \textit{Monthly Indices} & Anual (pesos, fijos) / mensual (precios) & Pesos pre-muestra $\times$ log del índice mundial, media trimestral \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Controles macroeconómicos domésticos}} (reconstruidos para todos los países del panel)}\\
 \addlinespace
@@ -84,6 +85,8 @@ Reservas/PIB & Reservas internacionales totales sobre PIB corriente & Banco Mund
 Cuenta corriente/PIB & Saldo de cuenta corriente, \% del PIB & Banco Mundial & \texttt{BN.\allowbreak CAB.\allowbreak XOKA.\allowbreak GD.\allowbreak ZS} & Anual & Interpolación lineal a trimestral \\
 Inflación interanual & Variación del IPC a 12 meses & Serie de IPC del FCI; respaldo Banco Mundial & \texttt{FP.\allowbreak CPI.\allowbreak TOTL.\allowbreak ZG} & Mensual & Variación a 4 trimestres \\
 Tipo de cambio real ef. & Índice de tipo de cambio real efectivo (2010 = 100) & BIS; series locales & \texttt{rEER\_*} & Mensual & Último valor del trimestre \\
+Volatilidad cambiaria & Desviación estándar de los retornos logarítmicos diarios del tipo de cambio frente al dólar (batería estilo \citealp{Chari2024b}) & Bloomberg & \texttt{<moneda> Curncy}, \texttt{PX\_LAST} & Diaria & Desv.\ est.\ trimestral $\times\sqrt{63}$ \\
+Margen de utilidad bancario & Ingreso neto sobre ingresos del sistema bancario cotizado (batería estilo \citealp{Chari2024b}) & Bloomberg (mismos bancos que $JLoss$) & \texttt{NET\_\allowbreak INCOME} $\div$ \texttt{SALES\_\allowbreak REV\_\allowbreak TURN} & Trimestral & Agregado por país, \% \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Concentración bancaria e instituciones}}}\\
 \addlinespace
@@ -98,15 +101,17 @@ Calidad de gobierno (WGI) & Índice de \textit{Worldwide Governance Indicators} 
 \vspace{1em}
 
 \noindent \textbf{Economías del panel y su cobertura.} El panel incluye toda economía
-con $JLoss$ disponible. La muestra de estimación del mecanismo (observaciones con EMBI $+$
-$JLoss$ $+$ $GaR$ simultáneamente) reúne \textbf{trece países}: nueve con EMBI de historia
-continua (Brasil, Chile, China, Colombia, Malasia, México, Perú, Polonia, Turquía), India
-con 54 trimestres (EMBI desde 2012Q4), y Filipinas, Indonesia y Sudáfrica con once cada uno
-(EMBI desde 2023Q3, aunque su CDS es de historia larga). Argentina, Egipto y Rusia tienen
-$JLoss$ pero no $GaR$; Pakistán tiene $JLoss$ y $GaR$ pero no EMBI. Corea del Sur, Bulgaria
-y Hungría se excluyen porque su $JLoss$ no es una medida válida a nivel de país —número de
-bancos cotizados insuficiente— (Capítulo~\ref{chap:investigacion}, Sección~5.1). La
-Figura~\ref{fig:cobertura} traza esta cobertura.
+con $JLoss$ disponible. La muestra de estimación de la especificación principal exige el EMBI
+del trimestre y $JLoss$ y $GaR$ del trimestre anterior, y reúne \textbf{trece países} y 765
+observaciones (2004Q2--2026Q2): diez con historia larga, entre 40 y 89 trimestres (Brasil,
+Chile, China, Colombia, India, Malasia, México, Perú, Polonia y Turquía); Indonesia y
+Sudáfrica con 32 cada una, 20 de ellos con el EMBI completado por la serie del FMI; y Filipinas
+con 12. Argentina cuenta con EMBI y con un $GaR$ exploratorio construido sin el bloque de tasas
+del FCI, y se usa solo como robustez fuera de la muestra principal; Egipto no tiene $GaR$ ni
+EMBI; Pakistán tiene $GaR$ pero su EMBI no se solapa con él; y Rusia no tiene EMBI. Corea del
+Sur, Bulgaria y Hungría se excluyen porque su $JLoss$ no es una medida válida a nivel de país
+---número de bancos cotizados insuficiente--- (Capítulo~\ref{chap:investigacion},
+Sección~\ref{sec:datos}). La Figura~\ref{fig:cobertura} traza esta cobertura.
 
 \vspace{1ex}
 

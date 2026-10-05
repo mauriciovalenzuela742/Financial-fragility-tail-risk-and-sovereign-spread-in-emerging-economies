@@ -173,8 +173,8 @@ La integración sobre $V\sim N(0,\sigma_V^2)$ se resuelve por cuadratura de Gaus
 \subsubsection{Contribuciones marginales y definición de \texorpdfstring{$JLoss$}{JLoss}}
 
 La contribución del banco $n$ al riesgo del sistema en el percentil 99 es $C_n=e_n\sum_k\nu_k\tilde p_n(\hat t_k)/\sum_k\nu_k$, con $\tilde p_n(\hat t)=p_ne^{\hat ta_n}/(1-p_n+p_ne^{\hat ta_n})$ la probabilidad inclinada por el punto de silla. La suma de las contribuciones es la pérdida inesperada ($UL$); la esperada es $EL=\sum_ie_ip_i$. Finalmente,
-\[ JLoss_{i,t}=\frac{EL_{i,t}+UL_{i,t}}{\sum_jEAD_{j,t}}\times100, \qquad e_j=EAD_j\cdot LGD,\ LGD=45\%\ \citep{BIS2006}. \]
-La parametrización es la de \citet{Chari2024b} (Tabla~\ref{tab:params}). El cómputo se reimplementó en Python y se validó contra el código original en MATLAB; la búsqueda del punto de silla usa el algoritmo de Brent por su robustez ante curvaturas extremas.
+\[ JLoss_{i,t}=\frac{EL_{i,t}+UL_{i,t}}{\sum_jEAD_{j,t}}\times100, \qquad e_j=EAD_j\cdot LGD, \]
+con una pérdida en caso de incumplimiento $LGD=45\%$ \citep{BIS2006}. La parametrización es la de \citet{Chari2024b} (Tabla~\ref{tab:params}). El cómputo se reimplementó en Python y se validó contra el código original en MATLAB; la búsqueda del punto de silla usa el algoritmo de Brent por su robustez ante curvaturas extremas.
 
 \begin{table}[htbp]
 \centering
