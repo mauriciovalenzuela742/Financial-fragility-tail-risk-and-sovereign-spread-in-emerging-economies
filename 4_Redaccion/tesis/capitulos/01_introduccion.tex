@@ -1,0 +1,77 @@
+% Capítulo de la tesis (texto derivado de envios/paper_empirico/cuerpo.tex; se edita aquí).
+\chapter{Introducción}
+\label{sec:intro}
+
+\section{Motivación}
+
+Durante las crisis financieras de las últimas dos décadas los spreads soberanos de las economías emergentes se han ampliado de forma más pronunciada que los de las economías avanzadas. Una parte de esa ampliación es atribuible a la fragilidad del sector bancario doméstico, que eleva el pasivo público contingente y deteriora los balances soberanos por la vía del rescate, y otra a su coincidencia con un debilitamiento agudo de las perspectivas de crecimiento.
+
+La fragilidad bancaria ya ha demostrado ser un determinante del spread soberano: la posibilidad de una quiebra del sistema bancario se traspasa a la capacidad de endeudamiento del Estado, que es quien previsiblemente la rescataría \citep{AcharyaDrechslerSchnabl2014b,Chari2024b}. Pero las condiciones internas de la economía ---en particular, la probabilidad de que el crecimiento caiga a su cola adversa--- también afectan directamente la capacidad de endeudamiento del soberano, y cuando ambas vulnerabilidades coinciden el spread podría verse todavía más afectado. Esa coincidencia es la que antecede a los episodios de crisis bancaria y de estallido de burbujas financieras, y la que convierte un problema bancario en uno fiscal. La conjetura que organiza esta investigación es, por tanto, que los dos canales no operan de forma aditiva: la fragilidad bancaria y el riesgo a la baja del crecimiento se complementan en su transmisión al riesgo soberano, de modo que su coincidencia amplifica el spread por encima de la suma de sus efectos individuales. Leída así, la fragilidad del sistema bancario es un pasivo contingente cuyo costo esperado para el fisco depende del estado del ciclo: cuando el crecimiento ya está en su escenario adverso, el mismo nivel de fragilidad implica un rescate proporcionalmente más costoso.
+
+La literatura relevante ha tratado esos dos canales por separado. La del nexo banca--soberano ha documentado cómo la fragilidad del sistema bancario se transmite al riesgo soberano, pero trata el crecimiento como un fundamento de fondo o como un factor de confusión a controlar. La de \textit{growth-at-risk} ha caracterizado cómo las condiciones financieras deterioran la cola izquierda de la distribución del crecimiento, pero no proyecta su análisis sobre la prima soberana. El trabajo más próximo, \citet{Chari2024b}, introduce una métrica estructural de fragilidad bancaria sistémica en la determinación del spread soberano de economías emergentes y estudia su interacción con factores financieros globales, no con una medida doméstica del riesgo de cola del crecimiento.
+
+De ahí la pregunta de investigación: \textbf{¿penaliza el mercado de forma no lineal la coexistencia de fragilidad bancaria y vulnerabilidad macroeconómica, de modo que la coincidencia de una cola adversa del crecimiento y una alta fragilidad bancaria amplifica el spread soberano?}
+
+\section{Objetivos y estrategia}
+\label{sec:objetivos}
+
+\textbf{Objetivo general.} Evaluar empíricamente el impacto conjunto, estructural y no lineal de la fragilidad del sistema bancario ($JLoss$) y del riesgo de cola del crecimiento ($GaR$) sobre el spread de crédito soberano en economías emergentes.
+
+\textbf{Objetivos específicos.}
+\begin{enumerate}
+    \item Construir y validar las series de fragilidad bancaria ($JLoss$) y de riesgo de cola del crecimiento ($GaR$) para una muestra amplia de economías emergentes, asegurando la reproducibilidad de los datos.
+    \item Cuantificar el efecto marginal de la fragilidad bancaria sobre el spread soberano, en puntos básicos y en elasticidades (especificación log-log), interpretando $JLoss$ como el costo directo esperado de un rescate sistémico.
+    \item Cuantificar el efecto marginal del riesgo macroeconómico de cola sobre el spread soberano, en puntos básicos, interpretando el $GaR$ como predictor prospectivo de la solvencia fiscal.
+    \item Estimar y contrastar la complementariedad de ambos riesgos mediante el coeficiente de interacción $JLoss\times GaR$, en puntos básicos y en elasticidades, formalizando la amplificación del riesgo soberano en escenarios de doble vulnerabilidad.
+\end{enumerate}
+
+\textbf{Estrategia.} La fragilidad bancaria se calcula con la metodología de \citet{Chari2024b} a partir de balances y precios de mercado de 113 bancos extraídos de Bloomberg; el riesgo de cola del crecimiento, con la metodología de \citet{OssandonBusch2022}, siguiendo a \citet{ABG2019b}; y ambas series se unen en un panel trimestral con el spread EMBI Global Diversified de J.P.\ Morgan (objetivo 1). Sobre ese panel se estiman regresiones lineales con distintas estructuras de efectos fijos y en distintos escenarios ---la muestra completa, sin los trimestres de crisis, con controles y con un vector de crisis---. La especificación principal sigue la de \citet{Chari2024b}: el logaritmo del spread se regresa sobre el logaritmo de $JLoss$ y sobre el riesgo de cola del crecimiento, ambos \emph{rezagados un trimestre}, y sobre su producto, con efectos fijos de país y de tiempo. Sus coeficientes son elasticidades (objetivos 2 y 4) y una semielasticidad (objetivo 3); todo el procedimiento se repite con el spread en puntos básicos y $JLoss$ en niveles, de modo que cada efecto se reporta en ambas unidades (Sección~\ref{sec:estrategia}). El rezago responde a una preocupación de identificación concreta: el spread soberano también afecta a sus propios determinantes ---encarece el fondeo de los bancos y deprecia los bonos soberanos que estos tienen en balance, y entra en las condiciones financieras con las que se estima el $GaR$---, de modo que una regresión contemporánea mezclaría el efecto de la fragilidad sobre el spread con el del spread sobre la fragilidad.
+
+\section{Mecanismo conceptual}
+\label{sec:mecanismo-conceptual}
+
+La Figura~\ref{fig:mecanismo} traza, de forma esquemática, la cadena de transmisión que motiva esta investigación y que el Capítulo~\ref{sec:marco} desarrolla a partir de sus tres pilares teóricos. Un estado adverso del riesgo de cola del crecimiento ($GaR$) agrava el rescate bancario esperado; ese rescate esperado es lo que mide la fragilidad sistémica $JLoss$, interpretada como un pasivo contingente del soberano (el \textit{bailout put} de \citealp{FarhiTirole2018b} y la dilución de \citealp{AcharyaDrechslerSchnabl2014b}); el mercado penaliza ese pasivo en el spread soberano, con una retroalimentación hacia la propia fragilidad bancaria ---un rescate financiado con más deuda deprime el precio de esa deuda y erosiona el patrimonio bancario, agravando la fragilidad que originó el rescate--- que es el multiplicador de \citet{FarhiTirole2018b}. Esa retroalimentación es, precisamente, la fuente de causalidad inversa que motiva rezagar los regresores.
+
+El mapa organiza la intuición de los tres pilares del marco teórico; no introduce un mecanismo adicional. El trabajo estima el tramo resaltado en azul ---la interacción entre $JLoss$ y el riesgo de cola del crecimiento sobre el spread---. La pregunta de si la concentración bancaria amplifica ese mismo tramo se retoma en el Capítulo~\ref{sec:agenda-futura} como trabajo futuro, no como hallazgo.
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.62\textwidth}{!}{%
+\begin{tikzpicture}[
+  node distance=8mm and 0mm,
+  box/.style={draw, thick, rounded corners, align=center, fill=gray!7,
+              minimum width=7.0cm, minimum height=1.05cm, font=\small},
+  boxhi/.style={box, draw=blue!55!black, fill=blue!5, line width=1pt},
+  lbl/.style={font=\scriptsize\itshape, align=left, text width=3.6cm}
+]
+\node[box]              (gar)    {Estado adverso: riesgo de cola del crecimiento ($GaR$)};
+\node[boxhi, below=of gar] (jloss)  {Fragilidad sistémica ($JLoss$) --- pasivo contingente esperado};
+\node[boxhi, below=of jloss] (spread) {Spread soberano (EMBI)};
+
+\draw[-{Latex[length=2.4mm]}] (gar)   -- (jloss)   node[midway, right, lbl] {agrava el rescate esperado};
+\draw[-{Latex[length=2.4mm]}, blue!55!black, line width=0.9pt] (jloss) -- (spread) node[midway, right, lbl, blue!55!black] {\textbf{interacción $\ln JLoss_{t-1}\times D_{t-1}$ estimada}};
+
+\draw[-{Latex[length=2.4mm]}, dashed, gray!50!black]
+  (spread.west) to[bend left=45] node[midway, left, lbl, text width=3.2cm] {rescate financiado con más deuda deprime el precio (Farhi--Tirole): causalidad inversa} (jloss.west);
+\end{tikzpicture}%
+}
+\caption[Mecanismo conceptual]{Mecanismo conceptual que resume los tres pilares del Capítulo~\ref{sec:marco}: el riesgo de cola del crecimiento agrava el rescate bancario esperado, ese rescate esperado es la fragilidad sistémica $JLoss$, y el mercado la penaliza en el spread soberano. La flecha discontinua es la retroalimentación del spread hacia la fragilidad bancaria, que motiva rezagar los regresores. El tramo en azul es el que se estima.}
+\label{fig:mecanismo}
+\end{figure}
+
+\section{Alcances y contribución}
+\label{sec:alcances}
+
+\textbf{Alcances.} El trabajo estima asociaciones condicionales sobre un panel de trece economías emergentes (2004Q2--2026Q2, $N=765$; catorce con Argentina como robustez). Su alcance está acotado por dos rasgos del panel que el Capítulo~\ref{sec:resultados} documenta: el spread y la fragilidad son muy persistentes y se retroalimentan, y trece países son pocos \textit{clusters} para la inferencia asintótica. Por eso los resultados se presentan como asociaciones y se someten a pruebas explícitas de identificación, y la tesis distingue en todo momento lo que el panel establece de lo que solo sugiere. Con ese alcance, la evidencia se ordena en cuatro resultados.
+
+\textbf{Primero, la fragilidad bancaria y el riesgo de cola se asocian con el spread.} Con efectos fijos de país y de tiempo, la elasticidad del spread a la fragilidad bancaria rezagada es $0{,}099$ ---unos 4,7 puntos básicos por unidad de $JLoss$ en niveles--- y un punto porcentual adicional de riesgo de cola ($D\equiv-GaR$) se asocia con un spread en torno a un 3,3\% mayor. La asociación de la fragilidad replica, con una métrica construida de forma independiente, la que documentan \citet{Chari2024b}.
+
+\textbf{Segundo, esa asociación no puede interpretarse como un efecto causal con estos datos.} El spread rezagado predice la fragilidad del trimestre siguiente (elasticidad de 0,17), y al modelar esa dinámica el efecto de la fragilidad deja de ser distinguible de cero; con \textit{wild cluster bootstrap} sobre trece países ni la fragilidad ni el riesgo de cola son significativos, y las variables instrumentales no cierran la identificación.
+
+\textbf{Tercero, en el promedio del panel no hay amplificación por encima de la proporcional.} La interacción en elasticidades es $-0{,}011$ ($p=0{,}11$); la complementariedad en puntos básicos es la que ya implica una estructura multiplicativa ($+0{,}19$ puntos básicos por unidad de $JLoss$ y punto porcentual de $D$).
+
+\textbf{Cuarto, la amplificación aparece en momentos y economías específicas.} Fuera de las crisis con respaldo oficial masivo y en el núcleo de once economías de financiamiento externo ---excluidas Polonia e India, de deuda local profunda---, la interacción es positiva y significativa en ambas formas funcionales y resiste el \textit{wild cluster bootstrap} ($+0{,}034$ en elasticidades y $+1{,}8$ puntos básicos; Sección~\ref{sec:robustez}). Es el patrón que predice el mecanismo, pero con salvedades: el grupo de contraste se definió a partir de una versión anterior del análisis, en logaritmos los controles domésticos lo absorben, y el episodio de estrés emergente de 2015--2016 no se distingue de ventanas al azar. La tesis lo reporta como evidencia condicional, no como un hallazgo robusto.
+
+\textbf{Contribución.} La contribución es de tres tipos. Conceptual: articular como un solo mecanismo dos canales que la literatura trata por separado, y mostrar que una estructura de intensidad de incumplimiento proporcional ya implica su complementariedad en puntos básicos. Empírica: construir las dos métricas para trece economías emergentes, replicar con ellas la asociación entre fragilidad bancaria y spread que documentan \citet{Chari2024b}, someterla a las pruebas de dinámica, inferencia con pocos \textit{clusters}, identificación y forma funcional que exige un panel de estas características, y delimitar \emph{cuándo} y \emph{en qué economías} aparece la amplificación. Y metodológica: un \textit{pipeline} reproducible de extracción de balances de 113 bancos desde Bloomberg y de estimación del $GaR$ en pseudo--tiempo real, con cada cifra del texto trazable a un archivo del repositorio.
+
+\textbf{Organización.} El Capítulo~\ref{sec:marco} desarrolla el marco conceptual y las hipótesis, sitúa el trabajo en la literatura y describe los datos; el Capítulo~\ref{sec:metodologia} detalla la construcción de $JLoss$ y $GaR$ y la estrategia econométrica ---regresiones, efectos fijos e inferencia---; el Capítulo~\ref{sec:resultados} reporta los resultados, su robustez y el alcance de la identificación; el Capítulo~\ref{sec:discusion} los interpreta; el Capítulo~\ref{sec:conclusiones} concluye; y el Capítulo~\ref{sec:agenda-futura} plantea los trabajos futuros.

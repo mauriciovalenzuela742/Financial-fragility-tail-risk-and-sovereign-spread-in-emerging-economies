@@ -27,38 +27,32 @@ El objetivo específico 4 del informe original formalizaba la hipótesis central
 \subsection{El mecanismo conceptual}
 \label{sec:mecanismo-conceptual}
 
-La Figura~\ref{fig:mecanismo} traza, de forma esquemática y a título puramente intuitivo, la cadena de transmisión completa que motiva esta investigación: el riesgo de cola del crecimiento modula el impacto de la estructura del mercado bancario (concentración, interconexión) sobre los incentivos que configuran la conducta bancaria (apalancamiento, exposición, correlación de carteras); las decisiones agregadas que resultan de esa conducta generan externalidades —riesgo moral, expectativa de rescate— que se traducen en un riesgo fiscal implícito y, con él, en fragilidad bancaria sistémica ($JLoss$); esa fragilidad es penalizada por el mercado en el spread soberano, con una retroalimentación desde el propio spread hacia la conducta bancaria, vía el costo de fondeo y la anticipación de nuevos rescates.
+La Figura~\ref{fig:mecanismo} traza, de forma esquemática, la cadena de transmisión que motiva esta investigación y que la Sección~2 desarrolla en detalle a partir de sus tres pilares teóricos. Un estado adverso del riesgo de cola del crecimiento ($GaR$) agrava el rescate bancario esperado; ese rescate esperado es precisamente lo que mide la fragilidad sistémica $JLoss$, interpretada como un pasivo contingente del soberano (el \textit{bailout put} de \citealp{FarhiTirole2018b} y la dilución de \citealp{AcharyaDrechslerSchnabl2014b}); el mercado penaliza ese pasivo en el spread soberano, con una retroalimentación hacia la propia fragilidad bancaria —un rescate financiado con más deuda deprime el precio de esa deuda y erosiona el patrimonio bancario, agravando la fragilidad que originó el rescate— que es el multiplicador de \citet{FarhiTirole2018b}.
 
-Es importante ser precisos sobre el estatus de este mapa: es un mecanismo conceptual que organiza la intuición, no una predicción derivada de un modelo formal de organización industrial bancaria. Este capítulo estima directamente el tramo final de esa cadena —la interacción entre la fragilidad bancaria ($JLoss$) y el riesgo de cola del crecimiento ($D\equiv-GaR$) sobre el spread soberano, resaltada en la Figura~\ref{fig:mecanismo}—, dejando la derivación formal de los tramos anteriores —cómo la concentración y la interconexión bancarias configuran los incentivos de la conducta bancaria, y cómo esta se traduce en fragilidad sistémica— fuera del alcance de este documento. La Sección~\ref{sec:agenda-futura} retoma, como pregunta abierta y no como hallazgo, si la concentración bancaria amplifica el tramo que sí se estima aquí.
+Es importante ser precisos sobre el estatus de este mapa: organiza la intuición de los tres pilares del marco teórico, no introduce un mecanismo adicional. Este capítulo estima directamente el tramo resaltado en azul en la Figura~\ref{fig:mecanismo} —la interacción entre la fragilidad bancaria ($JLoss$) y el riesgo de cola del crecimiento ($D\equiv-GaR$) sobre el spread soberano—, que es precisamente la síntesis de los tres pilares formalizada en la Sección~\ref{sec:sintesis-pilares}. La pregunta de si la concentración bancaria amplifica además ese mismo tramo —una hipótesis que requeriría modelar la estructura del mercado bancario, fuera del alcance de este documento— se retoma en la Sección~\ref{sec:agenda-futura} como agenda de investigación futura, no como hallazgo.
 
 \begin{figure}[t]
 \centering
-\resizebox{0.82\textwidth}{!}{%
+\resizebox{0.62\textwidth}{!}{%
 \begin{tikzpicture}[
   node distance=8mm and 0mm,
   box/.style={draw, thick, rounded corners, align=center, fill=gray!7,
-              minimum width=7.4cm, minimum height=1.05cm, font=\small},
+              minimum width=7.0cm, minimum height=1.05cm, font=\small},
   boxhi/.style={box, draw=blue!55!black, fill=blue!5, line width=1pt},
-  lbl/.style={font=\scriptsize\itshape, align=left, text width=3.4cm}
+  lbl/.style={font=\scriptsize\itshape, align=left, text width=3.6cm}
 ]
-\node[box]              (gar)    {Riesgo de cola del crecimiento ($GaR$)};
-\node[box, below=of gar]   (estr)   {Estructura del mercado bancario\\(concentración, interconexión)};
-\node[box, below=of estr]  (cond)   {Conducta bancaria\\(apalancamiento, exposición, correlación)};
-\node[box, below=of cond]  (ext)    {Externalidades\\(riesgo moral, expectativa de rescate)};
-\node[boxhi, below=of ext] (jloss)  {Fragilidad sistémica ($JLoss$)};
+\node[box]              (gar)    {Estado adverso: riesgo de cola del crecimiento ($GaR$)};
+\node[boxhi, below=of gar] (jloss)  {Fragilidad sistémica ($JLoss$) --- pasivo contingente esperado};
 \node[boxhi, below=of jloss] (spread) {Spread soberano (EMBI / CDS)};
 
-\draw[-{Latex[length=2.4mm]}] (gar)   -- (estr)   node[midway, right, lbl] {modula el impacto};
-\draw[-{Latex[length=2.4mm]}] (estr)  -- (cond)   node[midway, right, lbl] {configura incentivos};
-\draw[-{Latex[length=2.4mm]}] (cond)  -- (ext)    node[midway, right, lbl] {decisiones agregadas};
-\draw[-{Latex[length=2.4mm]}] (ext)   -- (jloss)  node[midway, right, lbl] {riesgo fiscal implícito};
-\draw[-{Latex[length=2.4mm]}, blue!55!black, line width=0.9pt] (jloss) -- (spread) node[midway, right, lbl, blue!55!black] {penalización de mercado \textbf{(estimado en este capítulo)}};
+\draw[-{Latex[length=2.4mm]}] (gar)   -- (jloss)   node[midway, right, lbl] {agrava el rescate esperado};
+\draw[-{Latex[length=2.4mm]}, blue!55!black, line width=0.9pt] (jloss) -- (spread) node[midway, right, lbl, blue!55!black] {\textbf{interacción $JLoss\times D$ estimada en este capítulo}};
 
 \draw[-{Latex[length=2.4mm]}, dashed, gray!50!black]
-  (spread.west) to[bend left=45] node[midway, left, lbl, text width=3.2cm] {retroalimentación\\(costo de fondeo / rescates)} (cond.west);
+  (spread.west) to[bend left=45] node[midway, left, lbl, text width=3.2cm] {rescate financiado con más deuda deprime el precio (Farhi--Tirole)} (jloss.west);
 \end{tikzpicture}%
 }
-\caption[Mecanismo conceptual: de la estructura bancaria al spread soberano]{Mecanismo conceptual que motiva esta investigación: cadena de transmisión desde el riesgo de cola del crecimiento y la estructura del mercado bancario hasta el spread soberano, con retroalimentación desde el spread hacia la conducta bancaria. El tramo resaltado en azul —la interacción $JLoss\times D$ sobre el spread soberano— es el que este capítulo estima directamente; los tramos anteriores se presentan solo como motivación intuitiva y no se derivan de un modelo formal en este documento.}
+\caption[Mecanismo conceptual: los tres pilares del marco teórico]{Mecanismo conceptual que resume los tres pilares de la Sección~2: el riesgo de cola del crecimiento ($GaR$) agrava el rescate bancario esperado, ese rescate esperado es la fragilidad sistémica $JLoss$ (pasivo contingente), y el mercado la penaliza en el spread soberano, con retroalimentación hacia la propia fragilidad bancaria (multiplicador de \citealp{FarhiTirole2018b}). El tramo resaltado en azul —la interacción $JLoss\times D$— es el que este capítulo estima directamente.}
 \label{fig:mecanismo}
 \end{figure}
 
@@ -107,6 +101,7 @@ La traducción de este canal al riesgo soberano opera a través de la dinámica 
 Operativamente, $GaR$ se define como el cuantil de cola izquierda de la distribución condicional del crecimiento (con la convención de que valores más negativos indican mayor riesgo a la baja), estimado mediante regresión cuantílica \citep{KoenkerBassett1978,Koenker2004} sobre un índice de condiciones financieras. El concepto, nacido como extensión macroeconómica del \textit{value-at-risk} \citep{PrasadEtAl2019}, se implementa en este trabajo siguiendo la plataforma de código abierto de CEMLA \citep{OssandonBusch2022}, que organiza los factores de riesgo del crecimiento en tres bloques —condiciones macrofinancieras locales, un índice de condiciones financieras y condiciones internacionales ortogonalizadas— y caracteriza la densidad condicional completa del crecimiento en lugar de únicamente su media. El puente conceptual entre condiciones financieras laxas, acumulación de vulnerabilidad y materialización del riesgo de cola lo ofrece \citet{Stein2012}, al concebir la política monetaria como instrumento de regulación de la estabilidad financiera.
 
 \subsection{Síntesis: complementariedad y amplificación supra-aditiva}
+\label{sec:sintesis-pilares}
 
 Los tres pilares convergen en una predicción común que constituye la hipótesis teórica central del trabajo: el efecto de la fragilidad bancaria sobre el riesgo soberano no es independiente del estado del crecimiento, y viceversa. La coincidencia de alta fragilidad bancaria y elevado riesgo a la baja del crecimiento amplifica el spread soberano por encima de la suma de los efectos individuales de cada dimensión.
 

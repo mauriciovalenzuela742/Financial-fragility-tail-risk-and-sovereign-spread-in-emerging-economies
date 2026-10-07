@@ -1,0 +1,37 @@
+% Capítulo de la tesis (texto derivado de envios/paper_empirico/cuerpo.tex; se edita aquí).
+\chapter{Discusión}
+\label{sec:discusion}
+
+\section{Interpretación}
+
+La hipótesis de partida era que el mercado penaliza de forma no lineal la coexistencia de fragilidad bancaria y riesgo de cola del crecimiento, de modo que su coincidencia amplifica el spread soberano. La evidencia obliga a responder en dos planos.
+
+\textbf{En el promedio del panel, la amplificación es proporcional.} El panel es compatible con una versión proporcional de la hipótesis ---ambos riesgos se asocian con un spread mayor y, en puntos básicos, se potencian como lo haría una intensidad de incumplimiento que responde a los dos---, pero no permite afirmar ni que la fragilidad cause el spread ni que exista, en general, una amplificación adicional. La razón principal no es la ausencia de relación, sino que la relación opera en ambas direcciones y con mucha persistencia: el mismo bucle de \citet{FarhiTirole2018b} que motiva la hipótesis hace que, con series trimestrales de trece países, el efecto de la fragilidad sobre el spread no pueda separarse del efecto del spread sobre la fragilidad ni del componente persistente que ambos comparten.
+
+\textbf{La amplificación adicional, si existe, es condicional: depende de cuándo y de en qué economías.} El análisis no encontró una simultaneidad que se manifieste en todo momento y en todas las economías. Encontró, en cambio, que la amplificación aparece en un subconjunto que el mecanismo permite anticipar. \emph{Cuándo}: fuera de las crisis con respaldo oficial masivo ---la crisis financiera global y la pandemia, con líneas de \textit{swap} de la Reserva Federal, financiamiento del FMI y compras de activos---, cuando el soberano enfrenta solo el costo esperado de rescatar a su banca; bajo ese respaldo la interacción es nula o negativa. \emph{Dónde}: en las economías cuya deuda la fija al margen un inversionista extranjero de cartera, y no en Polonia e India, donde un mercado local profundo la mantiene a vencimiento. En ese subconjunto la interacción resiste el \textit{wild cluster bootstrap} en ambas formas funcionales (Sección~\ref{sec:robustez-heterogeneidad}). La lectura económica es coherente: el multiplicador del \textit{doom loop} se traslada al precio de la deuda cuando el mercado espera que el pasivo contingente bancario recaiga sobre un soberano sin respaldo externo y cuya deuda valoriza un inversionista sensible al riesgo.
+
+Esa lectura, sin embargo, descansa en evidencia que no alcanza el estándar de la principal. La división entre economías se definió \textit{ex post}; en logaritmos los controles domésticos absorben la interacción; el episodio de estrés emergente de 2015--2016, que debería ser el caso más nítido, no se distingue de ventanas de tres trimestres elegidas al azar; y once o trece \textit{clusters} dejan poca potencia. Por eso la tesis la presenta como una hipótesis bien delimitada para contrastar con más datos, no como un resultado establecido.
+
+\textbf{Dos resultados secundarios ayudan a leer la evidencia previa.} El primero es que la interacción significativa de la especificación en niveles depende de la forma funcional: una parte es la complementariedad implícita en una estructura multiplicativa, y el resto se concentra en los trimestres de spread alto que la transformación logarítmica comprime. El segundo es que las asimetrías por régimen de crisis tienen el signo que predice el mecanismo, pero son también las que produciría la variación entre ventanas; con trece países, el panel no tiene la potencia para distinguirlas.
+
+\section{Implicancias}
+
+Las implicancias de política deben leerse con la cautela anterior, y se ordenan según el grado de evidencia que las respalda.
+
+\textbf{Lo que el panel respalda.} El riesgo de cola del crecimiento y la fragilidad bancaria son indicadores que se asocian con el costo de financiamiento soberano, y su seguimiento conjunto es informativo: ambos adelantan, en promedio, un spread más alto. Un monitoreo macroprudencial que combine una medida estructural de fragilidad bancaria con el \textit{Growth-at-Risk} captura dos fuentes de riesgo soberano que se transmiten por canales distintos (su correlación es de apenas 0,16).
+
+\textbf{Lo que el panel sugiere, condicional a confirmarse.} Si la amplificación se concentra en momentos sin respaldo externo y en economías de financiamiento externo, una regulación uniforme ---la misma exigencia para todas las economías y en todo momento--- no sería la respuesta más eficiente. La política podría enfocarse en caracterizar esos casos: identificar las economías cuya deuda depende de inversionistas extranjeros de cartera y vigilar con especial atención los episodios en que la fragilidad bancaria y la cola adversa del crecimiento coinciden sin un prestamista de última instancia internacional disponible, que es cuando el efecto multiplicativo tendría su mayor costo. Esa focalización es una implicancia de la evidencia condicional del Capítulo~\ref{sec:resultados}, no de un resultado robusto, y debería validarse antes de traducirse en regulación.
+
+\textbf{Lo que el panel no permite.} La evidencia no permite cuantificar cuánto bajaría el spread si se redujera la fragilidad bancaria, porque las asociaciones no son efectos causales identificados.
+
+\section{Limitaciones}
+
+\begin{enumerate}
+\item El corte transversal es de trece economías (catorce con Argentina, cuyo $GaR$ no es del todo homogéneo con el del resto); con ese número de \textit{clusters}, la inferencia asintótica es optimista y la inferencia robusta no rechaza la ausencia de efectos en el panel completo.
+\item El spread y la fragilidad son muy persistentes y se retroalimentan; ni el rezago de los regresores, ni la especificación dinámica, ni las variables instrumentales disponibles separan la dirección de interés.
+\item La heterogeneidad por tipo de economía usa una división definida \textit{ex post}, y en logaritmos no resiste los controles domésticos.
+\item La forma funcional no está completamente determinada: los datos prefieren los logaritmos a los niveles, pero la transformación de Box--Cox óptima es intermedia.
+\item $JLoss$ es ordinal por la calibración del motor, y la asociación es sensible a una malla de pérdidas más ancha.
+\item Los controles domésticos son interpolaciones de series anuales y plausiblemente median el mecanismo; faltan la calificación soberana histórica y el PIB per cápita que usan \citet{Chari2024b}.
+\item La cobertura del EMBI es desigual: Filipinas aporta 12 trimestres, e Indonesia y Sudáfrica 32 cada una, 20 de ellos de la serie del FMI.
+\end{enumerate}
