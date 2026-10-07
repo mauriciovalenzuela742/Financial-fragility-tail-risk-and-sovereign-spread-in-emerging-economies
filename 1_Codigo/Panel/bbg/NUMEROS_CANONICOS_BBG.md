@@ -1157,3 +1157,26 @@ reproduce byte a byte sus salidas anteriores.
 en EMstress (incluso con cluster país), pero ningún coeficiente resiste el wild bootstrap y EMstress
 no se distingue de ventanas al azar. Conclusión del paper sin cambios; la absorción por controles
 es propia de los logaritmos.
+
+## 14. Heterogeneidad por tipo de economía en la especificación vigente (2026-10-07)
+
+`python p16_heterogeneidad.py` (logs) y `JLOSS_FORMA=nivlag python p16_heterogeneidad.py` (niveles)
+→ `paper_heterogeneidad_numeros.csv` / `_nivlag.csv`. Re-estima la prueba de `p5_robustez_arbitro.py`
+§2b (núcleo de 11 emergentes de financiamiento externo vs. Polonia + India), que solo existía sobre el
+panel anterior en niveles contemporáneos. Panel embiext, 13 países, rezagos de la principal, EF país +
+tiempo; wild cluster bootstrap con pesos de Webb (G=11). La principal se reproduce (N=765, β3=−0,0112).
+
+| M4 solo núcleo (11 países) | Log-log | Niveles (pb) |
+|---|---|---|
+| β3 muestra completa (N=621): DK / wild | +0,011 (p=0,16 / 0,12) | +0,78 (p=0,018 / 0,046) |
+| β3 completa con 6 controles (N=515): DK / wild | +0,004 (0,25 / 0,39) | +0,53 (0,007 / 0,042) |
+| β3 sin crisis (N=533): DK / wild | **+0,034 (p<0,001 / 0,015)** | **+1,79 (p<0,001 / 0,002)** |
+| β3 sin crisis con 6 controles (N=442): DK / wild | +0,004 (0,59 / 0,68) | +0,81 (0,010 / 0,12) |
+| β3 sin crisis, leave-one-country-out (rango; p máx.) | 0,018–0,039; 0,08 | 0,87–1,92; 0,08 |
+| β3 Polonia+India (modelo con interacciones de grupo), sin crisis | −0,118 (p=0,002) | −1,82 (p=0,02) |
+
+**Lectura:** la amplificación adicional que el panel completo no muestra aparece en el núcleo de
+financiamiento externo fuera de las crisis con respaldo, y es la única que resiste el wild bootstrap
+en ambas formas funcionales sin controles. Salvedades: el grupo de contraste se definió a partir de la
+versión anterior (no ex ante), en logaritmos los controles domésticos la absorben, y con 11 clusters la
+inferencia sigue siendo frágil. Se reporta como evidencia condicional, no como hallazgo robusto.

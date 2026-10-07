@@ -1,0 +1,170 @@
+% Capítulo de la tesis (texto derivado de envios/paper_empirico/cuerpo.tex; se edita aquí).
+\chapter{Marco teórico}
+\label{sec:marco}
+
+\section{Marco conceptual}
+\label{sec:marco-conceptual}
+
+El argumento se sostiene sobre tres pilares que la literatura ha desarrollado de forma mayoritariamente independiente: el bucle de retroalimentación soberano--bancario (\textit{doom loop}); la interpretación de la fragilidad bancaria sistémica como pasivo contingente del soberano, que fundamenta la métrica $JLoss$; y la determinación del riesgo a la baja del crecimiento por las condiciones financieras, que fundamenta el $GaR$. La contribución conceptual no está en ninguno de ellos por separado, sino en la tesis de que operan de manera complementaria.
+
+\subsection{El nexo banco--soberano}
+
+La piedra angular es el mecanismo de retroalimentación entre la solvencia bancaria y la soberana formalizado por \citet{FarhiTirole2018b}. En su modelo de tres fechas, el soberano emite deuda cuyo precio refleja la capacidad fiscal esperada, y los bancos domésticos mantienen bonos soberanos como reserva de liquidez. Ante un choque adverso, la solvencia del soberano se deteriora por dos vías: un efecto directo, porque el choque contrae la actividad y los ingresos fiscales, y uno indirecto, a través de los balances bancarios. La caída del precio de la deuda pública erosiona el patrimonio de los bancos; si el soberano valora su inversión, los rescata, y el rescate se financia con deuda adicional que reduce todavía más su precio.
+
+Formalmente, el precio de la deuda en la fecha intermedia admite una representación de punto fijo, $p_1(s)=1-F\!\left(B_1(s)\mid s\right)$, donde $B_1(s)$ es el acervo de deuda estado-contingente y $F(\cdot)$ la distribución de la capacidad fiscal. La sensibilidad de $p_1(s)$ al estado $s$ toma la forma de un multiplicador: una caída del precio aumenta el rescate requerido y el volumen de bonos a colocar, lo que vuelve a deprimir el precio. La magnitud del multiplicador crece con el \textit{home bias} bancario. La implicación que este trabajo explota es que la amplificación es no lineal: el deterioro soberano no es la suma de un componente bancario y uno fiscal, sino su producto.
+
+\subsection{La fragilidad bancaria como pasivo contingente: el canal \texorpdfstring{$JLoss$}{JLoss}}
+
+$JLoss$ se interpreta como el costo esperado de rescatar al sistema bancario ante un evento sistémico, y por ello entra en la valoración del bono soberano \citep{Chari2024b}. Esta lectura operacionaliza el \textit{bailout put} de \citet{FarhiTirole2018b} y la dilución de \citet{AcharyaDrechslerSchnabl2014b}: si el mercado anticipa que el soberano asumirá el costo de recapitalizar su banca en un escenario de tensión, ese pasivo contingente se incorpora \textit{ex ante} en la prima soberana.
+
+\subsection{El riesgo a la baja del crecimiento: el canal \texorpdfstring{$GaR$}{GaR}}
+
+El tercer pilar proviene del programa de \textit{vulnerable growth} de \citet{ABG2019b}: las condiciones financieras predicen de forma asimétrica la distribución condicional del crecimiento, con una dependencia mucho más fuerte en la cola izquierda que en la derecha. La traducción al riesgo soberano opera por la dinámica de la deuda, $\dot d=(r-g)\,d-pb$: un sesgo a la baja en la distribución del crecimiento deteriora la capacidad fiscal precisamente en los estados en que el incumplimiento se vuelve probable. Como el costo del default tiene un perfil de tipo opción, concentrado en el peor escenario, lo relevante para la prima no es el crecimiento esperado sino su cola izquierda, que es lo que mide el $GaR$: el cuantil 5\% de la distribución condicional del crecimiento, estimado por regresión cuantílica \citep{KoenkerBassett1978,Koenker2004} sobre un índice de condiciones financieras y siguiendo la plataforma de CEMLA \citep{OssandonBusch2022}. El puente entre condiciones financieras laxas, acumulación de vulnerabilidad y materialización del riesgo de cola lo ofrece \citet{Stein2012}.
+
+\subsection{Complementariedad e hipótesis}
+\label{sec:sintesis-pilares}
+
+Los tres pilares convergen en una predicción: el efecto de la fragilidad bancaria sobre el riesgo soberano depende del estado del crecimiento. Del multiplicador de \citet{FarhiTirole2018b}, porque la amplificación crece tanto con la fragilidad del balance bancario como con la severidad del estado adverso; del canal de dilución de \citet{AcharyaDrechslerSchnabl2014b}, porque la sensibilidad soberana a las condiciones bancarias escala con el deterioro macroeconómico preexistente; y de \citet{GennaioliMartinRossi2014}, porque el costo del incumplimiento soberano crece con la exposición bancaria en los escenarios de bajo crecimiento.
+
+El riesgo de cola se mide por $D_{i,t}\equiv-GaR_{i,t}$, de modo que un $D$ mayor indica una cola más adversa. Conviene distinguir dos versiones de la complementariedad, porque la especificación en logaritmos las separa. La primera es la complementariedad en \emph{niveles}: el efecto de la fragilidad sobre el spread en puntos básicos crece con el riesgo de cola, $\partial^2\mathrm{Spread}/\partial JLoss\,\partial D>0$. La segunda es la complementariedad en \emph{elasticidades}: el efecto \emph{porcentual} de la fragilidad sobre el spread crece con el riesgo de cola, $\partial^2\ln\mathrm{Spread}/\partial\ln JLoss\,\partial D>0$. Si el spread tiene una estructura multiplicativa, $\ln\mathrm{Spread}=\beta_1\ln JLoss+\beta_2 D$, la primera se cumple automáticamente siempre que $\beta_1,\beta_2>0$:
+\[
+\frac{\partial^2\,\mathrm{Spread}}{\partial JLoss\;\partial D}=\beta_1\beta_2\,\frac{\mathrm{Spread}}{JLoss}>0,
+\]
+sin que haga falta ningún término de interacción. La segunda exige, además, un coeficiente de interacción positivo en la especificación log-log.
+
+La forma multiplicativa tiene un fundamento directo en los modelos de intensidad de incumplimiento \citep{DuffieSingleton1999}: el spread de un bono con pérdida en caso de incumplimiento $L$ es, en primera aproximación, $\mathrm{Spread}\approx\lambda\,L$, donde $\lambda$ es la intensidad (neutral al riesgo) de incumplimiento. Si la intensidad responde de forma proporcional al pasivo contingente bancario y exponencial al riesgo de cola del crecimiento,
+\[
+\lambda_{i,t}=\lambda_0\,JLoss_{i,t-1}^{\beta_1}\,e^{\beta_2D_{i,t-1}}
+\quad\Longrightarrow\quad
+\ln\mathrm{Spread}_{i,t}=\ln(\lambda_0L)+\beta_1\ln JLoss_{i,t-1}+\beta_2D_{i,t-1},
+\]
+que es la especificación principal con $\beta_3=0$; la forma log-normal de la intensidad es además la habitual en la valoración de riesgo soberano \citep{PanSingleton2008}. En esta lectura, la complementariedad en niveles es la consecuencia natural de que ambos riesgos escalen la misma intensidad de incumplimiento, y el coeficiente $\beta_3$ mide un canal \emph{adicional}: que el riesgo de cola eleve la elasticidad de la intensidad al pasivo contingente, como lo haría el multiplicador de \citet{FarhiTirole2018b} si su magnitud creciera con la severidad del estado adverso. $\beta_3=0$ no contradice el marco teórico: es su versión proporcional. Es, por tanto, la versión más exigente de la hipótesis, y la que contrasta la especificación principal de este trabajo. Las hipótesis son:
+
+\begin{itemize}
+    \item \textbf{H1 (canal bancario).} La fragilidad bancaria sistémica eleva el spread soberano: $\beta_1>0$.
+    \item \textbf{H2 (canal de crecimiento).} Un mayor riesgo de cola del crecimiento eleva el spread soberano: $\beta_2^{D}>0$ (equivalentemente, $\beta_2<0$ en la parametrización con $GaR$).
+    \item \textbf{H3 (complementariedad).} La interacción entre fragilidad bancaria y riesgo de cola amplifica el spread: en elasticidades, $\beta_3>0$ en la especificación log-log; en niveles, $\partial^2\mathrm{Spread}/\partial JLoss\,\partial D>0$, lo que ya implican H1 y H2 bajo la forma multiplicativa.
+\end{itemize}
+
+Frente a \citet{Chari2024b}, que interactúan $JLoss$ con factores financieros globales ---el VIX, la tasa del Tesoro estadounidense, los spreads de alto rendimiento---, este trabajo interactúa $JLoss$ con una medida doméstica del riesgo de cola del crecimiento. La distinción importa para la política: la primera interacción indica cuándo un sistema bancario frágil expone al soberano al ciclo financiero global; la segunda, cuándo lo expone a su propio ciclo doméstico.
+
+\section{Estado del arte}
+\label{sec:literatura}
+
+El trabajo se sitúa en la intersección de cuatro literaturas que han evolucionado en paralelo: los determinantes del spread soberano en economías emergentes, las métricas de riesgo sistémico, el nexo banca--soberano y la frontera entre condiciones financieras y crecimiento.
+
+\subsection{Determinantes del spread soberano en economías emergentes}
+
+La literatura clásica ha oscilado entre los fundamentos macroeconómicos domésticos ---deuda/PIB, crecimiento, términos de intercambio, reservas, calidad institucional--- \citep{Edwards1984,HilscherNosbusch2010} y los factores globales o de oferta de capital, sintetizados en la distinción entre factores \textit{push} y \textit{pull} \citep{CalvoLeidermanReinhart1996}. La evidencia ha favorecido la preeminencia de los factores globales: \citet{GonzalezRozadaLevyYeyati2008} muestran que una fracción sustancial de la variación de los spreads emergentes se explica por el apetito de riesgo global; \citet{LongstaffEtAl2011} documentan que el riesgo de crédito soberano es mayoritariamente sistemático; y \citet{RemolonaScatignaWu2008} atribuyen la dinámica de la prima de riesgo a la aversión global al riesgo. \citet{UribeYue2006} formalizan la conexión entre el ciclo doméstico y el spread, y \citet{MirandaAgrippinoRey2022} consolidan el ciclo financiero global como factor común de los precios de activos riesgosos. \citet{CavalloValenzuela2010} y \citet{CsontoIvaschenko2013} descomponen el papel relativo de fundamentos y factores globales. Este trabajo introduce un determinante doméstico ausente de ese núcleo ---el riesgo de cola del crecimiento--- y su interacción con la fragilidad bancaria. Los efectos fijos de tiempo de la especificación absorben, por construcción, todo el componente global común.
+
+\subsection{Métricas de riesgo sistémico y fragilidad bancaria}
+
+La crisis de 2008--09 catalizó tres familias de medidas. La primera, basada en datos de mercado, incluye el \textit{SRISK} \citep{AcharyaEtAl2017b,BrownleesEngle2016} y el $\Delta$CoVaR \citep{AdrianBrunnermeier2016b}. La segunda, estructural y semiparamétrica, deriva de \citet{Merton1974b} y agrega las pérdidas potenciales del sistema: el \textit{Distress Insurance Premium} de \citet{HuangZhouZhu2009} y las \textit{Banking Stability Measures} de \citet{SegovianoGoodhart2009}. La tercera mide la interconexión \citep{BillioEtAl2012}; \citet{BisiasEtAl2012} ofrecen una panorámica. $JLoss$ pertenece a la segunda familia y es pariente directa del \textit{Distress Insurance Premium}. Su ventaja para el problema soberano es la agregación a nivel de país, la interpretación como costo de rescate y la disponibilidad para economías emergentes, donde SRISK y CoVaR tienen escasa cobertura. \citet{GiglioKellyPruitt2016} evalúan la capacidad predictiva comparada de estas métricas.
+
+\subsection{El nexo banca--soberano y el \textit{doom loop}}
+
+\citet{ReinhartRogoff2009,ReinhartRogoff2011} documentan que las crisis bancarias anteceden a las soberanas, y \citet{LaevenValencia2013,LaevenValencia2020} cuantifican sus costos fiscales. En el plano teórico, a \citet{FarhiTirole2018b}, \citet{AcharyaDrechslerSchnabl2014b} y \citet{GennaioliMartinRossi2014} se suman \citet{Bocola2016}, \citet{BoltonJeanne2011}, \citet{Leonello2018} y la propuesta de ESBies de \citet{BrunnermeierEtAl2016}. En el plano empírico, \citet{ModySandri2012}, \citet{DieckmannPlank2012}, \citet{KallestrupLandoMurgoci2016}, \citet{FratzscherRieth2019} y \citet{AcharyaSteffen2015} documentan el nexo, pero abrumadoramente para Europa y en frecuencia de crisis. Su extensión a un panel amplio de emergentes con una métrica homogénea de fragilidad es la línea que abren \citet{Chari2024b} y que este trabajo prolonga.
+
+\subsection{\textit{Growth-at-Risk}}
+
+\citet{ABG2019b} establecen que las condiciones financieras predicen con fuerza la cola izquierda del crecimiento. El marco fue adoptado por el FMI \citep{PrasadEtAl2019} y trasladado a América Latina por la plataforma de CEMLA \citep{OssandonBusch2022}, base de la estimación de este trabajo. \citet{AllenBaliTang2012} y \citet{GiglioKellyPruitt2016} vinculan el riesgo de cola financiero con contracciones macroeconómicas, y \citet{BrunnermeierSannikov2014} y \citet{HeKrishnamurthy2013} racionalizan por qué las fricciones financieras generan no linealidades. Econométricamente, el método descansa en la regresión cuantílica \citep{KoenkerBassett1978,Koenker2005}, su extensión a paneles \citep{Koenker2004,Canay2011,MachadoSantosSilva2019} y el reordenamiento de \citet{ChernozhukovEtAl2010}; el índice de condiciones financieras sigue a \citet{HatziusEtAl2010} y \citet{HolloKremerLoDuca2012}. Esta literatura se detiene en el crecimiento: su conexión con el precio del riesgo soberano está, hasta donde alcanza esta revisión, inexplorada.
+
+\subsection{Brecha y posicionamiento}
+
+La literatura del nexo banca--soberano trata el crecimiento como un fundamento de fondo; la de \textit{growth-at-risk} no llega a la prima soberana; y la de determinantes del spread ha privilegiado los factores globales. Este trabajo (i) emplea conjuntamente una métrica estructural de fragilidad bancaria y una de riesgo de cola del crecimiento como determinantes del spread; (ii) contrasta su complementariedad distinguiendo la que implica una estructura multiplicativa de la amplificación adicional; y (iii) lo hace con regresores predeterminados que mitigan la causalidad inversa, declarando los límites de la identificación con trece países.
+
+\section{Antecedentes (datos)}
+\label{sec:datos}
+
+\subsection{El panel}
+
+El panel es trimestral y reúne las economías emergentes con $JLoss$, $GaR$ y EMBI disponibles. Todos los insumos micro de $JLoss$ provienen de Bloomberg; los componentes reales del FCI (IPC, PIB, índice accionario, tipo de cambio real, rendimiento a diez años), de estadísticas nacionales; el VIX, de Bloomberg. El Anexo~\ref{chap:anexoA} tabula la procedencia de cada serie.
+
+Una economía entra al panel si se dispone de su $JLoss$; las exclusiones responden a un único criterio, que $JLoss$ no sea una medida válida a nivel de país. Corea del Sur queda fuera porque el valor de mercado de su banca es persistentemente cercano al 4\% del punto de incumplimiento (\textit{Korea discount}), lo que el modelo de Merton lee como incumplimiento inminente; Bulgaria y Hungría, porque solo uno y dos de sus bancos cotizan, respectivamente, de modo que la métrica no representa un sistema bancario.
+
+La muestra de estimación de la especificación principal exige el EMBI del trimestre y $JLoss$ y $GaR$ del trimestre anterior, sin huecos. Reúne trece economías y 765 observaciones país-trimestre (2004Q2--2026Q2; Figura~\ref{fig:cobertura}). Diez economías aportan historia larga, entre 40 y 89 trimestres: Brasil, Chile, China, Colombia, India, Malasia, México, Perú, Polonia y Turquía, limitadas por el inicio del $GaR$ o del EMBI. Filipinas aporta 12 trimestres; Indonesia y Sudáfrica, 32 cada una. Egipto, Pakistán y Rusia tienen $JLoss$ pero no aportan observaciones: les falta el EMBI, el $GaR$ o el solapamiento entre ambos. Argentina sí completa las tres series, pero su $GaR$ se estimó con un índice de condiciones financieras sin el bloque de tasas y con una ventana de estandarización más corta, por la breve historia de su IPC oficial; por esa desviación metodológica queda fuera de la muestra principal y se incorpora como ejercicio de robustez (34 observaciones, spread de 2017Q3 a 2025Q4; Sección~\ref{sec:robustez-argentina}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_cobertura_embiext.pdf}
+\caption[Cobertura del panel]{Cobertura del panel, por país. Gris: trimestres con $JLoss$. Celeste: además con EMBI. Azul: muestra de estimación de la especificación principal. Triángulos: trimestres en que el EMBI proviene de la serie del FMI (GFSR). Entre paréntesis, trimestres de estimación por país.}
+\label{fig:cobertura}
+\end{figure}
+
+\subsection{Variable dependiente: el EMBI}
+
+El spread soberano se mide, siguiendo a \citet{Chari2024b}, por el EMBI Global Diversified de J.P.\ Morgan, promediado a frecuencia trimestral desde la serie diaria. Para Indonesia y Sudáfrica, cuya serie de J.P.\ Morgan disponible comienza en 2023Q3, el período 2010Q1--2014Q4 se completa con la serie trimestral de spreads soberanos del FMI (\textit{Global Financial Stability Report}). El empalme se valida sobre las economías con ambas series: en 80 trimestres de solapamiento (China, Hungría, Polonia y Turquía) las dos series correlacionan 0,94, con una razón mediana de 1,02, por lo que se usan sin reescalar. La serie del FMI solo llena trimestres sin dato de J.P.\ Morgan. La Sección~\ref{sec:robustez} verifica que excluir esos 40 trimestres no altera los resultados.
+
+\subsection{Controles}
+
+Los controles domésticos son la deuda del gobierno general/PIB y el balance fiscal/PIB (FMI), las reservas/PIB y la cuenta corriente/PIB (Banco Mundial), la inflación interanual y el tipo de cambio real efectivo. Son series anuales interpoladas a frecuencia trimestral y cubren 649 de las 765 observaciones de la muestra principal.
+
+\subsection{Estadística descriptiva}
+
+La Tabla~\ref{tab:descriptivos} resume la muestra de estimación. El spread promedia 198 puntos básicos, con una mediana de 177 y un máximo de 661. $JLoss_{t-1}$ tiene una media de 4,65 y una mediana de 2,67: la fragilidad sistémica se concentra en pocos episodios y países. La Tabla~\ref{tab:mediaspais} muestra que Turquía (9,6), India (8,4) y China (6,8) están en el extremo superior, y que Malasia, Perú, Indonesia y Sudáfrica tienen una fragilidad media cercana al mínimo de la métrica. $D_{t-1}$ promedia $-1{,}5$ puntos porcentuales ---en el trimestre típico el cuantil 5\% del crecimiento es positivo--- con una cola que llega a $+17{,}7$ en los episodios de estrés.
+
+La descomposición de la varianza (Tabla~\ref{tab:varianza}) es relevante para la identificación con efectos fijos de país: el 82\% de la desviación de $\ln JLoss_{t-1}$, el 84\% de la de $D_{t-1}$ y el 67\% de la de $\ln$ EMBI es variación \textit{within}, dentro de cada país a lo largo del tiempo. Deuda/PIB y reservas/PIB, en cambio, son mayoritariamente transversales (53\% y 52\% \textit{within}).
+
+\input{\tablasdir/tabla_descriptivos_embiext}
+
+La Figura~\ref{fig:distribuciones} muestra las distribuciones univariadas: la transformación logarítmica reduce la asimetría de $JLoss$ de 2,79 a 1,34 y la del EMBI de 1,20 a $-0{,}74$. La Figura~\ref{fig:correlaciones} presenta la matriz de correlaciones. $D$ y el \textit{Expected Shortfall} correlacionan $-0{,}98$ ---son la misma información sobre la cola---, y $\ln JLoss_{t-1}$ correlaciona $-0{,}48$ con el balance fiscal, $+0{,}41$ con la inflación y $+0{,}31$ con la deuda, un anticipo de por qué los controles la absorben en la Sección~\ref{sec:bateria}. La correlación entre $\ln JLoss_{t-1}$ y $D_{t-1}$ es moderada (0,16), de modo que los dos canales aportan información distinta.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_distribuciones_embiext.pdf}
+\caption[Distribuciones univariadas]{Distribuciones univariadas de la muestra de estimación (línea roja: media). La transformación logarítmica comprime la asimetría del spread y de $JLoss$.}
+\label{fig:distribuciones}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{fig_correlaciones_embiext.pdf}
+\caption[Matriz de correlaciones]{Matriz de correlaciones de la muestra de estimación. $JLoss$, $D$, ES y $P(\text{crec.}<0)$ rezagados un trimestre; controles contemporáneos.}
+\label{fig:correlaciones}
+\end{figure}
+
+Las Figuras~\ref{fig:jlosspaises} y~\ref{fig:garpaises} trazan $JLoss$ y $D$ por país. Ambas series son moderadas y estables en los períodos normales y se disparan en episodios puntuales, no siempre simultáneos entre países, que son la variación que identifica la interacción. La Figura~\ref{fig:series} superpone, por país, la fragilidad, el riesgo de cola y el spread, con el vector de crisis sombreado: en Brasil, Colombia, México y Polonia los tres se mueven juntos en 2008--09 y 2020; en Brasil también en 2015--16, y en Turquía entre 2018 y 2021.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_jloss_paises_embiext.pdf}
+\caption[JLoss por país]{$JLoss$ trimestral por país (motor de punto de silla sobre datos Bloomberg). Sombreado: ventana de estimación.}
+\label{fig:jlosspaises}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_gar_paises_embiext.pdf}
+\caption[Riesgo de cola por país]{$D=-GaR$ trimestral por país (puntos porcentuales; más alto indica una cola más adversa). Sombreado: ventana de estimación.}
+\label{fig:garpaises}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_series_pais_embiext.pdf}
+\caption[Fragilidad, riesgo de cola y spread por país]{$JLoss$ (eje izquierdo), $D=-GaR$ (eje derecho interior) y EMBI (eje derecho exterior) por país. Sombreado: crisis financiera global (2008Q4--2009Q4), estrés emergente (2015Q3--2016Q1) y pandemia (2020Q1--2021Q4).}
+\label{fig:series}
+\end{figure}
+
+La Figura~\ref{fig:comovimiento} agrega las tres series por la mediana transversal de cada trimestre, estandarizadas. $\ln JLoss_{t-1}$ y $D_{t-1}$ co-mueven con fuerza (correlación 0,64 entre medianas), y cada una correlaciona 0,31 con $\ln$ EMBI. La Figura~\ref{fig:comovpais} repite el ejercicio dentro de cada país: el co-movimiento es nítido en los episodios de estrés y débil en los períodos normales. Por último, la Figura~\ref{fig:skewt} ilustra qué mide el $GaR$ con la densidad condicional del crecimiento chileno en un trimestre benigno (2025Q3) y en el de mayor estrés (2020Q2): en el segundo, la distribución se desplaza y su cuantil 5\% cae a $-13{,}4$ puntos porcentuales.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{fig_comovimiento_embiext.pdf}
+\caption[Co-movimiento agregado]{Co-movimiento de $D_{t-1}$, $\ln JLoss_{t-1}$ y $\ln$ EMBI, estandarizados y agregados por la mediana transversal de cada trimestre. Sombreado: vector de crisis.}
+\label{fig:comovimiento}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_comov_pais_embiext.pdf}
+\caption[Co-movimiento por país]{Co-movimiento estandarizado por país ($z$-score dentro de cada país). Las líneas se cortan en los trimestres sin dato.}
+\label{fig:comovpais}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{fig_skewt_chile_embiext.pdf}
+\caption[Densidad condicional del crecimiento]{Densidad condicional \textit{skew-t} del crecimiento de Chile en un trimestre benigno y en el de mayor estrés. Línea discontinua: $GaR$ (cuantil 5\%); punteada: \textit{Expected Shortfall}; área: 5\% de cola.}
+\label{fig:skewt}
+\end{figure}
