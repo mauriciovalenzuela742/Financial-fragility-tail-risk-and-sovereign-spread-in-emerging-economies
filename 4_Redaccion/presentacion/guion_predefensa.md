@@ -72,25 +72,135 @@ fuera la defensa, y le agradecería que me interrumpa cuando quiera."
 conclusiones. El centro está en los resultados: la batería principal y la batería con el vector de
 crisis."
 
-### 3. Qué es el spread y sus dos pilares (2 min)
-**Propósito:** situar la tesis en la literatura y mostrar la brecha.
+### 3. Qué es el spread y sus dos pilares (2 min 30 s)
+**Propósito:** definir el spread, situar la tesis entre las dos grandes explicaciones de la
+literatura y mostrar la brecha que llena.
 
-**Qué digo:** "Primero, qué es el spread soberano: es la diferencia entre lo que rinde la deuda en
-dólares de un gobierno emergente y lo que rinden los bonos del Tesoro de Estados Unidos de plazo
-similar. Es la prima que exige el mercado por el riesgo de que ese país no pague, y la mido con el
-EMBI Global Diversified de J.P. Morgan, en puntos básicos. La literatura explica esa prima con dos pilares. El
-primero son los fundamentos domésticos ---Edwards, Hilscher y Nosbusch, Uribe y Yue---: deuda,
-crecimiento, reservas. El segundo son los factores globales ---Calvo, Leiderman y Reinhart,
-Longstaff et al., Miranda-Agrippino y Rey---: el apetito global por riesgo mueve a todos los
-emergentes juntos. Yo mido lo doméstico con dos variables: la fragilidad bancaria, con JLoss, y el
-riesgo de cola del crecimiento, con el GaR. Lo global lo absorbo con efectos fijos de tiempo. La
-brecha es esta: Chari et al. (2024) cruzan la fragilidad bancaria con factores globales; nadie la
-ha cruzado con el riesgo de cola doméstico."
+**Qué digo (versión para exponer):** "Primero, qué es el spread soberano: es la diferencia entre lo
+que rinde la deuda en dólares de un gobierno emergente y lo que rinden los bonos del Tesoro de
+Estados Unidos de plazo similar. Es la prima que exige el mercado por el riesgo de que ese país no
+pague, y la mido con el EMBI Global Diversified de J.P. Morgan, en puntos básicos.
+
+La literatura explica esa prima con dos pilares. El primero son los **fundamentos domésticos**:
+Edwards mostró, ya en los ochenta, que la deuda y las reservas de cada país explican el precio de
+sus préstamos; Hilscher y Nosbusch, con el EMBI, que los fundamentos ---en especial la volatilidad
+de los términos de intercambio--- explican buena parte de los spreads; y Uribe y Yue, que el spread
+y el ciclo doméstico se influyen mutuamente. El segundo pilar son los **factores globales**: Calvo,
+Leiderman y Reinhart mostraron que los flujos de capital hacia los emergentes los empujan
+condiciones externas, como las tasas de Estados Unidos; Longstaff y coautores, que el riesgo de
+crédito soberano es en gran parte común a todos los países; y Miranda-Agrippino y Rey, que existe
+un ciclo financiero global que mueve los precios de riesgo en todo el mundo.
+
+Yo mido el pilar doméstico con dos variables: la fragilidad bancaria, con JLoss, y el riesgo de cola
+del crecimiento, con el GaR. El pilar global lo absorbo con efectos fijos de tiempo. Y la brecha es
+esta: Chari y coautores (2024) cruzan la fragilidad bancaria con factores globales; nadie la ha
+cruzado con el riesgo de cola doméstico del crecimiento. Ese cruce es lo que estudio."
 
 **Transición:** "¿Por qué tendrían que interactuar? Por el mecanismo."
 
-**Si me pregunta** por qué no incluyo el VIX: los efectos fijos de tiempo absorben todo choque
-común, incluido el VIX; en la réplica de Chari los incluyo explícitamente y el resultado no cambia.
+**Si me pregunta por los autores: qué aportó cada uno y con qué método**
+
+*Pilar 1: fundamentos domésticos (factores pull)*
+
+- **Edwards (1984), *American Economic Review*.**
+  - *Pregunta:* ¿qué determina el precio al que los países en desarrollo se endeudan en el
+    exterior?
+  - *Método:* un modelo de riesgo de incumplimiento en el que el prestamista cobra una prima según
+    la probabilidad de que el país no pague. Lo lleva a los datos regresando el logaritmo del spread
+    de los préstamos bancarios a gobiernos de países en desarrollo, sobre la tasa LIBOR, entre 1976 y
+    1980, contra indicadores macroeconómicos de cada país: deuda/PIB, servicio de la deuda,
+    reservas, inversión y cuenta corriente.
+  - *Hallazgo:* más deuda eleva el spread; más reservas e inversión lo reducen. Fue de los primeros
+    en mostrar que el mercado distingue a los deudores según sus fundamentos.
+  - *Conexión conmigo:* fundó la idea de que el spread mide riesgo de incumplimiento y depende de
+    variables domésticas; mis controles (deuda, reservas, cuenta corriente) vienen de esta tradición.
+- **Hilscher y Nosbusch (2010), *Review of Finance*.**
+  - *Pregunta:* ¿cuánto de la variación de los spreads emergentes explican los fundamentos
+    macroeconómicos?
+  - *Método:* un modelo estructural tipo Merton, en el que el país incumple si su capacidad de pago
+    cae bajo un umbral, de modo que importan tanto el nivel como la volatilidad de los fundamentos.
+    Lo estiman con un panel de spreads EMBI de economías emergentes entre mediados de los noventa y
+    mediados de los dos mil.
+  - *Hallazgo:* los fundamentos explican una parte importante de los spreads, y la **volatilidad
+    de los términos de intercambio** es especialmente relevante, más allá de su nivel.
+  - *Conexión conmigo:* muestra que el **riesgo** de los fundamentos, no solo su nivel, se cobra en
+    el spread. Es la misma lógica del GaR: lo que importa es la cola de la distribución del
+    crecimiento, no su promedio.
+- **Uribe y Yue (2006), *Journal of International Economics*.**
+  - *Pregunta:* ¿el spread mueve al ciclo económico de los emergentes, o el ciclo mueve al spread?
+  - *Método:* un VAR de panel con datos trimestrales de siete emergentes (entre ellos Argentina,
+    Brasil, México, Perú y Sudáfrica) desde mediados de los noventa, con la tasa de interés de
+    EE.UU., el spread del país, el producto, la inversión y la balanza comercial, identificado con un
+    orden recursivo. Lo complementan con un modelo teórico de economía pequeña y abierta.
+  - *Hallazgo:* la relación va en **ambas direcciones**. Los spreads reaccionan a las condiciones
+    domésticas y, a la vez, sus choques afectan la actividad; además amplifican los choques de la
+    tasa de EE.UU. Los choques de la tasa externa explican cerca de una quinta parte de los ciclos.
+  - *Conexión conmigo:* anticipa mi principal problema de identificación: el spread y sus
+    determinantes se retroalimentan. Por eso rezago los regresores y pruebo el canal inverso.
+
+*Pilar 2: factores globales (factores push)*
+
+- **Calvo, Leiderman y Reinhart (1996), *Journal of Economic Perspectives*** (sobre su trabajo de
+  1993 en el *IMF Staff Papers*).
+  - *Pregunta:* ¿por qué llegaron tantos capitales a América Latina y Asia a comienzos de los
+    noventa?
+  - *Método:* análisis del co-movimiento entre países. En el trabajo de 1993 extraen componentes
+    principales de las reservas y los tipos de cambio reales de países latinoamericanos y muestran
+    que el factor común se mueve con variables de EE.UU., como las tasas de interés. El artículo de
+    1996 sintetiza esa evidencia.
+  - *Hallazgo:* gran parte de los flujos se explica por factores **externos (push)** ---la caída de
+    las tasas en EE.UU. y la recesión en los países desarrollados---, no solo por las reformas
+    domésticas (pull). Advierten que lo que entra por factores externos puede salir de golpe.
+  - *Conexión conmigo:* es el origen de la distinción push/pull que ordena mi lámina.
+- **Longstaff, Pan, Pedersen y Singleton (2011), *American Economic Journal: Macroeconomics*.**
+  - *Pregunta:* ¿cuán "soberano" es realmente el riesgo de crédito soberano?
+  - *Método:* datos mensuales de CDS soberanos de 26 países entre 2000 y 2010. Usan componentes
+    principales para medir cuánto se mueven juntos, regresiones contra variables locales (bolsa,
+    tipo de cambio, reservas) y globales (bolsa de EE.UU., VIX, spreads de alto rendimiento), y un
+    modelo de valoración que separa la probabilidad de incumplimiento de la prima de riesgo.
+  - *Hallazgo:* el riesgo soberano es **mayoritariamente común**: un solo componente explica la
+    mayor parte de la variación, y las variables globales explican más que las locales. Una parte
+    importante del spread es prima de riesgo y no probabilidad de incumplimiento.
+  - *Conexión conmigo:* justifica los efectos fijos de tiempo, que absorben todo ese componente
+    común; mi variación identificadora es la doméstica, dentro de cada país.
+- **Miranda-Agrippino y Rey (2022), *Handbook of International Economics*** (síntesis de su
+  trabajo de 2020 en la *Review of Economic Studies*).
+  - *Pregunta:* ¿existe un ciclo financiero global y qué lo mueve?
+  - *Método:* un modelo de factores dinámicos sobre cientos de precios de activos riesgosos de todo
+    el mundo para extraer un factor común, y un VAR bayesiano para estimar cómo responde ese factor
+    a choques de política monetaria de EE.UU. identificados con alta frecuencia.
+  - *Hallazgo:* un solo **factor global** explica una fracción importante de los precios de riesgo
+    del mundo, y la política monetaria de la Fed lo mueve: cuando la Fed endurece, caen los precios
+    de riesgo, se contrae el crédito y suben las primas.
+  - *Conexión conmigo:* es la versión moderna del pilar global y la razón por la que no basta con
+    controlar el VIX: los efectos fijos de tiempo capturan todo el ciclo común.
+
+*La brecha*
+
+- **Chari, Garcés, Martínez y Valenzuela (2024), *Journal of Financial Stability*.**
+  - *Pregunta:* ¿la fragilidad del sistema bancario se traslada al spread soberano de los
+    emergentes?
+  - *Método:* construyen JLoss con datos de mercado de los bancos: probabilidades de incumplimiento
+    tipo Merton agregadas por punto de silla. Estiman regresiones de panel del spread EMBI con JLoss
+    rezagado y controles que agregan progresivamente, y estudian cómo la relación cambia con los
+    factores financieros globales.
+  - *Hallazgo:* mayor fragilidad bancaria se asocia con spreads más altos, y esa relación depende
+    del entorno financiero global.
+  - *Conexión conmigo:* es el trabajo más cercano. Uso su métrica y su estructura de batería, y
+    replico su asociación con datos construidos de forma independiente. La diferencia: ellos cruzan
+    la fragilidad con factores **globales**; yo la cruzo con el riesgo de cola **doméstico** del
+    crecimiento. Ese cruce es la brecha que lleno.
+
+**Si me pregunta cómo se relacionan los dos pilares:** no compiten; se complementan. Los factores
+globales mueven a todos los emergentes juntos, y yo los absorbo con efectos fijos de tiempo. Lo que
+queda es la variación doméstica, que es justamente donde operan la fragilidad bancaria y el riesgo
+de cola de cada país.
+
+**Si me pregunta por qué no incluyo el VIX:** los efectos fijos de tiempo absorben todo choque común,
+incluido el VIX; en la réplica de Chari los incluyo explícitamente y el resultado no cambia.
+
+*Nota para mí:* si pide cifras exactas de un paper (coeficientes, porcentajes de varianza), decir
+que lo verifico en el original en vez de improvisar.
 
 ### 4. El mecanismo y el balance de fuerzas (2 min)
 **Propósito:** que se entienda por qué la coincidencia debería amplificar, y anticipar el problema
@@ -222,6 +332,75 @@ lo someto a un wild cluster bootstrap con pesos de Webb, que es la corrección e
 clusters: un resultado es robusto solo si resiste esa prueba. Además propago el error del GaR, que
 es una estimación, y aplico pruebas de identificación: canal inverso, dinámica, proyecciones
 locales, instrumentos y permutación."
+
+**Si me pregunta por qué hice estas pruebas en específico.** La lógica común: la regresión principal
+es MCO con efectos fijos y regresores rezagados, y cada prueba ataca una amenaza concreta a esa
+identificación. No elegí pruebas al azar; elegí la que corresponde a cada debilidad conocida del
+diseño.
+
+- **Canal inverso** (regresar $\ln$ JLoss$_t$ sobre $\ln$ EMBI$_{t-1}$).
+  - *Amenaza:* causalidad inversa. Es el propio *doom loop*: un spread más alto deprecia los bonos
+    soberanos que tienen los bancos y eleva su probabilidad de incumplimiento.
+  - *Por qué esta prueba:* es la forma más directa de medir si esa flecha existe y qué tan fuerte es.
+  - *Qué esperaría si fuera causal:* un canal inverso débil frente al directo.
+  - *Resultado:* 0,17 (p = 0,009), más fuerte que la dirección que busco.
+- **Dinámica: spread rezagado y fragilidad adelantada.**
+  - *Amenaza:* el spread y la fragilidad son muy persistentes. Un factor omitido persistente puede
+    mover a la vez la fragilidad pasada y el spread presente, y el rezago no lo elimina.
+  - *Por qué esta prueba:* incluir el spread rezagado separa el efecto de la fragilidad de la
+    inercia del spread. La fragilidad *adelantada* (t+1) funciona como placebo: el futuro no puede
+    causar el presente.
+  - *Qué esperaría si fuera causal:* que el efecto sobreviva con el spread rezagado y que el
+    adelanto sea nulo.
+  - *Resultado:* el efecto cae a 0,005, y el adelanto (0,051) pesa casi lo mismo que el rezago
+    (0,058). Hay un componente persistente común.
+  - *Por qué no GMM de panel dinámico (Arellano–Bond):* está diseñado para paneles con pocos
+    periodos. Con T ≈ 88 trimestres el sesgo de Nickell es del orden de 1/T, así que el estimador
+    *within* con el rezago es adecuado.
+- **Proyecciones locales (Jordà, 2005).**
+  - *Amenaza:* que el efecto sea un artefacto de imponer una dinámica de un solo rezago.
+  - *Por qué esta prueba:* estima la respuesta del spread en cada horizonte (0 a 6 trimestres) sin
+    imponer una forma dinámica.
+  - *Qué esperaría si fuera causal:* una respuesta positiva y significativa en los trimestres
+    siguientes.
+  - *Resultado:* respuestas planas en todos los horizontes. El +4,6 pb de la versión anterior en
+    niveles no se reproduce.
+- **Variables instrumentales *shift-share* (Goldsmith-Pinkham, Sorkin y Swift, 2020).**
+  - *Amenaza:* endogeneidad que ni el rezago ni la dinámica eliminan.
+  - *Por qué esta prueba:* es la herramienta estándar para obtener variación exógena de la
+    fragilidad. Un choque global (liquidez del Tesoro, dólar amplio, términos de intercambio)
+    multiplicado por la exposición *pre-muestral* de cada país mueve la fragilidad sin depender del
+    spread corriente.
+  - *Por qué tres instrumentos:* para tener sobreidentificación y aplicar la prueba de Sargan. Si
+    todos fueran válidos, deberían estimar el mismo parámetro.
+  - *Resultado:* primeras etapas razonables (F ≈ 9–11), pero estimaciones de signo inestable
+    (+0,35, −2,18, +0,15) y Sargan rechaza. Los instrumentos son macro-agregados y mueven más que la
+    fragilidad bancaria.
+- **Wild cluster bootstrap (pesos de Webb).**
+  - *Amenaza:* con 13 países, los errores asintóticos (Driscoll–Kraay o *cluster*) son optimistas y
+    rechazan la hipótesis nula demasiado seguido (Cameron, Gelbach y Miller, 2008).
+  - *Por qué esta prueba:* es la corrección estándar con pocos *clusters*. Los pesos de Webb, de
+    seis puntos, se recomiendan con menos de 15 *clusters*.
+  - *Resultado:* fragilidad p = 0,33, riesgo de cola p = 0,20, interacción p = 0,89.
+- **Bootstrap del GaR (regresor generado, Pagan, 1984).**
+  - *Amenaza:* el GaR es una estimación de primera etapa, así que su error no está en los errores
+    estándar de la segunda.
+  - *Por qué esta prueba:* reestimar la regresión principal sobre 500 réplicas de la regresión
+    cuantílica propaga ese error.
+  - *Resultado:* las conclusiones no cambian (p = 0,003, 0,049, 0,12). La medición del riesgo de
+    cola no es el problema.
+- **Prueba de permutación del episodio *EMstress*.**
+  - *Amenaza:* que el episodio de 2015–16 se haya elegido porque da el resultado esperado, o que
+    cualquier ventana corta produzca una "amplificación" por azar.
+  - *Por qué esta prueba:* reemplazar 2015–16 por cada una de las 51 ventanas comparables de tres
+    trimestres fuera de *Backstop* muestra si el episodio real es especial.
+  - *Resultado:* queda en el lugar 20 de 51 (p = 0,39). Además lo complementé con errores
+    agrupados por país y con otros episodios sin respaldo (*taper* 2013, 2018).
+
+**En una frase:** cada prueba responde a una pregunta distinta: si hay causalidad inversa, si es
+persistencia, si hay respuesta dinámica, si hay variación exógena, si la inferencia es confiable
+con pocos países, si importa que el GaR sea estimado y si el episodio de crisis es especial. La
+causalidad no resiste ninguna de las que la ponen a prueba; la medición del GaR no es el problema.
 
 ## Datos (≈ 2 min)
 
