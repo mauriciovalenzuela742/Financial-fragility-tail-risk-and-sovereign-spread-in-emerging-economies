@@ -72,10 +72,13 @@ fuera la defensa, y le agradecería que me interrumpa cuando quiera."
 conclusiones. El centro está en los resultados: la batería principal y la batería con el vector de
 crisis."
 
-### 3. Dos pilares del spread soberano emergente (1 min 30 s)
+### 3. Qué es el spread y sus dos pilares (2 min)
 **Propósito:** situar la tesis en la literatura y mostrar la brecha.
 
-**Qué digo:** "La literatura explica el spread soberano de los emergentes con dos pilares. El
+**Qué digo:** "Primero, qué es el spread soberano: es la diferencia entre lo que rinde la deuda en
+dólares de un gobierno emergente y lo que rinden los bonos del Tesoro de Estados Unidos de plazo
+similar. Es la prima que exige el mercado por el riesgo de que ese país no pague, y la mido con el
+EMBI Global Diversified de J.P. Morgan, en puntos básicos. La literatura explica esa prima con dos pilares. El
 primero son los fundamentos domésticos ---Edwards, Hilscher y Nosbusch, Uribe y Yue---: deuda,
 crecimiento, reservas. El segundo son los factores globales ---Calvo, Leiderman y Reinhart,
 Longstaff et al., Miranda-Agrippino y Rey---: el apetito global por riesgo mueve a todos los
