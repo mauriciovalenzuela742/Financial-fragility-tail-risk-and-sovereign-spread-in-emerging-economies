@@ -18,6 +18,8 @@
 \newcommand{\GaR}{\mathrm{GaR}}
 \newcommand{\Spread}{\mathrm{spread}}
 \newcommand{\EMBI}{\mathrm{EMBI}}
+% Cifra destacada para las láminas de resultados
+\newcommand{\cifra}[2]{\begin{center}{\Huge\bfseries\color{tesisblue}#1}\\[2pt]{\small #2}\end{center}}
 
 \author{Mauricio Valenzuela Corvalán}
 \institute[Universidad de Chile]{Departamento de Ingeniería Civil Industrial\\
@@ -46,30 +48,34 @@ Profesor coguía: Ronald Fischer
 % =====================================================================
 \section{Motivación y pregunta}
 
-\begin{frame}{Motivación}
+\begin{frame}{Dos pilares del \textit{spread} soberano emergente}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{block}{Fundamentos domésticos}
+\small
 \begin{itemize}
-\item En las crisis de las últimas dos décadas los \textit{spreads} soberanos emergentes se ampliaron más que los avanzados.
-\item Dos fuentes candidatas:
-  \begin{itemize}
-  \item \textbf{Fragilidad bancaria doméstica}: eleva el pasivo contingente del fisco (rescates).
-  \item \textbf{Riesgo a la baja del crecimiento}: deteriora la capacidad fiscal justo en los malos estados.
-  \end{itemize}
-\item La literatura las trata por separado:
-  \begin{itemize}
-  \item el nexo banca--soberano trata el crecimiento como fundamento de fondo;
-  \item \textit{growth-at-risk} no llega a la prima soberana;
-  \item Chari et al.\ (2024) interactúan la fragilidad con factores \emph{globales}, no con el ciclo doméstico.
-  \end{itemize}
+\item Edwards (1984); Hilscher y Nosbusch (2010); Uribe y Yue (2006).
+\item \textbf{Mis proxies:} fragilidad bancaria ($\JLoss$) y riesgo de cola del crecimiento ($\GaR$).
 \end{itemize}
-\vspace{4pt}
-\begin{block}{Pregunta}
-¿Amplifica la coincidencia de alta fragilidad bancaria y elevado riesgo de cola del crecimiento el \textit{spread} soberano por encima de la suma de sus efectos individuales?
 \end{block}
+\column{0.48\textwidth}
+\begin{block}{Factores globales}
+\small
+\begin{itemize}
+\item Calvo et al.\ (1996); Longstaff et al.\ (2011); Miranda-Agrippino y Rey (2022).
+\item \textbf{Mi proxy:} efectos fijos de tiempo (VIX, Tesoro, \textit{high yield}).
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{La brecha}
+Chari et al.\ (2024) cruzan la fragilidad bancaria con factores \textbf{globales}. Nadie la ha cruzado con el riesgo de cola \textbf{doméstico} del crecimiento.
+\end{alertblock}
 \end{frame}
 
-\begin{frame}{El mecanismo: un \textit{doom loop} banca--soberano}
+\begin{frame}{El mecanismo y el balance de fuerzas}
 \begin{columns}[c]
-\column{0.5\textwidth}
+\column{0.52\textwidth}
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
@@ -79,289 +85,154 @@ Profesor coguía: Ronald Fischer
   boxhi/.style={box, draw=tesisblue, fill=tesisblue!8, line width=1pt},
   lbl/.style={font=\scriptsize\itshape, align=left, text width=2.4cm}
 ]
-\node[box]              (gar)    {Estado adverso: riesgo de cola del crecimiento ($\GaR$)};
-\node[boxhi, below=of gar] (jloss)  {Fragilidad sistémica ($\JLoss$) --- pasivo contingente esperado};
+\node[box]              (gar)    {Cola adversa del crecimiento ($\GaR$)};
+\node[boxhi, below=of gar] (jloss)  {Fragilidad bancaria ($\JLoss$): rescate esperado};
 \node[boxhi, below=of jloss] (spread) {\textit{Spread} soberano (EMBI)};
-\draw[-{Latex[length=2.2mm]}] (gar)   -- (jloss)   node[midway, right, lbl] {agrava el rescate esperado};
-\draw[-{Latex[length=2.2mm]}, tesisblue, line width=0.9pt] (jloss) -- (spread) node[midway, right, lbl, tesisblue] {\textbf{interacción estimada}};
+\draw[-{Latex[length=2.2mm]}] (gar)   -- (jloss)   node[midway, right, lbl] {encarece el rescate};
+\draw[-{Latex[length=2.2mm]}, tesisblue, line width=0.9pt] (jloss) -- (spread) node[midway, right, lbl, tesisblue] {\textbf{lo que estimo}};
 \draw[-{Latex[length=2.2mm]}, dashed, gray!50!black]
-  (spread.west) to[bend left=45] node[midway, left, lbl, text width=2.2cm] {rescate con más deuda deprime el precio: \textbf{causalidad inversa}} (jloss.west);
+  (spread.west) to[bend left=45] node[midway, left, lbl, text width=2.2cm] {más deuda deprime el precio: \textbf{causalidad inversa}} (jloss.west);
 \end{tikzpicture}%
 }
-\column{0.5\textwidth}
-\footnotesize
-\textbf{1. Bucle banca--soberano} (Farhi--Tirole, 2018). Un choque deprime el precio de la deuda, erosiona el patrimonio bancario y fuerza un rescate financiado con más deuda: un multiplicador.
-
-\vspace{4pt}
-\textbf{2. $\JLoss$ como pasivo contingente} (\textit{bailout put}; Acharya--Drechsler--Schnabl, 2014). El mercado lo incorpora \textit{ex ante} en la prima.
-
-\vspace{4pt}
-\textbf{3. $\GaR$ como estado que activa el multiplicador} (Adrian--Boyarchenko--Giannone, 2019).
-
-\vspace{4pt}
-\textcolor{tesisred}{La flecha discontinua es también el principal problema de identificación.}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Hipótesis: dos versiones de la complementariedad}
+{\scriptsize Farhi y Tirole (2018); Acharya et al.\ (2014); Adrian et al.\ (2019).}
+\column{0.46\textwidth}
+\begin{alertblock}{Abren la brecha}
 \small
-Con $D\equiv-\GaR$ (mayor $D$ = cola más adversa):
 \begin{itemize}
-\item \textbf{H1} (canal bancario): $\beta_1>0$. \quad \textbf{H2} (canal de crecimiento): $\beta_2>0$.
-\item \textbf{H3} (complementariedad): la coincidencia amplifica el \textit{spread}.
+\item Bancos frágiles
+\item Cola adversa del crecimiento
+\item Deuda en manos extranjeras
 \end{itemize}
-\vspace{2pt}
-\begin{block}{Un modelo de intensidad de incumplimiento (Duffie--Singleton, 1999)}
-\vspace{-6pt}
-\[
-\Spread\approx\lambda L,\quad \lambda_{i,t}=\lambda_0\,\JLoss_{i,t-1}^{\beta_1}e^{\beta_2D_{i,t-1}}
-\;\Longrightarrow\;\ln\Spread_{i,t}=c+\beta_1\ln\JLoss_{i,t-1}+\beta_2D_{i,t-1}
-\]
-\vspace{-8pt}
+\end{alertblock}
+\begin{block}{La contienen}
+\small
+\begin{itemize}
+\item Respaldo oficial (Fed, FMI)
+\item Mercado local de deuda profundo
+\end{itemize}
 \end{block}
-\begin{itemize}
-\item En \textbf{puntos básicos} la complementariedad es automática: $\dfrac{\partial^2\Spread}{\partial\JLoss\,\partial D}=\beta_1\beta_2\dfrac{\Spread}{\JLoss}>0$.
-\item La versión \textbf{exigente} de H3 es una amplificación \emph{adicional}: $\beta_3>0$ en la forma log-log.
-\item $\beta_3=0$ no contradice el marco: es su versión proporcional.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Objetivos}
-\textbf{Objetivo general.} Evaluar empíricamente el impacto conjunto, estructural y no lineal de la fragilidad bancaria ($\JLoss$) y del riesgo de cola del crecimiento ($\GaR$) sobre el \textit{spread} soberano en economías emergentes.
-\vspace{2pt}
-
-\textbf{Objetivos específicos}
-\begin{enumerate}\footnotesize
-\item Construir y validar $\JLoss$ y $\GaR$ para una muestra amplia de emergentes, de forma reproducible.
-\item Efecto marginal de la fragilidad en \textbf{pb y elasticidades}: $\JLoss$ como costo esperado de un rescate sistémico.
-\item Efecto marginal del riesgo de cola en \textbf{pb}: $\GaR$ como predictor prospectivo de la solvencia fiscal.
-\item Complementariedad mediante $\JLoss\times\GaR$, en \textbf{pb y elasticidades}: amplificación en escenarios de doble vulnerabilidad.
-\end{enumerate}
-\footnotesize Regresiones lineales de panel con efectos fijos de país y de tiempo; errores Driscoll--Kraay, \textit{cluster} por país y \textit{wild cluster bootstrap}.
-\end{frame}
-
-\begin{frame}{Del Informe de Taller de Tesis I a esta tesis}
-\begin{columns}[T]
-\column{0.48\textwidth}
-\textbf{Punto de partida (dic.\ 2025)}
-\begin{itemize}\small
-\item Muestra piloto: 4 países, 2008--2022.
-\item Interacción $\JLoss\times\GaR$ ``altamente significativa'' con efectos fijos.
-\item Especificación en niveles, regresores contemporáneos.
-\end{itemize}
-\column{0.48\textwidth}
-\textbf{Esta tesis}
-\begin{itemize}\small
-\item Motor de datos propio: 113 bancos (Bloomberg), $\GaR$ en pseudo--tiempo real.
-\item 13 economías, $N=765$ (14 con Argentina, $N=799$).
-\item $\ln\EMBI$ sobre $\ln\JLoss_{t-1}$ y $D_{t-1}$: \textbf{logaritmos y rezagos}.
-\item Batería de pruebas de árbitro: dinámica, pocos \textit{clusters}, IV, forma funcional.
-\end{itemize}
 \end{columns}
+\end{frame}
+
+\begin{frame}{Pregunta e hipótesis}
+\begin{block}{Pregunta}
+¿Penaliza el mercado de forma \textbf{no lineal} la coincidencia de fragilidad bancaria y una cola adversa del crecimiento?
+\end{block}
 \vspace{4pt}
-\begin{alertblock}{Mensaje anticipado}
-Asociaciones que no resisten como causales; la amplificación aparece solo en \textbf{momentos y economías específicas} (evidencia condicional).
+\begin{itemize}
+\item \textbf{H1}\quad La fragilidad bancaria eleva el \textit{spread}.
+\item \textbf{H2}\quad El riesgo de cola eleva el \textit{spread}.
+\item \textbf{H3}\quad Su coincidencia lo \textbf{amplifica}.
+\end{itemize}
+\vspace{6pt}
+\footnotesize Matiz clave: si ambos escalan la misma probabilidad de incumplimiento, en puntos básicos ya se potencian (\textbf{versión proporcional}). La versión exigente de H3 es una amplificación \textbf{adicional}.
+\end{frame}
+
+\begin{frame}{Qué aporta esta tesis}
+\begin{enumerate}
+\item \textbf{Conceptual.} Une dos literaturas separadas ---nexo banca--soberano y \textit{growth-at-risk}--- en un solo mecanismo.
+\vspace{6pt}
+\item \textbf{Empírico.} Construye ambas métricas para 13 emergentes, replica a Chari et al.\ (2024) con datos propios y delimita \textbf{cuándo} y \textbf{en qué economías} aparece la amplificación.
+\vspace{6pt}
+\item \textbf{Metodológico.} \textit{Pipeline} reproducible: 113 bancos desde Bloomberg y $\GaR$ en pseudo--tiempo real.
+\end{enumerate}
+\vspace{8pt}
+\begin{alertblock}{Con un límite explícito}
+Los hallazgos son \textbf{asociaciones}, no efectos causales, y la amplificación es \textbf{condicional}.
 \end{alertblock}
 \end{frame}
 
 % =====================================================================
-\section{Medición y estrategia empírica}
+\section{Medición y estrategia}
 
-\begin{frame}{$\JLoss$: fragilidad bancaria sistémica}
-\small
-Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \% de la exposición (Chari et al., 2024).
-\begin{enumerate}
-\item \textbf{PD individual} tipo Merton--KMV: punto de incumplimiento $D^*=L_{ST}+\tfrac12L_{LT}$, $EDF=\Phi(-DD)$.
-\item \textbf{Factor sistémico} país (Vasicek): $p_i(V)=\Phi\!\left(\frac{\Phi^{-1}(p_i)-\rho_iV}{\sqrt{1-\rho_i^2}}\right)$.
-\item \textbf{Agregación por punto de silla} de la distribución de pérdidas; Gauss--Hermite (7 nodos).
-\item \textbf{Contribuciones marginales}: $\JLoss=\dfrac{EL+UL}{\sum EAD}\times100$, LGD $=45\%$.
-\end{enumerate}
-\vspace{2pt}
-\begin{itemize}
-\item 113 bancos cotizados, un único protocolo de extracción Bloomberg; reimplementado en Python y validado contra el MATLAB original.
-\item La cota de la malla es activa en el 98\% de los casos $\Rightarrow$ $\JLoss$ es \textbf{ordinal}: el logaritmo es invariante a su escala.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{$\GaR$: riesgo de cola del crecimiento}
-\begin{columns}[c]
-\column{0.5\textwidth}
+\begin{frame}{Dos métricas construidas desde cero}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{block}{$\JLoss$: fragilidad bancaria}
 \small
 \begin{itemize}
-\item FCI tipo CISS: bloques accionario, de tasas y cambiario (replica CEMLA, corr.\ 0,9995).
-\item Regresión cuantílica de panel, $h=1$:\\
-{\footnotesize $Q(\Delta y_{i,t+1}\mid\cdot;\tau)=\alpha+\beta_1\Delta y_{i,t}+\beta_2FCI^{\perp VIX}_{i,t}+\beta_3VIX_t+\mu_i$}
-\item $\GaR\equiv$ cuantil 5\%; 39 cuantiles reordenados.
-\item \textbf{Pseudo--tiempo real}: ventana expansiva, sin sesgo de anticipación.
-\item ¿Circular con el EMBI? El componente tipo \textit{spread} aporta 0,07 al FCI; sin él, el $\GaR$ correlaciona 0,985 con el oficial.
+\item Pérdida conjunta esperada del sistema bancario.
+\item PD tipo Merton $\to$ agregación por punto de silla.
+\item 113 bancos; validada contra el código original.
+\item Ordinal $\Rightarrow$ entra en logaritmos.
 \end{itemize}
-\column{0.5\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_skewt_chile_embiext.pdf}\\
-{\scriptsize Chile: trimestre benigno vs.\ 2020Q2 ($\GaR=-13{,}4$ pp).}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{$\GaR$: riesgo de cola}
+\small
+\begin{itemize}
+\item Cuantil 5\% del crecimiento futuro.
+\item Regresión cuantílica de panel sobre condiciones financieras.
+\item Pseudo--tiempo real: sin mirar el futuro.
+\item No es circular con el EMBI (corr.\ 0,985 sin el componente tipo \textit{spread}).
+\end{itemize}
+\end{block}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Especificación principal}
-\begin{block}{Log-log rezagada (Chari et al., 2024)}
+\begin{frame}{La especificación}
+\begin{block}{Log-log rezagada}
 \vspace{-6pt}
 \[
-\ln\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\ln\JLoss_{i,t-1}+\beta_2D_{i,t-1}+\beta_3(\ln\JLoss_{i,t-1}\times D_{i,t-1})+\omega'X_{i,t}+\varepsilon_{i,t}
+\ln\EMBI_{i,t}=\alpha_i+\delta_t+\beta_1\ln\JLoss_{i,t-1}+\beta_2D_{i,t-1}+\beta_3\,(\ln\JLoss\times D)_{i,t-1}+\varepsilon_{i,t}
 \]
 \vspace{-8pt}
 \end{block}
-\footnotesize
+{\small con $D\equiv-\GaR$: mayor $D$, cola más adversa.}
+\vspace{4pt}
 \begin{itemize}
-\item \textbf{Rezagos}: el \textit{spread} afecta a sus determinantes (bonos en balance, fondeo, FCI); $t-1$ los hace predeterminados.
-\item \textbf{Logaritmos}: asimetría del EMBI 1,20 y de $\JLoss$ 2,79 en niveles; elasticidades comparables entre países; $\JLoss$ ordinal.
-\item EF de país y de tiempo (absorben VIX, Tesoro, \textit{high yield}); errores Driscoll--Kraay.
-\item Sin controles en la principal: deuda, balance fiscal, inflación\ldots\ son plausiblemente \textbf{canales} (mal control). Se agregan como robustez.
-\item Batería: 4 modelos anidados $\times$ 3 estructuras de EF $\times$ 3 muestras = 36 regresiones.
-\item Vector de crisis: \textit{Backstop} (GFC, COVID) vs.\ \textit{EMstress} (2015Q3--2016Q1) como test de falsación.
+\item \textbf{Rezagos}: frente a la causalidad inversa.
+\item \textbf{Logaritmos}: elasticidades; series muy asimétricas.
+\item \textbf{Efectos fijos} de país y de tiempo.
+\item \textbf{Errores}: Driscoll--Kraay y \textit{wild cluster bootstrap} (pocos países).
+\item Todo se repite en \textbf{puntos básicos} (niveles).
 \end{itemize}
 \end{frame}
 
 % =====================================================================
 \section{Datos}
 
-\begin{frame}{El panel: 13 economías, 2004Q2--2026Q2, $N=765$}
+\begin{frame}{El panel: 13 economías, 2004--2026, 765 observaciones}
 \centering
-\includegraphics[width=0.9\textwidth,height=0.68\textheight,keepaspectratio]{fig_cobertura_embiext.pdf}\\
-\footnotesize Diez economías con historia larga (40--89 trimestres); Filipinas 12; Indonesia y Sudáfrica 32 (EMBI 2010--14 completado con FMI GFSR, corr.\ 0,94). Argentina: robustez. Corea, Bulgaria y Hungría excluidas ($\JLoss$ no válido a nivel país).
-\end{frame}
-
-\begin{frame}{Estadística descriptiva}
-\begin{columns}[T]
-\column{0.5\textwidth}
-\centering
-\small
-\begin{tabular}{lccc}
-\toprule
- & Media & Mediana & Máx. \\
-\midrule
-EMBI (pb) & 198 & 177 & 661 \\
-$\JLoss_{t-1}$ & 4,65 & 2,67 & --- \\
-$D_{t-1}$ (pp) & $-1{,}5$ & --- & 17,7 \\
-\bottomrule
-\end{tabular}
-
-\vspace{8pt}
-\begin{tabular}{lc}
-\toprule
-Varianza \textit{within} país & \% \\
-\midrule
-$\ln\JLoss_{t-1}$ & 82 \\
-$D_{t-1}$ & 84 \\
-$\ln\EMBI$ & 67 \\
-\bottomrule
-\end{tabular}
-\column{0.48\textwidth}
-\small
-\begin{itemize}
-\item Fragilidad concentrada: Turquía (9,6), India (8,4), China (6,8).
-\item En el trimestre típico el cuantil 5\% del crecimiento es positivo.
-\item La variación es mayoritariamente \emph{within}: identifica con EF de país.
-\item Corr$(\ln\JLoss_{t-1},D_{t-1})=0{,}16$: información distinta.
-\item $\ln\JLoss$ correlaciona con balance fiscal ($-0{,}48$), inflación ($+0{,}41$) y deuda ($+0{,}31$).
-\end{itemize}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Las tres series co-mueven en los episodios de estrés}
-\centering
-\includegraphics[width=0.72\textwidth]{fig_comovimiento_embiext.pdf}\\
-\footnotesize Medianas transversales estandarizadas. Corr$(\ln\JLoss_{t-1},D_{t-1})=0{,}64$ entre medianas; cada una 0,31 con $\ln\EMBI$. Co-movimiento nítido en 2008--09 y 2020, débil en tiempos normales.
+\includegraphics[width=0.92\textwidth,height=0.7\textheight,keepaspectratio]{fig_cobertura_embiext.pdf}\\
+\footnotesize Argentina se agrega como robustez (14 economías, 799 observaciones).
 \end{frame}
 
 % =====================================================================
 \section{Resultados}
 
-\begin{frame}{Resultado 1: ambos riesgos se asocian con el \textit{spread}}
-\centering
-\small
-\begin{tabular}{lccc}
-\toprule
-M4, EF país + tiempo & Muestra completa & Sin crisis & Con 6 controles \\
-\midrule
-$\ln\JLoss_{t-1}$ ($\beta_1$) & $0{,}0985^{***}$ & $0{,}0866^{**}$ & $-0{,}0076$ \\
-$D_{t-1}$ ($\beta_2$) & $0{,}0324^{**}$ & $0{,}0502^{***}$ & $0{,}0281^{**}$ \\
-$\ln\JLoss_{t-1}\times D_{t-1}$ ($\beta_3$) & $-0{,}0112$ & $0{,}0045$ & $-0{,}0065$ \\
- & ($p=0{,}11$) & ($p=0{,}67$) & \\
-$N$ & 765 & 656 & 649 \\
-\bottomrule
-\end{tabular}
-\vspace{6pt}
-\begin{itemize}\small
-\item Duplicar $\JLoss$ $\Rightarrow$ \textit{spread} $\approx$7\% mayor ($\approx$14 pb sobre la media).
-\item +1 pp de $D$ $\Rightarrow$ \textit{spread} $\approx$3,3\% mayor; 1 d.e.\ ($3{,}7$ pp) $\approx$13\% ($\approx$25 pb).
-\item $\beta_1$ significativo al 1\% en las 9 columnas sin controles; $\beta_2>0$ en 27 de 27 columnas.
-\item La interacción no es significativamente positiva en ninguna de las 9 columnas de M4.
+\begin{frame}{1 · Ambos riesgos se asocian con el \textit{spread}}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\cifra{0,10}{elasticidad a la fragilidad bancaria\\ (duplicar $\JLoss$ $\approx$ +7\%; $\approx$4,7 pb por unidad)}
+\column{0.48\textwidth}
+\cifra{+3,3\,\%}{de \textit{spread} por cada punto\\ de riesgo de cola}
+\end{columns}
+\vspace{10pt}
+\begin{itemize}
+\item Replica a Chari et al.\ (2024): elasticidad 0,11--0,16 con sus controles.
+\item Con controles fiscales y cambiarios la fragilidad se diluye: son plausiblemente \textbf{canales}.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Se replica Chari et al.\ (2024)\ldots\ y los controles la absorben}
-\begin{columns}[T]
-\column{0.48\textwidth}
-\textbf{Batería estilo Tabla 4 de Chari et al.}
-\begin{itemize}\small
-\item Volatilidad cambiaria, margen bancario, deuda, reservas, cuenta corriente, factores globales.
-\item Elasticidad de $\ln\JLoss_{t-1}$ entre \textbf{0,107 y 0,164}, $p<0{,}01$ en las 6 columnas.
-\item Misma magnitud que el paper de referencia, con una métrica construida de forma independiente.
-\end{itemize}
-\column{0.48\textwidth}
-\textbf{Con los seis controles domésticos}
-\begin{itemize}\small
-\item $\beta_1$ cae a $-0{,}008$ ($p=0{,}86$); misma muestra sin controles: $0{,}107$ ($p=0{,}008$).
-\item La fragilidad rezagada \emph{predice} los controles: balance fiscal $-0{,}69^{***}$, TCR $-4{,}8^{***}$, inflación $+3{,}3^{***}$, deuda $+3{,}8^{**}$.
-\item ¿Canales o fundamento común? Con controles en $t-4$: $0{,}062$ ($p=0{,}17$).
+\begin{frame}{2 · Pero la asociación no es causal}
+\begin{columns}[c]
+\column{0.55\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_lp_lnlag_arb.pdf}\\
+{\scriptsize Proyecciones locales: planas.}
+\column{0.43\textwidth}
+\small
+\begin{itemize}
+\item El \textit{spread} también mueve a la fragilidad: \textbf{0,17}.
+\item Con dinámica, el efecto cae a \textbf{cero}.
+\item \textit{Wild bootstrap} (13 países): \textbf{no significativo}.
+\item Instrumentos: \textbf{no cierran}.
 \end{itemize}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Resultado 2: ¿efecto o persistencia?}
-\small
-\begin{block}{La retroalimentación existe y es fuerte}
-$\ln\JLoss_t$ sobre $\ln\EMBI_{t-1}$: elasticidad $\mathbf{0{,}17}$ ($p=0{,}009$), mayor que la dirección que se busca medir. Es el bucle de Farhi--Tirole visto desde el otro extremo.
-\end{block}
-\begin{block}{La dinámica absorbe el efecto de la fragilidad}
-\begin{itemize}
-\item Persistencia del \textit{spread}: $\rho=0{,}94$ trimestral.
-\item Con $\ln\EMBI_{t-1}$: $\beta_1$ de corto plazo $0{,}005$ ($p=0{,}76$); largo plazo $0{,}078$ ($p=0{,}72$). Sesgo de Nickell $\sim1/T$, $T\approx88$.
-\item Con la fragilidad adelantada: $\JLoss_{t-1}$ $0{,}058$ ($p=0{,}18$) y $\JLoss_{t+1}$ $0{,}051$ ($p=0{,}23$): un componente persistente común.
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}{Las proyecciones locales son planas}
-\centering
-\includegraphics[width=0.85\textwidth]{fig_lp_lnlag_arb.pdf}\\
-\footnotesize Respuesta de $\ln\EMBI_{t+h}$ a $\ln\JLoss_{t-1}$ (izq.) y a $D_{t-1}$ (der.), controlando por $\ln\EMBI_{t-1}$. Indistinguible de cero en $h=0,\dots,6$; el riesgo de cola, solo marginal en $h=2$ ($p=0{,}08$). El $+4{,}6$ pb de la versión en niveles no se reproduce.
-\end{frame}
-
-\begin{frame}{Inferencia, instrumentos y regresores generados}
-\centering
-\footnotesize
-\begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{lcc}
-\toprule
-Prueba & Resultado & Lectura \\
-\midrule
-\textit{Wild cluster bootstrap} (Webb, 13 \textit{clusters}) & $p=0{,}33$ / $0{,}20$ / $0{,}89$ & nada significativo \\
-Ancho de banda DK (2, 4, 8 rezagos) & $p(\beta_1)\in[0{,}001;0{,}011]$ & DK estable pero optimista \\
-IV \textit{shift-share}: on/off-run, dólar, TOT & $+0{,}35$ / $-2{,}18$ / $+0{,}15$ & signo inestable, n.s. \\
-Primeras etapas & $F\approx9$--$11$ & razonables \\
-Sargan (sobreidentificada) & $p<0{,}001$ & no identifican lo mismo \\
-Bootstrap del $\GaR$ (500 réplicas) & $p=0{,}003$ / $0{,}049$ / $0{,}12$ & no es el problema \\
-\bottomrule
-\end{tabular}
-\end{adjustbox}
-\vspace{8pt}
-\begin{alertblock}{Lectura}
-La debilidad de la evidencia viene de la \textbf{dinámica} y del \textbf{número de países}, no de la medición del riesgo de cola.
-\end{alertblock}
-\end{frame}
-
-\begin{frame}{Resultado 3: no hay amplificación por encima de la proporcional}
+\begin{frame}{3 · En promedio, no hay amplificación adicional}
 \begin{columns}[c]
 \column{0.55\textwidth}
 \centering
@@ -369,226 +240,165 @@ La debilidad de la evidencia viene de la \textbf{dinámica} y del \textbf{númer
 \column{0.43\textwidth}
 \small
 \begin{itemize}
-\item Elasticidad de $\JLoss$: $0{,}145$ (p10 de $D$), $0{,}098$ (mediana), $0{,}054$ (p90). \textbf{No crece} con el riesgo de cola.
-\item Complementariedad implícita en pb con $\beta_3=0$: $\mathbf{+0{,}19}$ pb [0,01; 0,42].
-\item Del orden de la interacción en niveles en la muestra completa ($+0{,}18$ a $+0{,}25$).
-\item Umbral de Hansen: $LR=6{,}0$, no supera el valor crítico.
+\item El efecto de la fragilidad \textbf{no crece} con el riesgo de cola.
+\item Interacción: $-0{,}011$ (n.s.).
+\item En pb sí se potencian ($+0{,}19$), pero solo por la forma \textbf{proporcional}.
 \end{itemize}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Lo que elimina la interacción es el logaritmo, no el rezago}
-\centering
-\small
-\begin{tabular}{llcc}
-\toprule
-Forma & Regresores & Muestra completa & Sin crisis \\
-\midrule
-Niveles (pb) & contemporáneos & $+0{,}177$ ($t=0{,}68$) & $+1{,}183^{***}$ ($t=3{,}45$) \\
- & rezagados & $+0{,}246$ ($t=0{,}95$) & $+1{,}294^{***}$ ($t=4{,}81$) \\
-\addlinespace
-Logaritmos & contemporáneos & $-0{,}0145^{**}$ ($t=-2{,}16$) & $-0{,}0052$ ($t=-0{,}37$) \\
- & rezagados (principal) & $-0{,}0112$ ($t=-1{,}59$) & $+0{,}0045$ ($t=0{,}42$) \\
-\bottomrule
-\end{tabular}
-\vspace{8pt}
-\begin{itemize}\small
-\item La forma log-log impone una estructura multiplicativa: la complementariedad en pb ya viene incluida.
-\item Prueba PE: rechaza niveles frente a logs ($t=-3{,}56$), no al revés ($t=1{,}04$).
-\item Pero Box--Cox: $\hat\lambda=0{,}44$ [0,38; 0,50]: los datos no zanjan del todo la forma funcional.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{El vector de crisis: \textit{Backstop} vs.\ \textit{EMstress}}
-\begin{columns}[c]
-\column{0.55\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_crisis_regimen_lnlag.pdf}
-\column{0.43\textwidth}
-\small
-CM4, EF país + tiempo, 6 controles:
-\begin{itemize}
-\item Fuera de crisis: $\hat\beta_3\in[-0{,}002;+0{,}013]$.
-\item \textit{Backstop}: $\hat\beta_3+\hat\beta_4=-0{,}015$ ($p=0{,}03$).
-\item \textit{EMstress}: $+0{,}026$ ($p=0{,}08$).
-\end{itemize}
-Al pie de la letra, el patrón del mecanismo. Pero:
-\begin{itemize}
-\item \textit{Cluster} país: $p=0{,}40$ y $p=0{,}11$.
-\item \textit{Taper} 2013: $-0{,}020$; 2018: $+0{,}037$; los tres juntos $+0{,}013$ ($p=0{,}25$).
-\end{itemize}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Prueba de permutación: 2015--16 no es un episodio especial}
-\begin{columns}[c]
-\column{0.58\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_permutacion_emstress_arb.pdf}
-\column{0.4\textwidth}
-\small
-\begin{itemize}
-\item Se reemplaza 2015Q3--2016Q1 por cada una de las 51 ventanas de 3 trimestres fuera de \textit{Backstop}.
-\item El episodio real ocupa el lugar \textbf{20 de 51}: $p=0{,}39$.
-\item Una de cada tres ventanas al azar produce una amplificación igual o mayor.
-\item En niveles: lugar 21 de 51, $p=0{,}41$.
-\end{itemize}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Resultado 4: ¿cuándo y en qué economías?}
+\begin{frame}{Las crisis muestran el patrón esperado, sin robustez}
 \begin{columns}[T]
-\column{0.55\textwidth}
+\column{0.5\textwidth}
 \centering
-\footnotesize
-\begin{adjustbox}{max width=\linewidth}
-\begin{tabular}{lcc}
-\toprule
-Núcleo: 11 economías de & Log-log & Niveles \\
-financiamiento externo, sin crisis & $\beta_3$ & $\gamma_3$ (pb) \\
-\midrule
-Interacción & $0{,}034^{***}$ & $1{,}79^{***}$ \\
-$p$ \textit{wild cluster bootstrap} & $0{,}015$ & $0{,}002$ \\
-\textit{Leave-one-out} (rango) & $[0{,}018;0{,}039]$ & $[0{,}87;1{,}92]$ \\
-Con 6 controles & $0{,}004$ & $0{,}81^{***}$ \\
-\addlinespace
-Polonia e India & $-0{,}118^{***}$ & $-1{,}82^{**}$ \\
-\bottomrule
-\end{tabular}
-\end{adjustbox}
-\column{0.43\textwidth}
-\small
-\begin{itemize}
-\item \textbf{Cuándo}: fuera de las crisis con respaldo oficial (GFC, COVID).
-\item \textbf{Dónde}: deuda fijada por inversionistas extranjeros; no en mercados locales profundos.
-\item Única amplificación que resiste el \textit{wild bootstrap} en ambas formas.
-\end{itemize}
+\includegraphics[width=\textwidth]{fig_crisis_regimen_lnlag.pdf}\\
+{\scriptsize Negativa con respaldo oficial; positiva en 2015--16.}
+\column{0.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_permutacion_emstress_arb.pdf}\\
+{\scriptsize Pero 2015--16 queda 20 de 51 ventanas: no es especial.}
 \end{columns}
-\vspace{6pt}
-\begin{alertblock}{Salvedades}
-\small Grupo de contraste definido \textit{ex post}; en logs los controles la absorben; 11 \textit{clusters}. Evidencia \textbf{condicional}, no robusta.
-\end{alertblock}
 \end{frame}
 
-\begin{frame}{Robustez}
-\centering
-\footnotesize
-\begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{lcc}
-\toprule
-Ejercicio & $\beta_1$ / $\beta_3$ & Conclusión \\
-\midrule
-Principal (13 países, $N=765$) & $0{,}0985^{***}$ / $-0{,}0112$ & --- \\
-\textbf{Con Argentina} (14 países, $N=799$) & $0{,}0964^{***}$ / $-0{,}0082$ & sin cambios \\
-Sin EMBI empalmado del FMI & --- / $-0{,}012$ & sin cambios \\
-\textit{Expected Shortfall} en vez de $\GaR$ & --- / $-0{,}010$ & sin cambios \\
-\textit{Leave-one-country-out} & $\beta_3\in[-0{,}017;-0{,}010]$ en 12/13 & sin Polonia $+0{,}008$ (n.s.) \\
-$\JLoss$ en percentiles & $0{,}27$ por 100 pctl.$^{***}$ & ordinal se mantiene \\
-Malla de pérdidas ancha & $0{,}067$ ($p=0{,}22$) & sensible a calibración \\
-Todo en niveles (pb) & $4{,}7^{***}$ / $0{,}25$ & más favorable, no resiste \textit{wild boot} \\
-\bottomrule
-\end{tabular}
-\end{adjustbox}
-\vspace{6pt}
-\begin{itemize}\footnotesize
-\item \textbf{Argentina}: EMBI J.P.\ Morgan (corr.\ 0,99999 con la serie del panel), 34 obs.\ 2017Q3--2025Q4, $\GaR$ sin bloque de tasas. Backstop $-0{,}012$ ($p=0{,}03$); EMstress con EF país+tiempo pierde significancia ($p=0{,}13$).
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Contabilidad del \textit{spread}: el choque COVID}
+\begin{frame}{4 · Dónde sí aparece: momentos y economías específicas}
 \begin{columns}[c]
-\column{0.58\textwidth}
+\column{0.64\textwidth}
 \centering
-\includegraphics[width=\textwidth]{fig_contabilidad_lnlag.pdf}
-\column{0.4\textwidth}
+\includegraphics[width=\textwidth]{fig_heterogeneidad_lnlag.pdf}
+\column{0.34\textwidth}
 \small
-2019Q4 $\to$ 2020Q2, diez economías:
 \begin{itemize}
-\item \textit{Spread} observado: $+63$ log-puntos.
-\item Predicho por el modelo: $+24$.
-\item Riesgo de cola $+21$, fragilidad $+10$, interacción $-7$.
-\item El grueso es el componente global común (EF de tiempo).
-\item La interacción aporta 1,7\% del \textit{spread} en el trimestre típico.
+\item \textbf{Cuándo}: fuera de crisis con respaldo oficial.
+\item \textbf{Dónde}: economías cuya deuda compran inversionistas extranjeros.
+\item $+0{,}034$ en logs y $+1{,}8$ pb en niveles.
+\item Polonia e India: \textbf{al revés}.
 \end{itemize}
 \end{columns}
+\end{frame}
+
+\begin{frame}{Cómo leer este hallazgo: es condicional}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{block}{Lo respalda}
+\small
+\begin{itemize}
+\item Resiste el \textit{wild bootstrap} ($p=0{,}015$ y $0{,}002$).
+\item Aparece en logs y en niveles.
+\item Sobrevive a excluir cada país.
+\item El contraste va en sentido opuesto.
+\end{itemize}
+\end{block}
+\column{0.48\textwidth}
+\begin{alertblock}{Lo limita}
+\small
+\begin{itemize}
+\item Grupo definido \textit{ex post}.
+\item En logs, los controles lo absorben.
+\item Solo 11 países.
+\item 2015--16 no pasa la permutación.
+\end{itemize}
+\end{alertblock}
+\end{columns}
+\vspace{8pt}
+\begin{exampleblock}{Lectura}
+Una hipótesis \textbf{bien delimitada} para contrastar con más datos, no un hallazgo robusto.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Robustez: los resultados no dependen de la muestra}
+\centering
+\small
+\begin{tabular}{lc}
+\toprule
+Ejercicio & ¿Cambia la conclusión? \\
+\midrule
+Agregar Argentina (14 países) & No \\
+\textit{Expected Shortfall} en vez de $\GaR$ & No \\
+Sin el EMBI empalmado del FMI & No \\
+Excluir cada país & No (12 de 13) \\
+Todo en puntos básicos & Más favorable, pero no resiste el \textit{wild bootstrap} \\
+\bottomrule
+\end{tabular}
 \end{frame}
 
 % =====================================================================
-\section{Discusión y conclusiones}
+\section{Conclusiones}
 
-\begin{frame}{Síntesis: qué está establecido y qué no}
+\begin{frame}{Respuesta a la pregunta}
+\begin{enumerate}
+\item \textbf{Métricas}: $\JLoss$ y $\GaR$ construidas y validadas para 13 emergentes.
+\vspace{4pt}
+\item \textbf{Fragilidad}: se asocia con el \textit{spread} (0,10; $\approx$4,7 pb), no de forma causal.
+\vspace{4pt}
+\item \textbf{Riesgo de cola}: se asocia con el \textit{spread} (+3,3\%), no de forma causal.
+\vspace{4pt}
+\item \textbf{Complementariedad}: proporcional en promedio; amplificación adicional solo \textbf{condicional}.
+\end{enumerate}
+\vspace{6pt}
+\begin{block}{¿Penaliza el mercado la coincidencia de forma no lineal?}
+\textbf{No en general. Sí, condicionalmente}: sin respaldo externo y en economías de financiamiento externo.
+\end{block}
+\end{frame}
+
+\begin{frame}{El aporte, en una lámina}
+\begin{itemize}
+\item \textbf{Un mecanismo} que une la fragilidad bancaria y el riesgo de cola del crecimiento.
+\vspace{4pt}
+\item \textbf{Dos métricas propias} y una réplica independiente de Chari et al.\ (2024).
+\vspace{4pt}
+\item \textbf{Una delimitación precisa}: qué se puede afirmar, qué no, y dónde buscar la amplificación.
+\vspace{4pt}
+\item \textbf{Una infraestructura reproducible} para ir más allá.
+\end{itemize}
+\vspace{8pt}
+\begin{alertblock}{Lo que no afirma}
+Ni causalidad ni una amplificación universal.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Implicancias}
 \begin{columns}[T]
 \column{0.48\textwidth}
-\begin{block}{Establecido}
+\begin{block}{Respaldado por los datos}
 \small
-\begin{itemize}
-\item Fragilidad y riesgo de cola, medidos un trimestre antes, se \textbf{asocian} con un \textit{spread} mayor.
-\item La complementariedad \textbf{proporcional} es compatible con los datos.
-\item Robusto a Argentina, a la medida de cola y al empalme del EMBI.
-\end{itemize}
+Monitorear \textbf{juntos} $\JLoss$ y $\GaR$: ambos adelantan un \textit{spread} más alto.
 \end{block}
 \column{0.48\textwidth}
-\begin{alertblock}{No establecido}
+\begin{exampleblock}{Si se confirma lo condicional}
 \small
-\begin{itemize}
-\item Que la fragilidad \textbf{cause} el \textit{spread}; significancia con 13 \textit{clusters}.
-\item Una amplificación \textbf{adicional} ($\beta_3>0$) en el promedio del panel.
-\item Asimetrías por régimen de crisis: no resisten \textit{cluster} ni permutación.
-\end{itemize}
-\end{alertblock}
-\begin{exampleblock}{Condicional}
-\small Amplificación en el núcleo de financiamiento externo, fuera de crisis con respaldo.
+\textbf{Focalizar} en vez de regular igual a todos: economías de financiamiento externo, en episodios sin respaldo oficial.
 \end{exampleblock}
 \end{columns}
+\vspace{8pt}
+\begin{alertblock}{No permite}
+Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad.
+\end{alertblock}
 \end{frame}
 
-\begin{frame}{Interpretación e implicancias}
+\begin{frame}{Trabajo futuro}
 \begin{itemize}
-\small
-\item En promedio, la amplificación es \textbf{proporcional}: ambos riesgos escalan la misma intensidad de incumplimiento.
-\item No hay una simultaneidad que opere \textbf{siempre y en todas las economías}: aparece cuando no hay respaldo externo y donde la deuda la valoriza un inversionista extranjero.
-\item El obstáculo para la causalidad es que la relación \textbf{opera en ambas direcciones}: el mismo \textit{doom loop} que motiva la hipótesis.
-\end{itemize}
-\vspace{2pt}
-\begin{block}{Para la política}
-\small Fragilidad bancaria y riesgo de cola son \textbf{indicadores adelantados} del costo de financiamiento soberano. Si la evidencia condicional se confirma, más que una regulación uniforme convendría \textbf{caracterizar los casos} de doble vulnerabilidad: economías de financiamiento externo, en episodios sin prestamista de última instancia.
-\end{block}
-\end{frame}
-
-\begin{frame}{Limitaciones}
-\begin{enumerate}
-\item Trece economías (catorce con Argentina): la inferencia robusta no rechaza la ausencia de efectos.
-\item \textit{Spread} y fragilidad persistentes y retroalimentados: ni rezagos, ni dinámica, ni IV separan la dirección.
-\item Heterogeneidad por economía con grupo definido \textit{ex post}; en logs no resiste controles.
-\item Forma funcional no del todo determinada (Box--Cox intermedio).
-\item $\JLoss$ ordinal por la calibración; sensible a la malla de pérdidas.
-\item Controles anuales interpolados, plausiblemente mediadores; faltan calificación soberana y PIB per cápita.
-\item Cobertura desigual del EMBI (Filipinas, Indonesia, Sudáfrica).
-\end{enumerate}
-\end{frame}
-
-\begin{frame}{Qué haría falta para ir más allá}
-\begin{itemize}
-\item \textbf{Más economías}: completar el EMBI de Indonesia, Filipinas, Sudáfrica e India; homologar el $\GaR$ de Argentina para incorporarla a la muestra principal.
-\item \textbf{Variación exógena específicamente bancaria}: cambios regulatorios, choques de fondeo idiosincrásicos a bancos grandes.
-\item \textbf{Mayor frecuencia}: datos diarios/semanales de precios bancarios y \textit{spreads} para separar la dirección de la retroalimentación.
-\item \textbf{Participación extranjera} en la deuda soberana como moderador continuo.
-\item \textbf{Controles trimestrales} y calificación soberana histórica para completar la réplica de Chari et al.
-\item \textit{Pregunta abierta}: ¿amplifica la concentración bancaria? No identificada con tres medidas de HHI.
+\item \textbf{Más países}: completar el EMBI de Asia y Sudáfrica; incorporar Argentina.
+\vspace{4pt}
+\item \textbf{Moderador medido ex ante}: participación extranjera en la deuda.
+\vspace{4pt}
+\item \textbf{Variación exógena bancaria}: cambios regulatorios, choques de fondeo.
+\vspace{4pt}
+\item \textbf{Mayor frecuencia}: datos diarios o semanales.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Conclusión}
-\begin{itemize}
-\item Se articulan el nexo banca--soberano y el \textit{growth-at-risk}, y se construyen ambas métricas para trece emergentes (113 bancos, $\GaR$ en pseudo--tiempo real).
-\item Se replica la asociación fragilidad--\textit{spread} y se documenta una análoga para el riesgo de cola.
-\item Sometidas a las pruebas que exige el panel, no resisten como efectos causales, y en promedio la complementariedad no va más allá de la proporcional.
-\item La amplificación aparece en \textbf{momentos y economías específicas}: evidencia condicional que delimita dónde buscarla.
-\end{itemize}
-\vspace{2pt}
-\begin{block}{El aporte}
-Delimitar con precisión qué permite afirmar este diseño y qué no, y dejar una infraestructura de datos reproducible (\texttt{1\_Codigo/Panel/bbg/}) sobre la que un diseño con más países, más frecuencia o variación exógena pueda avanzar.
-\end{block}
+\vspace{6pt}
+\begin{enumerate}
+\item La fragilidad bancaria y el riesgo de cola \textbf{se asocian} con el \textit{spread} soberano.
+\vspace{8pt}
+\item No es causal: el \textit{spread} también \textbf{retroalimenta} a la fragilidad.
+\vspace{8pt}
+\item La amplificación \textbf{no es universal}: aparece en momentos y economías específicas.
+\end{enumerate}
+\vspace{10pt}
+\centering
+\textit{El aporte es saber dónde buscarla y qué haría falta para confirmarla.}
 \end{frame}
 
 \begin{frame}
@@ -607,6 +417,141 @@ Números canónicos: \texttt{NUMEROS\_CANONICOS\_BBG.md}
 \appendix
 \section{Respaldo}
 
+\begin{frame}{Respaldo: del Informe de Taller de Tesis I a esta tesis}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Punto de partida (dic.\ 2025)}
+\begin{itemize}\small
+\item Muestra piloto: 4 países, 2008--2022.
+\item Interacción $\JLoss\times\GaR$ ``altamente significativa'' con efectos fijos.
+\item Especificación en niveles, regresores contemporáneos.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Esta tesis}
+\begin{itemize}\small
+\item Motor de datos propio: 113 bancos (Bloomberg), $\GaR$ en pseudo--tiempo real.
+\item 13 economías, $N=765$ (14 con Argentina, $N=799$).
+\item Logaritmos y rezagos; batería de pruebas de árbitro.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Respaldo: construcción de $\JLoss$}
+\small
+Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \% de la exposición (Chari et al., 2024).
+\begin{enumerate}
+\item \textbf{PD individual} tipo Merton--KMV: $D^*=L_{ST}+\tfrac12L_{LT}$, $EDF=\Phi(-DD)$.
+\item \textbf{Factor sistémico} país (Vasicek): $p_i(V)=\Phi\!\left(\frac{\Phi^{-1}(p_i)-\rho_iV}{\sqrt{1-\rho_i^2}}\right)$.
+\item \textbf{Agregación por punto de silla}; Gauss--Hermite (7 nodos).
+\item \textbf{Contribuciones marginales}: $\JLoss=\dfrac{EL+UL}{\sum EAD}\times100$, LGD $=45\%$.
+\end{enumerate}
+\vspace{2pt}
+La cota de la malla es activa en el 98\% de los casos $\Rightarrow$ $\JLoss$ es \textbf{ordinal}.
+\end{frame}
+
+\begin{frame}{Respaldo: construcción del $\GaR$}
+\begin{columns}[c]
+\column{0.5\textwidth}
+\small
+\begin{itemize}
+\item FCI tipo CISS: bloques accionario, de tasas y cambiario (replica CEMLA, corr.\ 0,9995).
+\item Regresión cuantílica de panel, $h=1$:\\
+{\footnotesize $Q(\Delta y_{i,t+1}\mid\cdot;\tau)=\alpha+\beta_1\Delta y_{i,t}+\beta_2FCI^{\perp VIX}_{i,t}+\beta_3VIX_t+\mu_i$}
+\item $\GaR\equiv$ cuantil 5\%; 39 cuantiles reordenados; ventana expansiva.
+\end{itemize}
+\column{0.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_skewt_chile_embiext.pdf}\\
+{\scriptsize Chile: trimestre benigno vs.\ 2020Q2 ($\GaR=-13{,}4$ pp).}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Respaldo: descriptivos y co-movimiento}
+\begin{columns}[c]
+\column{0.42\textwidth}
+\centering
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+ & Media & Mediana & Máx. \\
+\midrule
+EMBI (pb) & 198 & 177 & 661 \\
+$\JLoss_{t-1}$ & 4,65 & 2,67 & --- \\
+$D_{t-1}$ (pp) & $-1{,}5$ & --- & 17,7 \\
+\bottomrule
+\end{tabular}
+
+\vspace{6pt}
+Varianza \textit{within} país: $\ln\JLoss$ 82\%, $D$ 84\%, $\ln\EMBI$ 67\%. Corr$(\ln\JLoss,D)=0{,}16$.
+\column{0.56\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_comovimiento_embiext.pdf}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Respaldo: batería principal y controles}
+\centering
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+M4, EF país + tiempo & Muestra completa & Sin crisis & Con 6 controles \\
+\midrule
+$\ln\JLoss_{t-1}$ ($\beta_1$) & $0{,}0985^{***}$ & $0{,}0866^{**}$ & $-0{,}0076$ \\
+$D_{t-1}$ ($\beta_2$) & $0{,}0324^{**}$ & $0{,}0502^{***}$ & $0{,}0281^{**}$ \\
+$\ln\JLoss_{t-1}\times D_{t-1}$ ($\beta_3$) & $-0{,}0112$ ($p=0{,}11$) & $0{,}0045$ & $-0{,}0065$ \\
+$N$ & 765 & 656 & 649 \\
+\bottomrule
+\end{tabular}
+\vspace{6pt}
+\begin{itemize}\footnotesize
+\item Batería estilo Chari et al.: $\beta_1$ entre 0,107 y 0,164, $p<0{,}01$ en 6 columnas.
+\item Con controles $\beta_1$ cae a $-0{,}008$; misma muestra sin controles: $0{,}107$.
+\item La fragilidad rezagada predice los controles: balance fiscal $-0{,}69^{***}$, TCR $-4{,}8^{***}$, inflación $+3{,}3^{***}$, deuda $+3{,}8^{**}$. Con controles en $t-4$: $0{,}062$ (n.s.).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Respaldo: identificación e inferencia}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcc}
+\toprule
+Prueba & Resultado & Lectura \\
+\midrule
+Canal inverso: $\ln\JLoss_t$ sobre $\ln\EMBI_{t-1}$ & $0{,}17$ ($p=0{,}009$) & retroalimentación fuerte \\
+Con $\ln\EMBI_{t-1}$ ($\rho=0{,}94$): $\beta_1$ corto / largo plazo & $0{,}005$ / $0{,}078$ & efecto absorbido \\
+Fragilidad adelantada: $\JLoss_{t-1}$ / $\JLoss_{t+1}$ & $0{,}058$ / $0{,}051$ & componente común \\
+\textit{Wild cluster bootstrap} (Webb, 13): $\beta_1/\beta_2/\beta_3$ & $p=0{,}33/0{,}20/0{,}89$ & nada significativo \\
+IV \textit{shift-share}: on/off-run, dólar, TOT & $+0{,}35$ / $-2{,}18$ / $+0{,}15$ & signo inestable, n.s. \\
+Primeras etapas / Sargan & $F\approx9$--$11$ / $p<0{,}001$ & no identifican lo mismo \\
+Bootstrap del $\GaR$ (500 réplicas) & $p=0{,}003/0{,}049/0{,}12$ & la medición no es el problema \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{frame}
+
+\begin{frame}{Respaldo: logaritmos vs.\ niveles}
+\centering
+\footnotesize
+\begin{tabular}{llcc}
+\toprule
+Forma & Regresores & Muestra completa & Sin crisis \\
+\midrule
+Niveles (pb) & contemporáneos & $+0{,}177$ & $+1{,}183^{***}$ \\
+ & rezagados & $+0{,}246$ & $+1{,}294^{***}$ \\
+\addlinespace
+Logaritmos & contemporáneos & $-0{,}0145^{**}$ & $-0{,}0052$ \\
+ & rezagados (principal) & $-0{,}0112$ & $+0{,}0045$ \\
+\bottomrule
+\end{tabular}
+\vspace{6pt}
+\begin{itemize}\footnotesize
+\item Lo que elimina la interacción es el logaritmo, no el rezago.
+\item Prueba PE: rechaza niveles frente a logs ($t=-3{,}56$), no al revés ($t=1{,}04$).
+\item Box--Cox: $\hat\lambda=0{,}44$ [0,38; 0,50]: forma intermedia.
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Respaldo: la especificación en niveles, prueba por prueba}
 \centering
 \scriptsize
@@ -621,81 +566,73 @@ $\beta_2$ (riesgo de cola) & $0{,}0324$ & $0{,}033$ & $3{,}240$ & $0{,}268$ \\
 $\beta_3$ sin crisis & $0{,}0045$ & $0{,}673$ & $1{,}294$ & $<0{,}001$ \\
 $\beta_1$ con 6 controles & $-0{,}0076$ & $0{,}858$ & $2{,}741$ & $<0{,}001$ \\
 Canal inverso & $0{,}171$ & $0{,}009$ & $0{,}014$ & $<0{,}001$ \\
-$\beta_1$ con \textit{spread} rezagado & $0{,}0049$ & $0{,}756$ & $0{,}489$ & $0{,}072$ \\
 \textit{Wild bootstrap} $\beta_1/\beta_2/\beta_3$ & & $0{,}33/0{,}20/0{,}89$ & & $0{,}31/0{,}42/0{,}49$ \\
-\textit{EMstress} (DK) & $0{,}026$ & $0{,}080$ & $1{,}207$ & $<0{,}001$ \\
-\textit{EMstress} (\textit{cluster} país) & $0{,}026$ & $0{,}113$ & $1{,}207$ & $0{,}009$ \\
+\textit{EMstress} (DK / \textit{cluster} país) & $0{,}026$ & $0{,}080/0{,}113$ & $1{,}207$ & $<0{,}001/0{,}009$ \\
 Permutación & & $0{,}392$ & & $0{,}412$ \\
 \bottomrule
 \end{tabular}
-\vspace{4pt}
-
-\footnotesize En niveles la evidencia es más favorable, pero no resiste el \textit{wild bootstrap} ni la permutación, y los datos prefieren los logaritmos.
 \end{frame}
 
+\begin{frame}{Respaldo: vector de crisis}
+\small
+CM4, EF país + tiempo, 6 controles:
+\begin{itemize}
+\item Fuera de crisis: $\hat\beta_3\in[-0{,}002;+0{,}013]$.
+\item \textit{Backstop} (GFC, COVID): $\hat\beta_3+\hat\beta_4=-0{,}015$ ($p=0{,}03$ DK; $p=0{,}40$ \textit{cluster} país).
+\item \textit{EMstress} (2015Q3--2016Q1): $+0{,}026$ ($p=0{,}08$ DK; $p=0{,}11$ \textit{cluster} país).
+\item Otros episodios sin respaldo: \textit{taper} 2013 $-0{,}020$; 2018 $+0{,}037$; los tres juntos $+0{,}013$ ($p=0{,}25$).
+\item Permutación: 2015--16 queda 20 de 51 ventanas ($p=0{,}39$).
+\end{itemize}
+\end{frame}
 
-\begin{frame}{Respaldo: Argentina, comparación completa}
+\begin{frame}{Respaldo: heterogeneidad por tipo de economía}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{l cc cc}
+\toprule
+ & \multicolumn{2}{c}{Log-log ($\beta_3$)} & \multicolumn{2}{c}{Niveles (pb)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+ & Completa & Sin crisis & Completa & Sin crisis \\
+\midrule
+Núcleo (11 economías) & $0{,}011$ & $0{,}034^{***}$ & $0{,}78^{**}$ & $1{,}79^{***}$ \\
+\quad $p$ \textit{wild cluster bootstrap} & $0{,}12$ & $0{,}015$ & $0{,}046$ & $0{,}002$ \\
+\quad con seis controles & $0{,}004$ & $0{,}004$ & $0{,}53^{***}$ & $0{,}81^{***}$ \\
+\quad $p$ \textit{wild} con controles & $0{,}39$ & $0{,}68$ & $0{,}042$ & $0{,}12$ \\
+\quad \textit{leave-one-out} (rango) & $[0{,}002;0{,}015]$ & $[0{,}018;0{,}039]$ & $[0{,}27;0{,}93]$ & $[0{,}87;1{,}92]$ \\
+\addlinespace
+Polonia e India & $-0{,}059^{**}$ & $-0{,}118^{***}$ & $0{,}02$ & $-1{,}82^{**}$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{6pt}
+
+\scriptsize Núcleo: los 11 emergentes de financiamiento externo, excluidas Polonia e India (deuda local profunda). División tomada de la versión anterior del análisis (\textit{ex post}).
+\end{frame}
+
+\begin{frame}{Respaldo: Argentina}
 \centering
 \small
 \begin{tabular}{lcc}
 \toprule
 M4, EF país + tiempo & Sin Argentina & Con Argentina \\
 \midrule
-Muestra completa: $\beta_1$ & $0{,}0985^{***}$ & $0{,}0964^{***}$ \\
-\phantom{Muestra completa:} $\beta_2$ & $0{,}0324^{**}$ & $0{,}0326^{**}$ \\
-\phantom{Muestra completa:} $\beta_3$ & $-0{,}0112$ ($p=0{,}11$) & $-0{,}0082$ ($p=0{,}28$) \\
-Sin crisis: $\beta_1/\beta_2/\beta_3$ & $0{,}087/0{,}050/0{,}005$ & $0{,}089/0{,}049/0{,}007$ \\
-Con controles: $\beta_1/\beta_2/\beta_3$ & $-0{,}008/0{,}028/-0{,}007$ & $-0{,}039/0{,}027/-0{,}004$ \\
+$\beta_1$ / $\beta_2$ & $0{,}0985^{***}$ / $0{,}0324^{**}$ & $0{,}0964^{***}$ / $0{,}0326^{**}$ \\
+$\beta_3$ & $-0{,}0112$ ($p=0{,}11$) & $-0{,}0082$ ($p=0{,}28$) \\
 \textit{Backstop} $\beta_3+\beta_4$ & $-0{,}0146$ ($p=0{,}03$) & $-0{,}0120$ ($p=0{,}03$) \\
 \textit{EMstress} EF país+tiempo & $0{,}026$ ($p=0{,}08$) & $0{,}024$ ($p=0{,}13$) \\
-\textit{EMstress} EF tiempo / país & $0{,}036$ / $0{,}036$ & $0{,}055$ / $0{,}054$ \\
-$N$ (principal) & 765 & 799 \\
+$N$ & 765 & 799 \\
 \bottomrule
 \end{tabular}
 \vspace{6pt}
 
-\footnotesize $\GaR$ de Argentina estimado sin el bloque de tasas del FCI y con ventana de estandarización más corta (IPC oficial breve): por eso queda como robustez.
-\end{frame}
-
-\begin{frame}{Respaldo: variables instrumentales}
-\small
-\begin{itemize}
-\item Instrumentos \textit{shift-share} (Goldsmith-Pinkham, Sorkin y Swift, 2020) para $\ln\JLoss_{t-1}$:
-  \begin{itemize}
-  \item choque rezagado de liquidez del Tesoro (\textit{on/off-the-run}) $\times$ exposición pre-muestral;
-  \item dólar amplio (BIS) $\times$ exposición pre-muestral;
-  \item términos de intercambio por exposición sectorial a \textit{commodities} (participaciones 1998--2003).
-  \end{itemize}
-\item Primeras etapas razonables ($F$ entre 9 y 11).
-\item Segundas etapas: $+0{,}35$ ($p=0{,}72$), $-2{,}18$ ($p=0{,}29$), $+0{,}15$ ($p=0{,}58$).
-\item Sargan rechaza ($p<0{,}001$): los instrumentos no identifican el mismo parámetro.
-\end{itemize}
-\vspace{4pt}
-\begin{block}{Qué haría falta}
-Un instrumento cuya relevancia sea específicamente \textbf{bancaria}, no macro-agregada.
-\end{block}
-\end{frame}
-
-\begin{frame}{Respaldo: forma funcional (Box--Cox)}
-\begin{columns}[c]
-\column{0.55\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_boxcox_arb.pdf}
-\column{0.43\textwidth}
-\small
-\begin{itemize}
-\item $\hat\lambda=0{,}44$, IC 95\% $[0{,}38;0{,}50]$.
-\item Excluye logaritmo ($\lambda=0$) y niveles ($\lambda=1$).
-\item Prueba PE (MacKinnon, White y Davidson, 1983): prefiere logs a niveles.
-\item Entre las dos formas consideradas, la logarítmica es la más defendible.
-\end{itemize}
-\end{columns}
+\footnotesize Su $\GaR$ se estimó sin el bloque de tasas y con una ventana más corta: por eso es robustez.
 \end{frame}
 
 \begin{frame}{Respaldo: modelo de umbral de Hansen}
 \centering
 \includegraphics[width=0.85\textwidth]{fig_umbral_lnlag.pdf}\\
-\footnotesize Umbral en $D=0{,}12$; elasticidad $0{,}141$ en la cola severa vs.\ $0{,}079$ (diferencia $p=0{,}08$). Perfil plano y $LR=6{,}0$ bajo el valor crítico: no hay evidencia de un cambio de régimen.
+\footnotesize Elasticidad 0,141 en la cola severa vs.\ 0,079 (diferencia $p=0{,}08$); $LR=6{,}0$ bajo el valor crítico.
 \end{frame}
 
 \begin{frame}{Respaldo: \textit{leave-one-country-out} y ventanas móviles}
@@ -708,7 +645,7 @@ Un instrumento cuya relevancia sea específicamente \textbf{bancaria}, no macro-
 \includegraphics[width=\textwidth]{fig_ventanas_lnlag.pdf}
 \end{columns}
 \vspace{4pt}
-\footnotesize Izquierda: $\hat\beta_3$ entre $-0{,}017$ y $-0{,}010$ en 12 de 13 exclusiones. Derecha: ventanas de cinco años; señal positiva solo en 2011--2015 y 2012--2016, indistinguible de la variación entre ventanas.
+\footnotesize $\hat\beta_3$ entre $-0{,}017$ y $-0{,}010$ en 12 de 13 exclusiones; en ventanas de cinco años, positivo solo en 2011--2016.
 \end{frame}
 
 \begin{frame}{Respaldo: medición de $\JLoss$ y circularidad del $\GaR$}
@@ -716,37 +653,63 @@ Un instrumento cuya relevancia sea específicamente \textbf{bancaria}, no macro-
 \column{0.48\textwidth}
 \textbf{$\JLoss$}
 \begin{itemize}\small
-\item Cota superior de la malla (4,8\%) activa en el 98\% de los país-trimestre.
-\item La variación la gobierna la pérdida esperada (las PD).
-\item Malla ancha: correlación 0,80 en logs; elasticidad $0{,}067$ ($p=0{,}22$).
+\item Cota de la malla (4,8\%) activa en el 98\% de los casos.
+\item Malla ancha: elasticidad $0{,}067$ ($p=0{,}22$).
 \item En percentiles: $0{,}27$ por 100 percentiles ($p=0{,}002$).
 \end{itemize}
 \column{0.48\textwidth}
 \textbf{$\GaR$}
 \begin{itemize}\small
-\item El único componente tipo \textit{spread} del FCI es $CDIFF$.
-\item Crudo correlaciona 0,68 con el EMBI; su aporte estandarizado al FCI, 0,07.
-\item $\GaR$ sin $CDIFF$: correlación 0,985 con el oficial.
-\item El EMBI no entra en el cálculo; $D$ entra rezagado.
+\item Único componente tipo \textit{spread}: $CDIFF$ (aporte 0,07 al FCI).
+\item Sin $CDIFF$: correlación 0,985 con el oficial.
+\item El EMBI no entra al cálculo; $D$ entra rezagado.
 \end{itemize}
 \end{columns}
 \end{frame}
 
+\begin{frame}{Respaldo: contabilidad del \textit{spread} en el choque COVID}
+\begin{columns}[c]
+\column{0.58\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_contabilidad_lnlag.pdf}
+\column{0.4\textwidth}
+\small
+2019Q4 $\to$ 2020Q2: observado $+63$ log-puntos; predicho $+24$ (riesgo de cola $+21$, fragilidad $+10$, interacción $-7$). El grueso es el componente global común.
+\end{columns}
+\end{frame}
+
+\begin{frame}{Respaldo: limitaciones}
+\small
+\begin{enumerate}
+\item Trece economías (catorce con Argentina): la inferencia robusta no rechaza la ausencia de efectos.
+\item \textit{Spread} y fragilidad persistentes y retroalimentados: ni rezagos, ni dinámica, ni IV separan la dirección.
+\item Heterogeneidad por economía con grupo definido \textit{ex post}; en logs no resiste controles.
+\item Forma funcional no del todo determinada (Box--Cox intermedio).
+\item $\JLoss$ ordinal; sensible a la malla de pérdidas.
+\item Controles anuales interpolados; faltan calificación soberana y PIB per cápita.
+\item Cobertura desigual del EMBI (Filipinas, Indonesia, Sudáfrica).
+\end{enumerate}
+\end{frame}
+
 \begin{frame}[allowframebreaks]{Referencias principales}
-\footnotesize
+\scriptsize
 \begin{itemize}
 \item Acharya, V., Drechsler, I., \& Schnabl, P. (2014). A Pyrrhic Victory? Bank Bailouts and Sovereign Credit Risk. \textit{Journal of Finance}, 69(6), 2689--2739.
 \item Adrian, T., Boyarchenko, N., \& Giannone, D. (2019). Vulnerable Growth. \textit{American Economic Review}, 109(4), 1263--1289.
+\item Calvo, G., Leiderman, L., \& Reinhart, C. (1996). Inflows of Capital to Developing Countries in the 1990s. \textit{Journal of Economic Perspectives}, 10(2), 123--139.
 \item Cameron, A. C., Gelbach, J. B., \& Miller, D. L. (2008). Bootstrap-Based Improvements for Inference with Clustered Errors. \textit{Review of Economics and Statistics}, 90(3), 414--427.
 \item Chari, A., Garcés, F., Martínez, J. F., \& Valenzuela, P. (2024). Sovereign Credit Spreads, Banking Fragility, and Global Factors. \textit{Journal of Financial Stability}, 72, 101235.
 \item Driscoll, J. C., \& Kraay, A. C. (1998). Consistent Covariance Matrix Estimation with Spatially Dependent Panel Data. \textit{Review of Economics and Statistics}, 80(4), 549--560.
 \item Duffie, D., \& Singleton, K. (1999). Modeling Term Structures of Defaultable Bonds. \textit{Review of Financial Studies}, 12(4), 687--720.
+\item Edwards, S. (1984). LDC Foreign Borrowing and Default Risk. \textit{American Economic Review}, 74(4), 726--734.
 \item Farhi, E., \& Tirole, J. (2018). Deadly Embrace: Sovereign and Financial Balance Sheets Doom Loops. \textit{Review of Economic Studies}, 85(3), 1781--1823.
 \item Goldsmith-Pinkham, P., Sorkin, I., \& Swift, H. (2020). Bartik Instruments: What, When, Why, and How. \textit{American Economic Review}, 110(8), 2586--2624.
 \item Hansen, B. E. (1999, 2000). Threshold Effects in Non-Dynamic Panels / Sample Splitting and Threshold Estimation.
-\item MacKinnon, J., White, H., \& Davidson, R. (1983). Tests for Model Specification in the Presence of Alternative Hypotheses. \textit{Journal of Econometrics}, 21(1), 53--70.
+\item Hilscher, J., \& Nosbusch, Y. (2010). Determinants of Sovereign Risk. \textit{Review of Finance}, 14(2), 235--262.
+\item Longstaff, F., Pan, J., Pedersen, L., \& Singleton, K. (2011). How Sovereign Is Sovereign Credit Risk? \textit{AEJ: Macroeconomics}, 3(2), 75--103.
+\item Miranda-Agrippino, S., \& Rey, H. (2022). The Global Financial Cycle. \textit{Handbook of International Economics}, Vol.\ 6.
 \item Ossandon Busch, M. et al.\ (2022). Growth at Risk: Methodology and Applications in an Open-Source Platform (CEMLA).
-\item Pan, J., \& Singleton, K. (2008). Default and Recovery Implicit in the Term Structure of Sovereign CDS Spreads. \textit{Journal of Finance}, 63(5), 2345--2384.
+\item Uribe, M., \& Yue, V. Z. (2006). Country Spreads and Emerging Countries: Who Drives Whom? \textit{Journal of International Economics}, 69(1), 6--36.
 \end{itemize}
 \end{frame}
 
