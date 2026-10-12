@@ -56,15 +56,16 @@ Profesor coguía: Ronald Fischer
 
 \begin{frame}{Dos pilares del \textit{spread} soberano emergente}
 \begin{exampleblock}{¿Qué es el \textit{spread} soberano?}
-\footnotesize Diferencia entre el rendimiento de los bonos en dólares de un gobierno emergente y el de los bonos del Tesoro de EE.UU.\ de plazo similar, en puntos básicos: la \textbf{prima que exige el mercado por el riesgo de incumplimiento} del país. Se mide con el EMBI Global Diversified de J.P.\ Morgan.
+\footnotesize Diferencia entre el rendimiento de los bonos en dólares de un gobierno emergente y el del Tesoro de EE.UU.\ a igual plazo: la \textbf{prima que exige el mercado por el riesgo de incumplimiento} del país, en puntos básicos (EMBI Global Diversified, J.P.\ Morgan).
 \end{exampleblock}
+\vspace{-8pt}
 \begin{columns}[T]
 \column{0.48\textwidth}
 \begin{block}{Fundamentos domésticos}
 \footnotesize
 \begin{itemize}
 \item Edwards (1984); Hilscher y Nosbusch (2010); Uribe y Yue (2006).
-\item \textbf{Proxies:} fragilidad bancaria ($\JLoss$) y riesgo de cola del crecimiento ($\GaR$).
+\item \textbf{Proxies:} riesgo financiero ($\JLoss$) y riesgo económico ($\GaR$).
 \end{itemize}
 \end{block}
 \column{0.48\textwidth}
@@ -72,52 +73,57 @@ Profesor coguía: Ronald Fischer
 \footnotesize
 \begin{itemize}
 \item Calvo et al.\ (1996); Longstaff et al.\ (2011); Miranda-Agrippino y Rey (2022).
-\item \textbf{Proxy:} efectos fijos de tiempo (absorben VIX, Tesoro, \textit{high yield}).
+\item \textbf{Proxy:} efectos fijos de tiempo (VIX, Tesoro, \textit{high yield}).
 \end{itemize}
 \end{block}
 \end{columns}
 \begin{alertblock}{La brecha}
-\footnotesize Chari et al.\ (2024) cruzan la fragilidad bancaria con factores \textbf{globales}. Nadie la ha cruzado con el riesgo de cola \textbf{doméstico} del crecimiento.
+\footnotesize No se han cruzado \textbf{simultáneamente} los dos riesgos de cola domésticos: el financiero y el económico (Chari et al., 2024, cruzan la fragilidad con factores globales).
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{El mecanismo y el balance de fuerzas}
+\begin{frame}{El mecanismo: un triángulo y el balance de fuerzas}
 \begin{columns}[c]
-\column{0.52\textwidth}
+\column{0.58\textwidth}
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
-  node distance=9mm and 0mm,
   box/.style={draw, thick, rounded corners, align=center, fill=gray!7,
-              text width=4.2cm, minimum height=1.0cm, font=\small},
+              text width=3.9cm, minimum height=1.15cm, font=\small},
   boxhi/.style={box, draw=tesisblue, fill=tesisblue!8, line width=1pt},
-  lbl/.style={font=\scriptsize\itshape, align=left, text width=2.4cm}
+  lbl/.style={font=\scriptsize\itshape, align=center}
 ]
-\node[box]              (gar)    {Cola adversa del crecimiento ($\GaR$)};
-\node[boxhi, below=of gar] (jloss)  {Fragilidad bancaria ($\JLoss$): rescate esperado};
-\node[boxhi, below=of jloss] (spread) {\textit{Spread} soberano (EMBI)};
-\draw[-{Latex[length=2.2mm]}] (gar)   -- (jloss)   node[midway, right, lbl] {encarece el rescate};
-\draw[-{Latex[length=2.2mm]}, tesisblue, line width=0.9pt] (jloss) -- (spread) node[midway, right, lbl, tesisblue] {\textbf{lo que estimo}};
-\draw[-{Latex[length=2.2mm]}, dashed, gray!50!black]
-  (spread.west) to[bend left=45] node[midway, left, lbl, text width=2.2cm] {más deuda deprime el precio: \textbf{causalidad inversa}} (jloss.west);
+\node[box]   (jloss)  at (0,0)    {Riesgo financiero:\\ fragilidad bancaria ($\JLoss$)};
+\node[box]   (gar)    at (8.8,0) {Riesgo económico:\\ cola del crecimiento ($\GaR$)};
+\node[boxhi] (spread) at (4.4,-3.2) {\textit{Spread} soberano (EMBI)};
+\draw[thick] (jloss) -- (gar)
+  node[midway, above, lbl, text width=4.2cm] {menos crédito, menor crecimiento (acelerador financiero)}
+  node[midway, below, lbl, text width=4.2cm] {el crecimiento débil deteriora a los bancos};
+\draw[-{Latex[length=2.4mm]}, tesisblue, line width=0.9pt] (jloss) -- (spread)
+  node[midway, left, lbl, text width=2.6cm] {rescate esperado (pasivo contingente)};
+\draw[-{Latex[length=2.4mm]}, tesisblue, line width=0.9pt] (gar) -- (spread)
+  node[midway, right, lbl, text width=2.6cm] {capacidad fiscal en la cola};
+\draw[-{Latex[length=2.4mm]}, dashed, gray!50!black]
+  (spread.west) to[bend left=35] node[midway, left, lbl, text width=2.2cm] {retroalimentación} (jloss.south west);
 \end{tikzpicture}%
 }
-{\scriptsize Farhi y Tirole (2018); Acharya et al.\ (2014); Adrian et al.\ (2019).}
-\column{0.46\textwidth}
+{\scriptsize Bernanke, Gertler y Gilchrist (1996); Farhi y Tirole (2018); Acharya et al.\ (2014).}
+\column{0.4\textwidth}
 \begin{alertblock}{Abren la brecha}
-\small
+\footnotesize
 \begin{itemize}
-\item Bancos frágiles
-\item Cola adversa del crecimiento
+\item Riesgo financiero: bancos frágiles
+\item Riesgo económico: cola adversa
 \item Deuda en manos extranjeras
 \end{itemize}
 \end{alertblock}
 \begin{block}{La contienen}
-\small
+\footnotesize
 \begin{itemize}
-\item Respaldo oficial (Fed, FMI)
+\item Respaldo oficial: el \textbf{banco central}
 \item Mercado local de deuda profundo
 \end{itemize}
+No entran como regresores: los absorben los efectos fijos.
 \end{block}
 \end{columns}
 \end{frame}
@@ -130,10 +136,11 @@ Profesor coguía: Ronald Fischer
 \begin{itemize}
 \item \textbf{H1}\quad La fragilidad bancaria eleva el \textit{spread}.
 \item \textbf{H2}\quad El riesgo de cola eleva el \textit{spread}.
-\item \textbf{H3}\quad Su coincidencia lo \textbf{amplifica}.
+\item \textbf{H3}\quad Su coincidencia lo \textbf{amplifica} (si no, sus efectos son \textbf{aditivos}).
+\item \textbf{H4}\quad Con más \textbf{resiliencia} ---menos deuda, mejor balance fiscal, más reservas--- ambos efectos son menores.
 \end{itemize}
-\vspace{6pt}
-\footnotesize Matiz clave: si ambos escalan la misma probabilidad de incumplimiento, en puntos básicos ya se potencian (\textbf{versión proporcional}). La versión exigente de H3 es una amplificación \textbf{adicional}.
+\vspace{4pt}
+\footnotesize Matiz: si ambos escalan la misma probabilidad de incumplimiento, en puntos básicos ya se potencian (\textbf{versión proporcional}). La versión exigente de H3 es una amplificación \textbf{adicional}. Son correlaciones, no causalidad.
 \end{frame}
 
 \begin{frame}{Objetivos}
@@ -183,9 +190,9 @@ Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \%
 \begin{frame}{Construcción del $\GaR$: riesgo de cola del crecimiento}
 \begin{columns}[c]
 \column{0.52\textwidth}
-\small
+\footnotesize
 \begin{enumerate}
-\item \textbf{Índice de condiciones financieras} (FCI tipo CISS): tensión accionaria, de tasas y cambiaria.
+\item \textbf{Índice de condiciones financieras} (FCI tipo CISS): tensión accionaria, de tasas y cambiaria, en términos reales (deflactadas por la inflación).
 \item \textbf{Regresión cuantílica de panel}, un trimestre adelante:\\
 {\footnotesize $Q(\Delta y_{i,t+1}\mid\cdot;\tau)=\alpha+\beta_1\Delta y_{i,t}+\beta_2FCI^{\perp}_{i,t}+\beta_3VIX_t+\mu_i$}
 \item $\GaR_{i,t}$ = cuantil $\tau=5\%$; ventana expansiva (pseudo--tiempo real).
@@ -276,11 +283,12 @@ Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \%
 \footnotesize Argentina se agrega como robustez (14 economías, 799 observaciones). Corea, Bulgaria y Hungría quedan fuera: su $\JLoss$ no es válido a nivel país.
 \end{frame}
 
-\begin{frame}{Descriptivos y co-movimiento}
+\begin{frame}{Descriptivos y las dos variables en el tiempo}
 \begin{columns}[c]
-\column{0.42\textwidth}
+\column{0.34\textwidth}
 \centering
-\footnotesize
+\scriptsize
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lccc}
 \toprule
  & Media & Mediana & Máx. \\
@@ -290,14 +298,15 @@ $\JLoss_{t-1}$ & 4,65 & 2,67 & --- \\
 $D_{t-1}$ (pp) & $-1{,}5$ & --- & 17,7 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 
 \vspace{6pt}
 \raggedright
 Más del 80\% de la variación de $\JLoss$ y $D$ es dentro de cada país. Corr$(\ln\JLoss,D)=0{,}16$: información distinta.
-\column{0.56\textwidth}
+\column{0.64\textwidth}
 \centering
-\includegraphics[width=\textwidth]{fig_comovimiento_embiext.pdf}\\
-{\scriptsize Las tres series se mueven juntas en 2008--09 y 2020.}
+\includegraphics[width=\textwidth]{fig_series_agregadas_embiext.pdf}\\
+{\scriptsize Mediana y rango p25--p75 entre países; sombreado: crisis. Ambas saltan en 2008--09 y 2020.}
 \end{columns}
 \end{frame}
 
@@ -415,12 +424,14 @@ Driscoll--Kraay con 2, 4 y 8 rezagos: $\beta_1$ & $p$ entre 0,001 y 0,011 & esta
 Variables instrumentales: Tesoro, dólar, términos de intercambio & $+0{,}35$ / $-2{,}18$ / $+0{,}15$ & signo inestable, n.s. \\
 Primeras etapas / Sargan & $F\approx9$--$11$ / $p<0{,}001$ & no identifican lo mismo \\
 Bootstrap del $\GaR$ (500 réplicas): $\beta_1$ / $\beta_2$ / $\beta_3$ & $p=0{,}003$ / $0{,}049$ / $0{,}12$ & la medición no es el problema \\
+Riesgo de cola limpio de factores financieros globales (dos etapas): $\beta_2$ & $0{,}033^{**}$ (antes $0{,}032$) & no es un reflejo de lo financiero \\
+$\GaR$ sin el bloque bursátil del FCI: $\beta_2$ & $0{,}045^{**}$ (con bloque $0{,}039$) & no depende del cruce con $\JLoss$ \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\vspace{8pt}
+\vspace{4pt}
 \begin{alertblock}{Lectura}
-Las asociaciones existen, pero con 13 países y una relación de doble vía \textbf{no pueden leerse como causales}.
+\small Las asociaciones existen y el riesgo económico no es un reflejo de las variables financieras, pero con 13 países y una relación de doble vía \textbf{no pueden leerse como causales}.
 \end{alertblock}
 \end{frame}
 
@@ -511,6 +522,42 @@ Una hipótesis \textbf{bien delimitada} para contrastar con más datos, no un ha
 \end{exampleblock}
 \end{frame}
 
+\begin{frame}{La resiliencia de la política económica funciona como un seguro}
+\begin{columns}[c]
+\column{0.52\textwidth}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{l cc}
+\toprule
+ & Log-log & Niveles (pb) \\
+\midrule
+Resiliencia (efecto directo) & $-0{,}153^{***}$ & $-3{,}5$ \\
+Riesgo de cola $\times$ resiliencia & & \\
+\quad fuera de crisis & $-0{,}024^{***}$ & $-4{,}25^{***}$ \\
+\quad en crisis & $-0{,}001$ & $1{,}14^{*}$ \\
+Fragilidad $\times$ resiliencia & $0{,}053$ & $4{,}70^{***}$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\vspace{4pt}
+{\scriptsize Resiliencia: índice de $-$deuda/PIB, balance fiscal/PIB y reservas/PIB (por desviación estándar). Crisis: GFC y pandemia. $N=670$.\par}
+\column{0.46\textwidth}
+\small
+\begin{itemize}
+\item Más resiliencia, \textbf{menor \textit{spread}}.
+\item En tiempos normales, \textbf{atenúa} el efecto del riesgo de cola.
+\item En una crisis que afecta a todos, esa atenuación \textbf{desaparece}.
+\item No atenúa el efecto de la fragilidad bancaria.
+\end{itemize}
+\end{columns}
+\vspace{4pt}
+\begin{alertblock}{Salvedad}
+\footnotesize No resiste el \textit{wild bootstrap}: evidencia sugerente.
+\end{alertblock}
+\end{frame}
+
 \begin{frame}{Robustez: los resultados no dependen de la muestra}
 \centering
 \small
@@ -538,7 +585,7 @@ Todo en puntos básicos & Más favorable, pero no resiste el \textit{wild bootst
 \vspace{3pt}
 \item \textbf{Riesgo de cola}: +3,3\% por punto; asociación, no causal.
 \vspace{3pt}
-\item \textbf{Complementariedad}: proporcional en promedio; adicional solo condicional (+0,034; +1,8 pb).
+\item \textbf{Complementariedad}: efectos aditivos en promedio; amplificación solo condicional (+0,034; +1,8 pb).
 \end{enumerate}
 \vspace{6pt}
 \begin{block}{¿Penaliza el mercado la coincidencia de forma no lineal?}
@@ -549,7 +596,7 @@ Todo en puntos básicos & Más favorable, pero no resiste el \textit{wild bootst
 \begin{frame}{Hallazgos específicos y su grado de evidencia}
 \centering
 \footnotesize
-\begin{adjustbox}{max width=\textwidth}
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.8\textheight}
 \begin{tabular}{llc}
 \toprule
 Hallazgo & Cifra & Evidencia \\
@@ -559,12 +606,15 @@ El riesgo de cola se asocia con el \textit{spread} & +3,3\% por punto & establec
 Se replica a Chari et al.\ (2024) & 0,107--0,164 & establecida \\
 Los controles domésticos absorben la fragilidad & $0{,}10\to-0{,}008$ & establecida (canales) \\
 El \textit{spread} retroalimenta a la fragilidad & 0,17 & establecida \\
+El riesgo de cola no es un reflejo de las variables financieras & $0{,}033$ limpio; $0{,}045$ sin bloque bursátil & establecida \\
 Efecto causal de la fragilidad o de la cola & \textit{wild} $p=0{,}33$ / $0{,}20$ & \textbf{no establecido} \\
 Amplificación adicional en promedio & $\beta_3=-0{,}011$ & \textbf{no hay} \\
 Interacción negativa bajo \textit{Backstop} & $-0{,}015$ (\textit{cluster} $p=0{,}40$) & no robusta \\
 Amplificación en 2015--16 (\textit{EMstress}) & $+0{,}026$; lugar 20 de 51 & no robusta \\
 Amplificación en el núcleo, sin crisis & $+0{,}034$; $+1{,}8$ pb & \textbf{condicional} \\
 Polonia e India, en sentido opuesto & $-0{,}118$ & condicional \\
+Más resiliencia, menor \textit{spread} & $-0{,}153$ por desviación estándar & sugerente \\
+La resiliencia atenúa el riesgo de cola fuera de crisis, no en crisis & $-0{,}024$ / $-0{,}001$ & sugerente \\
 Argentina y otras robusteces & sin cambios & robusta \\
 \bottomrule
 \end{tabular}
@@ -577,8 +627,8 @@ Argentina y otras robusteces & sin cambios & robusta \\
 \small
 \textbf{Cuándo}
 \begin{itemize}
-\item Fuera de las crisis con respaldo oficial masivo (GFC, COVID).
-\item Cuando coinciden fragilidad alta y cola adversa sin un prestamista de última instancia.
+\item Fuera de las crisis con respaldo externo masivo (GFC, COVID).
+\item Cuando coinciden ambos riesgos y responde solo el banco central del país.
 \end{itemize}
 \vspace{3pt}
 \textbf{Dónde}
@@ -610,12 +660,12 @@ Argentina y otras robusteces & sin cambios & robusta \\
 \column{0.48\textwidth}
 \begin{block}{Respaldado por los datos}
 \small
-Monitorear \textbf{juntos} $\JLoss$ y $\GaR$: ambos adelantan un \textit{spread} más alto.
+Monitorear \textbf{juntos} el riesgo financiero ($\JLoss$) y el económico ($\GaR$). El resguardo propio ---deuda, balance fiscal, reservas--- protege en tiempos normales.
 \end{block}
 \column{0.48\textwidth}
 \begin{exampleblock}{Si se confirma lo condicional}
 \small
-\textbf{Focalizar} en vez de regular igual a todos: economías de financiamiento externo, en episodios sin respaldo oficial.
+\textbf{Focalizar} en vez de regular igual a todos: economías de financiamiento externo, en episodios sin respaldo externo.
 \end{exampleblock}
 \end{columns}
 \vspace{8pt}
@@ -652,27 +702,24 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad.
 \begin{frame}{Conclusión}
 \vspace{6pt}
 \begin{enumerate}
-\item La fragilidad bancaria y el riesgo de cola \textbf{se asocian} con el \textit{spread} soberano.
-\vspace{8pt}
+\item El riesgo financiero y el económico \textbf{se asocian} con el \textit{spread} soberano; sus efectos son \textbf{aditivos}.
+\vspace{5pt}
 \item No es causal: el \textit{spread} también \textbf{retroalimenta} a la fragilidad.
-\vspace{8pt}
-\item La amplificación \textbf{no es universal}: aparece fuera de crisis con respaldo y en economías de financiamiento externo.
+\vspace{5pt}
+\item La \textbf{resiliencia} protege en tiempos normales, no en crisis sistémicas.
+\vspace{5pt}
+\item La amplificación \textbf{no es universal}: aparece sin respaldo externo y en economías de financiamiento externo.
 \end{enumerate}
-\vspace{10pt}
+\vspace{6pt}
 \centering
 \textit{El aporte es saber dónde buscarla y qué haría falta para confirmarla.}
 \end{frame}
 
 \begin{frame}
+\vfill
 \centering
-\Large \textbf{Gracias}
-\vspace{10pt}
-
-\normalsize Repositorio reproducible: \texttt{1\_Codigo/Panel/bbg/}\\
-Números canónicos: \texttt{NUMEROS\_CANONICOS\_BBG.md}
-\vspace{14pt}
-
-\large Preguntas
+{\Huge\bfseries\color{tesisblue} Gracias}
+\vfill
 \end{frame}
 
 % =====================================================================
@@ -855,11 +902,38 @@ $N$ & 765 & 799 \\
 \end{columns}
 \end{frame}
 
+\begin{frame}{Respaldo: solapamiento del riesgo de cola con las variables financieras}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{l ccc}
+\toprule
+ & Fragilidad ($\beta_1$) & Riesgo de cola ($\beta_2$) & Interacción ($\beta_3$) \\
+\midrule
+\multicolumn{4}{l}{\textit{Efectos fijos de país y de tiempo}} \\
+\quad Especificación principal & $0{,}099^{***}$ & $0{,}032^{**}$ & $-0{,}011$ \\
+\quad $D$ limpio de los factores globales & $0{,}110^{***}$ & $0{,}033^{**}$ & $-0{,}016^{**}$ \\
+\quad $D$ limpio de $\ln\JLoss$ & $0{,}125^{***}$ & $0{,}035^{**}$ & $-0{,}023$ \\
+\multicolumn{4}{l}{\textit{Solo efectos fijos de país}} \\
+\quad Sin limpiar & $0{,}152^{***}$ & $0{,}017^{*}$ & $-0{,}006$ \\
+\quad $D$ limpio de los factores globales & $0{,}191^{***}$ & $0{,}013$ & $-0{,}013$ \\
+\multicolumn{4}{l}{\textit{$\GaR$ estimado en muestra completa}} \\
+\quad Con el bloque bursátil del FCI & $0{,}096^{***}$ & $0{,}039^{**}$ & $-0{,}006$ \\
+\quad Sin el bloque bursátil del FCI & $0{,}096^{***}$ & $0{,}045^{**}$ & $-0{,}004$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{4pt}
+
+{\scriptsize\raggedright Los factores globales explican el 34\% de la variación del riesgo de cola dentro de cada país; correlación parcial con $\ln\JLoss$: 0,26 (factor de inflación de varianza 1,07). Sin efectos fijos de tiempo, parte de la asociación del riesgo de cola es global. *** $p<0{,}01$, ** $p<0{,}05$, * $p<0{,}10$ (Driscoll--Kraay).\par}
+\end{frame}
+
 \begin{frame}[allowframebreaks]{Referencias principales}
 \scriptsize
 \begin{itemize}
 \item Acharya, V., Drechsler, I., \& Schnabl, P. (2014). A Pyrrhic Victory? Bank Bailouts and Sovereign Credit Risk. \textit{Journal of Finance}, 69(6), 2689--2739.
 \item Adrian, T., Boyarchenko, N., \& Giannone, D. (2019). Vulnerable Growth. \textit{American Economic Review}, 109(4), 1263--1289.
+\item Bernanke, B., Gertler, M., \& Gilchrist, S. (1996). The Financial Accelerator and the Flight to Quality. \textit{Review of Economics and Statistics}, 78(1), 1--15.
 \item Calvo, G., Leiderman, L., \& Reinhart, C. (1996). Inflows of Capital to Developing Countries in the 1990s. \textit{Journal of Economic Perspectives}, 10(2), 123--139.
 \item Cameron, A. C., Gelbach, J. B., \& Miller, D. L. (2008). Bootstrap-Based Improvements for Inference with Clustered Errors. \textit{Review of Economics and Statistics}, 90(3), 414--427.
 \item Chari, A., Garcés, F., Martínez, J. F., \& Valenzuela, P. (2024). Sovereign Credit Spreads, Banking Fragility, and Global Factors. \textit{Journal of Financial Stability}, 72, 101235.

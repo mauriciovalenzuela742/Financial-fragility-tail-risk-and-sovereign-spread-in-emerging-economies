@@ -129,6 +129,22 @@ El mecanismo opera a través del precio que fija el inversionista marginal de la
 \end{equation}
 donde $\beta_3$ es la interacción en el núcleo y $\beta_3+\theta_3$ en el grupo de contraste, y (ii) solo sobre el núcleo. La división no es ex ante: proviene de la versión anterior del análisis, en la que la interacción se diluía al añadir esas dos economías. Por eso sus resultados se leen como evidencia condicional y se someten a las mismas pruebas de inferencia que la especificación principal.
 
+\subsection{Solapamiento con las variables financieras: regresión en dos etapas}
+\label{sec:est-solapamiento}
+
+El índice de condiciones financieras con que se estima el $GaR$ se construye con variables financieras ---bolsa, tasas y tipo de cambio---, y $JLoss$ usa la volatilidad accionaria de los bancos. Parte de la variación del riesgo de cola podría, entonces, estar explicada por variables que ya están en el lado derecho de la regresión o por los factores financieros globales, y el riesgo de cola estaría contando dos veces la misma información. Tres pruebas lo acotan. La primera son diagnósticos: cuánta variación de $D_{t-1}$ explican los factores globales y los efectos fijos, y cuál es su correlación parcial con $\ln JLoss_{t-1}$. La segunda es una regresión en dos etapas: en la primera se regresa $D_{t-1}$ sobre las variables financieras ---los factores globales (VIX, tasa del Tesoro a diez años, spread de alto rendimiento y \textit{on/off-the-run}) o $\ln JLoss_{t-1}$--- y en la segunda se usa el residuo, que es la parte del riesgo de cola que esas variables no explican. Con efectos fijos de tiempo los factores globales ya están absorbidos, de modo que la prueba es informativa sobre todo en la especificación con solo efectos fijos de país. La tercera reconstruye el $GaR$ con un FCI \emph{sin el bloque bursátil} ---el que comparte información con $JLoss$--- y reestima la especificación principal.
+
+\subsection{Resiliencia de la política económica}
+\label{sec:est-resiliencia}
+
+La capacidad del gobierno y del banco central para absorber un rescate depende de su resiliencia: menos deuda, un mejor balance fiscal y más reservas. Si el mecanismo opera a través del costo esperado del rescate, una economía más resiliente debería ver un efecto menor de ambos riesgos sobre su spread. Para contrastarlo se construye un índice $R_{i,t}$ como el promedio de los valores estandarizados de la deuda/PIB (con signo negativo), el balance fiscal/PIB y las reservas/PIB, de modo que un $R$ mayor indica más resiliencia, y se estima
+\begin{multline}
+\ln\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1\ln JLoss_{i,t-1}+\beta_2D_{i,t-1}+\beta_3(\ln JLoss\times D)_{i,t-1}\\
++\kappa R_{i,t}+\psi_1(\ln JLoss_{i,t-1}\times R_{i,t})+\psi_2(D_{i,t-1}\times R_{i,t})+\varepsilon_{i,t}.
+\label{eq:resiliencia}
+\end{multline}
+$\kappa$ es el efecto directo de la resiliencia sobre el spread, y $\psi_1$ y $\psi_2$ miden cuánto cambia el efecto de la fragilidad y del riesgo de cola por cada desviación estándar adicional de resiliencia: la hipótesis es $\psi_1<0$ y $\psi_2<0$. La ecuación se estima además interactuando $R$ y sus productos con un indicador de crisis (la crisis financiera global y la pandemia), para ver si ese resguardo sigue operando cuando el choque afecta a todas las economías a la vez, y con $R$ medido cuatro trimestres antes.
+
 \subsection{Efecto marginal y umbral}
 \label{sec:est-marginal}
 

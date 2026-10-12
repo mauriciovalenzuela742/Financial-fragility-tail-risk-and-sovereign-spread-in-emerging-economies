@@ -55,8 +55,16 @@
 \setbeamercolor{palette quaternary}{fg=white,bg=structure.fg!50!black}
 \setbeamercolor{titlelike}{parent=palette primary}
 
+% Bloques como cajas redondeadas con sombra y cuerpo coloreado (estilo del tema Madrid /
+% inner theme "rounded", el que usa el template de presentaciones de Pablo Pizarro), con la
+% paleta del proyecto: block = azul, alertblock = rojo, exampleblock = naranjo.
+\setbeamertemplate{blocks}[rounded][shadow=true]
 \setbeamercolor{block title}{bg=tesisblue,fg=white}
-\setbeamercolor*{block title example}{use={normal text,example text},bg=white,fg=tesisblue}
+\setbeamercolor{block body}{bg=tesisblue!8,fg=black}
+\setbeamercolor{block title alerted}{bg=tesisred,fg=white}
+\setbeamercolor{block body alerted}{bg=tesisred!8,fg=black}
+\setbeamercolor*{block title example}{bg=tesisorange,fg=white}
+\setbeamercolor*{block body example}{bg=tesisorange!8,fg=black}
 \setbeamercolor{fine separation line}{}
 \setbeamercolor{item projected}{fg=white}
 \setbeamercolor{palette sidebar primary}{use=normal text,fg=normal text.fg}
