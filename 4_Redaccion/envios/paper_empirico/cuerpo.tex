@@ -30,28 +30,33 @@ La Figura~\ref{fig:mecanismo} traza, de forma esquemática, la cadena de transmi
 
 El mapa organiza la intuición de los tres pilares del marco teórico; no introduce un mecanismo adicional. El trabajo estima el tramo resaltado en azul ---la interacción entre $JLoss$ y el riesgo de cola del crecimiento sobre el spread---. La pregunta de si la concentración bancaria amplifica ese mismo tramo se retoma en la Sección~\ref{sec:agenda-futura} como agenda futura, no como hallazgo.
 
+Las dos variables miden riesgos domésticos de naturaleza distinta: $JLoss$ es un riesgo \emph{financiero} ---la fragilidad del sistema bancario--- y el $GaR$ un riesgo \emph{económico} ---la cola adversa del crecimiento---; ambos son riesgos de cola. Por eso el mecanismo tiene la forma de un triángulo y no la de una secuencia: los dos riesgos se relacionan entre sí y ambos afectan al spread. Un sistema bancario frágil restringe el crédito y, por esa vía, deprime el crecimiento ---el acelerador financiero de \citet{BernankeGertlerGilchrist1996}---, y un crecimiento débil deteriora la cartera de los bancos. Lo que contiene la transmisión al spread es el respaldo oficial doméstico ---el banco central, que es quien rescata a la banca--- y la profundidad del mercado local de deuda. Ninguno de los dos entra como regresor: quedan absorbidos por los efectos fijos de país y de tiempo. La brecha que este trabajo llena es, entonces, que no se han cruzado simultáneamente los dos riesgos de cola domésticos, el financiero y el económico, como determinantes del spread.
+
 \begin{figure}[htbp]
 \centering
-\resizebox{0.62\textwidth}{!}{%
+\resizebox{0.92\textwidth}{!}{%
 \begin{tikzpicture}[
-  node distance=8mm and 0mm,
   box/.style={draw, thick, rounded corners, align=center, fill=gray!7,
-              minimum width=7.0cm, minimum height=1.05cm, font=\small},
+              text width=4.8cm, minimum height=1.15cm, font=\small},
   boxhi/.style={box, draw=blue!55!black, fill=blue!5, line width=1pt},
-  lbl/.style={font=\scriptsize\itshape, align=left, text width=3.6cm}
+  lbl/.style={font=\scriptsize\itshape, align=center}
 ]
-\node[box]              (gar)    {Estado adverso: riesgo de cola del crecimiento ($GaR$)};
-\node[boxhi, below=of gar] (jloss)  {Fragilidad sistémica ($JLoss$) --- pasivo contingente esperado};
-\node[boxhi, below=of jloss] (spread) {Spread soberano (EMBI)};
+\node[box]   (jloss)  at (0,0)    {Riesgo financiero:\\ fragilidad bancaria ($JLoss$)};
+\node[box]   (gar)    at (11.6,0)  {Riesgo económico:\\ cola del crecimiento ($GaR$)};
+\node[boxhi] (spread) at (5.8,-3.4) {Spread soberano (EMBI)};
 
-\draw[-{Latex[length=2.4mm]}] (gar)   -- (jloss)   node[midway, right, lbl] {agrava el rescate esperado};
-\draw[-{Latex[length=2.4mm]}, blue!55!black, line width=0.9pt] (jloss) -- (spread) node[midway, right, lbl, blue!55!black] {\textbf{interacción $\ln JLoss_{t-1}\times D_{t-1}$ estimada}};
-
+\draw[thick] (jloss) -- (gar)
+  node[midway, above, lbl, text width=5.6cm] {menos crédito, menor crecimiento (acelerador financiero)}
+  node[midway, below, lbl, text width=5.6cm] {el crecimiento débil deteriora a los bancos};
+\draw[-{Latex[length=2.4mm]}, blue!55!black, line width=0.9pt] (jloss) -- (spread)
+  node[midway, left, lbl, text width=2.7cm] {pasivo contingente: rescate esperado};
+\draw[-{Latex[length=2.4mm]}, blue!55!black, line width=0.9pt] (gar) -- (spread)
+  node[midway, right, lbl, text width=2.7cm] {capacidad fiscal en la cola};
 \draw[-{Latex[length=2.4mm]}, dashed, gray!50!black]
-  (spread.west) to[bend left=45] node[midway, left, lbl, text width=3.2cm] {rescate financiado con más deuda deprime el precio (Farhi--Tirole): causalidad inversa} (jloss.west);
+  (spread.west) to[bend left=35] node[midway, left, lbl, text width=2.3cm] {retroalimentación: causalidad inversa} (jloss.south west);
 \end{tikzpicture}%
 }
-\caption[Mecanismo conceptual]{Mecanismo conceptual que resume los tres pilares de la Sección~\ref{sec:marco}: el riesgo de cola del crecimiento agrava el rescate bancario esperado, ese rescate esperado es la fragilidad sistémica $JLoss$, y el mercado la penaliza en el spread soberano. La flecha discontinua es la retroalimentación del spread hacia la fragilidad bancaria, que motiva rezagar los regresores. El tramo en azul es el que se estima.}
+\caption[Mecanismo conceptual]{Mecanismo conceptual. Dos riesgos domésticos de cola ---uno financiero, la fragilidad bancaria ($JLoss$), y uno económico, la cola del crecimiento ($GaR$)--- se relacionan entre sí y ambos afectan al spread soberano. La línea sin flecha entre ellos es la relación de doble vía del acelerador financiero \citep{BernankeGertlerGilchrist1996}. La flecha discontinua es la retroalimentación del spread hacia la fragilidad bancaria, que motiva rezagar los regresores. En azul, lo que se estima: el efecto de cada riesgo y el de su coincidencia.}
 \label{fig:mecanismo}
 \end{figure}
 
@@ -68,6 +73,8 @@ Sobre un panel de trece economías emergentes (2004Q2--2026Q2, $N=765$), la evid
 Reestimado todo el procedimiento con el spread en puntos básicos y la fragilidad en niveles, la evidencia es más favorable a la hipótesis ---la fragilidad sobrevive a los controles y la amplificación aparece fuera de las crisis con respaldo---, pero los límites de inferencia y de identificación se mantienen, y los datos prefieren la forma logarítmica (Sección~\ref{sec:robustez-niveles}). Incorporar a Argentina, la economía de spreads más extremos entre las candidatas, tampoco cambia ninguna conclusión (Sección~\ref{sec:robustez-argentina}).
 
 \textbf{La amplificación aparece, en cambio, en momentos y economías específicas.} Fuera de las crisis con respaldo oficial y en el núcleo de once economías de financiamiento externo ---excluidas Polonia e India, de deuda local profunda---, la interacción es positiva en ambas formas funcionales ($+0{,}034$ en elasticidades y $+1{,}8$ puntos básicos) y resiste el \textit{wild cluster bootstrap}. Es el patrón que predice el mecanismo, pero el grupo de contraste se definió a partir de una versión anterior del análisis y, en logaritmos, los controles domésticos lo absorben: se reporta como evidencia condicional, no como un hallazgo robusto (Sección~\ref{sec:robustez-heterogeneidad}).
+
+\textbf{El riesgo económico no es un reflejo de las variables financieras, y la resiliencia lo modera fuera de las crisis.} El coeficiente del riesgo de cola no cambia al limpiarlo de los factores financieros globales o de la propia fragilidad, ni al reconstruir el $GaR$ sin el bloque bursátil que comparte con $JLoss$. Y la resiliencia de la política económica ---menos deuda, mejor balance fiscal, más reservas--- atenúa su efecto en tiempos normales, pero no en las crisis que afectan a todos a la vez (Secciones~\ref{sec:robustez-solapamiento} y~\ref{sec:robustez-resiliencia}).
 
 La conclusión es, por tanto, más modesta que la hipótesis de partida: el panel documenta asociaciones compatibles con el mecanismo, pero no permite separarlas de la persistencia del spread y de su efecto sobre la propia fragilidad, y la amplificación adicional queda acotada a un subconjunto de momentos y economías. La Sección~\ref{sec:identificacion} reporta esas pruebas y la Sección~\ref{sec:agenda-futura}, los datos que harían falta para ir más allá.
 
@@ -99,6 +106,8 @@ El tercer pilar proviene del programa de \textit{vulnerable growth} de \citet{AB
 
 \subsection{Síntesis: complementariedad e hipótesis}
 \label{sec:sintesis-pilares}
+
+\textbf{Dos riesgos domésticos que se relacionan entre sí.} $JLoss$ mide un riesgo financiero y el $GaR$ un riesgo económico, y no son independientes. En el acelerador financiero de \citet{BernankeGertlerGilchrist1996}, el deterioro de los balances encarece el financiamiento y contrae el crédito, lo que amplifica y propaga los choques a la actividad: un sistema bancario frágil presta menos, y con menos crédito el crecimiento se debilita. En la dirección opuesta, una cola adversa del crecimiento deteriora la cartera de los bancos y eleva su probabilidad de incumplimiento. La relación entre ambos es de doble vía, y el mecanismo tiene la forma de un triángulo: los dos riesgos se retroalimentan y ambos se trasladan al spread soberano. Este trabajo no identifica la relación entre ellos ---en el panel su correlación es moderada--- sino la asociación de cada uno, y de su coincidencia, con el spread. Conviene además fijar el vocabulario: si cada riesgo eleva el spread por separado, sus efectos son \emph{aditivos}; hay \emph{amplificación} solo si la coincidencia de ambos lo eleva más que la suma.
 
 Los tres pilares convergen en una predicción: el efecto de la fragilidad bancaria sobre el riesgo soberano depende del estado del crecimiento. Del multiplicador de \citet{FarhiTirole2018b}, porque la amplificación crece tanto con la fragilidad del balance bancario como con la severidad del estado adverso; del canal de dilución de \citet{AcharyaDrechslerSchnabl2014b}, porque la sensibilidad soberana a las condiciones bancarias escala con el deterioro macroeconómico preexistente; y de \citet{GennaioliMartinRossi2014}, porque el costo del incumplimiento soberano crece con la exposición bancaria en los escenarios de bajo crecimiento.
 
@@ -263,6 +272,22 @@ El mecanismo opera a través del precio que fija el inversionista marginal de la
 \label{eq:heterogeneidad}
 \end{equation}
 donde $\beta_3$ es la interacción en el núcleo y $\beta_3+\theta_3$ en el grupo de contraste, y (ii) solo sobre el núcleo, con \textit{wild cluster bootstrap} sobre sus once \textit{clusters}. La división no es \textit{ex ante}: proviene de una versión anterior del análisis, en la que la interacción se diluía al añadir esas dos economías. Por eso sus resultados se leen como evidencia condicional.
+
+\subsubsection{Solapamiento con las variables financieras: regresión en dos etapas}
+\label{sec:est-solapamiento}
+
+El índice de condiciones financieras con que se estima el $GaR$ se construye con variables financieras ---bolsa, tasas y tipo de cambio---, y $JLoss$ usa la volatilidad accionaria de los bancos. Parte de la variación del riesgo de cola podría, entonces, estar explicada por variables que ya están en el lado derecho de la regresión o por los factores financieros globales, y el riesgo de cola estaría contando dos veces la misma información. Tres pruebas lo acotan. La primera son diagnósticos: cuánta variación de $D_{t-1}$ explican los factores globales y los efectos fijos, y cuál es su correlación parcial con $\ln JLoss_{t-1}$. La segunda es una regresión en dos etapas: en la primera se regresa $D_{t-1}$ sobre las variables financieras ---los factores globales (VIX, tasa del Tesoro a diez años, spread de alto rendimiento y \textit{on/off-the-run}) o $\ln JLoss_{t-1}$--- y en la segunda se usa el residuo, que es la parte del riesgo de cola que esas variables no explican. Con efectos fijos de tiempo los factores globales ya están absorbidos, de modo que la prueba es informativa sobre todo en la especificación con solo efectos fijos de país. La tercera reconstruye el $GaR$ con un FCI \emph{sin el bloque bursátil} ---el que comparte información con $JLoss$--- y reestima la especificación principal.
+
+\subsubsection{Resiliencia de la política económica}
+\label{sec:est-resiliencia}
+
+La capacidad del gobierno y del banco central para absorber un rescate depende de su resiliencia: menos deuda, un mejor balance fiscal y más reservas. Si el mecanismo opera a través del costo esperado del rescate, una economía más resiliente debería ver un efecto menor de ambos riesgos sobre su spread. Para contrastarlo se construye un índice $R_{i,t}$ como el promedio de los valores estandarizados de la deuda/PIB (con signo negativo), el balance fiscal/PIB y las reservas/PIB, de modo que un $R$ mayor indica más resiliencia, y se estima
+\begin{multline}
+\ln\mathrm{EMBI}_{i,t}=\alpha_i+\delta_t+\beta_1\ln JLoss_{i,t-1}+\beta_2D_{i,t-1}+\beta_3(\ln JLoss\times D)_{i,t-1}\\
++\kappa R_{i,t}+\psi_1(\ln JLoss_{i,t-1}\times R_{i,t})+\psi_2(D_{i,t-1}\times R_{i,t})+\varepsilon_{i,t}.
+\label{eq:resiliencia}
+\end{multline}
+$\kappa$ es el efecto directo de la resiliencia sobre el spread, y $\psi_1$ y $\psi_2$ miden cuánto cambia el efecto de la fragilidad y del riesgo de cola por cada desviación estándar adicional de resiliencia: la hipótesis es $\psi_1<0$ y $\psi_2<0$. La ecuación se estima además interactuando $R$ y sus productos con un indicador de crisis (la crisis financiera global y la pandemia), para ver si ese resguardo sigue operando cuando el choque afecta a todas las economías a la vez, y con $R$ medido cuatro trimestres antes.
 
 \subsubsection{Efecto marginal, umbral e inferencia}
 
@@ -612,6 +637,73 @@ Observaciones (núcleo) & 621 & 533 & 621 & 533 \\
 
 El resultado es el más favorable a la hipótesis de todo el trabajo, y conviene leerlo con la misma vara que el resto. Fuera de las crisis con respaldo oficial, en el núcleo de financiamiento externo la interacción es positiva en ambas formas funcionales ---$+0{,}034$ en elasticidades y $+1{,}8$ puntos básicos en niveles---, resiste el \textit{wild cluster bootstrap} ($p=0{,}015$ y $0{,}002$) y se mantiene positiva al excluir cada economía del núcleo. En Polonia e India, en cambio, es negativa. Es el patrón del mecanismo: la amplificación aparece donde el inversionista marginal de la deuda soberana es extranjero y en los períodos sin un prestamista de última instancia internacional. Tres salvedades impiden tomarlo como un hallazgo robusto. Primero, la división entre núcleo y contraste se definió a partir de una versión anterior del análisis, no \textit{ex ante}, de modo que la significancia está sobrestimada por la búsqueda de especificación. Segundo, en logaritmos los seis controles domésticos la absorben por completo ($0{,}004$), como ocurre con la elasticidad de la fragilidad en la batería principal; en niveles sobrevive a ellos, pero con controles y sin crisis ya no resiste el \textit{wild bootstrap} ($p=0{,}12$). Tercero, once \textit{clusters} siguen siendo pocos, y en la muestra completa la interacción en logaritmos no es significativa. La evidencia es, por tanto, condicional: sugiere \emph{cuándo} y \emph{en qué economías} buscar la amplificación, no que esta esté establecida.
 
+\textbf{Solapamiento del riesgo de cola con las variables financieras.}\label{sec:robustez-solapamiento} La Tabla~\ref{tab:solapamiento} reporta las pruebas de la Sección~\ref{sec:est-solapamiento}. Los factores financieros globales explican el 34\% de la variación del riesgo de cola dentro de cada país, y los efectos fijos de país y de tiempo, el 82\%; tras descontarlos, la correlación parcial entre $D_{t-1}$ y $\ln JLoss_{t-1}$ es de 0,26, lo que equivale a un factor de inflación de varianza de 1,07: los dos riesgos comparten poca variación y no hay un problema de colinealidad.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Solapamiento del riesgo de cola con las variables financieras]{Riesgo de cola limpio de las variables financieras (M4; errores de Driscoll--Kraay)}
+\label{tab:solapamiento}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{l ccc}
+\toprule
+ & $\beta_1$ (fragilidad) & $\beta_2$ (riesgo de cola) & $\beta_3$ (interacción) \\
+\midrule
+\multicolumn{4}{l}{\textit{Efectos fijos de país y de tiempo}} \\
+\quad Especificación principal & $0{,}099^{***}$ & $0{,}032^{**}$ & $-0{,}011$ \\
+\quad $D$ limpio de los factores globales & $0{,}110^{***}$ & $0{,}033^{**}$ & $-0{,}016^{**}$ \\
+\quad $D$ limpio de $\ln JLoss$ & $0{,}125^{***}$ & $0{,}035^{**}$ & $-0{,}023$ \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Solo efectos fijos de país}} \\
+\quad Sin limpiar & $0{,}152^{***}$ & $0{,}017^{*}$ & $-0{,}006$ \\
+\quad $D$ limpio de los factores globales & $0{,}191^{***}$ & $0{,}013$ & $-0{,}013$ \\
+\addlinespace
+\multicolumn{4}{l}{\textit{$GaR$ estimado en muestra completa (efectos fijos de país y de tiempo)}} \\
+\quad Con el bloque bursátil del FCI & $0{,}096^{***}$ & $0{,}039^{**}$ & $-0{,}006$ \\
+\quad Sin el bloque bursátil del FCI & $0{,}096^{***}$ & $0{,}045^{**}$ & $-0{,}004$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} ``Limpio'' es el residuo de regresar $D_{t-1}$ sobre los factores globales (VIX, tasa del Tesoro a diez años, spread de alto rendimiento y \textit{on/off-the-run}, con efectos fijos de país) o sobre $\ln JLoss_{t-1}$ (con efectos fijos de país y de tiempo). Las dos últimas filas usan el $GaR$ estimado una sola vez sobre toda la muestra, con y sin el bloque bursátil del FCI ($N=773$); las demás, la muestra principal ($N=765$). ***, ** y * indican significancia al 1\%, 5\% y 10\%. Fuente: \texttt{p18\_solapamiento\_gar.py}.}
+\end{table}
+
+Con efectos fijos de país y de tiempo, limpiar el riesgo de cola de los factores globales o de la propia fragilidad deja su coeficiente prácticamente igual ($0{,}033$ y $0{,}035$ frente a $0{,}032$): los efectos fijos de tiempo ya absorben el componente global. Reconstruir el $GaR$ sin el bloque bursátil del FCI ---el que comparte información con $JLoss$--- tampoco cambia nada: la serie resultante correlaciona 0,98 con la que lo incluye y su coeficiente es $0{,}045$ frente a $0{,}039$. El riesgo de cola no es, por tanto, un reflejo de las variables financieras que ya están en la regresión. La prueba sí acota el resultado en una dirección: con solo efectos fijos de país, donde los factores globales no están absorbidos, el riesgo de cola limpio de ellos deja de ser significativo ($0{,}013$, $p=0{,}17$). Parte de su asociación con el spread es global, y es la especificación con efectos fijos de tiempo la que aísla su componente doméstico.
+
+\textbf{Resiliencia de la política económica.}\label{sec:robustez-resiliencia} La Tabla~\ref{tab:resiliencia} estima la ecuación~\eqref{eq:resiliencia}. Las economías menos resilientes tienen, en promedio, bancos más frágiles y una cola más adversa (correlación del índice con $\ln JLoss_{t-1}$ de $-0{,}43$ y con $D_{t-1}$ de $-0{,}33$).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Resiliencia de la política económica]{Resiliencia de la política económica como moderador (efectos fijos de país y de tiempo, $N=670$)}
+\label{tab:resiliencia}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{l cc}
+\toprule
+ & Log-log & Niveles (pb) \\
+\midrule
+Efecto directo de la resiliencia ($\kappa$) & $-0{,}153^{***}$ & $-3{,}5$ \\
+Fragilidad $\times$ resiliencia ($\psi_1$) & $0{,}053$ & $4{,}70^{***}$ \\
+Riesgo de cola $\times$ resiliencia ($\psi_2$) & $-0{,}014^{*}$ & $-1{,}88$ \\
+\quad $p$ \textit{wild cluster bootstrap} ($\psi_1$ / $\psi_2$) & $0{,}42$ / $0{,}46$ & $0{,}22$ / $0{,}43$ \\
+\addlinespace
+\multicolumn{3}{l}{\textit{Riesgo de cola $\times$ resiliencia, según el régimen}} \\
+\quad Fuera de crisis & $-0{,}024^{***}$ & $-4{,}25^{***}$ \\
+\quad Cambio en crisis & $0{,}023^{***}$ & $5{,}39^{***}$ \\
+\quad En crisis (neto) & $-0{,}001$ & $1{,}14^{*}$ \\
+\addlinespace
+\multicolumn{3}{l}{\textit{Efecto directo de la resiliencia, según el régimen}} \\
+\quad Fuera de crisis & $-0{,}141^{***}$ & $-5{,}6$ \\
+\quad En crisis & $-0{,}330^{***}$ & $-25{,}8^{***}$ \\
+\addlinespace
+Riesgo de cola $\times$ resiliencia, con $R$ en $t-4$ & $-0{,}028^{***}$ & $-4{,}22^{**}$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} $R$ es el promedio de los valores estandarizados de $-$deuda/PIB, balance fiscal/PIB y reservas/PIB, reestandarizado; los coeficientes son por desviación estándar de resiliencia. Crisis: 2008Q4--2009Q4 y 2020Q1--2021Q4. Niveles: spread en puntos básicos y $JLoss$ en niveles. Errores de Driscoll--Kraay; \textit{wild cluster bootstrap} con pesos de Webb y 13 \textit{clusters}. ***, ** y * indican significancia al 1\%, 5\% y 10\%. Fuente: \texttt{p19\_resiliencia.py}.}
+\end{table}
+
+Tres resultados. Primero, la resiliencia baja el spread por sí misma: una desviación estándar adicional se asocia con un spread en torno a un 14\% menor, y esa asociación es más fuerte en las crisis. Segundo, para el riesgo de cola la hipótesis se cumple fuera de las crisis y deja de cumplirse en ellas: en tiempos normales, una desviación estándar más de resiliencia reduce la semielasticidad del riesgo de cola en $0{,}024$, una magnitud comparable a la propia semielasticidad media ($0{,}032$), pero durante la crisis financiera global y la pandemia esa atenuación desaparece ($-0{,}001$). Es la lógica de un seguro: en tiempos normales un mejor resguardo abarata la prima, pero cuando el choque golpea a todos a la vez las primas suben para todos y el resguardo propio no reduce la sensibilidad. El patrón es el mismo en puntos básicos y con la resiliencia medida cuatro trimestres antes. Tercero, para la fragilidad bancaria la hipótesis no se cumple: su asociación con el spread es mayor, no menor, en las economías más resilientes, y en niveles con claridad. Una lectura posible, que este diseño no permite contrastar, es que el rescate bancario es más creíble donde el soberano puede pagarlo, y que es esa credibilidad la que traslada el riesgo bancario al precio de la deuda \citep{AcharyaDrechslerSchnabl2014b}. Estos resultados comparten los límites del resto: ninguno de los términos de moderación resiste el \textit{wild cluster bootstrap} sobre la muestra completa. Son evidencia sugerente de que la resiliencia importa, no un contraste concluyente.
+
 \subsection{Robustez a la forma funcional: la especificación en niveles}
 \label{sec:robustez-niveles}
 
@@ -664,7 +756,7 @@ La Figura~\ref{fig:contabilidad} descompone el cambio del spread en el choque de
 
 \subsection{Síntesis}
 
-El panel establece seis cosas. (i) La fragilidad bancaria y el riesgo de cola del crecimiento, medidos un trimestre antes, se asocian positivamente con el spread soberano en regresiones con efectos fijos de país y de tiempo, y la asociación de la fragilidad replica, con una métrica construida de forma independiente, la que documentan \citet{Chari2024b}. (ii) Esas asociaciones no pueden leerse como efectos causales: el spread retroalimenta a la fragilidad, ambos son muy persistentes, y el efecto de la fragilidad desaparece al modelar esa dinámica; con inferencia apropiada para trece países tampoco es significativo, y las variables instrumentales no cierran la identificación. (iii) No hay evidencia de complementariedad por encima de la que implica una estructura proporcional, que es la versión que predice un modelo de intensidad de incumplimiento; las asimetrías por régimen de crisis no resisten los errores agrupados por país ni la prueba de permutación. (iv) La interacción que la especificación en niveles encontraba depende de la forma funcional, y los datos prefieren los logaritmos a los niveles. Reestimado todo en puntos básicos, la fragilidad resiste los controles y la amplificación aparece en los períodos sin respaldo oficial, pero ninguno de esos resultados resiste el \textit{wild cluster bootstrap} ni la prueba de permutación (Sección~\ref{sec:robustez-niveles}). (v) Ninguna de estas conclusiones depende de la composición del corte transversal: añadir a Argentina deja los coeficientes prácticamente intactos (Sección~\ref{sec:robustez-argentina}). (vi) La amplificación que el promedio del panel no muestra aparece en un subconjunto acotado ---el núcleo de economías de financiamiento externo, fuera de las crisis con respaldo---, donde resiste el \textit{wild cluster bootstrap} en ambas formas funcionales, aunque no los controles en logaritmos y con un grupo de contraste definido \textit{ex post} (Sección~\ref{sec:robustez-heterogeneidad}).
+El panel establece ocho cosas. (i) La fragilidad bancaria y el riesgo de cola del crecimiento, medidos un trimestre antes, se asocian positivamente con el spread soberano en regresiones con efectos fijos de país y de tiempo, y la asociación de la fragilidad replica, con una métrica construida de forma independiente, la que documentan \citet{Chari2024b}. (ii) Esas asociaciones no pueden leerse como efectos causales: el spread retroalimenta a la fragilidad, ambos son muy persistentes, y el efecto de la fragilidad desaparece al modelar esa dinámica; con inferencia apropiada para trece países tampoco es significativo, y las variables instrumentales no cierran la identificación. (iii) No hay evidencia de complementariedad por encima de la que implica una estructura proporcional, que es la versión que predice un modelo de intensidad de incumplimiento; las asimetrías por régimen de crisis no resisten los errores agrupados por país ni la prueba de permutación. (iv) La interacción que la especificación en niveles encontraba depende de la forma funcional, y los datos prefieren los logaritmos a los niveles. Reestimado todo en puntos básicos, la fragilidad resiste los controles y la amplificación aparece en los períodos sin respaldo oficial, pero ninguno de esos resultados resiste el \textit{wild cluster bootstrap} ni la prueba de permutación (Sección~\ref{sec:robustez-niveles}). (v) Ninguna de estas conclusiones depende de la composición del corte transversal: añadir a Argentina deja los coeficientes prácticamente intactos (Sección~\ref{sec:robustez-argentina}). (vi) La amplificación que el promedio del panel no muestra aparece en un subconjunto acotado ---el núcleo de economías de financiamiento externo, fuera de las crisis con respaldo---, donde resiste el \textit{wild cluster bootstrap} en ambas formas funcionales, aunque no los controles en logaritmos y con un grupo de contraste definido \textit{ex post} (Sección~\ref{sec:robustez-heterogeneidad}). (vii) El riesgo de cola no es un reflejo de las variables financieras de la regresión: su coeficiente no cambia al limpiarlo de los factores globales o de la fragilidad, ni al reconstruir el $GaR$ sin el bloque bursátil; sin efectos fijos de tiempo, en cambio, parte de su asociación es global (Sección~\ref{sec:robustez-solapamiento}). (viii) La resiliencia de la política económica baja el spread y atenúa el efecto del riesgo de cola fuera de las crisis, pero no dentro de ellas, y no atenúa el de la fragilidad bancaria; es evidencia sugerente, que no resiste el \textit{wild cluster bootstrap} (Sección~\ref{sec:robustez-resiliencia}).
 
 % =====================================================================
 \section{Discusión y conclusiones}
@@ -675,6 +767,8 @@ El panel establece seis cosas. (i) La fragilidad bancaria y el riesgo de cola de
 La hipótesis de partida era que el mercado penaliza de forma no lineal la coexistencia de fragilidad bancaria y riesgo de cola del crecimiento. El panel es compatible con una versión proporcional de esa hipótesis ---ambos riesgos se asocian con un spread mayor y, en puntos básicos, se potencian como lo haría una intensidad de incumplimiento que responde a los dos---, pero no permite afirmar ni que la fragilidad cause el spread ni que exista una amplificación adicional. La razón principal no es la ausencia de relación, sino que la relación opera en ambas direcciones y con mucha persistencia: el mismo bucle de \citet{FarhiTirole2018b} que motiva la hipótesis hace que, con series trimestrales de trece países, el efecto de la fragilidad sobre el spread no pueda separarse del efecto del spread sobre la fragilidad ni del componente persistente que ambos comparten.
 
 La amplificación adicional, si existe, es condicional: depende de cuándo y de en qué economías. Aparece fuera de las crisis con respaldo oficial masivo, cuando el soberano enfrenta solo el costo esperado de rescatar a su banca, y en las economías cuya deuda fija al margen un inversionista extranjero de cartera, no en Polonia e India, donde un mercado local profundo la mantiene a vencimiento (Sección~\ref{sec:robustez-heterogeneidad}). La lectura económica es coherente ---el multiplicador del \textit{doom loop} se traslada al precio de la deuda cuando el pasivo contingente recae sobre un soberano sin respaldo externo y cuya deuda valoriza un inversionista sensible al riesgo---, pero descansa en una división de economías definida \textit{ex post} y no resiste los controles en logaritmos: es una hipótesis bien delimitada para contrastar con más datos, no un resultado establecido.
+
+\textbf{Efectos aditivos, y la resiliencia como un seguro.} Leídos en conjunto, los resultados dicen tres cosas. La primera es que el riesgo económico importa por sí mismo: la cola del crecimiento se asocia con el spread aun controlando por la fragilidad bancaria y por las variables financieras, y esa asociación no proviene de la información financiera con que se construye el $GaR$. La segunda es que los dos riesgos domésticos operan de forma aditiva: cada uno eleva el spread por separado, pero su coincidencia no lo eleva más que la suma, salvo en el subconjunto acotado de economías y períodos ya descrito. La tercera es que la capacidad de respuesta de la política económica condiciona esa transmisión de un modo específico. Fuera de las crisis, una economía con menos deuda, mejor balance fiscal y más reservas paga menos por su riesgo de cola: el resguardo funciona como un seguro. En una crisis que afecta a todas las economías a la vez, ese seguro no reduce la sensibilidad al riesgo ---las primas suben para todos---, aunque las economías más resilientes siguen pagando un spread más bajo en nivel. Es coherente con que la amplificación aparezca justamente donde falta un respaldo externo: lo que protege en tiempos normales es el resguardo propio, y lo que protege en una crisis sistémica es que exista alguien más que respalde.
 
 Dos resultados secundarios ayudan a leer la evidencia previa. El primero es que la interacción significativa de la especificación en niveles depende de la forma funcional: una parte es la complementariedad implícita en una estructura multiplicativa, y el resto se concentra en los trimestres de spread alto que la transformación logarítmica comprime. El segundo es que las asimetrías por régimen de crisis ---la interacción negativa bajo respaldo oficial y positiva en el estrés emergente de 2015--2016--- son las que se esperarían del mecanismo, pero son también las que produciría la variación entre ventanas de tres trimestres; con trece países, el panel no tiene la potencia para distinguirlas.
 
@@ -703,7 +797,7 @@ Una pregunta adicional es si la concentración bancaria amplifica la complementa
 
 \subsection{Conclusión}
 
-Este trabajo articula en un solo marco dos literaturas que se han mantenido separadas ---la del nexo banca--soberano y la del riesgo a la baja del crecimiento--- y construye, para trece economías emergentes, las dos métricas que lo operacionalizan: la fragilidad bancaria sistémica a partir de 113 bancos extraídos homogéneamente de Bloomberg, y el riesgo de cola del crecimiento por regresión cuantílica en pseudo--tiempo real. Con ellas, el trabajo replica la asociación entre fragilidad bancaria y spread soberano que documenta la literatura más próxima y encuentra una asociación análoga para el riesgo de cola del crecimiento. Pero al someter esas asociaciones a las pruebas que exige un panel corto en países y largo en persistencia, no resisten como efectos causales, y en el promedio del panel la complementariedad entre ambos riesgos no va más allá de la que implica una estructura proporcional; la amplificación adicional aparece solo fuera de las crisis con respaldo oficial y en las economías de financiamiento externo, con evidencia condicional. La hipótesis con la que se aprobó esta investigación queda, así, sin respaldo en su versión universal y con respaldo condicional en una versión acotada a ciertos regímenes y tipos de economía. El aporte del trabajo es, en buena medida, delimitar con precisión esa distinción, mostrar por qué el diseño disponible no permite ir más allá, y dejar construida la infraestructura de datos ---reproducible y trazable, en \texttt{1\_Codigo/Panel/bbg/}--- sobre la que un diseño con más economías, más frecuencia o variación exógena podría hacerlo.
+Este trabajo articula en un solo marco dos literaturas que se han mantenido separadas ---la del nexo banca--soberano y la del riesgo a la baja del crecimiento--- y construye, para trece economías emergentes, las dos métricas que lo operacionalizan: la fragilidad bancaria sistémica a partir de 113 bancos extraídos homogéneamente de Bloomberg, y el riesgo de cola del crecimiento por regresión cuantílica en pseudo--tiempo real. Con ellas, el trabajo replica la asociación entre fragilidad bancaria y spread soberano que documenta la literatura más próxima y encuentra una asociación análoga para el riesgo de cola del crecimiento. Pero al someter esas asociaciones a las pruebas que exige un panel corto en países y largo en persistencia, no resisten como efectos causales, y en el promedio del panel la complementariedad entre ambos riesgos no va más allá de la que implica una estructura proporcional; la amplificación adicional aparece solo fuera de las crisis con respaldo oficial y en las economías de financiamiento externo, con evidencia condicional. Los dos riesgos operan, así, de forma aditiva, y la resiliencia de la política económica ---menos deuda, mejor balance fiscal y más reservas--- baja el spread y atenúa el efecto del riesgo de cola en tiempos normales, pero no en las crisis que afectan a todas las economías a la vez. La hipótesis con la que se aprobó esta investigación queda, así, sin respaldo en su versión universal y con respaldo condicional en una versión acotada a ciertos regímenes y tipos de economía. El aporte del trabajo es, en buena medida, delimitar con precisión esa distinción, mostrar por qué el diseño disponible no permite ir más allá, y dejar construida la infraestructura de datos ---reproducible y trazable, en \texttt{1\_Codigo/Panel/bbg/}--- sobre la que un diseño con más economías, más frecuencia o variación exógena podría hacerlo.
 
 % =====================================================================
 \section*{Anexo: tablas de la especificación en niveles}
@@ -741,6 +835,7 @@ Las tablas de esta sección reproducen la batería principal y la de interacció
 \bibitem[Allen et al.(2012)]{AllenBaliTang2012} Allen, L., Bali, T. G., \& Tang, Y. (2012). Does Systemic Risk in the Financial Sector Predict Future Economic Downturns? \textit{Review of Financial Studies}, 25(10), 3000--3036.
 \bibitem[Barndorff-Nielsen \& Shephard(2002)]{BarndorffNielsenShephard2002} Barndorff-Nielsen, O. E., \& Shephard, N. (2002). Econometric Analysis of Realized Volatility and Its Use in Estimating Stochastic Volatility Models. \textit{Journal of the Royal Statistical Society B}, 64(2), 253--280.
 \bibitem[BIS(2006)]{BIS2006} Bank for International Settlements (BIS). (2006). \textit{International Convergence of Capital Measurement and Capital Standards (Basel II)}. Basel.
+\bibitem[Bernanke et al.(1996)]{BernankeGertlerGilchrist1996} Bernanke, B., Gertler, M., \& Gilchrist, S. (1996). The Financial Accelerator and the Flight to Quality. \textit{Review of Economics and Statistics}, 78(1), 1--15.
 \bibitem[Billio et al.(2012)]{BillioEtAl2012} Billio, M., Getmansky, M., Lo, A. W., \& Pelizzon, L. (2012). Econometric Measures of Connectedness and Systemic Risk in the Finance and Insurance Sectors. \textit{Journal of Financial Economics}, 104(3), 535--559.
 \bibitem[Bisias et al.(2012)]{BisiasEtAl2012} Bisias, D., Flood, M., Lo, A. W., \& Valavanis, S. (2012). A Survey of Systemic Risk Analytics. \textit{Annual Review of Financial Economics}, 4, 255--296.
 \bibitem[Bocola(2016)]{Bocola2016} Bocola, L. (2016). The Pass-Through of Sovereign Risk. \textit{Journal of Political Economy}, 124(4), 879--926.

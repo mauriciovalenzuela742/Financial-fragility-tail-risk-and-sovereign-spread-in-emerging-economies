@@ -1180,3 +1180,56 @@ financiamiento externo fuera de las crisis con respaldo, y es la única que resi
 en ambas formas funcionales sin controles. Salvedades: el grupo de contraste se definió a partir de la
 versión anterior (no ex ante), en logaritmos los controles domésticos la absorben, y con 11 clusters la
 inferencia sigue siendo frágil. Se reporta como evidencia condicional, no como hallazgo robusto.
+
+## 15. Solapamiento del GaR con las variables financieras (2026-10-11)
+
+Observación del profesor guía en la predefensa (2026-10-09): el FCI del GaR usa variables
+financieras que se cruzan con JLoss y con los factores globales. `python p18_solapamiento_gar.py`
+→ `paper_solapamiento_numeros.csv`. Para la parte C: `build_fci_no_stx.py` (FCI sin bloque bursátil,
+corr. media 0,87 con el FCI base) y `gar_insample_robustez.py GaR_panel_all18_noSTX.xlsx noSTX`
+(en `1_Codigo/GaR/individuals/nlhpc_gar_all18/`). Principal: log-log rezagada, EF país + tiempo.
+
+| Prueba | Resultado |
+|---|---|
+| R² within de D sobre factores globales (VIX, Tesoro, HY, on/off) | 0,34 |
+| R² de D sobre EF país + tiempo | 0,82 |
+| Correlación parcial D–ln JLoss tras EF / VIF | 0,26 / 1,07 |
+| Principal (referencia): b1 / b2 / b3 | 0,0985 / 0,0324 (p=0,033) / −0,0112 |
+| Dos etapas, D limpio de factores globales, EF país + tiempo | 0,110 / 0,0331 (p=0,027) / −0,016 (p=0,04) |
+| Ídem con solo EF país (ref. sin limpiar: b2 = 0,0174, p=0,07) | 0,191 / 0,0127 (p=0,17) / −0,013 |
+| Dos etapas, D limpio de ln JLoss, EF país + tiempo | 0,125 / 0,0346 (p=0,013) / −0,023 |
+| GaR in-sample base vs. sin bloque bursátil: corr. de D | 0,98 |
+| b2 con GaR in-sample base / sin bloque bursátil (N=773) | 0,0389 (p=0,040) / 0,0451 (p=0,050) |
+| Ídem sin crisis (N=662) | 0,0684 (p<0,001) / 0,0835 (p<0,001) |
+
+**Lectura:** con EF de tiempo los factores globales ya están absorbidos (el residuo deja b2 igual);
+el riesgo de cola y la fragilidad comparten poca variación (VIF 1,07); y quitar el bloque bursátil
+del FCI no cambia nada. Sin EF de tiempo, en cambio, parte de la asociación del riesgo de cola es
+global: limpio de factores globales deja de ser significativo.
+
+## 16. Resiliencia de la política económica como moderador (2026-10-11)
+
+Hipótesis del profesor guía: a mayor resiliencia (menos deuda/PIB, mejor balance fiscal/PIB, más
+reservas/PIB), menor efecto de la fragilidad y del riesgo de cola sobre el spread. `python
+p19_resiliencia.py` (y `JLOSS_FORMA=nivlag`) → `paper_resiliencia_numeros.csv` / `_nivlag.csv`.
+R = promedio de z-scores de (−deuda/PIB, balance fiscal/PIB, reservas/PIB), estandarizado; g1 = J×R,
+g2 = D×R. EF país + tiempo, N=670. Corr(R, ln JLoss) = −0,43; corr(R, D) = −0,33.
+
+| | Log-log | Niveles (pb) |
+|---|---|---|
+| Efecto directo de R | −0,153 (DK p<0,001; cluster 0,35) | −3,5 (n.s.) |
+| g2: D×R (DK / cluster / wild) | −0,014 (0,056 / 0,35 / 0,46) | −1,88 (0,25 / 0,36 / 0,43) |
+| g1: J×R (DK / cluster / wild) | +0,053 (0,11 / 0,33 / 0,42) | +4,70 (<0,001 / 0,006 / 0,22) |
+| g2 fuera de crisis | −0,024 (p=0,007) | −4,25 (p=0,009) |
+| g2 cambio en crisis (GFC+COVID) | +0,023 (p=0,006) | +5,39 (p<0,001) |
+| g2 en crisis (neto) | −0,001 (p=0,86) | +1,14 (p=0,10) |
+| g1 fuera de crisis / en crisis | +0,086 (0,017) / +0,115 (0,058) | +4,74 / +5,57 (ambos p<0,001) |
+| Efecto directo de R fuera / en crisis | −0,141 / −0,330 (ambos p<0,001) | −5,6 (n.s.) / −25,8 (p<0,001) |
+| R medido en t−4: g2 (DK / cluster / wild) | −0,028 (0,002 / 0,089 / 0,14) | −4,22 (0,020 / 0,063 / 0,14) |
+
+**Lectura:** (i) la resiliencia atenúa el efecto del riesgo de cola **fuera de crisis**, y esa
+atenuación desaparece en las crisis sistémicas (analogía del seguro: cuando el choque afecta a todos,
+el resguardo propio no reduce la sensibilidad); (ii) el nivel de resiliencia sí baja el spread, más
+aún en crisis; (iii) para la fragilidad bancaria la hipótesis no se cumple: su efecto es mayor, no
+menor, en países más resilientes (compatible con que un rescate creíble traslada el riesgo bancario
+al soberano; conjetura). Nada de esto resiste el wild bootstrap con 13 países: evidencia sugerente.

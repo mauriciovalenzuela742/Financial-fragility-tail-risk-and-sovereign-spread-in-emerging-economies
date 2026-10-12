@@ -9,7 +9,7 @@ econometría; el objetivo es exponer con claridad y salir con decisiones.*
 
 **Antes de entrar**
 
-- [ ] La presentación nueva (51 láminas: 35 de exposición y 16 de respaldo) en PDF, en el computador y
+- [ ] La presentación nueva (53 láminas: 36 de exposición y 17 de respaldo) en PDF, en el computador y
       en un pendrive.
 - [ ] La tesis en PDF abierta, por si pide una tabla completa, y esta guía impresa.
 - [ ] Cronómetro visible. Ensayar una vez en voz alta midiendo los tiempos por sección.
@@ -53,6 +53,8 @@ econometría; el objetivo es exponer con claridad y salir con decisiones.*
 **Las tres salvedades del resultado condicional:** el grupo se definió *ex post*; en logaritmos los
 controles lo absorben; 11 *clusters* son pocos.
 
+**Vocabulario (lo corrigió el profesor guía):** *amplificación* o *simultaneidad*, nunca "multiplicidad"; efectos *aditivos* cuando cada riesgo sube el spread por separado; *riesgo financiero* (JLoss) y *riesgo económico* (GaR).
+
 **Lo que NO debo decir:** que las métricas son mías (son de Chari et al. y de Adrian et al.; mía es
 su construcción), que la fragilidad *causa* el spread, ni que la amplificación está *demostrada*.
 
@@ -91,10 +93,11 @@ condiciones externas, como las tasas de Estados Unidos; Longstaff y coautores, q
 crédito soberano es en gran parte común a todos los países; y Miranda-Agrippino y Rey, que existe
 un ciclo financiero global que mueve los precios de riesgo en todo el mundo.
 
-Yo mido el pilar doméstico con dos variables: la fragilidad bancaria, con JLoss, y el riesgo de cola
-del crecimiento, con el GaR. El pilar global lo absorbo con efectos fijos de tiempo. Y la brecha es
-esta: Chari y coautores (2024) cruzan la fragilidad bancaria con factores globales; nadie la ha
-cruzado con el riesgo de cola doméstico del crecimiento. Ese cruce es lo que estudio."
+Yo mido el pilar doméstico con dos riesgos de cola: uno **financiero**, la fragilidad bancaria, con
+JLoss; y uno **económico**, la cola del crecimiento, con el GaR. El pilar global lo absorbo con
+efectos fijos de tiempo. Y la brecha es esta: no se han cruzado simultáneamente los dos riesgos de
+cola domésticos, el financiero y el económico; Chari y coautores (2024) cruzan la fragilidad con
+factores globales. Ese cruce es lo que estudio."
 
 **Transición:** "¿Por qué tendrían que interactuar? Por el mecanismo."
 
@@ -202,27 +205,35 @@ incluido el VIX; en la réplica de Chari los incluyo explícitamente y el result
 *Nota para mí:* si pide cifras exactas de un paper (coeficientes, porcentajes de varianza), decir
 que lo verifico en el original en vez de improvisar.
 
-### 4. El mecanismo y el balance de fuerzas (2 min)
-**Propósito:** que se entienda por qué la coincidencia debería amplificar, y anticipar el problema
-de identificación.
+### 4. El mecanismo: un triángulo y el balance de fuerzas (2 min)
+**Propósito:** que se entienda que los dos riesgos se relacionan entre sí y que ambos llegan al
+spread, y anticipar el problema de identificación.
 
-**Cómo leer:** el diagrama de arriba hacia abajo; después, la flecha punteada.
+**Cómo leer:** primero la línea de arriba (sin flechas), después las dos flechas azules y al final
+la punteada.
 
-**Qué digo:** "Un estado adverso del crecimiento encarece el rescate bancario esperado. Ese rescate
-esperado es lo que mide JLoss: un pasivo contingente del fisco, el *bailout put* de Farhi y Tirole
-y la dilución de Acharya, Drechsler y Schnabl. El mercado lo cobra en el spread. A la derecha está
-el balance de fuerzas: abren la brecha los bancos frágiles, la cola adversa y la deuda en manos
-extranjeras; la contienen el respaldo oficial ---la Fed, el FMI--- y un mercado local de deuda
-profundo. Y la flecha punteada es clave: un spread más alto deprecia los bonos que tienen los
-bancos y los hace más frágiles. Esa causalidad inversa es mi principal problema de identificación,
-y vuelve más adelante."
+**Qué digo:** "El mecanismo es un triángulo, no una secuencia. Los dos riesgos se relacionan entre
+sí: un sistema bancario frágil da menos crédito y eso deprime el crecimiento ---el acelerador
+financiero de Bernanke, Gertler y Gilchrist---, y un crecimiento débil deteriora a los bancos. Y
+ambos se trasladan al spread: la fragilidad, como rescate esperado, que es un pasivo contingente del
+fisco; la cola del crecimiento, por la capacidad fiscal. A la derecha, el balance de fuerzas: abren
+la brecha el riesgo financiero, el económico y la deuda en manos extranjeras; la contienen el
+respaldo oficial ---el banco central, que es quien rescata a la banca--- y un mercado local de deuda
+profundo. Esas dos fuerzas no entran como regresores: las absorben los efectos fijos. Y la flecha
+punteada es la retroalimentación: un spread más alto daña a los bancos. Como las tres cosas ocurren
+a la vez, hablo de correlaciones, no de causalidad."
 
 **Transición:** "Con esto, la pregunta."
+
+**Si me pregunta** por el acelerador financiero: Bernanke, Gertler y Gilchrist (1996) muestran que
+el deterioro de los balances encarece el financiamiento y contrae el crédito, lo que amplifica los
+choques a la actividad. No estimo esa relación; la uso para explicar por qué los dos riesgos se
+mueven juntos.
 
 ### 5. Pregunta e hipótesis (1 min 15 s)
 **Qué digo:** "La pregunta es si el mercado penaliza de forma no lineal la coincidencia de
 fragilidad bancaria y cola adversa. H1: la fragilidad eleva el spread. H2: el riesgo de cola lo
-eleva. H3: su coincidencia lo amplifica. Un matiz que ordena todo lo demás: si ambos riesgos escalan
+eleva. H3: su coincidencia lo amplifica; si no, sus efectos son aditivos. H4: con más resiliencia de la política económica ---menos deuda, mejor balance fiscal, más reservas--- ambos efectos son menores. Un matiz que ordena todo lo demás: si ambos riesgos escalan
 la misma probabilidad de incumplimiento, en puntos básicos ya se potencian; eso es la versión
 proporcional, que no necesita una interacción. La versión exigente de H3 es una amplificación
 adicional: un coeficiente de interacción positivo en logaritmos."
@@ -276,12 +287,13 @@ eso entra en logaritmos, que son invariantes a la escala."
 
 **Si me pregunta** por qué ordinal: la componente inesperada queda evaluada en la cota (4,8 %), así
 que la variación la gobiernan las probabilidades de incumplimiento. En percentiles la asociación se
-mantiene (lámina 48).
+mantiene (lámina 49).
 
 ### 9. Construcción del GaR (1 min 30 s)
 **Qué digo:** "El GaR es el cuantil 5 % de la distribución del crecimiento un trimestre adelante.
 Primero construyo un índice de condiciones financieras tipo CISS, con tensión accionaria, de tasas
-y cambiaria; replica la salida de referencia de CEMLA con correlación 0,9995. Después estimo una
+y cambiaria, todas en términos reales: el retorno bursátil y las tasas se deflactan por la
+inflación. Replica la salida de referencia de CEMLA con correlación 0,9995. Después estimo una
 regresión cuantílica de panel del crecimiento futuro sobre el crecimiento actual, el índice
 financiero sin el componente del VIX, el VIX y un efecto fijo de país. El GaR es el cuantil 5 %, y
 lo estimo en pseudo–tiempo real: en cada fecha uso solo la información disponible hasta ella. En la
@@ -411,11 +423,16 @@ estimó con menos información, así que la uso como robustez. Corea, Bulgaria y
 porque su JLoss no es válido a nivel país: en Corea el valor de mercado de la banca está muy por
 debajo de su punto de incumplimiento, y en Bulgaria y Hungría cotizan uno o dos bancos."
 
-### 14. Descriptivos y co-movimiento (1 min)
-**Qué digo:** "El spread promedia 198 puntos básicos. Más del 80 % de la variación de JLoss y del
-riesgo de cola es dentro de cada país, así que los efectos fijos de país no se comen la
-identificación. La correlación entre ambos es 0,16: aportan información distinta. Y en la figura,
-las tres series se mueven juntas en 2008–09 y 2020, que es la motivación directa de la interacción."
+### 14. Descriptivos y las dos variables en el tiempo (1 min 30 s)
+**Cómo leer:** la línea es la mediana entre países; la banda, el rango entre el 25 % y el 75 %; lo
+sombreado, las crisis.
+
+**Qué digo:** "Antes de las regresiones, las series. El spread promedia 198 puntos básicos, y más
+del 80 % de la variación de JLoss y del riesgo de cola es dentro de cada país, así que los efectos
+fijos de país no se comen la identificación. En la figura, a la izquierda JLoss y a la derecha el
+riesgo de cola: las dos tienen sentido económico, son bajas y estables en tiempos normales y saltan
+en la crisis financiera global y en la pandemia. Su correlación es 0,16: aportan información
+distinta."
 
 ## Resultados I — la batería principal (≈ 8 min)
 
@@ -439,10 +456,14 @@ significativa."
 bidireccionales, que absorben tanto lo permanente de cada país como lo común a todos en cada
 trimestre.
 
+**Conclusión directa:** La fragilidad y el riesgo de cola se asocian positivamente con el spread en toda la batería (0,099 y 0,032 en la referencia); la interacción nunca es positiva y significativa (−0,011). No hay amplificación en promedio.
+
 ### 16. Panel B: sin trimestres de crisis (1 min 30 s)
 **Qué digo:** "Si saco la GFC y el COVID, el patrón se mantiene: fragilidad 0,087, significativa;
 riesgo de cola 0,050, significativo al 1 %; y la interacción pasa a positiva, 0,005, pero
 indistinguible de cero. Es decir, las crisis no son las que generan la asociación."
+
+**Conclusión directa:** Sin la GFC ni el COVID el patrón se mantiene (0,087 y 0,050) y la interacción sigue siendo nula (0,005): las crisis no son las que generan la asociación.
 
 ### 17. Panel C: con seis controles domésticos (1 min 30 s)
 **Qué digo:** "Con los seis controles ---deuda, balance fiscal, reservas, cuenta corriente,
@@ -455,6 +476,8 @@ fragilidad."
 
 **Si me pregunta** si no es un fundamento común: no lo puedo descartar; con los controles medidos
 cuatro trimestres antes la elasticidad es 0,062, menor y no significativa.
+
+**Conclusión directa:** Con controles, la fragilidad deja de ser significativa (−0,008) y el riesgo de cola se mantiene (0,028): los controles domésticos absorben a la fragilidad, plausiblemente porque son sus canales.
 
 ### 18. Lectura de la batería principal (2 min)
 **Qué digo:** "En magnitudes: una elasticidad de 0,10 quiere decir que duplicar JLoss se asocia con
@@ -478,6 +501,8 @@ crisis la interacción es 0,012, no significativa. Dentro de las crisis, beta tr
 columna 11, es −0,025; con solo efectos de país, columna 12, desaparece. Mezclar todas las crisis en
 un solo vector, sin embargo, junta episodios muy distintos. Por eso lo descompongo."
 
+**Conclusión directa:** Fuera de crisis la interacción es nula (0,012); dentro de las crisis es negativa (−0,012, p = 0,045). Las crisis, en conjunto, no amplifican; si algo, atenúan.
+
 ### 20. Backstop vs. EMstress (2 min 30 s)
 **Cómo leer:** columna (1), las dos últimas filas en negrita.
 
@@ -487,6 +512,8 @@ la interacción es −0,015, significativa al 5 %. Bajo *EMstress* ---2015–16,
 significativa al 1 %. Al pie de la letra, es exactamente el patrón del mecanismo: la amplificación
 aparece cuando el soberano enfrenta el estrés sin respaldo y desaparece cuando la Fed y el FMI
 intervienen."
+
+**Conclusión directa:** Con respaldo oficial la interacción es negativa (−0,015) y sin respaldo es positiva (+0,026, p = 0,08): el patrón del mecanismo, pero no resiste errores agrupados por país ni la prueba de permutación.
 
 ### 21. Lectura: el patrón esperado, pero sin robustez (2 min)
 **Cómo leer:** primero la lista, después el histograma: la línea roja es 2015–16 en medio de la
@@ -521,8 +548,18 @@ de cola (p = 0,20) son significativos. Driscoll–Kraay es estable frente al anc
 optimista con pocos países. Las variables instrumentales ---liquidez del Tesoro, dólar amplio y
 términos de intercambio, con exposiciones pre-muestra--- tienen primeras etapas razonables, pero
 dan +0,35, −2,18 y +0,15, y Sargan las rechaza: no identifican el mismo parámetro. Y el GaR como
-regresor generado no es el problema. Conclusión: las asociaciones existen, pero no se pueden leer
-como causales."
+regresor generado no es el problema. Las dos últimas filas responden a una duda natural: ¿el riesgo
+de cola cuenta dos veces lo financiero, porque su índice usa variables financieras? No: si lo limpio
+de los factores financieros globales con una regresión en dos etapas, el coeficiente queda igual,
+0,033; y si reconstruyo el GaR sin el bloque bursátil, que es el que comparte información con JLoss,
+queda en 0,045. Conclusión: las asociaciones existen y el riesgo económico no es un reflejo de las
+variables financieras, pero no se pueden leer como causales."
+
+**Si me pregunta** por el detalle del solapamiento: lámina 51. Los factores globales explican el 34 %
+de la variación del riesgo de cola, pero los efectos fijos de tiempo ya los absorben; sin efectos fijos
+de tiempo, limpio de factores globales deja de ser significativo (0,013, p = 0,17).
+
+**Conclusión directa:** Con wild bootstrap nada es significativo y los instrumentos no cierran: las asociaciones no se pueden leer como causales.
 
 ### 24. En promedio, no hay amplificación adicional (2 min)
 **Cómo leer:** la recta del efecto marginal baja de izquierda a derecha.
@@ -555,6 +592,8 @@ en niveles, y es la única amplificación de toda la tesis que resiste el wild b
 cae a 0,004. Las once economías son Brasil, Chile, China, Colombia, Filipinas, Indonesia, Malasia,
 México, Perú, Sudáfrica y Turquía."
 
+**Conclusión directa:** Solo en el núcleo de 11 economías y fuera de crisis aparece una amplificación que resiste el wild bootstrap (+0,034; +1,8 pb), y en Polonia e India va al revés: evidencia condicional.
+
 ### 27. Cómo leer este hallazgo (1 min 30 s)
 **Qué digo:** "Lo digo explícitamente: es un hallazgo condicional. Lo respalda que resiste el wild
 bootstrap, que aparece en ambas formas funcionales, que sobrevive a excluir cada país y que el grupo
@@ -563,57 +602,77 @@ anterior, así que la significancia está sobrestimada por la búsqueda de espec
 los controles lo absorben; que son 11 países; y que 2015–16 no pasa la permutación. Por eso lo
 presento como una hipótesis bien delimitada, no como un hallazgo robusto."
 
-### 28. Robustez (1 min)
+### 28. La resiliencia de la política económica funciona como un seguro (2 min)
+**Propósito:** mostrar cómo la capacidad de respuesta del país condiciona la transmisión.
+
+**Cómo leer:** la fila "fuera de crisis" contra la fila "en crisis".
+
+**Qué digo:** "Construí un índice de resiliencia con deuda, balance fiscal y reservas: menos deuda,
+mejor balance y más reservas es más resiliencia. Tres resultados. Más resiliencia, menor spread.
+Fuera de las crisis, la resiliencia atenúa el efecto del riesgo de cola: −0,024 por desviación
+estándar. Y en la crisis financiera global y en la pandemia esa atenuación desaparece. Es como un
+seguro: en tiempos normales el que está mejor resguardado paga menos prima, pero cuando el choque
+les pega a todos las primas suben para todos. Para la fragilidad bancaria no se cumple: su efecto
+no es menor en los países más resilientes."
+
+**Conclusión directa:** el resguardo propio protege en tiempos normales, no en crisis sistémicas; es
+evidencia sugerente, porque no resiste el wild bootstrap.
+
+**Si me pregunta** por qué la fragilidad no se atenúa: una lectura posible es que el rescate es más
+creíble donde el soberano puede pagarlo, y esa credibilidad traslada el riesgo bancario a la deuda;
+con este diseño no lo puedo contrastar.
+
+### 29. Robustez (1 min)
 **Qué digo:** "Las conclusiones no dependen de la muestra: con Argentina, con el Expected Shortfall
 en vez del GaR, sin los trimestres de EMBI empalmados del FMI o excluyendo cada país, nada cambia. En
 puntos básicos la evidencia es más favorable, pero tampoco resiste el wild bootstrap."
 
 ## Conclusiones (≈ 6 min)
 
-### 29. Respuesta a la pregunta (1 min 15 s)
+### 30. Respuesta a la pregunta (1 min 15 s)
 **Qué digo:** "Vuelvo a los objetivos. Uno: las series están construidas y validadas para 13
 emergentes. Dos: la fragilidad se asocia con el spread, 0,10 o 4,7 puntos básicos, pero no de forma
-causal. Tres: el riesgo de cola, +3,3 % por punto, tampoco de forma causal. Cuatro: la
-complementariedad es proporcional en promedio y la adicional solo aparece condicionalmente. ¿Penaliza
+causal. Tres: el riesgo de cola, +3,3 % por punto, tampoco de forma causal. Cuatro: los
+dos riesgos son aditivos en promedio y la amplificación solo aparece condicionalmente. ¿Penaliza
 el mercado la coincidencia de forma no lineal? No en general. Sí, condicionalmente."
 
-### 30. Hallazgos específicos y su grado de evidencia (1 min 30 s)
+### 31. Hallazgos específicos y su grado de evidencia (1 min 30 s)
 **Cómo leer:** la tercera columna: establecida, no establecida, no robusta o condicional.
 
 **Qué digo:** "Resumo cada hallazgo con su cifra y su grado de evidencia. Establecido: las dos
-asociaciones, la réplica de Chari, la absorción por los controles y la retroalimentación. No
+asociaciones, la réplica de Chari, la absorción por los controles, la retroalimentación y que el
+riesgo de cola no es un reflejo de las variables financieras. Sugerente: que la resiliencia baja el
+spread y protege en tiempos normales, no en crisis. No
 establecido: el efecto causal. No hay amplificación en promedio. No robustas: las asimetrías por
 crisis. Condicional: la amplificación en el núcleo sin crisis y el contraste de Polonia e India."
 
-### 31. Dónde buscar la amplificación (1 min 30 s)
-**Qué digo:** "Esta es la caracterización. Cuándo: fuera de las crisis con respaldo oficial
-masivo, cuando coinciden fragilidad alta y cola adversa sin un prestamista de última instancia.
+### 32. Dónde buscar la amplificación (1 min 30 s)
+**Qué digo:** "Esta es la caracterización. Cuándo: fuera de las crisis con respaldo externo
+masivo, cuando coinciden los dos riesgos y responde solo el banco central del país.
 Dónde: en las once economías cuya deuda la compran inversionistas extranjeros, no en Polonia ni en
 India. Por qué: porque ese inversionista es sensible al riesgo del rescate y lo traslada al precio.
 Qué vigilar: JLoss y el GaR juntos, y la participación extranjera en la deuda. Qué falta para
 confirmarlo: un grupo definido de antemano, más países y más episodios sin respaldo."
 
-### 32. Implicancias (45 s)
-**Qué digo:** "Lo respaldado: monitorear JLoss y el GaR juntos, porque ambos adelantan un spread más
-alto. Si lo condicional se confirma, convendría focalizar la regulación en esos casos en lugar de
+### 33. Implicancias (45 s)
+**Qué digo:** "Lo respaldado: monitorear juntos el riesgo financiero y el económico, porque ambos
+adelantan un spread más alto, y cuidar el resguardo propio ---deuda, balance fiscal y reservas---, que
+protege en tiempos normales. Si lo condicional se confirma, convendría focalizar la regulación en esos casos en lugar de
 una exigencia uniforme. Lo que no permite: decir cuánto bajaría el spread si cae la fragilidad."
 
-### 33. Limitaciones y trabajo futuro (45 s)
+### 34. Limitaciones y trabajo futuro (45 s)
 **Qué digo:** "Las limitaciones son 13 países, una relación de doble vía, la heterogeneidad
 definida ex post y una medida ordinal. El trabajo futuro: más países, la participación extranjera
 medida de antemano, variación exógena bancaria y datos de mayor frecuencia."
 
-### 34. Conclusión (30 s)
-**Qué digo:** Leer las tres frases y cerrar con: "El aporte es saber dónde buscar la amplificación y
+### 35. Conclusión (30 s)
+**Qué digo:** Leer las cuatro frases y cerrar con: "El aporte es saber dónde buscar la amplificación y
 qué haría falta para confirmarla."
 
-### 35. Gracias
-**Qué digo:** "Muchas gracias. Quedo atento a sus comentarios."
+### 36. Gracias
+**Qué digo:** "Muchas gracias. Quedo atento a sus comentarios." La lámina solo dice "Gracias".
 
-*Respaldo (36–51): no se presenta; se usa para responder. Taller I (36); baterías con errores
-estándar: Panel A (37), B (38), C (39), vector único (40), Backstop vs. EMstress (41); logs vs.
-niveles (42); niveles prueba por prueba (43); heterogeneidad en niveles (44); Argentina (45); Hansen
-(46); leave-one-out y ventanas (47); medición de JLoss y GaR (48); COVID (49); referencias (50–51).*
+*Respaldo (37–53): no se presenta; se usa para responder. Taller I (37); baterías con errores estándar: Panel A (38), B (39), C (40), vector único (41), Backstop vs. EMstress (42); logs vs. niveles (43); niveles prueba por prueba (44); heterogeneidad en niveles (45); Argentina (46); Hansen (47); leave-one-out y ventanas (48); medición de JLoss y GaR (49); COVID (50); solapamiento del riesgo de cola (51); referencias (52–53).*
 
 \newpage
 
@@ -626,9 +685,15 @@ JLoss y Chari et al. (2024) en detalle: espera preguntas finas sobre la métrica
 con la plataforma de CEMLA. Lo mío es la construcción homogénea, la reimplementación validada y el
 cruce de ambas (lámina 7).
 
+**¿El riesgo de cola no cuenta dos veces lo financiero?** No: limpio de factores globales el
+coeficiente queda igual (0,033) y sin el bloque bursátil del índice, en 0,045 (láminas 23 y 51).
+
+**¿Qué pasa con la resiliencia?** Baja el spread y atenúa el riesgo de cola fuera de crisis, no en
+crisis; no atenúa la fragilidad; no resiste el wild bootstrap (lámina 28).
+
 **¿Por qué log-log y no niveles, como en el Informe de Taller?** Porque las series son muy
 asimétricas y JLoss es ordinal; la prueba PE prefiere logs. Reporto todo también en niveles
-(láminas 42 y 43): la evidencia es más favorable, pero tampoco resiste el wild bootstrap.
+(láminas 43 y 44): la evidencia es más favorable, pero tampoco resiste el wild bootstrap.
 
 **¿Por qué no hay controles en la regresión principal?** Porque son plausiblemente canales del
 mecanismo: la fragilidad rezagada los predice. Con controles en t−4 la elasticidad es 0,062 (n.s.).
@@ -657,13 +722,13 @@ lámina 27. Por eso es condicional, y propongo un moderador continuo medido ex a
 extranjera en la deuda.
 
 **¿Por qué JLoss es ordinal?** La cota de la malla de pérdidas (4,8 %) está activa en el 98 % de los
-casos; la variación viene de las probabilidades de incumplimiento (lámina 48).
+casos; la variación viene de las probabilidades de incumplimiento (lámina 49).
 
 **¿El GaR no está contaminado por el spread?** El EMBI no entra al cálculo; sin el único componente
 tipo spread, el GaR correlaciona 0,985 con el oficial.
 
 **¿Por qué Argentina no está en la muestra principal?** Su GaR se estimó sin el bloque de tasas y con
-una ventana más corta. Como robustez no cambia nada (lámina 45).
+una ventana más corta. Como robustez no cambia nada (lámina 46).
 
 **Si nada es causal, ¿cuál es el aporte?** La construcción homogénea de las series para 13 países, la
 réplica independiente de Chari, el primer cruce con el riesgo de cola doméstico y la delimitación de
