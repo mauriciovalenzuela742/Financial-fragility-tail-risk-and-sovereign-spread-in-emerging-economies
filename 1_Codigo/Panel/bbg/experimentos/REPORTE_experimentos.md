@@ -318,7 +318,7 @@ QS con ancho 16 sube a 15 % / 21 %.
    son 88 trimestres y 13 países.
 3. **Lo que más ayuda no es el kernel sino el valor crítico.** QS con ancho largo y valores críticos
    fixed-b baja el tamaño a 13 % / 9 %, la mejor variante de Driscoll–Kraay; el preblanqueo también
-   ayuda. Aun así no llega al 5 %, y cuesta potencia (de 67 % a 50 % para la fragilidad).
+   ayuda. Aun así no llega al 5 %, y cuesta potencia (de 67 % a 48 % para la fragilidad, sin ajustar por tamaño).
 4. **El wild bootstrap por país sigue siendo el mejor calibrado en niveles** (6–7 % en `p29`). La
    regla de la tesis se mantiene.
 5. **Sobre los datos, el único resultado que se mueve es el riesgo de cola de la principal:** pasa
