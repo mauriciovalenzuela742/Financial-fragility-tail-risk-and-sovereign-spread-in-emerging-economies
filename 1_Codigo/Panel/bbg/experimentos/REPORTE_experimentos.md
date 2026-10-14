@@ -255,3 +255,79 @@ se predice un país no visto. Refuerza que las asociaciones son modestas y espec
 - En x5 los efectos fijos se quitan sobre la muestra completa antes de validar.
 - x4 usa 10 de los 13 países (los que tienen 40 trimestres contiguos).
 - La simulación de cordura de x2 usa 200 muestras.
+
+---
+
+## x6 y x7 · Kernel espectral cuadrático (QS) frente a Bartlett
+
+**Pregunta.** La tesis usa Driscoll–Kraay con kernel de Bartlett y ancho fijo de 3 trimestres. ¿El
+kernel espectral cuadrático de Andrews (1991), con ancho de banda automático, da una inferencia
+mejor calibrada?
+
+**Aclaración.** El kernel no cambia los coeficientes; cambia los errores estándar. "Mejor" significa
+mejor calibrado, no más significativo.
+
+El código propio coincide con `linearmodels` en los tres kernels (diferencia relativa máxima
+1,2e-14), y con Bartlett de ancho 3 la simulación reproduce la de `p29` (29,9 % y 21,9 % frente a
+27,8 % y 20,8 %).
+
+### Datos reales: los p-valores casi no cambian (x6)
+
+| Coeficiente | Bartlett, ancho 3 (tesis) | Bartlett, Andrews | QS, Andrews | QS, Newey–West | QS preblanqueado |
+|---|---|---|---|---|---|
+| Principal: fragilidad (0,099) | 0,003 | 0,003 | 0,005 | 0,008 | 0,003 |
+| Principal: riesgo de cola (0,032) | 0,033 | 0,041 | **0,052** | 0,050 | 0,057 |
+| Principal: interacción (−0,011) | 0,11 | 0,12 | 0,14 | 0,12 | 0,26 |
+| Primeras diferencias: fragilidad (0,037) | 0,002 | 0,003 | 0,003 | <0,001 | 0,002 |
+| Mismo trimestre, spread de cierre (0,037) | 0,044 | 0,044 | 0,051 | 0,050 | 0,064 |
+| Riesgo de cola sobre el modelo de Chari (0,038) | 0,027 | 0,032 | 0,040 | 0,041 | 0,058 |
+| Fragilidad → riesgo de cola (0,333) | 0,007 | 0,008 | 0,010 | 0,003 | 0,012 |
+
+Los anchos automáticos resultan cortos (4 a 6 trimestres) porque la serie de momentos tiene poca
+autocorrelación (0,3 a 0,5), aunque el spread tenga 0,94. Con valores críticos fixed-b, el riesgo de
+cola de la principal **no** se rechaza al 5 % con ninguno de los dos kernels; la fragilidad sí. En
+puntos básicos nada cambia: fragilidad p < 0,001 y riesgo de cola p entre 0,27 y 0,36 con todos.
+
+### Simulación: tamaño al 5 % nominal en niveles (x7; 1.000 réplicas)
+
+Proceso B (dependencia entre países conservada), fragilidad / riesgo de cola:
+
+| Método | Tamaño | Error estándar / desviación verdadera | Error cuadrático medio de la varianza |
+|---|---|---|---|
+| Bartlett, ancho 3 (tesis) | 30 % / 22 % | 0,54 / 0,62 | 0,50 / 0,41 |
+| Bartlett, Andrews | 27 % / 19 % | 0,59 / 0,66 | 0,44 / 0,38 |
+| **QS, Andrews** | 24 % / 17 % | 0,63 / 0,69 | **0,41 / 0,36** |
+| QS, Newey–West (1994) | 26 % / 18 % | 0,60 / 0,68 | 0,43 / 0,36 |
+| QS preblanqueado | 21 % / 13 % | 0,67 / 0,79 | 0,42 / 0,50 |
+| Bartlett, ancho 16, valores críticos fixed-b | 18 % / 11 % | — | — |
+| **QS, ancho 16, valores críticos fixed-b** | **13 % / 9 %** | — | — |
+
+Con retroalimentación (proceso C, tamaño centrado): Bartlett ancho 3, 18 % / 17 %; QS Andrews,
+14 % / 14 %; QS preblanqueado, 11 % / 10 %; QS ancho 16 con fixed-b, 7 % / 10 %.
+
+En **primeras diferencias** todos están bien calibrados (4 % a 8 %), y alargar el ancho empeora:
+QS con ancho 16 sube a 15 % / 21 %.
+
+### Lectura
+1. **La teoría de Andrews se cumple, pero la ganancia es chica.** Con el mismo selector de ancho, el
+   QS tiene menor error cuadrático medio de la varianza que Bartlett (0,41 frente a 0,44; 0,36
+   frente a 0,38): un 6–8 % mejor. Reduce el sobre-rechazo en unos 2 o 3 puntos.
+2. **El cambio de kernel no resuelve el problema.** Con cualquier kernel y cualquier selector
+   automático, en niveles se rechaza una hipótesis nula cierta entre el 17 % y el 27 % de las veces.
+   El estimador de la varianza queda sesgado hacia abajo entre un 48 % y un 69 %: no es el kernel,
+   son 88 trimestres y 13 países.
+3. **Lo que más ayuda no es el kernel sino el valor crítico.** QS con ancho largo y valores críticos
+   fixed-b baja el tamaño a 13 % / 9 %, la mejor variante de Driscoll–Kraay; el preblanqueo también
+   ayuda. Aun así no llega al 5 %, y cuesta potencia (de 67 % a 50 % para la fragilidad).
+4. **El wild bootstrap por país sigue siendo el mejor calibrado en niveles** (6–7 % en `p29`). La
+   regla de la tesis se mantiene.
+5. **Sobre los datos, el único resultado que se mueve es el riesgo de cola de la principal:** pasa
+   de p = 0,033 a 0,052 con QS y no se rechaza con valores críticos fixed-b. Es coherente con lo ya
+   escrito: evidencia sugerente.
+
+### Qué cambiaría en la tesis si se incorporan
+- Nada en las conclusiones. Podría agregarse como robustez una fila "QS con ancho automático" en la
+  tabla de inferencia y una frase: el kernel óptimo de Andrews mejora poco la calibración.
+- Cambiar el estimador de referencia a QS obligaría a recalcular las estrellas de todas las tablas
+  para ganar 2 o 3 puntos de tamaño: no lo recomiendo.
+- La figura `x6_sensibilidad_ancho.png` muestra el p-valor de cada riesgo para anchos de 1 a 24.
