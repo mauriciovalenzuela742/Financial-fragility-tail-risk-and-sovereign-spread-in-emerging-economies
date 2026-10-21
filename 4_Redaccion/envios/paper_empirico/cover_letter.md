@@ -7,43 +7,46 @@ cola del crecimiento y *spread* soberano en economías emergentes"**, para su ev
 publicación en *[revista]*.
 
 El trabajo articula dos literaturas que han evolucionado por separado —el nexo
-banca–soberano y el programa de *Growth-at-Risk*— y contrasta si la fragilidad bancaria
-sistémica y el riesgo a la baja del crecimiento determinan el *spread* soberano de forma
-**complementaria** y no aditiva. Sobre un panel único de trece economías emergentes
-construido íntegramente con datos de mercado de Bloomberg (2004–2026, $N=721$), el
-coeficiente de interacción $JLoss\times D$ ($D\equiv-GaR$) sobre el EMBI Global
-Diversified de J.P. Morgan tiene el signo que predice el multiplicador de *doom loop*,
-pero **no es significativo sobre la muestra completa** ($\hat\beta_3=+0{,}16$,
-$p=0{,}26$); los canales de nivel —fragilidad bancaria y riesgo de cola del
-crecimiento por separado— sí están bien identificados.
+banca–soberano y el programa de *Growth-at-Risk*— y parte de un resultado conocido: la
+fragilidad bancaria se asocia con el *spread* soberano (Chari et al., 2024). La pregunta
+es qué agrega el riesgo de cola del crecimiento *doméstico* ($D\equiv-GaR$) y qué ocurre
+cuando los dos riesgos se dan a la vez. Sobre un panel de trece economías emergentes
+construido con datos de mercado de Bloomberg (2004–2026, $N=765$) y el EMBI Global
+Diversified de J.P. Morgan, el resultado de Chari et al. se replica con una construcción
+de datos independiente (elasticidad $0{,}099$; $0{,}107$–$0{,}164$ con sus controles),
+aunque no como una elasticidad común a los países ni con evidencia de que la fragilidad
+anteceda al *spread*: ambos se mueven dentro del mismo trimestre.
 
-El hallazgo central es la caracterización de **dónde y cuándo** aparece esa
-complementariedad, no un coeficiente único. Es significativa en dos dimensiones: (i)
-**transversal**, en el núcleo de once economías emergentes de financiamiento externo
-($\hat\beta_3=+0{,}47$, $p=0{,}023$), diluyéndose al añadir economías con mercados de
-deuda local profundos; y (ii) **temporal**, mediante un test de falsación directo —se
-interactúa la complementariedad con un vector de crisis sin excluir observaciones, y se
-muestra que se **anula** bajo respaldo oficial masivo (crisis financiera global 2008–09,
-pandemia 2020–21) y **sobrevive** en el estrés emergente de 2015–2016, que no tuvo ese
-respaldo ($p<0{,}001$). Un modelo de umbral de panel corrobora la no linealidad.
+El hallazgo central es que los dos riesgos **tienden a darse juntos, sin evidencia de que se
+amplifiquen**. (i) Coinciden en su tercil alto $1{,}9$ veces lo esperado bajo
+independencia (168 observaciones frente a 87), en los trece países y también fuera de
+las crisis globales (permutación por bloques, $p=0{,}001$), y hay evidencia sugerente de que la fragilidad bancaria
+antecede al deterioro de la cola del crecimiento. (ii) Cuando coinciden,
+no se rechaza que sus asociaciones con el *spread* se sumen: la interacción es $\hat\beta_3=-0{,}011$ (wild
+bootstrap $p=0{,}89$) y los datos no permiten descartar una amplificación de hasta un
+30–40 % de la suma. (iii) El riesgo de cola agrega información modesta, y solo en
+niveles, a lo que explica la fragilidad ($0{,}037$; wild $p=0{,}066$); no mejora el
+pronóstico fuera de muestra. (iv) Ninguna condición estudiada —resiliencia de la
+política económica, respaldo externo medido por país, participación extranjera en la
+deuda con hipótesis escritas antes de estimar— modifica la transmisión de forma
+demostrable.
 
-La contribución es triple. Primero, sustancial: es —hasta donde sabemos— la primera
-evidencia sistemática de la interacción entre una métrica estructural de fragilidad
-bancaria y una medida de riesgo de cola del crecimiento *doméstico y endógeno* en la
-determinación del riesgo soberano de economías emergentes, frente a la interacción con
-factores financieros *globales y exógenos* de la literatura más próxima (Chari et al.,
-2024). Segundo, de identificación: el resultado se somete a una batería exigente —wild
-cluster bootstrap, un bootstrap de bloques que re-estima la regresión cuantílica de
-$GaR$ completa en cada réplica para propagar la incertidumbre del regresor generado, y
-tres intentos de instrumentación del canal de nivel (liquidez de fondeo *on/off-run*,
-dólar amplio BIS, choque de términos de intercambio por *commodities*)— sin que ninguna
-conclusión cambie de categoría, aunque la identificación causal del canal de nivel no
-queda cerrada por variables instrumentales sobre esta muestra. Tercero, de
-transparencia: el trabajo declara explícitamente los límites de la inferencia con un
-número reducido de países y episodios de cola, y reporta la heterogeneidad como
-resultado principal en vez de un coeficiente promedio que la oculta.
+La contribución tiene cuatro partes. Primero, sustancial: es —hasta donde sabemos— el primer
+cruce sistemático de una métrica estructural de fragilidad bancaria con una medida de
+riesgo de cola del crecimiento *doméstico* en el riesgo soberano de economías
+emergentes, frente a la interacción con factores financieros *globales* de la
+literatura más próxima (Chari et al., 2024). Las dos métricas son de otros autores (el
+$GaR$, de Adrian, Boyarchenko y Giannone, 2019); lo propio es la construcción homogénea
+de sus series y su cruce. Segundo, de inferencia: una simulación con dependencia entre
+países muestra que los errores de Driscoll–Kraay rechazan una hipótesis nula cierta
+entre el 20 % y el 30 % de las veces en niveles, por lo que el criterio es el wild
+cluster bootstrap por país; se agregan permutaciones, corrección de Holm, exclusión de
+cada país y moderadores placebo. Tercero, de transparencia: el trabajo reporta cada
+prueba salga como salga, incluidos los resultados nulos, y declara lo que no se puede
+afirmar con trece países, entre ello que las asociaciones no son causales y que un
+sesgo de retroalimentación puede explicar parte de los coeficientes de nivel. Cuarto, una batería de pruebas que delimita qué no puede afirmarse con trece países.
 
-Todo el código de construcción de las métricas y de estimación es reproducible y se pone
+Todo el código de construcción de las series y de estimación es reproducible y se pone
 a disposición.
 
 El manuscrito es original, no ha sido publicado y no está bajo consideración en otra

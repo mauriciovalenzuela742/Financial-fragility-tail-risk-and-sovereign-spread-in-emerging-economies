@@ -11,6 +11,8 @@ Carpeta de datos compartidos para el análisis de fragilidad bancaria, Growth-at
 - **global_controls_quarterly.csv** (8.5 KB) — Tipos de interés de EE.UU. a 10 años, spreads HY corporativo, spreads on-off-run, datos trimestrales 2003-2026.
 - **EMBI_real_8countries_2006_2014.csv** (7.8 KB) — Índice EMBI (riesgo soberano, puntos base) para 8 países emergentes, 2006-2014 anual.
 - **embi.xlsx** (527 KB) — EMBI en formato Excel, probable histórico ampliado.
+- **Database_For_Posting_EM_Frozen.xlsx** (3,2 MB) — Base de tenedores de deuda soberana de economías emergentes. Fuente: Arslanalp y Tsuda, FMI, versión de mayo de 2026.
+- **participacion_extranjera.csv** (100 KB) — Participación extranjera en la deuda del gobierno (total, no bancos, oficial y bancos; % de la deuda total), 13 países, 2004Q1–2025Q4; lo escribe `p26_participacion_extranjera.py` desde el Excel anterior. Fuente: Arslanalp y Tsuda, FMI, versión de mayo de 2026.
 
 ### GaR (Growth-at-Risk) — Panel oficial
 - **gar_panel_all17.csv** (468 KB) — Panel oficial de GaR: 17 economías (Brasil, México, Chile, Colombia, Perú, Turquía, Polonia, Indonesia, Malasia, Pakistán, Filipinas, Rusia, India, China, Sudáfrica, Corea del Sur, Hungría), trimestral desde 2003Q1. Contiene percentil 5% del crecimiento y estadísticos de la distribución condicional (media, desviación, sesgo, curtosis, ajuste Student-t).
