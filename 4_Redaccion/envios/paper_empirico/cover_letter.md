@@ -18,13 +18,15 @@ aunque no como una elasticidad común a los países ni con evidencia de que la f
 anteceda al *spread*: ambos se mueven dentro del mismo trimestre.
 
 El hallazgo central es que los dos riesgos **tienden a darse juntos, sin evidencia de que se
-amplifiquen**. (i) Coinciden en su tercil alto $1{,}9$ veces lo esperado bajo
-independencia (168 observaciones frente a 87), en los trece países y también fuera de
-las crisis globales (permutación por bloques, $p=0{,}001$), y hay evidencia sugerente de que la fragilidad bancaria
-antecede al deterioro de la cola del crecimiento. (ii) Cuando coinciden,
-no se rechaza que sus asociaciones con el *spread* se sumen: la interacción es $\hat\beta_3=-0{,}011$ (wild
-bootstrap $p=0{,}89$) y los datos no permiten descartar una amplificación de hasta un
-30–40 % de la suma. (iii) El riesgo de cola agrega información modesta, y solo en
+amplifiquen**. (i) Coinciden en su tercil alto $1{,}2$ veces lo esperado descontado el
+calendario común de los choques (168 observaciones frente a 141; $p=0{,}0002$) y $1{,}9$
+veces lo esperado bajo independencia pura, en los trece países y también fuera de las
+crisis globales; y la fragilidad bancaria antecede al deterioro de la cola del
+crecimiento, sin depender de un país ni de los precios accionarios que comparten las dos
+métricas. (ii) Cuando coinciden, no se rechaza que sus asociaciones con el *spread* se
+sumen: la interacción es $\hat\beta_3=-0{,}011$ (wild bootstrap $p=0{,}89$), y una
+prueba de equivalencia descarta una amplificación de más de un 35 % de la suma, pero no
+una menor. (iii) El riesgo de cola agrega información modesta, y solo en
 niveles, a lo que explica la fragilidad ($0{,}037$; wild $p=0{,}066$); no mejora el
 pronóstico fuera de muestra. (iv) Ninguna condición estudiada —resiliencia de la
 política económica, respaldo externo medido por país, participación extranjera en la

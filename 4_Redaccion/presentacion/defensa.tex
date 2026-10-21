@@ -164,7 +164,7 @@ Además se contrasta si tres condiciones ---resiliencia, respaldo externo y qui�
 \begin{enumerate}\setlength\itemsep{2pt}
 \item \textbf{Series:} construcción homogénea y reproducible de las dos métricas para 13 economías (113 bancos, un solo protocolo de Bloomberg; $\GaR$ en pseudo--tiempo real).
 \item \textbf{Réplica independiente} de Chari et al.\ y delimitación de su alcance: no es una elasticidad común y no hay precedencia temporal.
-\item \textbf{Primer cruce} de la fragilidad bancaria con el riesgo de cola doméstico: coinciden, hay indicios de que la fragilidad antecede al riesgo de cola, no hay evidencia de que se amplifiquen y el riesgo económico agrega poco.
+\item \textbf{Primer cruce} de la fragilidad bancaria con el riesgo de cola doméstico: coinciden, la fragilidad antecede al riesgo de cola, no hay evidencia de que se amplifiquen y el riesgo económico agrega poco.
 \item \textbf{Una batería de pruebas} que muestra qué no se puede afirmar con 13 países.
 \end{enumerate}
 \end{frame}
@@ -363,7 +363,7 @@ Más del 80\% de la variación de $\JLoss$ y $D$ es dentro de cada país. Corr$(
 \item Pendientes por país entre $-0{,}84$ y $+0{,}97$; 8 de 13 positivas; promedio de grupo $0{,}106$ ($p=0{,}39$); se rechaza la homogeneidad ($p<0{,}001$).
 \item \textbf{Turquía} tiene el 17\% de la variación de la fragilidad y aporta el 70\% del coeficiente: sin ella, $0{,}034$ ($p=0{,}43$).
 \item \textbf{Piso de $\JLoss$} (2,16): el 24\% de las observaciones está pegado al piso (Malasia 60\%, Perú 58\%, Chile 49\%); ahí la métrica no informa.
-\item La asociación es de los episodios fuera del piso.
+\item La asociación es de los episodios fuera del piso. Con la distancia al incumplimiento de Merton (sin piso) es más nítida: \textit{wild} $0{,}055$.
 \end{itemize}
 \end{columns}
 \end{frame}
@@ -471,7 +471,8 @@ $R^2$ dentro del país & $0{,}153$ & $0{,}185$ & $0{,}194$ \\
 \toprule
 \textit{Ambos riesgos en su tercil alto (definido dentro de cada país)} & Observado & Por azar & $p$ \\
 \midrule
-Observaciones conjuntas ($22{,}0\%$ de 765) & \textbf{168} & 87 (independencia) & 1,9 veces (neto del calendario común: 132 esperadas, 1,3 veces) \\
+Observaciones conjuntas ($22{,}0\%$ de 765) & \textbf{168} & 87 (independencia) & 1,9 veces \\
+Permutación entre países dentro de cada trimestre (calendario común) & 168 & $140{,}9$ & \textbf{1,2 veces}; $0{,}0002$ \\
 Permutación por bloques dentro de cada país (999 réplicas) & 168 & $85{,}7$ & $0{,}001$ \\
 Fuera de los trimestres de crisis & 108 & $59{,}3$ & $0{,}001$ \\
 Duración media de los 62 episodios conjuntos (trimestres) & $2{,}71$ & $1{,}85$ & $0{,}003$ \\
@@ -480,6 +481,7 @@ Países con más coincidencias que las esperadas & \textbf{13 de 13} & & \\
 \textit{Rezago cruzado (rezago propio, EF de país y de tiempo)} & Coeficiente & & $p$ \textit{wild} \\
 \midrule
 Fragilidad en $t-1$ $\to$ riesgo de cola en $t$ & $\mathbf{0{,}405^{***}}$ & & $0{,}024$ \\
+\quad sin cada país (rango) / con el $GaR$ sin bloque bursátil & $[0{,}32;\,0{,}47]$ / $0{,}388$ & & DK $<0{,}07$ / $0{,}002$ \\
 Riesgo de cola en $t-1$ $\to$ fragilidad en $t$ & $-0{,}006$ & & $0{,}48$ \\
 \bottomrule
 \end{tabular}
@@ -488,7 +490,7 @@ Riesgo de cola en $t-1$ $\to$ fragilidad en $t$ & $-0{,}006$ & & $0{,}48$ \\
 \begin{columns}[T]
 \column{0.56\textwidth}
 \begin{block}{Lectura}
-\footnotesize \textbf{Simultaneidad: firme.} Casi el doble de lo esperado, en todos los países y por más tiempo. \textbf{Precedencia: sugerente.} La fragilidad antecede al riesgo de cola y no al revés; descansa en un rezago trimestral.
+\footnotesize \textbf{Simultaneidad: firme}, 1,2 veces lo esperado (calendario común). \textbf{Precedencia: firme a un trimestre}, sin depender de un país ni del bloque bursátil; pequeña y no causal.
 \end{block}
 \column{0.42\textwidth}
 \begin{alertblock}{Salvedad}
@@ -516,14 +518,14 @@ Forma funcional intermedia (Box--Cox, $\lambda=0{,}44$): interacción & $t=-0{,}
 \end{adjustbox}
 \vspace{3pt}
 \begin{itemize}\footnotesize\setlength\itemsep{2pt}
-\item Es un no rechazo: los datos no permiten descartar un extra de hasta un 30--40\% de la suma (lámina siguiente).
+\item Es un no rechazo: una prueba de equivalencia descarta una amplificación de más de un 35\% de la suma, no una menor (lámina siguiente).
 \item El signo negativo de $\beta_3$ es de \textbf{Polonia} (sin ella $+0{,}008$, $p=0{,}19$): \textbf{no} se lee como atenuación.
 \item Aditivo en logaritmos es proporcional en puntos básicos: es álgebra de la forma funcional, no un hallazgo.
 \item \textbf{Señales débiles en contra}, que se reportan: fuera del piso de $\JLoss$ el riesgo de cola pesa $+7{,}5$ pb más ($p$ \textit{wild} $0{,}036$) con un umbral de 2\%, y en logaritmos no ($0{,}11$); en cambios a cuatro trimestres en pb la interacción es $+0{,}358$ ($0{,}011$), ausente en logaritmos.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Las bandas: cuánta amplificación no se puede descartar}
+\begin{frame}{Las bandas: cuánta amplificación se descarta y cuánta no}
 \begin{columns}[c]
 \column{0.3\textwidth}
 \cifra{+16,4\,\%}{de \textit{spread}: suma de las dos asociaciones (28 pb)}
@@ -531,23 +533,23 @@ Forma funcional intermedia (Box--Cox, $\lambda=0{,}44$): interacción & $t=-0{,}
 \centering
 \small
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{l ccc}
+\begin{tabular}{l cccc}
 \toprule
-Intervalo de 95\% & $\beta_3$ & Extra máximo & \% de la suma \\
+Intervalo de 95\% & $\beta_3$ & Extra máximo & \% de la suma & TOST: se rechaza más de \\
 \midrule
-Driscoll--Kraay & $[-0{,}025;\,0{,}003]$ & $+0{,}5$ puntos & 3\% \\
-\textit{Wild bootstrap} & $[-0{,}054;\,0{,}015]$ & $+2{,}9$ puntos & 16\% \\
-\textit{Cluster} por país & $[-0{,}050;\,0{,}028]$ & $+5{,}3$ puntos & 29\% \\
-En pb (\textit{wild}) & & $+11$ pb & 39\% \\
+Driscoll--Kraay & $[-0{,}025;\,0{,}003]$ & $+0{,}5$ puntos & 3\% & 0,4\% \\
+\textit{Wild bootstrap} & $[-0{,}054;\,0{,}015]$ & $+2{,}9$ puntos & 16\% & 13\% \\
+\textit{Cluster} por país & $[-0{,}050;\,0{,}028]$ & $+5{,}3$ puntos & 29\% & 22\% \\
+En pb (\textit{wild}) & & $+11$ pb & 39\% & 35\% \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
 \end{columns}
 \vspace{2pt}
-{\footnotesize\raggedright Con ambos riesgos una desviación estándar dentro del país sobre su media. Extra estimado por la interacción: $-2{,}1$ puntos en logaritmos; en puntos básicos, $+3{,}0$ sobre 28. ``Extra máximo'': la mayor amplificación que el intervalo no permite descartar.\par}
+{\footnotesize\raggedright Con ambos riesgos una desviación estándar dentro del país sobre su media. Extra estimado por la interacción: $-2{,}1$ puntos en logaritmos; en puntos básicos, $+3{,}0$ sobre 28. ``Extra máximo'': la mayor amplificación que el intervalo no permite descartar. TOST: la menor amplificación que se rechaza al 5\% (intervalo al 90\%).\par}
 \vspace{-2pt}
 \begin{alertblock}{Lo que se puede decir}
-\footnotesize \textbf{No hay evidencia de amplificación}; los datos no permiten descartar un extra de hasta un 30--40\% de la suma. No se afirma que la amplificación esté descartada.
+\footnotesize \textbf{No hay evidencia de amplificación}; se descarta una amplificación de más de un 35\% de la suma con los tres métodos y en las dos formas, pero no una menor.
 \end{alertblock}
 \end{frame}
 
@@ -800,14 +802,14 @@ Driscoll--Kraay & $5\%$ / $6\%$ & $87\%$ (fragilidad) & & \\
 \begin{frame}{Respuesta a la pregunta}
 \small
 \begin{enumerate}\setlength\itemsep{0pt}
-\item \textbf{La simultaneidad es un hecho}: los dos riesgos coinciden 1,9 veces lo esperado por azar (1,3 neto); hay indicios de que la fragilidad antecede al riesgo de cola.
-\item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen}; no se descarta un extra de hasta un 30--40\% de la suma.
+\item \textbf{La simultaneidad es un hecho}: los dos riesgos coinciden 1,2 veces lo esperado descontado el calendario común (1,9 frente a la independencia); la fragilidad antecede al riesgo de cola.
+\item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen}; se descarta más de un 35\% de la suma, no menos.
 \item \textbf{El riesgo económico agrega poco} a lo que explica la fragilidad: un 2--3\,\% de \textit{spread} por punto, solo en niveles; no mejora el pronóstico.
 \item \textbf{Ninguna condición} estudiada ---resiliencia, respaldo externo, quién tiene la deuda--- modifica la transmisión de forma demostrable.
 \end{enumerate}
 \vspace{-2pt}
 \begin{block}{En una frase}
-\footnotesize Los dos riesgos domésticos tienden a darse juntos; cuando coinciden, no hay evidencia de que se amplifiquen (no se descarta un extra de hasta un 30--40\% de la suma); y el riesgo económico agrega información modesta a lo que ya explica la fragilidad.
+\footnotesize Los dos riesgos domésticos tienden a darse juntos; cuando coinciden, no hay evidencia de que se amplifiquen (se descarta más de un 35\% de la suma, no menos); y el riesgo económico agrega información modesta a lo que ya explica la fragilidad.
 \end{block}
 \vspace{-4pt}
 {\footnotesize \textbf{Réplica:} la asociación fragilidad--\textit{spread} replica a Chari et al.\ con sus controles, pero no es una elasticidad común ni hay precedencia temporal.\par}
@@ -823,8 +825,8 @@ Hallazgo & Cifra & Evidencia \\
 \midrule
 \multicolumn{3}{l}{\textit{Conclusiones propias}} \\
 Los dos riesgos coinciden más que por azar & 168 frente a 87; $p=0{,}001$; 13 de 13 países & \textbf{firme} \\
-La fragilidad antecede al riesgo de cola & $0{,}405$ (\textit{wild} $0{,}024$); rezago trimestral & sugerente \\
-Amplificación cuando coinciden & $-0{,}011$ (\textit{wild} $0{,}89$); no se descarta 30--40\% & \textbf{no hay evidencia} \\
+La fragilidad antecede al riesgo de cola & $0{,}405$ (\textit{wild} $0{,}024$); sin cada país y sin bloque bursátil & firme (a un trimestre) \\
+Amplificación cuando coinciden & $-0{,}011$ (\textit{wild} $0{,}89$); TOST: se descarta $>35\%$ & \textbf{no hay evidencia} \\
 El riesgo de cola agrega a la fragilidad, en niveles & conjunta \textit{wild} $0{,}041$; depende de Polonia & sugerente \\
 El riesgo de cola en cambios o fuera de muestra & $0{,}004$; 0 de 9 horizontes; $+3\%$ de error & \textbf{no hay evidencia} \\
 Resiliencia: directa y con la cola fuera de crisis & $-0{,}153$; $-0{,}024$; solo Driscoll--Kraay & sugerente \\
@@ -836,7 +838,7 @@ Respaldo externo por país & $-0{,}004$ (\textit{wild} $0{,}90$) & \textbf{no ha
 Asimetría \textit{Backstop} / \textit{EMstress} & Holm $0{,}12$ / $0{,}24$; lugar 20 de 51 & \textbf{no hay evidencia} \\
 \midrule
 \multicolumn{3}{l}{\textit{Réplica de Chari et al.\ (2024) y validación del panel}} \\
-Fragilidad y \textit{spread} en niveles & $0{,}099$ (\textit{wild} $0{,}33$); $0{,}107$--$0{,}164$ con sus controles; 70\% es Turquía & sugerente \\
+Fragilidad y \textit{spread} en niveles & $0{,}099$ (\textit{wild} $0{,}33$); $0{,}107$--$0{,}164$ con sus controles; 70\% es Turquía; con la DD de Merton, \textit{wild} $0{,}055$ & sugerente \\
 La fragilidad antecede al \textit{spread} & cierre a cierre $0{,}025$ (\textit{wild} $0{,}21$) & \textbf{no hay evidencia} \\
 Se mueven en el mismo trimestre & $0{,}037$ (\textit{wild} $0{,}008$); 13 de 13 países en pb & resiste el \textit{wild}; sujeto al sesgo de retroalimentación \\
 \bottomrule
@@ -849,7 +851,7 @@ Se mueven en el mismo trimestre & $0{,}037$ (\textit{wild} $0{,}008$); 13 de 13 
 \column{0.48\textwidth}
 \begin{block}{Respaldado por los datos}
 \small
-\textbf{Vigilar los dos riesgos juntos} se justifica: tienden a agravarse a la vez, y hay indicios de que la fragilidad bancaria antecede al deterioro de la cola del crecimiento.
+\textbf{Vigilar los dos riesgos juntos} se justifica: tienden a agravarse a la vez, y la fragilidad bancaria antecede al deterioro de la cola del crecimiento.
 \end{block}
 \column{0.48\textwidth}
 \begin{exampleblock}{Sin base en estos datos}
@@ -875,7 +877,7 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad: son asocia
 \begin{itemize}
 \item 13 países: en niveles solo el \textit{wild bootstrap} está bien calibrado, con potencia de 35\% y 67\%.
 \item Cada coeficiente de nivel depende de un país y tiene sesgo de retroalimentación.
-\item El piso de $\JLoss$: un cuarto de las observaciones no informa.
+\item El piso de $\JLoss$: un cuarto de las observaciones no informa (con la DD de Merton la asociación mejora; la interacción sigue nula).
 \item La simultaneidad se concentra desde 2020.
 \item Datos trimestrales: no separan la precedencia dentro del trimestre.
 \end{itemize}
@@ -886,7 +888,7 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad: son asocia
 \begin{itemize}
 \item Más economías.
 \item \textit{Spreads} y fragilidad de mayor frecuencia.
-\item Una métrica de fragilidad sin piso (malla de pérdidas más ancha).
+\item La distancia al incumplimiento como medida principal, con la batería completa.
 \item Variación exógena bancaria.
 \item Estudio de eventos en torno a los anuncios de líneas de respaldo.
 \end{itemize}
@@ -897,9 +899,9 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad: son asocia
 \begin{frame}{Conclusión}
 \vspace{4pt}
 \begin{enumerate}
-\item Los dos riesgos domésticos \textbf{coinciden}; hay indicios de que la fragilidad bancaria antecede al riesgo económico.
+\item Los dos riesgos domésticos \textbf{coinciden}, también descontado el calendario común, y la fragilidad bancaria antecede al riesgo económico.
 \vspace{4pt}
-\item Cuando coinciden, \textbf{no hay evidencia de amplificación}, aunque no se descarta un extra de hasta un 30--40\% de la suma.
+\item Cuando coinciden, \textbf{no hay evidencia de amplificación}, se descarta más de un 35\% de la suma, aunque no menos.
 \vspace{4pt}
 \item El riesgo económico \textbf{agrega poco} a lo que ya explica la fragilidad.
 \vspace{4pt}

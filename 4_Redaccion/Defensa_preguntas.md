@@ -8,7 +8,97 @@ citar; **Si insiste** = la línea de defensa de segundo nivel.*
 Complemento específico para la construcción del GaR:
 `1_Codigo/Defensa_GaR_preguntas_respuestas.md`.
 
-> **Encuadre vigente (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**
+> **Aviso (2026-10-21).** Las secciones A a G y las preguntas de cierre son del encuadre del
+> 2026-09-02 y quedan como **archivo**. Ese encuadre usaba la especificación en niveles
+> contemporánea, θ = −0,47 en el núcleo de 11 como hallazgo central y el capítulo de OI, y nada
+> de eso es vigente. Para la defensa vale la sección **V**, que va a continuación. Sus cifras están
+> en la tesis vigente y en las secciones 17–19 de `NUMEROS_CANONICOS_BBG.md`.
+
+---
+
+## V. Preguntas vigentes (tesis del 2026-10-21)
+
+**V1. Si H3 no se sostiene y los coeficientes de nivel no se distinguen del sesgo de
+retroalimentación, ¿qué aprendemos en positivo?**
+**R.** Hay tres cosas.
+- Los dos riesgos coinciden más que por azar, también descontado el calendario común: 168
+  observaciones frente a 140,9 esperadas, 1,2 veces (p = 0,0002).
+- La fragilidad antecede al riesgo de cola (0,405; wild p = 0,024). Lo hace sin depender de un
+  país (0,32–0,47) y también con el GaR sin bloque bursátil (0,388; wild p = 0,002).
+- Una prueba de equivalencia descarta una amplificación de más de un 35 % de la suma de las dos
+  asociaciones.
+
+**Si insiste:** el aporte metodológico es separar la aditividad en logaritmos (que equivale a
+proporcionalidad en pb) de la amplificación, y medir con qué inferencia se puede leer un panel
+de 13 países.
+
+**V2. ¿La simultaneidad no es solo 2020?**
+**R.** No. En 2020–22 lo observado iguala a lo esperado por el calendario (razón 1,01). El exceso
+viene de 2015–19 (2,9 veces; p = 0,0002) y de 2023–26 (1,3 veces; p = 0,0002).
+
+**V3. ¿Por qué antes decía "1,9 veces" y ahora "1,2"?**
+**R.** Porque la nula importa. El 1,9 se compara con la independencia pura, que ignora que
+todas las economías se estresan a la vez. El 1,2 conserva cuántas economías tienen el riesgo de
+cola alto en cada trimestre. Las dos nulas se rechazan, y la cifra que se usa es la exigente.
+
+**V4. ¿La precedencia fragilidad → riesgo de cola no es mecánica? El FCI y JLoss usan precios
+accionarios.**
+**R.** Con el GaR reconstruido sin el bloque bursátil, el coeficiente sube (0,388 frente a
+0,301 con el bloque, ambos dentro de la muestra). La dirección inversa nunca es significativa.
+**Si insiste:** quedan dos límites. Con tres o cuatro rezagos el wild bootstrap ya no rechaza
+(p = 0,11 y 0,15), y no se puede fechar dentro del trimestre porque el GaR es trimestral.
+
+**V5. Si JLoss satura la malla en el 98 % de los casos, ¿por qué no usar directamente la PD media
+de Merton?**
+**R.** La variación de JLoss la gobierna la pérdida esperada, es decir, las PD de Merton
+ponderadas, de modo que en la práctica es eso. La métrica se lee como ordinal, el logaritmo es
+invariante a su escala, y con la malla ancha la correlación es de aproximadamente 0,9.
+*(Pendiente: la mejora B6 de `evaluacion_experta.md` lo estima directamente.)*
+
+**V6. ¿Por qué cambió de CDS a EMBI, de niveles a logaritmos y de contemporáneo a rezago? ¿Qué
+se decidió antes de ver qué resultado?**
+**R.** El EMBI y el rezago siguen a Chari et al. (2024). Los logaritmos los prefiere la prueba
+PE. La agrupación de 11 economías se declaró exploratoria porque nació de ver los datos. La
+prueba de participación extranjera se escribió el 13-oct, antes de estimar, con su consecuencia
+fijada. La tesis reporta las cuatro combinaciones de forma funcional y rezago.
+
+**V7. Turquía aporta el 70 % de β₁ y Polonia el signo de β₃. ¿Hay un resultado común?**
+**R.** No para la fragilidad: las pendientes por país van de −0,84 a +0,97, y la homogeneidad se
+rechaza. Por eso la tesis no la presenta como una elasticidad común. El riesgo de cola es
+positivo en 10 de las 13 economías.
+
+**V8. ¿Qué diferencia hay entre su "aditividad" y la proporcionalidad mecánica del logaritmo?**
+**R.** Con una intensidad de incumplimiento λ = λ₀·JLoss^β₁·e^(β₂D), el spread es
+multiplicativo. En pb la complementariedad sale sola, sin ningún término de interacción. La
+amplificación exige β₃ > 0 en log-log, y eso es lo que se contrasta.
+
+**V9. El pronóstico fuera de muestra no usa el GaR recursivo ni efectos fijos de tiempo. ¿Para
+qué incluirlo?**
+**R.** Se declara como evidencia débil en cualquier dirección. Lo que muestra es que ningún
+modelo le gana al spread rezagado, tampoco el que agrega la fragilidad.
+
+**V10. ¿Cómo se relaciona con Debt-at-Risk del FMI (Fiscal Monitor, oct. 2024)?**
+**R.** Debt-at-Risk lleva la lógica de riesgo de cola a la trayectoria de la deuda. Esta tesis
+la lleva al precio de la deuda y la cruza con la fragilidad bancaria, de modo que son
+complementarios.
+
+**V11. La prueba preespecificada está en el encabezado del código y no en un registro externo.
+¿Cómo lo acredita?**
+**R.** No se puede acreditar con un registro externo, y el historial de git tampoco ayuda:
+`p26_participacion_extranjera.py` se commiteó por primera vez el 21-oct, junto con sus
+resultados. La tesis lo declara como limitación. Lo que sí hay es la consecuencia escrita de
+antemano, y la tesis la acató aunque le era desfavorable: el núcleo de 11 pasó a exploratorio.
+**Si insiste:** reconocerlo sin rodeos y presentar la prueba como "declarada antes de estimar
+por el autor, sin registro verificable".
+
+**V12. Si la causalidad no está identificada, ¿para qué sirve la tesis a un banco central?**
+**R.** Para vigilar los dos riesgos juntos, porque coinciden y la fragilidad antecede al
+deterioro de la cola del crecimiento. No justifica una prima regulatoria adicional por la
+simultaneidad, porque una amplificación grande queda descartada.
+
+---
+
+> **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**
 > (como en Chari et al. 2024); el CDS 5A es robustez. Panel de **13 países** (Hungría excluida
 > por bancos mínimos). El hallazgo central: los canales de **nivel** (H1 `JLoss→spread`, H2
 > `GaR→spread`) están bien identificados; la **complementariedad** (H3, θ) es **condicional** —
