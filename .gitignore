@@ -43,3 +43,9 @@ _ckpt_*.csv
 1_Codigo/Panel/bbg/_*run*.log
 1_Codigo/Panel/bbg/_gmm_input.csv
 1_Codigo/Panel/bbg/_causal_input.csv
+
+# Material del curso EP7000 (clases, laboratorios, instructivos): solo local, no se publica
+4_Redaccion/tesis/capitulos info/**/Clase_*
+4_Redaccion/tesis/capitulos info/**/Laboratorio_*
+4_Redaccion/tesis/capitulos info/**/La_introducci_n_*
+4_Redaccion/tesis/capitulos info/**/Lineamientos_*

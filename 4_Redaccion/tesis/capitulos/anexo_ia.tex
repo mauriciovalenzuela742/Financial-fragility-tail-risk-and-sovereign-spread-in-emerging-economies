@@ -1,0 +1,74 @@
+% Anexo exigido por el Instructivo N.º 17/2026 cuando la IA se usa en componentes fundamentales:
+% prompts (o su descripción representativa) y metodología de uso y verificación.
+\chapter{Uso de inteligencia artificial: prompts y metodología}
+\label{chap:anexoIA}
+
+\noindent Este anexo complementa la declaración de uso de inteligencia artificial de las páginas preliminares, como lo exige el Instructivo N.º~17/2026 de la Universidad de Chile para las tesis en que la inteligencia artificial intervino en componentes fundamentales. Describe las herramientas, las etapas en que se usaron, los prompts representativos, la forma en que se integraron al trabajo y los criterios con que se verificó lo que produjeron.
+
+\section{Herramientas, período y trazabilidad}
+
+La herramienta principal fue Claude (Anthropic), en sus versiones Sonnet~5, Opus~5 y Opus~5.5, usada a través de Claude Code entre agosto y octubre de 2026. Claude Code trabaja sobre los archivos del proyecto: lee el código y los documentos, propone cambios, los edita y ejecuta programas en el computador del autor. No es un chat aislado. Por eso todo lo que produjo quedó en el mismo repositorio que el resto de la tesis.
+
+La trazabilidad descansa en el control de versiones. El repositorio registra 107 cambios confirmados entre el 3 de agosto y el 14 de octubre de 2026, y 99 de ellos declaran la coautoría de la herramienta en su mensaje. Cada cambio queda fechado, con su descripción y con las líneas exactas que modificó. De forma secundaria se usó el asistente del editor \LaTeX{} Prism para ajustar diapositivas; el prompt usado está en \texttt{4\_Redaccion/presentacion/prompt\_prism\_diapositivas.md}.
+
+\section{Etapas, propósito y verificación}
+
+La Tabla~\ref{tab:ia-etapas} resume en qué se usó la herramienta en cada etapa y cómo se verificó el resultado.
+
+\begin{small}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.38\textwidth}>{\raggedright\arraybackslash}p{0.37\textwidth}}
+\caption[Uso de inteligencia artificial por etapa]{Uso de inteligencia artificial por etapa y forma de verificación.}\label{tab:ia-etapas}\\
+\toprule
+Etapa & Uso de la herramienta & Verificación \\
+\midrule
+\endfirsthead
+\toprule
+Etapa & Uso de la herramienta & Verificación \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Datos & Programas de extracción de Bloomberg (identificadores de bancos y series), consolidación del panel y documentación de la procedencia. & Revisión de cobertura por país y serie; procedencia tabulada en el Anexo~\ref{chap:anexoA}; empalme del EMBI validado contra la serie de J.P.\ Morgan (Sección~\ref{sec:datos}). \\
+Métricas & Código para reconstruir $JLoss$ siguiendo a \citet{Chari2024b} y para estimar el $GaR$ siguiendo la plataforma de CEMLA. & El índice de condiciones financieras reproduce la salida de referencia de CEMLA (correlación 0,9995 para México); la réplica de \citet{Chari2024b} se reporta con sus diferencias (Capítulo~\ref{sec:resultados}). \\
+Econometría & Programas de las baterías de regresiones, pruebas de identificación, inferencia y robustez (\texttt{1\_Codigo/Panel/bbg/}). & Réplica independiente en R (\texttt{bateria\_regresiones.R}); auditoría de reproducibilidad de punta a punta (\texttt{4\_Redaccion/}\allowbreak\texttt{REPRODUCIBILIDAD.md}); registro de cifras canónicas re-ejecutadas (\texttt{NUMEROS\_}\allowbreak\texttt{CANONICOS\_BBG.md}). \\
+Literatura & Síntesis de artículos, fichas de lectura y verificación de referencias. & Lectura de las fuentes por el autor; cada cita textual se cotejó con el PDF original y su página; las referencias se revisaron contra la publicación. \\
+Redacción & Borradores y reescrituras de los capítulos, corrección editorial, consistencia de cifras y formato \LaTeX. & Revisión del autor y del profesor guía; toda cifra del texto se contrasta con el registro de cifras canónicas; compilación sin referencias indefinidas. \\
+Revisión crítica & Informes simulados de árbitro que señalaron debilidades y propusieron pruebas adicionales. & Cada prueba propuesta se ejecutó y se reporta salga como salga; si debilitó una conclusión, la conclusión se corrigió. \\
+Defensa & Láminas en Beamer, guiones y preguntas probables de la comisión. & Revisión del autor y ensayo de la predefensa del 9 de octubre de 2026 con el profesor guía. \\
+\end{longtable}
+\end{small}
+
+\section{Prompts representativos}
+
+El instructivo permite incluir los prompts o una descripción representativa. Se transcriben literalmente dos prompts, a modo de ejemplo del registro habitual, y se describen los demás por tipo de tarea.
+
+\textbf{Prompts literales.}
+\begin{itemize}
+    \item \textit{``puse el material del marco teorico, por favor revisa el capitulo dale un orden si es necesario y responde el laboratorio haz un plan para eso''.} Resultado: un plan aprobado por el autor, la reorganización del Capítulo~\ref{sec:marco} según las movidas retóricas del marco teórico y tres fichas de lectura.
+    \item \textit{``redacta la declaración de uso de IA''.} Resultado: la declaración de las páginas preliminares y este anexo, revisados por el autor.
+\end{itemize}
+
+\textbf{Descripciones representativas por tipo de tarea.}
+\begin{itemize}
+    \item \emph{Código y datos.} Corregir los identificadores de Bloomberg y ejecutar la extracción de un grupo de países; agregar economías al panel; integrar una serie alternativa del EMBI y validar el empalme.
+    \item \emph{Estimación.} Construir la batería de regresiones de la especificación principal; agregar la interacción con el vector de crisis sin eliminar trimestres; diseñar y ejecutar un \textit{bootstrap} del regresor generado en el clúster de cómputo NLHPC.
+    \item \emph{Revisión crítica.} Someter la especificación principal a las pruebas que pediría un árbitro, reportar el resultado de cada una y corregir el texto donde la conclusión se debilitara.
+    \item \emph{Redacción.} Reescribir un capítulo a partir de los resultados vigentes; incorporar las observaciones del profesor guía tras la predefensa; reducir marcas de estilo típicas de los modelos de lenguaje; reconciliar todas las cifras del texto con el registro de cifras canónicas.
+    \item \emph{Presentación.} Preparar las láminas de la defensa y el guion de la predefensa.
+\end{itemize}
+
+\section{Metodología de integración}
+
+El trabajo con la herramienta siguió un ciclo fijo. El autor planteó cada tarea en lenguaje natural. En las tareas de mayor alcance, la herramienta propuso primero un plan, que el autor aprobó, corrigió o rechazó antes de que se modificara cualquier archivo. La herramienta ejecutó después el plan sobre los archivos del proyecto. El autor revisó los cambios, sus salidas y el documento compilado, y los confirmó en el control de versiones. Las decisiones de fondo ---la pregunta, las hipótesis, la muestra, la especificación y la lectura de los resultados--- se discutieron en las reuniones con el profesor guía, y sus observaciones se incorporaron como nuevas tareas.
+
+\section{Criterios críticos aplicados}
+
+Sobre lo producido con la herramienta se aplicaron los siguientes criterios:
+\begin{itemize}
+    \item \textbf{Ninguna cifra sin ejecución.} Todo número del texto proviene de un programa del repositorio que se puede volver a ejecutar, y se contrasta con el registro de cifras canónicas.
+    \item \textbf{Ningún dato inventado.} Lo que no se pudo verificar se dejó pendiente y marcado, en vez de completarse.
+    \item \textbf{Citas verificadas.} Cada cita textual y cada atribución se cotejaron con la fuente original. Las métricas se atribuyen a sus autores: $JLoss$ a \citet{Chari2024b} y el $GaR$ a \citet{ABG2019b} y CEMLA.
+    \item \textbf{Asociaciones, no causalidad.} El texto describe los coeficientes como asociaciones condicionales y clasifica la evidencia en una escala explícita (Sección~\ref{sec:marco-relacion}).
+    \item \textbf{Toda prueba se reporta.} Cada prueba se informa salga como salga, y si debilita una conclusión, la conclusión se corrige en la tesis, en el artículo y en las láminas.
+    \item \textbf{Datos personales.} Las transcripciones de reuniones con información personal se excluyeron del repositorio público.
+\end{itemize}
