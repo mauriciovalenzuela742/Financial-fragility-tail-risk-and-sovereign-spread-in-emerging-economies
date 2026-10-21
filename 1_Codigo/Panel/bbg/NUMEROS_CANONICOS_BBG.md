@@ -1754,3 +1754,70 @@ cifras no cambian con la confirmación de Chile (ya estaba codificado como conti
 contrastes por régimen de fecha quedan en Backstop 0,03 → 0,12 y EMstress 0,08 → 0,24 (§17.2). Ninguna
 de las condiciones estudiadas (resiliencia, respaldo externo, quién tiene la deuda) modifica la
 transmisión de forma demostrable.
+
+## 19. Evaluación experta: simultaneidad con calendario, precedencia y equivalencia (2026-10-21)
+
+Fuente: `p33_simultaneidad_precedencia_tost.py` → `paper_p33_numeros.csv` (log-log) y
+`paper_p33_numeros_nivlag.csv` (niveles, `JLOSS_FORMA=nivlag`). Pruebas pedidas en
+`4_Redaccion/evaluacion_experta.md` (mejoras A2, A3, B7); no estaban entre las fijadas antes de estimar.
+Regresión principal verificada (N=765, b3=−0,0112).
+
+**19.1 Simultaneidad con nula de calendario** (indicador de D permutado entre países dentro de cada
+trimestre, 4 999 réplicas):
+
+| Muestra | Observado | Esperado | Razón | p |
+|---|---|---|---|---|
+| Completa (N=765) | 168 | 140,9 | 1,19 | 0,0002 |
+| Fuera de crisis (N=656) | 108 | 81,1 | 1,33 | 0,0002 |
+| 2004–09 / 2010–14 / 2015–19 | 14 / 9 / 16 | 13,3 / 6,9 / 5,6 | 1,05 / 1,31 / 2,88 | 0,44 / 0,15 / 0,0002 |
+| 2020–22 / 2023–26 | 75 / 54 | 74,4 / 40,7 | 1,01 / 1,33 | 0,47 / 0,0002 |
+
+En niveles la razón es 1,20 (p=0,0002), con los mismos terciles.
+
+**19.2 Precedencia ln JLoss_{t−1} → D_t** (rezago propio, EF país y tiempo):
+
+| Variante | Coef. | p DK / cluster / wild |
+|---|---|---|
+| Base (N=752) | 0,405 | 0,0095 / 0,0011 / 0,024 |
+| Sin cada país | 0,321 (sin Brasil) a 0,473 (sin Perú) | DK < 0,05 en 12 de 13 (sin Brasil 0,065); cluster < 0,05 en 13 |
+| GaR base dentro de muestra | 0,301 | 0,012 / 0,0005 / 0,006 |
+| GaR sin bloque bursátil (dentro de muestra) | 0,388 | 0,0001 / <0,0001 / 0,002 |
+| 2 rezagos (suma; Wald) | 0,414 | 0,004 / 0,002 / 0,033 |
+| 3 rezagos | 0,421 | 0,014 / 0,007 / 0,11 |
+| 4 rezagos | 0,455 | 0,002 / 0,002 / 0,15 |
+| Inversa D → ln JLoss, 2–4 rezagos (suma) | −0,007 a −0,012 | ninguna < 0,05 |
+
+**19.3 Equivalencia (TOST) para b3** (escenario: ambos riesgos 1 d.e. within sobre su media; cota =
+extremo superior del IC 90 %, como fracción de la suma de las dos asociaciones):
+
+| | DK | Cluster t(12) | Wild invertido | MDE 80 % (DK / cluster) |
+|---|---|---|---|---|
+| Log-log (suma 0,152) | 0,4 % | 22 % | 13 % | 21 % / 58 % |
+| Niveles (suma 28,4 pb) | 29 % | 34 % | 35 % | 31 % / 40 % |
+
+**Lectura:** la simultaneidad sobrevive a una nula que conserva el calendario, pero su magnitud es 1,2
+veces (no 1,9); el exceso viene de 2015–19 y 2023–26. La precedencia pasa la exclusión de cada país y
+el GaR sin bloque bursátil: firme como precedencia estadística a un trimestre (no causal, no fechable
+dentro del trimestre). Con los tres métodos y en las dos formas se rechaza una amplificación de más de
+un 35 % de la suma; una menor no se puede descartar.
+
+## 20. Fragilidad sin saturación: PD y DD de Merton (2026-10-21)
+
+Fuente: `p34_fragilidad_alternativa.py` → `fragilidad_alternativa_bbg.csv` (series país-trimestre),
+`paper_p34_numeros.csv` y `paper_p34_numeros_nivlag.csv`. Mejora B6 de `evaluacion_experta.md`; no
+preespecificada. PD_w = PD de Merton/KMV media ponderada por pasivos (%); DD_w = distancia al
+incumplimiento media ponderada por pasivos; mismo motor y bancos que JLoss.
+
+| Medida (rezagada, centrada) | β1 log (DK / cluster / wild) | por d.e. within | β3 log (wild) | γ1 pb (wild) | γ3 pb (DK / wild) | corr. con ln JLoss | N |
+|---|---|---|---|---|---|---|---|
+| ln JLoss (base) | 0,099 (0,003 / 0,28 / 0,32) | 0,052 | −0,011 (0,90) | 4,73 (0,31) | 0,25 (0,34 / 0,47) | 1 | 765 |
+| ln PD_w | 0,021 (<0,001 / 0,075 / 0,091) | 0,057 | 0,0005 (0,89) | 2,14 (0,30) | 0,11 (0,34 / 0,47) | 0,71 | 765 |
+| −DD_w | 0,082 (<0,001 / 0,044 / 0,055) | 0,080 | 0,0001 (0,997) | 18,8 (0,048) | 1,87 (0,017 / 0,13) | 0,85 | 765 |
+| ln JLoss malla ancha (sin India) | 0,067 (0,22 / 0,47 / 0,47) | 0,031 | 0,002 (0,99) | 4,10 (0,27) | 0,49 (0,0495 / 0,20) | 0,80 | 710 |
+| ln JLoss base sin India | 0,087 (0,035 / 0,39 / 0,42) | 0,045 | −0,013 (0,89) | 5,28 (0,29) | 0,42 (0,16 / 0,36) | 1 | 710 |
+
+**Lectura:** con la distancia al incumplimiento, que no tiene piso ni techo, la asociación de la
+fragilidad es más nítida (wild 0,055 en logs; 0,048 en pb) con la misma magnitud por d.e. (~18 pb). La
+interacción sigue en cero en logaritmos con todas las medidas; en pb es positiva con −DD_w solo con DK,
+coherente con la proporcionalidad multiplicativa. La saturación atenúa la fragilidad, no explica la
+ausencia de amplificación.

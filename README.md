@@ -1,24 +1,21 @@
 # Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano en economías emergentes
 
-Tesis de Magíster en Economía Aplicada (Universidad de Chile). Investiga por qué la
-**coincidencia** de fragilidad bancaria sistémica y riesgo a la baja del crecimiento amplifica
-el spread soberano de las economías emergentes por encima de la suma de sus efectos
-individuales, desde dos aristas:
+Tesis de Magíster en Economía Aplicada (Universidad de Chile; profesor guía J. F. Martínez, coguía
+R. Fischer). Chari et al. (2024) ya documentan la asociación entre fragilidad bancaria y spread
+soberano. Sobre esa base, la tesis pregunta **qué agrega el riesgo económico doméstico —el riesgo de
+cola del crecimiento— y qué ocurre cuando los dos riesgos se dan a la vez**: si sus efectos sobre el
+spread se suman o se amplifican.
 
-- **Capítulo empírico** — estima el término de interacción `JLoss × GaR` sobre el spread
-  soberano (**EMBI Global Diversified**, siguiendo a Chari et al. 2024) en un panel de
-  economías emergentes.
-- **Capítulo teórico (organización industrial)** — modelo de competencia bancaria à la Cournot
-  del que esa complementariedad es una predicción de primer orden, con una predicción
-  distintiva adicional: la amplificación por concentración bancaria.
+Las métricas no son propias. **`JLoss`** es de Chari et al. (2024), y el **`GaR`** (*Growth-at-Risk*)
+es de Adrian, Boyarchenko y Giannone (2019), en la implementación de CEMLA (Ossandón Busch et al.,
+2022). Lo propio es construir las series de las dos métricas con un protocolo homogéneo y cruzarlas.
+Todos los coeficientes son **asociaciones, no efectos causales**.
 
-> **Estado a 2026-09-02.** La variable dependiente del capítulo empírico es el **EMBI Global
-> Diversified** (como en Chari et al. 2024); el CDS soberano 5Y queda como serie de robustez.
-> Hungría sale del panel por el mismo criterio de bancos mínimos que ya excluía a Bulgaria.
-> **Panel de 13 países.** Documento de tesis compilado y limpio:
-> [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (82 pp). Los dos capítulos se
-> preparan además como envíos separados a revista — ver
-> [`4_Redaccion/envios/`](4_Redaccion/envios/).
+> **Estado a 2026-10-21.**
+> - Tesis compilada: [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (127 pp.).
+> - Paper empírico standalone: [`4_Redaccion/envios/paper_empirico/`](4_Redaccion/envios/paper_empirico/).
+> - El capítulo teórico de organización industrial de versiones anteriores ya no forma parte de la tesis.
+> - Evaluación experta con rúbrica y plan de mejoras: [`4_Redaccion/evaluacion_experta.md`](4_Redaccion/evaluacion_experta.md).
 
 ---
 
@@ -28,60 +25,59 @@ individuales, desde dos aristas:
 
 | Insumo | Fuente | Cobertura efectiva |
 |---|---|---|
-| **JLoss** (fragilidad, motor de punto de silla / Merton–KMV) | Bloomberg: balances + capitalización bursátil de 113 bancos | 20 economías, 2004–2026 |
-| **Spread soberano** | **EMBI Global Diversified (J.P. Morgan)**, principal; CDS soberano 5Y USD de Bloomberg, robustez | 9 países con historia continua + 4 parciales |
-| **GaR** (riesgo de cola, regresión cuantílica de panel, marco CEMLA) | insumos FCI de estadísticas nacionales (Bloomberg no publica cuentas nacionales) | 17 economías |
-| **Controles domésticos** (deuda, fiscal, reservas, CA, inflación, REER) | IMF WEO + World Bank + BIS, para **todos** los países del panel | — |
-| **HHI** (concentración bancaria) | World Bank GFDD + serie trimestral de bancos Bloomberg | — |
+| **JLoss** (Merton–KMV + punto de silla) | Bloomberg: balances + capitalización bursátil de 113 bancos | 20 economías, 2004–2026 |
+| **Spread soberano** | **EMBI Global Diversified (J.P. Morgan)**. La serie del FMI (GFSR) completa Indonesia y Sudáfrica en 2010–2014. CDS soberano 5Y como robustez | 13 economías |
+| **GaR** (cuantil 5 % del crecimiento, regresión cuantílica de panel en pseudo-tiempo real) | FCI de estadísticas nacionales + VIX | 17 economías |
+| **Controles domésticos** (deuda, fiscal, reservas, CA, inflación, REER) | FMI WEO + Banco Mundial + BIS, anuales interpolados | — |
 
-**Muestra de estimación:** 13 países, N = 721 (M1) / 614 (M2) observaciones trimestrales.
-**Exclusiones (3), por JLoss no válido a nivel país — bancos cotizados insuficientes:** Corea
-del Sur (*Korea discount* → Merton lee incumplimiento inminente), Bulgaria (un solo banco
-cotizado) y **Hungría** (2 bancos, `below_min_banks` en 89/89 trimestres). Ver
-[`1_Codigo/Panel/bbg/DIAGNOSTICO_COREA.md`](1_Codigo/Panel/bbg/DIAGNOSTICO_COREA.md).
+**Muestra de estimación:** 13 economías, **N = 765** observaciones país-trimestre, 2004Q2–2026Q2
+(`1_Codigo/Panel/bbg/Panel_bloomberg_embiext.csv`).
+- Argentina entra solo como robustez, porque su GaR usa un FCI sin el bloque de tasas.
+- Quedan fuera las economías cuyo `JLoss` no es válido a nivel país: Corea del Sur (*Korea discount*),
+  Bulgaria (un banco cotizado) y Hungría (dos).
+
+**Especificación principal:**
+- Variable dependiente: `ln EMBI_it`.
+- Regresores, centrados: `ln JLoss_i,t-1`, `D_i,t-1 = −GaR_i,t-1` y su producto.
+- Efectos fijos de país y de tiempo, sin controles.
+- Inferencia: errores de Driscoll–Kraay y *wild cluster bootstrap* por país (pesos de Webb).
+- Todo se reestima además en niveles (puntos básicos).
 
 ### Resultados principales
 
-| Hipótesis | Resultado |
+Escala de evidencia:
+- *Firme*: resiste el wild bootstrap o una permutación y no depende de un país.
+- *Sugerente*: solo es significativo con Driscoll–Kraay, o depende de un país.
+- *Exploratorio*: no estaba preespecificado y no pasa la corrección de Holm.
+
+| Conclusión | Evidencia |
 |---|---|
-| **H1** — nivel: `JLoss → spread` | **Respaldada** por MCO con efectos fijos (β₁ = +2,8, t = 2,7) y proyecciones locales (+4,6 pb, t = 2,9, pico en h = 1). El IV *shift-share* sobre el panel de 13 países es más débil que en la versión con CDS (F ≈ 11, 2ª etapa no significativa); un 2º instrumento da signo opuesto y Sargan rechaza. **El canal causal de nivel no está cerrado por IV.** |
-| **H2** — nivel: `GaR → spread` | Respaldada — β₂ = −4,3 (t = −2,3): un `GaR` más negativo se asocia con mayor spread. |
-| **H3 / complementariedad** — θ (interacción `JLoss × GaR`) < 0 | **Condicional.** Sobre la muestra completa de 13 países, θ = −0,16 (**no significativo**, p = 0,26; wild boot 0,14). **No es la métrica del spread:** EMBI y CDS dan el mismo θ (≈ −0,7, p ≈ 0,05) sobre la misma submuestra. Es la **composición de la muestra**. |
-| **Heterogeneidad — el hallazgo central** | En el **núcleo de 11 economías emergentes de financiamiento externo**, θ = **−0,47** (t = −2,29, **p = 0,023**; wild boot 0,015). Se diluye al añadir Polonia e India (mercados de deuda local profundos). La diferencia de grupo no es significativa (p = 0,23) — solo 2 países en el grupo de contraste. El modelo de umbral de Hansen corrobora la no linealidad (+5,9 vs +2,0 pb por régimen, LR = 27). |
-| **Frontera temporal** | Fenómeno **pre-pandemia**: θ base = −1,0 (p = 0,057), el término post-2020 (+1,0) lo compensa. Negativo y significativo en la ventana móvil 2012–2016. |
-| **H4a** — β₃ (parametrización directa de la triple interacción) | Signo **contrario** al predicho, no significativo. Sólo el θ de nivel sin HHI recupera el signo del modelo. |
-| **H4b** — amplificación por concentración | **No identificada** con ninguno de tres proxies de HHI (estructural, anual, trimestral). El punto estimado no tiene signo estable entre proxies; el bootstrap de bloques cruza el cero holgadamente con todos. |
+| **1. Los dos riesgos coinciden** más de lo esperado: hay 168 observaciones con ambos en su tercil alto, 1,2 veces lo esperado descontado el calendario común (p = 0,0002) y 1,9 veces lo esperado bajo independencia pura. Además, la fragilidad **antecede** al riesgo de cola (0,405; wild p = 0,024) y no al revés, sin depender de un país ni del bloque bursátil del FCI. | Firme (la precedencia, a un trimestre y no causal) |
+| **2. Cuando coinciden, no hay evidencia de amplificación**: β₃ = −0,011 (DK p = 0,11; wild p = 0,89). Una prueba de equivalencia descarta una amplificación de más de un 35 % de la suma de las dos asociaciones, pero no una menor. | No hay evidencia |
+| **3. El riesgo económico agrega poco**: 0,037 sobre el modelo de Chari et al. (wild p = 0,066), solo en niveles. No aparece en los cambios, no mejora el pronóstico y depende de Polonia. | Sugerente |
+| **4. Ninguna condición modera la transmisión** de forma demostrable: ni la resiliencia de la política económica, ni el respaldo externo por país, ni la participación extranjera en la deuda (esta última, con una prueba preespecificada). | No hay evidencia / exploratorio |
+| **Réplica de Chari et al.**: elasticidad de 0,099 (DK p = 0,003; wild p = 0,33) y de 0,107–0,164 con sus controles. Desaparece con los seis controles domésticos, y Turquía aporta el 70 % del coeficiente. | Sugerente |
 
 Números canónicos completos y trazables:
-[`1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`](1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md).
-Batería de robustez de árbitro: [`1_Codigo/Panel/bbg/p5_robustez_arbitro.py`](1_Codigo/Panel/bbg/p5_robustez_arbitro.py).
+[`1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`](1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md)
+(secciones 17 a 19 para la especificación vigente).
 
-### Fronteras y limitaciones del resultado
+### Fronteras y limitaciones
 
-Lo que la evidencia **respalda con solidez** son los canales de **nivel** (H1, H2). La
-complementariedad (H3) es **condicional** — significativa en el núcleo de economías de
-financiamiento externo, no en el conjunto del panel. Las fronteras honestas:
-
-- **La complementariedad no es significativa sobre la muestra completa** (θ = −0,16, p = 0,26).
-  Solo lo es sobre el núcleo de 11 economías de financiamiento externo (θ = −0,47, p = 0,023);
-  con solo 2 economías (Polonia, India) en el grupo de contraste, la diferencia entre grupos
-  no alcanza un contraste estadístico formal (p = 0,23).
-- **Identificación temporal acotada:** fenómeno pre-pandemia; la señal se concentra en la
-  ventana 2012–2016.
-- **Corte transversal efectivo:** 9 de 13 países casi no tienen variación de `JLoss`; sin
-  China θ cae a −0,05.
-- **Identificación causal de nivel no cerrada por IV** sobre esta muestra reducida (F ≈ 11,
-  2ª etapa n.s.; 2º instrumento con signo opuesto; Sargan rechaza). H1 se apoya en MCO con
-  efectos fijos y proyecciones locales.
-- **`JLoss` ordinal, no cardinal:** la censura de la malla de pérdidas satura el VaR99 en el
-  ~98 % de las observaciones; se interpreta como ranking de fragilidad relativa.
-- **Regresores generados:** `JLoss` y `GaR` son estimados; la inferencia que los trata como
-  datos subestima la varianza de θ (el sesgo de medición atenúa, así que θ es un límite
-  conservador).
-- **Controles domésticos interpolados de series anuales:** sus coeficientes bajo FE
-  bidireccionales no tienen signo económico fiable; se incluyen como controles, no se
-  interpretan.
-- **H4b sin identificar** con ninguno de los tres proxies de concentración.
+- **Identificación:** la retroalimentación del spread hacia la fragilidad sesga los coeficientes de
+  nivel. En una simulación sin efecto directo, la regresión entrega 0,066 para la fragilidad (dato:
+  0,099) y 0,022 para el riesgo de cola (dato: 0,032). El IV *shift-share* no cierra la identificación:
+  los instrumentos dan signos opuestos y la prueba de Sargan rechaza.
+- **Pocos países:** con 13 clusters, Driscoll–Kraay rechaza una nula cierta entre el 20 y el 30 % de las
+  veces. El wild bootstrap está bien calibrado, pero su potencia es de 35 % para la fragilidad y de 67 %
+  para el riesgo de cola.
+- **`JLoss` saturado:** el VaR99 satura la malla de pérdidas en el 98 % de las observaciones y el 23,7 %
+  está en el piso (2,16). La métrica se lee como ordinal.
+- **Fechado:** la fragilidad y el spread se mueven dentro del mismo trimestre, de modo que no hay
+  evidencia de que la fragilidad anteceda al spread.
+- **Simultaneidad concentrada:** 129 de las 168 observaciones conjuntas son de 2020 en adelante, aunque
+  el exceso sobre el calendario viene de 2015–2019 y 2023–2026.
+- **Controles:** son anuales interpolados y plausiblemente median el mecanismo ("mal control").
 
 ---
 
@@ -121,6 +117,20 @@ python bbg/p9_diag_ryr.py             # diagnóstico de endogeneidad Ryr <-> EMB
 python bbg/p9_robustez_gar_nocdiff.py # robustez: GaR reconstruido sin CDIFF
 python bbg/p4_figuras.py           # figuras -> bbg/figuras/ y copia a 4_Redaccion/tesis/imagenes/
 
+# 2e. Especificación vigente: log-log rezagada sobre Panel_bloomberg_embiext.csv (lo construye
+#     p1_build_panels.py --embi-ext); JLOSS_FORMA=nivlag reestima todo en niveles (pb)
+python bbg/p1_build_panels.py --embi-ext   # -> bbg/Panel_bloomberg_embiext.csv
+python bbg/p12_tablas_latex_lnlag.py       # baterías 4x3x3 (tablas de la tesis)
+python bbg/p13_figuras_paper.py            # figuras y efecto marginal del paper
+python bbg/p14_arbitro_lnlag.py            # identificación: canal inverso, dinámica, LP, IV, réplica de Chari
+python bbg/p15_comparacion_formas.py       # niveles frente a logaritmos (prueba PE, Box-Cox)
+python bbg/p16_heterogeneidad.py           # agrupación ex post (exploratoria)
+python bbg/p18_solapamiento_gar.py         # GaR frente a las variables financieras
+python bbg/p19_resiliencia.py              # resiliencia de la política económica
+# p21 a p31: fechado, potencia, estrés conjunto, medición, respaldo, participación extranjera, influencia
+python bbg/p32_aporte_riesgo_cola.py       # información incremental, simultaneidad, bandas
+python bbg/p33_simultaneidad_precedencia_tost.py  # nula de calendario, precedencia, equivalencia (TOST)
+
 # 2b. Robustez a la censura del grid de JLoss (opcional, ~40 min de motor)
 cd ../JLoss_reconstruction && python _engine_wide.py    # -> Panel_JLoss_wide.csv (grid [0.01,0.20])
 cd ../Panel && python bbg/_robustez_widebounds.py       # -> robustez_widebounds_bbg.csv
@@ -133,7 +143,7 @@ python bbg/p10_boot_gar.py segunda_etapa ../GaR/individuals/nlhpc_gar_all18/gar_
 python -c "import nbformat; from nbclient import NotebookClient; nb=nbformat.read('bbg/EDA_Panel_Final_bbg.ipynb', as_version=4); NotebookClient(nb, timeout=600, kernel_name='python3', resources={'metadata': {'path': 'bbg'}}).execute(); nbformat.write(nb, 'bbg/EDA_Panel_Final_bbg.ipynb')"
 
 # 3. Documento de tesis (desde 4_Redaccion/tesis/)
-latexmk -pdf main.tex             # -> main.pdf, 94 pp, compila sin errores (MiKTeX 25.12 / pdfTeX)
+latexmk -pdf main.tex             # -> main.pdf, 127 pp, compila sin errores (MiKTeX 25.12 / pdfTeX)
 ```
 
 ---
@@ -180,3 +190,8 @@ latexmk -pdf main.tex             # -> main.pdf, 94 pp, compila sin errores (MiK
 | `Concentración trimestral + IV reforzado` | `HHI_q` de los mismos bancos que `JLoss` (H4b sigue no identificado); IV con exposición pre-2012 |
 | `Reestructura el panel: EMBI como variable dependiente principal, CDS a robustez` | Variable dependiente = EMBI Global Diversified (Chari et al. 2024); CDS a robustez; el θ marginal negativo era específico del CDS |
 | `Excluye Hungría; sección de heterogeneidad núcleo/convergencia` | Hungría fuera (2 bancos, `below_min` 89/89, mismo criterio que Bulgaria); panel de 13 países; hallazgo central pasa a ser la heterogeneidad: θ = −0,47 (p = 0,023) en el núcleo de 11 EM de financiamiento externo, no significativo al añadir Polonia e India; EMBI vs CDS dan el mismo θ sobre la misma submuestra |
+| `Reescribe el paper empirico con la especificacion log-log rezagada…` | Especificación principal pasa a log-log con regresores rezagados un trimestre (como Chari et al., Tabla 4); niveles en pb en paralelo |
+| `Integra Argentina al panel canonico…` | Argentina como robustez (GaR con FCI sin bloque de tasas) |
+| `Reescribe la tesis como investigacion empirica unica…` | Sale el capítulo teórico de OI; batería de interacción de crisis |
+| `Somete la especificacion principal a pruebas de arbitro…` / `Incorpora las pruebas del informe de árbitro…` | Dos rondas de arbitraje: fechado del spread, simulación de tamaño y potencia, participación extranjera preespecificada; el núcleo de 11 pasa a exploratorio; la conclusión pasa a "simultaneidad sin amplificación" |
+| Evaluación experta (2026-10-21) | `p33`: simultaneidad con nula de calendario (1,2×), precedencia robusta a excluir países y al GaR sin bloque bursátil, prueba de equivalencia (se descarta amplificación > 35 % de la suma) |
