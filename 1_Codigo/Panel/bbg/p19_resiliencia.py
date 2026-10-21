@@ -112,6 +112,60 @@ def crisis(dd):
         num(f"cr_{lab}", est); num(f"cr_{lab}_p_dk", 2 * stats.norm.sf(abs(est / se)))
 
 
+def moderar_con(d, serie_R, pref, absorbido=False):
+    """moderación con un indicador de resiliencia dado (columna `serie_R` de d). Si `absorbido`, R no
+    varía en el tiempo y su efecto directo queda en los efectos fijos de país."""
+    dd = d.dropna(subset=["ln_EMBI", "ln_JLoss_l1", "D_l1", serie_R]).copy()
+    dd["R"] = dd[serie_R] if absorbido else (dd[serie_R] - dd[serie_R].mean()) / dd[serie_R].std()
+    dd["J_c"] = dd["ln_JLoss_l1"] - dd["ln_JLoss_l1"].mean()
+    dd["T_c"] = dd["D_l1"] - dd["D_l1"].mean()
+    dd["JxT"] = dd["J_c"] * dd["T_c"]
+    dd["JxR"] = dd["J_c"] * dd["R"]; dd["TxR"] = dd["T_c"] * dd["R"]
+    rhs = ["J_c", "T_c", "JxT", "JxR", "TxR"] + ([] if absorbido else ["R"])
+    m = fit(dd, rhs); mc = fit(dd, rhs, CLU)
+    num(f"{pref}_N", m.nobs)
+    for n, lab in (("JxR", "g1"), ("TxR", "g2")):
+        num(f"{pref}_{lab}", m.params[n]); num(f"{pref}_{lab}_p_dk", m.pvalues[n]); num(f"{pref}_{lab}_p_pais", mc.pvalues[n])
+        p, _ = p14.wild_boot(dd, "ln_EMBI", rhs, n, weights="webb")
+        num(f"{pref}_{lab}_p_wild", p)
+
+
+def variantes(d):
+    """objeción de árbitro: el índice es ad hoc y contemporáneo. Componentes por separado, primer
+    componente principal y clasificación ex ante (invariante en el tiempo)."""
+    import numpy as np
+    cols = [c for c, _ in COMP]
+    dd = d.dropna(subset=["ln_EMBI", "ln_JLoss_l1", "D_l1"] + cols).copy()
+    for c, s in COMP:                                   # 1. cada componente por separado (signo: más = más resiliente)
+        dd["R_" + c] = s * dd[c]
+        moderar_con(dd, "R_" + c, "comp_" + c)
+    Z = np.column_stack([s * (dd[c] - dd[c].mean()) / dd[c].std() for c, s in COMP])   # 2. componente principal
+    u, sv, vt = np.linalg.svd(Z - Z.mean(0), full_matrices=False)
+    carga = vt[0] * np.sign(vt[0].sum())
+    dd["R_pc1"] = Z @ carga
+    num("pc1_var_explicada", sv[0] ** 2 / (sv ** 2).sum())
+    for (c, _), v in zip(COMP, carga):
+        num("pc1_carga_" + c, v)
+    moderar_con(dd, "R_pc1", "pc1")
+    # 3. ex ante: promedio 2004-2007 del índice por país (o los primeros 16 trimestres disponibles)
+    raw = pd.read_csv(os.environ["JLOSS_PANEL_CSV"]).dropna(subset=cols)
+    raw = raw[raw["country"].isin(dd["country"].unique())].sort_values(["country", "quarter"])
+    for c, s in COMP:
+        raw["z_" + c] = s * (raw[c] - raw[c].mean()) / raw[c].std()
+    raw["R0"] = raw[["z_" + c for c, _ in COMP]].mean(axis=1)
+    pre = raw[raw["quarter"] <= "2007Q4"].groupby("country")["R0"].mean()
+    falt = [p_ for p_ in dd["country"].unique() if p_ not in pre.index]
+    if falt:
+        pre = pd.concat([pre, raw[raw["country"].isin(falt)].groupby("country").head(16).groupby("country")["R0"].mean()])
+    num("exante_paises_con_2004_07", len(pre) - len(falt))
+    dd["R_exante_alta"] = dd["country"].map((pre > pre.median()).astype(float))
+    num("exante_n_alta", dd.groupby("country")["R_exante_alta"].first().sum())
+    moderar_con(dd, "R_exante_alta", "exante", absorbido=True)
+    sin = dd[~dd["quarter"].isin(p13.CRISIS_BAT)]
+    moderar_con(sin, "R_exante_alta", "exante_sincrisis", absorbido=True)
+    print("   alta resiliencia ex ante:", sorted(pre[pre > pre.median()].index))
+
+
 def main():
     print("p19: panel", os.path.basename(os.environ["JLOSS_PANEL_CSV"]), "| forma", "niveles" if NIV else "logs")
     d, _ = p14.base()                       # trae los controles en t y en t-4 (sufijo _l4)
@@ -126,6 +180,7 @@ def main():
     terciles(dd)
     crisis(dd)
     moderacion(preparar(d, "_l4"), "modl4")
+    variantes(d)
     out = os.path.join(HERE, f"paper_resiliencia_numeros{SFX}.csv")
     pd.Series(NUM, name="valor").rename_axis("clave").to_csv(out)
     for k, v in NUM.items():

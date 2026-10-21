@@ -1,0 +1,10 @@
+country,instrumento,desde,hasta,fuente,nota
+brazil,swap_fed,2008Q4,2009Q4,https://www.federalreserve.gov/newsevents/pressreleases/monetary20081029b.htm,Anunciada el 29-oct-2008; expiró el 1-feb-2010 (se cuenta hasta 2009Q4)
+mexico,swap_fed,2008Q4,2009Q4,https://www.federalreserve.gov/newsevents/pressreleases/monetary20081029b.htm,Anunciada el 29-oct-2008; expiró el 1-feb-2010 (se cuenta hasta 2009Q4)
+brazil,swap_fed,2020Q1,2021Q4,https://newbagehot.yale.edu/node/336,Anunciada el 19-mar-2020; expiró el 31-dic-2021 tras tres extensiones
+mexico,swap_fed,2020Q1,2021Q4,https://newbagehot.yale.edu/node/336,Anunciada el 19-mar-2020; expiró el 31-dic-2021 tras tres extensiones
+mexico,fcl_fmi,2009Q2,2026Q2,https://www.imf.org/en/news/articles/2025/11/14/pr-25374-mexico-imf-approves-new-2-year-us-24-billion-flexible-credit-line-arrangement,Primera FCL en abril de 2009; renovada sin interrupción (décimo acuerdo en 2023; sucesor en nov-2025)
+colombia,fcl_fmi,2009Q2,2025Q1,https://www.banrep.gov.co/en/monetary-exchange-policies/flexible-credit-line-fmi,FCL desde mayo de 2009 con renovaciones; el FMI suspendió el acceso el 26-abr-2025
+poland,fcl_fmi,2009Q2,2017Q3,https://www.imf.org/en/news/articles/2017/11/02/pr17418-poland-ends-the-two-year-flexible-credit-line-arrangement-with-the-imf,FCL desde 2009 con cuatro acuerdos sucesores; terminó el 3-nov-2017
+chile,fcl_fmi,2020Q2,2026Q2,https://www.imf.org/en/news/articles/2022/08/29/pr22294-chile-imf-executive-board-approves-two-year-flexible-credit-line-for-chile,FCL desde mayo de 2020; en mayo de 2022 pasó a una Línea de Liquidez de Corto Plazo (SLL) y el 29-ago-2022 el FMI aprobó una nueva FCL de dos años y Chile canceló la SLL; renovada en 2024. Acceso continuo a una línea precautoria del FMI
+peru,fcl_fmi,2020Q2,2024Q2,https://www.imf.org/en/news/articles/2024/05/21/pr24174-peru-exits-the-flexible-credit-line-arrangement-with-the-imf,FCL aprobada en mayo de 2020; sucesora del 27-may-2022; expiró el 26-may-2024
