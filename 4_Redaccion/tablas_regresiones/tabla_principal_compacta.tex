@@ -1,0 +1,32 @@
+\begin{table}[htbp]
+\centering
+\small
+\caption[Regresión principal]{Regresión principal: cuatro modelos anidados con efectos fijos de país y de tiempo ($N=765$)}
+\label{tab:principal-compacta}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{l cccc}
+\toprule
+ & M1 & M2 & M3 & M4 \\
+\midrule
+\multicolumn{5}{l}{\textit{A. Logaritmos: $\ln$ EMBI sobre $\ln JLoss_{t-1}$ y $D_{t-1}$}} \\
+\quad Fragilidad bancaria ($\beta_1$) & $0{,}127^{***}$ &  & $0{,}097^{***}$ & $0{,}099^{***}$ \\
+\quad & $[0{,}19]$ &  & $[0{,}32]$ & $[0{,}32]$ \\
+\quad Riesgo de cola, $D_{t-1}$ ($\beta_2$) &  & $0{,}037^{**}$ & $0{,}030^{*}$ & $0{,}032^{**}$ \\
+\quad &  & $[0{,}08]$ & $[0{,}17]$ & $[0{,}20]$ \\
+\quad Interacción ($\beta_3$) &  &  &  & $-0{,}011$ \\
+\quad &  &  &  & $[0{,}90]$ \\
+\quad $R^2$ dentro del país & $0{,}065$ & $0{,}047$ & $0{,}074$ & $0{,}077$ \\
+\addlinespace
+\multicolumn{5}{l}{\textit{B. Niveles: EMBI en puntos básicos sobre $JLoss_{t-1}$ y $D_{t-1}$}} \\
+\quad Fragilidad bancaria ($\beta_1$) & $5{,}04^{***}$ &  & $4{,}70^{***}$ & $4{,}73^{***}$ \\
+\quad & $[0{,}28]$ &  & $[0{,}33]$ & $[0{,}31]$ \\
+\quad Riesgo de cola, $D_{t-1}$ ($\beta_2$) &  & $5{,}50^{*}$ & $3{,}52$ & $3{,}24$ \\
+\quad &  & $[0{,}16]$ & $[0{,}34]$ & $[0{,}42]$ \\
+\quad Interacción ($\beta_3$) &  &  &  & $0{,}25$ \\
+\quad &  &  &  & $[0{,}47]$ \\
+\quad $R^2$ dentro del país & $0{,}158$ & $0{,}095$ & $0{,}193$ & $0{,}198$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} Regresores rezagados un trimestre y centrados en su media; efectos fijos de país y de tiempo; muestra completa sin controles. Estrellas según errores de Driscoll--Kraay (***, ** y * al 1\%, 5\% y 10\%); entre corchetes, $p$ del \textit{wild cluster bootstrap} por país (pesos de Webb, 999 réplicas). La columna M4 del Panel A es la regresión principal, la ecuación~\eqref{eq:principal}. La batería completa ---tres estructuras de efectos fijos y tres muestras--- está en la Tabla~\ref{tab:bateria-lnlag-embiext} del Anexo~\ref{chap:anexo-robustez}. Fuente: \texttt{p40\_tabla\_compacta.py}.}
+\end{table}
