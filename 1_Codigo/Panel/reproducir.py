@@ -61,6 +61,7 @@ PASOS = [
     ("bbg/p56_inferencia_conjunta.py", [], "base"),
     ("bbg/p57_replica_externa.py", [], "base"),
     ("bbg/p58_iv_choques.py", [], "base"),
+    ("bbg/p59_modelo.py", [], "base"),
 ]
 
 

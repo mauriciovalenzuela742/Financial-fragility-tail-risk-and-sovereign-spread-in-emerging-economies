@@ -41,6 +41,10 @@ CLAVES = {
                               "N2_hungary_psi", "N2_southkorea_psi", "N2cds_psi", "N2_potencia"],
     "paper_p58_numeros.csv": ["N1_TM", "N1_F_T", "N1_F_TM", "N1_debil", "N1_p_uni", "N1_fs_Z", "N1_rf_ZM",
                               "familia5_N2-H1_holm", "familia5_N1-H1_holm"],
+    "paper_p59_numeros.csv": ["cal_b", "cal_D4", "cal_m", "cal_s_obj", "mod_ps", "mod_beta_log", "mod_psi_log",
+                              "mod_beta_niv", "mod_psi_niv", "mod_psi_log_max", "mod_psi_niv_min", "mod_psi_niv_max",
+                              "mod_obs_psi_log_mediana", "mod_obs_psi_log_pos", "m6_b", "m6_p_uni", "m6_loo_ok",
+                              "m6perm_p_perm"],
 }
 
 

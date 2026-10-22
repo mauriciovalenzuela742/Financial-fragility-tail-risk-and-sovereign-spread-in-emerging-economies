@@ -2166,3 +2166,41 @@ Desviaciones declaradas respecto del preregistro:
 2. La deuda anual de Corea viene de sus observaciones anuales de QPSD interpoladas, porque la API del FMI
    devolvió 403.
 3. La potencia se calcula con el error bootstrap de la muestra observada, no con un bootstrap anidado.
+
+## 34. Modelo de límite fiscal calibrado (N3) (2026-10-22)
+
+Preregistro 6: `4_Redaccion/preregistro_modelo.md`, commit `90f0adf`. Fuente: `p59_modelo.py` →
+`paper_p59_numeros.csv`, `modelo_grilla_bbg.csv` y `paper_p59n_numeros.csv` (la parte en niveles).
+
+**Calibración** (muestra de la prueba D4 × deuda, N = 719):
+- Momentos: b = 44,6 % del PIB (d.e. 20,2); D4 medio 0,18 pp; m = 4,2 %; σ_L = 2,67 pp; spread geométrico
+  medio 173 pb.
+- Parámetros: r = 3 %, R = 0,63 y r_f = 2 %. La capacidad fiscal calibrada es p̄ = 1,48 % del PIB, con
+  z = −1,69.
+
+| | Modelo (base) | Rango del modelo | Datos |
+|---|---|---|---|
+| ∂ln s/∂D (por pp) | 0,82 | 0,53 a 0,94 | 0,047 |
+| ∂²ln s/∂D∂b × d.e.(b) | −0,43 | −0,78 a −0,04 | +0,033 |
+| ∂s/∂D (pb por pp) | 143 | 92 a 163 | — |
+| ∂²s/∂D∂b × d.e.(b) (pb) | 91 | 10 a 203 | +3,14 (M6-H1) |
+
+- **Por observación (calibración base, 681 observaciones):**
+  - logaritmos: interacción negativa en el 100 %, mediana −0,46;
+  - niveles: positiva en el 91 %, mediana 37,5;
+  - las medias, −45 y 45, están dominadas por observaciones con una cola casi degenerada.
+- **Familias:** con la cola normal, ψ_log va de −0,78 a −0,10; con la t de 5 grados de libertad, de −0,26 a
+  −0,04.
+
+**M6-H1 (interacción D4 × deuda en pb, especificación en niveles):**
+- b = 3,14; DK p = 0,34; agrupado por país p = 0,12; wild unilateral 0,087.
+- Positiva y con p < 0,10 sin 6 de 13 economías (rango 2,09–5,40).
+- Permutación de la deuda: p = 0,29.
+- **Veredicto:** no firme.
+- **Secundaria con D_{t−1}:** 1,15 (wild unilateral 0,24).
+
+**Lectura:**
+- En logaritmos, el modelo predice el signo contrario al estimado.
+- En niveles, predice el signo estimado, pero con una magnitud entre 3 y 65 veces la estimación, que además
+  no es firme.
+- Sobre el nivel, el modelo implica una semielasticidad al riesgo de cola 17 veces mayor que la estimada.

@@ -34,6 +34,18 @@ Los modelos cuantitativos de incumplimiento soberano agregan una predicción que
 
 Dos matices de la literatura internacional precisan esa predicción. La moneda de la deuda importa: la deuda en moneda extranjera ---el ``pecado original'' de \citet{EichengreenHausmann1999}--- expone al soberano a la depreciación que suele acompañar a una cola adversa del crecimiento. Y el ciclo financiero global mueve a la vez los precios de los activos riesgosos de todas las economías emergentes \citep{Rey2013}, con una intensidad distinta en cada una, de modo que un control común por trimestre puede no bastar.
 
+\subsection{Un modelo de límite fiscal: qué predice en logaritmos y en puntos básicos}
+\label{sec:modelo-limite}
+
+Para contrastar la predicción de la Sección~\ref{sec:marco-incumplimiento} en magnitud, y no solo en signo, la tesis usa un modelo de límite fiscal de dos períodos, en la línea de \citet{EatonGersovitz1981}, \citet{Bi2012} y \citet{GhoshEtAl2013}. El gobierno debe una deuda $b$, en proporción del PIB, a una tasa real $r$. Incumple si el superávit primario que estabilizaría la deuda supera su capacidad fiscal $\bar p$:
+\begin{equation}
+\frac{(r-g)\,b}{1+g}>\bar p \quad\Longleftrightarrow\quad g<g^*(b)=\frac{r\,b-\bar p}{b+\bar p},
+\label{eq:limite}
+\end{equation}
+donde $g$ es el crecimiento del año siguiente. El umbral $g^*$ crece con la deuda. El crecimiento tiene mediana $m$ y una cola izquierda normal de escala $\sigma_L$, de modo que la probabilidad de incumplimiento es $\pi=\Phi\big((g^*-m)/\sigma_L\big)$ y el riesgo de cola es $D=-q_{0,05}=1{,}645\,\sigma_L-m$. Un aumento del riesgo de cola con la mediana fija ---el patrón que documentan \citet{ABG2019b}--- es un aumento de $\sigma_L$. Con inversionistas neutrales al riesgo y una recuperación $R$, el spread es $s=(1+r_f)(1-R)\pi/\big(1-(1-R)\pi\big)$.
+
+El modelo da dos predicciones de signo, con $z=(g^*-m)/\sigma_L<0$. En puntos básicos, $\partial\pi/\partial\sigma_L=-z\,\phi(z)/\sigma_L$, y su derivada respecto del umbral es $\phi(z)(z^2-1)/\sigma_L^2$. Es positiva mientras $z<-1$, es decir, mientras la probabilidad de incumplimiento sea menor que un 16\%. Con más deuda, el umbral se acerca a la zona de la distribución que el riesgo de cola desplaza, y el mismo aumento del riesgo de cola eleva más el spread: \emph{interacción positiva en puntos básicos}. En logaritmos, en cambio, $\partial\ln\pi/\partial\sigma_L=-z\,\phi(z)/\big(\sigma_L\Phi(z)\big)$ es decreciente en $z$. Cuando la deuda es baja, el incumplimiento es un evento de la cola profunda, y ensanchar la cola lo multiplica; cuando es alta, el incumplimiento ya es probable y el mismo ensanchamiento lo eleva en una proporción menor: \emph{interacción negativa en logaritmos}. La predicción de los modelos de incumplimiento sobre la deuda y el riesgo de crecimiento es, por tanto, una predicción en niveles. Que la interacción se estime en logaritmos o en puntos básicos no es neutral.
+
 \subsection{Riesgo financiero y riesgo económico}
 \label{sec:marco-relacion}
 
