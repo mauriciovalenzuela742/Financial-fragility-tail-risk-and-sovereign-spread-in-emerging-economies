@@ -133,3 +133,32 @@ de cola. M5, M7 y M8 quedan para el paper.
 
 **Nota esperada con M1–M4 y M9:** en torno a 6,5. El techo restante es la identificación, que en esta
 literatura rara vez se resuelve en una tesis de magíster.
+
+---
+
+# 4. Registro de aplicación (21 de octubre de 2026)
+
+Preregistro 2: `preregistro_macro.md`, commit `f820594`, anterior a los datos. Cifras en
+`NUMEROS_CANONICOS_BBG.md`, §28.
+
+| # | Estado | Resultado |
+|---|---|---|
+| M1 | Hecho | "Hallazgo central" (deuda × riesgo de cola) al frente del resumen, la introducción (quinta contribución), la síntesis, las conclusiones, el paper y las láminas |
+| M2 | Hecho | Subsección "Deuda, crecimiento e incumplimiento soberano" (Eaton–Gersovitz, Arellano, Aguiar–Gopinath, Eichengreen–Hausmann, Rey) e hipótesis H4 en el marco |
+| M3 | Hecho (preregistrado) | El riesgo de cola a cuatro trimestres es **firme** (0,047; Holm 0,018; 13 de 13); D4 × deuda = 0,033, significativo también con DK; en cambios aparece con el wild (0,006), no con DK |
+| M4 | Hecho (preregistrado) | El pecado original no se confirma (−0,004; 8 economías); si algo, pesa más la deuda en moneda local |
+| M5 | Hecho (secundaria) | El componente global explica el 70 % de la varianza; sobre el idiosincrásico, la fragilidad sigue siendo solo DK |
+| M6 | Hecho (preregistrado) | El doom loop completo no se confirma (−0,053) |
+| M7 | No factible | Bloomberg en el repo solo trae la calificación actual; hace falta la histórica de S&P o Moody's |
+| M8 | Hecho (secundaria) | El régimen cambiario flexible no modera ninguna transmisión |
+| M9 | Hecho, con ajuste | Se mantiene el término "riesgo económico" (regla del proyecto) y se precisa su alcance en el recuadro de vocabulario |
+
+**Nota reestimada (misma rúbrica):**
+- Contribución: 6,3 → 6,6, porque el hallazgo central queda reencuadrado y preregistrado dos veces.
+- Marco: 6,0 → 6,4, porque ahora está anclado en la teoría del incumplimiento soberano.
+- Datos: 6,0 → 6,2, por el GaR de mediano plazo y la deuda por moneda.
+- Identificación: 5,8 → 5,9.
+- Interpretación: 6,3 → 6,5.
+- Inferencia (6,8), estructura (5,8) y reproducibilidad (6,9): sin cambio.
+
+**Nota ponderada: 6,4** (0,99 + 0,64 + 0,93 + 1,18 + 1,02 + 0,975 + 0,29 + 0,345).

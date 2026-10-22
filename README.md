@@ -45,6 +45,12 @@ Todos los coeficientes son **asociaciones, no efectos causales**.
 
 ### Resultados principales
 
+**Hallazgo central (dos preregistros, commits `c492ca3` y `f820594`):** donde hay más deuda pública, el riesgo de
+cola del crecimiento pesa más en el spread, como predicen los modelos de incumplimiento soberano. Una d.e. más de
+deuda eleva en un tercio la semielasticidad al riesgo de cola del trimestre siguiente y en un 70 % la del riesgo de
+cola del año siguiente (este último, firme: 0,047; Holm 0,018). Ni el doom loop completo (deuda × fragilidad) ni
+el pecado original (deuda en moneda extranjera) se confirman.
+
 Escala de evidencia:
 - *Firme*: resiste el wild bootstrap o una permutación y no depende de un país.
 - *Sugerente*: solo es significativo con Driscoll–Kraay, o depende de un país.

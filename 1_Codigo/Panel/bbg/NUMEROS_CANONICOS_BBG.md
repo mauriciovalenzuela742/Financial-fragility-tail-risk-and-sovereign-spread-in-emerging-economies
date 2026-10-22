@@ -1967,3 +1967,28 @@ primero: +0,70 % al impacto, +1,02 % a 3 meses, +0,79 % a 12; con la fragilidad 
 0,5 % [0,25; 1,6] (primera) y 0,3 % [0,12; 0,80] (segunda).
 **Lectura:** el riesgo de cola pasa a firme como asociación de nivel con cargas heterogéneas y una relación de
 largo plazo; la fragilidad no gana nada; la interacción sigue nula.
+
+## 28. Pruebas macroeconómicas preregistradas (2026-10-21)
+
+Preregistro 2: `4_Redaccion/preregistro_macro.md`, commit `f820594`, anterior a los datos y la estimación.
+Datos: `p44_datos_macro.py` → `macro_trimestral_bbg.csv` (QPSD deuda del gobierno general en moneda
+extranjera y local: Brasil, Colombia, Indonesia, México, Perú, Filipinas, Sudáfrica, Turquía; régimen grueso
+de Ilzetzki–Reinhart–Rogoff, `2_Datos/irr/`). GaR de mediano plazo: `GaR/individuals/nlhpc_gar_all18/
+gar_insample_horizonte.py` → `gar_insample_h4.csv`, `gar_insample_h8.csv` (cuantil 5 % del crecimiento promedio
+de t+1..t+k, dentro de la muestra). Estimación: `p45_macro_preregistrada.py` → `paper_p45_numeros.csv`.
+
+| Prueba | Coef. | p uni wild | Holm | Sin cada país | Veredicto |
+|---|---|---|---|---|---|
+| R2-H1 fragilidad × DEBT_{t−4} (> 0), N = 719 | −0,053 | 0,72 | 1,00 | 0 de 13 | no |
+| R2-H2 D × FXDEBT_{t−4} (> 0), N = 368, 8 econ. | −0,004 | 0,87 | 1,00 | 0 de 8 | no |
+| R2-H3 β2 de D4 (> 0), N = 765 | 0,047 (DK 0,019; cluster 0,025) | 0,006 | 0,018 | 13 de 13 (0,025–0,055) | **firme** |
+
+Secundarias: D8 0,092 (wild uni 0,013); D1 dentro de muestra (referencia) 0,040 (0,009); d.e. within D4 1,80,
+D8 0,75, D1 3,13. D4 × DEBT_{t−4} = 0,033 (wild uni 0,0045; DK 0,033; cluster 0,003), frente a β2(D4) = 0,047:
++70 % por d.e. de deuda. FX / LC a la vez: 0,0026 / 0,0127, diferencia −0,010 (DK 0,10), N = 368. Cambios a
+cuatro trimestres: Δ4D4 0,018 (DK 0,27; wild 0,006), Δ4D1 dentro de muestra 0,013 (DK 0,37; wild 0,024). M5:
+el componente global explica el 70 % de la varianza de ln EMBI; sobre el idiosincrásico, fragilidad 0,080 (DK
+0,002; wild 0,43), riesgo de cola 0,010 (DK 0,081; wild 0,20), interacción −0,009 (wild 0,65). M8 (régimen
+flexible en el 79 % de las obs.): × fragilidad 0,076 (wild 0,60), × riesgo de cola 0,016 (wild 0,37).
+**Lectura:** el riesgo de cola de mediano plazo es firme y la amplificación por la deuda se fortalece con él;
+ni el doom loop completo ni el pecado original se confirman.

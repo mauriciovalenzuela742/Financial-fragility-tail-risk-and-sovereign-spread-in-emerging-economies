@@ -132,6 +132,15 @@ factores comunes (CCE de Pesaran), resiste el wild bootstrap y la exclusión de 
 efectos aleatorios es 0,022 sin Polonia (p = 0,011), y el PMG da una relación de largo plazo de 0,067.
 Es un fundamento de nivel, no una señal de corto plazo.
 
+**V18. ¿Cuál es el hallazgo principal de la tesis?**
+**R.** Que la deuda pública amplifica la transmisión del riesgo de cola del crecimiento al spread,
+como predicen Arellano (2008) y Aguiar–Gopinath (2006). Es firme en dos preregistros anteriores a los
+datos. Con el riesgo de cola del año siguiente, una d.e. más de deuda eleva la semielasticidad en un
+70 %, y el resultado es significativo incluso con Driscoll–Kraay.
+**Si insiste en el doom loop:** la deuda no amplifica la transmisión de la fragilidad bancaria
+(−0,053) ni el efecto se concentra en la deuda en moneda extranjera. Solo el canal del crecimiento
+depende de la deuda.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**

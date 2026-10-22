@@ -170,6 +170,10 @@ python bbg/p40_tabla_compacta.py                  # tabla compacta M1-M4 del cue
 python bbg/p41_datos_resiliencia.py               # datos trimestrales QPSD, QEDS y GEM (red; cachea resiliencia_trimestral_bbg.csv)
 python bbg/p42_resiliencia_preregistrada.py       # pruebas preregistradas (preregistro_resiliencia.md, commit c492ca3)
 python bbg/p43_revision_econometrica.py           # CCE, PMG, coeficientes aleatorios, VAR mensual (~15 min)
+python bbg/p44_datos_macro.py                     # deuda en moneda extranjera/local (QPSD) y régimen cambiario (IRR, 2_Datos/irr)
+(cd ../GaR/individuals/nlhpc_gar_all18 && python gar_insample_horizonte.py GaR_panel_all18.xlsx 4 && \
+   python gar_insample_horizonte.py GaR_panel_all18.xlsx 8)   # GaR de mediano plazo (~3 min cada uno)
+python bbg/p45_macro_preregistrada.py             # pruebas del preregistro 2 (preregistro_macro.md, commit f820594)
 ```
 
 ### Paso 2d — Notebook EDA (`EDA_Panel_Final_bbg.ipynb`)
