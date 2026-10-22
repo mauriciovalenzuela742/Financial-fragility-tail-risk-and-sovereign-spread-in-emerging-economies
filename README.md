@@ -49,7 +49,12 @@ Todos los coeficientes son **asociaciones, no efectos causales**.
 cola del crecimiento pesa más en el spread, como predicen los modelos de incumplimiento soberano. Una d.e. más de
 deuda eleva en un tercio la semielasticidad al riesgo de cola del trimestre siguiente y en un 70 % la del riesgo de
 cola del año siguiente (este último, firme: 0,047; Holm 0,018). Ni el doom loop completo (deuda × fragilidad) ni
-el pecado original (deuda en moneda extranjera) se confirman.
+el pecado original (deuda en moneda extranjera) se confirman. Con la inferencia conjunta sobre los cuatro
+preregistros (`p56`), la interacción resiste una permutación de la deuda entre economías con el riesgo de cola
+del año siguiente (p = 0,009), pero no con el del trimestre siguiente (p = 0,17), que pasa a sugerente.
+
+**Reproducción:** `python 1_Codigo/Panel/reproducir.py` regenera las cifras desde los CSV y verifica 67 cifras
+canónicas (`verificar_canonicos.py`, también en la integración continua).
 
 Escala de evidencia:
 - *Firme*: resiste el wild bootstrap o una permutación y no depende de un país.

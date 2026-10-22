@@ -216,3 +216,19 @@ intentó, pero no es un 7.
 
 **Lo que falta no es otra prueba, sino tres cosas que la tesis no tiene:** variación exógena, un modelo
 cuantitativo y una réplica externa del hallazgo central.
+
+---
+
+# 6. Registro de aplicación (22 de octubre de 2026)
+
+| # | Estado | Resultado |
+|---|---|---|
+| N4 | Hecho | El capítulo de resultados abre con el hallazgo central (Sección 4.1, con los dos preregistros y la inferencia conjunta). La resiliencia y las crisis pasan al Anexo E y quedan resumidas en una sección; las extensiones, al Anexo F. Capítulos 1 a 7: ~78 páginas |
+| N6 | Hecho | Con Holm sobre las 14 hipótesis primarias, ninguna bajo 0,05 (R2-H3 0,08; R-H3 0,19). Aleatorización de la deuda: con el riesgo de cola a un año, p = 0,009; a un trimestre, p = 0,17. La interacción preregistrada a un trimestre pasa de firme a sugerente, corregido en la tesis, el paper y las láminas |
+| N7 | Hecho | `reproducir.py` (un comando), `verificar_canonicos.py` (67 cifras), integración continua, `CITATION.cff` y `.zenodo.json`. Falta que el autor active Zenodo y publique una *release* para el DOI |
+
+**Efecto sobre la trayectoria de la nota.** N6 sube la inferencia a 7,0, pero baja la contribución, porque
+el hallazgo central queda circunscrito al horizonte de un año y a una prueba que era secundaria. Con N4 y N7,
+la estructura sube a ~6,7 y la reproducibilidad a 7,0. Nota estimada: **6,3**, igual que la prevista sin
+datos nuevos. El peso de N1 y N2 aumenta: son las que pueden devolver al hallazgo central la fuerza que la
+inferencia conjunta le quitó, y la réplica externa debería preregistrar como primaria la versión a un año.

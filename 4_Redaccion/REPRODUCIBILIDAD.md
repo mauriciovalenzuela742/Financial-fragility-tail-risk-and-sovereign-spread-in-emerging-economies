@@ -15,6 +15,32 @@ Alcance: la cadena vigente del **capítulo empírico** (Cap. 2, `paper2_empirico
 
 ---
 
+## Reproducción con un solo comando (2026-10-22)
+
+Desde `1_Codigo/Panel/`, con el `.venv` de la raíz:
+
+```bash
+python reproducir.py            # especificación vigente desde los CSV del repositorio (sin red ni pasos lentos)
+python reproducir.py --lentos   # agrega p32 (más de una hora), la cuantílica (~70 min) y el motor JLoss de mu2 (horas)
+python reproducir.py --red      # agrega las descargas (Banco Mundial, QPSD y QEDS)
+python verificar_canonicos.py   # compara 67 cifras de la tesis con canonicos_esperados.json
+```
+
+`reproducir.py` ejecuta en orden los scripts de los Pasos 2e–2g y la inferencia conjunta (`p56`), deja un
+registro por script en `bbg/_logs/` y termina con la verificación. La integración continua de GitHub
+(`.github/workflows/verificar.yml`) corre `verificar_canonicos.py` en cada *push*. La construcción del panel
+base (p0–p11) sigue el Paso 2, porque depende de red y de la extracción de Bloomberg. Primera prueba de punta a punta (2026-10-22): p12, p13 y p14 reprodujeron sus cifras sin diferencias; la corrida se detuvo en p32 por falta de memoria del equipo, no por un error del script, y por eso p32 pasó a la lista de pasos lentos.
+
+**Disponibilidad de los datos.** El EMBI, los balances y la capitalización de los bancos, los CDS y los
+índices accionarios provienen de Bloomberg, bajo licencia; el repositorio contiene las series extraídas que
+usa la estimación, y su redistribución puede estar restringida por esa licencia. Las series del Banco
+Mundial (QPSD, QEDS, GEM, GFDD), de Arslanalp y Tsuda y de Ilzetzki, Reinhart y Rogoff son públicas. El GaR
+se estima con la plataforma de CEMLA. Los metadatos para citar y depositar el código están en
+`CITATION.cff` y `.zenodo.json`; el DOI se obtiene al activar la integración de GitHub con Zenodo y publicar
+una *release*.
+
+---
+
 ## 0. Frontera real de reproducibilidad
 
 Tres cosas **no se pueden reproducir sin acceso especial**, sin importar qué tan bien esté el

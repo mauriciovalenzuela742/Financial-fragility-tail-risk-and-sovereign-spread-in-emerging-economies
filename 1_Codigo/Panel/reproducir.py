@@ -31,7 +31,7 @@ PASOS = [
     ("bbg/p12_tablas_latex_lnlag.py", [], "base"),
     ("bbg/p13_figuras_paper.py", [], "base"),
     ("bbg/p14_arbitro_lnlag.py", [], "base"),
-    ("bbg/p32_aporte_riesgo_cola.py", [], "base"),
+    ("bbg/p32_aporte_riesgo_cola.py", [], "lento"),     # más de una hora (bootstrap); exige memoria
     ("bbg/p33_simultaneidad_precedencia_tost.py", [], "base"),
     ("bbg/p34_fragilidad_alternativa.py", [], "base"),
     ("bbg/p35_cuantilica_spread.py", [], "lento"),

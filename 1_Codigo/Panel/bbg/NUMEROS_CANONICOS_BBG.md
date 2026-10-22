@@ -2101,3 +2101,29 @@ Desviaciones declaradas respecto del preregistro:
 4. El p unilateral del AUROC es la fracción de réplicas bootstrap con AUROC ≤ 0,5.
 5. La deuda primaria es `debt_q` estricta (10 economías; faltan Chile, India y Malasia); la deuda con
    relleno anual de R-H3 se reporta como secundaria.
+
+## 32. Inferencia conjunta sobre los cuatro preregistros y aleatorización (2026-10-22)
+
+Fuente: `p56_inferencia_conjunta.py` → `paper_p56_numeros.csv`. Comprobación posterior y más exigente (N6 de
+`plan_nota7.md`); no estaba preregistrada y solo puede quitar hallazgos.
+
+| Hipótesis (preregistro) | p | Holm (14) | BH | BY |
+|---|---|---|---|---|
+| R2-H3 riesgo de cola a un año (2) | 0,006 | 0,084 | 0,084 | 0,273 |
+| R-H3 riesgo de cola × deuda (1) | 0,015 | 0,189 | 0,102 | 0,330 |
+| P1 umbral de tensión (4) | 0,128 | 1,00 | 0,488 | 1,00 |
+| μ4-H1 concentración (3) | 0,146 | 1,00 | 0,488 | 1,00 |
+| Las diez restantes | 0,20–0,90 | 1,00 | ≥ 0,49 | 1,00 |
+
+Ninguna bajo 0,05 con Holm, BH ni BY; una bajo 0,10 con BH (R2-H3).
+
+**Aleatorización** (deuda de otra economía, 999 permutaciones de las 13; N = 719):
+- D_{t−1} × deuda: b = 0,0107; p = 0,174; percentil 95 de las permutaciones 0,0164; media 0,0030.
+- D4_{t−1} × deuda: b = 0,0326; p = 0,009; percentil 95 0,0245; media 0,0113.
+
+**Lectura:** la deuda amplifica la transmisión del riesgo de cola de mediano plazo (firme: wild 0,005, DK 0,033,
+permutación 0,009; prueba secundaria del preregistro 2); con el riesgo de cola del trimestre siguiente, la
+interacción preregistrada pasa de firme a sugerente.
+
+**Reproducción (N7):** `1_Codigo/Panel/reproducir.py` regenera estas cifras desde los CSV y
+`verificar_canonicos.py` compara 67 cifras citadas con `canonicos_esperados.json`.

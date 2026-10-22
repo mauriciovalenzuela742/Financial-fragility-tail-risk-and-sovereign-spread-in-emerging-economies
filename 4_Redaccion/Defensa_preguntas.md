@@ -165,6 +165,14 @@ tensión financiera, pero de 13 % con la deuda; ahí la ausencia de umbral es po
 **Si pregunta por alerta temprana:** fuera de la muestra el AUROC es 0,49; dentro, 0,71. Con más
 tensión los riesgos domésticos pesan menos: en una crisis manda el ciclo global.
 
+**V22. Hizo cuatro preregistros con catorce hipótesis. ¿Sobrevive algo a todas juntas?**
+**R.** Lo probé (p56). Con Holm sobre las catorce, ninguna queda bajo 0,05; la más cercana es el riesgo de
+cola a un año (0,08). Y al asignar a cada economía la deuda de otra, la amplificación con el riesgo de cola
+del trimestre siguiente no se distingue del azar (p = 0,17): por eso la tesis la trata como sugerente. Con el
+riesgo de cola del año siguiente sí resiste (p = 0,009), y esa es la versión del hallazgo central que sostengo.
+**Si insiste en que era secundaria:** es cierto, y lo declaro; por eso la presento como la versión que resiste
+la prueba más exigente, no como la hipótesis preregistrada primaria.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**
