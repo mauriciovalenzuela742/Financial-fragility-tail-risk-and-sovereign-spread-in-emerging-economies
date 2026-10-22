@@ -2041,3 +2041,63 @@ fragilidad 0,099 / 0,064 / 0,086 (DK p 0,005 / 0,22 / 0,15); riesgo de cola 0,03
 
 **Lectura:** ninguna hipótesis micro pasa Holm; el patrón va hacia el pasivo contingente (sistémicos), pero la
 propiedad no ordena la transmisión como predice el rescate. La medida es robusta al motor.
+
+## 31. Umbrales de vigilancia preregistrados (2026-10-22)
+
+Preregistro 4: `4_Redaccion/preregistro_umbrales.md`, commit `7ad3810`, anterior a toda estimación. Fuentes:
+`p52_umbrales.py` → `paper_p52_numeros.csv` y `umbrales_pais_bbg.csv`; `p53_alerta_temprana.py` →
+`paper_p53_numeros.csv`; `p55_medidas_sistemicas.py` → `paper_p55_numeros.csv`.
+
+**Familia primaria (Holm):**
+
+| | Umbral agrupado γ̂ (IC 90 %) | LR | p bloques país / wild | Holm | Veredicto |
+|---|---|---|---|---|---|
+| P1 tensión (FCI_{t−1}) | 0,28 (0,23–0,45); percentil 30 | 19,9 | 0,128 / 0,258 | 0,38 | no hay evidencia |
+| P2 deuda (debt_q_{t−4}, 10 econ., N = 528) | 24,7 % (24,3–25,3); percentil 21 | 61,8 | 0,259 / 0,405 | 0,52 | no hay evidencia |
+| P3 AUROC fuera de muestra | 0,49 (IC 90 %: 0,36–0,60); 39 episodios, 273 obs. | — | p = 0,60 | 0,60 | no hay evidencia |
+
+Pendientes por régimen (bajo / alto):
+- P1: fragilidad 0,100 / 0,099; riesgo de cola 0,061 / 0,024 (diferencia −0,038, DK p = 0,009, signo opuesto).
+  70 % de los trimestres en el régimen alto.
+- P2: riesgo de cola 0,000 / 0,067 (wild unilateral 0,013; positiva sin 8 de 10). Régimen bajo: China,
+  Filipinas, parte de Perú e Indonesia.
+- U3 (D_{t−1}): γ̂ = 1,17 (percentil 82); LR 20,6; p 0,43; fragilidad 0,148 / −0,059.
+
+Potencia del contraste de linealidad (régimen alto = doble pendiente): agrupado P1 0,68, P2 0,13, U3 0,09; por
+país, en promedio, 0,60 / 0,26 / 0,23.
+
+**Por país** (≥ 50 trimestres; U1 y U3: BRA, CHL, CHN, COL, IND, MEX, PER, POL, TUR; U2: BRA, COL, MEX, PER,
+POL, TUR):
+
+| | Linealidad (Holm < 0,05) | C1: contienen γ̂ (nivel / percentil) | C2 umbral común p | C3 percentiles propios | C4 diferencias > 0 | C5 quiebre ≥ umbral |
+|---|---|---|---|---|---|---|
+| U1 | 0 de 9 | 6 / 6 de 9 | 0,34 | 16–82 (mediana 47) | fragilidad 6, cola 2 de 9 | — |
+| U2 | 4 de 6 | 0 / 2 de 6 | 0,062 | 19–70 | 0 de 6 | 5 de 6 |
+| U3 | 2 de 9 | 2 / 0 de 9 | 0,040 | 15–84 | 5 de 9 | — |
+
+Con controles globales en lugar de λ_t: U1 C1 2 de 9; U2 0 de 6; U3 3 de 9. Lectura fijada: U1 cumple la regla de
+"umbral común" (6 de 9 y C2 no rechaza), pero el umbral no es significativo; U2 y U3 no son comunes ni
+transferibles (rango de percentiles > 30).
+
+**Secundarias de P1** (p bloques): FCI en percentil propio 0,056 (wild 0,037); sin bloque de tasas 0,60; ⊥ VIX
+0,56; percentil expansivo 0,080; con −DD 0,065. En todas el riesgo de cola pesa menos con más tensión.
+U2 con D4: p 0,31; con la deuda con relleno anual (13 econ.): γ̂ = 49,2 %, p 0,26.
+
+**U6 (medidas sistémicas):** MES: Spearman con JLoss 0,51 (dentro 0,34); β1 = 0,098 (DK 0,015; wild 0,11);
+umbral U1 con MES p = 0,007, fragilidad 0,180 bajo / 0,055 alto. ΔCoVaR: Spearman 0,39 (dentro 0,09);
+β1 = 0,101 (DK < 0,001; wild 0,25); umbral U1 p = 0,015, 0,194 / 0,063.
+
+**U4 (secundarias):** AUROC dentro de muestra 0,71; coeficientes del logit: JLoss −0,35 (p 0,07), D −0,51
+(0,008), deuda −0,27 (0,04), FCI +0,82 (< 0,001). Fuera de muestra por señal: JLoss 0,48, D 0,46, deuda 0,55,
+FCI 0,58. Con −DD: 0,51; sin deuda (13 econ., 73 episodios): 0,54. Semáforo: con τ(0,7) casi todo es ámbar
+(FCI: rojo 25 %, ámbar 75 %; tasa de episodios 22 % y 11 %). Por país (≥ 3 episodios), AUROC dentro de muestra
+entre 0,54 (Brasil) y 0,81 (Polonia).
+
+Desviaciones declaradas respecto del preregistro:
+1. El bootstrap por bloques de país se adaptó al panel no balanceado: cada país conserva sus regresores y
+   recibe un bloque circular de residuos de un país sorteado.
+2. En U3 no se incluye q lineal, porque q = D_{t−1} ya es el regresor T (colinealidad exacta).
+3. U5 (iMaPP) no es factible: la base del FMI exige acceso registrado (403 o redirección al login).
+4. El p unilateral del AUROC es la fracción de réplicas bootstrap con AUROC ≤ 0,5.
+5. La deuda primaria es `debt_q` estricta (10 economías; faltan Chile, India y Malasia); la deuda con
+   relleno anual de R-H3 se reporta como secundaria.
