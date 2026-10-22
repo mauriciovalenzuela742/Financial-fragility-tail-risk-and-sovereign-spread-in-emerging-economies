@@ -1,0 +1,1468 @@
+country,quarter,fxdebt,lcdebt,coarse,irr_nombre,flexible
+argentina,2000Q1,,,1.0,Argentina,0.0
+argentina,2000Q2,,,1.0,Argentina,0.0
+argentina,2000Q3,,,1.0,Argentina,0.0
+argentina,2000Q4,,,1.0,Argentina,0.0
+argentina,2001Q1,,,1.0,Argentina,0.0
+argentina,2001Q2,,,1.0,Argentina,0.0
+argentina,2001Q3,,,1.0,Argentina,0.0
+argentina,2001Q4,,,5.0,Argentina,0.0
+argentina,2002Q1,,,5.0,Argentina,0.0
+argentina,2002Q2,,,5.0,Argentina,0.0
+argentina,2002Q3,,,5.0,Argentina,0.0
+argentina,2002Q4,,,2.0,Argentina,0.0
+argentina,2003Q1,,,2.0,Argentina,0.0
+argentina,2003Q2,,,2.0,Argentina,0.0
+argentina,2003Q3,,,2.0,Argentina,0.0
+argentina,2003Q4,,,2.0,Argentina,0.0
+argentina,2004Q1,,,2.0,Argentina,0.0
+argentina,2004Q2,,,2.0,Argentina,0.0
+argentina,2004Q3,,,2.0,Argentina,0.0
+argentina,2004Q4,,,2.0,Argentina,0.0
+argentina,2005Q1,,,2.0,Argentina,0.0
+argentina,2005Q2,,,2.0,Argentina,0.0
+argentina,2005Q3,,,2.0,Argentina,0.0
+argentina,2005Q4,,,2.0,Argentina,0.0
+argentina,2006Q1,,,2.0,Argentina,0.0
+argentina,2006Q2,,,2.0,Argentina,0.0
+argentina,2006Q3,,,2.0,Argentina,0.0
+argentina,2006Q4,,,2.0,Argentina,0.0
+argentina,2007Q1,,,2.0,Argentina,0.0
+argentina,2007Q2,,,2.0,Argentina,0.0
+argentina,2007Q3,,,2.0,Argentina,0.0
+argentina,2007Q4,,,2.0,Argentina,0.0
+argentina,2008Q1,,,2.0,Argentina,0.0
+argentina,2008Q2,,,2.0,Argentina,0.0
+argentina,2008Q3,,,2.0,Argentina,0.0
+argentina,2008Q4,,,2.0,Argentina,0.0
+argentina,2009Q1,,,2.0,Argentina,0.0
+argentina,2009Q2,,,2.0,Argentina,0.0
+argentina,2009Q3,,,2.0,Argentina,0.0
+argentina,2009Q4,,,2.0,Argentina,0.0
+argentina,2010Q1,,,2.0,Argentina,0.0
+argentina,2010Q2,,,2.0,Argentina,0.0
+argentina,2010Q3,,,2.0,Argentina,0.0
+argentina,2010Q4,,,2.0,Argentina,0.0
+argentina,2011Q1,,,2.0,Argentina,0.0
+argentina,2011Q2,,,2.0,Argentina,0.0
+argentina,2011Q3,,,2.0,Argentina,0.0
+argentina,2011Q4,,,2.0,Argentina,0.0
+argentina,2012Q1,,,2.0,Argentina,0.0
+argentina,2012Q2,,,2.0,Argentina,0.0
+argentina,2012Q3,,,2.0,Argentina,0.0
+argentina,2012Q4,,,2.0,Argentina,0.0
+argentina,2013Q1,,,2.0,Argentina,0.0
+argentina,2013Q2,,,2.0,Argentina,0.0
+argentina,2013Q3,,,2.0,Argentina,0.0
+argentina,2013Q4,,,2.0,Argentina,0.0
+argentina,2014Q1,,,2.0,Argentina,0.0
+argentina,2014Q2,,,2.0,Argentina,0.0
+argentina,2014Q3,,,2.0,Argentina,0.0
+argentina,2014Q4,,,2.0,Argentina,0.0
+argentina,2015Q1,,,2.0,Argentina,0.0
+argentina,2015Q2,,,2.0,Argentina,0.0
+argentina,2015Q3,,,2.0,Argentina,0.0
+argentina,2015Q4,,,5.0,Argentina,0.0
+argentina,2016Q1,,,5.0,Argentina,0.0
+argentina,2016Q2,,,5.0,Argentina,0.0
+argentina,2016Q3,,,5.0,Argentina,0.0
+argentina,2016Q4,,,5.0,Argentina,0.0
+argentina,2017Q1,,,5.0,Argentina,0.0
+argentina,2017Q2,,,5.0,Argentina,0.0
+argentina,2017Q3,,,5.0,Argentina,0.0
+argentina,2017Q4,,,5.0,Argentina,0.0
+argentina,2018Q1,,,5.0,Argentina,0.0
+argentina,2018Q2,,,5.0,Argentina,0.0
+argentina,2018Q3,,,5.0,Argentina,0.0
+argentina,2018Q4,,,5.0,Argentina,0.0
+argentina,2019Q1,,,5.0,Argentina,0.0
+argentina,2019Q2,,,5.0,Argentina,0.0
+argentina,2019Q3,,,5.0,Argentina,0.0
+argentina,2019Q4,,,5.0,Argentina,0.0
+argentina,2020Q1,,,5.0,Argentina,0.0
+argentina,2020Q2,,,5.0,Argentina,0.0
+argentina,2020Q3,,,5.0,Argentina,0.0
+argentina,2020Q4,,,5.0,Argentina,0.0
+argentina,2021Q1,,,5.0,Argentina,0.0
+argentina,2021Q2,,,5.0,Argentina,0.0
+argentina,2021Q3,,,5.0,Argentina,0.0
+argentina,2021Q4,,,5.0,Argentina,0.0
+argentina,2022Q1,,,5.0,Argentina,0.0
+argentina,2022Q2,,,5.0,Argentina,0.0
+argentina,2022Q3,,,5.0,Argentina,0.0
+argentina,2022Q4,,,5.0,Argentina,0.0
+argentina,2023Q1,,,5.0,Argentina,0.0
+argentina,2023Q2,,,5.0,Argentina,0.0
+argentina,2023Q3,,,5.0,Argentina,0.0
+argentina,2023Q4,,,5.0,Argentina,0.0
+argentina,2024Q1,,,5.0,Argentina,0.0
+argentina,2024Q2,,,5.0,Argentina,0.0
+argentina,2024Q3,,,5.0,Argentina,0.0
+argentina,2024Q4,,,5.0,Argentina,0.0
+argentina,2025Q1,,,5.0,Argentina,0.0
+argentina,2025Q2,,,3.0,Argentina,1.0
+argentina,2025Q3,,,3.0,Argentina,1.0
+argentina,2025Q4,,,3.0,Argentina,1.0
+brazil,2000Q1,,,3.0,Brazil,1.0
+brazil,2000Q2,,,3.0,Brazil,1.0
+brazil,2000Q3,,,3.0,Brazil,1.0
+brazil,2000Q4,,,3.0,Brazil,1.0
+brazil,2001Q1,,,3.0,Brazil,1.0
+brazil,2001Q2,,,3.0,Brazil,1.0
+brazil,2001Q3,,,3.0,Brazil,1.0
+brazil,2001Q4,,,3.0,Brazil,1.0
+brazil,2002Q1,,,3.0,Brazil,1.0
+brazil,2002Q2,,,3.0,Brazil,1.0
+brazil,2002Q3,,,3.0,Brazil,1.0
+brazil,2002Q4,,,3.0,Brazil,1.0
+brazil,2003Q1,,,4.0,Brazil,1.0
+brazil,2003Q2,,,4.0,Brazil,1.0
+brazil,2003Q3,,,4.0,Brazil,1.0
+brazil,2003Q4,,,4.0,Brazil,1.0
+brazil,2004Q1,,,4.0,Brazil,1.0
+brazil,2004Q2,,,4.0,Brazil,1.0
+brazil,2004Q3,,,4.0,Brazil,1.0
+brazil,2004Q4,,,4.0,Brazil,1.0
+brazil,2005Q1,,,4.0,Brazil,1.0
+brazil,2005Q2,,,4.0,Brazil,1.0
+brazil,2005Q3,,,4.0,Brazil,1.0
+brazil,2005Q4,,,4.0,Brazil,1.0
+brazil,2006Q1,,,4.0,Brazil,1.0
+brazil,2006Q2,,,4.0,Brazil,1.0
+brazil,2006Q3,,,4.0,Brazil,1.0
+brazil,2006Q4,,,4.0,Brazil,1.0
+brazil,2007Q1,,,4.0,Brazil,1.0
+brazil,2007Q2,,,4.0,Brazil,1.0
+brazil,2007Q3,,,4.0,Brazil,1.0
+brazil,2007Q4,,,4.0,Brazil,1.0
+brazil,2008Q1,,,4.0,Brazil,1.0
+brazil,2008Q2,,,4.0,Brazil,1.0
+brazil,2008Q3,,,4.0,Brazil,1.0
+brazil,2008Q4,,,3.0,Brazil,1.0
+brazil,2009Q1,,,3.0,Brazil,1.0
+brazil,2009Q2,,,3.0,Brazil,1.0
+brazil,2009Q3,3.10286608972166,54.8970528231042,3.0,Brazil,1.0
+brazil,2009Q4,2.84105479068137,52.5292809748592,3.0,Brazil,1.0
+brazil,2010Q1,2.73532196979973,50.2361765969175,3.0,Brazil,1.0
+brazil,2010Q2,2.71047823121225,50.187960221431,3.0,Brazil,1.0
+brazil,2010Q3,2.54369818794669,49.3880418747583,3.0,Brazil,1.0
+brazil,2010Q4,2.39418694852241,46.6305496698006,3.0,Brazil,1.0
+brazil,2011Q1,2.17262776540144,48.0868148540574,3.0,Brazil,1.0
+brazil,2011Q2,1.8851617886563,47.9881981455269,3.0,Brazil,1.0
+brazil,2011Q3,2.19520522250109,48.1900749144329,3.0,Brazil,1.0
+brazil,2011Q4,2.15225196200309,47.5135822639162,3.0,Brazil,1.0
+brazil,2012Q1,2.01426851169539,48.7968987107344,3.0,Brazil,1.0
+brazil,2012Q2,2.2529217323261,49.3427261459941,3.0,Brazil,1.0
+brazil,2012Q3,2.21864460552137,49.7537310091823,3.0,Brazil,1.0
+brazil,2012Q4,2.33820698029862,49.7416401842861,3.0,Brazil,1.0
+brazil,2013Q1,2.2740807454554,49.8659050373107,3.0,Brazil,1.0
+brazil,2013Q2,2.31189921560961,48.8504823462199,3.0,Brazil,1.0
+brazil,2013Q3,2.35749065960993,48.6282054046095,3.0,Brazil,1.0
+brazil,2013Q4,2.47433853466197,47.2988166971545,3.0,Brazil,1.0
+brazil,2014Q1,2.30751139723347,47.5673232604457,3.0,Brazil,1.0
+brazil,2014Q2,2.31597119983653,49.1874448246157,3.0,Brazil,1.0
+brazil,2014Q3,2.71854726401482,51.0654534193892,3.0,Brazil,1.0
+brazil,2014Q4,2.98923338114094,52.1748810434356,3.0,Brazil,1.0
+brazil,2015Q1,3.4902344309046,54.8683782287723,3.0,Brazil,1.0
+brazil,2015Q2,3.40356342722272,57.001227328124,3.0,Brazil,1.0
+brazil,2015Q3,4.22306272736764,58.8107592585587,3.0,Brazil,1.0
+brazil,2015Q4,4.10953100143264,60.6174599458673,3.0,Brazil,1.0
+brazil,2016Q1,3.78631262293758,61.4733376686285,3.0,Brazil,1.0
+brazil,2016Q2,3.35511724880941,62.6883122249008,3.0,Brazil,1.0
+brazil,2016Q3,3.45797616513421,65.3814104332837,3.0,Brazil,1.0
+brazil,2016Q4,3.40840704055501,65.0597402613266,3.0,Brazil,1.0
+brazil,2017Q1,3.21079865988694,66.6041596582063,3.0,Brazil,1.0
+brazil,2017Q2,3.310525832833,68.1744499186668,3.0,Brazil,1.0
+brazil,2017Q3,3.16862616415598,69.7033957057837,3.0,Brazil,1.0
+brazil,2017Q4,3.23127186414294,68.7315892608138,3.0,Brazil,1.0
+brazil,2018Q1,3.23562934631915,69.2183420584401,3.0,Brazil,1.0
+brazil,2018Q2,3.73373376714603,70.566460417183,3.0,Brazil,1.0
+brazil,2018Q3,3.78182535268299,70.7887825121096,3.0,Brazil,1.0
+brazil,2018Q4,3.6300783892394,70.1169558225059,3.0,Brazil,1.0
+brazil,2019Q1,3.6834338927169,71.7965167614833,3.0,Brazil,1.0
+brazil,2019Q2,3.56182966329765,71.5358281965558,3.0,Brazil,1.0
+brazil,2019Q3,3.83538956888316,70.8849201161835,3.0,Brazil,1.0
+brazil,2019Q4,3.80093006436811,68.8510503646817,3.0,Brazil,1.0
+brazil,2020Q1,5.65419491266296,69.6552133642756,3.0,Brazil,1.0
+brazil,2020Q2,6.73336880924823,80.901610979564,3.0,Brazil,1.0
+brazil,2020Q3,6.38068501705854,78.9935114713453,3.0,Brazil,1.0
+brazil,2020Q4,5.67940329395024,75.8223301338384,3.0,Brazil,1.0
+brazil,2021Q1,5.59240864679951,70.5779544392055,3.0,Brazil,1.0
+brazil,2021Q2,4.86814830478351,71.5231395432822,3.0,Brazil,1.0
+brazil,2021Q3,5.23463188563008,70.9892472404643,3.0,Brazil,1.0
+brazil,2021Q4,5.21247542442606,69.6113237604621,3.0,Brazil,1.0
+brazil,2022Q1,4.29328488093312,69.3331350580058,3.0,Brazil,1.0
+brazil,2022Q2,4.49866521915521,66.942157091427,3.0,Brazil,1.0
+brazil,2022Q3,4.49957703496091,65.9357463583612,3.0,Brazil,1.0
+brazil,2022Q4,4.29403889715122,64.8747445158889,3.0,Brazil,1.0
+brazil,2023Q1,3.99956725295006,65.71354310671,3.0,Brazil,1.0
+brazil,2023Q2,3.77598910179816,66.1725722657898,3.0,Brazil,1.0
+brazil,2023Q3,3.8836473057649,67.4309557969905,3.0,Brazil,1.0
+brazil,2023Q4,3.42570291016311,67.8790468602349,3.0,Brazil,1.0
+brazil,2024Q1,3.67350541155377,69.7524847435238,3.0,Brazil,1.0
+brazil,2024Q2,4.05615823420161,70.4607256557445,3.0,Brazil,1.0
+brazil,2024Q3,3.88865565379252,70.8037147411078,3.0,Brazil,1.0
+brazil,2024Q4,4.31685746409936,69.7368231533559,3.0,Brazil,1.0
+brazil,2025Q1,3.82826239312345,69.3511613427674,3.0,Brazil,1.0
+brazil,2025Q2,3.57157972861229,70.3338410184928,3.0,Brazil,1.0
+brazil,2025Q3,3.51935896729779,72.4918332194701,3.0,Brazil,1.0
+brazil,2025Q4,3.68403897220289,73.4019096601715,3.0,Brazil,1.0
+brazil,2026Q1,3.57068224232164,73.9810056623731,,,
+brazil,2026Q2,3.59365139693354,75.930623464349,,,
+chile,2000Q1,,,3.0,Chile,1.0
+chile,2000Q2,,,3.0,Chile,1.0
+chile,2000Q3,,,3.0,Chile,1.0
+chile,2000Q4,,,3.0,Chile,1.0
+chile,2001Q1,,,3.0,Chile,1.0
+chile,2001Q2,,,3.0,Chile,1.0
+chile,2001Q3,,,3.0,Chile,1.0
+chile,2001Q4,,,3.0,Chile,1.0
+chile,2002Q1,,,3.0,Chile,1.0
+chile,2002Q2,,,3.0,Chile,1.0
+chile,2002Q3,,,3.0,Chile,1.0
+chile,2002Q4,,,3.0,Chile,1.0
+chile,2003Q1,,,3.0,Chile,1.0
+chile,2003Q2,,,3.0,Chile,1.0
+chile,2003Q3,,,3.0,Chile,1.0
+chile,2003Q4,,,3.0,Chile,1.0
+chile,2004Q1,,,3.0,Chile,1.0
+chile,2004Q2,,,3.0,Chile,1.0
+chile,2004Q3,,,3.0,Chile,1.0
+chile,2004Q4,,,3.0,Chile,1.0
+chile,2005Q1,,,3.0,Chile,1.0
+chile,2005Q2,,,3.0,Chile,1.0
+chile,2005Q3,,,3.0,Chile,1.0
+chile,2005Q4,,,3.0,Chile,1.0
+chile,2006Q1,,,3.0,Chile,1.0
+chile,2006Q2,,,3.0,Chile,1.0
+chile,2006Q3,,,3.0,Chile,1.0
+chile,2006Q4,,,3.0,Chile,1.0
+chile,2007Q1,,,3.0,Chile,1.0
+chile,2007Q2,,,3.0,Chile,1.0
+chile,2007Q3,,,3.0,Chile,1.0
+chile,2007Q4,,,3.0,Chile,1.0
+chile,2008Q1,,,3.0,Chile,1.0
+chile,2008Q2,,,3.0,Chile,1.0
+chile,2008Q3,,,3.0,Chile,1.0
+chile,2008Q4,,,3.0,Chile,1.0
+chile,2009Q1,,,3.0,Chile,1.0
+chile,2009Q2,,,3.0,Chile,1.0
+chile,2009Q3,,,3.0,Chile,1.0
+chile,2009Q4,,,3.0,Chile,1.0
+chile,2010Q1,,,3.0,Chile,1.0
+chile,2010Q2,,,3.0,Chile,1.0
+chile,2010Q3,,,3.0,Chile,1.0
+chile,2010Q4,,,3.0,Chile,1.0
+chile,2011Q1,,,3.0,Chile,1.0
+chile,2011Q2,,,3.0,Chile,1.0
+chile,2011Q3,,,3.0,Chile,1.0
+chile,2011Q4,,,3.0,Chile,1.0
+chile,2012Q1,,,3.0,Chile,1.0
+chile,2012Q2,,,3.0,Chile,1.0
+chile,2012Q3,,,3.0,Chile,1.0
+chile,2012Q4,,,3.0,Chile,1.0
+chile,2013Q1,,,3.0,Chile,1.0
+chile,2013Q2,,,3.0,Chile,1.0
+chile,2013Q3,,,3.0,Chile,1.0
+chile,2013Q4,,,3.0,Chile,1.0
+chile,2014Q1,,,3.0,Chile,1.0
+chile,2014Q2,,,3.0,Chile,1.0
+chile,2014Q3,,,3.0,Chile,1.0
+chile,2014Q4,,,3.0,Chile,1.0
+chile,2015Q1,,,3.0,Chile,1.0
+chile,2015Q2,,,3.0,Chile,1.0
+chile,2015Q3,,,3.0,Chile,1.0
+chile,2015Q4,,,3.0,Chile,1.0
+chile,2016Q1,,,3.0,Chile,1.0
+chile,2016Q2,,,3.0,Chile,1.0
+chile,2016Q3,,,3.0,Chile,1.0
+chile,2016Q4,,,3.0,Chile,1.0
+chile,2017Q1,,,3.0,Chile,1.0
+chile,2017Q2,,,3.0,Chile,1.0
+chile,2017Q3,,,3.0,Chile,1.0
+chile,2017Q4,,,3.0,Chile,1.0
+chile,2018Q1,,,3.0,Chile,1.0
+chile,2018Q2,,,3.0,Chile,1.0
+chile,2018Q3,,,3.0,Chile,1.0
+chile,2018Q4,,,3.0,Chile,1.0
+chile,2019Q1,,,3.0,Chile,1.0
+chile,2019Q2,,,3.0,Chile,1.0
+chile,2019Q3,,,3.0,Chile,1.0
+chile,2019Q4,,,3.0,Chile,1.0
+chile,2020Q1,,,3.0,Chile,1.0
+chile,2020Q2,,,3.0,Chile,1.0
+chile,2020Q3,,,3.0,Chile,1.0
+chile,2020Q4,,,3.0,Chile,1.0
+chile,2021Q1,,,3.0,Chile,1.0
+chile,2021Q2,,,3.0,Chile,1.0
+chile,2021Q3,,,3.0,Chile,1.0
+chile,2021Q4,,,3.0,Chile,1.0
+chile,2022Q1,,,3.0,Chile,1.0
+chile,2022Q2,,,3.0,Chile,1.0
+chile,2022Q3,,,3.0,Chile,1.0
+chile,2022Q4,,,3.0,Chile,1.0
+chile,2023Q1,,,3.0,Chile,1.0
+chile,2023Q2,,,3.0,Chile,1.0
+chile,2023Q3,,,3.0,Chile,1.0
+chile,2023Q4,,,3.0,Chile,1.0
+chile,2024Q1,,,3.0,Chile,1.0
+chile,2024Q2,,,3.0,Chile,1.0
+chile,2024Q3,,,3.0,Chile,1.0
+chile,2024Q4,,,3.0,Chile,1.0
+chile,2025Q1,,,3.0,Chile,1.0
+chile,2025Q2,,,3.0,Chile,1.0
+chile,2025Q3,,,3.0,Chile,1.0
+chile,2025Q4,,,3.0,Chile,1.0
+china,2000Q1,,,1.0,"China, PR",0.0
+china,2000Q2,,,1.0,"China, PR",0.0
+china,2000Q3,,,1.0,"China, PR",0.0
+china,2000Q4,,,1.0,"China, PR",0.0
+china,2001Q1,,,1.0,"China, PR",0.0
+china,2001Q2,,,1.0,"China, PR",0.0
+china,2001Q3,,,1.0,"China, PR",0.0
+china,2001Q4,,,1.0,"China, PR",0.0
+china,2002Q1,,,1.0,"China, PR",0.0
+china,2002Q2,,,1.0,"China, PR",0.0
+china,2002Q3,,,1.0,"China, PR",0.0
+china,2002Q4,,,1.0,"China, PR",0.0
+china,2003Q1,,,1.0,"China, PR",0.0
+china,2003Q2,,,1.0,"China, PR",0.0
+china,2003Q3,,,1.0,"China, PR",0.0
+china,2003Q4,,,1.0,"China, PR",0.0
+china,2004Q1,,,1.0,"China, PR",0.0
+china,2004Q2,,,1.0,"China, PR",0.0
+china,2004Q3,,,1.0,"China, PR",0.0
+china,2004Q4,,,1.0,"China, PR",0.0
+china,2005Q1,,,1.0,"China, PR",0.0
+china,2005Q2,,,1.0,"China, PR",0.0
+china,2005Q3,,,1.0,"China, PR",0.0
+china,2005Q4,,,1.0,"China, PR",0.0
+china,2006Q1,,,1.0,"China, PR",0.0
+china,2006Q2,,,1.0,"China, PR",0.0
+china,2006Q3,,,1.0,"China, PR",0.0
+china,2006Q4,,,1.0,"China, PR",0.0
+china,2007Q1,,,1.0,"China, PR",0.0
+china,2007Q2,,,1.0,"China, PR",0.0
+china,2007Q3,,,1.0,"China, PR",0.0
+china,2007Q4,,,1.0,"China, PR",0.0
+china,2008Q1,,,1.0,"China, PR",0.0
+china,2008Q2,,,1.0,"China, PR",0.0
+china,2008Q3,,,1.0,"China, PR",0.0
+china,2008Q4,,,1.0,"China, PR",0.0
+china,2009Q1,,,1.0,"China, PR",0.0
+china,2009Q2,,,1.0,"China, PR",0.0
+china,2009Q3,,,1.0,"China, PR",0.0
+china,2009Q4,,,1.0,"China, PR",0.0
+china,2010Q1,,,1.0,"China, PR",0.0
+china,2010Q2,,,1.0,"China, PR",0.0
+china,2010Q3,,,1.0,"China, PR",0.0
+china,2010Q4,,,1.0,"China, PR",0.0
+china,2011Q1,,,1.0,"China, PR",0.0
+china,2011Q2,,,1.0,"China, PR",0.0
+china,2011Q3,,,1.0,"China, PR",0.0
+china,2011Q4,,,1.0,"China, PR",0.0
+china,2012Q1,,,1.0,"China, PR",0.0
+china,2012Q2,,,1.0,"China, PR",0.0
+china,2012Q3,,,1.0,"China, PR",0.0
+china,2012Q4,,,1.0,"China, PR",0.0
+china,2013Q1,,,1.0,"China, PR",0.0
+china,2013Q2,,,1.0,"China, PR",0.0
+china,2013Q3,,,1.0,"China, PR",0.0
+china,2013Q4,,,1.0,"China, PR",0.0
+china,2014Q1,,,1.0,"China, PR",0.0
+china,2014Q2,,,1.0,"China, PR",0.0
+china,2014Q3,,,1.0,"China, PR",0.0
+china,2014Q4,,,1.0,"China, PR",0.0
+china,2015Q1,,,1.0,"China, PR",0.0
+china,2015Q2,,,1.0,"China, PR",0.0
+china,2015Q3,,,1.0,"China, PR",0.0
+china,2015Q4,,,1.0,"China, PR",0.0
+china,2016Q1,,,1.0,"China, PR",0.0
+china,2016Q2,,,1.0,"China, PR",0.0
+china,2016Q3,,,1.0,"China, PR",0.0
+china,2016Q4,,,1.0,"China, PR",0.0
+china,2017Q1,,,1.0,"China, PR",0.0
+china,2017Q2,,,1.0,"China, PR",0.0
+china,2017Q3,,,1.0,"China, PR",0.0
+china,2017Q4,,,1.0,"China, PR",0.0
+china,2018Q1,,,1.0,"China, PR",0.0
+china,2018Q2,,,1.0,"China, PR",0.0
+china,2018Q3,,,1.0,"China, PR",0.0
+china,2018Q4,,,1.0,"China, PR",0.0
+china,2019Q1,,,1.0,"China, PR",0.0
+china,2019Q2,,,1.0,"China, PR",0.0
+china,2019Q3,,,1.0,"China, PR",0.0
+china,2019Q4,,,1.0,"China, PR",0.0
+china,2020Q1,,,1.0,"China, PR",0.0
+china,2020Q2,,,1.0,"China, PR",0.0
+china,2020Q3,,,1.0,"China, PR",0.0
+china,2020Q4,,,1.0,"China, PR",0.0
+china,2021Q1,,,1.0,"China, PR",0.0
+china,2021Q2,,,1.0,"China, PR",0.0
+china,2021Q3,,,1.0,"China, PR",0.0
+china,2021Q4,,,1.0,"China, PR",0.0
+china,2022Q1,,,1.0,"China, PR",0.0
+china,2022Q2,,,1.0,"China, PR",0.0
+china,2022Q3,,,1.0,"China, PR",0.0
+china,2022Q4,,,1.0,"China, PR",0.0
+china,2023Q1,,,1.0,"China, PR",0.0
+china,2023Q2,,,1.0,"China, PR",0.0
+china,2023Q3,,,1.0,"China, PR",0.0
+china,2023Q4,,,1.0,"China, PR",0.0
+china,2024Q1,,,1.0,"China, PR",0.0
+china,2024Q2,,,1.0,"China, PR",0.0
+china,2024Q3,,,1.0,"China, PR",0.0
+china,2024Q4,,,1.0,"China, PR",0.0
+china,2025Q1,,,1.0,"China, PR",0.0
+china,2025Q2,,,1.0,"China, PR",0.0
+china,2025Q3,,,1.0,"China, PR",0.0
+china,2025Q4,,,1.0,"China, PR",0.0
+colombia,2000Q1,,,3.0,Colombia,1.0
+colombia,2000Q2,,,3.0,Colombia,1.0
+colombia,2000Q3,,,3.0,Colombia,1.0
+colombia,2000Q4,,,3.0,Colombia,1.0
+colombia,2001Q1,,,3.0,Colombia,1.0
+colombia,2001Q2,,,3.0,Colombia,1.0
+colombia,2001Q3,,,3.0,Colombia,1.0
+colombia,2001Q4,,,3.0,Colombia,1.0
+colombia,2002Q1,,,3.0,Colombia,1.0
+colombia,2002Q2,,,3.0,Colombia,1.0
+colombia,2002Q3,,,3.0,Colombia,1.0
+colombia,2002Q4,,,3.0,Colombia,1.0
+colombia,2003Q1,,,3.0,Colombia,1.0
+colombia,2003Q2,,,3.0,Colombia,1.0
+colombia,2003Q3,,,3.0,Colombia,1.0
+colombia,2003Q4,,,3.0,Colombia,1.0
+colombia,2004Q1,,,3.0,Colombia,1.0
+colombia,2004Q2,,,3.0,Colombia,1.0
+colombia,2004Q3,,,3.0,Colombia,1.0
+colombia,2004Q4,,,3.0,Colombia,1.0
+colombia,2005Q1,,,3.0,Colombia,1.0
+colombia,2005Q2,,,3.0,Colombia,1.0
+colombia,2005Q3,,,3.0,Colombia,1.0
+colombia,2005Q4,,,3.0,Colombia,1.0
+colombia,2006Q1,,,3.0,Colombia,1.0
+colombia,2006Q2,,,3.0,Colombia,1.0
+colombia,2006Q3,,,3.0,Colombia,1.0
+colombia,2006Q4,,,3.0,Colombia,1.0
+colombia,2007Q1,,,3.0,Colombia,1.0
+colombia,2007Q2,,,3.0,Colombia,1.0
+colombia,2007Q3,,,3.0,Colombia,1.0
+colombia,2007Q4,,,3.0,Colombia,1.0
+colombia,2008Q1,8.68899512306577,28.3795126299748,3.0,Colombia,1.0
+colombia,2008Q2,8.48505557334257,30.0578713416533,3.0,Colombia,1.0
+colombia,2008Q3,9.50463012023644,29.355007502169,3.0,Colombia,1.0
+colombia,2008Q4,10.0637210462427,27.2749612641329,3.0,Colombia,1.0
+colombia,2009Q1,12.1001050223245,28.5156860187397,3.0,Colombia,1.0
+colombia,2009Q2,10.1899184861172,28.6109787817156,3.0,Colombia,1.0
+colombia,2009Q3,9.06062256931566,28.3781471515725,3.0,Colombia,1.0
+colombia,2009Q4,10.5097276186562,29.4843511991168,3.0,Colombia,1.0
+colombia,2010Q1,9.69135510428175,29.4500238111857,3.0,Colombia,1.0
+colombia,2010Q2,9.55744513120156,29.5340236348611,3.0,Colombia,1.0
+colombia,2010Q3,8.80824985280107,29.6256074066982,3.0,Colombia,1.0
+colombia,2010Q4,9.37112263206626,30.5869385352777,3.0,Colombia,1.0
+colombia,2011Q1,8.93511669680061,29.5283830475873,3.0,Colombia,1.0
+colombia,2011Q2,8.01322694300848,28.4352233696637,3.0,Colombia,1.0
+colombia,2011Q3,9.06409525562881,28.4229567478736,3.0,Colombia,1.0
+colombia,2011Q4,9.04642790045383,28.2703660208225,3.0,Colombia,1.0
+colombia,2012Q1,8.06349224293941,27.8398999430007,3.0,Colombia,1.0
+colombia,2012Q2,7.92180801870541,27.2580464038698,3.0,Colombia,1.0
+colombia,2012Q3,7.76102081736165,27.0511574016738,3.0,Colombia,1.0
+colombia,2012Q4,7.42635410268542,27.3384075561475,3.0,Colombia,1.0
+colombia,2013Q1,9.3049894740471,26.4559824590808,3.0,Colombia,1.0
+colombia,2013Q2,9.45445886409833,25.8297521109474,3.0,Colombia,1.0
+colombia,2013Q3,9.85027400256386,26.9496327719643,3.0,Colombia,1.0
+colombia,2013Q4,9.77941725895623,27.4694377487163,3.0,Colombia,1.0
+colombia,2014Q1,10.2572704267636,27.7325009406223,3.0,Colombia,1.0
+colombia,2014Q2,9.63713964023388,27.8295980891686,3.0,Colombia,1.0
+colombia,2014Q3,10.0592555664805,27.0209722553151,3.0,Colombia,1.0
+colombia,2014Q4,10.7637768602775,28.2719206073817,3.0,Colombia,1.0
+colombia,2015Q1,12.4363214601444,28.1583644891262,3.0,Colombia,1.0
+colombia,2015Q2,12.163930017919,28.8004232396589,3.0,Colombia,1.0
+colombia,2015Q3,14.9938901318974,29.5787967677915,3.0,Colombia,1.0
+colombia,2015Q4,15.5992799061042,27.4701640639876,3.0,Colombia,1.0
+colombia,2016Q1,15.061454426875,28.3344367535973,3.0,Colombia,1.0
+colombia,2016Q2,14.6355074272153,28.9199616582056,3.0,Colombia,1.0
+colombia,2016Q3,14.1743872368148,29.2875173157614,3.0,Colombia,1.0
+colombia,2016Q4,15.0604335737436,29.1607874682207,3.0,Colombia,1.0
+colombia,2017Q1,14.5473094905519,30.4196804658236,3.0,Colombia,1.0
+colombia,2017Q2,15.1626052283983,29.6632283972257,3.0,Colombia,1.0
+colombia,2017Q3,15.0307423135164,30.3934309459358,3.0,Colombia,1.0
+colombia,2017Q4,15.0559405951328,30.7588248044413,3.0,Colombia,1.0
+colombia,2018Q1,14.165373667642,31.5397220879557,3.0,Colombia,1.0
+colombia,2018Q2,15.2595335583669,32.6495465747759,3.0,Colombia,1.0
+colombia,2018Q3,15.2185480631321,33.598038843022,3.0,Colombia,1.0
+colombia,2018Q4,16.8133288188533,33.0552065559541,3.0,Colombia,1.0
+colombia,2019Q1,16.465231561633,34.0256395393474,3.0,Colombia,1.0
+colombia,2019Q2,16.0769571356912,34.2668300329961,3.0,Colombia,1.0
+colombia,2019Q3,17.1031477252345,33.562842819473,3.0,Colombia,1.0
+colombia,2019Q4,16.1470269664577,32.3722589076744,3.0,Colombia,1.0
+colombia,2020Q1,20.3217658889348,34.1465141581706,3.0,Colombia,1.0
+colombia,2020Q2,21.5641679372162,37.0222304866645,3.0,Colombia,1.0
+colombia,2020Q3,23.5815280904016,39.4620953255253,3.0,Colombia,1.0
+colombia,2020Q4,23.1621927195539,40.5687587876335,3.0,Colombia,1.0
+colombia,2021Q1,24.9115050929432,40.7668257385779,3.0,Colombia,1.0
+colombia,2021Q2,24.6915033757981,40.175911626,3.0,Colombia,1.0
+colombia,2021Q3,23.8289001103635,39.2857837936788,3.0,Colombia,1.0
+colombia,2021Q4,24.7042737947455,37.8795036102571,3.0,Colombia,1.0
+colombia,2022Q1,22.0034210059301,37.8228731899321,3.0,Colombia,1.0
+colombia,2022Q2,22.7242815723692,36.2688836228225,3.0,Colombia,1.0
+colombia,2022Q3,23.5173181910442,34.5637967520021,3.0,Colombia,1.0
+colombia,2022Q4,24.8436877640599,34.4831516283398,3.0,Colombia,1.0
+colombia,2023Q1,23.5857493513408,36.1156134418614,3.0,Colombia,1.0
+colombia,2023Q2,20.4612764835112,37.1447144019804,3.0,Colombia,1.0
+colombia,2023Q3,19.6224384102074,37.3442463693229,3.0,Colombia,1.0
+colombia,2023Q4,19.0113687557913,37.4091851280829,3.0,Colombia,1.0
+colombia,2024Q1,18.8663394637875,38.3868236184298,3.0,Colombia,1.0
+colombia,2024Q2,19.9926026424042,40.004948255009,3.0,Colombia,1.0
+colombia,2024Q3,19.7183229819673,40.3315863609937,3.0,Colombia,1.0
+colombia,2024Q4,20.7566711706655,40.659163092778,3.0,Colombia,1.0
+colombia,2025Q1,19.1112304713094,40.589462782337,3.0,Colombia,1.0
+colombia,2025Q2,18.9402257890078,41.9044086331727,3.0,Colombia,1.0
+colombia,2025Q3,17.8010177858427,44.0627321082892,3.0,Colombia,1.0
+colombia,2025Q4,17.0270494433862,45.2591585315757,3.0,Colombia,1.0
+colombia,2026Q1,16.9050283076499,45.9892523220972,,,
+colombia,2026Q2,13.6643749238634,46.5795487617691,,,
+india,2000Q1,,,2.0,India,0.0
+india,2000Q2,,,2.0,India,0.0
+india,2000Q3,,,2.0,India,0.0
+india,2000Q4,,,2.0,India,0.0
+india,2001Q1,,,2.0,India,0.0
+india,2001Q2,,,2.0,India,0.0
+india,2001Q3,,,2.0,India,0.0
+india,2001Q4,,,2.0,India,0.0
+india,2002Q1,,,2.0,India,0.0
+india,2002Q2,,,2.0,India,0.0
+india,2002Q3,,,2.0,India,0.0
+india,2002Q4,,,2.0,India,0.0
+india,2003Q1,,,2.0,India,0.0
+india,2003Q2,,,2.0,India,0.0
+india,2003Q3,,,2.0,India,0.0
+india,2003Q4,,,2.0,India,0.0
+india,2004Q1,,,2.0,India,0.0
+india,2004Q2,,,2.0,India,0.0
+india,2004Q3,,,2.0,India,0.0
+india,2004Q4,,,2.0,India,0.0
+india,2005Q1,,,2.0,India,0.0
+india,2005Q2,,,2.0,India,0.0
+india,2005Q3,,,2.0,India,0.0
+india,2005Q4,,,2.0,India,0.0
+india,2006Q1,,,2.0,India,0.0
+india,2006Q2,,,2.0,India,0.0
+india,2006Q3,,,2.0,India,0.0
+india,2006Q4,,,2.0,India,0.0
+india,2007Q1,,,2.0,India,0.0
+india,2007Q2,,,2.0,India,0.0
+india,2007Q3,,,2.0,India,0.0
+india,2007Q4,,,2.0,India,0.0
+india,2008Q1,,,2.0,India,0.0
+india,2008Q2,,,2.0,India,0.0
+india,2008Q3,,,2.0,India,0.0
+india,2008Q4,,,2.0,India,0.0
+india,2009Q1,,,3.0,India,1.0
+india,2009Q2,,,3.0,India,1.0
+india,2009Q3,,,3.0,India,1.0
+india,2009Q4,,,3.0,India,1.0
+india,2010Q1,,,3.0,India,1.0
+india,2010Q2,,,3.0,India,1.0
+india,2010Q3,,,3.0,India,1.0
+india,2010Q4,,,3.0,India,1.0
+india,2011Q1,,,3.0,India,1.0
+india,2011Q2,,,3.0,India,1.0
+india,2011Q3,,,3.0,India,1.0
+india,2011Q4,,,3.0,India,1.0
+india,2012Q1,,,3.0,India,1.0
+india,2012Q2,,,3.0,India,1.0
+india,2012Q3,,,3.0,India,1.0
+india,2012Q4,,,3.0,India,1.0
+india,2013Q1,,,3.0,India,1.0
+india,2013Q2,,,3.0,India,1.0
+india,2013Q3,,,3.0,India,1.0
+india,2013Q4,,,3.0,India,1.0
+india,2014Q1,,,3.0,India,1.0
+india,2014Q2,,,3.0,India,1.0
+india,2014Q3,,,3.0,India,1.0
+india,2014Q4,,,3.0,India,1.0
+india,2015Q1,,,3.0,India,1.0
+india,2015Q2,,,3.0,India,1.0
+india,2015Q3,,,3.0,India,1.0
+india,2015Q4,,,3.0,India,1.0
+india,2016Q1,,,3.0,India,1.0
+india,2016Q2,,,3.0,India,1.0
+india,2016Q3,,,3.0,India,1.0
+india,2016Q4,,,3.0,India,1.0
+india,2017Q1,,,3.0,India,1.0
+india,2017Q2,,,3.0,India,1.0
+india,2017Q3,,,3.0,India,1.0
+india,2017Q4,,,3.0,India,1.0
+india,2018Q1,,,3.0,India,1.0
+india,2018Q2,,,3.0,India,1.0
+india,2018Q3,,,3.0,India,1.0
+india,2018Q4,,,3.0,India,1.0
+india,2019Q1,,,3.0,India,1.0
+india,2019Q2,,,3.0,India,1.0
+india,2019Q3,,,3.0,India,1.0
+india,2019Q4,,,3.0,India,1.0
+india,2020Q1,,,3.0,India,1.0
+india,2020Q2,,,3.0,India,1.0
+india,2020Q3,,,3.0,India,1.0
+india,2020Q4,,,3.0,India,1.0
+india,2021Q1,,,3.0,India,1.0
+india,2021Q2,,,3.0,India,1.0
+india,2021Q3,,,3.0,India,1.0
+india,2021Q4,,,3.0,India,1.0
+india,2022Q1,,,3.0,India,1.0
+india,2022Q2,,,3.0,India,1.0
+india,2022Q3,,,3.0,India,1.0
+india,2022Q4,,,3.0,India,1.0
+india,2023Q1,,,3.0,India,1.0
+india,2023Q2,,,3.0,India,1.0
+india,2023Q3,,,3.0,India,1.0
+india,2023Q4,,,3.0,India,1.0
+india,2024Q1,,,3.0,India,1.0
+india,2024Q2,,,3.0,India,1.0
+india,2024Q3,,,3.0,India,1.0
+india,2024Q4,,,3.0,India,1.0
+india,2025Q1,,,3.0,India,1.0
+india,2025Q2,,,3.0,India,1.0
+india,2025Q3,,,3.0,India,1.0
+india,2025Q4,,,3.0,India,1.0
+indonesia,2000Q1,,,3.0,Indonesia,1.0
+indonesia,2000Q2,,,3.0,Indonesia,1.0
+indonesia,2000Q3,,,3.0,Indonesia,1.0
+indonesia,2000Q4,,,3.0,Indonesia,1.0
+indonesia,2001Q1,,,3.0,Indonesia,1.0
+indonesia,2001Q2,,,3.0,Indonesia,1.0
+indonesia,2001Q3,,,3.0,Indonesia,1.0
+indonesia,2001Q4,,,3.0,Indonesia,1.0
+indonesia,2002Q1,,,3.0,Indonesia,1.0
+indonesia,2002Q2,,,3.0,Indonesia,1.0
+indonesia,2002Q3,,,3.0,Indonesia,1.0
+indonesia,2002Q4,,,3.0,Indonesia,1.0
+indonesia,2003Q1,,,3.0,Indonesia,1.0
+indonesia,2003Q2,,,3.0,Indonesia,1.0
+indonesia,2003Q3,,,3.0,Indonesia,1.0
+indonesia,2003Q4,,,3.0,Indonesia,1.0
+indonesia,2004Q1,,,3.0,Indonesia,1.0
+indonesia,2004Q2,,,3.0,Indonesia,1.0
+indonesia,2004Q3,,,3.0,Indonesia,1.0
+indonesia,2004Q4,,,3.0,Indonesia,1.0
+indonesia,2005Q1,,,3.0,Indonesia,1.0
+indonesia,2005Q2,,,3.0,Indonesia,1.0
+indonesia,2005Q3,,,3.0,Indonesia,1.0
+indonesia,2005Q4,,,3.0,Indonesia,1.0
+indonesia,2006Q1,,,3.0,Indonesia,1.0
+indonesia,2006Q2,,,3.0,Indonesia,1.0
+indonesia,2006Q3,,,3.0,Indonesia,1.0
+indonesia,2006Q4,,,3.0,Indonesia,1.0
+indonesia,2007Q1,,,3.0,Indonesia,1.0
+indonesia,2007Q2,,,3.0,Indonesia,1.0
+indonesia,2007Q3,,,2.0,Indonesia,0.0
+indonesia,2007Q4,,,2.0,Indonesia,0.0
+indonesia,2008Q1,,,2.0,Indonesia,0.0
+indonesia,2008Q2,,,2.0,Indonesia,0.0
+indonesia,2008Q3,,,2.0,Indonesia,0.0
+indonesia,2008Q4,,,2.0,Indonesia,0.0
+indonesia,2009Q1,,,2.0,Indonesia,0.0
+indonesia,2009Q2,,,2.0,Indonesia,0.0
+indonesia,2009Q3,,,2.0,Indonesia,0.0
+indonesia,2009Q4,,,2.0,Indonesia,0.0
+indonesia,2010Q1,11.3279402846538,12.9550785369567,2.0,Indonesia,0.0
+indonesia,2010Q2,10.8149735602511,12.9654374390299,2.0,Indonesia,0.0
+indonesia,2010Q3,10.7959311619947,13.0624894229785,2.0,Indonesia,0.0
+indonesia,2010Q4,10.8482727388602,12.5753033125337,2.0,Indonesia,0.0
+indonesia,2011Q1,10.0655279504212,12.5792591760691,2.0,Indonesia,0.0
+indonesia,2011Q2,9.96958160408504,12.4979582167145,2.0,Indonesia,0.0
+indonesia,2011Q3,9.90851057412154,12.0702244420733,2.0,Indonesia,0.0
+indonesia,2011Q4,9.96714609856642,12.1309630443258,2.0,Indonesia,0.0
+indonesia,2012Q1,9.83245765637748,12.3242830434688,2.0,Indonesia,0.0
+indonesia,2012Q2,10.0892573215837,12.4518031851879,2.0,Indonesia,0.0
+indonesia,2012Q3,10.2135311581146,12.6046819322961,2.0,Indonesia,0.0
+indonesia,2012Q4,9.95593866600081,12.4586229412864,2.0,Indonesia,0.0
+indonesia,2013Q1,9.35644551237778,12.4801505575929,2.0,Indonesia,0.0
+indonesia,2013Q2,9.38408495455689,12.4118970713041,2.0,Indonesia,0.0
+indonesia,2013Q3,10.9419224380379,12.5011922298088,2.0,Indonesia,0.0
+indonesia,2013Q4,11.0247241296007,12.6301680698717,2.0,Indonesia,0.0
+indonesia,2014Q1,10.4731635572884,13.2052983523404,2.0,Indonesia,0.0
+indonesia,2014Q2,10.5608089363737,13.4364136797696,2.0,Indonesia,0.0
+indonesia,2014Q3,10.5787099169103,13.7433773169956,2.0,Indonesia,0.0
+indonesia,2014Q4,10.3429629416809,13.5548021483948,2.0,Indonesia,0.0
+indonesia,2015Q1,10.9638875416341,14.0816059397236,2.0,Indonesia,0.0
+indonesia,2015Q2,9.64919134822195,12.2765715591557,2.0,Indonesia,0.0
+indonesia,2015Q3,12.0187443827094,14.5022288181262,2.0,Indonesia,0.0
+indonesia,2015Q4,11.4650036957061,14.8088011430157,2.0,Indonesia,0.0
+indonesia,2016Q1,11.6807040941061,15.3154515399748,2.0,Indonesia,0.0
+indonesia,2016Q2,11.8353528941856,15.5960293480522,2.0,Indonesia,0.0
+indonesia,2016Q3,11.5533226461933,15.9719295716133,2.0,Indonesia,0.0
+indonesia,2016Q4,11.2728870991125,15.7201549327387,2.0,Indonesia,0.0
+indonesia,2017Q1,11.5291225591304,16.1348025677895,2.0,Indonesia,0.0
+indonesia,2017Q2,11.2794353959049,16.3363481339231,2.0,Indonesia,0.0
+indonesia,2017Q3,11.5346603801559,16.6698701667456,2.0,Indonesia,0.0
+indonesia,2017Q4,11.3410910338731,16.7186237637313,2.0,Indonesia,0.0
+indonesia,2018Q1,11.9509190712452,16.8341023248671,2.0,Indonesia,0.0
+indonesia,2018Q2,12.2715826273413,16.5070309788468,2.0,Indonesia,0.0
+indonesia,2018Q3,12.4560366427288,16.9171611811341,2.0,Indonesia,0.0
+indonesia,2018Q4,12.1726594717356,17.0964987095566,2.0,Indonesia,0.0
+indonesia,2019Q1,11.5971210473628,17.8458216216584,2.0,Indonesia,0.0
+indonesia,2019Q2,11.5715701141296,17.3639071690015,2.0,Indonesia,0.0
+indonesia,2019Q3,11.4201740231939,18.0952572794682,2.0,Indonesia,0.0
+indonesia,2019Q4,11.2761464126775,18.4596065896083,2.0,Indonesia,0.0
+indonesia,2020Q1,13.3545877544486,18.968237991095,3.0,Indonesia,1.0
+indonesia,2020Q2,13.4359650739358,22.3849006315348,3.0,Indonesia,1.0
+indonesia,2020Q3,13.851147124908,23.8165309458969,3.0,Indonesia,1.0
+indonesia,2020Q4,12.9777004198921,25.6763761431118,3.0,Indonesia,1.0
+indonesia,2021Q1,13.0614112841907,26.6287279397969,3.0,Indonesia,1.0
+indonesia,2021Q2,12.6906425820509,26.6968533524751,3.0,Indonesia,1.0
+indonesia,2021Q3,12.2886890587191,27.127096827112,3.0,Indonesia,1.0
+indonesia,2021Q4,11.5454854804984,26.8735400206299,3.0,Indonesia,1.0
+indonesia,2022Q1,11.2802081083155,27.0225540229525,3.0,Indonesia,1.0
+indonesia,2022Q2,11.0350448128954,25.6493781729732,3.0,Indonesia,1.0
+indonesia,2022Q3,11.0148230467967,26.3011354859938,3.0,Indonesia,1.0
+indonesia,2022Q4,11.2746299497256,26.8023918674193,3.0,Indonesia,1.0
+indonesia,2023Q1,10.6456413925229,27.4982342438655,3.0,Indonesia,1.0
+indonesia,2023Q2,10.5576314081587,27.2405980377457,3.0,Indonesia,1.0
+indonesia,2023Q3,10.6459946917008,27.174055073101,3.0,Indonesia,1.0
+indonesia,2023Q4,11.0645460908376,27.5678315400253,3.0,Indonesia,1.0
+indonesia,2024Q1,10.9190451066577,27.4155001190968,3.0,Indonesia,1.0
+indonesia,2024Q2,11.3812386050888,27.4100591552269,3.0,Indonesia,1.0
+indonesia,2024Q3,11.4455507374791,29.5057298723671,3.0,Indonesia,1.0
+indonesia,2024Q4,11.2081428704842,27.7704412607092,3.0,Indonesia,1.0
+indonesia,2025Q1,11.441355393398,27.9771164254379,3.0,Indonesia,1.0
+indonesia,2025Q2,10.9649445669966,27.8261829676354,3.0,Indonesia,1.0
+indonesia,2025Q3,11.1049971109173,28.0847528737648,3.0,Indonesia,1.0
+indonesia,2025Q4,11.5646081563432,27.6749239613345,3.0,Indonesia,1.0
+indonesia,2026Q1,11.3916488231883,27.9167693647104,,,
+indonesia,2026Q2,12.0303923592562,27.6864176770621,,,
+malaysia,2000Q1,,,1.0,Malaysia,0.0
+malaysia,2000Q2,,,1.0,Malaysia,0.0
+malaysia,2000Q3,,,1.0,Malaysia,0.0
+malaysia,2000Q4,,,1.0,Malaysia,0.0
+malaysia,2001Q1,,,1.0,Malaysia,0.0
+malaysia,2001Q2,,,1.0,Malaysia,0.0
+malaysia,2001Q3,,,1.0,Malaysia,0.0
+malaysia,2001Q4,,,1.0,Malaysia,0.0
+malaysia,2002Q1,,,1.0,Malaysia,0.0
+malaysia,2002Q2,,,1.0,Malaysia,0.0
+malaysia,2002Q3,,,1.0,Malaysia,0.0
+malaysia,2002Q4,,,1.0,Malaysia,0.0
+malaysia,2003Q1,,,1.0,Malaysia,0.0
+malaysia,2003Q2,,,1.0,Malaysia,0.0
+malaysia,2003Q3,,,1.0,Malaysia,0.0
+malaysia,2003Q4,,,1.0,Malaysia,0.0
+malaysia,2004Q1,,,1.0,Malaysia,0.0
+malaysia,2004Q2,,,1.0,Malaysia,0.0
+malaysia,2004Q3,,,1.0,Malaysia,0.0
+malaysia,2004Q4,,,1.0,Malaysia,0.0
+malaysia,2005Q1,,,1.0,Malaysia,0.0
+malaysia,2005Q2,,,1.0,Malaysia,0.0
+malaysia,2005Q3,,,3.0,Malaysia,1.0
+malaysia,2005Q4,,,3.0,Malaysia,1.0
+malaysia,2006Q1,,,3.0,Malaysia,1.0
+malaysia,2006Q2,,,3.0,Malaysia,1.0
+malaysia,2006Q3,,,3.0,Malaysia,1.0
+malaysia,2006Q4,,,3.0,Malaysia,1.0
+malaysia,2007Q1,,,3.0,Malaysia,1.0
+malaysia,2007Q2,,,3.0,Malaysia,1.0
+malaysia,2007Q3,,,3.0,Malaysia,1.0
+malaysia,2007Q4,,,3.0,Malaysia,1.0
+malaysia,2008Q1,,,3.0,Malaysia,1.0
+malaysia,2008Q2,,,3.0,Malaysia,1.0
+malaysia,2008Q3,,,3.0,Malaysia,1.0
+malaysia,2008Q4,,,3.0,Malaysia,1.0
+malaysia,2009Q1,,,3.0,Malaysia,1.0
+malaysia,2009Q2,,,3.0,Malaysia,1.0
+malaysia,2009Q3,,,3.0,Malaysia,1.0
+malaysia,2009Q4,,,3.0,Malaysia,1.0
+malaysia,2010Q1,,,3.0,Malaysia,1.0
+malaysia,2010Q2,,,3.0,Malaysia,1.0
+malaysia,2010Q3,,,3.0,Malaysia,1.0
+malaysia,2010Q4,,,3.0,Malaysia,1.0
+malaysia,2011Q1,,,3.0,Malaysia,1.0
+malaysia,2011Q2,,,3.0,Malaysia,1.0
+malaysia,2011Q3,,,3.0,Malaysia,1.0
+malaysia,2011Q4,,,3.0,Malaysia,1.0
+malaysia,2012Q1,,,3.0,Malaysia,1.0
+malaysia,2012Q2,,,3.0,Malaysia,1.0
+malaysia,2012Q3,,,3.0,Malaysia,1.0
+malaysia,2012Q4,,,3.0,Malaysia,1.0
+malaysia,2013Q1,,,3.0,Malaysia,1.0
+malaysia,2013Q2,,,3.0,Malaysia,1.0
+malaysia,2013Q3,,,3.0,Malaysia,1.0
+malaysia,2013Q4,,,3.0,Malaysia,1.0
+malaysia,2014Q1,,,3.0,Malaysia,1.0
+malaysia,2014Q2,,,3.0,Malaysia,1.0
+malaysia,2014Q3,,,3.0,Malaysia,1.0
+malaysia,2014Q4,,,3.0,Malaysia,1.0
+malaysia,2015Q1,,,3.0,Malaysia,1.0
+malaysia,2015Q2,,,3.0,Malaysia,1.0
+malaysia,2015Q3,,,3.0,Malaysia,1.0
+malaysia,2015Q4,,,3.0,Malaysia,1.0
+malaysia,2016Q1,,,3.0,Malaysia,1.0
+malaysia,2016Q2,,,3.0,Malaysia,1.0
+malaysia,2016Q3,,,3.0,Malaysia,1.0
+malaysia,2016Q4,,,3.0,Malaysia,1.0
+malaysia,2017Q1,,,3.0,Malaysia,1.0
+malaysia,2017Q2,,,3.0,Malaysia,1.0
+malaysia,2017Q3,,,3.0,Malaysia,1.0
+malaysia,2017Q4,,,3.0,Malaysia,1.0
+malaysia,2018Q1,,,3.0,Malaysia,1.0
+malaysia,2018Q2,,,3.0,Malaysia,1.0
+malaysia,2018Q3,,,3.0,Malaysia,1.0
+malaysia,2018Q4,,,3.0,Malaysia,1.0
+malaysia,2019Q1,,,3.0,Malaysia,1.0
+malaysia,2019Q2,,,3.0,Malaysia,1.0
+malaysia,2019Q3,,,3.0,Malaysia,1.0
+malaysia,2019Q4,,,3.0,Malaysia,1.0
+malaysia,2020Q1,,,3.0,Malaysia,1.0
+malaysia,2020Q2,,,3.0,Malaysia,1.0
+malaysia,2020Q3,,,3.0,Malaysia,1.0
+malaysia,2020Q4,,,3.0,Malaysia,1.0
+malaysia,2021Q1,,,3.0,Malaysia,1.0
+malaysia,2021Q2,,,3.0,Malaysia,1.0
+malaysia,2021Q3,,,3.0,Malaysia,1.0
+malaysia,2021Q4,,,3.0,Malaysia,1.0
+malaysia,2022Q1,,,3.0,Malaysia,1.0
+malaysia,2022Q2,,,3.0,Malaysia,1.0
+malaysia,2022Q3,,,3.0,Malaysia,1.0
+malaysia,2022Q4,,,3.0,Malaysia,1.0
+malaysia,2023Q1,,,3.0,Malaysia,1.0
+malaysia,2023Q2,,,3.0,Malaysia,1.0
+malaysia,2023Q3,,,3.0,Malaysia,1.0
+malaysia,2023Q4,,,3.0,Malaysia,1.0
+malaysia,2024Q1,,,3.0,Malaysia,1.0
+malaysia,2024Q2,,,3.0,Malaysia,1.0
+malaysia,2024Q3,,,3.0,Malaysia,1.0
+malaysia,2024Q4,,,3.0,Malaysia,1.0
+malaysia,2025Q1,,,3.0,Malaysia,1.0
+malaysia,2025Q2,,,3.0,Malaysia,1.0
+malaysia,2025Q3,,,3.0,Malaysia,1.0
+malaysia,2025Q4,,,3.0,Malaysia,1.0
+mexico,2000Q1,,,3.0,Mexico,1.0
+mexico,2000Q2,,,3.0,Mexico,1.0
+mexico,2000Q3,,,3.0,Mexico,1.0
+mexico,2000Q4,,,3.0,Mexico,1.0
+mexico,2001Q1,,,3.0,Mexico,1.0
+mexico,2001Q2,,,3.0,Mexico,1.0
+mexico,2001Q3,,,3.0,Mexico,1.0
+mexico,2001Q4,,,3.0,Mexico,1.0
+mexico,2002Q1,,,3.0,Mexico,1.0
+mexico,2002Q2,,,3.0,Mexico,1.0
+mexico,2002Q3,,,3.0,Mexico,1.0
+mexico,2002Q4,,,3.0,Mexico,1.0
+mexico,2003Q1,,,3.0,Mexico,1.0
+mexico,2003Q2,,,3.0,Mexico,1.0
+mexico,2003Q3,,,3.0,Mexico,1.0
+mexico,2003Q4,,,3.0,Mexico,1.0
+mexico,2004Q1,,,3.0,Mexico,1.0
+mexico,2004Q2,,,3.0,Mexico,1.0
+mexico,2004Q3,,,3.0,Mexico,1.0
+mexico,2004Q4,,,3.0,Mexico,1.0
+mexico,2005Q1,,,3.0,Mexico,1.0
+mexico,2005Q2,,,3.0,Mexico,1.0
+mexico,2005Q3,,,3.0,Mexico,1.0
+mexico,2005Q4,,,3.0,Mexico,1.0
+mexico,2006Q1,,,3.0,Mexico,1.0
+mexico,2006Q2,,,3.0,Mexico,1.0
+mexico,2006Q3,,,3.0,Mexico,1.0
+mexico,2006Q4,,,3.0,Mexico,1.0
+mexico,2007Q1,,,3.0,Mexico,1.0
+mexico,2007Q2,,,3.0,Mexico,1.0
+mexico,2007Q3,,,3.0,Mexico,1.0
+mexico,2007Q4,,,3.0,Mexico,1.0
+mexico,2008Q1,3.64241024279473,17.4707066351543,3.0,Mexico,1.0
+mexico,2008Q2,3.41062866659286,17.4015322462265,3.0,Mexico,1.0
+mexico,2008Q3,3.40952466846587,17.576483159879,3.0,Mexico,1.0
+mexico,2008Q4,4.37045507639439,20.1131034187644,3.0,Mexico,1.0
+mexico,2009Q1,4.40456782127498,20.9039281045847,3.0,Mexico,1.0
+mexico,2009Q2,4.17734710256494,22.2625746186856,3.0,Mexico,1.0
+mexico,2009Q3,4.56987445559851,23.4496313734154,3.0,Mexico,1.0
+mexico,2009Q4,4.98905104642573,23.1117244589918,3.0,Mexico,1.0
+mexico,2010Q1,4.60447056330155,23.7124236160441,3.0,Mexico,1.0
+mexico,2010Q2,4.69197054541494,23.8626347967432,3.0,Mexico,1.0
+mexico,2010Q3,4.68033679237888,23.740468433823,3.0,Mexico,1.0
+mexico,2010Q4,5.05912397343685,22.8641596368939,3.0,Mexico,1.0
+mexico,2011Q1,4.78699968137286,23.1569312322182,3.0,Mexico,1.0
+mexico,2011Q2,4.78138068316997,23.3172950037726,3.0,Mexico,1.0
+mexico,2011Q3,5.3987170680226,23.8457754014269,3.0,Mexico,1.0
+mexico,2011Q4,5.62161023335153,23.4565598978447,3.0,Mexico,1.0
+mexico,2012Q1,5.25652150766967,24.1115521323306,3.0,Mexico,1.0
+mexico,2012Q2,5.56929648530017,23.5625353172393,3.0,Mexico,1.0
+mexico,2012Q3,5.2139932251758,24.4374275116335,3.0,Mexico,1.0
+mexico,2012Q4,5.30982767144829,24.2164678539528,3.0,Mexico,1.0
+mexico,2013Q1,5.00049674167566,25.2000845364015,3.0,Mexico,1.0
+mexico,2013Q2,5.34686095709234,25.5442717124901,3.0,Mexico,1.0
+mexico,2013Q3,5.32335716889485,26.364292386877,3.0,Mexico,1.0
+mexico,2013Q4,5.5672212024796,26.7599414573749,3.0,Mexico,1.0
+mexico,2014Q1,5.62249146819609,27.6596673303885,3.0,Mexico,1.0
+mexico,2014Q2,5.72804316218415,27.8209794120239,3.0,Mexico,1.0
+mexico,2014Q3,5.80697990944197,28.3664982809451,3.0,Mexico,1.0
+mexico,2014Q4,6.37592500541388,27.8184871418793,3.0,Mexico,1.0
+mexico,2015Q1,6.74161504635428,28.1043804143887,3.0,Mexico,1.0
+mexico,2015Q2,6.91069684556444,27.9771558702439,3.0,Mexico,1.0
+mexico,2015Q3,7.42515076697348,28.2663523375507,3.0,Mexico,1.0
+mexico,2015Q4,7.39031917884339,29.1035682357294,3.0,Mexico,1.0
+mexico,2016Q1,7.87652424726867,29.4722685765376,4.0,Mexico,1.0
+mexico,2016Q2,8.58707636603189,28.0312100504105,4.0,Mexico,1.0
+mexico,2016Q3,8.51056440437856,28.7888056664805,4.0,Mexico,1.0
+mexico,2016Q4,8.80406784778718,29.4795932354537,4.0,Mexico,1.0
+mexico,2017Q1,7.97264708841133,29.1411978523706,4.0,Mexico,1.0
+mexico,2017Q2,7.3445369836805,28.9226761506681,4.0,Mexico,1.0
+mexico,2017Q3,7.40910813683623,29.2791415948811,4.0,Mexico,1.0
+mexico,2017Q4,7.99610039137769,28.5533011732678,4.0,Mexico,1.0
+mexico,2018Q1,7.73171459696595,29.0481302982986,4.0,Mexico,1.0
+mexico,2018Q2,8.28517776428671,28.6620520185781,4.0,Mexico,1.0
+mexico,2018Q3,7.63685107487327,28.9501205342826,4.0,Mexico,1.0
+mexico,2018Q4,7.80305546126815,28.8225379455063,4.0,Mexico,1.0
+mexico,2019Q1,7.71903193459575,28.7230259962244,4.0,Mexico,1.0
+mexico,2019Q2,7.82199568125704,28.6419376708471,4.0,Mexico,1.0
+mexico,2019Q3,7.99607363932454,29.2971489236425,4.0,Mexico,1.0
+mexico,2019Q4,7.4695454131309,29.8633937131466,4.0,Mexico,1.0
+mexico,2020Q1,9.4916564666249,29.9729258570939,4.0,Mexico,1.0
+mexico,2020Q2,10.3325034590371,32.0470959180176,4.0,Mexico,1.0
+mexico,2020Q3,10.3931165587288,32.8461092850966,4.0,Mexico,1.0
+mexico,2020Q4,9.30368873509798,33.3954945975067,4.0,Mexico,1.0
+mexico,2021Q1,9.79392281941536,34.1549817179909,4.0,Mexico,1.0
+mexico,2021Q2,8.84470257942999,32.6857309335128,4.0,Mexico,1.0
+mexico,2021Q3,8.91977461293897,33.4056694449741,4.0,Mexico,1.0
+mexico,2021Q4,8.85633211684179,33.5367995455562,4.0,Mexico,1.0
+mexico,2022Q1,8.73149367469111,34.4572418576461,4.0,Mexico,1.0
+mexico,2022Q2,8.23341810618986,34.2307442028155,4.0,Mexico,1.0
+mexico,2022Q3,8.04217565724588,34.2269878147059,4.0,Mexico,1.0
+mexico,2022Q4,7.56585781557036,33.9704190565578,4.0,Mexico,1.0
+mexico,2023Q1,7.16497275783692,35.1968871690669,4.0,Mexico,1.0
+mexico,2023Q2,6.64307694356704,35.3892031885978,4.0,Mexico,1.0
+mexico,2023Q3,6.67138340710207,36.1232480009271,4.0,Mexico,1.0
+mexico,2023Q4,6.31324529027854,35.5780567846685,4.0,Mexico,1.0
+mexico,2024Q1,6.64485145056444,37.5342002601337,4.0,Mexico,1.0
+mexico,2024Q2,7.09056126257439,38.6243966098045,4.0,Mexico,1.0
+mexico,2024Q3,7.62630388517613,39.9000208421019,4.0,Mexico,1.0
+mexico,2024Q4,7.55148022612806,40.3180793863143,4.0,Mexico,1.0
+mexico,2025Q1,8.25323431744883,40.5428255579906,4.0,Mexico,1.0
+mexico,2025Q2,7.68359725334931,41.0056832296065,4.0,Mexico,1.0
+mexico,2025Q3,8.05575677167194,42.4666456098633,4.0,Mexico,1.0
+mexico,2025Q4,7.73740610304776,43.3904057186373,4.0,Mexico,1.0
+mexico,2026Q1,8.42347065196894,43.5786995286808,,,
+mexico,2026Q2,8.27953551483173,43.7889036150148,,,
+peru,2000Q1,,,2.0,Peru,0.0
+peru,2000Q2,,,2.0,Peru,0.0
+peru,2000Q3,,,2.0,Peru,0.0
+peru,2000Q4,,,2.0,Peru,0.0
+peru,2001Q1,,,2.0,Peru,0.0
+peru,2001Q2,,,2.0,Peru,0.0
+peru,2001Q3,,,2.0,Peru,0.0
+peru,2001Q4,,,2.0,Peru,0.0
+peru,2002Q1,,,2.0,Peru,0.0
+peru,2002Q2,,,2.0,Peru,0.0
+peru,2002Q3,,,2.0,Peru,0.0
+peru,2002Q4,,,2.0,Peru,0.0
+peru,2003Q1,,,3.0,Peru,1.0
+peru,2003Q2,,,3.0,Peru,1.0
+peru,2003Q3,,,3.0,Peru,1.0
+peru,2003Q4,,,3.0,Peru,1.0
+peru,2004Q1,,,3.0,Peru,1.0
+peru,2004Q2,,,3.0,Peru,1.0
+peru,2004Q3,,,3.0,Peru,1.0
+peru,2004Q4,,,3.0,Peru,1.0
+peru,2005Q1,,,3.0,Peru,1.0
+peru,2005Q2,,,3.0,Peru,1.0
+peru,2005Q3,,,3.0,Peru,1.0
+peru,2005Q4,,,3.0,Peru,1.0
+peru,2006Q1,,,3.0,Peru,1.0
+peru,2006Q2,,,3.0,Peru,1.0
+peru,2006Q3,,,3.0,Peru,1.0
+peru,2006Q4,,,3.0,Peru,1.0
+peru,2007Q1,,,3.0,Peru,1.0
+peru,2007Q2,,,3.0,Peru,1.0
+peru,2007Q3,,,3.0,Peru,1.0
+peru,2007Q4,,,3.0,Peru,1.0
+peru,2008Q1,,,3.0,Peru,1.0
+peru,2008Q2,,,3.0,Peru,1.0
+peru,2008Q3,,,3.0,Peru,1.0
+peru,2008Q4,,,3.0,Peru,1.0
+peru,2009Q1,,,3.0,Peru,1.0
+peru,2009Q2,,,3.0,Peru,1.0
+peru,2009Q3,,,3.0,Peru,1.0
+peru,2009Q4,,,3.0,Peru,1.0
+peru,2010Q1,15.3168495081871,9.9813279617785,3.0,Peru,1.0
+peru,2010Q2,14.2048243343814,9.7945524730701,3.0,Peru,1.0
+peru,2010Q3,13.769931577887,9.73021640887125,3.0,Peru,1.0
+peru,2010Q4,13.1359409190372,10.7778369611118,3.0,Peru,1.0
+peru,2011Q1,12.7478084571863,10.1067297008274,3.0,Peru,1.0
+peru,2011Q2,12.0706817747931,9.75374802070817,3.0,Peru,1.0
+peru,2011Q3,11.8099059893497,9.41331879104954,3.0,Peru,1.0
+peru,2011Q4,11.2222835266537,10.2468243247528,3.0,Peru,1.0
+peru,2012Q1,10.8985618254659,9.45491826970305,3.0,Peru,1.0
+peru,2012Q2,10.6511984534848,9.13972722899996,3.0,Peru,1.0
+peru,2012Q3,10.1868261660504,9.2013133650843,2.0,Peru,0.0
+peru,2012Q4,9.73615900401353,10.0457131354957,2.0,Peru,0.0
+peru,2013Q1,9.3899480841132,9.4331184462873,2.0,Peru,0.0
+peru,2013Q2,9.11534051862499,9.46164644427601,2.0,Peru,0.0
+peru,2013Q3,8.94531546982119,9.33915099422904,2.0,Peru,0.0
+peru,2013Q4,8.76678229402159,10.2446375325591,2.0,Peru,0.0
+peru,2014Q1,8.65229850715463,9.35862756863636,2.0,Peru,0.0
+peru,2014Q2,8.51767305034281,9.53875250029573,2.0,Peru,0.0
+peru,2014Q3,8.58295562437996,9.58398752021119,2.0,Peru,0.0
+peru,2014Q4,8.49532692848928,10.9931701637911,2.0,Peru,0.0
+peru,2015Q1,8.85296421433362,10.8520615176278,2.0,Peru,0.0
+peru,2015Q2,8.85665662509716,10.852942638295,2.0,Peru,0.0
+peru,2015Q3,9.84896729804018,11.0201064493023,2.0,Peru,0.0
+peru,2015Q4,10.8228786477212,12.0108697721468,2.0,Peru,0.0
+peru,2016Q1,11.0813086394704,11.4279281319446,2.0,Peru,0.0
+peru,2016Q2,10.6209094416799,11.53569372804,2.0,Peru,0.0
+peru,2016Q3,10.773250268994,11.6165396569474,2.0,Peru,0.0
+peru,2016Q4,10.1584236251974,13.3162468373672,2.0,Peru,0.0
+peru,2017Q1,9.43799721549718,13.6067929839741,2.0,Peru,0.0
+peru,2017Q2,9.29523911706752,13.9350954424071,2.0,Peru,0.0
+peru,2017Q3,7.80290921343364,15.44481939182,2.0,Peru,0.0
+peru,2017Q4,7.61421363660669,16.1567348094352,2.0,Peru,0.0
+peru,2018Q1,7.52163940724999,15.2116727989809,2.0,Peru,0.0
+peru,2018Q2,7.37589733442387,15.1691806282236,2.0,Peru,0.0
+peru,2018Q3,7.33238614834804,15.4677399833081,2.0,Peru,0.0
+peru,2018Q4,7.15524430493271,16.8482220406014,2.0,Peru,0.0
+peru,2019Q1,7.06125204515866,16.6337802874422,2.0,Peru,0.0
+peru,2019Q2,7.10370420149174,16.9492223510696,2.0,Peru,0.0
+peru,2019Q3,7.16380587098494,16.8939788793083,2.0,Peru,0.0
+peru,2019Q4,7.01438903445332,18.1871559256041,2.0,Peru,0.0
+peru,2020Q1,7.23846254466989,17.5280321034587,2.0,Peru,0.0
+peru,2020Q2,9.74400428220284,18.7106718168412,2.0,Peru,0.0
+peru,2020Q3,11.1504751961,19.1113163433006,2.0,Peru,0.0
+peru,2020Q4,13.2947371283471,19.8465209689867,3.0,Peru,1.0
+peru,2021Q1,15.7685906418653,18.5915686308107,3.0,Peru,1.0
+peru,2021Q2,14.803880573002,16.9702911886062,3.0,Peru,1.0
+peru,2021Q3,16.050068547906,16.2081815286512,3.0,Peru,1.0
+peru,2021Q4,17.2819513658982,16.3599698380187,3.0,Peru,1.0
+peru,2022Q1,15.5375389425371,15.6353001181583,3.0,Peru,1.0
+peru,2022Q2,15.6950370123256,15.581917431597,3.0,Peru,1.0
+peru,2022Q3,16.226614383624,15.6235578264674,3.0,Peru,1.0
+peru,2022Q4,15.5978933975395,16.1107177929754,3.0,Peru,1.0
+peru,2023Q1,15.2618559558892,15.579149127849,3.0,Peru,1.0
+peru,2023Q2,14.1397498281224,16.2510761977422,3.0,Peru,1.0
+peru,2023Q3,14.5494224326967,16.147671361669,3.0,Peru,1.0
+peru,2023Q4,14.2215464391946,17.0238867780533,3.0,Peru,1.0
+peru,2024Q1,14.3139436943146,16.388097182517,3.0,Peru,1.0
+peru,2024Q2,14.6471521076022,16.0950493431419,3.0,Peru,1.0
+peru,2024Q3,14.3916926992977,16.3818355218723,3.0,Peru,1.0
+peru,2024Q4,14.1284923372771,16.564043703422,3.0,Peru,1.0
+peru,2025Q1,13.5053620544905,16.1983462002219,3.0,Peru,1.0
+peru,2025Q2,13.7310404636004,16.6542434363935,3.0,Peru,1.0
+peru,2025Q3,12.8775627526436,16.8239115813491,3.0,Peru,1.0
+peru,2025Q4,12.0728024835074,17.0800370093033,3.0,Peru,1.0
+philippines,2000Q1,,,2.0,Philippines,0.0
+philippines,2000Q2,,,2.0,Philippines,0.0
+philippines,2000Q3,,,2.0,Philippines,0.0
+philippines,2000Q4,,,2.0,Philippines,0.0
+philippines,2001Q1,,,2.0,Philippines,0.0
+philippines,2001Q2,,,2.0,Philippines,0.0
+philippines,2001Q3,,,2.0,Philippines,0.0
+philippines,2001Q4,,,2.0,Philippines,0.0
+philippines,2002Q1,,,2.0,Philippines,0.0
+philippines,2002Q2,,,2.0,Philippines,0.0
+philippines,2002Q3,,,2.0,Philippines,0.0
+philippines,2002Q4,,,2.0,Philippines,0.0
+philippines,2003Q1,,,2.0,Philippines,0.0
+philippines,2003Q2,,,2.0,Philippines,0.0
+philippines,2003Q3,,,2.0,Philippines,0.0
+philippines,2003Q4,,,2.0,Philippines,0.0
+philippines,2004Q1,,,2.0,Philippines,0.0
+philippines,2004Q2,,,2.0,Philippines,0.0
+philippines,2004Q3,,,2.0,Philippines,0.0
+philippines,2004Q4,,,2.0,Philippines,0.0
+philippines,2005Q1,,,2.0,Philippines,0.0
+philippines,2005Q2,,,2.0,Philippines,0.0
+philippines,2005Q3,,,2.0,Philippines,0.0
+philippines,2005Q4,,,2.0,Philippines,0.0
+philippines,2006Q1,,,2.0,Philippines,0.0
+philippines,2006Q2,,,2.0,Philippines,0.0
+philippines,2006Q3,,,2.0,Philippines,0.0
+philippines,2006Q4,,,2.0,Philippines,0.0
+philippines,2007Q1,,,2.0,Philippines,0.0
+philippines,2007Q2,,,2.0,Philippines,0.0
+philippines,2007Q3,,,2.0,Philippines,0.0
+philippines,2007Q4,,,2.0,Philippines,0.0
+philippines,2008Q1,,,2.0,Philippines,0.0
+philippines,2008Q2,,,2.0,Philippines,0.0
+philippines,2008Q3,,,2.0,Philippines,0.0
+philippines,2008Q4,,,2.0,Philippines,0.0
+philippines,2009Q1,,,2.0,Philippines,0.0
+philippines,2009Q2,,,2.0,Philippines,0.0
+philippines,2009Q3,18.0645058491518,,2.0,Philippines,0.0
+philippines,2009Q4,17.7845920241755,,2.0,Philippines,0.0
+philippines,2010Q1,17.4335005356314,,2.0,Philippines,0.0
+philippines,2010Q2,17.4935613059584,,2.0,Philippines,0.0
+philippines,2010Q3,16.7121609776171,0.481878587533134,2.0,Philippines,0.0
+philippines,2010Q4,16.1931169775275,0.469272100416201,2.0,Philippines,0.0
+philippines,2011Q1,15.2341994398609,1.03009195045641,2.0,Philippines,0.0
+philippines,2011Q2,15.1194385247539,1.00989276342513,2.0,Philippines,0.0
+philippines,2011Q3,15.3800299708587,0.993725911811263,2.0,Philippines,0.0
+philippines,2011Q4,14.6641484824406,0.974690005066617,2.0,Philippines,0.0
+philippines,2012Q1,14.4292310594876,0.956924917529297,2.0,Philippines,0.0
+philippines,2012Q2,13.9480379768006,0.938025809043035,2.0,Philippines,0.0
+philippines,2012Q3,13.2379751726676,0.916815856444069,2.0,Philippines,0.0
+philippines,2012Q4,11.987655388976,1.17244210038451,2.0,Philippines,0.0
+philippines,2013Q1,11.0381763650605,1.14823503729453,2.0,Philippines,0.0
+philippines,2013Q2,11.2207652086226,1.1242486809941,2.0,Philippines,0.0
+philippines,2013Q3,11.0980596824147,1.10118554593204,2.0,Philippines,0.0
+philippines,2013Q4,10.6278700770283,1.07612140689333,2.0,Philippines,0.0
+philippines,2014Q1,10.6559270811484,1.05312050450389,2.0,Philippines,0.0
+philippines,2014Q2,10.1833951847268,1.02785036935284,2.0,Philippines,0.0
+philippines,2014Q3,10.3418053975698,1.00710308074349,2.0,Philippines,0.0
+philippines,2014Q4,9.64236182776782,0.981908733335627,2.0,Philippines,0.0
+philippines,2015Q1,9.61224932853462,0.969548818804289,2.0,Philippines,0.0
+philippines,2015Q2,9.46426119734991,0.955463473772995,2.0,Philippines,0.0
+philippines,2015Q3,9.49777000643019,0.944594756584117,2.0,Philippines,0.0
+philippines,2015Q4,9.49212116012201,0.929988064791884,2.0,Philippines,0.0
+philippines,2016Q1,9.41791927593537,0.914679771110912,2.0,Philippines,0.0
+philippines,2016Q2,9.5145363327934,0.895896446507453,2.0,Philippines,0.0
+philippines,2016Q3,9.53162042190286,0.876850991045966,2.0,Philippines,0.0
+philippines,2016Q4,9.19833779530047,0.85696359330885,2.0,Philippines,0.0
+philippines,2017Q1,9.11007970258046,0.839875493168185,2.0,Philippines,0.0
+philippines,2017Q2,8.90719298230151,0.820593531681696,2.0,Philippines,0.0
+philippines,2017Q3,8.79099329451658,0.801674503751787,2.0,Philippines,0.0
+philippines,2017Q4,8.57552441712365,0.783244143686657,2.0,Philippines,0.0
+philippines,2018Q1,9.29591146515845,0.743400285933683,2.0,Philippines,0.0
+philippines,2018Q2,9.07217589529407,0.72395480973935,2.0,Philippines,0.0
+philippines,2018Q3,9.47830453165085,0.704725547636118,2.0,Philippines,0.0
+philippines,2018Q4,8.94931765065836,0.683919403161871,2.0,Philippines,0.0
+philippines,2019Q1,8.96596524589486,0.67114510859843,2.0,Philippines,0.0
+philippines,2019Q2,8.92108948711589,0.659034893242617,2.0,Philippines,0.0
+philippines,2019Q3,9.00662490204583,0.648899086306668,2.0,Philippines,0.0
+philippines,2019Q4,8.7350797461968,0.636659556975935,2.0,Philippines,0.0
+philippines,2020Q1,9.3734377510198,0.630298109633605,2.0,Philippines,0.0
+philippines,2020Q2,11.107067701529,0.654800243806456,2.0,Philippines,0.0
+philippines,2020Q3,12.0286000999408,0.679317953321993,2.0,Philippines,0.0
+philippines,2020Q4,13.1863427335096,0.692219691579449,2.0,Philippines,0.0
+philippines,2021Q1,13.3309791511975,0.45049927423047,2.0,Philippines,0.0
+philippines,2021Q2,13.8020592942805,0.435078364891102,2.0,Philippines,0.0
+philippines,2021Q3,14.9080534431787,0.425955880469292,2.0,Philippines,0.0
+philippines,2021Q4,14.1959358296535,0.30124231121906,2.0,Philippines,0.0
+philippines,2022Q1,15.0144919646502,0.294771972964285,2.0,Philippines,0.0
+philippines,2022Q2,15.1280231910349,0.285274781835821,2.0,Philippines,0.0
+philippines,2022Q3,15.4795187047951,0.273584023262986,2.0,Philippines,0.0
+philippines,2022Q4,15.0873149208623,0.149798375025791,2.0,Philippines,0.0
+philippines,2023Q1,15.2577646071278,1.05350625055143,2.0,Philippines,0.0
+philippines,2023Q2,15.1228424905044,1.03281108380188,2.0,Philippines,0.0
+philippines,2023Q3,15.1984110977117,0.937003329225512,2.0,Philippines,0.0
+philippines,2023Q4,15.0963941931762,1.13086041851059,2.0,Philippines,0.0
+philippines,2024Q1,15.1063468337743,1.28575557521955,2.0,Philippines,0.0
+philippines,2024Q2,15.4595093321252,1.43382244654462,2.0,Philippines,0.0
+philippines,2024Q3,15.3619107652057,1.95730043439704,2.0,Philippines,0.0
+philippines,2024Q4,15.3925152564944,1.93405944768289,2.0,Philippines,0.0
+philippines,2025Q1,16.0155286441605,2.20682607503702,2.0,Philippines,0.0
+philippines,2025Q2,15.7700795778385,2.47033582650803,2.0,Philippines,0.0
+philippines,2025Q3,16.0306339151903,2.86371418778014,2.0,Philippines,0.0
+philippines,2025Q4,,,2.0,Philippines,0.0
+poland,2000Q1,,,3.0,Poland,1.0
+poland,2000Q2,,,3.0,Poland,1.0
+poland,2000Q3,,,3.0,Poland,1.0
+poland,2000Q4,,,3.0,Poland,1.0
+poland,2001Q1,,,3.0,Poland,1.0
+poland,2001Q2,,,3.0,Poland,1.0
+poland,2001Q3,,,3.0,Poland,1.0
+poland,2001Q4,,,3.0,Poland,1.0
+poland,2002Q1,,,3.0,Poland,1.0
+poland,2002Q2,,,3.0,Poland,1.0
+poland,2002Q3,,,3.0,Poland,1.0
+poland,2002Q4,,,3.0,Poland,1.0
+poland,2003Q1,,,3.0,Poland,1.0
+poland,2003Q2,,,3.0,Poland,1.0
+poland,2003Q3,,,3.0,Poland,1.0
+poland,2003Q4,,,3.0,Poland,1.0
+poland,2004Q1,,,3.0,Poland,1.0
+poland,2004Q2,,,3.0,Poland,1.0
+poland,2004Q3,,,3.0,Poland,1.0
+poland,2004Q4,,,3.0,Poland,1.0
+poland,2005Q1,,,3.0,Poland,1.0
+poland,2005Q2,,,3.0,Poland,1.0
+poland,2005Q3,,,3.0,Poland,1.0
+poland,2005Q4,,,3.0,Poland,1.0
+poland,2006Q1,,,3.0,Poland,1.0
+poland,2006Q2,,,3.0,Poland,1.0
+poland,2006Q3,,,3.0,Poland,1.0
+poland,2006Q4,,,3.0,Poland,1.0
+poland,2007Q1,,,3.0,Poland,1.0
+poland,2007Q2,,,3.0,Poland,1.0
+poland,2007Q3,,,3.0,Poland,1.0
+poland,2007Q4,,,3.0,Poland,1.0
+poland,2008Q1,,,3.0,Poland,1.0
+poland,2008Q2,,,3.0,Poland,1.0
+poland,2008Q3,,,3.0,Poland,1.0
+poland,2008Q4,,,3.0,Poland,1.0
+poland,2009Q1,,,3.0,Poland,1.0
+poland,2009Q2,,,3.0,Poland,1.0
+poland,2009Q3,,,3.0,Poland,1.0
+poland,2009Q4,,,3.0,Poland,1.0
+poland,2010Q1,,,3.0,Poland,1.0
+poland,2010Q2,,,3.0,Poland,1.0
+poland,2010Q3,,,3.0,Poland,1.0
+poland,2010Q4,,,3.0,Poland,1.0
+poland,2011Q1,,,3.0,Poland,1.0
+poland,2011Q2,,,3.0,Poland,1.0
+poland,2011Q3,,,3.0,Poland,1.0
+poland,2011Q4,,,3.0,Poland,1.0
+poland,2012Q1,,,3.0,Poland,1.0
+poland,2012Q2,,,3.0,Poland,1.0
+poland,2012Q3,,,3.0,Poland,1.0
+poland,2012Q4,,,3.0,Poland,1.0
+poland,2013Q1,,,3.0,Poland,1.0
+poland,2013Q2,,,3.0,Poland,1.0
+poland,2013Q3,,,3.0,Poland,1.0
+poland,2013Q4,,,3.0,Poland,1.0
+poland,2014Q1,,,3.0,Poland,1.0
+poland,2014Q2,,,3.0,Poland,1.0
+poland,2014Q3,,,3.0,Poland,1.0
+poland,2014Q4,,,3.0,Poland,1.0
+poland,2015Q1,,,3.0,Poland,1.0
+poland,2015Q2,,,3.0,Poland,1.0
+poland,2015Q3,,,3.0,Poland,1.0
+poland,2015Q4,,,3.0,Poland,1.0
+poland,2016Q1,,,3.0,Poland,1.0
+poland,2016Q2,,,3.0,Poland,1.0
+poland,2016Q3,,,3.0,Poland,1.0
+poland,2016Q4,,,3.0,Poland,1.0
+poland,2017Q1,,,3.0,Poland,1.0
+poland,2017Q2,,,3.0,Poland,1.0
+poland,2017Q3,,,3.0,Poland,1.0
+poland,2017Q4,,,3.0,Poland,1.0
+poland,2018Q1,,,3.0,Poland,1.0
+poland,2018Q2,,,3.0,Poland,1.0
+poland,2018Q3,,,3.0,Poland,1.0
+poland,2018Q4,,,3.0,Poland,1.0
+poland,2019Q1,,,3.0,Poland,1.0
+poland,2019Q2,,,3.0,Poland,1.0
+poland,2019Q3,,,3.0,Poland,1.0
+poland,2019Q4,,,3.0,Poland,1.0
+poland,2020Q1,,,3.0,Poland,1.0
+poland,2020Q2,,,3.0,Poland,1.0
+poland,2020Q3,,,3.0,Poland,1.0
+poland,2020Q4,,,3.0,Poland,1.0
+poland,2021Q1,,,3.0,Poland,1.0
+poland,2021Q2,,,3.0,Poland,1.0
+poland,2021Q3,,,3.0,Poland,1.0
+poland,2021Q4,,,3.0,Poland,1.0
+poland,2022Q1,,,3.0,Poland,1.0
+poland,2022Q2,,,3.0,Poland,1.0
+poland,2022Q3,,,3.0,Poland,1.0
+poland,2022Q4,,,3.0,Poland,1.0
+poland,2023Q1,,,3.0,Poland,1.0
+poland,2023Q2,,,3.0,Poland,1.0
+poland,2023Q3,,,3.0,Poland,1.0
+poland,2023Q4,,,3.0,Poland,1.0
+poland,2024Q1,,,3.0,Poland,1.0
+poland,2024Q2,,,3.0,Poland,1.0
+poland,2024Q3,,,3.0,Poland,1.0
+poland,2024Q4,,,3.0,Poland,1.0
+poland,2025Q1,,,3.0,Poland,1.0
+poland,2025Q2,,,3.0,Poland,1.0
+poland,2025Q3,,,3.0,Poland,1.0
+poland,2025Q4,,,3.0,Poland,1.0
+southafrica,2000Q1,,,4.0,South Africa,1.0
+southafrica,2000Q2,,,4.0,South Africa,1.0
+southafrica,2000Q3,,,4.0,South Africa,1.0
+southafrica,2000Q4,,,4.0,South Africa,1.0
+southafrica,2001Q1,,,4.0,South Africa,1.0
+southafrica,2001Q2,,,4.0,South Africa,1.0
+southafrica,2001Q3,,,4.0,South Africa,1.0
+southafrica,2001Q4,,,4.0,South Africa,1.0
+southafrica,2002Q1,,,4.0,South Africa,1.0
+southafrica,2002Q2,,,4.0,South Africa,1.0
+southafrica,2002Q3,,,4.0,South Africa,1.0
+southafrica,2002Q4,,,4.0,South Africa,1.0
+southafrica,2003Q1,,,4.0,South Africa,1.0
+southafrica,2003Q2,,,4.0,South Africa,1.0
+southafrica,2003Q3,,,4.0,South Africa,1.0
+southafrica,2003Q4,,,4.0,South Africa,1.0
+southafrica,2004Q1,,,4.0,South Africa,1.0
+southafrica,2004Q2,,,4.0,South Africa,1.0
+southafrica,2004Q3,,,4.0,South Africa,1.0
+southafrica,2004Q4,,,4.0,South Africa,1.0
+southafrica,2005Q1,,,4.0,South Africa,1.0
+southafrica,2005Q2,,,4.0,South Africa,1.0
+southafrica,2005Q3,,,4.0,South Africa,1.0
+southafrica,2005Q4,,,4.0,South Africa,1.0
+southafrica,2006Q1,,,4.0,South Africa,1.0
+southafrica,2006Q2,,,4.0,South Africa,1.0
+southafrica,2006Q3,,,4.0,South Africa,1.0
+southafrica,2006Q4,,,4.0,South Africa,1.0
+southafrica,2007Q1,,,4.0,South Africa,1.0
+southafrica,2007Q2,,,4.0,South Africa,1.0
+southafrica,2007Q3,,,4.0,South Africa,1.0
+southafrica,2007Q4,,,4.0,South Africa,1.0
+southafrica,2008Q1,,,4.0,South Africa,1.0
+southafrica,2008Q2,,,4.0,South Africa,1.0
+southafrica,2008Q3,,,4.0,South Africa,1.0
+southafrica,2008Q4,,,4.0,South Africa,1.0
+southafrica,2009Q1,,,4.0,South Africa,1.0
+southafrica,2009Q2,,,4.0,South Africa,1.0
+southafrica,2009Q3,,,4.0,South Africa,1.0
+southafrica,2009Q4,,,4.0,South Africa,1.0
+southafrica,2010Q1,3.0728516239155,33.0405913812407,4.0,South Africa,1.0
+southafrica,2010Q2,3.02858174482133,34.4967838309767,4.0,South Africa,1.0
+southafrica,2010Q3,2.90288074529144,35.9446030539059,4.0,South Africa,1.0
+southafrica,2010Q4,2.66205509870487,37.1775821539657,4.0,South Africa,1.0
+southafrica,2011Q1,2.94014804953868,38.112288239489,4.0,South Africa,1.0
+southafrica,2011Q2,2.90688776864851,38.8466188328146,4.0,South Africa,1.0
+southafrica,2011Q3,3.29825095571607,40.2893731521764,4.0,South Africa,1.0
+southafrica,2011Q4,3.39365186522577,41.2419548277466,4.0,South Africa,1.0
+southafrica,2012Q1,3.31350631644666,40.8763587153429,4.0,South Africa,1.0
+southafrica,2012Q2,3.23701694510853,42.3049768941906,4.0,South Africa,1.0
+southafrica,2012Q3,3.22780163267018,42.8913550254887,4.0,South Africa,1.0
+southafrica,2012Q4,3.25085582501327,44.1138862606926,4.0,South Africa,1.0
+southafrica,2013Q1,3.32108275634973,43.3994551263295,4.0,South Africa,1.0
+southafrica,2013Q2,3.14843681575135,44.5269553001629,4.0,South Africa,1.0
+southafrica,2013Q3,3.62576844674358,45.4138055225716,4.0,South Africa,1.0
+southafrica,2013Q4,3.70021003588848,46.4556350753629,4.0,South Africa,1.0
+southafrica,2014Q1,3.75805400497892,46.2569704465528,4.0,South Africa,1.0
+southafrica,2014Q2,3.53491524597292,47.5796605370153,4.0,South Africa,1.0
+southafrica,2014Q3,4.10818176257776,48.7866368935893,4.0,South Africa,1.0
+southafrica,2014Q4,4.11424208691675,49.6729216720841,4.0,South Africa,1.0
+southafrica,2015Q1,4.17345473768491,48.9143083425707,4.0,South Africa,1.0
+southafrica,2015Q2,4.13178755123451,49.6223459092122,4.0,South Africa,1.0
+southafrica,2015Q3,4.54655399694204,50.914482036781,4.0,South Africa,1.0
+southafrica,2015Q4,5.03049693158049,51.3058050775615,4.0,South Africa,1.0
+southafrica,2016Q1,5.23779890141271,46.4247482471325,4.0,South Africa,1.0
+southafrica,2016Q2,5.46402983965609,47.3224685011888,4.0,South Africa,1.0
+southafrica,2016Q3,6.07938249646695,47.4685727841643,4.0,South Africa,1.0
+southafrica,2016Q4,5.51853237661909,49.7344303486097,4.0,South Africa,1.0
+southafrica,2017Q1,5.41263900878219,48.0758446983524,4.0,South Africa,1.0
+southafrica,2017Q2,5.18820692552037,49.2049705478194,4.0,South Africa,1.0
+southafrica,2017Q3,5.95128867891429,49.9482068423313,4.0,South Africa,1.0
+southafrica,2017Q4,5.38266911212275,50.7272994864984,4.0,South Africa,1.0
+southafrica,2018Q1,4.92620044124778,51.5472402959846,4.0,South Africa,1.0
+southafrica,2018Q2,6.27114362071526,51.9068363384854,4.0,South Africa,1.0
+southafrica,2018Q3,6.47202231131585,52.056533922215,4.0,South Africa,1.0
+southafrica,2018Q4,6.4514796572116,52.38080019696,4.0,South Africa,1.0
+southafrica,2019Q1,6.77898435413417,52.5276745381948,4.0,South Africa,1.0
+southafrica,2019Q2,5.81441294149768,55.1346891158764,4.0,South Africa,1.0
+southafrica,2019Q3,7.86896561362298,55.5766367831694,4.0,South Africa,1.0
+southafrica,2019Q4,7.31829491396185,56.5478672631639,4.0,South Africa,1.0
+southafrica,2020Q1,8.29943238413859,56.3087665739015,4.0,South Africa,1.0
+southafrica,2020Q2,9.79132691663396,72.4441761379686,4.0,South Africa,1.0
+southafrica,2020Q3,8.3478868234572,66.932757718815,4.0,South Africa,1.0
+southafrica,2020Q4,7.14642478840558,66.0453167822891,4.0,South Africa,1.0
+southafrica,2021Q1,6.99170821191487,66.940915182485,4.0,South Africa,1.0
+southafrica,2021Q2,6.61778211287777,66.4645735705614,4.0,South Africa,1.0
+southafrica,2021Q3,7.99277055727534,68.1664895068273,4.0,South Africa,1.0
+southafrica,2021Q4,8.19091487985189,68.2420980505022,4.0,South Africa,1.0
+southafrica,2022Q1,7.07497985853918,66.4997980311982,4.0,South Africa,1.0
+southafrica,2022Q2,7.54981354698933,68.1713116232757,4.0,South Africa,1.0
+southafrica,2022Q3,8.13212942247611,68.9232553381599,4.0,South Africa,1.0
+southafrica,2022Q4,8.24305629912959,70.0481046352231,4.0,South Africa,1.0
+southafrica,2023Q1,8.26938071680827,68.7690488511498,4.0,South Africa,1.0
+southafrica,2023Q2,8.53744414997959,68.0450576198636,4.0,South Africa,1.0
+southafrica,2023Q3,8.65845916153341,71.0170367239183,4.0,South Africa,1.0
+southafrica,2023Q4,8.83097226265481,71.2952074762874,4.0,South Africa,1.0
+southafrica,2024Q1,8.41320197224712,72.4400850238094,4.0,South Africa,1.0
+southafrica,2024Q2,7.82919509297063,73.5870933224245,4.0,South Africa,1.0
+southafrica,2024Q3,7.89012956545181,74.9639422365609,4.0,South Africa,1.0
+southafrica,2024Q4,8.4755418981218,75.7621845404217,4.0,South Africa,1.0
+southafrica,2025Q1,8.68604411134769,76.9688306114066,4.0,South Africa,1.0
+southafrica,2025Q2,8.3078087545923,77.9933424875537,4.0,South Africa,1.0
+southafrica,2025Q3,7.3050929053825,79.5302917803878,4.0,South Africa,1.0
+southafrica,2025Q4,7.50365568211469,79.362382832573,4.0,South Africa,1.0
+southafrica,2026Q1,7.70818713562535,78.3164870509924,,,
+turkey,2000Q1,,,3.0,Turkey,1.0
+turkey,2000Q2,,,3.0,Turkey,1.0
+turkey,2000Q3,,,3.0,Turkey,1.0
+turkey,2000Q4,,,3.0,Turkey,1.0
+turkey,2001Q1,,,5.0,Turkey,0.0
+turkey,2001Q2,,,5.0,Turkey,0.0
+turkey,2001Q3,,,5.0,Turkey,0.0
+turkey,2001Q4,,,5.0,Turkey,0.0
+turkey,2002Q1,,,5.0,Turkey,0.0
+turkey,2002Q2,,,5.0,Turkey,0.0
+turkey,2002Q3,,,5.0,Turkey,0.0
+turkey,2002Q4,,,5.0,Turkey,0.0
+turkey,2003Q1,,,5.0,Turkey,0.0
+turkey,2003Q2,,,4.0,Turkey,1.0
+turkey,2003Q3,,,4.0,Turkey,1.0
+turkey,2003Q4,,,4.0,Turkey,1.0
+turkey,2004Q1,,,4.0,Turkey,1.0
+turkey,2004Q2,,,4.0,Turkey,1.0
+turkey,2004Q3,,,4.0,Turkey,1.0
+turkey,2004Q4,,,4.0,Turkey,1.0
+turkey,2005Q1,,,4.0,Turkey,1.0
+turkey,2005Q2,,,4.0,Turkey,1.0
+turkey,2005Q3,,,4.0,Turkey,1.0
+turkey,2005Q4,,,4.0,Turkey,1.0
+turkey,2006Q1,,,4.0,Turkey,1.0
+turkey,2006Q2,,,4.0,Turkey,1.0
+turkey,2006Q3,,,4.0,Turkey,1.0
+turkey,2006Q4,,,4.0,Turkey,1.0
+turkey,2007Q1,,,4.0,Turkey,1.0
+turkey,2007Q2,,,4.0,Turkey,1.0
+turkey,2007Q3,,,4.0,Turkey,1.0
+turkey,2007Q4,,,4.0,Turkey,1.0
+turkey,2008Q1,,,4.0,Turkey,1.0
+turkey,2008Q2,,,4.0,Turkey,1.0
+turkey,2008Q3,,,3.0,Turkey,1.0
+turkey,2008Q4,,,3.0,Turkey,1.0
+turkey,2009Q1,,,3.0,Turkey,1.0
+turkey,2009Q2,,,3.0,Turkey,1.0
+turkey,2009Q3,,,3.0,Turkey,1.0
+turkey,2009Q4,,,3.0,Turkey,1.0
+turkey,2010Q1,,,3.0,Turkey,1.0
+turkey,2010Q2,,,3.0,Turkey,1.0
+turkey,2010Q3,,,3.0,Turkey,1.0
+turkey,2010Q4,,,3.0,Turkey,1.0
+turkey,2011Q1,,,3.0,Turkey,1.0
+turkey,2011Q2,,,3.0,Turkey,1.0
+turkey,2011Q3,,,3.0,Turkey,1.0
+turkey,2011Q4,,,3.0,Turkey,1.0
+turkey,2012Q1,,,3.0,Turkey,1.0
+turkey,2012Q2,,,3.0,Turkey,1.0
+turkey,2012Q3,,,3.0,Turkey,1.0
+turkey,2012Q4,,,3.0,Turkey,1.0
+turkey,2013Q1,,,3.0,Turkey,1.0
+turkey,2013Q2,,,3.0,Turkey,1.0
+turkey,2013Q3,,,3.0,Turkey,1.0
+turkey,2013Q4,,,3.0,Turkey,1.0
+turkey,2014Q1,,,3.0,Turkey,1.0
+turkey,2014Q2,,,3.0,Turkey,1.0
+turkey,2014Q3,,,3.0,Turkey,1.0
+turkey,2014Q4,,,3.0,Turkey,1.0
+turkey,2015Q1,,,3.0,Turkey,1.0
+turkey,2015Q2,,,3.0,Turkey,1.0
+turkey,2015Q3,,,3.0,Turkey,1.0
+turkey,2015Q4,,,3.0,Turkey,1.0
+turkey,2016Q1,,,3.0,Turkey,1.0
+turkey,2016Q2,,,3.0,Turkey,1.0
+turkey,2016Q3,,,3.0,Turkey,1.0
+turkey,2016Q4,12.0588089998321,20.3007016328625,3.0,Turkey,1.0
+turkey,2017Q1,12.3713307140579,20.0325499185907,3.0,Turkey,1.0
+turkey,2017Q2,12.1579065813563,19.950407177025,3.0,Turkey,1.0
+turkey,2017Q3,11.5487829368948,19.7042050606884,3.0,Turkey,1.0
+turkey,2017Q4,11.7951118854765,20.2906643437134,3.0,Turkey,1.0
+turkey,2018Q1,11.9858482515307,19.8418048956415,3.0,Turkey,1.0
+turkey,2018Q2,12.8136581007189,19.3981234213118,3.0,Turkey,1.0
+turkey,2018Q3,15.7813954876244,19.8459889513047,5.0,Turkey,0.0
+turkey,2018Q4,13.8977876848126,19.7405339341729,5.0,Turkey,0.0
+turkey,2019Q1,15.4902143322202,19.3536029933402,5.0,Turkey,0.0
+turkey,2019Q2,15.922855574771,19.3675127715309,3.0,Turkey,1.0
+turkey,2019Q3,15.3833988889131,19.3911984401052,3.0,Turkey,1.0
+turkey,2019Q4,16.0785303816353,19.6412606497116,3.0,Turkey,1.0
+turkey,2020Q1,18.3163335277178,19.9353563876258,3.0,Turkey,1.0
+turkey,2020Q2,19.2942647834164,23.8659138815429,3.0,Turkey,1.0
+turkey,2020Q3,23.1391641585006,23.1497677364009,3.0,Turkey,1.0
+turkey,2020Q4,21.1843473345349,22.4023919211241,3.0,Turkey,1.0
+turkey,2021Q1,21.3208500863507,21.8589335070656,3.0,Turkey,1.0
+turkey,2021Q2,21.0940654717062,20.2777315138141,3.0,Turkey,1.0
+turkey,2021Q3,20.5082143048263,19.8055460066801,3.0,Turkey,1.0
+turkey,2021Q4,26.0931736590464,19.1851813642709,5.0,Turkey,0.0
+turkey,2022Q1,25.5022187950668,19.8563376168911,5.0,Turkey,0.0
+turkey,2022Q2,23.4537136288737,18.5952519812037,5.0,Turkey,0.0
+turkey,2022Q3,20.0475555956453,17.0019333662992,5.0,Turkey,0.0
+turkey,2022Q4,18.4290333091943,16.9098256681365,5.0,Turkey,0.0
+turkey,2023Q1,17.0100516926368,17.6145629162206,5.0,Turkey,0.0
+turkey,2023Q2,20.3680796349146,16.7246959354894,5.0,Turkey,0.0
+turkey,2023Q3,17.8776436849018,16.2878586724043,5.0,Turkey,0.0
+turkey,2023Q4,17.0840905890451,16.5614795071966,5.0,Turkey,0.0
+turkey,2024Q1,16.2105114053083,15.9720782204827,5.0,Turkey,0.0
+turkey,2024Q2,14.0185003622315,16.7349796550672,5.0,Turkey,0.0
+turkey,2024Q3,13.3849576616473,15.9739708841323,5.0,Turkey,0.0
+turkey,2024Q4,12.3143301275916,16.0124587573411,5.0,Turkey,0.0
+turkey,2025Q1,12.2054266391839,16.5332993558194,3.0,Turkey,1.0
+turkey,2025Q2,12.3714046655968,16.424408949757,3.0,Turkey,1.0
+turkey,2025Q3,12.5367520822268,16.3860818873131,3.0,Turkey,1.0
+turkey,2025Q4,12.1024617938295,16.5311472080872,3.0,Turkey,1.0
+turkey,2026Q1,11.7619048785544,16.2983040005947,,,
+turkey,2026Q2,11.1660019199831,15.9703524173329,,,
