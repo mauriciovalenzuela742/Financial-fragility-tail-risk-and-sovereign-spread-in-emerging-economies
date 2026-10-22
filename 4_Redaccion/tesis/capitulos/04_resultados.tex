@@ -218,6 +218,56 @@ Riesgo de cola $\times$ deuda, instrumentado & $0{,}001$ & DK $0{,}043$; $p$ uni
 
 Según las consecuencias fijadas en el preregistro, el hallazgo central queda como un resultado de la muestra original: firme dentro de ella con el horizonte de un año, sin réplica externa concluyente y sin confirmación con el instrumento.
 
+\subsection{¿Lo explica un modelo de límite fiscal?}
+\label{sec:modelo-resultados}
+
+Un sexto preregistro (\texttt{4\_Redaccion/preregistro\_modelo.md}) fijó la calibración del modelo de la Sección~\ref{sec:modelo-limite} y una prueba empírica nueva que el modelo sugiere, antes de resolverlo con números y de estimarla.
+\begin{itemize}
+    \item \textbf{Momentos de la muestra de la prueba de un año:} deuda media de 44,6\% del PIB (desviación estándar, 20,2 puntos); riesgo de cola medio de $0{,}18$ puntos; crecimiento mediano de 4,2\%; spread geométrico medio de 173 puntos básicos.
+    \item \textbf{Parámetros:} $r=3\%$ real; recuperación de 63\%, el recorte medio de 37\% que documentan \citet{CrucesTrebesch2013}.
+    \item \textbf{Capacidad fiscal:} se calibra para reproducir el spread medio, y resulta en $\bar p=1{,}5\%$ del PIB.
+    \item \textbf{Sensibilidad:} la recuperación, de 50\% a 75\%; la tasa, de 1\% a 5\%; y una cola de Student con cinco grados de libertad.
+\end{itemize}
+La prueba nueva es la interacción en puntos básicos, que el modelo predice positiva.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Modelo de límite fiscal frente a los datos]{Modelo de límite fiscal calibrado frente a las estimaciones: riesgo de cola a un año y deuda}
+\label{tab:modelo}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{>{\raggedright\arraybackslash}p{5.4cm} c c >{\raggedright\arraybackslash}p{5.6cm}}
+\toprule
+ & Modelo (base) & Rango del modelo & Datos \\
+\midrule
+\multicolumn{4}{l}{\textit{Logaritmos}} \\
+Semielasticidad al riesgo de cola, por punto & $0{,}82$ & $0{,}53$ a $0{,}94$ & $0{,}047$ (firme en la muestra) \\
+Interacción con la deuda, por d.e. de deuda & $-0{,}43$ & $-0{,}78$ a $-0{,}04$ & $+0{,}033$ (firme en la muestra; sin réplica externa) \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Puntos básicos}} \\
+Efecto del riesgo de cola, por punto & $143$ & $92$ a $163$ & --- \\
+Interacción con la deuda, por d.e. de deuda & $91$ & $10$ a $203$ & $+3{,}1$ (\textit{wild} unilateral $0{,}09$; 6 de 13 exclusiones; permutación $0{,}29$) \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Por observación (calibración base)}} \\
+Interacción en logaritmos / en puntos básicos & \multicolumn{2}{c}{mediana $-0{,}46$ / $37{,}5$} & negativa en el 100\% / positiva en el 91\% de las observaciones \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} Modelo de la ecuación~\eqref{eq:limite}, calibrado con los momentos de la muestra de la prueba del riesgo de cola a un año por la deuda ($N=719$). Rango: recuperación de 50\% a 75\%, tasa real de 1\% a 5\% y cola normal o de Student con cinco grados de libertad, recalibrando la capacidad fiscal en cada caso. Datos en puntos básicos: la misma regresión con el spread en puntos básicos y $JLoss$ en niveles. Fuente: \texttt{p59\_modelo.py}.}
+\end{table}
+
+\textbf{El modelo no explica el hallazgo central} (Tabla~\ref{tab:modelo}). En logaritmos predice el signo contrario: con más deuda, la semielasticidad al riesgo de cola debería caer, en todas las calibraciones y en todas las observaciones, y la tesis estima que sube. En puntos básicos, el modelo predice la interacción positiva que la tesis no había estimado. La prueba preregistrada da el signo correcto ($+3{,}1$ puntos básicos por desviación estándar de deuda), pero no es firme ---$p$ de $0{,}09$, positiva y significativa en solo seis de las trece exclusiones, y no distinguible de una deuda asignada al azar--- y queda muy por debajo del rango del modelo, de 10 a 203 puntos básicos.
+
+\textbf{La magnitud también falla, y en la misma dirección.} En el modelo, un punto porcentual más de riesgo de cola a un año eleva el logaritmo del spread en $0{,}82$; en los datos, en $0{,}047$, diecisiete veces menos. El spread responde al riesgo de cola mucho menos de lo que implicaría la probabilidad de incumplimiento de un modelo sin fricciones. Tres razones, no excluyentes, lo harían esperable. La primera es que el $GaR$ mide el riesgo de cola con error, lo que atenúa sus coeficientes. La segunda es que una parte grande del spread es una prima global que no depende de la probabilidad de incumplimiento de cada economía. La tercera es que los inversionistas pueden no valorar la cola del crecimiento que estima el $GaR$ como lo hace el modelo.
+
+\textbf{Qué queda de la interacción en logaritmos.} Según la consecuencia fijada en el preregistro, la interacción en logaritmos queda sin explicación en el modelo de límite fiscal. Sus candidatas son extensiones que el modelo no incluye:
+\begin{itemize}
+    \item una recuperación que cae con la deuda;
+    \item inversionistas aversos al riesgo, cuya prima por la cola crece con la exposición;
+    \item colas más gruesas: con la cola de Student, la interacción negativa se acerca a cero, sin volverse positiva.
+\end{itemize}
+Ninguna se contrastó aquí.
+
 \section{Punto de partida: réplica de Chari et al.\ y validación del panel}
 \label{sec:bateria}
 
@@ -766,7 +816,7 @@ Dos de las extensiones refuerzan conclusiones del capítulo. La revisión econom
 \section{Síntesis}
 \label{sec:sintesis-resultados}
 
-\textbf{El hallazgo central.} El resultado más sólido de la tesis no responde la pregunta original, sino la que plantean los modelos de incumplimiento soberano: la deuda pública amplifica la transmisión del riesgo de cola del crecimiento al spread. Es firme dentro de dos preregistros: con el riesgo de cola del trimestre siguiente (Sección~\ref{sec:resiliencia-prereg}) y, con más fuerza, con el del año siguiente (Sección~\ref{sec:macro-prereg}). Una prueba más exigente lo circunscribe (Sección~\ref{sec:inferencia-conjunta}): con la corrección sobre las catorce hipótesis de los cuatro preregistros ninguna queda bajo el 5\%, y al asignar a cada economía la deuda de otra, la versión del trimestre siguiente no se distingue del azar ($p=0{,}17$), mientras la del año siguiente sí ($p=0{,}009$). La deuda amplifica la transmisión del riesgo de cola de mediano plazo con evidencia firme, y la del trimestre siguiente, con evidencia sugerente. Fuera de la muestra no se confirma: en Hungría y Corea el signo se repite, pero la magnitud no coincide y la potencia es mínima, y un instrumento de términos de intercambio no muestra la amplificación (Sección~\ref{sec:n1n2}). Es un resultado de la muestra original. Ni la amplificación de la fragilidad por la deuda ni la concentración en la deuda en moneda extranjera se confirman.
+\textbf{El hallazgo central.} El resultado más sólido de la tesis no responde la pregunta original, sino la que plantean los modelos de incumplimiento soberano: la deuda pública amplifica la transmisión del riesgo de cola del crecimiento al spread. Es firme dentro de dos preregistros: con el riesgo de cola del trimestre siguiente (Sección~\ref{sec:resiliencia-prereg}) y, con más fuerza, con el del año siguiente (Sección~\ref{sec:macro-prereg}). Una prueba más exigente lo circunscribe (Sección~\ref{sec:inferencia-conjunta}): con la corrección sobre las catorce hipótesis de los cuatro preregistros ninguna queda bajo el 5\%, y al asignar a cada economía la deuda de otra, la versión del trimestre siguiente no se distingue del azar ($p=0{,}17$), mientras la del año siguiente sí ($p=0{,}009$). La deuda amplifica la transmisión del riesgo de cola de mediano plazo con evidencia firme, y la del trimestre siguiente, con evidencia sugerente. Fuera de la muestra no se confirma: en Hungría y Corea el signo se repite, pero la magnitud no coincide y la potencia es mínima, y un instrumento de términos de intercambio no muestra la amplificación (Sección~\ref{sec:n1n2}). Es un resultado de la muestra original. Un modelo de límite fiscal calibrado tampoco la explica: en logaritmos predice el signo contrario y, en puntos básicos, una interacción positiva mucho mayor que la que muestran los datos (Sección~\ref{sec:modelo-resultados}). Ni la amplificación de la fragilidad por la deuda ni la concentración en la deuda en moneda extranjera se confirman.
 
 La pregunta propia de esta tesis era qué agrega el riesgo económico doméstico a la fragilidad bancaria que ya documentan \citet{Chari2024b}, y qué pasa cuando los dos riesgos se dan a la vez. La respuesta, en una frase: los dos riesgos domésticos tienden a darse juntos ---y la fragilidad bancaria antecede al deterioro de la cola del crecimiento---, pero cuando coinciden no hay evidencia de que se amplifiquen: no se rechaza que sus efectos sobre el spread se sumen, se descarta una amplificación mayor que un 35\% de la suma y una menor no se puede descartar; el riesgo económico agrega información modesta y solo en niveles a lo que ya explica la fragilidad; y ninguna de las condiciones estudiadas modifica la transmisión de forma demostrable. En orden de importancia, son cuatro conclusiones.
 

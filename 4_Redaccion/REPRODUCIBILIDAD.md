@@ -28,7 +28,7 @@ python verificar_canonicos.py   # compara 67 cifras de la tesis con canonicos_es
 
 `reproducir.py` ejecuta en orden los scripts de los Pasos 2e–2g, la inferencia conjunta (`p56`), la réplica
 externa (`p57`, que la primera vez descarga la deuda de Hungría y Corea del Banco Mundial y la cachea en
-`replica_externa_bbg.csv`) y el instrumento (`p58`), deja un
+`replica_externa_bbg.csv`) el instrumento (`p58`) y el modelo de límite fiscal (`p59`), deja un
 registro por script en `bbg/_logs/` y termina con la verificación. La integración continua de GitHub
 (`.github/workflows/verificar.yml`) corre `verificar_canonicos.py` en cada *push*. La construcción del panel
 base (p0–p11) sigue el Paso 2, porque depende de red y de la extracción de Bloomberg. Primera prueba de punta a punta (2026-10-22): p12, p13 y p14 reprodujeron sus cifras sin diferencias; la corrida se detuvo en p32 por falta de memoria del equipo, no por un error del script, y por eso p32 pasó a la lista de pasos lentos.

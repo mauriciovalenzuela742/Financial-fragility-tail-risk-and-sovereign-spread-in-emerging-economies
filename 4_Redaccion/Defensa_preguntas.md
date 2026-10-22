@@ -182,6 +182,15 @@ significativo, y la réplica tenía una potencia de 5 %: con dos economías no s
 (F = 20), pero es débil para la interacción con la deuda (F = 9,7) y la estima nula. Por eso digo que el
 hallazgo es de la muestra original.
 
+**V24. ¿Tiene un modelo que explique el hallazgo central?**
+**R.** Sí, y no lo explica (p59, preregistro 6). Un modelo de límite fiscal calibrado con el panel predice
+que, con más deuda, el riesgo de cola pesa más en puntos básicos, pero menos en logaritmos: la cola
+izquierda normal hace que la sensibilidad proporcional caiga cuando el incumplimiento ya es probable. La tesis
+estima lo contrario en logaritmos. En puntos básicos los datos dan el signo del modelo (+3,1 pb), pero no es
+firme y es muy menor que lo que predice el modelo (10 a 203 pb).
+**Si pregunta por qué el modelo exagera tanto:** el GaR mide la cola con error, una parte grande del spread
+es prima global y el modelo no tiene aversión al riesgo. Ninguna de esas explicaciones se contrastó.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**

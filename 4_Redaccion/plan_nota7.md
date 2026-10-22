@@ -259,3 +259,36 @@ confirmado fuera de la muestra, y este no lo está. Nota estimada: **6,3–6,4**
   potencia suficiente. Con dos economías la potencia es de 5 %.
 - **Un instrumento más fuerte para la interacción:** por ejemplo, choques a la deuda, como las
   reestructuraciones o los cambios de regla fiscal, en vez de choques al riesgo de cola.
+
+---
+
+# 8. Registro de aplicación de N3 (22 de octubre de 2026)
+
+Preregistro 6: `preregistro_modelo.md`, commit `90f0adf`. Cifras en NUMEROS §34. Texto: el modelo en el
+marco teórico (`sec:modelo-limite`) y su contraste en el hallazgo central (`sec:modelo-resultados`).
+
+| Predicción | Modelo | Datos | Resultado |
+|---|---|---|---|
+| Interacción en logaritmos | −0,43 (−0,78 a −0,04) | +0,033 | **signo contrario** |
+| Interacción en pb | +91 (10 a 203) | +3,1, no firme (wild 0,087) | signo igual, magnitud muy menor |
+| Semielasticidad al riesgo de cola | 0,82 | 0,047 | el modelo implica 17 veces más |
+
+**Consecuencia fijada:** M6-H1 no es firme, de modo que el modelo tampoco tiene respaldo en niveles, y la
+interacción en logaritmos queda sin explicación en el modelo de límite fiscal. Se corrigieron las afirmaciones
+de que la interacción es "la que predicen los modelos de incumplimiento soberano" en el resumen, la
+introducción, las conclusiones, el paper, el README y las láminas.
+
+**Efecto sobre la nota.**
+- **Marco:** sube de 5,8–6,4 a ~6,6. La tesis tiene ahora un modelo propio, con predicciones derivadas y una
+  calibración preregistrada.
+- **Interpretación:** sube a ~6,7, porque la tesis distingue qué explica la teoría y qué no.
+- **Contribución:** no sube. El modelo no respalda el hallazgo central, que queda como una regularidad
+  empírica de la muestra original, sin réplica, sin instrumento y sin explicación teórica en el modelo más
+  simple.
+
+**Nota estimada: 6,4.**
+
+**El 7,0 ya no está al alcance con lo que hay en el repositorio.** Exigiría un hallazgo central confirmado
+fuera de la muestra, y las tres pruebas que podían confirmarlo dieron resultados nulos o contrarios: la
+réplica externa, el instrumento y el modelo. Lo que la tesis sí ofrece, y que un comité valora, es un
+registro completo de seis preregistros en el que cada resultado negativo se reporta y corrige el texto.
