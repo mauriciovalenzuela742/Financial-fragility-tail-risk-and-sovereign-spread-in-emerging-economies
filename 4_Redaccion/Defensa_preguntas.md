@@ -116,6 +116,22 @@ México entre 20 y 22 pp en una semana, frente a los demás países. Las FCL no 
 diaria banca–spread se acerca a cero después de los eventos, pero igual en los países sin línea: no
 hay desacople atribuible al respaldo.
 
+**V16. ¿Qué aprendió de la deuda, las reservas y los controles?**
+**R.** Con una prueba preregistrada (commit `c492ca3`, anterior a los datos) y datos trimestrales hay
+un resultado firme y dos nulos. Donde hay más deuda pública, el riesgo de cola pesa más en el spread:
+una d.e. más de deuda eleva la semielasticidad de 0,032 a 0,043 (Holm p = 0,029; 13 de 13 sin cada
+país). La adecuación de reservas no atenúa la transmisión de la fragilidad (Holm 0,29). Y el efecto
+directo de la fragilidad, neto del canal fiscal, es ≈ 0.
+**Si insiste:** R-H3 no es significativa con Driscoll–Kraay (p = 0,17), y se debilita con la deuda en
+t−8. El criterio preregistrado era el wild bootstrap, que la simulación de la tesis muestra mejor
+calibrado.
+
+**V17. ¿No dependía el riesgo de cola de Polonia?**
+**R.** En la regresión con efectos fijos de tiempo, sí. Pero si cada país responde distinto a los
+factores comunes (CCE de Pesaran), resiste el wild bootstrap y la exclusión de cada país. La media de
+efectos aleatorios es 0,022 sin Polonia (p = 0,011), y el PMG da una relación de largo plazo de 0,067.
+Es un fundamento de nivel, no una señal de corto plazo.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**

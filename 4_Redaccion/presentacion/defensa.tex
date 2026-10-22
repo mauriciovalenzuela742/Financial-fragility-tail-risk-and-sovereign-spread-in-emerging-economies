@@ -612,7 +612,7 @@ Reservas previas a la muestra & $-0{,}073$ & $0{,}30$ & $-4{,}3$ & $0{,}13$ \\
 \end{adjustbox}
 \vspace{-1pt}
 \begin{alertblock}{Lectura: exploratorio}
-\footnotesize El coeficiente de la fragilidad es menor donde hay más reservas; es estable al rezagarlas y más firme en puntos básicos. Pero en logaritmos depende de Polonia, no pasa la corrección de Holm, otras variables macroeconómicas dan interacciones similares e implica una elasticidad negativa para el 23\% de las observaciones. No sustenta recomendar reservas.
+\footnotesize El coeficiente de la fragilidad es menor donde hay más reservas; es estable al rezagarlas y más firme en puntos básicos. Pero en logaritmos depende de Polonia, no pasa la corrección de Holm, otras variables macroeconómicas dan interacciones similares e implica una elasticidad negativa para el 23\% de las observaciones. No sustenta recomendar reservas. La prueba preregistrada, con reservas sobre deuda externa de corto plazo, tampoco lo confirma (Holm $0{,}29$).
 \end{alertblock}
 \end{frame}
 
@@ -805,12 +805,12 @@ Driscoll--Kraay & $5\%$ / $6\%$ & $87\%$ (fragilidad) & & \\
 \begin{enumerate}\setlength\itemsep{0pt}
 \item \textbf{La simultaneidad es un hecho}: los dos riesgos coinciden 1,2 veces lo esperado descontado el calendario común (1,9 frente a la independencia); la fragilidad antecede al riesgo de cola.
 \item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen}; se descarta más de un 35\% de la suma, no menos.
-\item \textbf{El riesgo económico agrega poco} a lo que explica la fragilidad: un 2--3\,\% de \textit{spread} por punto, solo en niveles; no mejora el pronóstico.
-\item \textbf{Ninguna condición} estudiada ---resiliencia, respaldo externo, quién tiene la deuda--- modifica la transmisión de forma demostrable.
+\item \textbf{El riesgo económico agrega poco} a lo que explica la fragilidad: un 2--3\,\% de \textit{spread} por punto; no mejora el pronóstico, pero es una relación de largo plazo.
+\item \textbf{La deuda pública amplifica} la transmisión del riesgo de cola (preregistrada); ninguna otra condición la modifica de forma demostrable.
 \end{enumerate}
 \vspace{-2pt}
 \begin{block}{En una frase}
-\footnotesize Los dos riesgos domésticos tienden a darse juntos; cuando coinciden, no hay evidencia de que se amplifiquen (se descarta más de un 35\% de la suma, no menos); y el riesgo económico agrega información modesta a lo que ya explica la fragilidad.
+\footnotesize Los dos riesgos domésticos tienden a darse juntos; cuando coinciden, no hay evidencia de que se amplifiquen (se descarta más de un 35\% de la suma, no menos); el riesgo económico agrega información modesta, de largo plazo; y la deuda pública amplifica su transmisión.
 \end{block}
 \vspace{-4pt}
 {\footnotesize \textbf{Réplica:} la asociación fragilidad--\textit{spread} replica a Chari et al.\ con sus controles, pero no es una elasticidad común ni hay precedencia temporal.\par}
@@ -828,10 +828,11 @@ Hallazgo & Cifra & Evidencia \\
 Los dos riesgos coinciden más que por azar & 168 frente a 87; $p=0{,}001$; 13 de 13 países & \textbf{firme} \\
 La fragilidad antecede al riesgo de cola & $0{,}405$ (\textit{wild} $0{,}024$); sin cada país y sin bloque bursátil & firme (a un trimestre) \\
 Amplificación cuando coinciden & $-0{,}011$ (\textit{wild} $0{,}89$); TOST: se descarta $>35\%$ & \textbf{no hay evidencia} \\
-El riesgo de cola agrega a la fragilidad, en niveles & conjunta \textit{wild} $0{,}041$; depende de Polonia & sugerente \\
+El riesgo de cola agrega a la fragilidad, en niveles & conjunta \textit{wild} $0{,}041$; con cargas heterogéneas (CCE) \textit{wild} $0{,}016$, 13 de 13; largo plazo $0{,}067$ & firme como nivel; no en cambios \\
+Deuda $\times$ riesgo de cola (preregistrada) & $+0{,}011$ por d.e. de deuda; Holm $0{,}029$; 13 de 13 & \textbf{firme} \\
 El riesgo de cola en cambios o fuera de muestra & $0{,}004$; 0 de 9 horizontes; $+3\%$ de error & \textbf{no hay evidencia} \\
 Resiliencia: directa y con la cola fuera de crisis & $-0{,}153$; $-0{,}024$; solo Driscoll--Kraay & sugerente \\
-Reservas $\times$ fragilidad & $-0{,}247$ (\textit{wild} $0{,}08$); Holm $0{,}40$; placebos & exploratorio \\
+Reservas $\times$ fragilidad & $-0{,}247$ (\textit{wild} $0{,}08$); preregistrada con adecuación de reservas: Holm $0{,}29$ & exploratorio \\
 Resiliencia previa $\times$ riesgo de cola & $-0{,}028$ (\textit{wild} $0{,}06$) & exploratorio \\
 Amplificación en el núcleo de 11, sin crisis & $+0{,}034$ (\textit{wild} $0{,}015$); grupo \textit{ex post} & exploratorio \\
 Participación extranjera (preespecificada) & Holm $p=1{,}00$ & \textbf{no hay evidencia} \\
@@ -850,7 +851,7 @@ Se mueven en el mismo trimestre & $0{,}037$ (\textit{wild} $0{,}008$); 13 de 13 
 \begin{frame}{Extensiones posteriores a la estimación (no preespecificadas)}
 \centering
 \footnotesize
-\begin{adjustbox}{max width=\textwidth}
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.80\textheight}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
 \toprule
 Extensión & Resultado & Qué cambia \\
@@ -864,6 +865,10 @@ Panel ampliado & EMBI desde el CDS (+189 obs.) y Argentina con $\GaR$ homologado
 Eventos de respaldo (9, diarios) & \textit{Swap} Fed 2020: $-20$ a $-22$ pp en una semana; FCL, nada; desacople igual sin línea & Baja el nivel, no la transmisión \\
 \addlinespace
 Cola alta del \textit{spread} (cuantílica) & $\beta_3(\tau)$ de $-0{,}024$ a $-0{,}001$, nunca positiva; la fragilidad pesa más en $\tau$ alto ($0{,}19$) & Nada sobre H3 \\
+\addlinespace
+Prueba preregistrada (deuda, reservas, canal fiscal) & Deuda $\times$ riesgo de cola $+0{,}011$ (Holm $0{,}029$; 13 de 13); reservas, Holm $0{,}29$; efecto directo neto del canal fiscal $\approx0$ & La conclusión 4: la deuda amplifica \\
+\addlinespace
+Revisión econométrica (CCE, PMG, coeficientes aleatorios, VAR) & Riesgo de cola: CCE \textit{wild} $0{,}016$; largo plazo $0{,}067$ ($p=0{,}006$); la fragilidad explica $<1\%$ de la varianza del \textit{spread} & La conclusión 3: largo plazo \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
@@ -926,9 +931,9 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad: son asocia
 \vspace{4pt}
 \item Cuando coinciden, \textbf{no hay evidencia de amplificación}, se descarta más de un 35\% de la suma, aunque no menos.
 \vspace{4pt}
-\item El riesgo económico \textbf{agrega poco} a lo que ya explica la fragilidad.
+\item El riesgo económico \textbf{agrega poco} a lo que ya explica la fragilidad, pero es un fundamento de largo plazo.
 \vspace{4pt}
-\item \textbf{Ninguna condición} estudiada modifica la transmisión de forma demostrable.
+\item La \textbf{deuda pública} amplifica la transmisión del riesgo de cola; ninguna otra condición la modifica de forma demostrable.
 \end{enumerate}
 \vspace{4pt}
 {\small \textbf{Réplica:} la asociación fragilidad--\textit{spread} replica a Chari et al.\ con sus controles, pero no es una elasticidad común ni hay precedencia temporal.\par}

@@ -1925,3 +1925,45 @@ Localización (= regresión principal): β1 0,099, β2 0,032, β3 −0,011; esca
 **Lectura:** la amplificación no aparece en la cola alta del spread. La fragilidad pesa más cuando el
 spread es alto (y con −DD_w es significativa en la mediana y en τ = 0,90); el riesgo de cola pesa algo
 más cuando es bajo (sin significancia).
+
+## 26. Resiliencia preregistrada con datos trimestrales (2026-10-21)
+
+Preregistro: `4_Redaccion/preregistro_resiliencia.md`, commit `c492ca3`, anterior a los datos y a la
+estimación. Datos: `p41_datos_resiliencia.py` → `resiliencia_trimestral_bbg.csv`. QPSD: deuda del gobierno
+general (trimestral; central para Argentina, China y parte de Turquía; anual interpolada para Chile, India
+y Malasia, el 27 % de las obs. de R-H1). Reservas: Banco Mundial GEM, mensual (el FMI no expuso el código
+del indicador; respaldo preregistrado). Deuda externa de corto plazo: QEDS. RA = ln(reservas / deuda
+externa CP), mediana por país de 0,02 (Turquía) a 1,94 (Perú). Estimación: `p42_resiliencia_preregistrada.py`
+→ `paper_p42_numeros.csv`.
+
+| Prueba | Coeficiente | p uni wild | Holm | DK (bi) | Sin cada país | Veredicto |
+|---|---|---|---|---|---|---|
+| R-H2 fragilidad × RA_{t−4} (λ < 0), N = 725 | −0,063 | 0,29 | 0,29 | 0,001 | 1 de 13 | no se sostiene (término de reservas: exploratorio) |
+| R-H3 riesgo de cola × DEBT_{t−4} (ψ > 0), N = 719 | +0,011 | 0,015 | 0,029 | 0,17 | 13 de 13 (0,008–0,014) | **firme** |
+| R-H1 efecto directo controlado (N = 634) | 0,002 [−0,19; 0,16] | 0,48 | — | — | — | no se separa del canal fiscal; total 0,101 (DK 0,013) |
+
+Efecto directo de DEBT_{t−4}: +0,144 (DK < 0,001). Secundarias: fragilidad × reservas/PIB −0,238 (wild uni
+0,070); RA_{t−8} −0,035 (0,41); DEBT_{t−8} +0,0075 (0,082); LP mensual, respuesta del spread a Δ(−DD) en
+estado de reservas altas menos bajas: h0 +0,004 (wild 0,58), h3 +0,003 (0,84), ninguna h < 0,10.
+**Lectura:** con una d.e. más de deuda (≈ 20 pp del PIB) la semielasticidad del spread al riesgo de cola
+pasa de 0,032 a 0,043. La consecuencia preregistrada para R-H2 aplica: las reservas quedan exploratorias.
+
+## 27. Revisión econométrica: CCE, PMG, coeficientes aleatorios y VAR mensual (2026-10-21)
+
+Fuente: `p43_revision_econometrica.py` → `paper_p43_numeros.csv`. No preespecificada.
+
+| Estimador | Fragilidad | Riesgo de cola | Interacción |
+|---|---|---|---|
+| CCEP (cargas por país; cluster / wild) | 0,129 (0,090 / 0,145) | 0,0245 (<0,001 / 0,016); sin cada país 0,018–0,028, p máx 0,005 | −0,017 (0,31 / 0,37) |
+| CCE-MG (12 economías) | 0,167 (0,10) | 0,006 (0,71) | −0,037 (0,14) |
+| PMG largo plazo (12; bootstrap 199) | 0,065 (0,62) | 0,067 (0,006; IC [0,010; 0,103]) | — |
+| Coeficientes aleatorios (DL): media; I² | 0,122 (0,095); 93 % | 0,024 (0,005); 58 % | — |
+| — sin Turquía / sin Polonia | 0,084 (0,18) / 0,120 (0,11) | 0,027 (0,003) / 0,022 (0,011) | — |
+
+PMG: φ̄ = −0,091, negativa en 11 de 12. Encogimiento: Turquía 0,462 → 0,452; Polonia 0,164 → 0,142. VAR
+mensual (2 603 obs.): respuesta acumulada del spread a un choque de 1 d.e. de fragilidad, con la fragilidad
+primero: +0,70 % al impacto, +1,02 % a 3 meses, +0,79 % a 12; con la fragilidad segunda: 0 al impacto, +0,67 %
+[0,37; 0,93] a 3 meses, +0,40 % [0,23; 0,52] a 12. Varianza del spread a 12 meses explicada por la fragilidad:
+0,5 % [0,25; 1,6] (primera) y 0,3 % [0,12; 0,80] (segunda).
+**Lectura:** el riesgo de cola pasa a firme como asociación de nivel con cargas heterogéneas y una relación de
+largo plazo; la fragilidad no gana nada; la interacción sigue nula.
