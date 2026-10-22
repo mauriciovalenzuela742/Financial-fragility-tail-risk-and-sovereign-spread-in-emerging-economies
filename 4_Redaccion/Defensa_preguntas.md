@@ -96,6 +96,26 @@ por el autor, sin registro verificable".
 deterioro de la cola del crecimiento. No justifica una prima regulatoria adicional por la
 simultaneidad, porque una amplificación grande queda descartada.
 
+**V13. Su tesis dice que la fragilidad no antecede al spread. ¿Y a frecuencia mensual?**
+**R.** A frecuencia mensual sí lo antecede. Con la distancia al incumplimiento de Merton mensual (los
+mismos bancos y el mismo motor) y el EMBI diario, un aumento de la fragilidad en un mes va seguido de
+un spread mayor el mes siguiente (0,013; DK p = 0,005; wild del Wald p < 0,001). Se mantiene sin cada
+uno de los 13 países, y la dirección inversa no existe (wild p = 0,39). La magnitud es pequeña: una
+d.e. lleva a +0,6 % el mes siguiente.
+**Si insiste:** es precedencia, no causalidad. Las acciones bancarias pueden incorporar antes la misma
+información que después recoge el spread.
+
+**V14. ¿Probó un instrumento propiamente bancario?**
+**R.** Sí, el granular de Gabaix y Koijen: el retorno de los bancos grandes ponderado por tamaño menos
+el de igual peso. Es débil (F de 1,8 a 3,2) y su exclusión es dudosa (responde al spread del mismo
+trimestre, p = 0,04). Con 3 a 10 bancos por país no alcanza. Se reporta.
+
+**V15. ¿Y el estudio de eventos del respaldo?**
+**R.** Se estudiaron nueve anuncios. Las swap de la Fed de marzo de 2020 bajaron el spread de Brasil y
+México entre 20 y 22 pp en una semana, frente a los demás países. Las FCL no lo movieron. La relación
+diaria banca–spread se acerca a cero después de los eventos, pero igual en los países sin línea: no
+hay desacople atribuible al respaldo.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**

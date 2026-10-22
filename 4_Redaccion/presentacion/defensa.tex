@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-tabla]{babel}
-\usepackage{booktabs,graphicx,tikz,amsmath,adjustbox}
+\usepackage{booktabs,graphicx,tikz,amsmath,adjustbox,array}
 \usetikzlibrary{arrows.meta,positioning}
 \usepackage{tesis_beamer}
 
@@ -742,6 +742,7 @@ Dentro de las crisis globales & $0{,}063$ & $-0{,}018$ & $0{,}045^{**}$ & 54 de 
 \item \textbf{\textit{Swap} de la Fed:} Brasil y México (2008Q4--2009Q4 y 2020Q1--2021Q4).
 \item \textbf{Línea de Crédito Flexible del FMI:} México desde 2009Q2; Colombia 2009Q2--2025Q1; Polonia 2009Q2--2017Q3; Chile desde 2020Q2; Perú 2020Q2--2024Q2.
 \item Con acceso, la transmisión \textbf{no es menor}. El acceso no es exógeno: se pide y se otorga según el riesgo.
+\item \textbf{Estudio de eventos diario} (9 anuncios): las \textit{swap} de 2020 bajan el \textit{spread} $20$--$22$ pp en una semana; las FCL, nada. El desacople banca--\textit{spread} ocurre igual en las economías sin línea.
 \end{itemize}
 {\scriptsize ** $p<0{,}05$ (Driscoll--Kraay).\par}
 \end{frame}
@@ -835,12 +836,34 @@ Resiliencia previa $\times$ riesgo de cola & $-0{,}028$ (\textit{wild} $0{,}06$)
 Amplificación en el núcleo de 11, sin crisis & $+0{,}034$ (\textit{wild} $0{,}015$); grupo \textit{ex post} & exploratorio \\
 Participación extranjera (preespecificada) & Holm $p=1{,}00$ & \textbf{no hay evidencia} \\
 Respaldo externo por país & $-0{,}004$ (\textit{wild} $0{,}90$) & \textbf{no hay evidencia} \\
+Eventos diarios de respaldo & \textit{swap} Fed 2020: $-20$ a $-22$ pp; desacople igual que sin línea & baja el nivel; \textbf{no} la transmisión \\
 Asimetría \textit{Backstop} / \textit{EMstress} & Holm $0{,}12$ / $0{,}24$; lugar 20 de 51 & \textbf{no hay evidencia} \\
 \midrule
 \multicolumn{3}{l}{\textit{Réplica de Chari et al.\ (2024) y validación del panel}} \\
 Fragilidad y \textit{spread} en niveles & $0{,}099$ (\textit{wild} $0{,}33$); $0{,}107$--$0{,}164$ con sus controles; 70\% es Turquía; con la DD de Merton, \textit{wild} $0{,}055$ & sugerente \\
-La fragilidad antecede al \textit{spread} & cierre a cierre $0{,}025$ (\textit{wild} $0{,}21$) & \textbf{no hay evidencia} \\
+La fragilidad antecede al \textit{spread} & trimestral: cierre a cierre $0{,}025$ (\textit{wild} $0{,}21$); mensual: $0{,}013$ a un mes (\textit{wild} $<0{,}001$; 13 de 13) & trimestral, no; mensual, firme (no causal) \\
 Se mueven en el mismo trimestre & $0{,}037$ (\textit{wild} $0{,}008$); 13 de 13 países en pb & resiste el \textit{wild}; sujeto al sesgo de retroalimentación \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{frame}
+\begin{frame}{Extensiones posteriores a la estimación (no preespecificadas)}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
+\toprule
+Extensión & Resultado & Qué cambia \\
+\midrule
+Frecuencia mensual (DD de Merton y EMBI diario) & La fragilidad antecede al \textit{spread} un mes: $0{,}013$ (\textit{wild} $<0{,}001$; 13 de 13 sin cada país); inversa, nada & El fechado: dentro del trimestre la fragilidad va primero (no causal) \\
+\addlinespace
+Instrumento granular (Gabaix--Koijen) & $F$ de $1{,}8$ a $3{,}2$; forma reducida nula; responde al \textit{spread} ($p=0{,}04$) & Nada: no identifica \\
+\addlinespace
+Panel ampliado & EMBI desde el CDS (+189 obs.) y Argentina con $\GaR$ homologado: $\beta_3$ entre $-0{,}011$ y $-0{,}002$ & Nada \\
+\addlinespace
+Eventos de respaldo (9, diarios) & \textit{Swap} Fed 2020: $-20$ a $-22$ pp en una semana; FCL, nada; desacople igual sin línea & Baja el nivel, no la transmisión \\
+\addlinespace
+Cola alta del \textit{spread} (cuantílica) & $\beta_3(\tau)$ de $-0{,}024$ a $-0{,}001$, nunca positiva; la fragilidad pesa más en $\tau$ alto ($0{,}19$) & Nada sobre H3 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
@@ -886,11 +909,11 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad: son asocia
 \begin{block}{Trabajo futuro}
 \small
 \begin{itemize}
-\item Más economías.
-\item \textit{Spreads} y fragilidad de mayor frecuencia.
+\item Más economías (con EMBI directo, no imputado).
+\item Frecuencia diaria y un $\GaR$ mensual.
 \item La distancia al incumplimiento como medida principal, con la batería completa.
-\item Variación exógena bancaria.
-\item Estudio de eventos en torno a los anuncios de líneas de respaldo.
+\item Variación exógena bancaria (el instrumento granular fue débil).
+\item Más eventos de respaldo.
 \end{itemize}
 \end{block}
 \end{columns}
