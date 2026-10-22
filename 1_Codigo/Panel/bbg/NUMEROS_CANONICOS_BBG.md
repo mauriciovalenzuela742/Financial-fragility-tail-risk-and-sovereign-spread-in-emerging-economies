@@ -1992,3 +1992,15 @@ el componente global explica el 70 % de la varianza de ln EMBI; sobre el idiosin
 flexible en el 79 % de las obs.): × fragilidad 0,076 (wild 0,60), × riesgo de cola 0,016 (wild 0,37).
 **Lectura:** el riesgo de cola de mediano plazo es firme y la amplificación por la deuda se fortalece con él;
 ni el doom loop completo ni el pecado original se confirman.
+
+## 29. Fechado del riesgo de cola: GaR en t−2 (2026-10-22)
+
+Fuente: `p45b_rezago_gar.py` → `paper_p45b_numeros.csv`. Muestra con D_{t−1} y D_{t−2} (N = 756).
+
+| | Logaritmos: β1 / β2 / β3 (DK p) | Niveles (pb): γ1 / γ2 / γ3 (DK p) |
+|---|---|---|
+| D_{t−1} (referencia, misma muestra) | 0,095 (0,004) / 0,031 (0,042) / −0,011 (0,13) | 4,69 (<0,001) / 2,94 (0,32) / 0,25 (0,34) |
+| D_{t−2} en su lugar | 0,094 (0,002) / 0,034 (0,025; wild 0,14) / −0,008 (0,33) | 4,73 (<0,001) / 3,69 (0,16) / 0,15 (0,55) |
+| Ambos: D_{t−1} / D_{t−2} | 0,018 (0,17) / 0,023 (0,11; wild 0,068) | 0,91 (0,69) / 3,42 (0,11) |
+
+Correlación dentro del país entre D_{t−1} y D_{t−2}: 0,64. **Lectura:** el rezago del GaR no cambia nada.
