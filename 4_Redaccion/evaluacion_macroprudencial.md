@@ -212,6 +212,27 @@ Infraestructura que se reutiliza: `p2_regresiones.py::umbral_hansen()` (malla y 
   (γ = −0,18 sobre el CDS).
 - **Secundaria:** no entra en la familia de Holm porque ya fue estimado.
 
+## U1–U3 por país: ¿el umbral agrupado es común o un promedio de umbrales distintos?
+
+- **Pregunta:** el umbral agrupado impone el mismo γ a las trece economías. Si cada una tiene un umbral
+  propio, el agrupado puede ser un promedio que no describe a ninguna, y no serviría como regla común.
+- **Método:** el mismo modelo de umbral, estimado con la serie de tiempo de cada economía. El componente
+  global se descuenta con los efectos de tiempo de la regresión agrupada lineal y, como variante, con
+  controles globales. Cada umbral lleva su intervalo por inversión del LR (Hansen, 2000) y un intervalo de
+  bootstrap por bloques.
+- **Muestra:** solo las economías con al menos 50 trimestres con la variable de umbral, que son nueve.
+  Filipinas, Indonesia, Sudáfrica y Malasia no alcanzan.
+- **Comparación:**
+  1. cuántas economías contienen el umbral agrupado en su intervalo;
+  2. una prueba de umbral común frente a umbrales por país;
+  3. los umbrales expresados en el percentil propio de cada economía, para ver si lo común es el
+     percentil y no el nivel.
+- **Advertencia:** con 50 a 90 trimestres por país los intervalos serán aún más amplios que los
+  agrupados, y la deuda varía tan lento dentro de un país que su umbral se confunde con un quiebre en el
+  tiempo. Por eso se compara con un modelo de quiebre en una fecha.
+- **Qué podría cambiar:** si el umbral agrupado cae fuera de la mayoría de los intervalos por país, la
+  regla de U7 se expresa en percentiles propios de cada economía y no en un nivel común.
+
 ## U4. Alerta temprana: umbrales de señal y semáforo
 
 - **Evento (fijado ex ante):** episodio de estrés soberano = el alza del EMBI en los cuatro trimestres
