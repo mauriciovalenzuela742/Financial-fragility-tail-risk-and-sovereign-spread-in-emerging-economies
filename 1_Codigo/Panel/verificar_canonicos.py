@@ -37,6 +37,10 @@ CLAVES = {
     "paper_p55_numeros.csv": ["MES_spearman", "DCoVaR_spearman", "U1MES_p_bloques", "U1DCoVaR_p_bloques"],
     "paper_p56_numeros.csv": ["conj_R2-H3_holm", "conj_R-H3_holm", "conj_R2-H3_bh", "conj_holm05",
                               "perm_rh3_b_obs", "perm_rh3_p_perm", "perm_rh3D4_b_obs", "perm_rh3D4_p_perm"],
+    "paper_p57_numeros.csv": ["N2_psi_original", "N2_psi", "N2_N", "N2_p_uni", "N2_dif_p", "N2_no_replica",
+                              "N2_hungary_psi", "N2_southkorea_psi", "N2cds_psi", "N2_potencia"],
+    "paper_p58_numeros.csv": ["N1_TM", "N1_F_T", "N1_F_TM", "N1_debil", "N1_p_uni", "N1_fs_Z", "N1_rf_ZM",
+                              "familia5_N2-H1_holm", "familia5_N1-H1_holm"],
 }
 
 

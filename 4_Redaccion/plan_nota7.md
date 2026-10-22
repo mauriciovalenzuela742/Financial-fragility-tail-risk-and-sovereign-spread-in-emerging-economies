@@ -232,3 +232,30 @@ el hallazgo central queda circunscrito al horizonte de un año y a una prueba qu
 la estructura sube a ~6,7 y la reproducibilidad a 7,0. Nota estimada: **6,3**, igual que la prevista sin
 datos nuevos. El peso de N1 y N2 aumenta: son las que pueden devolver al hallazgo central la fuerza que la
 inferencia conjunta le quitó, y la réplica externa debería preregistrar como primaria la versión a un año.
+
+---
+
+# 7. Registro de aplicación de N1 y N2 (22 de octubre de 2026)
+
+Preregistro 5: `preregistro_n1n2.md`, commit `7df0427`. Cifras en NUMEROS §33; texto en la Sección
+`sec:n1n2` de la tesis y del paper.
+
+| # | Estado | Resultado |
+|---|---|---|
+| N2 | Hecho (preregistrado) | **No replica** según el criterio fijado: ψ = 0,219 en Hungría y Corea (p 0,002), siete veces la original; la diferencia se rechaza. Hungría sola: 0,025 (≈ original, no significativo). Potencia de 5 % |
+| N1 | Hecho (preregistrado) | **Instrumento débil** para la interacción (F 9,7 < 10; para el riesgo de cola, 20,3); la interacción instrumentada es nula (0,001; p 0,46) |
+
+**Consecuencia fijada:** el hallazgo central queda como resultado de la muestra original, y así lo dicen el
+resumen, la introducción, los resultados, la discusión, las conclusiones, el paper y las láminas.
+
+**Efecto sobre la nota.** Identificación y contribución no suben: N1 y N2 eran las dos pruebas que podían
+llevar la tesis sobre 6,6, y ninguna resultó. Sube la transparencia, porque una tesis que intenta la réplica
+y el instrumento con preregistro y reporta que no salen es más creíble. Pero un 7,0 exige un resultado
+confirmado fuera de la muestra, y este no lo está. Nota estimada: **6,3–6,4**.
+
+**Qué queda para acercarse al 7:**
+- **N3 (modelo cuantitativo):** sigue disponible, y no depende de que algo resulte.
+- **Una réplica con más economías:** necesita Bloomberg o Refinitiv para cinco a diez emergentes más, con
+  potencia suficiente. Con dos economías la potencia es de 5 %.
+- **Un instrumento más fuerte para la interacción:** por ejemplo, choques a la deuda, como las
+  reestructuraciones o los cambios de regla fiscal, en vez de choques al riesgo de cola.

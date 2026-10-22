@@ -59,6 +59,8 @@ PASOS = [
     ("bbg/p53_alerta_temprana.py", [], "base"),
     ("bbg/p55_medidas_sistemicas.py", [], "base"),
     ("bbg/p56_inferencia_conjunta.py", [], "base"),
+    ("bbg/p57_replica_externa.py", [], "base"),
+    ("bbg/p58_iv_choques.py", [], "base"),
 ]
 
 

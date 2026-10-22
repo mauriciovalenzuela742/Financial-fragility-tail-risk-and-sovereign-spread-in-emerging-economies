@@ -173,6 +173,15 @@ riesgo de cola del año siguiente sí resiste (p = 0,009), y esa es la versión 
 **Si insiste en que era secundaria:** es cierto, y lo declaro; por eso la presento como la versión que resiste
 la prueba más exigente, no como la hipótesis preregistrada primaria.
 
+**V23. ¿Replicó el hallazgo central fuera de la muestra?**
+**R.** Lo intenté, con un preregistro (p57). En Hungría y Corea el signo se repite, pero la interacción es
+siete veces la original y la diferencia se rechaza, así que según el criterio que fijé no replica. En
+Hungría, la única con EMBI, el coeficiente es casi igual al original (0,025 frente a 0,033), pero no
+significativo, y la réplica tenía una potencia de 5 %: con dos economías no se puede precisar.
+**Si pregunta por causalidad:** el instrumento de términos de intercambio (p58) mueve bien el riesgo de cola
+(F = 20), pero es débil para la interacción con la deuda (F = 9,7) y la estima nula. Por eso digo que el
+hallazgo es de la muestra original.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**
