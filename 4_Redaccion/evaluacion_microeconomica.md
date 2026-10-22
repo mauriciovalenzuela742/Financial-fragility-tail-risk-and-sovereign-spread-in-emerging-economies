@@ -266,3 +266,38 @@ prueba nueva se preregistra en un commit propio antes de estimar, como en `prere
 
 **Nota esperada con μ1–μ4:** en torno a 6,5. La tesis pasaría de usar los bancos como insumo de un índice
 a usarlos como unidad de análisis del mecanismo.
+
+---
+
+# 5. Registro de aplicación (22 de octubre de 2026)
+
+Preregistro 3: `preregistro_micro.md`, commit `d73245f`, anterior a los datos a nivel de banco, con la
+clasificación de propiedad fijada (`2_Datos/propiedad_bancos.csv`). El preregistro menciona 89 bancos; son
+87, y se declara. Resultados en `b94c301` (μ1, μ3–μ6) y en el commit de μ2. Cifras en
+`NUMEROS_CANONICOS_BBG.md`, §30; texto en la Sección `sec:micro-prereg` de la tesis y del paper.
+
+| # | Estado | Resultado |
+|---|---|---|
+| μ1 | Hecho (preregistrado) | H1: 1,08, positivo sin cada país, wild p uni 0,21. H2: sistémicos 0,062 frente a 0,022; la diferencia no resiste (0,20). Holm 1,00 |
+| μ2 | Hecho (preregistrado) | **Se cumple:** Spearman 0,92–0,97 y β₁ entre 0,087 y 0,150 con las tres variantes; con la malla ancha la interacción desaparece (0,001) |
+| μ3 | Hecho (preregistrado) | Filiales = nacionales (−0,007); el peso estatal tiene el signo opuesto (−0,120). Holm 1,00 |
+| μ4 | Hecho (preregistrado) | 0,101 con DK p = 0,001, pero wild 0,15 y Holm 0,88; el HHI varía poco dentro del país (14 %) |
+| μ5 | Hecho (preregistrado) | −0,038, Holm 1,00; tenencia casi puramente transversal (96 % entre países) |
+| μ6 | Hecho (secundaria) | Con ≥ 4 o 5 bancos la fragilidad pierde significancia (DK 0,22 / 0,15); el riesgo de cola la conserva. Cobertura de México, 34 % |
+| μ7 | No factible | No hay spreads de bonos ni CDS bancarios en el repositorio; queda como trabajo futuro |
+
+**Nota reestimada (misma rúbrica):**
+- Contribución: 6,0 → 6,2. Los bancos pasan de insumo a unidad de análisis, aunque el resultado es nulo.
+- Marco: 5,6 → 5,9. Las hipótesis micro (pasivo contingente, garantías, Cournot, *home bias*) quedan explícitas y contrastadas.
+- Datos: 5,7 → 6,2. La medida resiste tres calibraciones del motor; se agregan la propiedad y la cobertura.
+- Identificación: 5,5 → 5,7. Los efectos fijos de país-trimestre absorben todo choque común, incluido el spread.
+- Inferencia: 6,7 → 6,8. La familia está preregistrada y corregida por Holm.
+- Interpretación: 6,3 → 6,5. La tesis declara que el canal bancario no se demuestra y que el hallazgo central es macro.
+- Estructura: 5,8 → 5,7. Hay más extensión (149 pp.).
+- Reproducibilidad: 6,9, sin cambio.
+
+**Nota ponderada: 6,2** (0,93 + 0,59 + 0,93 + 1,14 + 1,02 + 0,975 + 0,285 + 0,345).
+
+La nota queda bajo el 6,5 esperado, que suponía que μ1–μ4 afinarían el mecanismo bancario. Las pruebas
+están bien hechas y reportadas, pero no lo afinan. Para un microeconomista, lo que más pesa ahora es que la
+medida es robusta (μ2) y que la tesis no sobrevende el canal bancario.
