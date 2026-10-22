@@ -141,6 +141,11 @@ datos. Con el riesgo de cola del año siguiente, una d.e. más de deuda eleva la
 (−0,053) ni el efecto se concentra en la deuda en moneda extranjera. Solo el canal del crecimiento
 depende de la deuda.
 
+**V19. Si el GaR pronostica el crecimiento del trimestre siguiente, ¿no debería entrar con dos rezagos?**
+**R.** No hace falta. Lo que importa es con qué información se calcula: GaR_{t−1} usa solo datos de t−1 y
+es anterior al spread de t. Igual se probó: con GaR_{t−2} el coeficiente es 0,034 frente a 0,031, y nada
+más cambia (p45b). Con los dos rezagos se reparten el coeficiente, porque correlacionan 0,64.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**
