@@ -176,6 +176,23 @@ python bbg/p44_datos_macro.py                     # deuda en moneda extranjera/l
 python bbg/p45_macro_preregistrada.py             # pruebas del preregistro 2 (preregistro_macro.md, commit f820594)
 ```
 
+### Paso 2f — Pruebas microeconómicas preregistradas (2026-10-22)
+
+Preregistro 3: `4_Redaccion/preregistro_micro.md` (commit `d73245f`). Desde `1_Codigo/Panel/`. Cifras en
+`bbg/NUMEROS_CANONICOS_BBG.md`, §30.
+
+```bash
+python bbg/p46_panel_bancos.py                    # panel banco-trimestre (cachea banco_trimestral_bbg.csv) y mu1
+python bbg/p47_sensibilidad_motor.py calcular rho # mu2: cada variante tarda ~20 min por país (cachea jloss_variante_<v>.csv)
+python bbg/p47_sensibilidad_motor.py calcular dp
+python bbg/p47_sensibilidad_motor.py calcular ancha
+python bbg/p47_sensibilidad_motor.py estimar
+python bbg/p48_garantias.py                       # mu3 (propiedad en 2_Datos/propiedad_bancos.csv)
+python bbg/p49_concentracion_oi.py                # mu4
+python bbg/p50_exposicion_soberana.py             # mu5 (cachea tenencia_bancaria_bbg.csv)
+python bbg/p51_cobertura_sistema.py               # mu6 y Holm de la familia (red; cachea cobertura_bancos_bbg.csv)
+```
+
 ### Paso 2d — Notebook EDA (`EDA_Panel_Final_bbg.ipynb`)
 
 **No usar `jupyter execute` ni `jupyter nbconvert --execute`** contra el `.venv` de este

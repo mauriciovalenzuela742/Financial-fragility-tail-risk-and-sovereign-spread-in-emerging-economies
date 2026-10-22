@@ -146,6 +146,15 @@ depende de la deuda.
 es anterior al spread de t. Igual se probó: con GaR_{t−2} el coeficiente es 0,034 frente a 0,031, y nada
 más cambia (p45b). Con los dos rezagos se reparten el coeficiente, porque correlacionan 0,64.
 
+**V20. Tiene 87 bancos. ¿Por qué no usa los bancos para identificar el canal bancario?**
+**R.** Lo hice, con un tercer preregistro anterior a los datos (p46–p51). La fragilidad de los bancos
+grandes responde más al spread y la asociación se concentra en los dos bancos sistémicos (0,062 frente a
+0,022), como predice el pasivo contingente, pero ninguna de las seis hipótesis pasa Holm. Las filiales
+extranjeras pesan igual que los nacionales y más banca estatal va con *menos* transmisión.
+**Si insiste en la calibración del motor:** con ρ por banco, otro punto de incumplimiento o la malla
+ancha, JLoss correlaciona 0,92–0,97 con la base y β₁ sigue positivo (p47). Lo frágil es el número de
+bancos: con al menos cuatro por economía la fragilidad pierde significancia; el riesgo de cola no.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**

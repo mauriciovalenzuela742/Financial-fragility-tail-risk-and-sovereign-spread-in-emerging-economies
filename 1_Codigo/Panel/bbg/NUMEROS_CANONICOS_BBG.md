@@ -2004,3 +2004,40 @@ Fuente: `p45b_rezago_gar.py` → `paper_p45b_numeros.csv`. Muestra con D_{t−1}
 | Ambos: D_{t−1} / D_{t−2} | 0,018 (0,17) / 0,023 (0,11; wild 0,068) | 0,91 (0,69) / 3,42 (0,11) |
 
 Correlación dentro del país entre D_{t−1} y D_{t−2}: 0,64. **Lectura:** el rezago del GaR no cambia nada.
+
+## 30. Pruebas microeconómicas preregistradas: los bancos como unidad (2026-10-22)
+
+Preregistro 3: `4_Redaccion/preregistro_micro.md`, commit `d73245f`, anterior a los datos a nivel de banco
+(menciona 89 bancos; son 87). Fuentes: `p46`–`p51` → `paper_p46…p51_numeros.csv`; panel
+`banco_trimestral_bbg.csv` (87 bancos, 6.684 banco-trimestres). p unilateral del wild por país (Webb, 999) en la
+dirección predicha; Holm sobre la familia de seis.
+
+| Hipótesis primaria | Coeficiente | p uni (wild) | Holm | Sin cada país |
+|---|---|---|---|---|
+| μ1-H1: Δfragilidad del banco × peso sistémico sobre Δln EMBI (EF banco y país-trimestre) | 1,08 | 0,21 | 1,00 | 0 de 13 (todos positivos: 0,27–1,58) |
+| μ1-H2: sistémica (2 mayores) − marginal | 0,040 | 0,20 | 1,00 | 0 de 13 |
+| μ3-H1: nacionales − filiales (7 economías) | −0,007 | 0,53 | 1,00 | 0 de 7 |
+| μ3-H2: fragilidad × peso estatal (t−4, estandarizado) | −0,120 (DK p < 0,001, signo opuesto) | 0,90 | 1,00 | 0 de 13 |
+| μ4-H1: fragilidad × HHI (t−4) | 0,101 (DK p = 0,001) | 0,15 | 0,88 | 1 de 13 |
+| μ5-H1: fragilidad × tenencia bancaria de deuda pública (t−4) | −0,038 | 0,80 | 1,00 | 0 de 13 |
+
+Detalle: sistémicos 0,062 (DK p < 0,001) y resto 0,022 (0,40), correlación entre ambas 0,79. Variación dentro del
+país: HHI 14 %, tenencia 4 %.
+
+**μ2 (sensibilidad del motor; criterio: Spearman > 0,8 y β1 > 0 con cada variante) — se cumple:**
+
+| Variante | N | Spearman (dentro) | β1 (DK p; wild) | β2 | β3 |
+|---|---|---|---|---|---|
+| ρ por banco (media 0,50) | 763 | 0,97 (0,98) | 0,087 (<0,001; 0,26) | 0,032 | −0,010 |
+| PD = 0,5 CP + 0,5 LP | 765 | 0,92 (0,83) | 0,150 (<0,001; 0,27) | 0,034 | −0,015 |
+| Malla ancha [0,01; 0,20] | 765 | 0,96 (0,82) | 0,089 (0,067; 0,31) | 0,033 | 0,001 |
+
+**μ6 (secundaria):** con al menos 3 / 4 / 5 bancos cotizados: N = 751 / 604 / 477 (13 / 11 / 10 economías);
+fragilidad 0,099 / 0,064 / 0,086 (DK p 0,005 / 0,22 / 0,15); riesgo de cola 0,034 / 0,050 / 0,051 (DK p 0,027 /
+0,005 / 0,012). Cobertura (cota superior: activos de los cotizados / crédito bancario privado, mediana): México
+34 %; otras diez entre 52 % (India) y 96 % (Perú); Malasia 116 % y Sudáfrica 154 %.
+
+**μ7:** no factible (sin spreads de bonos ni CDS bancarios en el repositorio).
+
+**Lectura:** ninguna hipótesis micro pasa Holm; el patrón va hacia el pasivo contingente (sistémicos), pero la
+propiedad no ordena la transmisión como predice el rescate. La medida es robusta al motor.
