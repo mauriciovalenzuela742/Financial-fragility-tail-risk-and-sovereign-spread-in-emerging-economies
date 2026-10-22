@@ -1,0 +1,92 @@
+country,bankname,propiedad,desde,hasta,nota
+brazil,abc_brasil,extranjero,,,Controlado por Bank ABC (Baréin)
+brazil,banco_bmg,privado,,,
+brazil,banco_do_brasil,estatal,,,Gobierno federal
+brazil,banco_do_nordeste,estatal,,,Gobierno federal
+brazil,banco_inter,privado,,,
+brazil,banco_pan,privado,,,Controlado por BTG Pactual (antes Caixa y Silvio Santos)
+brazil,banrisul,estatal,,,Estado de Rio Grande do Sul
+brazil,bradesco,privado,,,
+brazil,btg_pactual,privado,,,
+brazil,itau_unibanco,privado,,,
+brazil,santander_brasil,extranjero,,,Filial de Banco Santander
+chile,banco_de_chile,privado,,,Grupo Luksic (con participación de Citigroup)
+chile,bci,privado,,,
+chile,itau_corpbanca,privado,,2016Q1,CorpBanca (privado nacional) antes de la fusión
+chile,itau_corpbanca,extranjero,2016Q2,,Filial de Itaú Unibanco desde la fusión de abril de 2016
+chile,santander_chile,extranjero,,,Filial de Banco Santander
+china,abc,estatal,,,
+china,boc,estatal,,,
+china,bocom,estatal,,,
+china,ccb,estatal,,,
+china,china_everbright,estatal,,,China Everbright Group (estatal)
+china,citic,estatal,,,CITIC Group (estatal)
+china,cmb,estatal,,,China Merchants Group (estatal) como controlador
+china,icbc,estatal,,,
+china,minsheng,privado,,,
+china,psbc,estatal,,,
+colombia,banco_de_bogota,privado,,,Grupo Aval
+colombia,bancolombia,privado,,,
+colombia,davivienda,privado,,,
+india,axis_bank,privado,,,
+india,bank_of_baroda,estatal,,,
+india,canara_bank,estatal,,,
+india,federal_bank,privado,,,
+india,hdfc_bank,privado,,,
+india,icici_bank,privado,,,
+india,idbi,estatal,,,Gobierno y LIC mayoritarios
+india,indusind,privado,,,
+india,kotak_mahindra,privado,,,
+india,pnb,estatal,,,
+india,sbi,estatal,,,
+india,union_bank,estatal,,,
+india,yes_bank,privado,,,Rescatado en 2020 con participación de SBI (minoritaria)
+indonesia,bca,privado,,,
+indonesia,bni,estatal,,,
+indonesia,bri,estatal,,,
+indonesia,bsi,estatal,,,Bank Syariah Indonesia (de bancos estatales)
+indonesia,mandiri,estatal,,,
+malaysia,ambank,privado,,,
+malaysia,cimb,privado,,,Khazanah accionista relevante, no mayoritario
+malaysia,hong_leong_bank,privado,,,
+malaysia,maybank,estatal,,,PNB y fondos ASB mayoritarios (empresa ligada al gobierno)
+malaysia,public_bank,privado,,,
+malaysia,rhb_bank,privado,,,EPF accionista relevante, no mayoritario
+mexico,banco_bajio,privado,,,
+mexico,banorte,privado,,,
+mexico,banregio,privado,,,
+mexico,inbursa,privado,,,
+mexico,santander_mexico,extranjero,,,Filial de Banco Santander
+peru,bbva_peru,extranjero,,,Control conjunto de BBVA (con Breca)
+peru,bcp,privado,,,Credicorp
+peru,interbank,privado,,,Intercorp
+philippines,bdo_unibank,privado,,,
+philippines,bpi,privado,,,
+philippines,china_banking,privado,,,
+philippines,metrobank,privado,,,
+philippines,security_bank,privado,,,MUFG minoritario
+poland,alior,estatal,,,Controlado por PZU (estatal)
+poland,handlowy,extranjero,,,Filial de Citigroup
+poland,ing_bsk,extranjero,,,Filial de ING
+poland,mbank,extranjero,,,Filial de Commerzbank
+poland,millennium,extranjero,,,Filial de Millennium BCP
+poland,pekao,extranjero,,2017Q2,Filial de UniCredit hasta junio de 2017
+poland,pekao,estatal,2017Q3,,PZU y PFR (estatales) desde junio de 2017
+poland,pko_bp,estatal,,,
+poland,santander_polska,extranjero,,,Filial de Banco Santander
+southafrica,absa,extranjero,,2017Q2,Filial de Barclays hasta 2017
+southafrica,absa,privado,2017Q3,,Barclays redujo su participación a minoritaria en 2017
+southafrica,capitec,privado,,,
+southafrica,firstrand,privado,,,
+southafrica,investec,privado,,,
+southafrica,nedbank,privado,,,Old Mutual (grupo de origen sudafricano)
+southafrica,standard_bank,privado,,,ICBC minoritario (20 %)
+turkey,akbank,privado,,,
+turkey,garanti_bbva,privado,,2015Q2,
+turkey,garanti_bbva,extranjero,2015Q3,,BBVA controlador desde 2015
+turkey,halkbank,estatal,,,
+turkey,isbank,privado,,,
+turkey,sekerbank,privado,,,
+turkey,tskb,privado,,,Grupo Isbank
+turkey,vakifbank,estatal,,,
+turkey,yapi_kredi,privado,,,Koç (con UniCredit hasta 2019-2022)
