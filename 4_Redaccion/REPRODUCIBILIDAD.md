@@ -166,6 +166,10 @@ python bbg/p37_mensual_fechado.py                 # DD y EMBI mensuales (cachea 
    python gar_insample_robustez.py GaR_panel_all19_noRyr.xlsx all19noRyr)
 python bbg/p38_panel_ampliado.py                  # EMBI imputado desde el CDS y Argentina homologada
 python bbg/p39_eventos_respaldo.py                # estudio de eventos diario de las líneas de respaldo
+python bbg/p40_tabla_compacta.py                  # tabla compacta M1-M4 del cuerpo del capítulo
+python bbg/p41_datos_resiliencia.py               # datos trimestrales QPSD, QEDS y GEM (red; cachea resiliencia_trimestral_bbg.csv)
+python bbg/p42_resiliencia_preregistrada.py       # pruebas preregistradas (preregistro_resiliencia.md, commit c492ca3)
+python bbg/p43_revision_econometrica.py           # CCE, PMG, coeficientes aleatorios, VAR mensual (~15 min)
 ```
 
 ### Paso 2d — Notebook EDA (`EDA_Panel_Final_bbg.ipynb`)

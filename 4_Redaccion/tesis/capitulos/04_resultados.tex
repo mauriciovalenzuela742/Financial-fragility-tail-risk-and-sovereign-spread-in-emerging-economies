@@ -2,7 +2,7 @@
 \chapter{Resultados}
 \label{sec:resultados}
 
-Este capítulo responde la pregunta propia de la tesis: sobre la fragilidad bancaria que ya documentan \citet{Chari2024b}, ¿qué agrega el riesgo económico doméstico, y qué ocurre cuando los dos riesgos se dan a la vez? La respuesta se ordena en cuatro conclusiones. Primera, los dos riesgos tienden a darse juntos, también descontado el calendario común, y la fragilidad bancaria antecede al deterioro de la cola del crecimiento (Sección~\ref{sec:simultaneidad}). Segunda, cuando coinciden no hay evidencia de que se amplifiquen: no se rechaza que sus efectos sobre el spread sean aditivos, y se descarta una amplificación mayor que un 35\% de la suma, aunque no una menor (Sección~\ref{sec:aditivos}). Tercera, el riesgo económico agrega información modesta, y solo en niveles, a lo que ya explica la fragilidad (Sección~\ref{sec:aporte-cola}). Cuarta, ninguna de las condiciones estudiadas ---la resiliencia de la política económica, el respaldo externo y quién tiene la deuda--- modifica la transmisión de forma demostrable (Secciones~\ref{sec:robustez-resiliencia} y~\ref{sec:crisis-interaccion}). Que la fragilidad bancaria importa para el spread lo establecen \citet{Chari2024b}; aquí aparece como réplica independiente y validación del panel, y es el punto de partida (Sección~\ref{sec:bateria}). La Sección~\ref{sec:identificacion} delimita qué de todo ello puede afirmarse, y la Sección~\ref{sec:robustez-resumen} resume la robustez a la medición, a la muestra y a la forma funcional, cuyo detalle está en el Anexo~\ref{chap:anexo-robustez}. El capítulo presenta primero qué agrega el riesgo económico (conclusión 3, Sección~\ref{sec:aporte-cola}) y después la simultaneidad y la aditividad (conclusiones 1 y 2, Sección~\ref{sec:aditivos}), porque el segundo análisis usa el primero.
+Este capítulo responde la pregunta propia de la tesis: sobre la fragilidad bancaria que ya documentan \citet{Chari2024b}, ¿qué agrega el riesgo económico doméstico, y qué ocurre cuando los dos riesgos se dan a la vez? La respuesta se ordena en cuatro conclusiones. Primera, los dos riesgos tienden a darse juntos, también descontado el calendario común, y la fragilidad bancaria antecede al deterioro de la cola del crecimiento (Sección~\ref{sec:simultaneidad}). Segunda, cuando coinciden no hay evidencia de que se amplifiquen: no se rechaza que sus efectos sobre el spread sean aditivos, y se descarta una amplificación mayor que un 35\% de la suma, aunque no una menor (Sección~\ref{sec:aditivos}). Tercera, el riesgo económico agrega información modesta a lo que ya explica la fragilidad, una asociación de nivel y de largo plazo (Secciones~\ref{sec:aporte-cola} y~\ref{sec:revision-econometrica}). Cuarta, la deuda pública amplifica la transmisión del riesgo de cola, en una prueba preregistrada; ninguna otra condición ---la adecuación de reservas, el respaldo externo y quién tiene la deuda--- modifica la transmisión de forma demostrable (Secciones~\ref{sec:robustez-resiliencia} y~\ref{sec:crisis-interaccion}). Que la fragilidad bancaria importa para el spread lo establecen \citet{Chari2024b}; aquí aparece como réplica independiente y validación del panel, y es el punto de partida (Sección~\ref{sec:bateria}). La Sección~\ref{sec:identificacion} delimita qué de todo ello puede afirmarse, y la Sección~\ref{sec:robustez-resumen} resume la robustez a la medición, a la muestra y a la forma funcional, cuyo detalle está en el Anexo~\ref{chap:anexo-robustez}. El capítulo presenta primero qué agrega el riesgo económico (conclusión 3, Sección~\ref{sec:aporte-cola}) y después la simultaneidad y la aditividad (conclusiones 1 y 2, Sección~\ref{sec:aditivos}), porque el segundo análisis usa el primero.
 
 Todo el capítulo usa una misma escala de evidencia, que la simulación de la Sección~\ref{sec:inferencia-potencia} justifica. Un resultado es \emph{firme} si resiste la inferencia exigente (\textit{wild cluster bootstrap} por país o permutación) y no depende de un país; \emph{sugerente}, si es significativo solo con errores de Driscoll--Kraay o depende de un país; \emph{exploratorio}, si no estaba preespecificado y no pasa la corrección por comparaciones múltiples; y, en caso contrario, \emph{no hay evidencia}. La escala ordena la inferencia, no la identificación: ni siquiera el \textit{wild bootstrap} protege del sesgo que induce la retroalimentación entre el spread y sus determinantes (Sección~\ref{sec:identificacion}). Todos los coeficientes son asociaciones condicionales, no efectos causales, y cada prueba se reporta cualquiera sea su resultado.
 
@@ -20,7 +20,7 @@ Pregunta & Resultado principal & Pruebas que lo acotan & Veredicto \\
 \midrule
 \textbf{H1}. La fragilidad bancaria eleva el spread ($\beta_1>0$) & $0{,}099$ (DK $p=0{,}003$; \textit{wild} $0{,}32$); $0{,}107$--$0{,}164$ con los controles de Chari et al.; con la distancia al incumplimiento de Merton, \textit{wild} $0{,}055$ & Seis controles domésticos ($-0{,}008$); pendientes por país (Turquía, 70\%); fechado (mismo trimestre; a frecuencia mensual la fragilidad antecede en un mes); instrumento granular débil; simulación de retroalimentación ($+0{,}066$ sin efecto directo) & Sugerente: réplica de Chari et al., no causal \\
 \addlinespace
-\textbf{H2}. El riesgo de cola eleva el spread ($\beta_2>0$) & $0{,}032$ (DK $p=0{,}033$); $0{,}037$ sobre el modelo de Chari et al. (\textit{wild} $0{,}066$; conjunta, $0{,}041$) & Cambios a cuatro trimestres, proyecciones locales, entre países y fuera de la muestra (no aparece); Polonia & Sugerente, solo en niveles \\
+\textbf{H2}. El riesgo de cola eleva el spread ($\beta_2>0$) & $0{,}032$ (DK $p=0{,}033$); $0{,}037$ sobre el modelo de Chari et al. (\textit{wild} $0{,}066$; conjunta, $0{,}041$) & Cambios a cuatro trimestres, proyecciones locales, entre países y fuera de la muestra (no aparece); con cargas heterogéneas (CCE): \textit{wild} $0{,}016$ y 13 de 13 sin cada país; largo plazo (PMG) $0{,}067$ & Firme como asociación de nivel con factores comunes heterogéneos; no en cambios \\
 \addlinespace
 \textbf{H3}. La coincidencia amplifica el spread ($\beta_3>0$) & $-0{,}011$ (\textit{wild} $0{,}89$); estrés conjunto $-0{,}077$ (\textit{wild} $0{,}23$) & Bandas; equivalencia: se rechaza una amplificación de más de un 35\% de la suma; Box--Cox; régimen de crisis; medidas sin saturación; cuantiles altos del spread; panel ampliado & No hay evidencia; no se descarta una menor al 35\% \\
 \addlinespace
@@ -28,7 +28,7 @@ Simultaneidad de los dos riesgos & 168 observaciones conjuntas: 1,2 veces lo esp
 \addlinespace
 Precedencia de la fragilidad sobre el riesgo de cola & $0{,}405$ (\textit{wild} $0{,}024$); la inversa, $-0{,}006$ & Sin cada país ($0{,}32$--$0{,}47$); $GaR$ sin bloque bursátil ($0{,}388$); dos rezagos (\textit{wild} $0{,}033$; con tres o cuatro, no) & Firme a un trimestre; pequeña y no causal \\
 \addlinespace
-Moderadores: resiliencia, respaldo externo, quién tiene la deuda & Participación extranjera, preespecificada: Holm $p=1{,}00$; respaldo por país, sin desacople & Holm; moderadores placebo; exclusión de países; permutación del episodio de estrés & No hay evidencia; reservas, exploratorio \\
+Moderadores: deuda, reservas, respaldo externo, quién tiene la deuda & Preregistrada: riesgo de cola $\times$ deuda $+0{,}011$ (Holm $0{,}029$); reservas, Holm $0{,}29$; participación extranjera, Holm $1{,}00$; respaldo, sin desacople & Holm; exclusión de países; moderadores placebo; estudio de eventos & Deuda: firme; los demás, no hay evidencia \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
@@ -524,6 +524,58 @@ En suma: el coeficiente de la fragilidad es menor donde hay más reservas; la as
 
 La resiliencia no modifica, entonces, la transmisión de ninguno de los dos riesgos de forma demostrable. Lo que queda es sugerente (el spread más bajo de las economías resilientes y el contraste por régimen del riesgo de cola, solo con Driscoll--Kraay) o exploratorio (las reservas y la resiliencia previa).
 
+\subsection{Una prueba preregistrada con datos trimestrales}
+\label{sec:resiliencia-prereg}
+
+Los moderadores de esta sección tienen tres debilidades: son series anuales interpoladas, no estaban preespecificados y varios son, a la vez, canales del propio mecanismo. Por eso se escribió un preregistro (\texttt{4\_Redaccion/preregistro\_resiliencia.md}) con tres hipótesis, sus especificaciones, la inferencia y la consecuencia de cada resultado, y se registró en el repositorio antes de descargar los datos y de estimar. Los datos son trimestrales:
+\begin{itemize}
+    \item la deuda del gobierno general en \% del PIB, de la base trimestral del Banco Mundial (para Chile, India y Malasia, que no la reportan, la serie anual);
+    \item las reservas internacionales mensuales, del Banco Mundial;
+    \item la deuda externa de corto plazo, de las estadísticas trimestrales de deuda externa.
+\end{itemize}
+La adecuación de reservas se mide como el logaritmo de las reservas sobre la deuda externa de corto plazo, la regla de \citet{Greenspan1999}. Las tres hipótesis son:
+\begin{itemize}
+    \item R-H1: la fragilidad conserva un efecto directo neto del canal fiscal, estimado por g-estimación secuencial \citep{AcharyaBlackwellSen2016}.
+    \item R-H2: más reservas frente a la deuda de corto plazo atenúan la transmisión de la fragilidad.
+    \item R-H3: más deuda pública amplifica la transmisión del riesgo de cola.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Prueba preregistrada de resiliencia]{Prueba preregistrada de resiliencia con datos trimestrales}
+\label{tab:prereg}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{l c c c c}
+\toprule
+ & Coeficiente & $p$ unilateral (\textit{wild}) & Holm & Sin cada país \\
+\midrule
+\multicolumn{5}{l}{\textit{Familia primaria (moderadores en $t-4$, estandarizados)}} \\
+\quad R-H2: fragilidad $\times$ adecuación de reservas ($\lambda<0$) & $-0{,}063$ & $0{,}29$ & $0{,}29$ & 1 de 13 \\
+\quad R-H3: riesgo de cola $\times$ deuda pública ($\psi>0$) & $+0{,}011$ & $0{,}015$ & $0{,}029$ & 13 de 13 \\
+\addlinespace
+\multicolumn{5}{l}{\textit{R-H1: efecto directo de la fragilidad neto del canal fiscal}} \\
+\quad Efecto total (sin interacción, $N=634$) & $0{,}101$ & \multicolumn{3}{l}{DK $p=0{,}013$} \\
+\quad Efecto directo controlado & $0{,}002$ & \multicolumn{3}{l}{IC 95\% $[-0{,}19;\,0{,}16]$; $p$ unilateral $0{,}48$} \\
+\addlinespace
+\multicolumn{5}{l}{\textit{Secundarias}} \\
+\quad Fragilidad $\times$ reservas/PIB & $-0{,}238$ & $0{,}070$ & & \\
+\quad R-H2 y R-H3 con moderadores en $t-8$ & $-0{,}035$ / $+0{,}008$ & $0{,}41$ / $0{,}082$ & & \\
+\quad Mensual: respuesta del spread a la fragilidad, reservas altas $-$ bajas, a 0 y 3 meses & $+0{,}004$ / $+0{,}003$ & $0{,}58$ / $0{,}84$ (bilateral) & & \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} Regresión principal más el moderador y su producto con el riesgo indicado; efectos fijos de país y de tiempo. $p$ unilateral del \textit{wild cluster bootstrap} por país (pesos de Webb, 999 réplicas) en la dirección predicha; corrección de \citet{Holm1979} sobre la familia primaria. ``Sin cada país'': exclusiones con el signo predicho y $p$ unilateral menor que $0{,}10$. Con Driscoll--Kraay (bilateral), R-H2 da $p=0{,}001$ y R-H3, $p=0{,}17$. R-H1: g-estimación secuencial con el balance fiscal y la deuda del trimestre como mediadores, la inflación y el tipo de cambio real como confusores intermedios y los seis controles en $t-4$; \textit{bootstrap} de bloques por país (999). Fuente: \texttt{p41\_datos\_resiliencia.py} y \texttt{p42\_resiliencia\_preregistrada.py}.}
+\end{table}
+
+La Tabla~\ref{tab:prereg} da un resultado de cada tipo.
+
+\textbf{La deuda pública amplifica la transmisión del riesgo de cola (R-H3): evidencia firme según el criterio fijado de antemano.} Una desviación estándar más de deuda (unos 20 puntos del PIB) eleva la semielasticidad del spread al riesgo de cola en $0{,}011$: de $0{,}032$ en la deuda media a $0{,}043$, un tercio más; con una desviación estándar menos de deuda, baja a $0{,}021$. El resultado pasa la corrección de Holm y se mantiene, con el signo predicho, sin cada una de las trece economías ($0{,}008$ a $0{,}014$). Tiene dos límites: con Driscoll--Kraay no es significativo ($p=0{,}17$), y con la deuda medida ocho trimestres antes se debilita ($p=0{,}082$). Es la lectura macroeconómica del canal del crecimiento: una cola adversa del crecimiento pesa más en el precio de la deuda donde hay más deuda que servir.
+
+\textbf{La adecuación de reservas no atenúa la transmisión de la fragilidad (R-H2).} El coeficiente tiene el signo predicho ($-0{,}063$) y es significativo con Driscoll--Kraay, pero no con el \textit{wild bootstrap} ($p=0{,}29$), y solo resiste la exclusión de un país en uno de trece casos. Según la consecuencia fijada de antemano, el término de las reservas de esta sección queda definitivamente como exploratorio.
+
+\textbf{El efecto directo de la fragilidad no se puede separar del canal fiscal (R-H1).} Descontado el aporte del balance fiscal y de la deuda del trimestre, el efecto directo de la fragilidad es prácticamente nulo ($0{,}002$, con un intervalo de $-0{,}19$ a $0{,}16$), frente a un efecto total de $0{,}101$. La asociación de la fragilidad con el spread pasa por las cuentas fiscales, o comparte con ellas un fundamento común, y el panel no permite distinguir entre ambas lecturas. Es lo que anticipaba la caída del coeficiente con los seis controles, ahora con un método que no confunde un mediador con un control.
+
 \section{Crisis, respaldo externo y quién tiene la deuda}
 \label{sec:crisis-interaccion}
 
@@ -909,6 +961,50 @@ Los nueve eventos & $-6{,}0$ ($0{,}030$) & $-3{,}7$ ($0{,}018$) & $-4{,}4$ ($0{,
 
 La Tabla~\ref{tab:eventos} separa dos instrumentos con efectos distintos. Las líneas \textit{swap} de la Reserva Federal bajaron el spread al anunciarse: en marzo de 2020, entre 20 y 22 puntos porcentuales más que en las demás economías en la semana siguiente, sin una caída previa significativa. En octubre de 2008 la caída del día del anuncio estuvo precedida por otra en la semana anterior ($p=0{,}008$), de modo que no se le puede atribuir. Las Líneas de Crédito Flexible no movieron el spread en ninguna ventana. En cuanto al desacople, la pendiente entre bancos y spread sí se acerca a cero después de los eventos ($+0{,}74$; $p=0{,}004$), pero también lo hace en las economías sin línea en las mismas fechas: relativo a ellas, el cambio es negativo para las \textit{swap} y, para las Líneas de Crédito Flexible, depende de Perú. Es la normalización que sigue a cualquier pico de estrés, no un efecto del respaldo. El estudio de eventos confirma, con un diseño mejor identificado, la conclusión de la Sección~\ref{sec:respaldo-pais}: el respaldo externo puede bajar el nivel del spread, como las \textit{swap} de 2020, pero no hay evidencia de que modifique la transmisión de la fragilidad bancaria al spread.
 
+\subsection{Revisión econométrica: factores comunes, largo plazo, agrupación parcial y VAR mensual}
+\label{sec:revision-econometrica}
+
+Cuatro estimadores responden preguntas que la regresión principal deja abiertas:
+\begin{itemize}
+    \item ¿Responden las economías por igual a los choques globales? El estimador de efectos comunes correlacionados (CCE) de \citet{Pesaran2006} agrega los promedios transversales de cada trimestre con una carga propia de cada país, en versión agrupada (CCEP) y por grupo de medias (CCE-MG).
+    \item ¿Es la asociación de nivel o transitoria? El ARDL de grupo de medias agrupado \citep[PMG;][]{PesaranShinSmith1999} estima una relación de largo plazo común y una dinámica de corto plazo propia de cada país.
+    \item ¿Hay un efecto común detrás de pendientes tan distintas? Un modelo de coeficientes aleatorios encoge las pendientes por país hacia su media.
+    \item ¿Cuánto del spread explica la fragilidad? Un VAR de panel mensual de los cambios de la fragilidad y del spread lo cuantifica.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Revisión econométrica]{Revisión econométrica: cuatro estimadores alternativos}
+\label{tab:revision}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{l ccc}
+\toprule
+ & Fragilidad & Riesgo de cola & Interacción \\
+\midrule
+Regresión principal (EF de país y de tiempo) & $0{,}099$ [$0{,}32$] & $0{,}032$ [$0{,}20$] & $-0{,}011$ [$0{,}90$] \\
+CCE agrupado (cargas por país en los factores comunes) & $0{,}129$ [$0{,}15$] & $0{,}025$ [$0{,}016$] & $-0{,}017$ [$0{,}37$] \\
+\quad sin cada país (rango; $p$ \textit{cluster} máximo) & & $[0{,}018;\,0{,}028]$; $0{,}005$ & \\
+CCE por grupo de medias (12 economías) & $0{,}167$ ($0{,}10$) & $0{,}006$ ($0{,}71$) & $-0{,}037$ ($0{,}14$) \\
+PMG: relación de largo plazo (12 economías) & $0{,}065$ ($0{,}62$) & $0{,}067$ ($0{,}006$) & \\
+\quad velocidad de ajuste media ($\bar\phi$) & \multicolumn{3}{l}{$-0{,}091$; negativa en 11 de 12 economías} \\
+Coeficientes aleatorios: media & $0{,}122$ ($0{,}095$) & $0{,}024$ ($0{,}005$) & \\
+\quad heterogeneidad ($I^2$) & $93\%$ & $58\%$ & \\
+\quad media sin Turquía / sin Polonia & $0{,}084$ ($0{,}18$) / $0{,}120$ ($0{,}11$) & $0{,}027$ ($0{,}003$) / $0{,}022$ ($0{,}011$) & \\
+\addlinespace
+\multicolumn{4}{l}{\textit{VAR de panel mensual: choque de una desviación estándar a la fragilidad}} \\
+\quad Respuesta acumulada del spread a 3 / 12 meses (\%) & \multicolumn{3}{l}{$+0{,}67$ [$0{,}37$; $0{,}93$] / $+0{,}40$ [$0{,}23$; $0{,}52$] (fragilidad ordenada segunda)} \\
+\quad Varianza del spread que explica a 12 meses & \multicolumn{3}{l}{$0{,}3\%$ (fragilidad segunda) a $0{,}5\%$ (primera)} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} Logaritmos. Entre corchetes, $p$ del \textit{wild cluster bootstrap} por país; entre paréntesis, $p$ del estimador correspondiente: CCE-MG, $t$ con el error no paramétrico; PMG, \textit{bootstrap} de bloques de país (199); coeficientes aleatorios, DerSimonian--Laird sobre las pendientes país por país de la regresión sin interacción. El PMG es un ARDL(1,1,1) con las variables sin la media transversal de cada trimestre. El VAR es mensual, con tres rezagos y efectos fijos de país; los intervalos de la respuesta son de \textit{bootstrap} de bloques de país (199). Fuente: \texttt{p43\_revision\_econometrica.py}.}
+\end{table}
+
+La Tabla~\ref{tab:revision} cambia la lectura del riesgo de cola, y no la de los otros dos coeficientes. Cuando se permite que cada economía responda distinto al ciclo financiero global, el riesgo de cola resiste el \textit{wild bootstrap} ($p=0{,}016$) y la exclusión de cada país. Además, tiene una relación de largo plazo con el spread ($0{,}067$; $p=0{,}006$) hacia la que el spread converge a un ritmo de un 9\% por trimestre. Y su media de efectos aleatorios es significativa y no depende de Polonia ni de Turquía. La debilidad del riesgo de cola en la regresión principal provenía, en parte, de imponer cargas iguales sobre los factores comunes.
+
+La fragilidad, en cambio, no gana nada: su pendiente es muy heterogénea entre países ($I^2$ de $93\%$), su media depende de Turquía y no tiene una relación de largo plazo. A frecuencia mensual sus choques anteceden al spread, pero explican menos del 1\% de su varianza. La interacción es negativa o nula con los cuatro estimadores.
+
 \subsection{La cola alta del spread}
 \label{sec:cuantilica}
 
@@ -932,15 +1028,17 @@ La pregunta propia de esta tesis era qué agrega el riesgo económico doméstico
 
 \textbf{Conclusión 2. Cuando coinciden, no hay evidencia de que se amplifiquen (se descarta una amplificación mayor que un 35\% de la suma, no una menor).} La interacción de la regresión principal es $-0{,}011$ ($p=0{,}11$ con Driscoll--Kraay; $0{,}89$ con \textit{wild bootstrap}); con indicadores de estrés conjunto, las dos condiciones a la vez agregan $-0{,}077$ sobre la suma ($p=0{,}23$), y el término es negativo a todo horizonte de uno a cuatro trimestres. El signo negativo es de Polonia y no se lee como atenuación, y en puntos básicos la estimación puntual es positiva ($+0{,}25$). Es una hipótesis que no se rechaza, y una prueba de equivalencia acota lo que queda abierto: con los tres métodos de inferencia y en las dos formas funcionales se rechaza una amplificación de más de un 35\% de la suma de las dos asociaciones, pero no una menor (Secciones~\ref{sec:estres-conjunto} y~\ref{sec:bandas-aditividad}). Aditivo en logaritmos equivale a proporcional en puntos básicos; es álgebra de la forma funcional.
 
-\textbf{Conclusión 3. El riesgo económico agrega poco a lo que explica la fragilidad (evidencia sugerente, solo en niveles).} Sobre el modelo de \citet{Chari2024b} su coeficiente es $0{,}037$ ($p$ de \textit{wild bootstrap} de $0{,}066$; prueba conjunta con la interacción, $0{,}041$) y el $R^2$ dentro del país sube de $0{,}153$ a $0{,}185$. Pero no aparece en los cambios a cuatro trimestres, ni en las proyecciones locales, ni entre países, ni mejora el pronóstico fuera de la muestra; el coeficiente agrupado depende de Polonia; y el \textit{wild bootstrap} no protege del sesgo de retroalimentación, que por sí solo produciría un coeficiente de $+0{,}022$. A su favor, diez de trece pendientes por país son positivas y la asociación es inmune a tendencias por país. Es una asociación modesta, de un 2--3\,\% de spread por punto porcentual de riesgo de cola (Sección~\ref{sec:aporte-cola}).
+\textbf{Conclusión 3. El riesgo económico agrega poco a lo que explica la fragilidad, pero es una asociación de nivel y de largo plazo (firme con factores comunes heterogéneos).} Sobre el modelo de \citet{Chari2024b} su coeficiente es $0{,}037$ ($p$ de \textit{wild bootstrap} de $0{,}066$; prueba conjunta con la interacción, $0{,}041$) y el $R^2$ dentro del país sube de $0{,}153$ a $0{,}185$. Pero no aparece en los cambios a cuatro trimestres, ni en las proyecciones locales, ni entre países, ni mejora el pronóstico fuera de la muestra; el coeficiente agrupado depende de Polonia; y el \textit{wild bootstrap} no protege del sesgo de retroalimentación, que por sí solo produciría un coeficiente de $+0{,}022$. A su favor, diez de trece pendientes por país son positivas y la asociación es inmune a tendencias por país. Es una asociación modesta, de un 2--3\,\% de spread por punto porcentual de riesgo de cola (Sección~\ref{sec:aporte-cola}). La revisión econométrica la fortalece: con cargas propias de cada país sobre los factores comunes resiste el \textit{wild bootstrap} ($p=0{,}016$) y la exclusión de cada país, tiene una relación de largo plazo con el spread ($0{,}067$; $p=0{,}006$) y su media de efectos aleatorios no depende de Polonia (Sección~\ref{sec:revision-econometrica}).
 
-\textbf{Conclusión 4. Ninguna condición estudiada modifica la transmisión de forma demostrable.} La participación extranjera en la deuda, en una prueba preespecificada, no modera ninguno de los tres términos según el criterio declarado ($p$ con corrección de Holm de $1{,}00$ en logaritmos; en puntos básicos el término con la fragilidad es sugerente; Sección~\ref{sec:participacion-extranjera}); en consecuencia, la interacción positiva del grupo de once economías fuera de las crisis ($+0{,}034$; $+1{,}8$ puntos básicos) queda como exploratoria. El respaldo externo medido por país no se asocia con una transmisión menor (Sección~\ref{sec:respaldo-pais}), y un estudio de eventos diario lo confirma: las líneas \textit{swap} de la Reserva Federal de 2020 bajaron el spread al anunciarse, pero ninguna línea desacopló el spread de los bancos más que en las economías sin respaldo (Sección~\ref{sec:eventos}); las asimetrías por régimen de crisis no resisten los errores agrupados, la permutación ni la corrección de Holm. El término de las reservas con la fragilidad ($-0{,}247$) y el de la resiliencia previa con el riesgo de cola ($-0{,}028$) son exploratorios; el spread más bajo de las economías resilientes y el contraste por régimen del riesgo de cola, sugerentes (Sección~\ref{sec:robustez-resiliencia}).
+\textbf{Conclusión 4. La deuda pública amplifica la transmisión del riesgo de cola; ninguna otra condición la modifica de forma demostrable.} En una prueba preregistrada con datos trimestrales, una desviación estándar más de deuda eleva la semielasticidad del spread al riesgo de cola de $0{,}032$ a $0{,}043$ (Holm $p=0{,}029$; trece de trece exclusiones), mientras que la adecuación de reservas no atenúa la transmisión de la fragilidad (Holm $p=0{,}29$) y el efecto directo de la fragilidad no se separa del canal fiscal (Sección~\ref{sec:resiliencia-prereg}). La participación extranjera en la deuda, en una prueba preespecificada, no modera ninguno de los tres términos según el criterio declarado ($p$ con corrección de Holm de $1{,}00$ en logaritmos; en puntos básicos el término con la fragilidad es sugerente; Sección~\ref{sec:participacion-extranjera}); en consecuencia, la interacción positiva del grupo de once economías fuera de las crisis ($+0{,}034$; $+1{,}8$ puntos básicos) queda como exploratoria. El respaldo externo medido por país no se asocia con una transmisión menor (Sección~\ref{sec:respaldo-pais}), y un estudio de eventos diario lo confirma: las líneas \textit{swap} de la Reserva Federal de 2020 bajaron el spread al anunciarse, pero ninguna línea desacopló el spread de los bancos más que en las economías sin respaldo (Sección~\ref{sec:eventos}); las asimetrías por régimen de crisis no resisten los errores agrupados, la permutación ni la corrección de Holm. El término de las reservas con la fragilidad ($-0{,}247$), que la prueba preregistrada no confirma, y el de la resiliencia previa con el riesgo de cola ($-0{,}028$) son exploratorios; el spread más bajo de las economías resilientes y el contraste por régimen del riesgo de cola, sugerentes (Sección~\ref{sec:robustez-resiliencia}).
 
 \textbf{La fragilidad bancaria: réplica y validación.} La asociación que documentan \citet{Chari2024b} se replica con series construidas de forma independiente: una elasticidad de $0{,}099$, entre $0{,}107$ y $0{,}164$ con sus controles y $0{,}206$ con el CDS. La réplica vale con los controles de ese trabajo: con los seis controles domésticos de esta tesis el coeficiente es $-0{,}008$ ($p=0{,}86$). El capítulo delimita su alcance. No es una elasticidad común (pendientes por país entre $-0{,}84$ y $+0{,}97$; Turquía aporta el 70\% del coeficiente). La métrica tiene un piso en el que no informa; con la distancia al incumplimiento de Merton, que no lo tiene, la asociación es más nítida ($p$ de \textit{wild bootstrap} de $0{,}055$). Con datos trimestrales no hay precedencia temporal: la fragilidad y el spread se mueven dentro del mismo trimestre; a frecuencia mensual la fragilidad antecede al spread en un mes, con una magnitud pequeña y sin dirección inversa (Sección~\ref{sec:mensual}). Los datos no informan si la asociación es de nivel o transitoria. Y un coeficiente de nivel de ese tamaño es lo que produciría la sola retroalimentación entre las series (Secciones~\ref{sec:bateria} y~\ref{sec:identificacion}).
 
 \textbf{Qué se puede afirmar con trece países.} En niveles, los errores de Driscoll--Kraay rechazan una hipótesis nula cierta entre el 20\% y el 30\% de las veces; el \textit{wild bootstrap} por país está bien calibrado y tiene una potencia de 35\% para la fragilidad y de 67\% para el riesgo de cola, pero no protege del sesgo de retroalimentación (Sección~\ref{sec:inferencia-potencia}). El riesgo de cola no es un reflejo de las variables financieras (Sección~\ref{sec:robustez-solapamiento}). Los datos prefieren los logaritmos a los niveles, y reestimar todo en puntos básicos, añadir a Argentina o restringir el panel a las diez economías de historia larga no cambia estas conclusiones (Secciones~\ref{sec:robustez} y~\ref{sec:robustez-niveles}).
 
 \textbf{Extensiones posteriores a la estimación (Sección~\ref{sec:extensiones}).} Cinco pruebas no preespecificadas completan el cuadro. A frecuencia mensual, la fragilidad antecede al spread en un mes, sin dirección inversa y sin depender de un país, con una magnitud pequeña. Un instrumento granular construido con los retornos de los bancos grandes es demasiado débil para identificar. Con 189 observaciones más de EMBI imputado desde el CDS, y con Argentina incorporada mediante un $GaR$ homologado, ninguna conclusión cambia. Las líneas \textit{swap} de la Reserva Federal de 2020 bajaron el spread al anunciarse, pero ninguna línea cambió la transmisión. Y la amplificación tampoco aparece en la cola alta del spread, donde lo que crece es el peso de la fragilidad por separado.
+
+\textbf{Prueba preregistrada y revisión econométrica (Secciones~\ref{sec:resiliencia-prereg} y~\ref{sec:revision-econometrica}).} Con datos trimestrales y un preregistro anterior a los datos, la deuda pública amplifica la transmisión del riesgo de cola de forma firme, la adecuación de reservas no atenúa la de la fragilidad, y el efecto directo de la fragilidad no se separa del canal fiscal. Con cargas heterogéneas sobre los factores comunes, el riesgo de cola resiste la inferencia exigente y muestra una relación de largo plazo con el spread; la fragilidad sigue dependiendo de Turquía, y la interacción sigue siendo nula.
 
 \textbf{Respuesta a los objetivos específicos.}
 \begin{enumerate}
