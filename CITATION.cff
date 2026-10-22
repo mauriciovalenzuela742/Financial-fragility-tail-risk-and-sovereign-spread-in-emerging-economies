@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "Si usa este código o estos resultados, cite la tesis."
+title: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano en economías emergentes"
+type: software
+authors:
+  - family-names: Valenzuela
+    given-names: Mauricio
+    affiliation: "Universidad de Chile, Facultad de Ciencias Físicas y Matemáticas"
+repository-code: "https://github.com/mauriciovalenzuela742/Financial-fragility-tail-risk-and-sovereign-spread-in-emerging-economies"
+date-released: 2026-10-22
+keywords:
+  - spread soberano
+  - fragilidad bancaria
+  - Growth-at-Risk
+  - JLoss
+  - economías emergentes
+references:
+  - type: article
+    title: "Sovereign Credit Spreads, Banking Fragility, and Global Factors"
+    authors:
+      - family-names: Chari
+        given-names: "A."
+      - family-names: Garcés
+        given-names: "F."
+      - family-names: Martínez
+        given-names: "J. F."
+      - family-names: Valenzuela
+        given-names: "P."
+    journal: "Journal of Financial Stability"
+    volume: 72
+    year: 2024
+    notes: "Métrica JLoss (Chari et al., 2024); no es del autor."
+  - type: article
+    title: "Vulnerable Growth"
+    authors:
+      - family-names: Adrian
+        given-names: "T."
+      - family-names: Boyarchenko
+        given-names: "N."
+      - family-names: Giannone
+        given-names: "D."
+    journal: "American Economic Review"
+    year: 2019
+    notes: "Growth-at-Risk; estimado con la plataforma de CEMLA; no es del autor."
