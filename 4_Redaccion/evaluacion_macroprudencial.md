@@ -320,3 +320,47 @@ significativos que de que la tesis entregue un indicador evaluado con el lenguaj
 (umbral, aciertos, falsas alarmas). Si los umbrales no aparecen, la nota sube igual, pero menos (≈ 6,3):
 la tesis podría afirmar con evidencia que la transmisión no cambia de régimen con la tensión financiera,
 que también es una conclusión de política.
+
+---
+
+# 5. Registro de aplicación (22 de octubre de 2026)
+
+Preregistro 4: `preregistro_umbrales.md`, commit `7ad3810`, anterior a toda estimación. Cifras en
+`NUMEROS_CANONICOS_BBG.md`, §31; texto en la Sección `sec:umbrales-prereg` de la tesis y del paper, en las
+implicancias y en las conclusiones.
+
+| # | Estado | Resultado |
+|---|---|---|
+| U1 | Hecho (preregistrado) | Sin umbral de tensión financiera (p 0,13; Holm 0,38; potencia 0,68). Si algo, el riesgo de cola pesa menos con más tensión |
+| U2 | Hecho (preregistrado) | Sin umbral de deuda (p 0,26; Holm 0,52), pero con potencia de solo 0,13; la amplificación se lee como continua |
+| U3 | Hecho (secundaria) | Con el bootstrap, el umbral sobre el GaR no se distingue del lineal (p 0,43) |
+| Por país | Hecho (preregistrado) | U1: 6 de 9 contienen el agrupado y no se rechaza un umbral común, pero no hay umbral. U2 y U3: no comunes (C2 p 0,06 y 0,04) ni transferibles; el umbral de deuda de cada país es un quiebre en el tiempo (5 de 6) |
+| U4 | Hecho (preregistrado) | AUROC fuera de la muestra 0,49 (dentro, 0,71); el semáforo queda como exploratorio |
+| U5 | No factible | La base iMaPP exige acceso registrado |
+| U6 | Hecho (secundaria) | MES y ΔCoVaR correlacionan 0,51 y 0,39 con JLoss; con ellas el umbral de tensión sí aparece, pero con la fragilidad pesando menos en tensión |
+| U7 | Hecho | Implicancia nueva en la discusión: "No hay un umbral de vigilancia que los datos respalden"; la regla es continua |
+
+Desviaciones declaradas respecto del preregistro:
+1. El bootstrap por bloques de país se adaptó al panel no balanceado: cada país conserva sus regresores y
+   recibe un bloque circular de residuos de un país sorteado.
+2. En U3 no se incluye q lineal, porque q = D_{t−1} ya es el regresor T (colinealidad exacta).
+3. U5 (iMaPP) no es factible: la base del FMI exige acceso registrado (403 o redirección al login).
+4. El p unilateral del AUROC es la fracción de réplicas bootstrap con AUROC ≤ 0,5.
+5. La deuda primaria es `debt_q` estricta (10 economías; faltan Chile, India y Malasia); la deuda con
+   relleno anual de R-H3 se reporta como secundaria.
+
+**Nota reestimada (misma rúbrica):**
+- Contribución: 6,2 → 6,3. La pregunta de política se responde, aunque la respuesta sea negativa.
+- Marco: 5,7 → 5,8. Los umbrales y la alerta temprana quedan en el texto, pero la literatura macroprudencial sigue corta.
+- Datos: 6,2 → 6,3, por la comparación con MES y ΔCoVaR.
+- Identificación: 5,6 → 5,7.
+- Inferencia: 6,8 → 6,9, por la potencia simulada y el bootstrap de linealidad.
+- Interpretación: 6,0 → 6,4. Las implicancias dejan de ser vagas: una regla continua, sin semáforo, y la vigilancia doméstica sirve más fuera de las crisis.
+- Estructura: 5,7 → 5,6. La tesis tiene 151 pp.
+- Reproducibilidad: 6,9, sin cambio.
+
+**Nota ponderada: 6,2** (0,945 + 0,58 + 0,945 + 1,14 + 1,035 + 0,96 + 0,28 + 0,345).
+
+Queda bajo el 6,6 posible porque no aparece ningún umbral. Sube porque la tesis contesta con evidencia la
+pregunta que haría un comité de estabilidad financiera. La extensión es ahora el principal costo: conviene
+llevar al anexo parte de las extensiones antes de la defensa.

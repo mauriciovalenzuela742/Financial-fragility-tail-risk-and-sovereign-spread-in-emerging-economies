@@ -193,6 +193,18 @@ python bbg/p50_exposicion_soberana.py             # mu5 (cachea tenencia_bancari
 python bbg/p51_cobertura_sistema.py               # mu6 y Holm de la familia (red; cachea cobertura_bancos_bbg.csv)
 ```
 
+### Paso 2g — Umbrales de vigilancia preregistrados (2026-10-22)
+
+Preregistro 4: `4_Redaccion/preregistro_umbrales.md` (commit `7ad3810`). Desde `1_Codigo/Panel/`. Cifras en
+`bbg/NUMEROS_CANONICOS_BBG.md`, §31. Todo corre en un equipo de escritorio (p52 ≈ 15 min; p53 y p55, minutos).
+
+```bash
+python bbg/p52_umbrales.py              # U1-U3 agrupados y por país, C1-C5, potencia; figura fig_umbrales_pais
+python bbg/p53_alerta_temprana.py       # U4 y Holm de la familia {P1, P2, P3} (requiere la salida de p52)
+python bbg/p55_medidas_sistemicas.py    # U6: MES y DeltaCoVaR (cachea medidas_sistemicas_bbg.csv)
+```
+U5 (iMaPP) no se ejecutó: la base del FMI exige acceso registrado.
+
 ### Paso 2d — Notebook EDA (`EDA_Panel_Final_bbg.ipynb`)
 
 **No usar `jupyter execute` ni `jupyter nbconvert --execute`** contra el `.venv` de este

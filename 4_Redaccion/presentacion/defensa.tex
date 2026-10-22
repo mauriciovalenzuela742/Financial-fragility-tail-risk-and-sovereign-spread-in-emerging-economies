@@ -841,6 +841,7 @@ Participación extranjera (preespecificada) & Holm $p=1{,}00$ & \textbf{no hay e
 Respaldo externo por país & $-0{,}004$ (\textit{wild} $0{,}90$) & \textbf{no hay evidencia} \\
 Eventos diarios de respaldo & \textit{swap} Fed 2020: $-20$ a $-22$ pp; desacople igual que sin línea & baja el nivel; \textbf{no} la transmisión \\
 Asimetría \textit{Backstop} / \textit{EMstress} & Holm $0{,}12$ / $0{,}24$; lugar 20 de 51 & \textbf{no hay evidencia} \\
+Umbrales de vigilancia (preregistrada) & tensión $p=0{,}13$; deuda $0{,}26$; AUROC fuera de muestra $0{,}49$; por país, no comunes & \textbf{no hay evidencia} \\
 \midrule
 \multicolumn{3}{l}{\textit{Réplica de Chari et al.\ (2024) y validación del panel}} \\
 Fragilidad y \textit{spread} en niveles & $0{,}099$ (\textit{wild} $0{,}33$); $0{,}107$--$0{,}164$ con sus controles; 70\% es Turquía; con la DD de Merton, \textit{wild} $0{,}055$ & sugerente \\
@@ -868,7 +869,19 @@ Panel ampliado & EMBI desde el CDS (+189 obs.) y Argentina con $\GaR$ homologado
 Eventos de respaldo (9, diarios) & \textit{Swap} Fed 2020: $-20$ a $-22$ pp en una semana; FCL, nada; desacople igual sin línea & Baja el nivel, no la transmisión \\
 \addlinespace
 Cola alta del \textit{spread} (cuantílica) & $\beta_3(\tau)$ de $-0{,}024$ a $-0{,}001$, nunca positiva; la fragilidad pesa más en $\tau$ alto ($0{,}19$) & Nada sobre H3 \\
-\addlinespace
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{frame}
+
+\begin{frame}{Pruebas preregistradas y revisión econométrica}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.80\textheight}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
+\toprule
+Extensión & Resultado & Qué cambia \\
+\midrule
 Prueba preregistrada (deuda, reservas, canal fiscal) & Deuda $\times$ riesgo de cola $+0{,}011$ (Holm $0{,}029$; 13 de 13); reservas, Holm $0{,}29$; efecto directo neto del canal fiscal $\approx0$ & La conclusión 4: la deuda amplifica \\
 \addlinespace
 Revisión econométrica (CCE, PMG, coeficientes aleatorios, VAR) & Riesgo de cola: CCE \textit{wild} $0{,}016$; largo plazo $0{,}067$ ($p=0{,}006$); la fragilidad explica $<1\%$ de la varianza del \textit{spread} & La conclusión 3: largo plazo \\
@@ -876,6 +889,8 @@ Revisión econométrica (CCE, PMG, coeficientes aleatorios, VAR) & Riesgo de col
 Pruebas macro preregistradas (horizonte, moneda, \textit{doom loop}) & Riesgo de cola a 4 trimestres $0{,}047$ (Holm $0{,}018$); \textit{doom loop} y pecado original, no & La deuda amplifica más a 4 trimestres \\
 \addlinespace
 Pruebas micro preregistradas (87 bancos) & Ninguna de 6 pasa Holm (mín.\ $0{,}88$); filiales = nacionales; estatal, signo opuesto; con $\geq4$ bancos la fragilidad pierde significancia & No hay canal bancario demostrable \\
+\addlinespace
+Umbrales de vigilancia preregistrados (agrupados y por país) & Ninguno pasa Holm; con más tensión los riesgos domésticos pesan \emph{menos}; umbrales por país no transferibles; alerta temprana = azar & Regla continua: más deuda, más vigilancia del riesgo de cola \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}

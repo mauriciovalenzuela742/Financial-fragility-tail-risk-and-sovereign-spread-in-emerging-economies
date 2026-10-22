@@ -155,6 +155,16 @@ extranjeras pesan igual que los nacionales y más banca estatal va con *menos* t
 ancha, JLoss correlaciona 0,92–0,97 con la base y β₁ sigue positivo (p47). Lo frágil es el número de
 bancos: con al menos cuatro por economía la fragilidad pierde significancia; el riesgo de cola no.
 
+**V21. ¿Qué umbral le recomendaría a un banco central?**
+**R.** Ninguno, y lo probé con un preregistro (p52–p53). No hay un nivel de tensión financiera ni de deuda
+desde el cual la transmisión cambie (Holm 0,38 y 0,52), y estimados país por país los umbrales de deuda y
+de riesgo de cola son distintos entre economías: no son transferibles. La regla que respaldan los datos es
+continua: el riesgo de cola debe vigilarse con más atención cuanto mayor es la deuda.
+**Si insiste en la potencia:** para un umbral que duplique la pendiente, la potencia es de 68 % con la
+tensión financiera, pero de 13 % con la deuda; ahí la ausencia de umbral es poco informativa.
+**Si pregunta por alerta temprana:** fuera de la muestra el AUROC es 0,49; dentro, 0,71. Con más
+tensión los riesgos domésticos pesan menos: en una crisis manda el ciclo global.
+
 ---
 
 > **Encuadre de archivo (2026-09-02).** La variable dependiente es el **EMBI Global Diversified**

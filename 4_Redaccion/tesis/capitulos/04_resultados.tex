@@ -31,6 +31,8 @@ Precedencia de la fragilidad sobre el riesgo de cola & $0{,}405$ (\textit{wild} 
 Moderadores: deuda, reservas, respaldo externo, quién tiene la deuda & Preregistrada: riesgo de cola $\times$ deuda $+0{,}011$ (Holm $0{,}029$); reservas, Holm $0{,}29$; participación extranjera, Holm $1{,}00$; respaldo, sin desacople & Holm; exclusión de países; moderadores placebo; estudio de eventos & Deuda: firme; los demás, no hay evidencia \\
 \addlinespace
 Los bancos como unidad de análisis (preregistrada) & Seis hipótesis: ninguna pasa Holm (mínimo $0{,}88$); fragilidad de los dos bancos sistémicos $0{,}062$, del resto $0{,}022$ & Sin cada país; tres calibraciones del motor (rangos $0{,}92$--$0{,}97$); mínimo de cuatro o cinco bancos & no hay evidencia \\
+\addlinespace
+Umbrales de vigilancia (preregistrada) & Tensión financiera, $p=0{,}13$; deuda, $0{,}26$; alerta temprana fuera de la muestra, AUROC $0{,}49$; Holm $\geq0{,}38$ & Por país (nueve economías): umbrales de deuda y de riesgo de cola no comunes ni transferibles; potencia de 68\% para la tensión & no hay evidencia \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
@@ -1110,6 +1112,58 @@ Dos resultados van en contra de la lectura de rescate. La fragilidad de las fili
 
 \textbf{La medida a nivel de sistema.} Exigir al menos cuatro o cinco bancos cotizados por economía deja once o diez economías, y la fragilidad pierde significancia, mientras el riesgo de cola la conserva. La cobertura de los bancos cotizados es baja en México, cuyos bancos más grandes son filiales que no cotizan localmente. Es una cota superior, porque compara activos con crédito ---en Malasia y Sudáfrica supera el 100\%---: un 34\%, frente a entre el 52\% y el 96\% en las otras diez economías. La sensibilidad del motor, el criterio $\mu_{2}$ preregistrado, se cumple con las tres variantes: con $\rho$ estimado por banco, con un punto de incumplimiento que pondera a la mitad la deuda de corto plazo y con una malla de pérdidas cuatro veces más ancha, la correlación de rangos con el $JLoss$ base está entre $0{,}92$ y $0{,}97$, y $\beta_1$ sigue positivo, entre $0{,}087$ y $0{,}150$ (base, $0{,}099$). La inferencia tampoco cambia: significativo con Driscoll--Kraay salvo con la malla ancha ($p=0{,}07$), y no con el \textit{wild bootstrap}, como en la base. La interacción es lo único frágil: con la malla ancha desaparece ($0{,}001$), lo que suma a su lectura de exploratoria. La pérdida dado incumplimiento homogénea no requiere prueba, porque $JLoss$ es proporcional a ella y su logaritmo solo se desplaza en una constante. No se pudo contrastar si la garantía implícita distorsiona la distancia al incumplimiento ($\mu_{7}$): el repositorio no tiene spreads de bonos ni CDS bancarios.
 
+\subsection{Umbrales de vigilancia: pruebas preregistradas}
+\label{sec:umbrales-prereg}
+
+Un comité de estabilidad financiera trabaja con umbrales: desde qué nivel de un indicador cambia el riesgo y cuántas falsas alarmas cuesta reaccionar. Un cuarto preregistro (\texttt{4\_Redaccion/preregistro\_umbrales.md}), anterior a toda estimación, contrasta tres preguntas de ese tipo. Primera: si existe un nivel de tensión financiera doméstica ---el índice de condiciones financieras que alimenta el $GaR$--- por sobre el cual la fragilidad y el riesgo de cola pesan más en el spread (P1). Segunda: si existe un nivel de deuda desde el cual el riesgo de cola empieza a pesar (P2). Tercera: si los indicadores anticipan, fuera de la muestra, episodios de estrés soberano (P3). Los umbrales se estiman con un modelo de umbral de panel \citep{Hansen1999,Hansen2000}, con efectos fijos de país y de tiempo, y la linealidad se contrasta con un \textit{bootstrap} por bloques de país. Cada umbral se estima también con la serie de cada economía por separado, para ver si el umbral agrupado es común o un promedio de umbrales distintos.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Umbrales de vigilancia preregistrados]{Umbrales de vigilancia preregistrados: agrupados y por país}
+\label{tab:umbrales-prereg}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.6cm} c c c c}
+\toprule
+ & \multicolumn{2}{c}{Umbral agrupado} & \multicolumn{2}{c}{Por país} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+ & $\hat\gamma$ (IC 90\,\%) & $p$ linealidad (Holm) & Contienen $\hat\gamma$ & Umbral común ($p$) \\
+\midrule
+P1: tensión financiera (FCI$_{t-1}$) & $0{,}28$ ($0{,}23$--$0{,}45$) & $0{,}13$ ($0{,}38$) & 6 de 9 & $0{,}34$ \\
+\quad pendientes bajo / sobre el umbral & \multicolumn{4}{>{\raggedright\arraybackslash}p{10.2cm}}{fragilidad $0{,}100$ / $0{,}099$; riesgo de cola $0{,}061$ / $0{,}024$ (diferencia DK $p=0{,}009$, signo opuesto al predicho)} \\
+P2: deuda/PIB$_{t-4}$ (10 economías) & $24{,}7\%$ ($24{,}3$--$25{,}3$) & $0{,}26$ ($0{,}52$) & 0 de 6 & $0{,}06$ \\
+\quad pendientes bajo / sobre el umbral & \multicolumn{4}{>{\raggedright\arraybackslash}p{10.2cm}}{riesgo de cola $0{,}000$ / $0{,}067$ (\textit{wild} unilateral $0{,}013$; positiva sin 8 de 10 economías)} \\
+U3: riesgo de cola $D_{t-1}$ (secundaria) & $1{,}17$ ($0{,}03$--$1{,}55$) & $0{,}43$ & 2 de 9 & $0{,}04$ \\
+\addlinespace
+P3: alerta temprana, AUROC fuera de la muestra & \multicolumn{2}{>{\raggedright\arraybackslash}p{5.2cm}}{$0{,}49$ (IC 90\,\%: $0{,}36$--$0{,}60$); $p=0{,}60$ (Holm $0{,}60$)} & \multicolumn{2}{>{\raggedright\arraybackslash}p{5.2cm}}{39 episodios; dentro de la muestra, $0{,}71$} \\
+\addlinespace
+\multicolumn{5}{>{\raggedright\arraybackslash}p{15cm}}{\textit{Potencia del contraste de linealidad (pendiente del régimen alto igual al doble de la del bajo)}} \\
+\quad agrupado: P1 / P2 / U3 & \multicolumn{4}{>{\raggedright\arraybackslash}p{10.2cm}}{$0{,}68$ / $0{,}13$ / $0{,}09$; por país, en promedio, $0{,}60$ / $0{,}26$ / $0{,}23$} \\
+\addlinespace
+\multicolumn{5}{>{\raggedright\arraybackslash}p{15cm}}{\textit{Secundarias de P1}} \\
+\quad FCI en percentil propio / sin bloque de tasas / ortogonal al VIX & \multicolumn{4}{>{\raggedright\arraybackslash}p{10.2cm}}{$p$ de linealidad $0{,}06$ / $0{,}60$ / $0{,}56$; el riesgo de cola pesa menos con más tensión} \\
+\quad Con MES / $\Delta$CoVaR en lugar de $JLoss$ & \multicolumn{4}{>{\raggedright\arraybackslash}p{10.2cm}}{$p=0{,}007$ / $0{,}015$; la fragilidad pesa \emph{menos} con más tensión ($0{,}18$ frente a $0{,}06$)} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} Modelo de umbral con efectos fijos de país y de tiempo; régimen alto, $q>\hat\gamma$; se incluyen el indicador de régimen y $q$ en forma lineal. $p$ de linealidad: \textit{bootstrap} por bloques de país (999 réplicas); Holm sobre P1, P2 y P3. IC de $\hat\gamma$ por inversión del estadístico de razón de verosimilitud. Por país: nueve economías con al menos 50 trimestres (seis para la deuda), con el componente global descontado; ``contienen $\hat\gamma$'': economías cuyo intervalo al 90\,\% incluye el umbral agrupado; ``umbral común'': prueba de un umbral común frente a uno por país (\textit{wild bootstrap}). P3: logit con la fragilidad, el riesgo de cola, la deuda y el FCI, estimado de forma recursiva desde 2012; episodio, un alza del EMBI en cuatro trimestres sobre el percentil 90 del país. Fuente: \texttt{p52}, \texttt{p53} y \texttt{p55}.}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_umbrales_pais.pdf}
+\caption[Umbrales por país frente al agrupado]{Umbrales estimados con la serie de cada economía (punto) y su intervalo al 90\,\% (barra), en el percentil propio de cada una, frente al umbral agrupado en percentiles (línea discontinua).}
+\label{fig:umbrales-pais}
+\end{figure}
+
+Ninguna de las tres pruebas pasa la corrección de Holm (Tabla~\ref{tab:umbrales-prereg}). La transmisión no cambia de régimen con la tensión financiera doméstica de forma demostrable, y la potencia del contraste para un cambio de esa magnitud es de 68\%, de modo que un umbral grande se habría detectado con probabilidad razonable. Si algo cambia, es en la dirección contraria a la prevista: con más tensión, el riesgo de cola pesa menos en el spread, y con las medidas sistémicas de mercado ---MES y $\Delta$CoVaR, calculadas con los mismos bancos---, la fragilidad también pesa menos, esta vez con un umbral que el \textit{bootstrap} sí detecta. Es lo que cabe esperar si, en los episodios de tensión, el spread pasa a moverse con el ciclo financiero global, que explica la mayor parte de su varianza, y los riesgos domésticos pierden peso relativo. No es una prueba de ese mecanismo.
+
+El umbral de deuda no se distingue del modelo lineal: la potencia es de solo 13\%, y la amplificación de la Sección~\ref{sec:resiliencia-prereg} se lee mejor como continua. Bajo un 25\% del PIB el riesgo de cola casi no pesa en el spread y sobre ese nivel pesa $0{,}067$, pero ese tramo bajo lo forman sobre todo China, Filipinas y parte de los trimestres de Perú e Indonesia: el umbral separa economías más que niveles de deuda dentro de cada una. Por país, el umbral de deuda es significativo en cuatro de seis, pero ninguna contiene el umbral agrupado en su intervalo, y en cinco de las seis un quiebre en una fecha ajusta igual o mejor: como la deuda cambia lento dentro de cada país, su umbral es un cambio en el tiempo, no un nivel de deuda.
+
+\textbf{Agrupado frente a cada país.} La comparación decide, según la regla fijada en el preregistro, si un umbral puede servir como regla común. Para la tensión financiera, seis de nueve economías contienen el umbral agrupado y no se rechaza un umbral común ($p=0{,}34$), pero el umbral mismo no es significativo: no hay un umbral que compartir. Para la deuda y para el riesgo de cola se rechaza un umbral común ($p=0{,}06$ y $0{,}04$), y los umbrales de cada país, en su percentil propio, van del 19 al 70 y del 15 al 84 (Figura~\ref{fig:umbrales-pais}): no hay un umbral transferible entre economías. Al descontar el ciclo global con controles en lugar de los efectos de tiempo del panel, solo dos de nueve economías contienen el umbral de tensión agrupado.
+
+\textbf{Alerta temprana.} Dentro de la muestra, el logit distingue los episodios de estrés soberano (AUROC de $0{,}71$), pero fuera de la muestra no supera al azar ($0{,}49$). Dentro de la muestra, la tensión financiera anticipa más episodios ($+0{,}82$ por desviación estándar), mientras que más fragilidad y más riesgo de cola anticipan \emph{menos} ($-0{,}35$ y $-0{,}51$): cuando esos riesgos ya están altos, el spread ya subió, y lo que sigue tiende a ser una corrección. Fuera de la muestra, la tensión financiera sola es la señal más informativa (AUROC de $0{,}58$), sin llegar a ser útil para un regulador. El semáforo preregistrado queda como ejercicio exploratorio: con los umbrales de pérdida mínima, casi todos los trimestres caen en ámbar. Las medidas macroprudenciales efectivas (base iMaPP del FMI) no se pudieron incorporar porque la base requiere acceso registrado.
+
 \subsection{La cola alta del spread}
 \label{sec:cuantilica}
 
@@ -1148,6 +1202,8 @@ La pregunta propia de esta tesis era qué agrega el riesgo económico doméstico
 \textbf{Prueba preregistrada y revisión econométrica (Secciones~\ref{sec:resiliencia-prereg} y~\ref{sec:revision-econometrica}).} Con datos trimestrales y un preregistro anterior a los datos, la deuda pública amplifica la transmisión del riesgo de cola de forma firme, la adecuación de reservas no atenúa la de la fragilidad, y el efecto directo de la fragilidad no se separa del canal fiscal. Con cargas heterogéneas sobre los factores comunes, el riesgo de cola resiste la inferencia exigente y muestra una relación de largo plazo con el spread; la fragilidad sigue dependiendo de Turquía, y la interacción sigue siendo nula.
 
 \textbf{Los bancos como unidad de análisis (Sección~\ref{sec:micro-prereg}).} Un tercer preregistro lleva el análisis a los 87 bancos que componen $JLoss$. Ninguna de sus seis hipótesis pasa la corrección de Holm. La fragilidad de los bancos grandes responde más al spread y la asociación se concentra en los dos bancos sistémicos de cada economía, como predice la lectura del pasivo contingente, pero sin significancia; las filiales extranjeras pesan igual que los bancos nacionales, más banca estatal va con menos transmisión, y ni la concentración ni la tenencia de deuda pública de los bancos moderan la asociación. La medida es robusta a la calibración del motor (correlación de rangos entre $0{,}92$ y $0{,}97$ con tres variantes), pero al exigir al menos cuatro bancos por economía la fragilidad pierde significancia. Los bancos individuales no agregan evidencia a favor de un canal bancario.
+
+\textbf{Umbrales de vigilancia (Sección~\ref{sec:umbrales-prereg}).} Un cuarto preregistro busca los umbrales con que trabaja la política macroprudencial. Ninguna de sus tres pruebas pasa la corrección de Holm: la transmisión no cambia de régimen con la tensión financiera doméstica ---si algo, los riesgos domésticos pesan menos en el spread cuando la tensión es alta---, no hay un umbral de deuda distinguible de la amplificación continua, y los indicadores no anticipan episodios de estrés soberano fuera de la muestra. Estimados país por país, los umbrales de deuda y de riesgo de cola difieren entre economías y no son transferibles; el de tensión financiera no se rechaza como común, pero no es significativo.
 
 \textbf{Respuesta a los objetivos específicos.}
 \begin{enumerate}
