@@ -149,6 +149,25 @@ Opcionales, ya ejecutados y con outputs commiteados
 verificar desde cero; el grid ancho toma ~40 min, el bootstrap completo ~172 min en cluster
 (la segunda etapa local es trivial).
 
+### Paso 2e — Pruebas de la evaluación experta (2026-10-21; no preespecificadas)
+
+Desde `1_Codigo/Panel/`, con el `.venv` del root. Todas leen `bbg/Panel_bloomberg_embiext.csv` por
+defecto. `JLOSS_FORMA=nivlag` reestima en niveles los scripts que lo admiten (p33, p34, p35). Las
+cifras están en `bbg/NUMEROS_CANONICOS_BBG.md`, §19–25.
+
+```bash
+python bbg/p33_simultaneidad_precedencia_tost.py  # nula de calendario, precedencia, TOST (~5 min)
+python bbg/p34_fragilidad_alternativa.py          # PD y DD de Merton, malla ancha (~3 min; cachea fragilidad_alternativa_bbg.csv)
+python bbg/p35_cuantilica_spread.py               # MMQR y cuantílica con indicadoras (~70 min por el bootstrap)
+python bbg/p36_giv_granular.py                    # instrumento granular (cachea giv_granular_bbg.csv)
+python bbg/p37_mensual_fechado.py                 # DD y EMBI mensuales (cachea fragilidad_mensual_bbg.csv)
+# C11 necesita antes el GaR homologado sin bloque de tasas (~10 min):
+(cd ../GaR/individuals/nlhpc_gar_all18 && python build_fci_no_ryr.py && \
+   python gar_insample_robustez.py GaR_panel_all19_noRyr.xlsx all19noRyr)
+python bbg/p38_panel_ampliado.py                  # EMBI imputado desde el CDS y Argentina homologada
+python bbg/p39_eventos_respaldo.py                # estudio de eventos diario de las líneas de respaldo
+```
+
 ### Paso 2d — Notebook EDA (`EDA_Panel_Final_bbg.ipynb`)
 
 **No usar `jupyter execute` ni `jupyter nbconvert --execute`** contra el `.venv` de este

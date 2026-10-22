@@ -1821,3 +1821,107 @@ fragilidad es más nítida (wild 0,055 en logs; 0,048 en pb) con la misma magnit
 interacción sigue en cero en logaritmos con todas las medidas; en pb es positiva con −DD_w solo con DK,
 coherente con la proporcionalidad multiplicativa. La saturación atenúa la fragilidad, no explica la
 ausencia de amplificación.
+
+## 21. Instrumento granular (GIV) para la fragilidad (2026-10-21)
+
+Fuente: `p36_giv_granular.py` → `giv_granular_bbg.csv`, `paper_p36_numeros.csv`. Mejora C9; no
+preespecificada. z = retorno de capitalización de los bancos ponderado por pasivos (t−1) menos el de
+igual peso, por país y trimestre (Gabaix y Koijen); (b) tras quitar la beta de cada banco sobre el
+retorno medio del país. Regresión principal sin interacción, fragilidad_{t−1} instrumentada con z_{t−1}.
+
+| Endógena / instrumento | 1ª etapa (F DK / F cluster) | Forma reducida (p DK / wild) | 2SLS (EE cluster) | MCO | N |
+|---|---|---|---|---|---|
+| ln JLoss / z_{t−1} | 0,79 (1,8 / 3,2) | 0,084 (0,79 / 0,81) | 0,107 (0,363) | 0,104 | 750 |
+| ln JLoss / z(b)_{t−1} | 0,53 (0,8 / 1,2) | 0,092 (0,77 / 0,78) | 0,173 (0,511) | 0,104 | 750 |
+| ln JLoss / z_{t−2} | 0,53 (1,0 / 3,0) | 0,305 (0,29 / 0,52) | 0,580 (0,884) | 0,102 | 747 |
+| −DD_w / z_{t−1} | 1,32 (1,9 / 3,0) | 0,084 (0,79 / 0,81) | 0,064 (0,212) | 0,083 | 750 |
+
+Exogeneidad: z_{t−1} sobre Δ ln EMBI_{t−1}: −0,021 (DK p = 0,041), es decir, el instrumento responde
+al spread contemporáneo. Sistemas de 3 a 10 bancos (HHI de pasivos 0,17–0,41).
+**Lectura:** instrumento débil (F < 4) y con dudas de exclusión; no identifica. El 2SLS coincide en
+punto con el MCO pero con errores tres veces mayores.
+
+## 22. Fragilidad y spread mensuales (2026-10-21)
+
+Fuente: `p37_mensual_fechado.py` → `fragilidad_mensual_bbg.csv`, `paper_p37_numeros.csv`. Mejora C10;
+no preespecificada. −DD_w mensual (mismo motor y bancos; vol. realizada de 3 meses; balance más
+reciente) y EMBI diario (cierre = últimos 5 días hábiles). 13 economías, 2 655 país-meses, EF de país y
+de mes, DK (ancho 6). Validación: corr. con el DD_w trimestral de p34 = 0,9993 (886 obs.).
+
+| Prueba | Coeficiente | p |
+|---|---|---|
+| d(−DD)_{m−1} → d ln EMBI_m (rezago 1) | 0,0132 | DK 0,005 |
+| Suma rezagos 1–3; Wald conjunto | 0,0272 | DK suma 0,017 / Wald 0,038; cluster suma 0,001; wild Wald < 0,001 |
+| Sin cada país: suma; p del rezago 1 | 0,016 (sin Polonia) a 0,033 (sin Perú) | 13 de 13 < 0,05 (máx. 0,017) |
+| Inversa d ln EMBI → d(−DD), suma; Wald | 0,029 | 0,87 / 0,29; wild 0,39 |
+| Contemporánea d(−DD)_m | 0,0197 | DK 0,002; wild 0,001 |
+| LP acumulada h = 0/1/2/3/4/5/6 | 0,020 / 0,021 / 0,021 / 0,027 / 0,011 / 0,012 / 0,014 | 0,002 / 0,005 / 0,004 / 0,001 / 0,20 / 0,13 / 0,08 |
+
+d.e. de d(−DD) mensual = 0,43: una d.e. va seguida de un spread ~0,6 % mayor el mes siguiente y ~1,2 %
+acumulado a tres meses.
+**Lectura:** a frecuencia mensual la fragilidad antecede al spread, y no al revés, sin depender de un
+país. La conclusión trimestral ("se mueven en el mismo trimestre") era una limitación de la frecuencia.
+Es precedencia estadística, pequeña y no causal: puede reflejar que las acciones bancarias incorporan
+antes la misma información.
+
+## 23. Panel ampliado: EMBI desde el CDS y Argentina homologada (2026-10-21)
+
+Fuente: `p38_panel_ampliado.py` → `paper_p38_numeros.csv`; GaR homologado:
+`GaR/individuals/nlhpc_gar_all18/build_fci_no_ryr.py` → `GaR_panel_all19_noRyr.xlsx` →
+`gar_insample_all19noRyr.csv` (FCI 2×2 STX+EER para las 19 economías; corr. con el FCI oficial 0,89 de
+media, mín. 0,76 Turquía; corr. GaR base/homologado 0,986). Mejora C11; no preespecificada.
+
+(a) ln EMBI = a_i + 0,616 ln CDS (pendiente común, 807 trimestres de solapamiento). Validación (intercepto
+con los últimos 13 trimestres, pendiente sin el país, 10 economías): error absoluto mediano 0,175
+log-puntos, corr. mediana 0,86; Indonesia 0,50 (corr. 0,65), China 0,39, Sudáfrica 0,20. Se agregan 189
+observaciones (Indonesia 32 → 87, Filipinas 12 → 89, Sudáfrica 32 → 89). India sin CDS.
+
+| Muestra | N | β1 (DK / wild) | β2 (DK / wild) | β3 (DK / wild) |
+|---|---|---|---|---|
+| Principal | 765 | 0,099 (0,003 / 0,32) | 0,032 (0,033 / 0,20) | −0,011 (0,11 / 0,90) |
+| (a) Con EMBI imputado | 954 | 0,146 (<0,001 / 0,12) | 0,035 (0,060 / 0,075) | −0,011 (0,017 / 0,38) |
+| (b) GaR base dentro de muestra, 13 | 773 | 0,096 (0,007 / 0,34) | 0,039 (0,040 / 0,017) | −0,006 (0,20 / 0,71) |
+| (b) GaR homologado, 13 | 773 | 0,090 (0,006 / 0,40) | 0,038 (0,017 / 0,036) | −0,005 (0,25 / 0,69) |
+| (b) GaR homologado, 14 (con Argentina, 35 obs.) | 808 | 0,099 (0,008 / 0,33) | 0,031 (0,040 / 0,13) | −0,002 (0,69 / 0,86) |
+
+**Lectura:** ni más historia ni Argentina homologada cambian las conclusiones; la interacción sigue
+sin ser positiva.
+
+## 24. Estudio de eventos: líneas de respaldo (2026-10-21)
+
+Fuente: `p39_eventos_respaldo.py` → `paper_p39_numeros.csv`. Mejora C12; no preespecificada. Nueve
+eventos (Fed 29-oct-2008 y 19-mar-2020: Brasil, México; FCL: México 17-abr-2009, Polonia 6-may-2009,
+Colombia 11-may-2009, Perú 28-may-2020, Chile 29-may-2020). Spread anormal = Δ ln EMBI del país menos
+el medio de las economías sin respaldo ese día (pp, ×100). Placebo: 999 fechas del mismo país.
+
+| Grupo | [−5,−1] | [0,+1] | [0,+5] | [0,+10] | Δβ banca–spread (placebo p) | Δβ relativo a controles (n > 0) |
+|---|---|---|---|---|---|---|
+| Fed (4) | −12,0 (0,013) | −12,9 (0,003) | −9,9 (0,006) | −2,0 (0,21) | +0,56 (0,005) | −0,23 (2 de 4) |
+| FCL (5) | −1,2 (0,29) | +3,7 (0,96) | −0,03 (0,48) | +3,2 (0,85) | +0,90 (0,015) | +0,71 (2 de 5; Perú +4,5) |
+| Todos (9) | −6,0 (0,030) | −3,7 (0,018) | −4,4 (0,029) | +0,9 (0,68) | +0,74 (0,004) | +0,29 (4 de 9) |
+
+Por evento, Fed 2020: [0,+5] Brasil −22,1 (p 0,005), México −20,0 (p 0,004), sin caída previa
+significativa; Fed 2008: caída en [0,+1] (−10,2 y −17,2) pero precedida por otra en [−5,−1] (p 0,008).
+**Lectura:** las líneas swap de la Fed de 2020 bajaron el spread al anunciarse; las FCL no. La beta
+banca–spread se acerca a cero tras los eventos, pero también en las economías sin línea: no hay
+desacople específico del respaldo.
+
+## 25. La interacción en la cola alta del spread: regresión cuantílica (2026-10-21)
+
+Fuente: `p35_cuantilica_spread.py` → `paper_p35_numeros.csv`, figura `fig_cuantilica_lnlag`. Mejora B8;
+no preespecificada. MMQR (Machado y Santos Silva, 2019) con EF de país y de tiempo; regresión
+cuantílica con indicadoras de país y de tiempo; MMQR con −DD_w. Bootstrap de bloques de país (499
+réplicas; 199 en la de indicadoras); p bilateral por la fracción de réplicas del lado opuesto de cero.
+
+| τ | MMQR β1 | MMQR β2 | MMQR β3 (p) | Indicadoras β3 (p) | MMQR −DD_w: β1 (p) / β3 (p) |
+|---|---|---|---|---|---|
+| 0,10 | −0,012 | 0,053 | −0,024 (0,63) | +0,003 (0,96) | 0,051 (0,13) / −0,008 (0,73) |
+| 0,25 | 0,039 | 0,044 | −0,018 (0,66) | +0,003 (0,98) | — / −0,004 (0,76) |
+| 0,50 | 0,105 | 0,031 | −0,010 (0,69) | +0,002 (0,94) | 0,083 (0,032) / +0,000 (0,95) |
+| 0,75 | 0,153 | 0,022 | −0,005 (0,72) | +0,001 (0,86) | — / +0,004 (0,61) |
+| 0,90 | 0,189 | 0,016 | −0,001 (0,94) | −0,007 (0,95) | 0,106 (0,024) / +0,006 (0,43) |
+
+Localización (= regresión principal): β1 0,099, β2 0,032, β3 −0,011; escala: 0,063, −0,012, 0,007.
+**Lectura:** la amplificación no aparece en la cola alta del spread. La fragilidad pesa más cuando el
+spread es alto (y con −DD_w es significativa en la mediana y en τ = 0,90); el riesgo de cola pesa algo
+más cuando es bajo (sin significancia).

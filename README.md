@@ -56,6 +56,7 @@ Escala de evidencia:
 | **2. Cuando coinciden, no hay evidencia de amplificación**: β₃ = −0,011 (DK p = 0,11; wild p = 0,89). Una prueba de equivalencia descarta una amplificación de más de un 35 % de la suma de las dos asociaciones, pero no una menor. | No hay evidencia |
 | **3. El riesgo económico agrega poco**: 0,037 sobre el modelo de Chari et al. (wild p = 0,066), solo en niveles. No aparece en los cambios, no mejora el pronóstico y depende de Polonia. | Sugerente |
 | **4. Ninguna condición modera la transmisión** de forma demostrable: ni la resiliencia de la política económica, ni el respaldo externo por país, ni la participación extranjera en la deuda (esta última, con una prueba preespecificada). | No hay evidencia / exploratorio |
+| **Extensiones (no preespecificadas):** a frecuencia mensual la fragilidad antecede al spread un mes; el instrumento granular es débil (F < 4); con 189 observaciones de EMBI imputado desde el CDS y con Argentina homologada nada cambia; las líneas swap de la Fed de 2020 bajaron el spread 20–22 pp, pero ninguna línea cambió la transmisión. | Ver `NUMEROS_CANONICOS_BBG.md` §21–25 |
 | **Réplica de Chari et al.**: elasticidad de 0,099 (DK p = 0,003; wild p = 0,33) y de 0,107–0,164 con sus controles. Desaparece con los seis controles domésticos, y Turquía aporta el 70 % del coeficiente. | Sugerente |
 
 Números canónicos completos y trazables:
@@ -73,8 +74,10 @@ Números canónicos completos y trazables:
   para el riesgo de cola.
 - **`JLoss` saturado:** el VaR99 satura la malla de pérdidas en el 98 % de las observaciones y el 23,7 %
   está en el piso (2,16). La métrica se lee como ordinal.
-- **Fechado:** la fragilidad y el spread se mueven dentro del mismo trimestre, de modo que no hay
-  evidencia de que la fragilidad anteceda al spread.
+- **Fechado:** con datos trimestrales la fragilidad y el spread se mueven dentro del mismo trimestre.
+  A frecuencia mensual (distancia al incumplimiento de Merton y EMBI diario), la fragilidad antecede al
+  spread en un mes (0,013; wild p < 0,001; sin cada país), con una magnitud pequeña y sin dirección
+  inversa. Es precedencia, no causalidad.
 - **Simultaneidad concentrada:** 129 de las 168 observaciones conjuntas son de 2020 en adelante, aunque
   el exceso sobre el calendario viene de 2015–2019 y 2023–2026.
 - **Controles:** son anuales interpolados y plausiblemente median el mecanismo ("mal control").

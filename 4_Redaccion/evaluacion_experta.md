@@ -287,7 +287,11 @@ métrica). B8 y el bloque C quedan para el paper.
 | A6 | Hecho | Debt-at-Risk (FMI 2024) y Gelos et al. (2022) en el marco | "Inexplorada" matizado |
 | B6 | Hecho | `p34`: PD y DD de Merton ponderadas por pasivos, y malla ancha | Con −DD_w, β₁ wild 0,055 (pb: 0,048), frente a 0,32 con JLoss; β₃ sigue nulo en logaritmos. La malla ancha (sin India) debilita β₁ |
 | B7 | Hecho | Exclusión de un país, GaR sin bloque bursátil y 2–4 rezagos en `p33` | Precedencia firme a un trimestre (0,32–0,47; 0,388 sin el bloque); con 3–4 rezagos el wild no rechaza |
-| B8, C9–C12 | Pendiente | — | — |
+| B8 | Hecho | `p35`: MMQR (Machado–Santos Silva) con EF y regresión cuantílica con indicadoras, τ = 0,10–0,90; también con −DD_w | Ver `NUMEROS_CANONICOS_BBG.md` §25 |
+| C9 | Hecho | `p36`: instrumento granular (Gabaix–Koijen) con los retornos de los 113 bancos | **Débil** (F 1,8–3,2) y con exclusión dudosa (responde al spread del mismo trimestre, p = 0,04); no identifica |
+| C10 | Hecho | `p37`: −DD_w y EMBI mensuales (2 655 país-meses) | **Cambia una conclusión:** la fragilidad antecede al spread en un mes (0,013; wild < 0,001; 13 de 13 sin cada país), sin dirección inversa; pequeña y no causal |
+| C11 | Hecho | `p38` + `build_fci_no_ryr.py`: EMBI imputado desde el CDS (Indonesia, Filipinas, Sudáfrica; +189 obs.) y GaR homologado sin tasas con Argentina | Nada cambia; la imputación es imprecisa en Indonesia; India no tiene CDS |
+| C12 | Hecho | `p39`: nueve anuncios de swap de la Fed y FCL, datos diarios, placebos | Las swap de 2020 bajaron el spread 20–22 pp; las FCL no; el desacople banca–spread también ocurre sin línea (no es efecto del respaldo) |
 
 Cifras registradas en `NUMEROS_CANONICOS_BBG.md`, §19 y §20. La tesis (130 pp.), el paper (114 pp.) y
 las láminas (61) compilan sin referencias indefinidas.
@@ -302,6 +306,14 @@ las láminas (61) compilan sin referencias indefinidas.
 
 **Nota ponderada: 6,2.** El techo sigue fijado por la identificación y por la extensión del capítulo de
 resultados.
+
+**Tras B8 y C9–C12:**
+- Contribución: 6,0 → 6,3. La precedencia mensual de la fragilidad sobre el spread es un hallazgo positivo nuevo.
+- Identificación: 5,5 → 5,7. Se agregan el estudio de eventos, el instrumento granular (aunque débil) y el fechado mensual.
+- Datos: 6,1 → 6,2.
+- Estructura: 5,6 → 5,4. El capítulo de resultados creció a 137 pp. en total.
+
+**Nota ponderada: 6,2 (6,24).** Para subir de ahí hace falta podar: mover baterías al anexo (la parte pendiente de A1).
 
 ## Fuentes de la sección 1 y 4.2
 - [Manual del alumno, Magíster en Economía, U. de Chile (2013)](https://econ.uchile.cl/uploads/userfiles/files/Manual%20Alumno%20Magister%20Economia%202013.pdf)
