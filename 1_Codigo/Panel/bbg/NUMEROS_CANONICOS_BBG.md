@@ -2127,3 +2127,42 @@ interacción preregistrada pasa de firme a sugerente.
 
 **Reproducción (N7):** `1_Codigo/Panel/reproducir.py` regenera estas cifras desde los CSV y
 `verificar_canonicos.py` compara 67 cifras citadas con `canonicos_esperados.json`.
+
+## 33. Réplica externa (N2) e instrumento de términos de intercambio (N1) (2026-10-22)
+
+Preregistro 5: `4_Redaccion/preregistro_n1n2.md`, commit `7df0427`, anterior a los datos de las economías nuevas.
+Fuentes: `p57_replica_externa.py` → `paper_p57_numeros.csv`, `replica_externa_bbg.csv`; `p58_iv_choques.py` →
+`paper_p58_numeros.csv`.
+
+**N2-H1 (D4_{t−1} × deuda_{t−4}; original 0,0326, DK 0,0153):**
+
+| Muestra | ψ | Inferencia | Veredicto |
+|---|---|---|---|
+| Hungría + Corea (N = 139) | 0,219 | p uni (bloques) 0,002; IC 90 % 0,159–0,302; se 0,045; diferencia z = 3,88 (p < 0,001) | no replica |
+| Hungría (EMBI; 86 trim.; 2 bancos) | 0,025 | HAC p bilateral 0,66 | — |
+| Corea (CDS; 53 trim.; deuda anual interpolada) | 0,168 | HAC p 0,14 | — |
+| Controles globales en lugar de λ_t | 0,184 | diferencia p = 0,006 | — |
+| T = D_{t−1} (original 0,0107) | 0,142 | p uni 0,001; diferencia p < 0,001 | — |
+| CDS de IDN, PHL y ZAF fuera de la muestra principal (182 obs.) | 0,005 | p uni 0,62 | — |
+
+Potencia (ψ = original): 0,054; las simulaciones dan ψ medio 0,031 con desviación 0,032, frente a un error
+bootstrap de 0,046.
+
+**N1-H1 (2SLS, N = 719, 13 economías; instrumentos Z = ΔCTOT_4 en t−1 y Z × deuda):**
+- **Fuerza:** F de Sanderson–Windmeijer 20,3 para D4 y 9,7 para D4 × deuda, así que el instrumento es débil
+  (umbral 10).
+- **Estimación:** ψ_IV = 0,0006 (DK 0,043); p de pares por país 0,46; positivo sin 6 de 13 economías.
+- **Primera etapa:** Z → D4 = −0,19 (DK 0,10).
+- **Forma reducida:** Z × deuda = −0,003 (0,011); Z = −0,006 (0,025).
+- **Proyecciones locales con instrumento:** h = 0, 0,001 (0,043); h = 4, −0,029 (0,054); h = 8, −0,013 (0,044).
+- **Con T = D_{t−1}:** F de 20,4 y 11,5 (fuerte); ψ_IV = 0,001 (0,030).
+
+**Familia {N2-H1, N1-H1}:** Holm 0,004 y 1,00. Ninguna es firme: N2 no cumple el criterio de diferencia y N1 es
+débil.
+
+Desviaciones declaradas respecto del preregistro:
+1. JLoss de Hungría y Corea tomado del motor de producción (`Panel_JLoss_v9_bloomberg.csv`), el mismo motor
+   y protocolo; Hungría está bajo el mínimo de bancos del panel principal (mediana 2).
+2. La deuda anual de Corea viene de sus observaciones anuales de QPSD interpoladas, porque la API del FMI
+   devolvió 403.
+3. La potencia se calcula con el error bootstrap de la muestra observada, no con un bootstrap anidado.

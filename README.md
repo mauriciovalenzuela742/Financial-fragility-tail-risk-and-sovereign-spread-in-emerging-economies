@@ -52,6 +52,9 @@ cola del año siguiente (este último, firme: 0,047; Holm 0,018). Ni el doom loo
 el pecado original (deuda en moneda extranjera) se confirman. Con la inferencia conjunta sobre los cuatro
 preregistros (`p56`), la interacción resiste una permutación de la deuda entre economías con el riesgo de cola
 del año siguiente (p = 0,009), pero no con el del trimestre siguiente (p = 0,17), que pasa a sugerente.
+Fuera de la muestra no se confirma (preregistro 5, `7df0427`): en Hungría y Corea el signo se repite, pero la
+interacción es siete veces la original y la diferencia se rechaza (potencia 5 %); un instrumento de términos de
+intercambio es débil para la interacción (F 9,7) y la estima nula. Es un resultado de la muestra original.
 
 **Reproducción:** `python 1_Codigo/Panel/reproducir.py` regenera las cifras desde los CSV y verifica 67 cifras
 canónicas (`verificar_canonicos.py`, también en la integración continua).
