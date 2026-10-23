@@ -133,13 +133,13 @@ efectos aleatorios es 0,022 sin Polonia (p = 0,011), y el PMG da una relación d
 Es un fundamento de nivel, no una señal de corto plazo.
 
 **V18. ¿Cuál es el hallazgo principal de la tesis?**
-**R.** Que la deuda pública amplifica la transmisión del riesgo de cola del crecimiento al spread,
-como predicen Arellano (2008) y Aguiar–Gopinath (2006). Es firme en dos preregistros anteriores a los
-datos. Con el riesgo de cola del año siguiente, una d.e. más de deuda eleva la semielasticidad en un
-70 %, y el resultado es significativo incluso con Driscoll–Kraay.
-**Si insiste en el doom loop:** la deuda no amplifica la transmisión de la fragilidad bancaria
-(−0,053) ni el efecto se concentra en la deuda en moneda extranjera. Solo el canal del crecimiento
-depende de la deuda.
+**R.** Que los dos riesgos domésticos tienden a darse juntos, pero cuando coinciden no hay evidencia de que
+se amplifiquen: se descarta una amplificación mayor que un 35 % de la suma. Es la respuesta a la pregunta
+de la tesis, y es lo más firme. La pregunta que más pruebas recibió, la de si la deuda amplifica el riesgo de
+cola, deja una regularidad de la muestra (+0,033 por d.e. de deuda con el riesgo de cola a un año;
+permutación p = 0,009) que ni la réplica externa, ni el instrumento, ni el modelo confirman.
+**Si insiste en el doom loop:** la deuda no amplifica la transmisión de la fragilidad bancaria (−0,053) ni
+el efecto se concentra en la deuda en moneda extranjera.
 
 **V19. Si el GaR pronostica el crecimiento del trimestre siguiente, ¿no debería entrar con dos rezagos?**
 **R.** No hace falta. Lo que importa es con qué información se calcula: GaR_{t−1} usa solo datos de t−1 y
@@ -190,6 +190,34 @@ estima lo contrario en logaritmos. En puntos básicos los datos dan el signo del
 firme y es muy menor que lo que predice el modelo (10 a 203 pb).
 **Si pregunta por qué el modelo exagera tanto:** el GaR mide la cola con error, una parte grande del spread
 es prima global y el modelo no tiene aversión al riesgo. Ninguna de esas explicaciones se contrastó.
+
+**V25. Si casi nada se confirma, ¿cuál es su contribución?**
+**R.** Tres cosas. Primera, la pregunta de la tesis tiene respuesta: los riesgos coinciden y no hay
+amplificación grande, algo que nadie había contrastado porque nadie había cruzado las dos métricas.
+Segunda, las series son homogéneas, reproducibles con un comando y quedan disponibles. Tercera, la tesis
+muestra con seis preregistros qué resiste y qué no con trece países, y el modelo de límite fiscal muestra
+que la predicción teórica sobre deuda y riesgo de cola es en puntos básicos, no en logaritmos.
+
+**V26. ¿Por qué cambió tanto el hallazgo central entre versiones?**
+**R.** Porque lo sometí a pruebas cada vez más exigentes y reporté cada una: primero dos preregistros,
+después la corrección conjunta, la réplica externa, el instrumento y el modelo. Los datos no cambiaron;
+cambió cuánta confianza merece el resultado. Cada cambio está fechado en el historial del repositorio.
+
+**V27. ¿Seis preregistros no son otra forma de buscar hasta encontrar algo?**
+**R.** Al revés: cada uno se fijó antes de sus datos y la corrección conjunta trata los cuatro primeros como
+una sola familia (p56). Con esa corrección ninguna hipótesis queda bajo 0,05. Si buscara resultados, no los
+habría reportado así.
+**Si insiste:** las pruebas posteriores (réplica, instrumento, modelo) solo podían confirmar o debilitar el
+resultado, y lo debilitaron.
+
+**V28. ¿Qué haría con un año más de investigación?**
+**R.** Tres cosas:
+- ampliar la muestra a 20–25 economías con Refinitiv o Bloomberg, para que la réplica tenga potencia (con
+  dos economías era de 5 %);
+- buscar variación exógena en la deuda, como reestructuraciones o cambios de reglas fiscales, en vez de en
+  el riesgo de cola;
+- extender el modelo con inversionistas aversos al riesgo y una recuperación que caiga con la deuda, que son
+  las candidatas para explicar la interacción en logaritmos.
 
 ---
 
