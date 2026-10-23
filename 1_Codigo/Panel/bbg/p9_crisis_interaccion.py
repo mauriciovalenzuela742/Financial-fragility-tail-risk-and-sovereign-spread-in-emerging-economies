@@ -64,9 +64,13 @@ def _fit(dd, dummies, extra_rhs, fe, cov="dk"):
         dd[f"JLoss_{nm}"] = dd["JLoss_c"] * cr
         dd[f"D_{nm}"] = dd["D_c"] * cr
         rhs += [f"JxD_{nm}", f"JLoss_{nm}", f"D_{nm}"]
-    rhs += extra_rhs
+        dd[f"Cr_{nm}"] = cr
     eff = {"T": "TimeEffects", "P": "EntityEffects",
            "PT": "EntityEffects + TimeEffects"}[fe]
+    # Sin efectos fijos de tiempo, el indicador de crisis no queda absorbido y entra solo.
+    if "TimeEffects" not in eff:
+        rhs += [f"Cr_{nm}" for nm in dummies]
+    rhs += extra_rhs
     f = f"_DV ~ {' + '.join(rhs)} + {eff}"
     md = dd.set_index(["country", "t"])
     kw = (dict(cov_type="kernel", kernel="bartlett") if cov == "dk"
