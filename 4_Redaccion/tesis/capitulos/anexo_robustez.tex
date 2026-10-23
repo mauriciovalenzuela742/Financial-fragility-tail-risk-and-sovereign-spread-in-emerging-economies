@@ -139,14 +139,14 @@ Observaciones (economías) & 765 (13) & 765 (13) & 765 (13) & 710 (12) \\
 \quad $\beta_3+\beta_4$ \textit{Backstop} & $-0{,}0146$ ($p=0{,}03$) & $-0{,}0120$ ($p=0{,}03$) \\
 \quad $\beta_3+\beta_4$ \textit{EMstress}: EF país+tiempo & $0{,}026$ ($p=0{,}08$) & $0{,}024$ ($p=0{,}13$) \\
 \quad \phantom{$\beta_3+\beta_4$ \textit{EMstress}:} EF de tiempo & $0{,}036$ ($p=0{,}04$) & $0{,}055$ ($p=0{,}01$) \\
-\quad \phantom{$\beta_3+\beta_4$ \textit{EMstress}:} EF de país & $0{,}036$ ($p=0{,}001$) & $0{,}054$ ($p<0{,}001$) \\
+\quad \phantom{$\beta_3+\beta_4$ \textit{EMstress}:} EF de país & $0{,}022$ ($p=0{,}013$) & $0{,}022$ ($p=0{,}017$) \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
 \par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} Variable dependiente $\ln(\mathrm{EMBI})$; regresores rezagados un trimestre y centrados. Argentina aporta 34 observaciones en la muestra completa (spread 2017Q3--2025Q4, regresores desde 2017Q2). ***, ** y * indican significancia al 1\%, 5\% y 10\%. Fuente: \texttt{p12\_tablas\_latex\_lnlag.py} sobre \texttt{Panel\_bloomberg\_embiext\_arg.csv}.}
 \end{table}
 
-Argentina no cambia ninguna conclusión. La elasticidad de la fragilidad y la semielasticidad del riesgo de cola son prácticamente idénticas, y la primera vuelve a desaparecer con los controles domésticos. La interacción promedio sigue sin ser significativa y se acerca a cero. Bajo \textit{Backstop} la suma sigue siendo negativa. El único resultado que se mueve es el del estrés emergente de 2015--2016: se refuerza con efectos fijos solo de tiempo o solo de país, pero con ambos pierde significancia ($p=0{,}13$), lo que respalda la lectura de la prueba de permutación de que ese episodio no es un hallazgo. Que una economía de spreads extremos y con 34 trimestres adicionales deje intactos los coeficientes indica que la asociación no depende de agregar esa economía; no resuelve, en cambio, el problema de inferencia: catorce \textit{clusters} siguen siendo pocos.
+Argentina no cambia ninguna conclusión. La elasticidad de la fragilidad y la semielasticidad del riesgo de cola son prácticamente idénticas, y la primera vuelve a desaparecer con los controles domésticos. La interacción promedio sigue sin ser significativa y se acerca a cero. Bajo \textit{Backstop} la suma sigue siendo negativa. El único resultado que se mueve es el del estrés emergente de 2015--2016: es significativo con efectos fijos solo de tiempo o solo de país, pero con ambos pierde significancia ($p=0{,}13$), lo que respalda la lectura de la prueba de permutación de que ese episodio no es un hallazgo. Que una economía de spreads extremos y con 34 trimestres adicionales deje intactos los coeficientes indica que la asociación no depende de agregar esa economía; no resuelve, en cambio, el problema de inferencia: catorce \textit{clusters} siguen siendo pocos.
 
 \section{Robustez a la forma funcional: la especificación en niveles}
 \label{sec:robustez-niveles}

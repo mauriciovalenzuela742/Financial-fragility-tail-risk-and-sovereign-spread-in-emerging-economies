@@ -326,7 +326,7 @@ def tabla_crisis(spec=LEVELS):
         r" Las columnas (2)--(12) completan la batería de cuatro modelos "
         r"anidados: CM1, $JLoss$ y su interacción con el vector de crisis; CM2, lo mismo con $D$; CM3, ambos "
         r"niveles y sus interacciones, sin $JLoss\times D$; CM4, la especificación completa. $Crisis$ sola "
-        r"queda absorbida por los efectos fijos de tiempo cuando estos se incluyen. $\beta_3$ mide la "
+        r"queda absorbida por los efectos fijos de tiempo cuando estos se incluyen; en las columnas con solo efectos fijos de país entra como regresor (no reportado). $\beta_3$ mide la "
         r"complementariedad fuera de crisis y $\beta_3+\beta_4$ dentro de crisis (error estándar por método "
         r"delta; entre corchetes, $p$ del test de Wald $H_0\!:\beta_3+\beta_4=0$). Todas las columnas incluyen "
         r"seis controles domésticos (deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, "

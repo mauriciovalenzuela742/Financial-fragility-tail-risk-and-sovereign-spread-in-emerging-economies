@@ -246,3 +246,15 @@ contradiga el mensaje de la defensa.
 pesa más que cualquiera de estas acciones. Una exposición que transmita el mensaje en una frase y responda
 la V25 ("si casi nada se confirma, ¿cuál es su contribución?") sin ponerse a la defensiva puede compensar
 varias décimas del documento.
+
+---
+
+# 6. Registro de aplicación (23 de octubre de 2026)
+
+| # | Estado | Qué se hizo |
+|---|---|---|
+| 3.1 (puntos 1–5) e implicancia | Hecho | La deuda × riesgo de cola dice "regularidad de la muestra, sin confirmación externa" en la apertura del capítulo, la Tabla de veredictos (fila propia, con réplica, instrumento y modelo), la Síntesis y la discusión; la regla continua queda condicionada a que la regularidad se confirme. También en el paper y las láminas |
+| 3.2 | Hecho | La sección de la deuda pasa a ser la 4.4, después de la simultaneidad; el capítulo abre con la réplica de Chari et al. |
+| 3.3 (puntos 6–9) | Hecho | Riesgo de cola unificado (sugerente en la principal, firme con CCE); *wild* p de 0,33 en la Tabla de veredictos y nota sobre el remuestreo en la tabla compacta; "Ambos parten" corregido; las tres listas de contribuciones son las mismas seis |
+| 3.4 | En parte | Resumen de 658 a ~500 palabras. La metodología sigue describiendo crisis, heterogeneidad y resiliencia, porque los anexos citan sus ecuaciones |
+| Efectos fijos de tiempo | Hecho | En la tabla de crisis, las columnas con solo efectos fijos de país omitían el indicador de crisis por sí solo, que solo los efectos de tiempo absorben; se corrigió el código y se regeneraron las tablas (NUMEROS §35). El texto atribuía la caída del coeficiente de la fragilidad con efectos bidireccionales solo a la parte transversal; ahora reporta las tres estructuras |

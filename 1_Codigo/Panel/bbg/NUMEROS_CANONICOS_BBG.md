@@ -2204,3 +2204,20 @@ Preregistro 6: `4_Redaccion/preregistro_modelo.md`, commit `90f0adf`. Fuente: `p
 - En niveles, predice el signo estimado, pero con una magnitud entre 3 y 65 veces la estimación, que además
   no es firme.
 - Sobre el nivel, el modelo implica una semielasticidad al riesgo de cola 17 veces mayor que la estimada.
+
+## 35. Corrección: indicador de crisis en las columnas con solo efectos fijos de país (2026-10-23)
+
+En la ecuación con el vector de crisis, el indicador de crisis por sí solo queda absorbido por los efectos
+fijos de tiempo. En las columnas con solo efectos fijos de país no hay efectos de tiempo que lo absorban, y
+`p9_crisis_interaccion.py` y `p9b_bateria_crisis.py` lo omitían. Ahora entra como regresor (no reportado).
+Las columnas con efectos fijos de país y de tiempo, que son las que usa el texto, no cambian.
+
+| CM4, solo EF de país | Antes | Corregido |
+|---|---|---|
+| β3+β4 EMstress, sin Argentina | 0,036 (p 0,001) | 0,022 (p 0,013) |
+| β3+β4 EMstress, con Argentina | 0,054 (p < 0,001) | 0,022 (p 0,017) |
+| β3+β4 Backstop, sin Argentina | −0,007 (p 0,29) | −0,009 (p 0,16) |
+| β3+β4 vector único, sin Argentina | −0,004 (p 0,44) | −0,003 (p 0,58) |
+
+La lectura no cambia: el término de EMstress es significativo con un solo tipo de efecto fijo y pierde
+significancia con ambos.

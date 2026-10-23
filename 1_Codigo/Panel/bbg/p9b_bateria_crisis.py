@@ -127,10 +127,14 @@ def fit_crisis_model(d, model, dummies, fe, ctr):
         dd[f"JxD_{nm}"] = dd["JxD"] * cr
         dd[f"JLoss_{nm}"] = dd["JLoss_c"] * cr
         dd[f"D_{nm}"] = dd["D_c"] * cr
+        dd[f"Cr_{nm}"] = cr
 
     rhs, base = _build_rhs(model, dummies)
-    all_rhs = rhs + ctr
     eff = FE_MAP[fe]
+    # Sin efectos fijos de tiempo, el indicador de crisis no queda absorbido y entra solo.
+    if "TimeEffects" not in eff:
+        rhs = rhs + [f"Cr_{nm}" for nm in dummies]
+    all_rhs = rhs + ctr
     f = f"_DV ~ {' + '.join(all_rhs)} + {eff}"
     md = dd.set_index(["country", "t"])
     m = PanelOLS.from_formula(f, md).fit(cov_type="kernel", kernel="bartlett")
