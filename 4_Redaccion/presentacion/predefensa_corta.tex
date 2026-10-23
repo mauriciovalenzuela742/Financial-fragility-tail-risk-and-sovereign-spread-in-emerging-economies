@@ -261,38 +261,20 @@ Modelo de límite fiscal calibrado & logaritmos: $-0{,}43$; puntos básicos: $+9
 
 \begin{frame}{Hallazgos y su grado de evidencia}
 \centering
-\footnotesize
-\begin{adjustbox}{max width=\textwidth, max totalheight=0.84\textheight}
-\begin{tabular}{llc}
+\renewcommand{\arraystretch}{1.4}
+\begin{adjustbox}{width=\textwidth, max totalheight=0.84\textheight}
+\begin{tabular}{lll}
 \toprule
-Hallazgo & Cifra & Evidencia \\
+\textbf{Hallazgo} & \textbf{Cifra} & \textbf{Evidencia} \\
 \midrule
-\multicolumn{3}{l}{\textit{Conclusiones propias}} \\
-Los dos riesgos coinciden más que por azar & 168: 1,2 veces lo esperado con el calendario común ($p=0{,}0002$); 1,9 bajo independencia; 13 de 13 & \textbf{firme} \\
-La fragilidad antecede al riesgo de cola & $0{,}405$ (\textit{wild} $0{,}024$); sin cada país y sin bloque bursátil & firme (a un trimestre) \\
-Amplificación cuando coinciden & $-0{,}011$ (\textit{wild} $0{,}89$); TOST: se descarta $>35\%$ & \textbf{no hay evidencia} \\
-El riesgo de cola agrega a la fragilidad, en niveles & conjunta \textit{wild} $0{,}041$; con cargas heterogéneas (CCE) \textit{wild} $0{,}016$, 13 de 13; largo plazo $0{,}067$ & firme como nivel; no en cambios \\
-Deuda $\times$ riesgo de cola (preregistrada) & $+0{,}011$ (Holm $0{,}029$; conjunta $0{,}19$; permutación $0{,}17$); a 4 trimestres $+0{,}033$ (permutación $0{,}009$) & \textbf{firme} a 4 trim.\ en la muestra; sugerente a 1 \\
-Réplica externa (Hungría, Corea) / instrumento de términos de intercambio & $0{,}22$, difiere de $0{,}033$ (potencia 5\%) / F $9{,}7$, interacción $\approx0$ & \textbf{no confirma} \\
-Modelo de límite fiscal (preregistro 6) & log: predice $-0{,}43$ (dato $+0{,}033$); pb: predice $+91$ (dato $+3{,}1$, \textit{wild} $0{,}09$) & \textbf{no lo explica} \\
-Riesgo de cola a 4 trimestres (preregistrada) & $0{,}047$; Holm $0{,}018$; 13 de 13 & \textbf{firme} \\
-\textit{Doom loop} (deuda $\times$ fragilidad) / pecado original & $-0{,}053$ / $-0{,}004$; Holm $1{,}00$ & no hay evidencia \\
-El riesgo de cola en cambios o fuera de muestra & $0{,}004$; 0 de 9 horizontes; $+3\%$ de error & \textbf{no hay evidencia} \\
-Resiliencia: directa y con la cola fuera de crisis & $-0{,}153$; $-0{,}024$; solo Driscoll--Kraay & sugerente \\
-Reservas $\times$ fragilidad & $-0{,}247$ (\textit{wild} $0{,}08$); preregistrada con adecuación de reservas: Holm $0{,}29$ & exploratorio \\
-Resiliencia previa $\times$ riesgo de cola & $-0{,}028$ (\textit{wild} $0{,}06$) & exploratorio \\
-Amplificación en el núcleo de 11, sin crisis & $+0{,}034$ (\textit{wild} $0{,}015$); grupo \textit{ex post} & exploratorio \\
-Participación extranjera (preespecificada) & Holm $p=1{,}00$ & \textbf{no hay evidencia} \\
-Respaldo externo por país & $-0{,}004$ (\textit{wild} $0{,}90$) & \textbf{no hay evidencia} \\
-Eventos diarios de respaldo & \textit{swap} Fed 2020: $-20$ a $-22$ pp; desacople igual que sin línea & baja el nivel; \textbf{no} la transmisión \\
-Asimetría \textit{Backstop} / \textit{EMstress} & Holm $0{,}12$ / $0{,}24$; lugar 20 de 51 & \textbf{no hay evidencia} \\
-Umbrales de vigilancia (preregistrada) & tensión $p=0{,}13$; deuda $0{,}26$; AUROC fuera de muestra $0{,}49$; por país, no comunes & \textbf{no hay evidencia} \\
-\midrule
-\multicolumn{3}{l}{\textit{Réplica de Chari et al.\ (2024) y validación del panel}} \\
-Fragilidad y \textit{spread} en niveles & $0{,}099$ (\textit{wild} $0{,}33$); $0{,}107$--$0{,}164$ con sus controles; 70\% es Turquía; con la DD de Merton, \textit{wild} $0{,}055$ & sugerente \\
-La fragilidad antecede al \textit{spread} & trimestral: cierre a cierre $0{,}025$ (\textit{wild} $0{,}21$); mensual: $0{,}013$ a un mes (\textit{wild} $<0{,}001$; 13 de 13) & trimestral, no; mensual, firme (no causal) \\
-Se mueven en el mismo trimestre & $0{,}037$ (\textit{wild} $0{,}008$); 13 de 13 países en pb & resiste el \textit{wild}; sujeto al sesgo de retroalimentación \\
-Bancos como unidad (preregistrada) & 0 de 6 pasan Holm; sistémicos $0{,}062$ vs.\ resto $0{,}022$; motor: 3 variantes, rangos $0{,}92$--$0{,}97$ & \textbf{no hay evidencia}; robusta al motor \\
+Los dos riesgos coinciden & 1,2 veces lo esperado ($p=0{,}0002$) & \textbf{Firme} \\
+La fragilidad antecede a la cola & $0{,}405$ (\textit{wild} $0{,}024$) & \textbf{Firme} (1 trim.) \\
+Amplificación (H3) & $-0{,}011$; se descarta $>35\%$ & \textbf{No hay evidencia} \\
+El riesgo de cola agrega (H2) & $0{,}032$; CCE \textit{wild} $0{,}016$ & Firme como nivel \\
+Fragilidad y \textit{spread} (H1) & $0{,}099$; 70\% es Turquía & Sugerente \\
+Deuda $\times$ cola, en la muestra & $+0{,}033$ (permutación $0{,}009$) & Firme en la muestra \\
+Deuda $\times$ cola, fuera de ella & réplica, instrumento y modelo & \textbf{No se confirma} \\
+Otros moderadores y umbrales & Holm $\geq0{,}29$ & \textbf{No hay evidencia} \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
@@ -522,6 +504,45 @@ El modelo predice el signo contrario en logaritmos y una magnitud mucho mayor en
 \input{tablas/bat_A_ee.tex}
 \end{adjustbox}
 \notabat{Errores estándar Driscoll--Kraay entre paréntesis.}
+\end{frame}
+
+\begin{frame}{Respaldo: Hallazgos y su grado de evidencia}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.84\textheight}
+\begin{tabular}{llc}
+\toprule
+Hallazgo & Cifra & Evidencia \\
+\midrule
+\multicolumn{3}{l}{\textit{Conclusiones propias}} \\
+Los dos riesgos coinciden más que por azar & 168: 1,2 veces lo esperado con el calendario común ($p=0{,}0002$); 1,9 bajo independencia; 13 de 13 & \textbf{firme} \\
+La fragilidad antecede al riesgo de cola & $0{,}405$ (\textit{wild} $0{,}024$); sin cada país y sin bloque bursátil & firme (a un trimestre) \\
+Amplificación cuando coinciden & $-0{,}011$ (\textit{wild} $0{,}89$); TOST: se descarta $>35\%$ & \textbf{no hay evidencia} \\
+El riesgo de cola agrega a la fragilidad, en niveles & conjunta \textit{wild} $0{,}041$; con cargas heterogéneas (CCE) \textit{wild} $0{,}016$, 13 de 13; largo plazo $0{,}067$ & firme como nivel; no en cambios \\
+Deuda $\times$ riesgo de cola (preregistrada) & $+0{,}011$ (Holm $0{,}029$; conjunta $0{,}19$; permutación $0{,}17$); a 4 trimestres $+0{,}033$ (permutación $0{,}009$) & \textbf{firme} a 4 trim.\ en la muestra; sugerente a 1 \\
+Réplica externa (Hungría, Corea) / instrumento de términos de intercambio & $0{,}22$, difiere de $0{,}033$ (potencia 5\%) / F $9{,}7$, interacción $\approx0$ & \textbf{no confirma} \\
+Modelo de límite fiscal (preregistro 6) & log: predice $-0{,}43$ (dato $+0{,}033$); pb: predice $+91$ (dato $+3{,}1$, \textit{wild} $0{,}09$) & \textbf{no lo explica} \\
+Riesgo de cola a 4 trimestres (preregistrada) & $0{,}047$; Holm $0{,}018$; 13 de 13 & \textbf{firme} \\
+\textit{Doom loop} (deuda $\times$ fragilidad) / pecado original & $-0{,}053$ / $-0{,}004$; Holm $1{,}00$ & no hay evidencia \\
+El riesgo de cola en cambios o fuera de muestra & $0{,}004$; 0 de 9 horizontes; $+3\%$ de error & \textbf{no hay evidencia} \\
+Resiliencia: directa y con la cola fuera de crisis & $-0{,}153$; $-0{,}024$; solo Driscoll--Kraay & sugerente \\
+Reservas $\times$ fragilidad & $-0{,}247$ (\textit{wild} $0{,}08$); preregistrada con adecuación de reservas: Holm $0{,}29$ & exploratorio \\
+Resiliencia previa $\times$ riesgo de cola & $-0{,}028$ (\textit{wild} $0{,}06$) & exploratorio \\
+Amplificación en el núcleo de 11, sin crisis & $+0{,}034$ (\textit{wild} $0{,}015$); grupo \textit{ex post} & exploratorio \\
+Participación extranjera (preespecificada) & Holm $p=1{,}00$ & \textbf{no hay evidencia} \\
+Respaldo externo por país & $-0{,}004$ (\textit{wild} $0{,}90$) & \textbf{no hay evidencia} \\
+Eventos diarios de respaldo & \textit{swap} Fed 2020: $-20$ a $-22$ pp; desacople igual que sin línea & baja el nivel; \textbf{no} la transmisión \\
+Asimetría \textit{Backstop} / \textit{EMstress} & Holm $0{,}12$ / $0{,}24$; lugar 20 de 51 & \textbf{no hay evidencia} \\
+Umbrales de vigilancia (preregistrada) & tensión $p=0{,}13$; deuda $0{,}26$; AUROC fuera de muestra $0{,}49$; por país, no comunes & \textbf{no hay evidencia} \\
+\midrule
+\multicolumn{3}{l}{\textit{Réplica de Chari et al.\ (2024) y validación del panel}} \\
+Fragilidad y \textit{spread} en niveles & $0{,}099$ (\textit{wild} $0{,}33$); $0{,}107$--$0{,}164$ con sus controles; 70\% es Turquía; con la DD de Merton, \textit{wild} $0{,}055$ & sugerente \\
+La fragilidad antecede al \textit{spread} & trimestral: cierre a cierre $0{,}025$ (\textit{wild} $0{,}21$); mensual: $0{,}013$ a un mes (\textit{wild} $<0{,}001$; 13 de 13) & trimestral, no; mensual, firme (no causal) \\
+Se mueven en el mismo trimestre & $0{,}037$ (\textit{wild} $0{,}008$); 13 de 13 países en pb & resiste el \textit{wild}; sujeto al sesgo de retroalimentación \\
+Bancos como unidad (preregistrada) & 0 de 6 pasan Holm; sistémicos $0{,}062$ vs.\ resto $0{,}022$; motor: 3 variantes, rangos $0{,}92$--$0{,}97$ & \textbf{no hay evidencia}; robusta al motor \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Referencias principales}

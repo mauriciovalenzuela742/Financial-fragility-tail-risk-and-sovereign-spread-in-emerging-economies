@@ -36,11 +36,34 @@ RESPALDO = [
     "{¿Efecto o persistencia? La retroalimentación}",
     "{Limitaciones y trabajo futuro}",
     "{Respaldo: Panel A con errores estándar}",
+    "{Hallazgos y su grado de evidencia}",
 ]
+
+HALLAZGOS = r"""\begin{frame}{Hallazgos y su grado de evidencia}
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{adjustbox}{width=\textwidth, max totalheight=0.84\textheight}
+\begin{tabular}{lll}
+\toprule
+\textbf{Hallazgo} & \textbf{Cifra} & \textbf{Evidencia} \\
+\midrule
+Los dos riesgos coinciden & 1,2 veces lo esperado ($p=0{,}0002$) & \textbf{Firme} \\
+La fragilidad antecede a la cola & $0{,}405$ (\textit{wild} $0{,}024$) & \textbf{Firme} (1 trim.) \\
+Amplificación (H3) & $-0{,}011$; se descarta $>35\%$ & \textbf{No hay evidencia} \\
+El riesgo de cola agrega (H2) & $0{,}032$; CCE \textit{wild} $0{,}016$ & Firme como nivel \\
+Fragilidad y \textit{spread} (H1) & $0{,}099$; 70\% es Turquía & Sugerente \\
+Deuda $\times$ cola, en la muestra & $+0{,}033$ (permutación $0{,}009$) & Firme en la muestra \\
+Deuda $\times$ cola, fuera de ella & réplica, instrumento y modelo & \textbf{No se confirma} \\
+Otros moderadores y umbrales & Holm $\geq0{,}29$ & \textbf{No hay evidencia} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{frame}"""
 
 partes = [preambulo, "\\begin{document}\n", portada.strip("\n"), "\n\n"]
 for t in PRINCIPALES:
-    partes += [frame(t), "\n\n"]
+    # la tabla completa de hallazgos se lee muy pequeña: en la principal va una versión condensada
+    partes += [HALLAZGOS if t == "{Hallazgos y su grado de evidencia}" else frame(t), "\n\n"]
 partes += [frame("\n\\vfill\n\\centering\n{\\Huge\\bfseries\\color{tesisblue} Gracias}"), "\n\n"]
 partes += ["% =====================================================================\n\\appendix\n\n"]
 for t in RESPALDO:
