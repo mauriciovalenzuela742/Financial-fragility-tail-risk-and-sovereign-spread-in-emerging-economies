@@ -165,7 +165,8 @@ Además se contrasta si tres condiciones ---resiliencia, respaldo externo y qui�
 \item \textbf{Series:} construcción homogénea y reproducible de las dos métricas para 13 economías (113 bancos, un solo protocolo de Bloomberg; $\GaR$ en pseudo--tiempo real).
 \item \textbf{Réplica independiente} de Chari et al.\ y delimitación de su alcance: no es una elasticidad común y no hay precedencia temporal.
 \item \textbf{Primer cruce} de la fragilidad bancaria con el riesgo de cola doméstico: coinciden, la fragilidad antecede al riesgo de cola, no hay evidencia de que se amplifiquen y el riesgo económico agrega poco.
-\item \textbf{Una batería de pruebas} que muestra qué no se puede afirmar con 13 países.
+\item \textbf{Seis preregistros} fechados antes de los datos: cada resultado se reporta salga como salga.
+\item \textbf{Teoría frente a datos:} un modelo de límite fiscal muestra que la predicción sobre deuda y riesgo de cola es en pb, no en logaritmos.
 \end{enumerate}
 \end{frame}
 
@@ -800,17 +801,74 @@ Driscoll--Kraay & $5\%$ / $6\%$ & $87\%$ (fragilidad) & & \\
 % =====================================================================
 \section{Conclusiones}
 
+\begin{frame}{Deuda y riesgo de cola: lo que resiste y lo que no}
+\centering
+\scriptsize
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.60\textheight}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{0.40\textwidth}>{\raggedright\arraybackslash}p{0.18\textwidth}}
+\toprule
+Prueba & Resultado & Lectura \\
+\midrule
+Preregistro 1: riesgo de cola a un trimestre $\times$ deuda & $+0{,}011$ por d.e. de deuda; Holm $0{,}029$; 13 de 13 & firme en su familia \\
+Preregistro 2: riesgo de cola a un año & $0{,}047$ (Holm $0{,}018$); $\times$ deuda $+0{,}033$ & firme en su familia \\
+\addlinespace
+Inferencia conjunta (14 hipótesis, 4 preregistros) & ninguna bajo $0{,}05$; permutación de la deuda: a un trimestre $0{,}17$, a un año $0{,}009$ & a un año resiste \\
+\addlinespace
+Réplica externa: Hungría y Corea & $0{,}22$ frente a $0{,}033$; diferencia rechazada; potencia 5\% & \textbf{no replica} \\
+Instrumento: términos de intercambio & F $20$ para el riesgo de cola, $9{,}7$ para la interacción; $\psi\approx0$ & \textbf{débil} \\
+Modelo de límite fiscal calibrado & logaritmos: $-0{,}43$; puntos básicos: $+91$ (dato $+3{,}1$) & \textbf{no lo explica} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}
+\begin{block}{Lectura}
+\scriptsize Con más deuda, el riesgo de cola del año siguiente pesa más en el \textit{spread} \textbf{en la muestra}. Fuera de ella, con un instrumento o con un modelo, nada lo confirma por ahora. Se reporta como lo que es: una regularidad de la muestra.
+\end{block}
+\end{frame}
+
+\begin{frame}{Un modelo de límite fiscal: logaritmos frente a puntos básicos}
+\small
+\begin{columns}[T]
+\column{0.52\textwidth}
+\textbf{Modelo} (Eaton--Gersovitz; Bi, 2012)
+\[ \text{incumple si } g<g^*(b)=\frac{r\,b-\bar p}{b+\bar p} \]
+\[ \pi=\Phi\!\left(\frac{g^*-m}{\sigma_L}\right) \]
+Más riesgo de cola: más $\sigma_L$, con la mediana fija.
+\begin{itemize}\footnotesize
+\item \textbf{Puntos básicos:} con más deuda, $g^*$ se acerca a la zona que la cola desplaza $\Rightarrow$ interacción \textbf{positiva}.
+\item \textbf{Logaritmos:} con poca deuda el incumplimiento es de la cola profunda y ensancharla lo multiplica $\Rightarrow$ interacción \textbf{negativa}.
+\end{itemize}
+\column{0.44\textwidth}
+\footnotesize
+\textbf{Calibrado con el panel} (deuda 44,6\%, spread 173 pb, recuperación 63\%)
+\vspace{2pt}
+
+\begin{tabular}{lcc}
+\toprule
+ & Modelo & Datos \\
+\midrule
+Interacción, log & $-0{,}43$ & $+0{,}033$ \\
+Interacción, pb & $+91$ & $+3{,}1$ \\
+Riesgo de cola, log & $0{,}82$ & $0{,}047$ \\
+\bottomrule
+\end{tabular}
+\vspace{4pt}
+
+El modelo predice el signo contrario en logaritmos y una magnitud mucho mayor en pb. La forma funcional no es neutral.
+\end{columns}
+\end{frame}
+
 \begin{frame}{Respuesta a la pregunta}
 \small
 \begin{enumerate}\setlength\itemsep{0pt}
 \item \textbf{La simultaneidad es un hecho}: los dos riesgos coinciden 1,2 veces lo esperado descontado el calendario común (1,9 frente a la independencia); la fragilidad antecede al riesgo de cola.
 \item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen}; se descarta más de un 35\% de la suma, no menos.
 \item \textbf{El riesgo económico agrega poco} a lo que explica la fragilidad: un 2--3\,\% de \textit{spread} por punto; no mejora el pronóstico, pero es una relación de largo plazo.
-\item \textbf{La deuda pública amplifica} la transmisión del riesgo de cola (dos preregistros; con la inferencia conjunta, solo a 4 trimestres: permutación $p=0{,}009$; fuera de la muestra no se confirma); ninguna otra condición la modifica de forma demostrable.
+\item \textbf{Deuda y riesgo de cola: regularidad de la muestra.} Con más deuda, el riesgo de cola a un año pesa más (permutación $p=0{,}009$), pero la réplica externa, el instrumento y el modelo no lo confirman; ninguna otra condición modifica la transmisión.
 \end{enumerate}
 \vspace{-2pt}
 \begin{block}{En una frase}
-\footnotesize Los dos riesgos domésticos tienden a darse juntos; cuando coinciden, no hay evidencia de que se amplifiquen (se descarta más de un 35\% de la suma, no menos); el riesgo económico agrega información modesta, de largo plazo; y la deuda pública amplifica su transmisión.
+\footnotesize Los dos riesgos domésticos tienden a darse juntos; cuando coinciden, no hay evidencia de que se amplifiquen (se descarta más de un 35\% de la suma, no menos); el riesgo económico agrega información modesta, de largo plazo; y la amplificación por la deuda es una regularidad de la muestra que nada confirma por ahora.
 \end{block}
 \vspace{-4pt}
 {\footnotesize \textbf{Réplica:} la asociación fragilidad--\textit{spread} replica a Chari et al.\ con sus controles, pero no es una elasticidad común ni hay precedencia temporal.\par}
@@ -961,13 +1019,13 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad: son asocia
 \vspace{4pt}
 \item El riesgo económico \textbf{agrega poco} a lo que ya explica la fragilidad, pero es un fundamento de largo plazo.
 \vspace{4pt}
-\item La \textbf{deuda pública} amplifica la transmisión del riesgo de cola; ninguna otra condición la modifica de forma demostrable.
+\item Con más \textbf{deuda}, el riesgo de cola pesa más \textbf{en la muestra}; ni la réplica externa, ni el instrumento, ni el modelo lo confirman.
 \end{enumerate}
 \vspace{4pt}
 {\small \textbf{Réplica:} la asociación fragilidad--\textit{spread} replica a Chari et al.\ con sus controles, pero no es una elasticidad común ni hay precedencia temporal.\par}
 \vspace{6pt}
 \centering
-\textit{El aporte es el primer cruce de los dos riesgos domésticos y saber qué se puede afirmar, y qué no, con 13 países.}
+\textit{El aporte es el primer cruce de los dos riesgos domésticos, evaluado con seis preregistros: qué se puede afirmar, y qué no, con 13 países.}
 \end{frame}
 
 \begin{frame}
