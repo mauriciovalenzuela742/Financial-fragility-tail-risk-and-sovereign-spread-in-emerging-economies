@@ -17,7 +17,7 @@ subtitle: "Discurso de apertura, recorrido de láminas, preguntas difíciles, ci
 
 > Bancos frágiles y cola adversa del crecimiento **tienden a darse juntos**, pero cuando coinciden **no
 > hay evidencia de que se amplifiquen**; y la pregunta de si la deuda amplifica el riesgo de cola, que
-> recibió seis preregistros, deja **una regularidad de la muestra que nada confirma por ahora**.
+> recibió siete preregistros, deja **una regularidad de la muestra que nada confirma por ahora**.
 
 Si la comisión recuerda una sola cosa, que sea esa. Todo el discurso la desarrolla.
 
@@ -31,7 +31,7 @@ Si la comisión recuerda una sola cosa, que sea esa. Todo el discurso la desarro
    riesgos se dan a la vez: ¿se suman o se amplifican?"
 
 2. **Lo que hice (30 s).** "Construí las dos series para trece economías emergentes con un protocolo único,
-   las crucé por primera vez y sometí cada resultado a una batería de pruebas, con seis preregistros
+   las crucé por primera vez y sometí cada resultado a una batería de pruebas, con siete preregistros
    fechados en git antes de los datos."
 
 3. **Lo que encontré, en orden de firmeza (90 s).**
@@ -84,9 +84,9 @@ Respuestas de menos de un minuto. Primero el resultado, después la cifra y al f
 
 | # | Pregunta probable | Respuesta corta | Dónde |
 |---|---|---|---|
-| 1 | Si casi nada se confirma, ¿cuál es su contribución? | La pregunta tenía una respuesta: no hay amplificación grande, y los riesgos coinciden. Eso es un resultado. Y la tesis muestra, con seis preregistros, qué resiste y qué no con trece países. | V25 |
+| 1 | Si casi nada se confirma, ¿cuál es su contribución? | La pregunta tenía una respuesta: no hay amplificación grande, y los riesgos coinciden. Eso es un resultado. Y la tesis muestra, con siete preregistros, qué resiste y qué no con trece países. | V25 |
 | 2 | ¿Por qué cambió tanto el hallazgo central? | Porque lo sometí a pruebas cada vez más exigentes y reporté cada una. Lo que cambió fue cuánto confío en él, no los datos. | V26 |
-| 3 | ¿Seis preregistros no son también búsqueda de especificación? | Cada uno se fijó antes de sus datos y la corrección conjunta los trata como una sola familia: con esa corrección ninguna hipótesis queda bajo 0,05. Eso es lo contrario de buscar. | V22, V27 |
+| 3 | ¿Siete preregistros no son también búsqueda de especificación? | Cada uno se fijó antes de sus datos y la corrección conjunta los trata como una sola familia: con esa corrección ninguna hipótesis queda bajo 0,05. Eso es lo contrario de buscar. | V22, V27 |
 | 4 | ¿Por qué el modelo predice el signo contrario? | Con una cola normal, cuando la deuda es baja el incumplimiento es un evento extremo y ensanchar la cola lo multiplica; con deuda alta ya es probable. En puntos básicos el modelo sí predice la interacción. | V24 |
 | 5 | La réplica tenía 5 % de potencia: ¿para qué hacerla? | Para saberlo. Ahora sé que con dos economías no se puede replicar este efecto, y eso orienta el trabajo futuro: hacen falta cinco a diez economías más. | V23 |
 | 6 | ¿La fragilidad causa el spread? | No lo afirmo. Con trece países y retroalimentación, un coeficiente de este tamaño podría producirlo la sola retroalimentación. | V1, V12 |

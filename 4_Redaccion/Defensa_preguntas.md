@@ -195,7 +195,7 @@ es prima global y el modelo no tiene aversión al riesgo. Ninguna de esas explic
 **R.** Tres cosas. Primera, la pregunta de la tesis tiene respuesta: los riesgos coinciden y no hay
 amplificación grande, algo que nadie había contrastado porque nadie había cruzado las dos métricas.
 Segunda, las series son homogéneas, reproducibles con un comando y quedan disponibles. Tercera, la tesis
-muestra con seis preregistros qué resiste y qué no con trece países, y el modelo de límite fiscal muestra
+muestra con siete preregistros qué resiste y qué no con trece países, y el modelo de límite fiscal muestra
 que la predicción teórica sobre deuda y riesgo de cola es en puntos básicos, no en logaritmos.
 
 **V26. ¿Por qué cambió tanto el hallazgo central entre versiones?**
@@ -203,7 +203,7 @@ que la predicción teórica sobre deuda y riesgo de cola es en puntos básicos, 
 después la corrección conjunta, la réplica externa, el instrumento y el modelo. Los datos no cambiaron;
 cambió cuánta confianza merece el resultado. Cada cambio está fechado en el historial del repositorio.
 
-**V27. ¿Seis preregistros no son otra forma de buscar hasta encontrar algo?**
+**V27. ¿Siete preregistros no son otra forma de buscar hasta encontrar algo?**
 **R.** Al revés: cada uno se fijó antes de sus datos y la corrección conjunta trata los cuatro primeros como
 una sola familia (p56). Con esa corrección ninguna hipótesis queda bajo 0,05. Si buscara resultados, no los
 habría reportado así.
