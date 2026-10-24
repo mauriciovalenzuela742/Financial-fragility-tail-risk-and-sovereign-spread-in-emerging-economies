@@ -45,6 +45,14 @@ CLAVES = {
                               "mod_beta_niv", "mod_psi_niv", "mod_psi_log_max", "mod_psi_niv_min", "mod_psi_niv_max",
                               "mod_obs_psi_log_mediana", "mod_obs_psi_log_pos", "m6_b", "m6_p_uni", "m6_loo_ok",
                               "m6perm_p_perm"],
+    "paper_p60_numeros.csv": ["q1h1_sr", "q1h1_p", "bruto_sr", "sin_turquia_sr", "q1h1_rotacion_media", "fm_t"],
+    "paper_p62_numeros.csv": ["q3h1_esc_AltaJ", "q3h1_esc_AltaD", "q3h1_esc_Conj", "q3h1_c3_p", "q3h2_dm_p",
+                              "q3h2_q_cond_p_cc", "holm_q1h1", "holm_q3h1", "holm_q3h2"],
+    "paper_p61_numeros.csv": ["q2h1_t", "q2h1_p", "vida_media_meses", "cartera_carry_sr"],
+    "paper_p63_numeros.csv": ["q4h1_dm_t", "q4h1_p", "vs_fijo_p"],
+    "paper_p64_numeros.csv": ["q6_corr", "q6_mae_mediano", "q6_valida"],
+    "paper_p65_numeros.csv": ["q5h1_a3", "q5h1_p_uni", "q5h1_exclusiones_pos", "holm_q2h1", "holm_q4h1", "holm_q5h1"],
+    "paper_p66_numeros.csv": ["glob_m", "glob_holm05", "glob_by05", "glob_N2-H1_holm", "glob_R2-H3_holm"],
 }
 
 

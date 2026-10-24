@@ -632,8 +632,8 @@ Interacción en logaritmos / en puntos básicos & \multicolumn{2}{c}{mediana $-0
 
 \textbf{Qué queda de la interacción en logaritmos.} Según la consecuencia fijada en el preregistro, la interacción en logaritmos queda sin explicación en el modelo de límite fiscal. Sus candidatas son extensiones que el modelo no incluye:
 \begin{itemize}
-    \item una recuperación que cae con la deuda;
-    \item inversionistas aversos al riesgo, cuya prima por la cola crece con la exposición;
+    \item una recuperación que cae con la deuda \citep{Yue2010};
+    \item inversionistas aversos al riesgo, cuya prima por la cola crece con la exposición \citep{Lizarazo2013};
     \item colas más gruesas: con la cola de Student, la interacción negativa se acerca a cero, sin volverse positiva.
 \end{itemize}
 Ninguna se contrastó aquí.
@@ -759,6 +759,8 @@ La simulación de una versión anterior generaba las muestras artificiales con e
 
 \textbf{Comparaciones múltiples.} La interacción se contrasta en varias muestras y regímenes, y con seis contrastes alguno puede resultar significativo por azar. Con la corrección de \citet{Holm1979} sobre esa familia ($p$ de Driscoll--Kraay), la interacción en el grupo de once economías fuera de las crisis ($p=0{,}001$; corregido, $0{,}005$) y su diferencia con Polonia e India ($0{,}002$; corregido, $0{,}009$) se mantienen, mientras que las sumas bajo \textit{Backstop} ($0{,}03$; corregido, $0{,}12$) y \textit{EMstress} ($0{,}08$; corregido, $0{,}24$) dejan de ser significativas. La corrección no cuenta las agrupaciones que pudieron probarse antes de llegar a esa, y por eso no saca a ese resultado de la categoría de exploratorio (Sección~\ref{sec:participacion-extranjera}). Las correcciones de Holm sobre los componentes de la resiliencia y sobre la familia preespecificada de la participación extranjera están en las Tablas~\ref{tab:reservas} y~\ref{tab:participacion}.
 
+\textbf{Corrección sobre los ocho preregistros.} Las 23 hipótesis primarias de los ocho preregistros ---las 14 de la inferencia conjunta (Sección~\ref{sec:inferencia-conjunta}), la réplica externa y el instrumento, la prueba del modelo en puntos básicos y las seis de las preguntas de portafolio (Secciones~\ref{sec:quant-prereg} y~\ref{sec:quant2-prereg})--- se corrigen también juntas (\texttt{p66\_inferencia\_global.py}). Con la corrección de Holm, una sola queda bajo el 5\%: el signo positivo de la interacción entre la deuda y el riesgo de cola en Hungría y Corea ($p=0{,}002$; Holm $0{,}046$, en el límite de la resolución de un \textit{bootstrap} de 999 réplicas). No cambia el veredicto de la réplica, que el preregistro condicionaba también a que la magnitud no difiriera de la original, y es siete veces mayor. Con Benjamini--Yekutieli, que controla la tasa de falsos descubrimientos con cualquier dependencia, no queda ninguna; la que más se acerca, después de la réplica, es la interacción con el riesgo de cola a un año en la muestra original (Holm $0{,}13$).
+
 \subsection{Solapamiento del riesgo de cola con las variables financieras}
 
 El riesgo de cola no es un reflejo de las variables financieras que ya están en la regresión: limpiarlo de los factores globales o de la propia fragilidad, o reconstruir el $GaR$ sin el bloque bursátil del FCI, deja su coeficiente prácticamente igual. Con solo efectos fijos de país, el riesgo de cola limpio de los factores globales deja de ser significativo: parte de su asociación con el spread es global, y la especificación con efectos fijos de tiempo es la que la separa. El detalle está en la Sección~\ref{sec:robustez-solapamiento} del Anexo~\ref{chap:anexo-robustez}.
@@ -781,7 +783,7 @@ Las conclusiones no dependen de cómo se mide la fragilidad, de qué observacion
 \section{Extensiones posteriores a la estimación}
 \label{sec:extensiones}
 
-Revisiones posteriores a la estimación propusieron diez extensiones: seis no preespecificadas y cuatro con preregistro. La Tabla~\ref{tab:extensiones-resumen} resume qué encontró cada una y qué cambia en las conclusiones; el detalle, con sus tablas y figuras, está en el Anexo~\ref{chap:anexo-extensiones}.
+Revisiones posteriores a la estimación propusieron diez extensiones: seis no preespecificadas y cuatro con preregistro. La Tabla~\ref{tab:extensiones-resumen} resume qué encontró cada una y qué cambia en las conclusiones; el detalle, con sus tablas y figuras, está en el Anexo~\ref{chap:anexo-extensiones} y, para las dos preguntas de portafolio, en el Anexo~\ref{chap:anexo-portafolio}.
 
 \begin{table}[htbp]
 \centering
@@ -817,7 +819,7 @@ Valor razonable, cobertura y deuda en pb, preregistrada (Sección~\ref{sec:quant
 \end{adjustbox}
 \end{table}
 
-Tres de las extensiones refuerzan conclusiones del capítulo. La prueba preregistrada sobre la cola de los cambios del spread extiende la simultaneidad sin amplificación: la coincidencia de los dos riesgos tampoco ensancha la distribución de los cambios. La revisión econométrica sostiene que el riesgo de cola es una asociación de nivel y de largo plazo, firme cuando se permite que cada economía responda distinto al ciclo financiero global. La frecuencia mensual ordena el fechado que los datos trimestrales no pueden ordenar. Las demás confirman lo que ya se sabía o lo acotan: no hay amplificación en la cola alta del spread, el respaldo externo baja el nivel del spread pero no cambia la transmisión, los bancos individuales no agregan evidencia de un canal bancario y no hay un umbral desde el cual la transmisión cambie. Con más tensión financiera, si algo, los riesgos domésticos pesan menos en el spread.
+Tres de las extensiones refuerzan conclusiones del capítulo, y la cuarta preregistrada no cambia ninguna. La prueba preregistrada sobre la cola de los cambios del spread extiende la simultaneidad sin amplificación: la coincidencia de los dos riesgos tampoco ensancha la distribución de los cambios. La revisión econométrica sostiene que el riesgo de cola es una asociación de nivel y de largo plazo, firme cuando se permite que cada economía responda distinto al ciclo financiero global. La frecuencia mensual ordena el fechado que los datos trimestrales no pueden ordenar. Las demás confirman lo que ya se sabía o lo acotan: no hay amplificación en la cola alta del spread, el respaldo externo baja el nivel del spread pero no cambia la transmisión, los bancos individuales no agregan evidencia de un canal bancario y no hay un umbral desde el cual la transmisión cambie. Con más tensión financiera, si algo, los riesgos domésticos pesan menos en el spread.
 
 \section{Síntesis}
 \label{sec:sintesis-resultados}
