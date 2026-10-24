@@ -302,3 +302,33 @@ Q3-H2: VaR al 95\,\% fuera de la muestra & Condicional frente a EWMA: Diebold--M
 \textbf{La fragilidad no ordena los retornos entre países} (Tabla~\ref{tab:quant-prereg}). Bruto, el Sharpe de la cartera es nulo y la pendiente de Fama--MacBeth no se distingue de cero; neto de costos es fuertemente negativo, porque una cartera mensual rota dos veces y media su tamaño. El resultado es el mismo sin Turquía, con costos de 25 puntos básicos, con pesos por rango, a tres meses y por subperíodos. La precedencia mensual es una regularidad dentro de cada país, no una señal de valor relativo entre países.
 
 \textbf{La coincidencia tampoco ensancha la cola de los cambios del spread.} Cada riesgo por separado ensancha la distribución de los cambios, la fragilidad con evidencia firme. Su coincidencia no la ensancha más: el término conjunto es negativo, también a tres meses, sin 2020--2021, con los terciles de toda la muestra y sin efectos de mes. Es el mismo patrón subaditivo de la interacción en el nivel (Sección~\ref{sec:aditivos}). Un VaR que usa los dos riesgos no pronostica mejor que uno de volatilidad exponencial y no pasa la prueba de cobertura condicional. Según las consecuencias fijadas, la conclusión ``simultaneidad sin amplificación'' queda igual, ahora también para la cola de los cambios, y la precedencia mensual de la fragilidad no cambia de grado.
+
+\section{Valor razonable, cobertura condicional y deuda en puntos básicos: pruebas preregistradas}
+\label{sec:quant2-prereg}
+
+Un octavo preregistro (\texttt{4\_Redaccion/preregistro\_quant2.md}), anterior a toda estimación, completa las preguntas de un portafolio de deuda soberana con las mismas bases mensuales, sin anticipación y desde 2015. Las tres hipótesis primarias son si los fundamentos de la tesis definen un valor razonable cuyo residuo pronostica el cambio del spread del mes siguiente (Q2), si una razón de cobertura frente al factor común de las demás economías mejora cuando depende de la fragilidad y de la deuda (Q4), y si la interacción entre la deuda y el riesgo de cola que predice el modelo de límite fiscal en puntos básicos (Sección~\ref{sec:modelo-resultados}) aparece con datos mensuales (Q5). Q5 usa un nowcast mensual del riesgo de cola (Q6), que debía validarse antes contra el $GaR$ oficial. Las ramas que exigían los CDS de los bancos o las fechas de las calificaciones soberanas se declararon no factibles con los datos del repositorio.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Valor razonable, cobertura condicional y deuda en puntos básicos]{Valor razonable (Q2), cobertura condicional (Q4), nowcast del riesgo de cola (Q6) y deuda $\times$ riesgo de cola en puntos básicos (Q5): pruebas preregistradas}
+\label{tab:quant2-prereg}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{7.6cm}>{\raggedright\arraybackslash}p{2.6cm}}
+\toprule
+Prueba & Resultado & Holm \\
+\midrule
+Q2-H1: el residuo del valor razonable pronostica el cambio del spread a un mes & Clark--West $t=0{,}72$ ($p=0{,}24$); $R^2$ fuera de la muestra $+0{,}0006$; vida media del residuo 7,8 meses (criterio, menos de 6) & $0{,}47$: no pasa \\
+\addlinespace
+Q4-H1: cobertura condicional a la fragilidad y la deuda frente a un beta móvil de 36 meses & Diebold--Mariano $t=1{,}15$ ($p=0{,}13$); igual pérdida que un beta fijo; $c_{DD}=+0{,}025$ ($p=0{,}68$), $c_{deuda}=+0{,}16$ ($0{,}42$) & $0{,}37$: no pasa \\
+\addlinespace
+Q6: nowcast mensual del riesgo de cola (validación) & Correlación con el $GaR$ oficial $0{,}42$ (criterio, más de 0,9); error absoluto mediano 1,7 pp (criterio, menos de 0,5) & no valida \\
+\addlinespace
+Q5-H1: deuda $\times$ riesgo de cola en puntos básicos, mensual & $-1{,}1$ pb por d.e. de deuda (\textit{wild} unilateral $0{,}73$); positiva en 1 de 10 exclusiones; con el riesgo de cola oficial, $-0{,}9$ & $0{,}73$: no pasa (exploratoria) \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} 13 economías (10 con deuda trimestral en Q2 y Q5), 2015-01 a 2026-07. Q2: $\ln s$ sobre $\ln JLoss_{q-2}$, $D_{q-2}$ y la deuda de $q-4$ con efectos de país y de mes, reestimado cada mes; pronóstico $\hat\kappa\,\hat e$. Q4: factor, el cambio del logaritmo del promedio del spread de las otras doce economías; pérdida cuadrática del residuo cubierto. Q6: regresión cuantílica lineal ($\tau=0{,}05$) del crecimiento con el FCI y el VIX mensuales. Q5: spread en puntos básicos con efectos de país y de mes; \textit{wild cluster bootstrap} por país. Fuente: \texttt{p61}, \texttt{p63}, \texttt{p64} y \texttt{p65}.}
+\end{table}
+
+\textbf{Ninguna hipótesis pasa} (Tabla~\ref{tab:quant2-prereg}). El valor razonable no pronostica el cambio del spread del mes siguiente, y su residuo tarda casi ocho meses en cerrar la mitad de la brecha: la relación de largo plazo de la tesis describe niveles, pero no pronostica los cambios. La fragilidad y la deuda no cambian la exposición de cada país al factor común lo suficiente para mejorar la cobertura: un beta fijo por país cubre igual. El nowcast mensual del riesgo de cola no reproduce el $GaR$ oficial, que usa una distribución asimétrica ajustada y el crecimiento del trimestre, de modo que la prueba en puntos básicos queda como exploratoria; con el riesgo de cola oficial trimestral, la interacción en puntos básicos también es negativa. El modelo de límite fiscal sigue sin respaldo empírico en puntos básicos.

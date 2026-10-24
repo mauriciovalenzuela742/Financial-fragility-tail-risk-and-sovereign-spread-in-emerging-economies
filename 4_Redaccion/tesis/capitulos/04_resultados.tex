@@ -781,7 +781,7 @@ Las conclusiones no dependen de cómo se mide la fragilidad, de qué observacion
 \section{Extensiones posteriores a la estimación}
 \label{sec:extensiones}
 
-Revisiones posteriores a la estimación propusieron nueve extensiones: seis no preespecificadas y tres con preregistro. La Tabla~\ref{tab:extensiones-resumen} resume qué encontró cada una y qué cambia en las conclusiones; el detalle, con sus tablas y figuras, está en el Anexo~\ref{chap:anexo-extensiones}.
+Revisiones posteriores a la estimación propusieron diez extensiones: seis no preespecificadas y cuatro con preregistro. La Tabla~\ref{tab:extensiones-resumen} resume qué encontró cada una y qué cambia en las conclusiones; el detalle, con sus tablas y figuras, está en el Anexo~\ref{chap:anexo-extensiones}.
 
 \begin{table}[htbp]
 \centering
@@ -810,6 +810,8 @@ Umbrales de vigilancia, preregistrada (Sección~\ref{sec:umbrales-prereg}) & Sin
 Cola alta del spread (Sección~\ref{sec:cuantilica}) & La interacción va de $-0{,}024$ a $-0{,}001$ entre los cuantiles 10 y 90, nunca positiva; la fragilidad pesa más en la cola alta ($0{,}19$) & Nada sobre la amplificación \\
 \addlinespace
 Señal de valor relativo y cola de los cambios, preregistrada (Sección~\ref{sec:quant-prereg}) & La fragilidad no ordena los retornos entre países (Sharpe bruto $+0{,}01$; neto $-4{,}07$); cada riesgo ensancha la distribución de los cambios del spread, pero su coincidencia no la ensancha más ($-0{,}046$; $p=0{,}97$); el VaR condicional no mejora al EWMA & Refuerza la simultaneidad sin amplificación; la precedencia mensual no es una señal entre países \\
+\addlinespace
+Valor razonable, cobertura y deuda en pb, preregistrada (Sección~\ref{sec:quant2-prereg}) & El residuo del valor razonable no pronostica el cambio del spread (Clark--West $p=0{,}24$); la cobertura condicional no mejora a un beta móvil ($p=0{,}13$); el nowcast del riesgo de cola no valida; la interacción en pb es $-1{,}1$ & Nada: los fundamentos describen niveles, no pronostican cambios \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
@@ -845,6 +847,8 @@ La pregunta propia de esta tesis era qué agrega el riesgo económico doméstico
 \textbf{Umbrales de vigilancia (Sección~\ref{sec:umbrales-prereg}).} Un cuarto preregistro busca los umbrales con que trabaja la política macroprudencial. Ninguna de sus tres pruebas pasa la corrección de Holm: la transmisión no cambia de régimen con la tensión financiera doméstica ---si algo, los riesgos domésticos pesan menos en el spread cuando la tensión es alta---, no hay un umbral de deuda distinguible de la amplificación continua, y los indicadores no anticipan episodios de estrés soberano fuera de la muestra. Estimados país por país, los umbrales de deuda y de riesgo de cola difieren entre economías y no son transferibles; el de tensión financiera no se rechaza como común, pero no es significativo.
 
 \textbf{Señal de valor relativo y cola de los cambios (Sección~\ref{sec:quant-prereg}).} Un séptimo preregistro lleva dos resultados a las preguntas de un portafolio de deuda soberana, con datos mensuales desde 2015 y sin anticipación. Ninguna de sus tres hipótesis pasa la corrección de Holm. La fragilidad no ordena los retornos entre países: bruto, el Sharpe es nulo, y neto de costos, negativo. Y la coincidencia de los dos riesgos no ensancha la distribución de los cambios del spread más que cada riesgo por separado ($-0{,}046$; $p=0{,}97$), aunque la fragilidad alta por sí sola sí la ensancha.
+
+\textbf{Valor razonable, cobertura y deuda en puntos básicos (Sección~\ref{sec:quant2-prereg}).} Un octavo preregistro completa esas preguntas. Ninguna de sus tres hipótesis pasa: el residuo de un valor razonable con los fundamentos de la tesis no pronostica el cambio del spread del mes siguiente, una cobertura que depende de la fragilidad y la deuda no mejora a una de beta móvil, y la interacción entre la deuda y el riesgo de cola en puntos básicos es negativa también con datos mensuales.
 
 \textbf{Respuesta a los objetivos específicos.}
 \begin{enumerate}

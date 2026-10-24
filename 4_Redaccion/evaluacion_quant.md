@@ -414,3 +414,27 @@ de los cambios del spread: una pista para Q4 (cobertura) y para medir el riesgo,
 
 **Efecto sobre la nota de esta ronda:** contribución y diseño predictivo no suben. La transparencia sí: un
 preregistro con criterio de costos que se reporta negativo. Nota estimada: 6,3.
+
+---
+
+# 8. Registro de aplicación de Q2, Q4, Q5 y Q6 (23 de octubre de 2026)
+
+Preregistro 8: `preregistro_quant2.md`, commit `fc920b3`, anterior a toda estimación. Cifras en NUMEROS §37;
+texto en la Sección `sec:quant2-prereg` del Anexo F y del paper.
+
+| # | Estado | Resultado |
+|---|---|---|
+| Q2 | Hecho (preregistrado) | **No pasa.** Clark–West p 0,24 (Holm 0,47); vida media del residuo 7,8 meses. Cartera de valor −0,17; la de carry, +0,29 (p 0,11), es la única con signo positivo |
+| Q4 | Hecho (preregistrado) | **No pasa.** DM p 0,13 (Holm 0,37). Un beta fijo por país cubre igual que el condicional, y mejor que uno móvil de 36 meses |
+| Q6 | Hecho (preregistrado) | **No valida.** Correlación con el GaR oficial 0,42 y error mediano de 1,7 pp: una cuantílica lineal no reproduce el GaR con asimetría ajustada |
+| Q5 | Hecho (preregistrado, exploratorio) | **No pasa.** −1,1 pb por d.e. de deuda (Holm 0,73); con el riesgo de cola oficial, −0,9. El modelo de límite fiscal sigue sin respaldo en pb |
+| Q7, Q8 | No factibles | Faltan los CDS de los bancos y las fechas de calificación soberana |
+
+**Balance de las ocho ramas.** De las seis hipótesis primarias preregistradas en Q1–Q5, ninguna pasa. Lo que la
+investigación ofrece a un desk no es una señal, sino tres hechos acotados:
+1. la fragilidad alta ensancha la distribución de los cambios del spread (Q3, secundaria);
+2. la simultaneidad no lo hace más allá de cada riesgo;
+3. los fundamentos describen niveles de largo plazo, no cambios de un mes.
+
+**Nota final de esta ronda: 6,3**, la misma que tras Q1 y Q3. La transparencia sube, pero la contribución y
+el diseño predictivo no, porque ninguna pregunta de inversión obtuvo una respuesta positiva.
