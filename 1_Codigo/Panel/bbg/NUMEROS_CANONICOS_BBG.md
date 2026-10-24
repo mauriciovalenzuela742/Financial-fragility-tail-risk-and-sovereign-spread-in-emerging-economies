@@ -2274,3 +2274,31 @@ Desviaciones declaradas:
 2. El VaR se evalúa en la muestra común en que existen los tres pronósticos.
 3. Con umbrales expansivos, Conj = 1 en el 37 % de la muestra (la fragilidad sube en el período), más que el
    11 % esperado con terciles fijos; la secundaria con terciles de toda la muestra da el mismo signo.
+
+## 37. Preregistro 8: valor razonable (Q2), cobertura condicional (Q4), nowcast del GaR (Q6) y deuda × riesgo de cola en pb (Q5) (2026-10-23)
+
+Preregistro: `4_Redaccion/preregistro_quant2.md`, commit `fc920b3`, anterior a toda estimación. Código:
+`p61_valor_razonable.py`, `p63_cobertura.py`, `p64_nowcast_gar.py` (→ `gar_nowcast_mensual.csv`) y
+`p65_deuda_pb_mensual.py`; cifras en `paper_p61/p63/p64/p65_numeros.csv`. Evaluación desde 2015-01.
+
+| Prueba | Resultado | p | Holm |
+|---|---|---|---|
+| **Q2-H1** Clark–West, valor razonable a un mes (1 038 obs., 138 meses) | t 0,72; R² fuera de muestra +0,0006 | 0,235 | 0,47 |
+| Q2: vida media del residuo (mediana, 10 países) | 7,8 meses (criterio < 6) | — | — |
+| Q2: tres meses / sin deuda / sin Turquía | t 0,96 / 1,30 / 0,63 | 0,17 / 0,10 / 0,27 | — |
+| Q2: carteras valor / carry / momentum (Sharpe neto) | −0,17 / +0,29 / −3,62 | 0,76 / 0,11 / 1,00 | — |
+| **Q4-H1** DM, cobertura condicional frente a beta móvil 36 m (973 obs.) | pérdida 0,02662 frente a 0,02736; t 1,15 | 0,125 | 0,37 |
+| Q4: frente a beta fijo | 0,02662 frente a 0,02663; t 0,05 | 0,48 | — |
+| Q4: VIX como factor / solo DD / solo deuda / sin Turquía | t −0,50 / 1,06 / 1,13 / 1,16 | 0,69 / 0,15 / 0,13 / 0,12 | — |
+| Q4: c₁ (DD) y c₂ (deuda), toda la muestra, cluster | +0,025 / +0,164 | 0,68 / 0,42 | — |
+| **Q6** validación del nowcast (475 fines de trimestre) | corr 0,42 (criterio > 0,9); error absoluto mediano 1,70 pp (< 0,5); corr dentro del país mediana 0,32 | — | — |
+| **Q5-H1** a₃ en pb (779 obs., 10 economías) | −1,11; positiva en 1 de 10 exclusiones | 0,73 | 0,73 |
+| Q5: cambios / logaritmos / D oficial / sin Turquía | +0,37 / −0,013 / −0,89 / −0,85 | 0,15 / 0,82 / 0,73 / 0,76 | — |
+
+**Ninguna hipótesis pasa; el nowcast no valida, de modo que Q5 queda además como exploratoria.**
+
+Desviaciones declaradas:
+1. Q5 y Q2 usan la deuda trimestral `debt_q` estricta, que existe para 10 economías (faltan Chile, India y
+   Malasia, como en los preregistros 2 y 4). La condición de exclusiones de Q5 se evalúa sobre 10.
+2. En Q4, −DD_lag de m − 1 se toma con el rezago de la fila anterior del país.
+3. En Q2, los residuos históricos usan el β estimado en m (declarado en el preregistro).
