@@ -393,3 +393,24 @@ creíble que una que no lo intentó.
   *American Economic Journal: Macroeconomics*, 3(2).
 - Politis, D. y Romano, J. (1994). The stationary bootstrap. *Journal of the American Statistical
   Association*, 89(428).
+
+---
+
+# 7. Registro de aplicación de Q1 y Q3 (23 de octubre de 2026)
+
+Preregistro 7: `preregistro_quant.md`, commit `d968986`, anterior a todo retorno. Cifras en NUMEROS §36.
+
+| # | Estado | Resultado |
+|---|---|---|
+| Q1 | Hecho (preregistrado) | **No pasa.** Bruto, el Sharpe es +0,01 (IC 90 % −0,44 a +0,43) y Fama–MacBeth no muestra pendiente: el cambio mensual de la DD no ordena los retornos entre países. Neto de costos, −4,07, porque una cartera mensual rota 2,5 veces su tamaño |
+| Q3-H1 | Hecho (preregistrado) | **No pasa.** La fragilidad alta ensancha la distribución de los cambios del spread (+0,062, p 0,005) y el riesgo de cola algo (+0,019, p 0,085), pero su coincidencia no la ensancha más: −0,046 (p 0,97), en todas las secundarias |
+| Q3-H2 | Hecho (preregistrado) | **No pasa.** El VaR condicional no mejora al EWMA (DM p 0,47) y rechaza la cobertura condicional (p 0,002). El VaR histórico de 60 meses es el mejor de los tres |
+
+**Lectura.** La simultaneidad de los dos riesgos tampoco se traduce en una cola más ancha de los cambios del
+spread: el término conjunto es subaditivo, igual que la interacción en el nivel. La precedencia mensual de
+la fragilidad, que en la muestra es firme dentro de cada país, no es una señal de valor relativo entre
+países. Lo que sí aparece, como secundario, es que la fragilidad alta por sí sola ensancha la distribución
+de los cambios del spread: una pista para Q4 (cobertura) y para medir el riesgo, no para el nivel.
+
+**Efecto sobre la nota de esta ronda:** contribución y diseño predictivo no suben. La transparencia sí: un
+preregistro con criterio de costos que se reporta negativo. Nota estimada: 6,3.

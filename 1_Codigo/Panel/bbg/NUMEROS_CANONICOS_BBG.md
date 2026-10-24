@@ -2221,3 +2221,56 @@ Las columnas con efectos fijos de país y de tiempo, que son las que usa el text
 
 La lectura no cambia: el término de EMstress es significativo con un solo tipo de efecto fijo y pierde
 significancia con ambos.
+
+## 36. Preregistro 7: señal de valor relativo (Q1) y cola de los cambios del spread (Q3) (2026-10-23)
+
+Preregistro: `4_Redaccion/preregistro_quant.md`, commit `d968986`, anterior a todo retorno. Código:
+`p60_senal_dd.py` → `paper_p60_numeros.csv`, `fragilidad_mensual_lag_bbg.csv` (DD con el balance desde t+3;
+3 403 país-meses, 13 economías); `p62_cola_cambios.py` → `paper_p62_numeros.csv`. Evaluación desde 2015-01
+(139 meses; 10,8 países por mes en promedio). Retorno r = −7·Δs/1e4 + s/(12·1e4).
+
+**Q1 (largo/corto por terciles de ΔDD_lag; costo 0,525 % por unidad de rotación):**
+
+| | Sharpe anual [IC 90 %] | p uni (LW) | Media anual |
+|---|---|---|---|
+| **Q1-H1, neto 15 pb** | −4,07 [−4,93; −3,17] | 1,00 | −16,0 % |
+| Bruto | +0,01 [−0,44; +0,43] | 0,49 | +0,04 % |
+| Neto 25 pb / sin Turquía / rango | −6,33 / −4,24 / −4,18 | ≥ 0,99 | — |
+| Horizonte de tres meses (rotación 1,07) | −2,84 | 1,00 | −7,8 % |
+| DD de p37 (sin rezago del balance) | −4,16 | 1,00 | −16,0 % |
+| 2015–2019 / 2020 en adelante | −3,55 / −4,45 | 1,00 | — |
+
+Rotación media 2,54 por mes. Alfa frente al universo equiponderado −16,1 % anual (t −12,6); beta 0,05.
+Fama–MacBeth: pendiente −0,0006 (t NW −0,47). **La señal no ordena los retornos ni en bruto, y los costos
+de una cartera mensual la vuelven fuertemente negativa.**
+
+**Q3-H1 (MMQR de d ln s; EF de país y de mes en la localización, de país en la escala; N = 1 329; Conj = 1 en 495):**
+
+| Escala | Coeficiente | p uni (bootstrap de país, 999) |
+|---|---|---|
+| AltaJ | +0,062 | 0,005 |
+| AltaD | +0,019 | 0,085 |
+| **Conj (c3)** | **−0,046** | **0,97** |
+
+Cuantiles implícitos de Conj: τ 0,05 +0,098; τ 0,50 −0,006; τ 0,95 −0,119. Secundarias: tres meses c3 −0,058
+(p 0,96); sin 2020–2021 −0,044 (0,97); terciles de toda la muestra −0,023 (0,997); sin EF de mes −0,059 (0,996).
+**Cada riesgo por separado ensancha la distribución de los cambios (la fragilidad, con firmeza); su
+coincidencia no la ensancha más: el término conjunto es negativo, como la interacción en el nivel.**
+
+**Q3-H2 (VaR 95 % fuera de la muestra, 1 324 país-meses):**
+
+| Modelo | Tasa de excesos | Kupiec p | Christoffersen p | Pérdida cuantílica |
+|---|---|---|---|---|
+| Condicional (indicadores) | 4,5 % | 0,43 | 0,002 | 0,00265 |
+| EWMA (λ 0,97) | 2,3 % | < 0,001 | < 0,001 | 0,00267 |
+| Histórico 60 meses | 4,8 % | 0,78 | 0,29 | 0,00245 |
+
+DM frente al EWMA: t 0,08, p 0,47; frente al histórico: t −2,95 (el histórico es mejor). VaR 99 %: DM p 0,998.
+
+**Holm (Q1-H1, Q3-H1, Q3-H2): 1,00 / 1,00 / 1,00. Ninguna hipótesis pasa.**
+
+Desviaciones declaradas:
+1. El EWMA y el VaR histórico recorren cada serie en orden sin interrumpirse en los meses faltantes.
+2. El VaR se evalúa en la muestra común en que existen los tres pronósticos.
+3. Con umbrales expansivos, Conj = 1 en el 37 % de la muestra (la fragilidad sube en el período), más que el
+   11 % esperado con terciles fijos; la secundaria con terciles de toda la muestra da el mismo signo.
