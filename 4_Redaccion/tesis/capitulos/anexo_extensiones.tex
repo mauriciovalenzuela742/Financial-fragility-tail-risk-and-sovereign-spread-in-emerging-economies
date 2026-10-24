@@ -272,3 +272,33 @@ La teoría ubica la amplificación en los estados adversos, y la regresión prin
 \end{figure}
 
 La interacción no aparece en la cola alta (Figura~\ref{fig:cuantilica}). Con la regresión por momentos crece de $-0{,}024$ en el cuantil 10 a $-0{,}001$ en el 90, y no es positiva ni significativa en ningún cuantil ($p\geq0{,}63$). Con las variables indicadoras oscila entre $-0{,}007$ y $+0{,}003$ ($p\geq0{,}86$). Con la distancia al incumplimiento llega a $+0{,}006$ en el cuantil 90 ($p=0{,}43$). Lo que sí cambia con el cuantil es el peso de cada riesgo por separado. La fragilidad importa más cuando el spread es alto: su elasticidad va de $-0{,}01$ en el cuantil 10 a $0{,}19$ en el 90, y con la distancia al incumplimiento es significativa en la mediana y en el cuantil 90 ($p=0{,}032$ y $0{,}024$). El riesgo de cola, en cambio, pesa algo más cuando el spread es bajo ($0{,}053$ en el cuantil 10 y $0{,}016$ en el 90), aunque sin significancia. La amplificación no está escondida en la cola del spread: lo que la cola alta muestra es una fragilidad bancaria que pesa más en los estados de estrés, por separado y no en combinación con el riesgo de cola.
+
+\section{Una señal de valor relativo y la cola de los cambios del spread: pruebas preregistradas}
+\label{sec:quant-prereg}
+
+Un séptimo preregistro (\texttt{4\_Redaccion/preregistro\_quant.md}), escrito antes de construir cualquier retorno, lleva dos resultados de la tesis a las preguntas que haría quien gestiona un portafolio de deuda soberana emergente. La primera es si la precedencia mensual de la fragilidad (Sección~\ref{sec:mensual}) sirve para ordenar a los países según su retorno del mes siguiente (Q1). La segunda es si la simultaneidad de los dos riesgos, que no eleva el nivel del spread más que la suma, ensancha la distribución de sus cambios (Q3). Todo es mensual, de enero de 2015 en adelante (139 meses), y sin anticipación: el balance de los bancos se usa tres meses después de su fecha de cierre, el riesgo de cola es el del trimestre $q-2$ y el tercil alto de cada riesgo se define con la historia de cada país disponible hasta el mes anterior. El retorno de exceso se aproxima con una duración de siete años, $r\approx-7\,\Delta s+s/12$, porque no hay índices de retorno total por país en el repositorio, y cada operación paga la mitad de un \textit{bid-ask} de 15 puntos básicos de spread.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Señal de valor relativo y cola de los cambios del spread]{Señal de valor relativo con la fragilidad (Q1) y cola de los cambios del spread bajo simultaneidad (Q3): pruebas preregistradas}
+\label{tab:quant-prereg}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{7.6cm}>{\raggedright\arraybackslash}p{2.6cm}}
+\toprule
+Hipótesis & Resultado & Holm \\
+\midrule
+Q1: cartera larga/corta por terciles del cambio mensual de la distancia al incumplimiento & Sharpe anual neto $-4{,}07$ (IC 90\,\%: $-4{,}93$ a $-3{,}17$); bruto $+0{,}01$ ($-0{,}44$ a $+0{,}43$); Fama--MacBeth, $t=-0{,}47$; rotación de 2,5 veces por mes & $1{,}00$: no pasa \\
+\addlinespace
+Q3-H1: escala de los cambios mensuales del spread (MMQR) & Fragilidad alta $+0{,}062$ ($p=0{,}005$); riesgo de cola alto $+0{,}019$ ($0{,}085$); su coincidencia $-0{,}046$ ($0{,}97$) & $1{,}00$: no pasa \\
+\addlinespace
+Q3-H2: VaR al 95\,\% fuera de la muestra & Condicional frente a EWMA: Diebold--Mariano $p=0{,}47$; cobertura condicional rechazada ($p=0{,}002$); el VaR histórico de 60 meses es el mejor de los tres & $1{,}00$: no pasa \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} 13 economías, 2015-01 a 2026-07 (139 meses; 10,8 países por mes en promedio). Q1: Sharpe con la prueba de Ledoit y Wolf (2008), \textit{bootstrap} circular por bloques de 6 meses (4\,999 réplicas). Q3-H1: regresión cuantílica por momentos \citep{MachadoSantosSilva2019}, con efectos de país y de mes en la localización y de país en la escala; $p$ unilateral por \textit{bootstrap} de países (999). Q3-H2: regresión cuantílica recursiva con indicadoras de país, frente a un VaR normal con volatilidad exponencial ($\lambda=0{,}97$); prueba de Diebold y Mariano (1995) sobre la pérdida cuantílica, y de Christoffersen (1998). Desviaciones declaradas: el EWMA y el VaR histórico no se interrumpen en los meses sin dato; el VaR se evalúa donde existen los tres pronósticos; con umbrales expansivos la coincidencia ocurre en el 37\,\% de la muestra. Fuente: \texttt{p60\_senal\_dd.py} y \texttt{p62\_cola\_cambios.py}.}
+\end{table}
+
+\textbf{La fragilidad no ordena los retornos entre países} (Tabla~\ref{tab:quant-prereg}). Bruto, el Sharpe de la cartera es nulo y la pendiente de Fama--MacBeth no se distingue de cero; neto de costos es fuertemente negativo, porque una cartera mensual rota dos veces y media su tamaño. El resultado es el mismo sin Turquía, con costos de 25 puntos básicos, con pesos por rango, a tres meses y por subperíodos. La precedencia mensual es una regularidad dentro de cada país, no una señal de valor relativo entre países.
+
+\textbf{La coincidencia tampoco ensancha la cola de los cambios del spread.} Cada riesgo por separado ensancha la distribución de los cambios, la fragilidad con evidencia firme. Su coincidencia no la ensancha más: el término conjunto es negativo, también a tres meses, sin 2020--2021, con los terciles de toda la muestra y sin efectos de mes. Es el mismo patrón subaditivo de la interacción en el nivel (Sección~\ref{sec:aditivos}). Un VaR que usa los dos riesgos no pronostica mejor que uno de volatilidad exponencial y no pasa la prueba de cobertura condicional. Según las consecuencias fijadas, la conclusión ``simultaneidad sin amplificación'' queda igual, ahora también para la cola de los cambios, y la precedencia mensual de la fragilidad no cambia de grado.
