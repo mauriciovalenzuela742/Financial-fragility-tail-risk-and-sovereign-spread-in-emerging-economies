@@ -94,6 +94,7 @@ Respuestas de menos de un minuto. Primero el resultado, después la cifra y al f
 | 8 | ¿El GaR no está contaminado por el spread? | El EMBI no entra en el cálculo. El único componente con forma de spread aporta 0,07 al FCI; sin él, el GaR correlaciona 0,985 con el oficial y nada cambia. Además, D entra rezagado. | Metodología, FCI |
 | 9 | ¿Qué haría con un año más? | Ampliar a 20–25 economías con Refinitiv para la réplica, buscar choques a la deuda (reestructuraciones, reglas fiscales) y agregar aversión al riesgo al modelo. | V28 |
 | 10 | ¿Qué le diría a un banco central? | Vigilar la fragilidad bancaria y la cola del crecimiento juntas, con más atención cuanto mayor es la deuda; no hay un umbral a partir del cual actuar. | V21 |
+| 11 | ¿Sirve para algo práctico? | Probé seis preguntas de portafolio con preregistro (señal, valor razonable, cobertura, VaR) y ninguna pasó. La fragilidad alta ensancha la distribución de los cambios del spread: sirve para medir el riesgo, no para pronosticarlo. | Anexo G |
 
 ---
 
@@ -113,6 +114,8 @@ Respuestas de menos de un minuto. Primero el resultado, después la cifra y al f
 | Instrumento | F de 9,7 para la interacción (débil) |
 | Modelo | logaritmos −0,43; puntos básicos +91 (dato +3,1) |
 | Potencia del wild | 35 % para la fragilidad, 67 % para el riesgo de cola |
+| Preguntas de portafolio | 0 de 6 pasan Holm; Sharpe bruto de la señal +0,01; la coincidencia no ensancha la cola de los cambios (−0,046) |
+| Corrección sobre los ocho preregistros | 23 hipótesis: solo el signo de la réplica externa bajo 0,05 con Holm (0,046), sin cambiar su veredicto |
 
 ---
 

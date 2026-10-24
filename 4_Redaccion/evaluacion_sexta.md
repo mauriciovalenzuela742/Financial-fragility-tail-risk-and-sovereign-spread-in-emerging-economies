@@ -207,3 +207,21 @@ ninguna pasó. Lo que queda por ganar es contabilidad y presentación, no eviden
 - ensayar el mensaje de `preparacion_defensa.md`;
 - tener una respuesta corta a "¿sirve para algo práctico?": "probé seis preguntas de portafolio con
   preregistro y ninguna pasó; la fragilidad sirve para medir el riesgo, no para pronosticar el spread".
+
+---
+
+# 6. Registro de aplicación (24 de octubre de 2026)
+
+| # | Estado | Qué se hizo |
+|---|---|---|
+| 1 | Hecho | `p60`–`p66` en `reproducir.py`; 36 cifras nuevas congeladas (140 en total, 140 de 140 coinciden); Paso 2h en `REPRODUCIBILIDAD.md` |
+| 2 | Hecho | `p66_inferencia_global.py`: Holm, BH y BY sobre las 23 hipótesis primarias (NUMEROS §38). Bajo 0,05 con Holm, solo el signo de la réplica externa (0,046), sin cambiar su veredicto; con BY, ninguna. Párrafo nuevo en la Sección `sec:inferencia-potencia` de la tesis y del paper |
+| 3 | Hecho | Introducción corregida (dos tipos de preregistro, corrección sobre las 23); Q3 en la segunda conclusión; Q1–Q6 en `preparacion_defensa.md` (pregunta 11 y dos cifras) |
+| 4 | Hecho | Q1–Q6 pasan al Anexo G ("Preguntas de portafolio"); el de IA pasa a ser el H. Resumen de 505 a ~410 palabras |
+| 5 | Hecho | Lizarazo (2013) y Yue (2010) citadas en las extensiones del modelo, en la tesis y el paper |
+
+Pendiente: la tabla de Argentina del paper (generada automáticamente) sigue 13 pt sobre el alto de la página,
+y Zenodo sigue sin activarse.
+
+**Nota reestimada: 6,5** (6,4 contribución; 6,6 marco; 6,4 datos; 5,8 identificación; 7,0 inferencia; 6,9
+interpretación; 6,4 estructura; 7,0 reproducibilidad).

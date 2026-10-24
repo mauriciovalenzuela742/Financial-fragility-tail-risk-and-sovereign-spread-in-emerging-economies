@@ -2302,3 +2302,22 @@ Desviaciones declaradas:
    Malasia, como en los preregistros 2 y 4). La condición de exclusiones de Q5 se evalúa sobre 10.
 2. En Q4, −DD_lag de m − 1 se toma con el rezago de la fila anterior del país.
 3. En Q2, los residuos históricos usan el β estimado en m (declarado en el preregistro).
+
+## 38. Corrección sobre las 23 hipótesis primarias de los ocho preregistros (2026-10-24)
+
+Fuente: `p66_inferencia_global.py` → `paper_p66_numeros.csv`. Extiende la familia de p56 (14 hipótesis de los
+preregistros 1–4) con N2-H1 y N1-H1 (preregistro 5), M6-H1 (6), Q1-H1, Q3-H1, Q3-H2 (7) y Q2-H1, Q4-H1, Q5-H1
+(8), con el p unilateral de cada uno.
+
+| Hipótesis | p | Holm | BH | BY |
+|---|---|---|---|---|
+| N2-H1 réplica externa (signo) | 0,002 | **0,046** | 0,046 | 0,17 |
+| R2-H3 riesgo de cola a un año | 0,006 | 0,13 | 0,069 | 0,26 |
+| R-H3 deuda × riesgo de cola | 0,015 | 0,31 | 0,11 | 0,42 |
+| M6-H1 modelo en pb | 0,087 | 1,00 | 0,48 | 1,00 |
+| Las 19 restantes | ≥ 0,125 | 1,00 | ≥ 0,48 | 1,00 |
+
+Bajo 0,05: Holm 1, BH 1, BY 0 de 23. **Lectura:** la única hipótesis que sobrevive a Holm es el signo de la
+réplica externa, en el límite de la resolución del bootstrap (999 réplicas). Su veredicto preregistrado no
+cambia (no replica), porque el criterio exigía además que la magnitud no difiriera de la original.
+Canónicas: 140 cifras congeladas (se agregaron las de §36–§38).

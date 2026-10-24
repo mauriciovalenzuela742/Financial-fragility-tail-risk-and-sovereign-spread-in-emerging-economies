@@ -62,6 +62,13 @@ PASOS = [
     ("bbg/p57_replica_externa.py", [], "base"),
     ("bbg/p58_iv_choques.py", [], "base"),
     ("bbg/p59_modelo.py", [], "base"),
+    ("bbg/p60_senal_dd.py", [], "base"),            # preregistro 7: Q1 (cachea la DD mensual con rezago)
+    ("bbg/p62_cola_cambios.py", [], "base"),        # Q3 y Holm de la familia 7
+    ("bbg/p61_valor_razonable.py", [], "base"),     # preregistro 8: Q2
+    ("bbg/p63_cobertura.py", [], "base"),           # Q4
+    ("bbg/p64_nowcast_gar.py", [], "base"),         # Q6
+    ("bbg/p65_deuda_pb_mensual.py", [], "base"),    # Q5 y Holm de la familia 8
+    ("bbg/p66_inferencia_global.py", [], "base"),   # corrección sobre los ocho preregistros
 ]
 
 

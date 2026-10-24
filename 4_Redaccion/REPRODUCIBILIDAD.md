@@ -233,6 +233,22 @@ python bbg/p55_medidas_sistemicas.py    # U6: MES y DeltaCoVaR (cachea medidas_s
 ```
 U5 (iMaPP) no se ejecutó: la base del FMI exige acceso registrado.
 
+### Paso 2h — Preguntas de portafolio y corrección global (2026-10-23)
+
+Preregistros 7 (`preregistro_quant.md`, commit `d968986`) y 8 (`preregistro_quant2.md`, commit `fc920b3`).
+Desde `1_Codigo/Panel/`. Cifras en `bbg/NUMEROS_CANONICOS_BBG.md`, §36–§38. Todo corre en un equipo de
+escritorio (p60 reconstruye la DD mensual con el rezago del balance la primera vez, unos minutos).
+
+```bash
+python bbg/p60_senal_dd.py           # Q1 (cachea fragilidad_mensual_lag_bbg.csv)
+python bbg/p62_cola_cambios.py       # Q3 y Holm de la familia 7 (requiere p60)
+python bbg/p61_valor_razonable.py    # Q2
+python bbg/p63_cobertura.py          # Q4
+python bbg/p64_nowcast_gar.py        # Q6 (escribe gar_nowcast_mensual.csv)
+python bbg/p65_deuda_pb_mensual.py   # Q5 y Holm de la familia 8 (requiere p61, p63 y p64)
+python bbg/p66_inferencia_global.py  # Holm, BH y BY sobre las 23 hipótesis de los ocho preregistros
+```
+
 ### Paso 2d — Notebook EDA (`EDA_Panel_Final_bbg.ipynb`)
 
 **No usar `jupyter execute` ni `jupyter nbconvert --execute`** contra el `.venv` de este
