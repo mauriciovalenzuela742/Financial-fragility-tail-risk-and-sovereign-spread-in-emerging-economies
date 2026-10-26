@@ -228,3 +228,21 @@ el spread. Lo que queda por ganar es presentación.
 **Para la defensa.** La conexión de 3.2 es un buen argumento para la comisión: el resultado más firme sobre
 el riesgo económico (R2-H3) está en el horizonte donde la literatura ubica la vulnerabilidad. Dicho en una
 frase: "el mercado cobra por la cola del próximo trimestre, pero cobra más por la del próximo año".
+
+---
+
+# 6. Registro de aplicación (26 de octubre de 2026)
+
+| # | Estado | Qué se hizo |
+|---|---|---|
+| 1 | Hecho | Estructura temporal de Adrian et al. (2022) en el marco (canal $GaR$, con remisión a R2-H3), en la metodología (el horizonte de un trimestre se fijó al inicio, siguiendo a CEMLA; el de un año se preregistró después) y en la lectura de R2-H3, en la tesis y en el paper |
+| 2 | Hecho | La introducción lista cuatro moderadores, empezando por el nivel de la deuda pública |
+| 3 | Hecho | Objetivo 1: "trece economías emergentes"; objetivo 4: interacción $\ln JLoss\times D$, con $D\equiv-GaR$ |
+| 4 | Hecho | La subsección *Growth-at-Risk* del paper va ahora del concepto (Briguglio et al., 2009) a la medición tradicional (Kaminsky, Lizondo y Reinhart, 1998), al cuantil condicional y a su estructura temporal; tres referencias nuevas en el paper |
+| 5 | Hecho | Pregunta 12 en `preparacion_defensa.md` ("¿por qué un trimestre si el horizonte que importa es el año?") |
+
+La tesis compila con 167 pp. y el paper con 147 pp., ambos sin referencias indefinidas. El PDF y `tesis_latex.zip`
+quedaron regenerados. Siguen pendientes la tabla de Argentina del paper y Zenodo.
+
+**Nota reestimada: 6,5 (6,54)** (6,4 contribución; 6,8 marco; 6,4 datos; 5,8 identificación; 7,0 inferencia; 7,0
+interpretación; 6,5 estructura; 7,0 reproducibilidad).
