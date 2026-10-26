@@ -36,18 +36,30 @@ estructural de la fragilidad bancaria sistémica asociada al riesgo financiero, 
 la cual mide la pérdida conjunta esperada del sistema, y mostraron que se asocia con spreads
 soberanos más altos.
 
-Por otro lado, la vulnerabilidad macroeconómica se considera uno de los fundamentos domésticos más
-importantes para la estabilidad y el crecimiento de un país. Esta corresponde al grado de exposición
-que tiene un país ante \textit{shocks} externos (como una crisis financiera global, una caída en los
-precios de las materias primas o desastres naturales) y su capacidad para resistir y recuperarse de
-ellos. La literatura de \textit{Growth-at-Risk} cambió la forma de medir esto: \citet{ABG2019b}
-mostraron que las condiciones financieras predicen sobre todo la cola izquierda de la distribución
-del crecimiento futuro, y no tanto su centro. El riesgo económico relevante aquí no es que el
-crecimiento esperado caiga, es que la probabilidad de un escenario muy malo aumente. El cuantil bajo
-del crecimiento condicional (el $GaR$) se ha convertido en una herramienta de vigilancia del FMI
-\citep{PrasadEtAl2019} y de los bancos centrales de la región \citep{OssandonBusch2022}. Para el
-soberano, una cola adversa del crecimiento compromete la recaudación y la capacidad de pago
-exactamente en los estados en que el incumplimiento se vuelve probable.
+Por otro lado, la vulnerabilidad macroeconómica es el segundo fundamento doméstico que se refleja en
+el precio de la deuda. La literatura la define por dos elementos: la exposición de una economía a
+\textit{shocks} ---una crisis financiera global, una caída de los precios de las materias primas o un
+desastre natural--- y su capacidad para absorberlos y recuperarse de ellos \citep{BriguglioEtAl2009}.
+Durante mucho tiempo se midió con indicadores por separado, como el déficit, la deuda, las reservas o
+el crédito, que se combinaban en sistemas de alerta temprana de crisis
+\citep{KaminskyLizondoReinhart1998}. Esos indicadores dicen cuán expuesta está una economía, pero no
+cuánto caería su actividad si el \textit{shock} llegara. La literatura de \textit{Growth-at-Risk}
+responde esa pregunta, porque lleva la vulnerabilidad a la distribución del crecimiento futuro: una
+economía vulnerable no es la que espera crecer menos, sino aquella en la que un escenario muy adverso
+es más probable y más profundo. \citet{ABG2019b} estimaron esa distribución condicional por regresión
+cuantílica y mostraron que las condiciones financieras predicen sobre todo su cola izquierda: cuando
+se endurecen, los cuantiles bajos del crecimiento caen con fuerza, mientras que la mediana y los
+cuantiles altos se mueven mucho menos. Ese cuantil bajo, el $GaR$, reúne en un solo número los dos
+elementos de la definición. Las condiciones financieras recogen la exposición acumulada, y la
+profundidad de la cola refleja cuánto logra amortiguar la economía el golpe. \citet{AdrianEtAl2022}
+agregaron la dimensión temporal: las condiciones financieras laxas reducen el riesgo de cola en el
+corto plazo, pero lo elevan a dos o tres años, porque la vulnerabilidad se acumula en los períodos de
+calma. Por estas propiedades, el $GaR$ se convirtió en una herramienta de vigilancia del FMI
+\citep{PrasadEtAl2019} y de los bancos centrales de la región, que lo calculan con la plataforma
+abierta de CEMLA \citep{OssandonBusch2022}, que esta tesis adapta. Para el soberano, lo que
+importa es precisamente esa cola: en el escenario adverso caen la recaudación y la capacidad de pago, y
+el incumplimiento se vuelve probable. Por eso la tesis mide el riesgo económico doméstico con el
+$GaR$.
 
 Sin embargo, estas dos literaturas casi no se han cruzado. La del nexo entre banco y soberano trata
 el crecimiento como un fundamento de fondo o como una variable de control, mientras que la de
