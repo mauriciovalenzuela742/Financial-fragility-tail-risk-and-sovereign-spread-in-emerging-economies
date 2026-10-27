@@ -91,3 +91,32 @@ recaudación y la capacidad de pago.
    - se aplican las dos tablas de la sección 3 y la corrección de fondo;
    - se eliminan el párrafo de datos y método y la Sección 1.3;
    - el párrafo de organización de capítulos queda al final de 1.2.
+
+---
+
+# 5. Registro de aplicación (27 de octubre de 2026)
+
+**Texto oficial.**
+- La portada, el resumen y la introducción del autor quedaron como oficiales, con los cambios de la sección 4 (commit `9e22a44`).
+- Además se recuperó el escudo de la Universidad desde el PDF oficial: el archivo `imagenes/escudoU2014.pdf` del repositorio era un marcador vacío de 865 bytes.
+
+**Pasada con las pautas del humanizer.** Se aplicaron a mano, porque el modelo de 12B no corre en esta máquina. Las pautas son las de `prompt_format.json`: reorganizar, variar el largo de las oraciones, cortar rodeos y anuncios, preferir lo concreto, y conservar todo hecho, cifra, nombre y cita.
+
+| Bloque | Commit |
+|---|---|
+| Marco teórico y metodología | `e0dba9f` |
+| Resultados | `f3f6073` |
+| Discusión, conclusiones y trabajos futuros | `523e5ae` |
+| Anexos de robustez, moderadores, extensiones y portafolio | este commit |
+
+**Lo que no se tocó.**
+- El resumen y la introducción, que son el texto del autor.
+- La declaración y el anexo de IA, que son textos formales.
+- Las referencias y las tablas autogeneradas.
+- `anexoA_matematico.tex`, que no se incluye en la tesis.
+
+**Verificación.**
+- Un script compara cada archivo con su versión anterior en cifras, citas, referencias, rótulos, entornos y términos de la escala de evidencia. No hay diferencias en ningún archivo, salvo las esperadas de la introducción: la Sección 1.3 y el párrafo de datos.
+- La única frase reformulada en su contenido es la de la inferencia conjunta que decía "la deuda amplifica". Ahora dice que es la versión que pasa a las pruebas externas, lo que la hace coherente con el veredicto de regularidad de la muestra.
+- La tesis compila con 165 pp., sin referencias indefinidas ni flotantes demasiado grandes.
+- `verificar_canonicos.py` da 140 de 140.
