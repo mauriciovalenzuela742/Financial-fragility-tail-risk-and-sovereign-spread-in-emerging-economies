@@ -214,3 +214,21 @@ sobreviva a la corrección conjunta.
 doble que a un trimestre, en las trece economías, como anticipa la literatura de estructura temporal del
 GaR. Pero no sobrevive a la corrección sobre las 23 hipótesis, así que lo presento como evidencia firme
 dentro de su preregistro y no como hallazgo central".
+
+---
+
+# 6. Registro de aplicación (27 de octubre de 2026)
+
+| # | Estado | Qué se hizo |
+|---|---|---|
+| 1 | Hecho | Resumen: "Ossandon Busch et al.\ (2022)" |
+| 2 | Hecho | Metodología (tesis y paper): el horizonte de un trimestre se eligió porque el panel es trimestral y el riesgo de cola entra con un trimestre de rezago, de modo que $D_{t-1}$ es la cola del crecimiento del mismo trimestre del spread. El autor confirmó la razón. La pregunta 12 de la defensa usa la misma razón |
+| 3 | Hecho | Adrian et al. (2022), unificado como "lo reducen en el corto plazo y lo elevan en el mediano plazo" en la introducción, el marco y el paper |
+| 4 | Hecho | Salvedad de la corrección conjunta en R2-H3 (Holm 0,13 sobre 23), en la conclusión 3 de la síntesis y en la pregunta 12; R2-H3 agregada a las cifras que memorizar |
+| 5 | Hecho | El horizonte de un año, con su salvedad, en el resumen de la tesis y del paper, el hallazgo tercero de la introducción, la discusión y la conclusión tercera. Matizado "no aparece en los cambios a cuatro trimestres" (solo con el $GaR$ en pseudo tiempo real) en la discusión y en la introducción del paper |
+
+La tesis compila con 167 pp. y el paper con 147, sin referencias indefinidas. El PDF y `tesis_latex.zip` quedaron
+regenerados. Siguen pendientes la tabla de Argentina del paper y Zenodo.
+
+**Nota reestimada: 6,5 (6,54)** (6,4 contribución; 6,8 marco; 6,4 datos; 5,8 identificación; 7,0 inferencia; 7,0
+interpretación; 6,5 estructura; 7,0 reproducibilidad).
