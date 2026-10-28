@@ -1,7 +1,7 @@
 # Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano en economías emergentes
 
 Tesis de Magíster en Economía Aplicada (Universidad de Chile; profesor guía J. F. Martínez, coguía
-R. Fischer). Chari et al. (2024) ya documentan la asociación entre fragilidad bancaria y spread
+R. Fischer; comisión A. Corvalán). Chari et al. (2024) ya documentan la asociación entre fragilidad bancaria y spread
 soberano. Sobre esa base, la tesis pregunta **qué agrega el riesgo económico doméstico —el riesgo de
 cola del crecimiento— y qué ocurre cuando los dos riesgos se dan a la vez**: si sus efectos sobre el
 spread se suman o se amplifican.
@@ -11,11 +11,16 @@ es de Adrian, Boyarchenko y Giannone (2019), en la implementación de CEMLA (Oss
 2022). Lo propio es construir las series de las dos métricas con un protocolo homogéneo y cruzarlas.
 Todos los coeficientes son **asociaciones, no efectos causales**.
 
-> **Estado a 2026-10-21.**
-> - Tesis compilada: [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (127 pp.).
+> **Estado a 2026-10-28.**
+> - Tesis compilada: [`4_Redaccion/tesis/main.pdf`](4_Redaccion/tesis/main.pdf) (165 pp.). El resumen y la
+>   introducción son el texto oficial del autor. El resto se redactó con las pautas del *humanizer*, sin
+>   cambiar cifras ni citas.
 > - Paper empírico standalone: [`4_Redaccion/envios/paper_empirico/`](4_Redaccion/envios/paper_empirico/).
-> - El capítulo teórico de organización industrial de versiones anteriores ya no forma parte de la tesis.
-> - Evaluación experta con rúbrica y plan de mejoras: [`4_Redaccion/evaluacion_experta.md`](4_Redaccion/evaluacion_experta.md).
+> - Evaluaciones con rúbrica: la última es [`evaluacion_octava.md`](4_Redaccion/evaluacion_octava.md) (6,5),
+>   y la del texto oficial es [`evaluacion_resumen_intro_oficial.md`](4_Redaccion/evaluacion_resumen_intro_oficial.md).
+> - **Análisis aparte, fuera de la tesis:** ESG soberano, gobernanza y el peso de los factores externos frente
+>   a los domésticos (preregistro 9). Ver [`analisis_esg_lambda.md`](4_Redaccion/analisis_esg_lambda.md) y la
+>   sección correspondiente más abajo.
 
 ---
 
@@ -29,6 +34,7 @@ Todos los coeficientes son **asociaciones, no efectos causales**.
 | **Spread soberano** | **EMBI Global Diversified (J.P. Morgan)**. La serie del FMI (GFSR) completa Indonesia y Sudáfrica en 2010–2014. CDS soberano 5Y como robustez | 13 economías |
 | **GaR** (cuantil 5 % del crecimiento, regresión cuantílica de panel en pseudo-tiempo real) | FCI de estadísticas nacionales + VIX | 17 economías |
 | **Controles domésticos** (deuda, fiscal, reservas, CA, inflación, REER) | FMI WEO + Banco Mundial + BIS, anuales interpolados | — |
+| **Gobernanza (WGI)** para la triple interacción institucional | Banco Mundial, *Worldwide Governance Indicators* (valor de 2018). Desde el 28-10-2026 reemplaza a la plantilla provisional de `instituciones.csv` | 17 economías |
 
 **Muestra de estimación:** 13 economías, **N = 765** observaciones país-trimestre, 2004Q2–2026Q2
 (`1_Codigo/Panel/bbg/Panel_bloomberg_embiext.csv`).
@@ -57,8 +63,12 @@ Fuera de la muestra no se confirma (preregistro 5, `7df0427`): en Hungría y Cor
 interacción es siete veces la original y la diferencia se rechaza (potencia 5 %); un instrumento de términos de
 intercambio es débil para la interacción (F 9,7) y la estima nula. Es un resultado de la muestra original.
 
-**Reproducción:** `python 1_Codigo/Panel/reproducir.py` regenera las cifras desde los CSV y verifica 67 cifras
+**Reproducción:** `python 1_Codigo/Panel/reproducir.py` regenera las cifras desde los CSV y verifica 140 cifras
 canónicas (`verificar_canonicos.py`, también en la integración continua).
+
+**Inferencia conjunta:** ocho preregistros, fechados en el historial antes de los datos, suman 23 hipótesis
+primarias, que `p66` corrige en conjunto. El riesgo de cola del año siguiente (4,7 % por pp) es firme dentro de
+su preregistro, pero no sobrevive a la corrección conjunta: Holm 0,08 sobre 14 hipótesis y 0,13 sobre 23.
 
 Escala de evidencia:
 - *Firme*: resiste el wild bootstrap o una permutación y no depende de un país.
@@ -70,7 +80,7 @@ Escala de evidencia:
 | **1. Los dos riesgos coinciden** más de lo esperado: hay 168 observaciones con ambos en su tercil alto, 1,2 veces lo esperado descontado el calendario común (p = 0,0002) y 1,9 veces lo esperado bajo independencia pura. Además, la fragilidad **antecede** al riesgo de cola (0,405; wild p = 0,024) y no al revés, sin depender de un país ni del bloque bursátil del FCI. | Firme (la precedencia, a un trimestre y no causal) |
 | **2. Cuando coinciden, no hay evidencia de amplificación**: β₃ = −0,011 (DK p = 0,11; wild p = 0,89). Una prueba de equivalencia descarta una amplificación de más de un 35 % de la suma de las dos asociaciones, pero no una menor. | No hay evidencia |
 | **3. El riesgo económico agrega poco, pero es un fundamento de largo plazo**: 0,037 sobre el modelo de Chari et al. No aparece en los cambios ni mejora el pronóstico. Con cargas heterogéneas sobre los factores comunes (CCE) resiste el wild bootstrap (p = 0,016) y la exclusión de cada país, y tiene una relación de largo plazo con el spread (PMG: 0,067; p = 0,006). | Firme como asociación de nivel |
-| **4. Deuda y riesgo de cola: regularidad de la muestra, sin confirmación externa** (prueba preregistrada, commit `c492ca3`, datos trimestrales): una d.e. más de deuda eleva la semielasticidad de 0,032 a 0,043 (Holm p = 0,029; 13 de 13 sin cada país). Ninguna otra condición la modifica: ni la adecuación de reservas (Holm 0,29), ni la participación extranjera, ni el respaldo externo. El efecto directo de la fragilidad no se separa del canal fiscal. | Deuda: firme; resto: no hay evidencia |
+| **4. Deuda y riesgo de cola: regularidad de la muestra, sin confirmación externa** (prueba preregistrada, commit `c492ca3`, datos trimestrales): una d.e. más de deuda eleva la semielasticidad de 0,032 a 0,043 (Holm p = 0,029; 13 de 13 sin cada país). Ninguna otra condición la modifica: ni la adecuación de reservas (Holm 0,29), ni la participación extranjera, ni el respaldo externo. El efecto directo de la fragilidad no se separa del canal fiscal. | Deuda: firme dentro de la muestra, sin confirmación externa (regularidad de la muestra); resto: no hay evidencia |
 | **Extensiones (no preespecificadas):** a frecuencia mensual la fragilidad antecede al spread un mes; el instrumento granular es débil (F < 4); con 189 observaciones de EMBI imputado desde el CDS y con Argentina homologada nada cambia; las líneas swap de la Fed de 2020 bajaron el spread 20–22 pp, pero ninguna línea cambió la transmisión. | Ver `NUMEROS_CANONICOS_BBG.md` §21–25 |
 | **Los bancos como unidad de análisis** (preregistro 3, commit `d73245f`): ninguna de las seis hipótesis pasa Holm (mínimo 0,88). La asociación se concentra en los dos bancos sistémicos de cada economía (0,062 frente a 0,022), sin significancia; las filiales pesan igual que los nacionales y más banca estatal va con menos transmisión. JLoss es robusto a tres calibraciones del motor (Spearman 0,92–0,97; β₁ > 0). | No hay evidencia de un canal bancario |
 | **Umbrales de vigilancia** (preregistro 4, commit `7ad3810`): no hay un umbral de tensión financiera (p = 0,13) ni de deuda (0,26), y ningún indicador anticipa episodios de estrés fuera de la muestra (AUROC 0,49). Por país, los umbrales de deuda y de riesgo de cola no son comunes ni transferibles. Con más tensión, los riesgos domésticos pesan menos en el spread. | No hay evidencia de un umbral; la regla es continua |
@@ -163,8 +173,34 @@ python bbg/p10_boot_gar.py segunda_etapa ../GaR/individuals/nlhpc_gar_all18/gar_
 python -c "import nbformat; from nbclient import NotebookClient; nb=nbformat.read('bbg/EDA_Panel_Final_bbg.ipynb', as_version=4); NotebookClient(nb, timeout=600, kernel_name='python3', resources={'metadata': {'path': 'bbg'}}).execute(); nbformat.write(nb, 'bbg/EDA_Panel_Final_bbg.ipynb')"
 
 # 3. Documento de tesis (desde 4_Redaccion/tesis/)
-latexmk -pdf main.tex             # -> main.pdf, 127 pp, compila sin errores (MiKTeX 25.12 / pdfTeX)
+latexmk -pdf main.tex             # -> main.pdf, 165 pp, compila sin errores (MiKTeX 25.12 / pdfTeX)
+
+# 4. Análisis aparte ESG / lambda (preregistro 9; desde 1_Codigo/Panel/bbg/)
+python p67_datos_esg.py      # WDI + WGI + Freedom House -> 2_Datos/esg_wb_anual.csv (red: World Bank)
+python p68_indice_esg.py     # índices G y ESG (PCA) -> esg_indice_anual_bbg.csv, esg_trimestral_bbg.csv
+python p69_esg_spread.py     # E1-E3 y exploratorio -> paper_p69_numeros.csv
+python p70_lambda.py         # modelo lambda, E4-E5 y Holm -> paper_p70_numeros.csv (~30 min)
 ```
+
+---
+
+## Análisis aparte: ESG, gobernanza y λ·externo + (1−λ)·doméstico
+
+El punto de partida es la tesis de Barneche, Grezzi y Panario (2024, ORT Uruguay), que relaciona un índice ESG
+soberano con el EMBI, junto con Tebaldi, Nguyen y Zuluaga (2018). Tiene preregistro propio
+([`preregistro_esg.md`](4_Redaccion/preregistro_esg.md), commit `81c2d9c`) y familia de Holm propia (E1–E5). No
+entra en las 23 hipótesis de la tesis ni cambia sus cifras canónicas.
+
+| | Resultado | Veredicto |
+|---|---|---|
+| Gobernanza (WGI) dentro del país | −0,33 por d.e.; wild p unilateral 0,016; 13 de 13 sin cada país; Holm 0,063 | Sugerente (lo más sólido) |
+| Gobernanza × fragilidad | −0,15; Holm 0,063; cae sin Chile o sin Polonia | Sugerente y frágil |
+| Índice ESG (réplica ORT) | −0,43; Holm 0,11; funciona solo por su componente de gobernanza | Sugerente |
+| Peso de los factores externos (λ) | 0,48 [0,25; 0,57]; Shapley 0,44 | Lo global no domina |
+| λ con la tensión global (VIX) | No sube (θ1 = −0,09; p 0,83) | No hay evidencia |
+
+Ninguna hipótesis es firme. El informe completo, con las réplicas de ORT y de Tebaldi, está en
+[`analisis_esg_lambda.md`](4_Redaccion/analisis_esg_lambda.md).
 
 ---
 
@@ -215,3 +251,7 @@ latexmk -pdf main.tex             # -> main.pdf, 127 pp, compila sin errores (Mi
 | `Reescribe la tesis como investigacion empirica unica…` | Sale el capítulo teórico de OI; batería de interacción de crisis |
 | `Somete la especificacion principal a pruebas de arbitro…` / `Incorpora las pruebas del informe de árbitro…` | Dos rondas de arbitraje: fechado del spread, simulación de tamaño y potencia, participación extranjera preespecificada; el núcleo de 11 pasa a exploratorio; la conclusión pasa a "simultaneidad sin amplificación" |
 | Evaluación experta (2026-10-21) | `p33`: simultaneidad con nula de calendario (1,2×), precedencia robusta a excluir países y al GaR sin bloque bursátil, prueba de equivalencia (se descarta amplificación > 35 % de la suma) |
+| Evaluaciones séptima y octava (oct-2026) | Párrafo de vulnerabilidad → GaR reescrito; horizonte h = 1 justificado (panel trimestral, regresor rezagado un trimestre); nota 6,5 |
+| `Deja oficiales la portada, el resumen y la introducción del autor` + pautas del *humanizer* (2026-10-27) | Texto oficial del autor con hallazgos corregidos; comisión: A. Corvalán; capítulos 2–7 y anexos redactados sin cambiar cifras ni citas |
+| Preregistro 9 (`81c2d9c` … `65e89a0`, 2026-10-28) | Análisis aparte de ESG, gobernanza y λ; ninguna hipótesis firme |
+| `Reemplaza la plantilla instituciones.csv por el WGI real de 2018` | La triple interacción institucional sigue sin ser significativa (EMBI +0,20, t 0,95) |
