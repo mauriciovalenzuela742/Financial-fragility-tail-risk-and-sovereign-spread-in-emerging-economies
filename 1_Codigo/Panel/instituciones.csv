@@ -1,18 +1,18 @@
 country,rule_of_law,gov_effectiveness,cbi_garriga,fuente_nota
-brazil,-0.15,-0.30,0.74,APROX_WGI2018_verificar
-bulgaria,-0.05,0.20,0.55,APROX_WGI2018_verificar
-chile,1.00,1.00,0.78,APROX_WGI2018_verificar
-china,-0.20,0.50,0.51,APROX_WGI2018_verificar
-colombia,-0.40,0.10,0.62,APROX_WGI2018_verificar
-hungary,0.35,0.40,0.67,APROX_WGI2018_verificar
-india,0.00,0.20,0.55,APROX_WGI2018_verificar
-indonesia,-0.30,0.20,0.52,APROX_WGI2018_verificar
-malaysia,0.50,1.00,0.44,APROX_WGI2018_verificar
-mexico,-0.55,0.15,0.73,APROX_WGI2018_verificar
-pakistan,-0.75,-0.50,0.42,APROX_WGI2018_verificar
-peru,-0.50,-0.30,0.71,APROX_WGI2018_verificar
-philippines,-0.40,0.05,0.49,APROX_WGI2018_verificar
-poland,0.55,0.60,0.68,APROX_WGI2018_verificar
-southafrica,0.05,0.30,0.64,APROX_WGI2018_verificar
-southkorea,1.10,1.10,0.45,APROX_WGI2018_verificar
-turkey,-0.20,0.00,0.55,APROX_WGI2018_verificar
+brazil,-0.4,-0.14,0.74,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+bulgaria,-0.12,0.11,0.55,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+chile,0.98,1.1,0.78,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+china,-0.47,0.45,0.51,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+colombia,-0.4,-0.01,0.62,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+hungary,0.42,0.64,0.67,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+india,0.02,0.55,0.55,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+indonesia,-0.22,0.36,0.52,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+malaysia,0.31,0.9,0.44,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+mexico,-0.81,0.04,0.73,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+pakistan,-0.81,-0.42,0.42,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+peru,-0.43,-0.12,0.71,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+philippines,-0.62,0.24,0.49,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+poland,0.55,0.7,0.68,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+southafrica,-0.09,0.25,0.64,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+southkorea,1.12,1.37,0.45,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa
+turkey,-0.67,0.07,0.55,WGI_2018_real_BancoMundial_GOV_WGI_RL/GE.EST; cbi_garriga_aprox_sin_verificar_no_se_usa

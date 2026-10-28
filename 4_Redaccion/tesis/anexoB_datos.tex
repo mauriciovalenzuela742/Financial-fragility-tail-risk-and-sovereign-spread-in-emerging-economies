@@ -93,7 +93,7 @@ Margen de utilidad bancario & Ingreso neto sobre ingresos del sistema bancario c
 $HHI$ (concentración 3 bancos) & Activos de los tres mayores bancos comerciales sobre activos del sistema, \% & Banco Mundial, \textit{Global Financial Development Database} & \texttt{GFDD.\allowbreak OI.01} & Anual & Nivel estructural $=$ mediana por país; serie anual como robustez \\
 $HHI_q$ (concentración trimestral) & Activos de los tres mayores bancos \emph{cotizados} sobre activos cotizados totales, \% (mismos bancos que $\JLoss$) & Bloomberg (balances, \texttt{tot\_\allowbreak asset}) & motor \texttt{p6\_\allowbreak concentracion\_\allowbreak trimestral.py} & Trimestral & CR3 y HHI directos; NaN si $<$3 bancos cotizados; corr.\ $\approx$0,5 con GFDD \\
 Rating soberano S\&P & Calificación de largo plazo en moneda extranjera & Bloomberg & \texttt{RTG\_\allowbreak SP\_\allowbreak LT\_\allowbreak FC\_\allowbreak ISSUER\_\allowbreak CREDIT} & --- & \textit{Snapshot} (no serie); escala 21--1 \\
-Calidad de gobierno (WGI) & Índice de \textit{Worldwide Governance Indicators} (triple interacción institucional) & Banco Mundial & \texttt{instituciones.\allowbreak csv} (provisional) & Anual & Estandarizado; marcado provisional \\
+Calidad de gobierno (WGI) & Estado de derecho de los \textit{Worldwide Governance Indicators} (triple interacción institucional) & Banco Mundial (WGI, actualización 2024) & \texttt{instituciones.\allowbreak csv} & Anual (valor de 2018) & Estandarizado \\
 
 \end{longtable}
 \end{footnotesize}

@@ -351,7 +351,7 @@ cola severa apenas excluye el cero.
 | **IV shift-share nivel — ToT commodities (C2, 2026-09-16)** | F 1ª etapa ≈ **0,03** (prácticamente nula para `JLoss`) |
 | IV sobre-identificado (2 instrumentos, OnOffRun+USD) | Sargan p = **0,0003 → RECHAZA** validez conjunta |
 | IV sobre-identificado (3 instrumentos, +ToT commodities) | Sargan p = **0,0014 → RECHAZA** validez conjunta |
-| Triple interacción institucional (JxG × WGI) | +0,26 (t = +0,89), n.s. |
+| Triple interacción institucional (JxG × WGI) | +0,20 (t = +0,95), n.s. — WGI real 2018 (estado de derecho, `instituciones.csv` actualizado el 28-10-2026; con la plantilla provisional era +0,26, t = +0,89) |
 
 > **H1 (nivel):** respaldada por OLS (β1 = +2,79, t = 2,74) y proyecciones locales
 > (+4,62, t = 2,85). La evidencia IV es **más débil que en el panel de CDS**: con 13 países
@@ -781,7 +781,7 @@ LR = 80,0. El efecto de la fragilidad es ~3,5× mayor en el régimen de cola sev
 | **IV sobre-identificado (2 instrumentos: OnOffRun + USD amplio)** | β_JLoss_IV = +11,45, p = 0,048; F conjunto = 16,3; **Sargan stat = 9,06, p = 0,0026 → RECHAZA H0 de validez conjunta**. Los dos instrumentos no identifican el mismo parámetro — no reportar el sobre-identificado como estimación principal. |
 | IV shift-share — interacción (2 endógenos, 2º instrumento débil; "con cautela") | θ_IV = +7,96 (se 45,7), no informativo (no se usa en prosa como resultado principal) |
 | Proyecciones locales (pico régimen severo) | +4,35 pb (se 2,22) en h = 1; sin amplificación dinámica creciente |
-| Triple interacción institucional (JxG × WGI) | −0,013 (t = −0,10), n.s. |
+| Triple interacción institucional (JxG × WGI) | −0,16 (t = −1,21), n.s. — WGI real 2018 (`instituciones.csv` actualizado el 28-10-2026; con la plantilla provisional era −0,013, t = −0,10) |
 
 > **Nota sobre `pre_year` (elección del corte para estimar la exposición φ_país,
 > verificado 2026-09-01, `p7_iv_dolar_bis.py` + `causal_core.iv_shiftshare_overid`):**
