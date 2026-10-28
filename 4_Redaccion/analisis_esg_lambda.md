@@ -172,7 +172,11 @@ crecimiento, ESG del año anterior y efectos fijos de país.
   fragilidad y el riesgo de cola. Con el EMBI rezagado, el coeficiente es un efecto de corto plazo, y la
   persistencia del spread (0,88 en esta muestra) absorbe casi toda la variación lenta del índice.
 
-**Réplica de Tebaldi, Nguyen y Zuluaga (2018)**
+**Réplica aproximada de Tebaldi, Nguyen y Zuluaga (2018).** Se hizo antes de leer el paper, con
+Freedom House como "liberalización política" y el comercio/PIB como apertura. El paper (sección 3.2 y
+Tabla 1) usa otras medidas: el *Polity IV score* (de −10 a +10, Center for Systemic Peace), la IED/PIB
+como apertura y el EMBIG en puntos básicos (Bloomberg), con crecimiento, TCRE y reservas del FMI. Esta
+réplica, por lo tanto, no es la de Tebaldi; la corrección está en la sección 7.
 
 | Variable | Trimestral (LSDV, efectos de país, N = 740) | Anual (GMM de sistema, instrumentos colapsados, N = 163) |
 |---|---|---|
@@ -184,8 +188,9 @@ crecimiento, ESG del año anterior y efectos fijos de país.
 
 - *Pruebas del GMM:* 8 instrumentos, Hansen p 0,15, AR(2) p 0,07.
 - *Advertencia preregistrada:* con 13 países, el GMM es frágil.
-- *Conclusión:* la libertad política cambia de signo según la frecuencia y el estimador, así que no es un
-  resultado.
+- *Conclusión:* la libertad política de Freedom House cambia de signo según la frecuencia y el estimador,
+  así que no es un resultado. Como referencia, Tebaldi et al. encuentran −9,1 pb por punto de Polity
+  (t = −2,59) con un spread rezagado de 0,74 (Tabla 4, modelo 1).
 
 **Robustez de E1 a E3** (coeficiente y p unilateral):
 
@@ -205,25 +210,32 @@ E2 pierde fuerza al cortar en 2021 o al sacar los años con valores arrastrados.
 - se recuperó en Polonia;
 - cayó en Indonesia en 2024.
 
-**Triple interacción con el WGI real.** La tesis (`anexoB_datos.tex`, fila WGI) usa una plantilla
-provisional (`instituciones.csv`) en la triple interacción JLoss × GaR × institución de `p3_causal_fase5`.
-Con el estado de derecho real del WGI:
+**Triple interacción con el WGI real.** La tesis usaba una plantilla provisional (`instituciones.csv`) en
+la triple interacción JLoss × GaR × institución de `p3_causal_fase5`. **El 28 de octubre de 2026 la
+plantilla se reemplazó por el WGI real de 2018** (estado de derecho y efectividad del gobierno,
+`GOV_WGI_RL.EST` y `GOV_WGI_GE.EST`). También se actualizaron la fila del Anexo B y NUMEROS_CANONICOS_BBG.
 
-| Versión | Coeficiente | t | N |
-|---|---|---|---|
-| Plantilla | +0,23 | 0,75 | 614 |
-| WGI real de 2018 | −0,45 | −0,55 | 647 |
-| Media 2003–2025 | +1,44 | 1,21 | 647 |
+| Versión, mismos países y observaciones | EMBI (13 países, N = 614) | CDS (12 países, N = 493) |
+|---|---|---|
+| Plantilla (valores aproximados) | +0,23 (t = 0,75) | −0,04 (t = −0,27) |
+| **WGI real de 2018** | **+0,20 (t = 0,95)** | **−0,16 (t = −1,21)** |
 
-La conclusión de la tesis ("no significativo") no cambia con datos reales. La muestra crece porque la
-plantilla no cubría a todos los países del panel de esa prueba.
+La conclusión de la tesis ("no significativo") no cambia.
+- La columna `cbi_garriga` del archivo (independencia del banco central) sigue siendo aproximada; ningún
+  script la usa, y así quedó anotado en el archivo.
+- La exploración previa de `p69` daba otros valores (−0,45 y +1,44, N = 647) porque incluía a Argentina,
+  que la plantilla no cubre. Los de esta tabla mantienen la muestra de la tesis.
+- *Hallazgo lateral:* `causal_bbg.csv` es anterior a la integración de Argentina en `Panel_bloomberg.csv`
+  (commit `10f64ea`, 29-09-2026). Volver a correr `p3_causal_fase5.py` completo hoy cambiaría también las
+  otras filas de la batería causal (pasa a 14 países). Por eso no se regeneró el archivo: solo se
+  recalculó la triple interacción con la muestra original.
 
 # 6. Qué hacer con esto
 
 1. **En la tesis, nada obligatorio.** Ningún resultado es firme, y la conclusión sobre los moderadores
    ("ninguna otra condición modifica la transmisión de forma demostrable") sigue siendo correcta.
-2. **Opcional, en una línea:** reemplazar la nota "plantilla provisional" del Anexo B por el WGI real. Es
-   una mejora de datos que no cambia el veredicto.
+2. **Hecho (28-10-2026):** el Anexo B ya usa el WGI real en lugar de la plantilla. El veredicto no
+   cambia.
 3. **Trabajos futuros:** la gobernanza es candidata a moderador para un preregistro con más países, porque
    es la señal más estable del análisis. En el mismo preregistro convendría separar el contenido de las
    fuentes comerciales del WGI, por la posible causalidad inversa.
@@ -236,18 +248,26 @@ plantilla no cubría a todos los países del panel de esa prueba.
 # 7. Tebaldi et al. (2018): cómo conseguir el paper y sus datos
 
 - **Paper:** *Research in International Business and Finance* 45: 82–93, doi:10.1016/j.ribaf.2017.07.135.
-  - No está en acceso abierto.
-  - *Vías:* ScienceDirect con el acceso de la Universidad de Chile (SISIB, VPN o proxy), o pedirlo al
-    primer autor (E. Tebaldi, Bryant University).
-  - El resumen no nombra las fuentes de la liberalización política, del TCRE ni del spread. Hay que
-    confirmarlas en el texto antes de citarlas.
-- **Datos (usados aquí):**
-  - Freedom House, *Country and Territory Ratings and Statuses 1973–2024*: descarga abierta en
-    freedomhouse.org, guardada en `2_Datos/freedomhouse/`. La edición con 2024 aún no está publicada como
-    archivo; se puede pedir por correo ("FIW Data Request").
-  - Crecimiento (`NY.GDP.MKTP.KD.ZG`) y apertura (`NE.TRD.GNFS.ZS`) del WDI.
-  - TCRE del panel.
-  - V-Dem (`v2x_libdem`) queda como alternativa abierta si se quiere otra medida de democracia.
+  El PDF está en `3_Marco_teorico/Tebaldi et al 2018.pdf`.
+- **Lo que usan** (sección 3.2 y Tabla 1):
+
+| Variable | Fuente en Tebaldi | Cómo conseguirla |
+|---|---|---|
+| Spread (EMBIG, pb) | Bloomberg | Ya está en el panel (`EMBI_bps`) |
+| Crecimiento real del PIB | FMI | WDI `NY.GDP.MKTP.KD.ZG` (ya descargado) o WEO |
+| TCRE (IPC, base 2010) | FMI | Ya está en el panel (`reer`) |
+| *Polity IV score* (−10 a +10) | Center for Systemic Peace (INSCR) | Polity5, `p5v2018.xls`, en systemicpeace.org/inscrdata.html. Llega solo hasta 2018. El sitio rechaza la descarga automática, así que hay que bajarlo a mano. La alternativa es la variable `e_polity2` de V-Dem |
+| IED/PIB (apertura) | Banco Mundial | WDI `BX.KLT.DINV.WD.GD.ZS` |
+| Cuenta financiera/PIB, importaciones/reservas, reservas/PIB | FMI | WDI/IFS. Reservas/PIB ya están (`res_gdp`) |
+| Variables de región y de crisis | — | Las absorben los efectos fijos |
+
+- **Muestra y método:** 31 emergentes, anual 1994–2014, GMM de sistema. Comparten con el panel de la tesis
+  12 de las 13 economías: todas salvo India.
+- **Qué falta para la réplica fiel:** el archivo de Polity5, que hay que descargar a mano. Con él se
+  rehace la réplica con Polity, IED/PIB y el EMBI en pb, anual y con GMM. Por el corte de Polity en 2018,
+  la muestra llega hasta 2019.
+- **Datos usados en la réplica aproximada:** Freedom House 1973–2024 (`2_Datos/freedomhouse/`) y
+  comercio/PIB (`NE.TRD.GNFS.ZS`).
 
 # 8. Archivos y reproducción
 
