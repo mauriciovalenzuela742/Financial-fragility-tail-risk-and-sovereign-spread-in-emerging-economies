@@ -264,3 +264,24 @@ asocia con spreads menores dentro del país (Holm 0,063), y el ESG ambiental y s
 corta es: "Son dos preguntas distintas. La amplificación de la tesis es la de los dos riesgos juntos, y no
 aparece. La deuda intensifica la transmisión del riesgo de cola en esta muestra, pero no se confirma fuera de
 ella". Después de la acción 3, la pregunta ya no debería surgir.
+
+---
+
+# 6. Registro de aplicación (28 de octubre de 2026)
+
+| # | Estado | Qué se hizo |
+|---|---|---|
+| 1 | Hecho | Introducción: "casi no se han cruzado" |
+| 2 | Hecho | Resumen: "El riesgo económico ---la vulnerabilidad macroeconómica medida con el *Growth-at-Risk*---" y la cifra del horizonte de un año (4,7 %) |
+| 3 | Hecho | "Amplificación" queda reservada para H3. Para la deuda se usa "intensifica" o "intensificación": 25 líneas en los capítulos 4, 5 y 6, el Anexo de extensiones, el paper y las láminas de la defensa. Los preregistros no se tocaron, porque son registros fechados |
+| 4 | Hecho | Anexo de IA: 165 cambios al 28 de octubre, 157 con coautoría declarada; la revisión de estilo con las pautas del *humanizer* en la fila "Redacción", con su verificación; un tercer prompt literal. La declaración preliminar la menciona y aclara que el resumen y la introducción son texto del autor |
+| 5 | Hecho, a confirmar por el autor | Al final de 1.2, antes del párrafo de organización: la muestra, la respuesta y las seis contribuciones en un párrafo de cinco oraciones. La Sección 1.3 no se restituyó |
+| 6 | Hecho | Signo de porcentaje unificado sin espacio fino (31 casos en la tesis y el paper) |
+| 7 | Hecho | Nota en NUMEROS sobre la fecha y la muestra de `causal_bbg.csv` |
+
+La tesis compila con 165 pp., el paper con 147 y las láminas con 65, todo sin referencias indefinidas. El PDF y
+`tesis_latex.zip` quedaron regenerados, y `verificar_canonicos.py` da 140 de 140. Siguen pendientes la tabla de
+Argentina del paper y Zenodo.
+
+**Nota reestimada: 6,6 (6,56)** (6,4 contribución; 6,8 marco; 6,5 datos; 5,8 identificación; 7,0 inferencia;
+7,0 interpretación; 6,6 estructura; 7,0 reproducibilidad).

@@ -353,6 +353,8 @@ cola severa apenas excluye el cero.
 | IV sobre-identificado (3 instrumentos, +ToT commodities) | Sargan p = **0,0014 → RECHAZA** validez conjunta |
 | Triple interacción institucional (JxG × WGI) | +0,20 (t = +0,95), n.s. — WGI real 2018 (estado de derecho, `instituciones.csv` actualizado el 28-10-2026; con la plantilla provisional era +0,26, t = +0,89) |
 
+> **Fecha y muestra de `causal_bbg.csv`:** este archivo se generó con `Panel_bloomberg.csv` antes de integrar Argentina (commit `10f64ea`, 29-09-2026), con 13 países. Si hoy se corre `p3_causal_fase5.py` completo, la batería usa 14 países y cambian las filas de esta tabla (salvo la triple interacción, cuya muestra fija `instituciones.csv`). Ninguna de estas cifras entra en `verificar_canonicos.py` ni en el texto de la tesis. La triple interacción con el WGI real se recalculó con la muestra original (28-10-2026).
+
 > **H1 (nivel):** respaldada por OLS (β1 = +2,79, t = 2,74) y proyecciones locales
 > (+4,62, t = 2,85). La evidencia IV es **más débil que en el panel de CDS**: con 13 países
 > el instrumento `OnOffRun` baja a F = 11,4 y su 2ª etapa no es significativa; el 2º
