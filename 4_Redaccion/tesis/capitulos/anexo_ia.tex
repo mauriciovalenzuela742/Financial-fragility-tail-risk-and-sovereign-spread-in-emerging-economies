@@ -9,7 +9,7 @@
 
 La herramienta principal fue Claude (Anthropic), en sus versiones Sonnet~5, Opus~5 y Opus~5.5, usada a través de Claude Code entre agosto y octubre de 2026. Claude Code trabaja sobre los archivos del proyecto: lee el código y los documentos, propone cambios, los edita y ejecuta programas en el computador del autor. No es un chat aislado. Por eso todo lo que produjo quedó en el mismo repositorio que el resto de la tesis.
 
-La trazabilidad descansa en el control de versiones. El repositorio registra 107 cambios confirmados entre el 3 de agosto y el 14 de octubre de 2026, y 99 de ellos declaran la coautoría de la herramienta en su mensaje. Cada cambio queda fechado, con su descripción y con las líneas exactas que modificó. De forma secundaria se usó el asistente del editor \LaTeX{} Prism para ajustar diapositivas; el prompt usado está en \texttt{4\_Redaccion/presentacion/prompt\_prism\_diapositivas.md}.
+La trazabilidad descansa en el control de versiones. El repositorio registra 165 cambios confirmados entre el 3 de agosto y el 28 de octubre de 2026, y 157 de ellos declaran la coautoría de la herramienta en su mensaje. Cada cambio queda fechado, con su descripción y con las líneas exactas que modificó. De forma secundaria se usó el asistente del editor \LaTeX{} Prism para ajustar diapositivas; el prompt usado está en \texttt{4\_Redaccion/presentacion/prompt\_prism\_diapositivas.md}.
 
 \section{Etapas, propósito y verificación}
 
@@ -32,7 +32,7 @@ Datos & Programas de extracción de Bloomberg (identificadores de bancos y serie
 Métricas & Código para reconstruir $JLoss$ siguiendo a \citet{Chari2024b} y para estimar el $GaR$ siguiendo la plataforma de CEMLA. & El índice de condiciones financieras reproduce la salida de referencia de CEMLA (correlación 0,9995 para México); la réplica de \citet{Chari2024b} se reporta con sus diferencias (Capítulo~\ref{sec:resultados}). \\
 Econometría & Programas de las baterías de regresiones, pruebas de identificación, inferencia y robustez (\texttt{1\_Codigo/Panel/bbg/}). & Réplica independiente en R (\texttt{bateria\_regresiones.R}); auditoría de reproducibilidad de punta a punta (\texttt{4\_Redaccion/}\allowbreak\texttt{REPRODUCIBILIDAD.md}); registro de cifras canónicas re-ejecutadas (\texttt{NUMEROS\_}\allowbreak\texttt{CANONICOS\_BBG.md}). \\
 Literatura & Síntesis de artículos, fichas de lectura y verificación de referencias. & Lectura de las fuentes por el autor; cada cita textual se cotejó con el PDF original y su página; las referencias se revisaron contra la publicación. \\
-Redacción & Borradores y reescrituras de los capítulos, corrección editorial, consistencia de cifras y formato \LaTeX. & Revisión del autor y del profesor guía; toda cifra del texto se contrasta con el registro de cifras canónicas; compilación sin referencias indefinidas. \\
+Redacción & Borradores y reescrituras de los capítulos, corrección editorial, consistencia de cifras y formato \LaTeX. Una revisión final de estilo de los capítulos 2 a 7 y de los anexos, con las pautas del modelo de reescritura \textit{humanizer} (\texttt{jialinyyzz/humanizer}, Hugging Face): variar el largo de las oraciones, cortar rodeos y preferir la palabra concreta. Claude aplicó esas pautas sin ejecutar ese modelo. El resumen y la introducción son texto del autor. & Revisión del autor y del profesor guía; toda cifra del texto se contrasta con el registro de cifras canónicas; compilación sin referencias indefinidas. En la revisión de estilo, un programa comparó cada archivo antes y después en cifras, citas, referencias, rótulos y términos de la escala de evidencia, sin diferencias. \\
 Revisión crítica & Informes simulados de árbitro que señalaron debilidades y propusieron pruebas adicionales. & Cada prueba propuesta se ejecutó y se reporta salga como salga; si debilitó una conclusión, la conclusión se corrigió. \\
 Defensa & Láminas en Beamer, guiones y preguntas probables de la comisión. & Revisión del autor y ensayo de la predefensa del 9 de octubre de 2026 con el profesor guía. \\
 \end{longtable}
@@ -40,12 +40,13 @@ Defensa & Láminas en Beamer, guiones y preguntas probables de la comisión. & R
 
 \section{Prompts representativos}
 
-El instructivo permite incluir los prompts o una descripción representativa. Se transcriben literalmente dos prompts, a modo de ejemplo del registro habitual, y se describen los demás por tipo de tarea.
+El instructivo permite incluir los prompts o una descripción representativa. Se transcriben literalmente tres prompts, a modo de ejemplo del registro habitual, y se describen los demás por tipo de tarea.
 
 \textbf{Prompts literales.}
 \begin{itemize}
     \item \textit{``puse el material del marco teorico, por favor revisa el capitulo dale un orden si es necesario y responde el laboratorio haz un plan para eso''.} Resultado: un plan aprobado por el autor, la reorganización del Capítulo~\ref{sec:marco} según las movidas retóricas del marco teórico y tres fichas de lectura.
     \item \textit{``redacta la declaración de uso de IA''.} Resultado: la declaración de las páginas preliminares y este anexo, revisados por el autor.
+    \item \textit{``ocupa los lineamientos del humanizer para arreglar la redaccion de todo [enlace al modelo], ademas agregue un resumen e intro oficial en la carpeta de tesis, revisalo ponle una nota y deja ese texto como oficial antes de aplicar todos los cambios formula un plan para hacerlo''.} Resultado: una evaluación del resumen y la introducción del autor, que quedaron como texto oficial con erratas corregidas; un plan aprobado por el autor; y la revisión de estilo de los capítulos 2 a 7 y de los anexos, verificada con el programa de fidelidad descrito en la Tabla~\ref{tab:ia-etapas}.
 \end{itemize}
 
 \textbf{Descripciones representativas por tipo de tarea.}

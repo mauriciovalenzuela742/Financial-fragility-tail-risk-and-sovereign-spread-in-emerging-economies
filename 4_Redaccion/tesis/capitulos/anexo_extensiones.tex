@@ -222,7 +222,7 @@ Un comité de estabilidad financiera trabaja con umbrales: desde qué nivel de u
 \toprule
  & \multicolumn{2}{c}{Umbral agrupado} & \multicolumn{2}{c}{Por país} \\
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}
- & $\hat\gamma$ (IC 90\,\%) & $p$ linealidad (Holm) & Contienen $\hat\gamma$ & Umbral común ($p$) \\
+ & $\hat\gamma$ (IC 90\%) & $p$ linealidad (Holm) & Contienen $\hat\gamma$ & Umbral común ($p$) \\
 \midrule
 P1: tensión financiera (FCI$_{t-1}$) & $0{,}28$ ($0{,}23$--$0{,}45$) & $0{,}13$ ($0{,}38$) & 6 de 9 & $0{,}34$ \\
 \quad pendientes bajo / sobre el umbral & \multicolumn{4}{>{\raggedright\arraybackslash}p{10.2cm}}{fragilidad $0{,}100$ / $0{,}099$; riesgo de cola $0{,}061$ / $0{,}024$ (diferencia DK $p=0{,}009$, signo opuesto al predicho)} \\
@@ -230,7 +230,7 @@ P2: deuda/PIB$_{t-4}$ (10 economías) & $24{,}7\%$ ($24{,}3$--$25{,}3$) & $0{,}2
 \quad pendientes bajo / sobre el umbral & \multicolumn{4}{>{\raggedright\arraybackslash}p{10.2cm}}{riesgo de cola $0{,}000$ / $0{,}067$ (\textit{wild} unilateral $0{,}013$; positiva sin 8 de 10 economías)} \\
 U3: riesgo de cola $D_{t-1}$ (secundaria) & $1{,}17$ ($0{,}03$--$1{,}55$) & $0{,}43$ & 2 de 9 & $0{,}04$ \\
 \addlinespace
-P3: alerta temprana, AUROC fuera de la muestra & \multicolumn{2}{>{\raggedright\arraybackslash}p{5.2cm}}{$0{,}49$ (IC 90\,\%: $0{,}36$--$0{,}60$); $p=0{,}60$ (Holm $0{,}60$)} & \multicolumn{2}{>{\raggedright\arraybackslash}p{5.2cm}}{39 episodios; dentro de la muestra, $0{,}71$} \\
+P3: alerta temprana, AUROC fuera de la muestra & \multicolumn{2}{>{\raggedright\arraybackslash}p{5.2cm}}{$0{,}49$ (IC 90\%: $0{,}36$--$0{,}60$); $p=0{,}60$ (Holm $0{,}60$)} & \multicolumn{2}{>{\raggedright\arraybackslash}p{5.2cm}}{39 episodios; dentro de la muestra, $0{,}71$} \\
 \addlinespace
 \multicolumn{5}{>{\raggedright\arraybackslash}p{15cm}}{\textit{Potencia del contraste de linealidad (pendiente del régimen alto igual al doble de la del bajo)}} \\
 \quad agrupado: P1 / P2 / U3 & \multicolumn{4}{>{\raggedright\arraybackslash}p{10.2cm}}{$0{,}68$ / $0{,}13$ / $0{,}09$; por país, en promedio, $0{,}60$ / $0{,}26$ / $0{,}23$} \\
@@ -241,19 +241,19 @@ P3: alerta temprana, AUROC fuera de la muestra & \multicolumn{2}{>{\raggedright\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} Modelo de umbral con efectos fijos de país y de tiempo; régimen alto, $q>\hat\gamma$; se incluyen el indicador de régimen y $q$ en forma lineal. $p$ de linealidad: \textit{bootstrap} por bloques de país (999 réplicas); Holm sobre P1, P2 y P3. IC de $\hat\gamma$ por inversión del estadístico de razón de verosimilitud. Por país: nueve economías con al menos 50 trimestres (seis para la deuda), con el componente global descontado; ``contienen $\hat\gamma$'': economías cuyo intervalo al 90\,\% incluye el umbral agrupado; ``umbral común'': prueba de un umbral común frente a uno por país (\textit{wild bootstrap}). P3: logit con la fragilidad, el riesgo de cola, la deuda y el FCI, estimado de forma recursiva desde 2012; episodio, un alza del EMBI en cuatro trimestres sobre el percentil 90 del país. Fuente: \texttt{p52}, \texttt{p53} y \texttt{p55}.}
+\par\smallskip\parbox{0.95\linewidth}{\footnotesize \textit{Nota:} Modelo de umbral con efectos fijos de país y de tiempo; régimen alto, $q>\hat\gamma$; se incluyen el indicador de régimen y $q$ en forma lineal. $p$ de linealidad: \textit{bootstrap} por bloques de país (999 réplicas); Holm sobre P1, P2 y P3. IC de $\hat\gamma$ por inversión del estadístico de razón de verosimilitud. Por país: nueve economías con al menos 50 trimestres (seis para la deuda), con el componente global descontado; ``contienen $\hat\gamma$'': economías cuyo intervalo al 90\% incluye el umbral agrupado; ``umbral común'': prueba de un umbral común frente a uno por país (\textit{wild bootstrap}). P3: logit con la fragilidad, el riesgo de cola, la deuda y el FCI, estimado de forma recursiva desde 2012; episodio, un alza del EMBI en cuatro trimestres sobre el percentil 90 del país. Fuente: \texttt{p52}, \texttt{p53} y \texttt{p55}.}
 \end{table}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig_umbrales_pais.pdf}
-\caption[Umbrales por país frente al agrupado]{Umbrales estimados con la serie de cada economía (punto) y su intervalo al 90\,\% (barra), en el percentil propio de cada una, frente al umbral agrupado en percentiles (línea discontinua).}
+\caption[Umbrales por país frente al agrupado]{Umbrales estimados con la serie de cada economía (punto) y su intervalo al 90\% (barra), en el percentil propio de cada una, frente al umbral agrupado en percentiles (línea discontinua).}
 \label{fig:umbrales-pais}
 \end{figure}
 
 Ninguna de las tres pruebas pasa la corrección de Holm (Tabla~\ref{tab:umbrales-prereg}). La transmisión no cambia de régimen con la tensión financiera doméstica de forma demostrable, y la potencia del contraste para un cambio de esa magnitud es de 68\%: un umbral grande se habría detectado con una probabilidad razonable. Si algo cambia, es en la dirección contraria a la prevista: con más tensión, el riesgo de cola pesa menos en el spread, y con las medidas sistémicas de mercado ---MES y $\Delta$CoVaR, calculadas con los mismos bancos---, la fragilidad también pesa menos, esta vez con un umbral que el \textit{bootstrap} sí detecta. Es lo que cabe esperar si, en los episodios de tensión, el spread pasa a moverse con el ciclo financiero global, que explica la mayor parte de su varianza, y los riesgos domésticos pierden peso relativo. No es una prueba de ese mecanismo.
 
-El umbral de deuda no se distingue del modelo lineal: la potencia es de solo 13\%, y la amplificación de la Sección~\ref{sec:resiliencia-prereg} se lee mejor como continua. Bajo un 25\% del PIB el riesgo de cola casi no pesa en el spread y sobre ese nivel pesa $0{,}067$, pero ese tramo bajo lo forman sobre todo China, Filipinas y parte de los trimestres de Perú e Indonesia: el umbral separa economías más que niveles de deuda dentro de cada una. Por país, el umbral de deuda es significativo en cuatro de seis, pero ninguna contiene el umbral agrupado en su intervalo, y en cinco de las seis un quiebre en una fecha ajusta igual o mejor. Como la deuda cambia lento dentro de cada país, su umbral es un cambio en el tiempo, no un nivel de deuda.
+El umbral de deuda no se distingue del modelo lineal: la potencia es de solo 13\%, y la intensificación por la deuda de la Sección~\ref{sec:resiliencia-prereg} se lee mejor como continua. Bajo un 25\% del PIB el riesgo de cola casi no pesa en el spread y sobre ese nivel pesa $0{,}067$, pero ese tramo bajo lo forman sobre todo China, Filipinas y parte de los trimestres de Perú e Indonesia: el umbral separa economías más que niveles de deuda dentro de cada una. Por país, el umbral de deuda es significativo en cuatro de seis, pero ninguna contiene el umbral agrupado en su intervalo, y en cinco de las seis un quiebre en una fecha ajusta igual o mejor. Como la deuda cambia lento dentro de cada país, su umbral es un cambio en el tiempo, no un nivel de deuda.
 
 \textbf{Agrupado frente a cada país.} La comparación decide, según la regla fijada en el preregistro, si un umbral puede servir como regla común. Para la tensión financiera, seis de nueve economías contienen el umbral agrupado y no se rechaza un umbral común ($p=0{,}34$), pero el umbral mismo no es significativo: no hay un umbral que compartir. Para la deuda y para el riesgo de cola se rechaza un umbral común ($p=0{,}06$ y $0{,}04$), y los umbrales de cada país, en su percentil propio, van del 19 al 70 y del 15 al 84 (Figura~\ref{fig:umbrales-pais}): no hay un umbral transferible entre economías. Al descontar el ciclo global con controles en lugar de los efectos de tiempo del panel, solo dos de nueve economías contienen el umbral de tensión agrupado.
 
