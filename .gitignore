@@ -49,3 +49,12 @@ _ckpt_*.csv
 4_Redaccion/tesis/capitulos info/**/Laboratorio_*
 4_Redaccion/tesis/capitulos info/**/La_introducci_n_*
 4_Redaccion/tesis/capitulos info/**/Lineamientos_*
+
+# Datos de proveedores con licencia restringida: solo local, no se redistribuyen (ver README, "Datos restringidos")
+1_Codigo/Bloomberg_extraction/output/
+1_Codigo/Bloomberg_extraction/output_macro/
+1_Codigo/Panel/bbg/banco_trimestral_bbg.csv
+2_Datos/embi.xlsx
+1_Codigo/Panel/Serie_Historica_Spread_del_EMBI.xlsx
+**/vlab-srisk-*.csv
+1_Codigo/Stata_Sov_Risk/**/*.dta
