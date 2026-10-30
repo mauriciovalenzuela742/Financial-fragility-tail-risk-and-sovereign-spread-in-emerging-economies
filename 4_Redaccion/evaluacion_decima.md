@@ -149,3 +149,16 @@ redacción.
 movieron la nota en cinco centésimas. El tiempo rinde más ensayando las respuestas de
 `preparacion_defensa.md`, en especial las preguntas 1 (la contribución sin un resultado positivo), 6 (la
 causalidad) y 12 (el horizonte de un año y su corrección).
+
+---
+
+# Registro de las acciones (30-10-2026)
+
+| # | Acción | Hecho |
+|---|---|---|
+| 1 | Declaración y anexo de IA | "parten del texto del autor": la herramienta corrigió erratas, ajustó los hallazgos del resumen y redactó el párrafo de síntesis de la Sección 1.2, que el autor aprobó |
+| 2 | `preparacion_defensa.md` | "si la deuda intensifica la transmisión del riesgo de cola" |
+| 3 | Resumen del paper | "(un 4,7 % por punto porcentual)" |
+| 4 | Tabla de Argentina del paper | El alto máximo de las tablas generadas pasa a una macro, `\tablaalto` (0,66 por defecto, como antes); el paper la baja a 0,62 solo para esa tabla. `p11_tablas_latex.py` genera lo mismo |
+
+Compilación: tesis 165 pp. y paper 147, sin flotantes demasiado grandes ni referencias indefinidas. Cifras canónicas: 140 de 140.
