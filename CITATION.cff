@@ -8,6 +8,7 @@ authors:
     affiliation: "Universidad de Chile, Facultad de Ciencias Físicas y Matemáticas"
 repository-code: "https://github.com/mauriciovalenzuela742/Financial-fragility-tail-risk-and-sovereign-spread-in-emerging-economies"
 date-released: 2026-10-22
+license: MIT
 keywords:
   - spread soberano
   - fragilidad bancaria
