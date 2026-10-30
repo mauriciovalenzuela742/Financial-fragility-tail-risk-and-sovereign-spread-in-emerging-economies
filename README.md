@@ -229,6 +229,14 @@ Ninguna hipótesis es firme. El informe completo, con las réplicas de ORT y de 
 `README_ORGANIZACION.md` (2026-07-25) describe la reorganización de carpetas pero está
 **superado** en materia de resultados por este README y por `CONTROL_DE_VERSIONES.md`.
 
+## Licencia y cita
+
+El código del autor se distribuye con licencia [MIT](LICENSE). La licencia no cubre los datos de terceros
+que el repositorio incluye o deriva (J.P. Morgan, Bloomberg, V-Lab, Banco Mundial, Freedom House, FMI y
+otros): cada uno conserva los términos de su fuente. Las métricas JLoss (Chari et al., 2024) y
+Growth-at-Risk (Adrian, Boyarchenko y Giannone, 2019, con CEMLA) no son del autor. Para citar este trabajo,
+use [`CITATION.cff`](CITATION.cff).
+
 ---
 
 ## Historial de la fase Bloomberg

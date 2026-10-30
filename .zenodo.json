@@ -1,10 +1,12 @@
 {
   "title": "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano en economías emergentes: código y resultados",
   "upload_type": "software",
-  "description": "Código, datos derivados y resultados de la tesis de Magíster en Economía Aplicada (Universidad de Chile, 2026). Las métricas JLoss (Chari et al., 2024) y Growth-at-Risk (Adrian, Boyarchenko y Giannone, 2019, con la plataforma de CEMLA) no son del autor. Incluye cuatro preregistros fechados en el historial de git, el ejecutor reproducir.py y la verificación de cifras canónicas.",
+  "description": "Código, datos derivados y resultados de la tesis de Magíster en Economía Aplicada (Universidad de Chile, 2026). Panel de trece economías emergentes (2004Q2–2026Q2, N = 765). Las métricas JLoss (Chari et al., 2024) y Growth-at-Risk (Adrian, Boyarchenko y Giannone, 2019, con la plataforma de CEMLA) no son del autor. Incluye ocho preregistros de la tesis y uno de un análisis aparte sobre ESG, gobernanza y la ponderación λ entre factores externos y domésticos, todos fechados en el historial de git; el ejecutor reproducir.py; y la verificación de las 140 cifras canónicas. Todos los resultados son asociaciones condicionales, no efectos causales. La licencia MIT cubre el código del autor; los datos de terceros incluidos (J.P. Morgan, Bloomberg, V-Lab, Banco Mundial, Freedom House, FMI y otros) conservan los términos de sus fuentes.",
   "creators": [
     {"name": "Valenzuela, Mauricio", "affiliation": "Universidad de Chile"}
   ],
-  "keywords": ["spread soberano", "fragilidad bancaria", "Growth-at-Risk", "JLoss", "economías emergentes", "preregistro"],
-  "language": "spa"
+  "license": "MIT",
+  "keywords": ["spread soberano", "fragilidad bancaria", "Growth-at-Risk", "JLoss", "economías emergentes", "preregistro", "ESG", "gobernanza"],
+  "language": "spa",
+  "version": "v1.0-defensa"
 }
