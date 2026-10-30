@@ -16,7 +16,7 @@ subtitle: "Discurso de apertura, recorrido de láminas, preguntas difíciles, ci
 # 1. El mensaje en una frase
 
 > Bancos frágiles y cola adversa del crecimiento **tienden a darse juntos**, pero cuando coinciden **no
-> hay evidencia de que se amplifiquen**; y la pregunta de si la deuda amplifica el riesgo de cola, que
+> hay evidencia de que se amplifiquen**; y la pregunta de si la deuda intensifica la transmisión del riesgo de cola, que
 > recibió ocho preregistros, deja **una regularidad de la muestra que nada confirma por ahora**.
 
 Si la comisión recuerda una sola cosa, que sea esa. Todo el discurso la desarrolla.

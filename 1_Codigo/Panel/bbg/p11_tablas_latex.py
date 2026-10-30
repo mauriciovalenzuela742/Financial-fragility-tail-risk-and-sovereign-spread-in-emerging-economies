@@ -390,11 +390,13 @@ def panel_variant(spec):
 def _ajustar(tex, spec):
     """Si spec['ajustar']: encierra el tabular en un adjustbox con ancho y alto maximos, para
     que la tabla quepa en paginas mas angostas que la del documento standalone (p.ej. el paper,
-    carta 12pt, o la tesis). Requiere \\usepackage{adjustbox} en el documento que la incluye."""
+    carta 12pt, o la tesis). Requiere \\usepackage{adjustbox} en el documento que la incluye.
+    El alto maximo es \\tablaalto (0.66 por defecto); el documento puede bajarlo en un grupo."""
     if not spec.get("ajustar"):
         return tex
     tex = tex.replace(r"\begin{tabular}",
-                      r"\begin{adjustbox}{max width=\linewidth, max totalheight=0.66\textheight}" "\n"
+                      r"\providecommand{\tablaalto}{0.66}" "\n"
+                      r"\begin{adjustbox}{max width=\linewidth, max totalheight=\tablaalto\textheight}" "\n"
                       r"\begin{tabular}", 1)
     return tex.replace(r"\end{tabular}", r"\end{tabular}" "\n" r"\end{adjustbox}", 1)
 
