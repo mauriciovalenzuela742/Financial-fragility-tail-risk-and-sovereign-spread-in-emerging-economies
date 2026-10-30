@@ -229,6 +229,26 @@ Ninguna hipótesis es firme. El informe completo, con las réplicas de ORT y de 
 `README_ORGANIZACION.md` (2026-07-25) describe la reorganización de carpetas pero está
 **superado** en materia de resultados por este README y por `CONTROL_DE_VERSIONES.md`.
 
+## Datos restringidos
+
+Estos archivos se usaron en la tesis, pero no están en el repositorio porque sus proveedores no permiten
+redistribuirlos. Quien tenga acceso puede regenerarlos o descargarlos y dejarlos en la misma ruta:
+
+| Archivo (ruta local) | Proveedor | Cómo se obtiene |
+|---|---|---|
+| `1_Codigo/Bloomberg_extraction/output/<país>/` (capitalización diaria y balances por banco) | Bloomberg | `banks_bloomberg.py` / `extract_jloss_bloomberg.py` con Bloomberg Terminal |
+| `1_Codigo/Bloomberg_extraction/output_macro/` (CDS soberano 5 años en `EMBI_<país>.csv`, volatilidad cambiaria, margen, ratings, VIX, UST10Y, HY) | Bloomberg (HY de ICE BofA; ratings de las agencias) | `gar_macro_bloomberg.py` con Bloomberg Terminal |
+| `1_Codigo/Panel/bbg/banco_trimestral_bbg.csv` | Derivado banco por banco de Bloomberg | `p46_panel_bancos.py`, a partir de `output/` |
+| `2_Datos/embi.xlsx`, `1_Codigo/Panel/Serie_Historica_Spread_del_EMBI.xlsx` | J.P. Morgan (EMBI Global Diversified) | Licencia de J.P. Morgan, directa o a través de Bloomberg |
+| `2_Datos/vlab-srisk-all-20260728.csv` | NYU Stern V-Lab | Descarga en vlab.stern.nyu.edu |
+| `1_Codigo/Stata_Sov_Risk/*.dta` | Análisis predecesor de procedencia no documentada; no se usa | No aplica |
+
+Los paneles trimestrales que alimentan las regresiones (`Panel_bloomberg*.csv`) siguen en el repositorio,
+así que `reproducir.py` y `verificar_canonicos.py` funcionan sin estos archivos. Los pasos que sí los
+necesitan están en [`4_Redaccion/REPRODUCIBILIDAD.md`](4_Redaccion/REPRODUCIBILIDAD.md). Los archivos
+salieron del árbol el 30-10-2026, pero siguen en los commits anteriores del historial, que no se reescribió
+para no cambiar los hashes que fechan los preregistros.
+
 ## Licencia y cita
 
 El código del autor se distribuye con licencia [MIT](LICENSE). La licencia no cubre los datos de terceros

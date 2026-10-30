@@ -10,7 +10,7 @@ Carpeta de datos compartidos para el análisis de fragilidad bancaria, Growth-at
 - **VIX_History.csv** (430 KB) — Volatilidad implícita del S&P 500, histórico diario desde 1990. Métrica global de apetito por riesgo.
 - **global_controls_quarterly.csv** (8.5 KB) — Tipos de interés de EE.UU. a 10 años, spreads HY corporativo, spreads on-off-run, datos trimestrales 2003-2026.
 - **EMBI_real_8countries_2006_2014.csv** (7.8 KB) — Índice EMBI (riesgo soberano, puntos base) para 8 países emergentes, 2006-2014 anual.
-- **embi.xlsx** (527 KB) — EMBI en formato Excel, probable histórico ampliado.
+- **embi.xlsx** (527 KB) — EMBI diario por país desde 2000 (J.P. Morgan). *Solo local: no se redistribuye (ver "Datos restringidos" en el README raíz).*
 - **Database_For_Posting_EM_Frozen.xlsx** (3,2 MB) — Base de tenedores de deuda soberana de economías emergentes. Fuente: Arslanalp y Tsuda, FMI, versión de mayo de 2026.
 - **participacion_extranjera.csv** (100 KB) — Participación extranjera en la deuda del gobierno (total, no bancos, oficial y bancos; % de la deuda total), 13 países, 2004Q1–2025Q4; lo escribe `p26_participacion_extranjera.py` desde el Excel anterior. Fuente: Arslanalp y Tsuda, FMI, versión de mayo de 2026.
 
@@ -25,7 +25,7 @@ Nota importante: **Esta carpeta contiene una COPIA CONGELADA (anterior, autocont
 - **README_comparacion_GaR.md** (3.0 KB) — Documentación del ejercicio: qué se compara, cómo correr, interpretación de resultados.
 - **requirements.txt** (0.02 KB) — Dependencias Python: pandas, numpy, matplotlib.
 - **comparacion_gar_publicas.csv** (2.3 KB) — Resultados: correlaciones de nivel y cambio, flag de signo, por país y agregado pooled.
-- **vlab-srisk-all-20260728.csv** (6.4 KB) — SRISK mundial (capital shortfall sistémico) de NYU Stern V-Lab, mensual 2000-2026, fuente de datos para la validación.
+- **vlab-srisk-all-20260728.csv** (6.4 KB) — SRISK mundial (capital shortfall sistémico) de NYU Stern V-Lab, mensual 2000-2026, fuente de datos para la validación. *Solo local: se descarga en vlab.stern.nyu.edu y no se redistribuye.*
 - **fig_gar_vs_publicas_overlay.png** (295 KB) — Gráfico: GaR vs métrica mejor cubierta (estandarizadas) por país, se observa el co-movimiento inverso esperado.
 - **fig_gar_vs_publicas_corr.png** (68 KB) — Gráfico: correlación de nivel del GaR con cada métrica pública, por país.
 
