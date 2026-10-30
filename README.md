@@ -16,11 +16,13 @@ Todos los coeficientes son **asociaciones, no efectos causales**.
 >   introducción son el texto oficial del autor. El resto se redactó con las pautas del *humanizer*, sin
 >   cambiar cifras ni citas.
 > - Paper empírico standalone: [`4_Redaccion/envios/paper_empirico/`](4_Redaccion/envios/paper_empirico/).
-> - Evaluaciones con rúbrica: la última es [`evaluacion_octava.md`](4_Redaccion/evaluacion_octava.md) (6,5),
+> - Evaluaciones con rúbrica: la última es [`evaluacion_decima.md`](4_Redaccion/evaluacion_decima.md) (6,6),
 >   y la del texto oficial es [`evaluacion_resumen_intro_oficial.md`](4_Redaccion/evaluacion_resumen_intro_oficial.md).
 > - **Análisis aparte, fuera de la tesis:** ESG soberano, gobernanza y el peso de los factores externos frente
 >   a los domésticos (preregistro 9). Ver [`analisis_esg_lambda.md`](4_Redaccion/analisis_esg_lambda.md) y la
 >   sección correspondiente más abajo.
+> - **Explorador interactivo del panel** (página privada): ver la sección
+>   [Explorador interactivo del panel](#explorador-interactivo-del-panel).
 
 ---
 
@@ -203,6 +205,28 @@ Ninguna hipótesis es firme. El informe completo, con las réplicas de ORT y de 
 [`analisis_esg_lambda.md`](4_Redaccion/analisis_esg_lambda.md).
 
 ---
+
+## Explorador interactivo del panel
+
+[Explorador del panel JLoss–GaR](https://claude.ai/artifact/BKpAmnVmp3G6H2cRGdie4u): una página para
+recorrer el panel trimestre a trimestre (2004–2026) con una barra de fechas común a todas las vistas.
+Cada país tiene un color fijo.
+
+- **Espacio 3D animado.** Los ejes se eligen entre 22 variables; por defecto son ln JLoss, D = −GaR y
+  ln EMBI. Cada país deja una estela de hasta 8 trimestres.
+- **Burbujas con estelas.** El tamaño de la burbuja es una tercera variable, por defecto deuda/PIB.
+- **Mapa de calor país × trimestre**, en nivel o estandarizado dentro de cada país.
+- **Cuadrícula de simultaneidad.** Terciles de JLoss y de D calculados dentro de cada país, junto con la
+  serie de países en estrés conjunto.
+- **Carrera de rankings** de la variable elegida.
+- **Diccionario de datos y tabla de cobertura** por país. Las observaciones en la estimación suman 765,
+  igual que en la tesis.
+
+Los valores son del mismo trimestre (en las regresiones, ln JLoss y D entran rezagados un trimestre), y
+los patrones son asociaciones. La página es **privada**: solo la puede abrir el autor y quienes él autorice,
+porque incluye los niveles de EMBI y CDS, que son datos de proveedores (ver "Datos restringidos"). Los
+datos salen de `Panel_bloomberg_embiext_arg.csv`, `esg_trimestral_bbg.csv` y
+`2_Datos/participacion_extranjera.csv`.
 
 ## Estructura del repositorio
 
