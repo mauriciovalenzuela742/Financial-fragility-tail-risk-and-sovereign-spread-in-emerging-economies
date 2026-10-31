@@ -34,7 +34,7 @@ subtitle: "Diagnóstico, lo ejecutado (preregistrado) y los pasos siguientes —
 | LP mensual por estado de reservas | 5 | Sin diferencia entre estados en ningún horizonte |
 
 **Conclusión vigente.** La deuda pública amplifica la transmisión del riesgo de cola del crecimiento al
-spread: una desviación estándar más de deuda (≈ 20 pp del PIB) la eleva en un tercio, de 0,032 a 0,043.
+spread: una desviación estándar más de deuda (≈ 20 pp del PIB) la eleva en una cuarta parte, de 0,043 a 0,054.
 La adecuación de reservas no atenúa la transmisión de la fragilidad bancaria. Y la asociación de la
 fragilidad con el spread no se puede separar de su paso por las cuentas fiscales.
 

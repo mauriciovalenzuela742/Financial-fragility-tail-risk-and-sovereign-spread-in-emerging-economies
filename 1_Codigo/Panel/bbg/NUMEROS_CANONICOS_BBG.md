@@ -1948,7 +1948,7 @@ Efecto directo de DEBT_{t−4}: +0,144 (DK < 0,001). Secundarias: fragilidad × 
 0,070); RA_{t−8} −0,035 (0,41); DEBT_{t−8} +0,0075 (0,082); LP mensual, respuesta del spread a Δ(−DD) en
 estado de reservas altas menos bajas: h0 +0,004 (wild 0,58), h3 +0,003 (0,84), ninguna h < 0,10.
 **Lectura:** con una d.e. más de deuda (≈ 20 pp del PIB) la semielasticidad del spread al riesgo de cola
-pasa de 0,032 a 0,043. La consecuencia preregistrada para R-H2 aplica: las reservas quedan exploratorias.
+pasa de 0,043 (deuda media) a 0,054 (b(T_c) = 0,04325 + ψ 0,01066). La consecuencia preregistrada para R-H2 aplica: las reservas quedan exploratorias.
 
 ## 27. Revisión econométrica: CCE, PMG, coeficientes aleatorios y VAR mensual (2026-10-21)
 
