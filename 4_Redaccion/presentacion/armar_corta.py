@@ -33,6 +33,7 @@ RESPALDO = [
     "{Inferencia: cómo mido la incertidumbre}",
     "{Las bandas: cuánta amplificación se descarta y cuánta no}",
     "{Un modelo de límite fiscal: logaritmos frente a puntos básicos}",
+    "{Preguntas de portafolio y corrección global (preregistros 7 y 8)}",
     "{¿Efecto o persistencia? La retroalimentación}",
     "{Limitaciones y trabajo futuro}",
     "{Respaldo: Panel A con errores estándar}",
@@ -55,6 +56,7 @@ Fragilidad y \textit{spread} (H1) & $0{,}099$; 70\% es Turquía & Sugerente \\
 Deuda $\times$ cola, en la muestra & $+0{,}033$ (permutación $0{,}009$) & Firme en la muestra \\
 Deuda $\times$ cola, fuera de ella & réplica, instrumento y modelo & \textbf{No se confirma} \\
 Otros moderadores y umbrales & Holm $\geq0{,}29$ & \textbf{No hay evidencia} \\
+Corrección global (23 hipótesis) & riesgo de cola a un año $0{,}13$; deuda $\times$ cola $0{,}31$ & \textbf{No sobreviven} \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}

@@ -2,11 +2,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-tabla]{babel}
-\usepackage{booktabs,graphicx,tikz,amsmath,adjustbox}
+\usepackage{booktabs,graphicx,tikz,amsmath,adjustbox,array}
 \usetikzlibrary{arrows.meta,positioning}
 \usepackage{tesis_beamer}
 
-% Versión de predefensa (10 láminas + anexo). Figuras: las del paper (especificación vigente) y, como respaldo, las de la tesis.
+% Versión de predefensa (12 láminas + anexo); resultados, conclusiones y anexo al día con defensa.tex. Figuras: las del paper (especificación vigente) y, como respaldo, las de la tesis.
 % En el zip para Prism todas viven en imagenes/. Las baterías se cargan desde tablas/
 % (generadas por tablas_beamer.py a partir de las tablas de la tesis).
 \graphicspath{{../envios/paper_empirico/figuras/}{../tesis/imagenes/}{imagenes/}}
@@ -149,7 +149,7 @@ Además se contrasta si tres condiciones ---resiliencia, respaldo externo y qui�
 \begin{itemize}
 \item \textbf{Rezagos} de un trimestre y \textbf{efectos fijos de tiempo}, que absorben los factores globales.
 \item \textbf{Inferencia calibrada por simulación}: en niveles el criterio es el \textit{wild cluster bootstrap} por país; Driscoll--Kraay rechaza de más.
-\item \textbf{Prueba preespecificada}: la participación extranjera se contrastó con hipótesis fijadas antes de estimar y corrección de Holm.
+\item \textbf{Ocho preregistros} fechados antes de estimar: corrección de Holm por familia y sobre las 23 hipótesis primarias.
 \item \textbf{Además}: permutación, cambios, proyecciones locales y pronóstico fuera de muestra.
 \end{itemize}
 \end{frame}
@@ -164,7 +164,8 @@ Además se contrasta si tres condiciones ---resiliencia, respaldo externo y qui�
 \toprule
 \textit{Ambos riesgos en su tercil alto (definido dentro de cada país)} & Observado & Por azar & $p$ \\
 \midrule
-Observaciones conjuntas ($22{,}0\%$ de 765) & \textbf{168} & 87 (independencia) & 1,9 veces (neto del calendario común: 132 esperadas, 1,3 veces) \\
+Observaciones conjuntas ($22{,}0\%$ de 765) & \textbf{168} & 87 (independencia) & 1,9 veces \\
+Permutación entre países dentro de cada trimestre (calendario común) & 168 & $140{,}9$ & \textbf{1,2 veces}; $0{,}0002$ \\
 Permutación por bloques dentro de cada país (999 réplicas) & 168 & $85{,}7$ & $0{,}001$ \\
 Fuera de los trimestres de crisis & 108 & $59{,}3$ & $0{,}001$ \\
 Duración media de los 62 episodios conjuntos (trimestres) & $2{,}71$ & $1{,}85$ & $0{,}003$ \\
@@ -173,6 +174,7 @@ Países con más coincidencias que las esperadas & \textbf{13 de 13} & & \\
 \textit{Rezago cruzado (rezago propio, EF de país y de tiempo)} & Coeficiente & & $p$ \textit{wild} \\
 \midrule
 Fragilidad en $t-1$ $\to$ riesgo de cola en $t$ & $\mathbf{0{,}405^{***}}$ & & $0{,}024$ \\
+\quad sin cada país (rango) / con el $GaR$ sin bloque bursátil & $[0{,}32;\,0{,}47]$ / $0{,}388$ & & DK $<0{,}07$ / $0{,}002$ \\
 Riesgo de cola en $t-1$ $\to$ fragilidad en $t$ & $-0{,}006$ & & $0{,}48$ \\
 \bottomrule
 \end{tabular}
@@ -181,7 +183,7 @@ Riesgo de cola en $t-1$ $\to$ fragilidad en $t$ & $-0{,}006$ & & $0{,}48$ \\
 \begin{columns}[T]
 \column{0.56\textwidth}
 \begin{block}{Lectura}
-\footnotesize \textbf{Simultaneidad: firme.} Casi el doble de lo esperado, en todos los países y por más tiempo. \textbf{Precedencia: sugerente.} La fragilidad antecede al riesgo de cola y no al revés; descansa en un rezago trimestral.
+\footnotesize \textbf{Simultaneidad: firme}, 1,2 veces lo esperado (calendario común). \textbf{Precedencia: firme a un trimestre}, sin depender de un país ni del bloque bursátil; pequeña y no causal.
 \end{block}
 \column{0.42\textwidth}
 \begin{alertblock}{Salvedad}
@@ -202,75 +204,114 @@ Prueba & Estimación & $p$ \textit{wild bootstrap} \\
 Interacción $\beta_3$ de la regresión principal & $-0{,}011$ & $0{,}89$ \\
 Estrés conjunto: extra con los dos riesgos altos (fragilidad alta $+0{,}091$; cola alta $+0{,}186$) & $-0{,}077$ & $0{,}23$ \\
 Estrés conjunto uno a cuatro trimestres adelante & $-0{,}097$ a $-0{,}046$ & $0{,}17$ a $0{,}37$ \\
+Estrés conjunto con cuartiles en vez de terciles & $-0{,}122$ & $0{,}23$ \\
 Forma funcional intermedia (Box--Cox, $\lambda=0{,}44$): interacción & $t=-0{,}19$ & $0{,}97$ \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\vspace{-3pt}
-\begin{block}{Las bandas: cuánta amplificación no se puede descartar}
-\footnotesize Con ambos riesgos una desviación estándar sobre su media, la suma de los dos es $+16{,}4\%$ de \textit{spread} (28 pb). El extra estimado es $-2{,}1$ puntos (en pb, $+3{,}0$). Lo máximo que admite el intervalo de 95\%: $+0{,}5$ (Driscoll--Kraay), $+2{,}9$ (\textit{wild}), $+5{,}3$ puntos (\textit{cluster}, 29\% de la suma); en pb, $+11$ sobre 28 (39\%).
-\end{block}
-\vspace{-2pt}
-\begin{alertblock}{Lectura}
-\footnotesize \textbf{No hay evidencia de amplificación}; los datos no permiten descartar un extra de hasta un 30--40\% de la suma.
-\end{alertblock}
-\vspace{-2pt}
-{\scriptsize\raggedright Aditivo en logaritmos es proporcional en puntos básicos: es álgebra de la forma funcional, no un hallazgo. El signo negativo de $\beta_3$ es de Polonia (sin ella $+0{,}008$): no se lee como atenuación.\par}
+\vspace{3pt}
+\begin{itemize}\footnotesize\setlength\itemsep{2pt}
+\item Es un no rechazo: una prueba de equivalencia descarta una amplificación de más de un 35\% de la suma, no una menor (anexo).
+\item El signo negativo de $\beta_3$ es de \textbf{Polonia} (sin ella $+0{,}008$, $p=0{,}19$): \textbf{no} se lee como atenuación.
+\item Aditivo en logaritmos es proporcional en puntos básicos: es álgebra de la forma funcional, no un hallazgo.
+\item \textbf{Señales débiles en contra}, que se reportan: fuera del piso de $\JLoss$ el riesgo de cola pesa $+7{,}5$ pb más ($p$ \textit{wild} $0{,}036$) con un umbral de 2\%, y en logaritmos no ($0{,}11$); en cambios a cuatro trimestres en pb la interacción es $+0{,}358$ ($0{,}011$), ausente en logaritmos.
+\end{itemize}
 \end{frame}
 
 % 9
-\begin{frame}{Resultados 3 y 4: el riesgo económico agrega poco; ninguna condición cambia la transmisión}
+\begin{frame}{Resultado 3: qué agrega el riesgo económico a lo que explica la fragilidad}
 \begin{columns}[T]
-\column{0.5\textwidth}
+\column{0.56\textwidth}
 \centering
 \footnotesize
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{l c}
+\begin{tabular}{l ccc}
 \toprule
-\multicolumn{2}{l}{\textit{Agregar el riesgo de cola al modelo de Chari et al.\ ($N=662$)}} \\
+$N=662$ & Fragilidad & + cola & + interacción \\
 \midrule
-$\beta_2$ ($p$ \textit{wild} $0{,}066$) & $0{,}037^{***}$ \\
-Prueba conjunta $\beta_2=\beta_3=0$, $p$ \textit{wild} & $\mathbf{0{,}041}$ \\
-$R^2$ dentro del país (base $\to$ con $D$ $\to$ con interacción) & $0{,}153\to0{,}185\to0{,}194$ \\
-\midrule
-\multicolumn{2}{l}{\textit{Pero}} \\
-\midrule
-Cambios a cuatro trimestres ($p$ \textit{wild} $0{,}13$) & $0{,}004$ \\
-Proyecciones locales, horizontes significativos & 0 de 9 \\
-Fuera de muestra: error de pronóstico (evidencia débil) & $+3\%$ \\
-Sin Polonia ($p=0{,}51$) & $0{,}007$ \\
+Fragilidad ($\beta_1$) & $0{,}137^{***}$ & $0{,}107^{***}$ & $0{,}119^{***}$ \\
+Riesgo de cola ($\beta_2$) & & $0{,}037^{***}$ & $0{,}041^{***}$ \\
+\quad $p$ \textit{wild} & & $0{,}066$ & $0{,}11$ \\
+Interacción ($\beta_3$) & & & $-0{,}015^{**}$ \\
+\quad $p$ \textit{wild} & & & $0{,}58$ \\
+$R^2$ dentro del país & $0{,}153$ & $0{,}185$ & $0{,}194$ \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
 
 \vspace{3pt}
-{\scriptsize\raggedright Una asociación modesta, de un 2--3\,\% de \textit{spread} por punto de riesgo de cola, en niveles y en 10 de 13 países. Evidencia \textbf{sugerente}: el \textit{wild bootstrap} no protege del sesgo de retroalimentación.\par}
-\column{0.48\textwidth}
-\begin{block}{¿Alguna condición la cambia?}
+{\scriptsize\raggedright Modelo de Chari et al.: fragilidad rezagada y sus controles; EF de país y de tiempo. Prueba conjunta $\beta_2=\beta_3=0$: $p$ \textit{wild} $=\mathbf{0{,}041}$. Sin controles ($N=765$): $0{,}030$ ($p$ \textit{wild} $0{,}17$). *** $p<0{,}01$, ** $p<0{,}05$ (Driscoll--Kraay).\par}
+\column{0.42\textwidth}
+\begin{alertblock}{Pero}
 \footnotesize
-\begin{itemize}\setlength\itemsep{2pt}
-\item \textbf{Participación extranjera} en la deuda (preespecificada): $+0{,}037$, $-0{,}001$ y $-0{,}006$; Holm $p=1{,}00$. \textbf{No} (en pb, un indicio).
-\item \textbf{Respaldo externo} por país (\textit{swap} de la Fed, línea flexible del FMI): $-0{,}004$ ($p$ \textit{wild} $0{,}90$). \textbf{No.}
-\item \textbf{Reservas} $\times$ fragilidad: $-0{,}247$ ($p$ \textit{wild} $0{,}08$; Holm $0{,}40$); en logaritmos depende de Polonia y otras variables dan lo mismo. \textbf{Exploratorio.}
+\begin{itemize}\setlength\itemsep{0pt}
+\item Cambios a cuatro trimestres: $0{,}004$ ($p$ \textit{wild} $0{,}13$).
+\item Proyecciones locales: 0 de 9 horizontes. Entre países: $0{,}052$ ($p=0{,}46$).
+\item Fuera de muestra: agregarlo sube el error un 3\% (evidencia débil: diseño sin efectos de tiempo).
+\item El \textit{wild bootstrap} no protege del sesgo de retroalimentación: $+0{,}022$ simulado frente a $0{,}032$.
 \end{itemize}
-\end{block}
+\end{alertblock}
 \end{columns}
+\vspace{1pt}
+{\footnotesize\raggedright \textbf{Lectura (sugerente, solo en niveles):} una asociación modesta, de 0,02--0,03 por punto porcentual de riesgo de cola, que no mejora el pronóstico del \textit{spread} ni aparece en los cambios.\par}
 \end{frame}
 
 % 10
+\begin{frame}{Resultado 4: deuda y riesgo de cola, lo que resiste y lo que no}
+\centering
+\scriptsize
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.60\textheight}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{0.40\textwidth}>{\raggedright\arraybackslash}p{0.18\textwidth}}
+\toprule
+Prueba & Resultado & Lectura \\
+\midrule
+Preregistro 1: riesgo de cola a un trimestre $\times$ deuda & $+0{,}011$ por d.e. de deuda; Holm $0{,}029$; 13 de 13 & firme en su familia \\
+Preregistro 2: riesgo de cola a un año & $0{,}047$ (Holm $0{,}018$); $\times$ deuda $+0{,}033$: una d.e.\ más de deuda, $+70\%$ & firme en su familia \\
+\addlinespace
+Inferencia conjunta (14 hipótesis, 4 preregistros) & ninguna bajo $0{,}05$; permutación de la deuda: a un trimestre $0{,}17$, a un año $0{,}009$ & a un año resiste \\
+Corrección sobre los 8 preregistros (23 hipótesis) & riesgo de cola a un año: Holm $0{,}13$; deuda $\times$ cola: $0{,}31$ & no sobreviven \\
+\addlinespace
+Réplica externa: Hungría y Corea & $0{,}22$ frente a $0{,}033$; diferencia rechazada; potencia 5\% & \textbf{no replica} \\
+Instrumento: términos de intercambio & F $20$ para el riesgo de cola, $9{,}7$ para la interacción; $\psi\approx0$ & \textbf{débil} \\
+Modelo de límite fiscal calibrado & logaritmos: $-0{,}43$; puntos básicos: $+91$ (dato $+3{,}1$) & \textbf{no lo explica} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}
+\begin{block}{Lectura}
+\scriptsize Con más deuda, el riesgo de cola del año siguiente pesa más en el \textit{spread} \textbf{en la muestra}. Fuera de ella, con un instrumento o con un modelo, nada lo confirma por ahora. Se reporta como lo que es: una regularidad de la muestra.
+\end{block}
+\end{frame}
+
+% 11
+\begin{frame}{Resultado 4 (cont.): ninguna otra condición cambia la transmisión}
+\begin{itemize}\small\setlength\itemsep{3pt}
+\item \textbf{Participación extranjera} en la deuda (preespecificada): $+0{,}037$, $-0{,}001$ y $-0{,}006$; Holm $p=1{,}00$. \textbf{No} (en pb, un indicio).
+\item \textbf{Respaldo externo} por país (\textit{swap} de la Fed, línea flexible del FMI): $-0{,}004$ ($p$ \textit{wild} $0{,}90$). En los eventos diarios, el \textit{swap} de 2020 bajó el nivel del \textit{spread} ($-20$ a $-22$ pp), no la transmisión. \textbf{No.}
+\item \textbf{Reservas} $\times$ fragilidad: $-0{,}247$ ($p$ \textit{wild} $0{,}08$); en logaritmos depende de Polonia, y la prueba preregistrada con adecuación de reservas no lo confirma (Holm $0{,}29$). \textbf{Exploratorio.}
+\item \textbf{\textit{Doom loop}} (deuda $\times$ fragilidad) y \textbf{pecado original}: $-0{,}053$ y $-0{,}004$; Holm $1{,}00$. \textbf{No.}
+\item \textbf{Umbrales de vigilancia} (preregistrada): tensión $p=0{,}13$; deuda $0{,}26$; alerta temprana fuera de muestra con AUROC $0{,}49$. \textbf{No.}
+\end{itemize}
+\vspace{2pt}
+\begin{alertblock}{Lectura}
+\footnotesize Ausencia de evidencia, no evidencia de un cero: con 13 países la potencia es limitada.
+\end{alertblock}
+\end{frame}
+
+% 12
 \section{Conclusiones}
 \begin{frame}{Conclusiones e implicancias}
-\small
+\footnotesize
 \begin{enumerate}\setlength\itemsep{1pt}
-\item \textbf{La simultaneidad es un hecho} (firme): los dos riesgos coinciden 1,9 veces lo esperado por azar (1,3 neto); hay indicios (sugerente) de que la fragilidad antecede al riesgo de cola.
-\item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen}; no se descarta un extra de hasta un 30--40\% de la suma.
-\item \textbf{El riesgo económico agrega poco} (sugerente): solo en niveles; no mejora el pronóstico.
-\item \textbf{Ninguna condición} ---resiliencia, respaldo externo, quién tiene la deuda--- modifica la transmisión de forma demostrable.
+\item \textbf{La simultaneidad es un hecho} (firme): los dos riesgos coinciden 1,2 veces lo esperado descontado el calendario común (1,9 frente a la independencia), y la fragilidad antecede al riesgo de cola.
+\item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen}; se descarta más de un 35\% de la suma, no menos.
+\item \textbf{El riesgo económico agrega poco}: un 2--3\,\% de \textit{spread} por punto (4,7\,\% a un año, sin sobrevivir a la corrección global); no mejora el pronóstico, pero es una relación de largo plazo.
+\item \textbf{Deuda y riesgo de cola: regularidad de la muestra.} Con más deuda el riesgo de cola pesa más, pero la réplica externa, el instrumento y el modelo no lo confirman; ninguna otra condición modifica la transmisión.
 \end{enumerate}
-{\footnotesize \textbf{Réplica:} la asociación fragilidad--\textit{spread} replica a Chari et al.\ con sus controles, pero no es una elasticidad común ni hay precedencia temporal.\par}
+{\scriptsize \textbf{Réplica:} la asociación fragilidad--\textit{spread} replica a Chari et al.\ con sus controles, pero no es una elasticidad común ni hay precedencia temporal.\par}
 \vspace{-2pt}
 \begin{block}{Implicancias}
-\footnotesize Vigilar los dos riesgos juntos se justifica: tienden a agravarse a la vez. No hay base para una prima adicional por la simultaneidad, ni para recomendar reservas o diferenciar por quién tiene la deuda. No se puede cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad.
+\footnotesize Vigilar los dos riesgos juntos se justifica: tienden a agravarse a la vez. No hay base para una prima adicional por la simultaneidad, ni para recomendar reservas, diferenciar por quién tiene la deuda o fijar un umbral de vigilancia. No se puede cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad.
 \end{block}
 \end{frame}
 
@@ -310,28 +351,44 @@ Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \%
 \end{columns}
 \end{frame}
 
-\begin{frame}{Anexo: Batería principal · Panel A: muestra completa}
+\begin{frame}{Anexo: Inferencia: cómo mido la incertidumbre}
+\footnotesize
+\begin{itemize}\setlength\itemsep{1pt}
+\item \textbf{Driscoll--Kraay (referencia de las tablas):} robustos a heterocedasticidad, autocorrelación y choques comunes entre países.
+\item \textbf{\textit{Cluster} por país} y \textbf{\textit{wild cluster bootstrap}} por país (pesos de Webb, 1\,999 réplicas): los contrastes exigentes con 13 países.
+\item \textbf{Calibración por simulación:} 1\,000 paneles simulados miden cuánto rechaza de más cada método. En niveles, el criterio es el \textit{wild bootstrap}.
+\item \textbf{Permutación por bloques} para la simultaneidad; \textbf{corrección de Holm} para las familias de contrastes.
+\item \textbf{Prueba preespecificada:} la de la participación extranjera se fijó antes de estimar.
+\item \textbf{Identificación:} canal inverso, fechas del \textit{spread} (promedio o cierre), cambios, proyecciones locales y pronóstico fuera de muestra.
+\end{itemize}
+\vspace{-7pt}
+\begin{exampleblock}{Una sola escala de evidencia}
+\footnotesize \textbf{Firme}: resiste el \textit{wild bootstrap} o la permutación y no depende de un país. \textbf{Sugerente}: solo Driscoll--Kraay, o depende de un país. \textbf{Exploratorio}: no preespecificado y no pasa la corrección de Holm. \textbf{No hay evidencia.}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Anexo: Réplica de Chari et al.\ · Batería principal, Panel A: muestra completa}
 \centering
 \small
 \input{tablas/bat_A.tex}
 \notabat{M1 solo fragilidad; M2 solo riesgo de cola; M3 ambos; M4 ambos con interacción. $\beta_1$ elasticidad a $\ln\JLoss_{t-1}$; $\beta_2$ semielasticidad a $D_{t-1}=-\GaR_{t-1}$; $\beta_3$ interacción. Sin controles.}
 \end{frame}
 
-\begin{frame}{Anexo: Batería principal · Panel B: sin trimestres de crisis}
+\begin{frame}{Anexo: Réplica de Chari et al.\ · Batería principal, Panel B: sin trimestres de crisis}
 \centering
 \small
 \input{tablas/bat_B.tex}
 \notabat{Excluye 2008Q4--2009Q4 y 2020Q1--2021Q4. M1--M4 y $\beta_1$--$\beta_3$ como en el Panel A. Sin controles.}
 \end{frame}
 
-\begin{frame}{Anexo: Batería principal · Panel C: con seis controles domésticos}
+\begin{frame}{Anexo: Réplica de Chari et al.\ · Batería principal, Panel C: con seis controles domésticos}
 \centering
 \small
 \input{tablas/bat_C.tex}
 \notabat{Agrega deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación y tipo de cambio real. M1--M4 y $\beta_1$--$\beta_3$ como en el Panel A.}
 \end{frame}
 
-\begin{frame}{Anexo: Réplica de Chari et al.\ y sus límites}
+\begin{frame}{Anexo: La réplica y sus límites: no es una elasticidad común}
 \begin{columns}[c]
 \column{0.56\textwidth}
 \centering
@@ -340,16 +397,15 @@ Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \%
 \column{0.43\textwidth}
 \footnotesize
 \begin{itemize}\setlength\itemsep{1pt}
-\item \textbf{Se replica con sus controles}: $0{,}107$--$0{,}164$ ($0{,}206$ con el CDS). Con los seis controles domésticos de la tesis: $-0{,}008$.
-\item \textbf{No es una elasticidad común}: pendientes entre $-0{,}84$ y $+0{,}97$; promedio de grupo $0{,}106$ ($p=0{,}39$); se rechaza la homogeneidad.
-\item \textbf{Turquía} aporta el 70\% del coeficiente: sin ella, $0{,}034$ ($p=0{,}43$).
-\item \textbf{Piso de $\JLoss$} (2,16): el 24\% de las observaciones está pegado al piso; ahí la métrica no informa.
-\item Una desviación estándar dentro del país $\approx+5\%$ de \textit{spread} (13 pb).
+\item Pendientes por país entre $-0{,}84$ y $+0{,}97$; 8 de 13 positivas; promedio de grupo $0{,}106$ ($p=0{,}39$); se rechaza la homogeneidad ($p<0{,}001$).
+\item \textbf{Turquía} tiene el 17\% de la variación de la fragilidad y aporta el 70\% del coeficiente: sin ella, $0{,}034$ ($p=0{,}43$).
+\item \textbf{Piso de $\JLoss$} (2,16): el 24\% de las observaciones está pegado al piso (Malasia 60\%, Perú 58\%, Chile 49\%); ahí la métrica no informa.
+\item La asociación es de los episodios fuera del piso. Con la distancia al incumplimiento de Merton (sin piso) es más nítida: \textit{wild} $0{,}055$.
 \end{itemize}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Anexo: Fechas: la fragilidad y el \textit{spread} se mueven en el mismo trimestre}
+\begin{frame}{Anexo: La fragilidad y el \textit{spread} se mueven en el mismo trimestre}
 \centering
 \footnotesize
 \begin{adjustbox}{max width=\textwidth}
@@ -377,7 +433,60 @@ Cierre de $t-1$ menos promedio de $t-1$ (parte mecánica) & $0{,}020^{***}$ & $0
 \begin{alertblock}{Lectura}
 \footnotesize Se mueven dentro del mismo trimestre; no hay evidencia de que la fragilidad anteceda al \textit{spread}. {\scriptsize (*** $p<0{,}01$, ** $p<0{,}05$, Driscoll--Kraay.)}
 \end{alertblock}
+\end{frame}
 
+\begin{frame}{Anexo: El coeficiente del riesgo de cola depende de Polonia}
+\begin{columns}[c]
+\column{0.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_loo_efectos_lnlag.pdf}\\
+{\scriptsize Regresión principal excluyendo un país a la vez; IC 95\% (Driscoll--Kraay).}
+\column{0.49\textwidth}
+\begin{alertblock}{En contra}
+\footnotesize
+\begin{itemize}\setlength\itemsep{0pt}
+\item Sin Polonia: $0{,}007$ ($p=0{,}51$).
+\item Polonia aporta el 71\% del coeficiente.
+\item En parte es el logaritmo de \textit{spreads} muy bajos: sin las 36 observaciones bajo 60 pb, $0{,}018$ ($p=0{,}11$).
+\end{itemize}
+\end{alertblock}
+\begin{block}{A favor}
+\footnotesize
+\begin{itemize}\setlength\itemsep{0pt}
+\item 10 de 13 pendientes por país son positivas.
+\item Promedio de grupo, 10 países de historia larga: $0{,}033$ ($p=0{,}004$).
+\item Media ponderada por precisión: $0{,}023$, con o sin Polonia.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Anexo: Las bandas: cuánta amplificación se descarta y cuánta no}
+\begin{columns}[c]
+\column{0.3\textwidth}
+\cifra{+16,4\,\%}{de \textit{spread}: suma de las dos asociaciones (28 pb)}
+\column{0.68\textwidth}
+\centering
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{l cccc}
+\toprule
+Intervalo de 95\% & $\beta_3$ & Extra máximo & \% de la suma & TOST: se rechaza más de \\
+\midrule
+Driscoll--Kraay & $[-0{,}025;\,0{,}003]$ & $+0{,}5$ puntos & 3\% & 0,4\% \\
+\textit{Wild bootstrap} & $[-0{,}054;\,0{,}015]$ & $+2{,}9$ puntos & 16\% & 13\% \\
+\textit{Cluster} por país & $[-0{,}050;\,0{,}028]$ & $+5{,}3$ puntos & 29\% & 22\% \\
+En pb (\textit{wild}) & & $+11$ pb & 39\% & 35\% \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{columns}
+\vspace{2pt}
+{\footnotesize\raggedright Con ambos riesgos una desviación estándar dentro del país sobre su media. Extra estimado por la interacción: $-2{,}1$ puntos en logaritmos; en puntos básicos, $+3{,}0$ sobre 28. ``Extra máximo'': la mayor amplificación que el intervalo no permite descartar. TOST: la menor amplificación que se rechaza al 5\% (intervalo al 90\%).\par}
+\vspace{-2pt}
+\begin{alertblock}{Lo que se puede decir}
+\footnotesize \textbf{No hay evidencia de amplificación}; se descarta una amplificación de más de un 35\% de la suma con los tres métodos y en las dos formas, pero no una menor.
+\end{alertblock}
 \end{frame}
 
 \begin{frame}{Anexo: ¿Efecto o persistencia? La retroalimentación}
@@ -504,23 +613,22 @@ Dentro de las crisis globales & $0{,}063$ & $-0{,}018$ & $0{,}045^{**}$ & 54 de 
 
 \begin{frame}{Anexo: La elasticidad a la fragilidad no crece con el riesgo de cola}
 \begin{columns}[c]
-\column{0.52\textwidth}
+\column{0.55\textwidth}
 \centering
 \includegraphics[width=\textwidth]{fig_efecto_marginal_lnlag.pdf}\\
 {\scriptsize Elasticidad a la fragilidad según el riesgo de cola $D$.}
-\column{0.46\textwidth}
-\footnotesize
-\begin{itemize}\setlength\itemsep{2pt}
+\column{0.43\textwidth}
+\small
+\begin{itemize}
 \item La elasticidad \textbf{no crece} con el riesgo de cola: 0,145 $\to$ 0,098 $\to$ 0,054.
 \item $\beta_3=-0{,}011$; IC 95\% con \textit{wild bootstrap}: $[-0{,}054;\,0{,}015]$.
-\item El signo negativo es de Polonia (sin ella $+0{,}008$, $p=0{,}19$): no se lee como atenuación.
-\item Aditivo en logaritmos es proporcional en pb: álgebra de la forma funcional.
-\item \textbf{Señales débiles en contra}: fuera del piso de $\JLoss$ el riesgo de cola pesa $+7{,}5$ pb más ($p$ \textit{wild} $0{,}036$) con un umbral de 2\%, no en logaritmos; en cambios a cuatro trimestres en pb, $+0{,}358$ ($0{,}011$), ausente en logaritmos.
+\item El signo negativo es de Polonia (sin ella $+0{,}008$): no se lee como atenuación.
+\item La interacción de la versión en niveles la elimina el logaritmo, no el rezago.
 \end{itemize}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Anexo: Heterogeneidad: agrupación \textit{ex post}, exploratoria}
+\begin{frame}{Anexo: Heterogeneidad por economía: agrupación \textit{ex post}, exploratoria}
 \centering
 \footnotesize
 \begin{adjustbox}{max width=\textwidth, max totalheight=0.44\textheight}
@@ -603,11 +711,156 @@ Reservas previas a la muestra & $-0{,}073$ & $0{,}30$ & $-4{,}3$ & $0{,}13$ \\
 \end{adjustbox}
 \vspace{-1pt}
 \begin{alertblock}{Lectura: exploratorio}
-\footnotesize El coeficiente de la fragilidad es menor donde hay más reservas; es estable al rezagarlas y más firme en puntos básicos. Pero en logaritmos depende de Polonia, no pasa la corrección de Holm, otras variables macroeconómicas dan interacciones similares e implica una elasticidad negativa para el 23\% de las observaciones. No sustenta recomendar reservas.
+\footnotesize El coeficiente de la fragilidad es menor donde hay más reservas; es estable al rezagarlas y más firme en puntos básicos. Pero en logaritmos depende de Polonia, no pasa la corrección de Holm, otras variables macroeconómicas dan interacciones similares e implica una elasticidad negativa para el 23\% de las observaciones. No sustenta recomendar reservas. La prueba preregistrada, con reservas sobre deuda externa de corto plazo, tampoco lo confirma (Holm $0{,}29$).
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Anexo: Robustez: qué depende de la muestra y qué no}
+\begin{frame}{Anexo: Un modelo de límite fiscal: logaritmos frente a puntos básicos}
+\small
+\begin{columns}[T]
+\column{0.52\textwidth}
+\textbf{Modelo} (Eaton--Gersovitz; Bi, 2012)
+\[ \text{incumple si } g<g^*(b)=\frac{r\,b-\bar p}{b+\bar p} \]
+\[ \pi=\Phi\!\left(\frac{g^*-m}{\sigma_L}\right) \]
+Más riesgo de cola: más $\sigma_L$, con la mediana fija.
+\begin{itemize}\footnotesize
+\item \textbf{Puntos básicos:} con más deuda, $g^*$ se acerca a la zona que la cola desplaza $\Rightarrow$ interacción \textbf{positiva}.
+\item \textbf{Logaritmos:} con poca deuda el incumplimiento es de la cola profunda y ensancharla lo multiplica $\Rightarrow$ interacción \textbf{negativa}.
+\end{itemize}
+\column{0.44\textwidth}
+\footnotesize
+\textbf{Calibrado con el panel} (deuda 44,6\%, spread 173 pb, recuperación 63\%)
+\vspace{2pt}
+
+\begin{tabular}{lcc}
+\toprule
+ & Modelo & Datos \\
+\midrule
+Interacción, log & $-0{,}43$ & $+0{,}033$ \\
+Interacción, pb & $+91$ & $+3{,}1$ \\
+Riesgo de cola, log & $0{,}82$ & $0{,}047$ \\
+\bottomrule
+\end{tabular}
+\vspace{4pt}
+
+El modelo predice el signo contrario en logaritmos y una magnitud mucho mayor en pb. La forma funcional no es neutral.
+\end{columns}
+\end{frame}
+
+\begin{frame}{Anexo: Hallazgos y su grado de evidencia}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.84\textheight}
+\begin{tabular}{llc}
+\toprule
+Hallazgo & Cifra & Evidencia \\
+\midrule
+\multicolumn{3}{l}{\textit{Conclusiones propias}} \\
+Los dos riesgos coinciden más que por azar & 168: 1,2 veces lo esperado con el calendario común ($p=0{,}0002$); 1,9 bajo independencia; 13 de 13 & \textbf{firme} \\
+La fragilidad antecede al riesgo de cola & $0{,}405$ (\textit{wild} $0{,}024$); sin cada país y sin bloque bursátil & firme (a un trimestre) \\
+Amplificación cuando coinciden & $-0{,}011$ (\textit{wild} $0{,}89$); TOST: se descarta $>35\%$ & \textbf{no hay evidencia} \\
+El riesgo de cola agrega a la fragilidad, en niveles & conjunta \textit{wild} $0{,}041$; con cargas heterogéneas (CCE) \textit{wild} $0{,}016$, 13 de 13; largo plazo $0{,}067$ & firme como nivel; no en cambios \\
+Deuda $\times$ riesgo de cola (preregistrada) & $+0{,}011$ (Holm $0{,}029$; conjunta $0{,}19$; 23 hipótesis $0{,}31$; permutación $0{,}17$); a 4 trimestres $+0{,}033$ (permutación $0{,}009$) & \textbf{firme} a 4 trim.\ en la muestra; sugerente a 1 \\
+Réplica externa (Hungría, Corea) / instrumento de términos de intercambio & $0{,}22$, difiere de $0{,}033$ (potencia 5\%) / F $9{,}7$, interacción $\approx0$ & \textbf{no confirma} \\
+Modelo de límite fiscal (preregistro 6) & log: predice $-0{,}43$ (dato $+0{,}033$); pb: predice $+91$ (dato $+3{,}1$, \textit{wild} $0{,}09$) & \textbf{no lo explica} \\
+Riesgo de cola a 4 trimestres (preregistrada) & $0{,}047$; Holm $0{,}018$; 13 de 13; con las 23 hipótesis, Holm $0{,}13$ & \textbf{firme} en su familia \\
+\textit{Doom loop} (deuda $\times$ fragilidad) / pecado original & $-0{,}053$ / $-0{,}004$; Holm $1{,}00$ & no hay evidencia \\
+El riesgo de cola en cambios o fuera de muestra & $0{,}004$; 0 de 9 horizontes; $+3\%$ de error & \textbf{no hay evidencia} \\
+Resiliencia: directa y con la cola fuera de crisis & $-0{,}153$; $-0{,}024$; solo Driscoll--Kraay & sugerente \\
+Reservas $\times$ fragilidad & $-0{,}247$ (\textit{wild} $0{,}08$); preregistrada con adecuación de reservas: Holm $0{,}29$ & exploratorio \\
+Resiliencia previa $\times$ riesgo de cola & $-0{,}028$ (\textit{wild} $0{,}06$) & exploratorio \\
+Amplificación en el núcleo de 11, sin crisis & $+0{,}034$ (\textit{wild} $0{,}015$); grupo \textit{ex post} & exploratorio \\
+Participación extranjera (preespecificada) & Holm $p=1{,}00$ & \textbf{no hay evidencia} \\
+Respaldo externo por país & $-0{,}004$ (\textit{wild} $0{,}90$) & \textbf{no hay evidencia} \\
+Eventos diarios de respaldo & \textit{swap} Fed 2020: $-20$ a $-22$ pp; desacople igual que sin línea & baja el nivel; \textbf{no} la transmisión \\
+Asimetría \textit{Backstop} / \textit{EMstress} & Holm $0{,}12$ / $0{,}24$; lugar 20 de 51 & \textbf{no hay evidencia} \\
+Umbrales de vigilancia (preregistrada) & tensión $p=0{,}13$; deuda $0{,}26$; AUROC fuera de muestra $0{,}49$; por país, no comunes & \textbf{no hay evidencia} \\
+Cola de los cambios del \textit{spread} (preregistrada) & cada riesgo la ensancha; la coincidencia no: $-0{,}046$ ($p=0{,}97$) & \textbf{no hay evidencia} \\
+Señales de mercado (preregistradas) & valor relativo: Sharpe neto $-4{,}07$; valor razonable: Clark--West $p=0{,}24$; cobertura: $p=0{,}13$ & \textbf{no hay evidencia} \\
+\midrule
+\multicolumn{3}{l}{\textit{Réplica de Chari et al.\ (2024) y validación del panel}} \\
+Fragilidad y \textit{spread} en niveles & $0{,}099$ (\textit{wild} $0{,}33$); $0{,}107$--$0{,}164$ con sus controles; 70\% es Turquía; con la DD de Merton, \textit{wild} $0{,}055$ & sugerente \\
+La fragilidad antecede al \textit{spread} & trimestral: cierre a cierre $0{,}025$ (\textit{wild} $0{,}21$); mensual: $0{,}013$ a un mes (\textit{wild} $<0{,}001$; 13 de 13) & trimestral, no; mensual, firme (no causal) \\
+Se mueven en el mismo trimestre & $0{,}037$ (\textit{wild} $0{,}008$); 13 de 13 países en pb & resiste el \textit{wild}; sujeto al sesgo de retroalimentación \\
+Bancos como unidad (preregistrada) & 0 de 6 pasan Holm; sistémicos $0{,}062$ vs.\ resto $0{,}022$; motor: 3 variantes, rangos $0{,}92$--$0{,}97$ & \textbf{no hay evidencia}; robusta al motor \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{frame}
+
+\begin{frame}{Anexo: Extensiones posteriores a la estimación (no preespecificadas)}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.80\textheight}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
+\toprule
+Extensión & Resultado & Qué cambia \\
+\midrule
+Frecuencia mensual (DD de Merton y EMBI diario) & La fragilidad antecede al \textit{spread} un mes: $0{,}013$ (\textit{wild} $<0{,}001$; 13 de 13 sin cada país); inversa, nada & El fechado: dentro del trimestre la fragilidad va primero (no causal) \\
+\addlinespace
+Instrumento granular (Gabaix--Koijen) & $F$ de $1{,}8$ a $3{,}2$; forma reducida nula; responde al \textit{spread} ($p=0{,}04$) & Nada: no identifica \\
+\addlinespace
+Panel ampliado & EMBI desde el CDS (+189 obs.) y Argentina con $\GaR$ homologado: $\beta_3$ entre $-0{,}011$ y $-0{,}002$ & Nada \\
+\addlinespace
+Eventos de respaldo (9, diarios) & \textit{Swap} Fed 2020: $-20$ a $-22$ pp en una semana; FCL, nada; desacople igual sin línea & Baja el nivel, no la transmisión \\
+\addlinespace
+Cola alta del \textit{spread} (cuantílica) & $\beta_3(\tau)$ de $-0{,}024$ a $-0{,}001$, nunca positiva; la fragilidad pesa más en $\tau$ alto ($0{,}19$) & Nada sobre H3 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{frame}
+
+\begin{frame}{Anexo: Pruebas preregistradas y revisión econométrica}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.80\textheight}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
+\toprule
+Extensión & Resultado & Qué cambia \\
+\midrule
+Prueba preregistrada (deuda, reservas, canal fiscal) & Deuda $\times$ riesgo de cola $+0{,}011$ (Holm $0{,}029$; 13 de 13); reservas, Holm $0{,}29$; efecto directo neto del canal fiscal $\approx0$ & La conclusión 4: regularidad de la muestra \\
+\addlinespace
+Revisión econométrica (CCE, PMG, coeficientes aleatorios, VAR) & Riesgo de cola: CCE \textit{wild} $0{,}016$; largo plazo $0{,}067$ ($p=0{,}006$); la fragilidad explica $<1\%$ de la varianza del \textit{spread} & La conclusión 3: largo plazo \\
+\addlinespace
+Pruebas macro preregistradas (horizonte, moneda, \textit{doom loop}) & Riesgo de cola a 4 trimestres $0{,}047$ (Holm $0{,}018$); \textit{doom loop} y pecado original, no & Más fuerte a 4 trimestres (en la muestra) \\
+\addlinespace
+Pruebas micro preregistradas (87 bancos) & Ninguna de 6 pasa Holm (mín.\ $0{,}88$); filiales = nacionales; estatal, signo opuesto; con $\geq4$ bancos la fragilidad pierde significancia & No hay canal bancario demostrable \\
+\addlinespace
+Umbrales de vigilancia preregistrados (agrupados y por país) & Ninguno pasa Holm; con más tensión los riesgos domésticos pesan \emph{menos}; umbrales por país no transferibles; alerta temprana = azar & Regla continua: más deuda, más vigilancia del riesgo de cola \\
+\addlinespace
+Réplica externa e instrumento (preregistro 5) & Hungría y Corea: signo igual, magnitud siete veces mayor, potencia 5\%; términos de intercambio: F $9{,}7$ (débil), interacción nula & El hallazgo central es de la muestra original \\
+\addlinespace
+Modelo de límite fiscal calibrado (preregistro 6) & Predice la interacción en pb ($+91$) y la contraria en logaritmos ($-0{,}43$); en pb el dato es $+3{,}1$, no firme & El modelo no explica el hallazgo \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{frame}
+
+\begin{frame}{Anexo: Preguntas de portafolio y corrección global (preregistros 7 y 8)}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.54\textheight}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
+\toprule
+Prueba (mensual, desde 2015) & Resultado & Qué cambia \\
+\midrule
+Señal de valor relativo (Q1) & La fragilidad no ordena los retornos entre países: Sharpe bruto $+0{,}01$, neto $-4{,}07$ & La precedencia mensual no es una señal entre países \\
+\addlinespace
+Cola de los cambios del \textit{spread} (Q3) & Fragilidad alta la ensancha ($+0{,}062$; $p=0{,}005$), cola alta apenas ($+0{,}019$; $0{,}085$); la coincidencia no: $-0{,}046$ ($0{,}97$). El VaR condicional no mejora al EWMA ($p=0{,}47$) & Simultaneidad sin amplificación, también en la cola de los cambios \\
+\addlinespace
+Valor razonable (Q2) y cobertura condicional (Q4) & Clark--West $p=0{,}24$; frente a un beta móvil, $p=0{,}13$ & Los fundamentos describen niveles, no pronostican cambios \\
+\addlinespace
+\textit{Nowcast} del $\GaR$ (Q6) y deuda en pb (Q5) & Correlación $0{,}42$ con el $\GaR$ oficial (criterio $>0{,}9$): no valida; interacción en pb $-1{,}1$ ($p=0{,}73$) & Nada \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}
+\begin{block}{Corrección sobre las 23 hipótesis primarias de los ocho preregistros}
+\scriptsize Con Holm queda una sola bajo el 5\%: el signo de la réplica en Hungría y Corea ($0{,}046$), que no cambia su veredicto porque la magnitud es siete veces la original. Le siguen el riesgo de cola a un año ($0{,}13$) y la deuda $\times$ riesgo de cola ($0{,}31$). Con Benjamini--Yekutieli, ninguna.
+\end{block}
+\end{frame}
+
+\begin{frame}{Anexo: Robustez a la muestra y a la medición}
 \centering
 \small
 \begin{adjustbox}{max width=\textwidth}
@@ -616,6 +869,7 @@ Reservas previas a la muestra & $-0{,}073$ & $0{,}30$ & $-4{,}3$ & $0{,}13$ \\
 Ejercicio & ¿Cambia la conclusión? \\
 \midrule
 Agregar Argentina (14 países, 799 obs.) & No \\
+Solo las 10 economías de historia larga & No \\
 \textit{Expected Shortfall} en vez de $\GaR$ & No \\
 Sin el EMBI empalmado del FMI; desde 2010 & No \\
 \textit{Spread} de cierre en vez del promedio & Niveles: no. Cambios: desaparece la precedencia \\
@@ -628,7 +882,7 @@ Todo en puntos básicos & Más favorable, pero no resiste el \textit{wild bootst
 \end{adjustbox}
 \end{frame}
 
-\begin{frame}{Anexo: logaritmos vs.\ niveles}
+\begin{frame}{Anexo: Logaritmos vs.\ niveles}
 \centering
 \footnotesize
 \begin{tabular}{llcc}
@@ -667,6 +921,33 @@ $N$ & 765 & 799 \\
 \vspace{6pt}
 
 \footnotesize Su $\GaR$ se estimó sin el bloque de tasas y con una ventana más corta: por eso es robustez.
+\end{frame}
+
+\begin{frame}{Anexo: Limitaciones y trabajo futuro}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{alertblock}{Limitaciones}
+\small
+\begin{itemize}
+\item 13 países: en niveles solo el \textit{wild bootstrap} está bien calibrado, con potencia de 35\% y 67\%.
+\item Cada coeficiente de nivel depende de un país y tiene sesgo de retroalimentación.
+\item El piso de $\JLoss$: un cuarto de las observaciones no informa (con la DD de Merton la asociación mejora; la interacción sigue nula).
+\item La simultaneidad se concentra desde 2020.
+\item Datos trimestrales: no separan la precedencia dentro del trimestre.
+\end{itemize}
+\end{alertblock}
+\column{0.48\textwidth}
+\begin{block}{Trabajo futuro}
+\small
+\begin{itemize}
+\item Más economías (con EMBI directo, no imputado).
+\item Frecuencia diaria y un $\GaR$ mensual.
+\item La distancia al incumplimiento como medida principal, con la batería completa.
+\item Variación exógena bancaria (el instrumento granular fue débil).
+\item Más eventos de respaldo.
+\end{itemize}
+\end{block}
+\end{columns}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Referencias principales}
