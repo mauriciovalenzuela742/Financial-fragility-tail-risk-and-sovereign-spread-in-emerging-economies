@@ -3,7 +3,7 @@ title: "Octava evaluación: la tesis después de las correcciones de la séptima
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, lectura integral"
 ---
 
-*Evaluación de la versión del commit `8a43ce9` (empujado a `origin/master`). La tesis tiene 167 pp. y el paper
+*Evaluación de la versión del commit `fa1151e` (empujado a `origin/master`). La tesis tiene 167 pp. y el paper
 147. Usa la misma rúbrica de 8 criterios y pesos de `evaluacion_experta.md`, en la escala de 1,0 a 7,0.*
 
 *Esta ronda tiene dos preguntas:*
@@ -22,9 +22,9 @@ CEMLA). Todo son asociaciones.*
 
 | Cambio | Commit | Efecto |
 |---|---|---|
-| Párrafo de vulnerabilidad: concepto → medición tradicional → cuantil condicional → estructura temporal | `f7e2eb2` | El riesgo económico queda definido y enlazado con el $GaR$ |
-| Estructura temporal del $GaR$ en el marco, la metodología y R2-H3 (tesis y paper) | `8a43ce9` | R2-H3 deja de ser un hallazgo aislado |
-| La deuda entre los moderadores; objetivos 1 y 4 precisados; subsección GaR del paper; pregunta 12 de la defensa | `8a43ce9` | Coherencia |
+| Párrafo de vulnerabilidad: concepto → medición tradicional → cuantil condicional → estructura temporal | `498d037` | El riesgo económico queda definido y enlazado con el $GaR$ |
+| Estructura temporal del $GaR$ en el marco, la metodología y R2-H3 (tesis y paper) | `fa1151e` | R2-H3 deja de ser un hallazgo aislado |
+| La deuda entre los moderadores; objetivos 1 y 4 precisados; subsección GaR del paper; pregunta 12 de la defensa | `fa1151e` | Coherencia |
 
 ---
 
@@ -77,7 +77,7 @@ Lo escribí en la ronda anterior y debo corregirlo.
 **(a) "El horizonte de un trimestre se fijó al inicio de la investigación, siguiendo la plataforma de CEMLA"**
 (`03_metodologia.tex`, Sección `sec:gar`, y en el paper). Lo documentado es solo lo siguiente:
 - el código fija `H = 1` (`1_Codigo/GaR/phase2_gar_panel.py:24`);
-- R2-H3 se preregistró después (`f820594`).
+- R2-H3 se preregistró después (`3d5380e`).
 
 Nada en el repositorio dice que $h=1$ se eligiera "siguiendo a CEMLA", y la plataforma de Ossandon Busch et al.
 (2022) admite varios horizontes. Hay que reemplazar la frase por la razón verdadera. Si la razón es que el panel

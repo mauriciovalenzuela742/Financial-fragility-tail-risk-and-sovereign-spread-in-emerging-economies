@@ -97,16 +97,16 @@ recaudación y la capacidad de pago.
 # 5. Registro de aplicación (27 de octubre de 2026)
 
 **Texto oficial.**
-- La portada, el resumen y la introducción del autor quedaron como oficiales, con los cambios de la sección 4 (commit `9e22a44`).
+- La portada, el resumen y la introducción del autor quedaron como oficiales, con los cambios de la sección 4 (commit `4dd9bed`).
 - Además se recuperó el escudo de la Universidad desde el PDF oficial: el archivo `imagenes/escudoU2014.pdf` del repositorio era un marcador vacío de 865 bytes.
 
 **Pasada con las pautas del humanizer.** Se aplicaron a mano, porque el modelo de 12B no corre en esta máquina. Las pautas son las de `prompt_format.json`: reorganizar, variar el largo de las oraciones, cortar rodeos y anuncios, preferir lo concreto, y conservar todo hecho, cifra, nombre y cita.
 
 | Bloque | Commit |
 |---|---|
-| Marco teórico y metodología | `e0dba9f` |
-| Resultados | `f3f6073` |
-| Discusión, conclusiones y trabajos futuros | `523e5ae` |
+| Marco teórico y metodología | `c2501b7` |
+| Resultados | `ede595f` |
+| Discusión, conclusiones y trabajos futuros | `f9154d1` |
 | Anexos de robustez, moderadores, extensiones y portafolio | este commit |
 
 **Lo que no se tocó.**

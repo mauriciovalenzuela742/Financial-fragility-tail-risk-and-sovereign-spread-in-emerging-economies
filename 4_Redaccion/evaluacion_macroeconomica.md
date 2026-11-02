@@ -3,7 +3,7 @@ title: "Evaluación macroeconómica de la tesis"
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, lente de un macroeconomista (21 de octubre de 2026)"
 ---
 
-*Evaluación de la versión del commit `c3dbc1b`: tesis de 144 pp. con el capítulo de resultados en 44 pp.
+*Evaluación de la versión del commit `7dd8ae6`: tesis de 144 pp. con el capítulo de resultados en 44 pp.
 y las baterías en el Anexo D. Usa la misma rúbrica que `evaluacion_experta.md` (proxy de la pauta del
 Magíster en Economía Aplicada, escala de 1,0 a 7,0) y cambia la pregunta de fondo. La evaluación anterior
 juzgaba sobre todo la econometría; esta pregunta si la tesis dice algo creíble y útil sobre la
@@ -138,7 +138,7 @@ literatura rara vez se resuelve en una tesis de magíster.
 
 # 4. Registro de aplicación (21 de octubre de 2026)
 
-Preregistro 2: `preregistro_macro.md`, commit `f820594`, anterior a los datos. Cifras en
+Preregistro 2: `preregistro_macro.md`, commit `3d5380e`, anterior a los datos. Cifras en
 `NUMEROS_CANONICOS_BBG.md`, §28.
 
 | # | Estado | Resultado |

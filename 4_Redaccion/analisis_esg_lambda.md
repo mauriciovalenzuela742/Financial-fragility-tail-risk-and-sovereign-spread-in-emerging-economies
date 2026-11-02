@@ -3,7 +3,7 @@ title: "ESG, gobernanza y el peso de los factores externos y domésticos en el s
 subtitle: "Resultados del preregistro 9 (análisis aparte de la tesis), 28 de octubre de 2026"
 ---
 
-*Este informe reporta el preregistro 9 (`4_Redaccion/preregistro_esg.md`, commit `81c2d9c`), escrito antes
+*Este informe reporta el preregistro 9 (`4_Redaccion/preregistro_esg.md`, commit `852f12a`), escrito antes
 de descargar los datos. Es un análisis aparte, con su propia familia de Holm: no entra en las 23 hipótesis
 de la tesis ni cambia ninguna cifra canónica (`verificar_canonicos.py`: 140 de 140). Las métricas no son del
 autor (JLoss: Chari et al., 2024; GaR: Adrian, Boyarchenko y Giannone, 2019, con CEMLA). Todo son
@@ -226,7 +226,7 @@ La conclusión de la tesis ("no significativo") no cambia.
 - La exploración previa de `p69` daba otros valores (−0,45 y +1,44, N = 647) porque incluía a Argentina,
   que la plantilla no cubre. Los de esta tabla mantienen la muestra de la tesis.
 - *Hallazgo lateral:* `causal_bbg.csv` es anterior a la integración de Argentina en `Panel_bloomberg.csv`
-  (commit `10f64ea`, 29-09-2026). Volver a correr `p3_causal_fase5.py` completo hoy cambiaría también las
+  (commit `df16461`, 29-09-2026). Volver a correr `p3_causal_fase5.py` completo hoy cambiaría también las
   otras filas de la batería causal (pasa a 14 países). Por eso no se regeneró el archivo: solo se
   recalculó la triple interacción con la muestra original.
 
@@ -273,9 +273,9 @@ La conclusión de la tesis ("no significativo") no cambia.
 
 | Paso | Archivo | Commit |
 |---|---|---|
-| Preregistro | `4_Redaccion/preregistro_esg.md` | `81c2d9c` |
-| Datos | `1_Codigo/Panel/bbg/p67_datos_esg.py` → `2_Datos/esg_wb_anual.csv` | `7647c2c` |
-| Índices | `bbg/p68_indice_esg.py` → `esg_indice_anual_bbg.csv`, `esg_trimestral_bbg.csv`, `paper_p68_numeros.csv` | `b843ea1` |
+| Preregistro | `4_Redaccion/preregistro_esg.md` | `852f12a` |
+| Datos | `1_Codigo/Panel/bbg/p67_datos_esg.py` → `2_Datos/esg_wb_anual.csv` | `51c9534` |
+| Índices | `bbg/p68_indice_esg.py` → `esg_indice_anual_bbg.csv`, `esg_trimestral_bbg.csv`, `paper_p68_numeros.csv` | `21826c6` |
 | E1–E3 y exploratorio | `bbg/p69_esg_spread.py` → `paper_p69_numeros.csv` | este commit |
 | λ, E4–E5 y Holm | `bbg/p70_lambda.py` → `paper_p70_numeros.csv` | este commit |
 

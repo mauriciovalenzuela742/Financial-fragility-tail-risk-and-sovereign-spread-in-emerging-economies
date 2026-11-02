@@ -3,7 +3,7 @@ title: "Evaluación microeconómica de la tesis"
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, lente de un microeconomista (organización industrial bancaria, finanzas bancarias, información, microeconometría), 21 de octubre de 2026"
 ---
 
-*Evaluación de la versión del commit `73970c2` (tesis de 144 pp.). Usa la misma rúbrica de 8 criterios y
+*Evaluación de la versión del commit `31a053c` (tesis de 144 pp.). Usa la misma rúbrica de 8 criterios y
 pesos de `evaluacion_experta.md` (escala de 1,0 a 7,0). La econométrica se preguntaba si la inferencia es
 correcta, y la macro, si la tesis dice algo creíble sobre el riesgo soberano. Esta pregunta **si la
 medida de fragilidad y el mecanismo bancario tienen microfundamentos sólidos, y si la evidencia
@@ -23,7 +23,7 @@ Qué revisaría un microeconomista, en orden, y cómo:
 | 2 | ¿La agregación banco → país conserva la información? | Ver cuántos bancos tiene cada sistema, el peso del mayor banco y qué hace la saturación de la malla | `03_metodologia.tex:147`; `Bloomberg_extraction/output/*/mktcap_*.csv` |
 | 3 | ¿El canal bancario está microfundado? | Buscar el canal concreto por el que un banco frágil encarece la deuda soberana: tenencia de bonos soberanos (*home bias*), garantía implícita de rescate (*too-big-to-fail*), dilución (Acharya–Drechsler–Schnabl) | `02_marco_teorico.tex:18–24` |
 | 4 | ¿Hay heterogeneidad entre bancos que la tesis ignore? | Estatales frente a privados, grandes frente a chicos, bancos con más o menos bonos soberanos | No se trata en la tesis |
-| 5 | ¿La estructura de mercado importa? | La concentración (H4b), el modelo de Cournot que la tesis eliminó y su predicción distintiva | `07_trabajos_futuros.tex:17`; commit `af71bbf` |
+| 5 | ¿La estructura de mercado importa? | La concentración (H4b), el modelo de Cournot que la tesis eliminó y su predicción distintiva | `07_trabajos_futuros.tex:17`; commit `01337c2` |
 | 6 | ¿Incentivos y riesgo moral? | Si la garantía implícita reduce la disciplina de mercado del precio de las acciones bancarias, lo que contamina la DD de Merton | No se trata |
 | 7 | ¿Quién fija el precio? | El inversionista marginal del EMBI frente al de las acciones bancarias; la prueba de participación extranjera | `04_resultados.tex` (§ participación extranjera) |
 | 8 | ¿Se usa la variación a nivel de banco para identificar? | Hay 113 bancos con balances y capitalización diaria; la estimación se hace solo con el agregado país. El instrumento granular fue débil | `04_resultados.tex:899`; `p36_giv_granular.py` |
@@ -66,7 +66,7 @@ repositorio.
 
 ## 3.2 Marco teórico — 5,6
 - **Faltan los modelos de organización industrial bancaria** que la propia investigación desarrolló:
-  - El modelo de Cournot con amplificación por concentración se eliminó en el commit `af71bbf`.
+  - El modelo de Cournot con amplificación por concentración se eliminó en el commit `01337c2`.
   - `07_trabajos_futuros.tex:17` despacha la concentración en una frase ("la teoría no tiene una
     predicción unívoca"), cuando el trabajo previo sí tenía una predicción distintiva.
 - **No hay microfundamento del canal:**
@@ -271,9 +271,9 @@ a usarlos como unidad de análisis del mecanismo.
 
 # 5. Registro de aplicación (22 de octubre de 2026)
 
-Preregistro 3: `preregistro_micro.md`, commit `d73245f`, anterior a los datos a nivel de banco, con la
+Preregistro 3: `preregistro_micro.md`, commit `5be4d21`, anterior a los datos a nivel de banco, con la
 clasificación de propiedad fijada (`2_Datos/propiedad_bancos.csv`). El preregistro menciona 89 bancos; son
-87, y se declara. Resultados en `b94c301` (μ1, μ3–μ6) y en el commit de μ2. Cifras en
+87, y se declara. Resultados en `59f38f9` (μ1, μ3–μ6) y en el commit de μ2. Cifras en
 `NUMEROS_CANONICOS_BBG.md`, §30; texto en la Sección `sec:micro-prereg` de la tesis y del paper.
 
 | # | Estado | Resultado |

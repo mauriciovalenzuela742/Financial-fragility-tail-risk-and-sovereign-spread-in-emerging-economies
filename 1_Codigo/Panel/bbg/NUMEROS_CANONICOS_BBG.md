@@ -353,7 +353,7 @@ cola severa apenas excluye el cero.
 | IV sobre-identificado (3 instrumentos, +ToT commodities) | Sargan p = **0,0014 → RECHAZA** validez conjunta |
 | Triple interacción institucional (JxG × WGI) | +0,20 (t = +0,95), n.s. — WGI real 2018 (estado de derecho, `instituciones.csv` actualizado el 28-10-2026; con la plantilla provisional era +0,26, t = +0,89) |
 
-> **Fecha y muestra de `causal_bbg.csv`:** este archivo se generó con `Panel_bloomberg.csv` antes de integrar Argentina (commit `10f64ea`, 29-09-2026), con 13 países. Si hoy se corre `p3_causal_fase5.py` completo, la batería usa 14 países y cambian las filas de esta tabla (salvo la triple interacción, cuya muestra fija `instituciones.csv`). Ninguna de estas cifras entra en `verificar_canonicos.py` ni en el texto de la tesis. La triple interacción con el WGI real se recalculó con la muestra original (28-10-2026).
+> **Fecha y muestra de `causal_bbg.csv`:** este archivo se generó con `Panel_bloomberg.csv` antes de integrar Argentina (commit `df16461`, 29-09-2026), con 13 países. Si hoy se corre `p3_causal_fase5.py` completo, la batería usa 14 países y cambian las filas de esta tabla (salvo la triple interacción, cuya muestra fija `instituciones.csv`). Ninguna de estas cifras entra en `verificar_canonicos.py` ni en el texto de la tesis. La triple interacción con el WGI real se recalculó con la muestra original (28-10-2026).
 
 > **H1 (nivel):** respaldada por OLS (β1 = +2,79, t = 2,74) y proyecciones locales
 > (+4,62, t = 2,85). La evidencia IV es **más débil que en el panel de CDS**: con 13 países
@@ -1930,7 +1930,7 @@ más cuando es bajo (sin significancia).
 
 ## 26. Resiliencia preregistrada con datos trimestrales (2026-10-21)
 
-Preregistro: `4_Redaccion/preregistro_resiliencia.md`, commit `c492ca3`, anterior a los datos y a la
+Preregistro: `4_Redaccion/preregistro_resiliencia.md`, commit `54bd070`, anterior a los datos y a la
 estimación. Datos: `p41_datos_resiliencia.py` → `resiliencia_trimestral_bbg.csv`. QPSD: deuda del gobierno
 general (trimestral; central para Argentina, China y parte de Turquía; anual interpolada para Chile, India
 y Malasia, el 27 % de las obs. de R-H1). Reservas: Banco Mundial GEM, mensual (el FMI no expuso el código
@@ -1972,7 +1972,7 @@ largo plazo; la fragilidad no gana nada; la interacción sigue nula.
 
 ## 28. Pruebas macroeconómicas preregistradas (2026-10-21)
 
-Preregistro 2: `4_Redaccion/preregistro_macro.md`, commit `f820594`, anterior a los datos y la estimación.
+Preregistro 2: `4_Redaccion/preregistro_macro.md`, commit `3d5380e`, anterior a los datos y la estimación.
 Datos: `p44_datos_macro.py` → `macro_trimestral_bbg.csv` (QPSD deuda del gobierno general en moneda
 extranjera y local: Brasil, Colombia, Indonesia, México, Perú, Filipinas, Sudáfrica, Turquía; régimen grueso
 de Ilzetzki–Reinhart–Rogoff, `2_Datos/irr/`). GaR de mediano plazo: `GaR/individuals/nlhpc_gar_all18/
@@ -2009,7 +2009,7 @@ Correlación dentro del país entre D_{t−1} y D_{t−2}: 0,64. **Lectura:** el
 
 ## 30. Pruebas microeconómicas preregistradas: los bancos como unidad (2026-10-22)
 
-Preregistro 3: `4_Redaccion/preregistro_micro.md`, commit `d73245f`, anterior a los datos a nivel de banco
+Preregistro 3: `4_Redaccion/preregistro_micro.md`, commit `5be4d21`, anterior a los datos a nivel de banco
 (menciona 89 bancos; son 87). Fuentes: `p46`–`p51` → `paper_p46…p51_numeros.csv`; panel
 `banco_trimestral_bbg.csv` (87 bancos, 6.684 banco-trimestres). p unilateral del wild por país (Webb, 999) en la
 dirección predicha; Holm sobre la familia de seis.
@@ -2046,7 +2046,7 @@ propiedad no ordena la transmisión como predice el rescate. La medida es robust
 
 ## 31. Umbrales de vigilancia preregistrados (2026-10-22)
 
-Preregistro 4: `4_Redaccion/preregistro_umbrales.md`, commit `7ad3810`, anterior a toda estimación. Fuentes:
+Preregistro 4: `4_Redaccion/preregistro_umbrales.md`, commit `a733687`, anterior a toda estimación. Fuentes:
 `p52_umbrales.py` → `paper_p52_numeros.csv` y `umbrales_pais_bbg.csv`; `p53_alerta_temprana.py` →
 `paper_p53_numeros.csv`; `p55_medidas_sistemicas.py` → `paper_p55_numeros.csv`.
 
@@ -2132,7 +2132,7 @@ interacción preregistrada pasa de firme a sugerente.
 
 ## 33. Réplica externa (N2) e instrumento de términos de intercambio (N1) (2026-10-22)
 
-Preregistro 5: `4_Redaccion/preregistro_n1n2.md`, commit `7df0427`, anterior a los datos de las economías nuevas.
+Preregistro 5: `4_Redaccion/preregistro_n1n2.md`, commit `6a9ba1f`, anterior a los datos de las economías nuevas.
 Fuentes: `p57_replica_externa.py` → `paper_p57_numeros.csv`, `replica_externa_bbg.csv`; `p58_iv_choques.py` →
 `paper_p58_numeros.csv`.
 
@@ -2171,7 +2171,7 @@ Desviaciones declaradas respecto del preregistro:
 
 ## 34. Modelo de límite fiscal calibrado (N3) (2026-10-22)
 
-Preregistro 6: `4_Redaccion/preregistro_modelo.md`, commit `90f0adf`. Fuente: `p59_modelo.py` →
+Preregistro 6: `4_Redaccion/preregistro_modelo.md`, commit `eaf698d`. Fuente: `p59_modelo.py` →
 `paper_p59_numeros.csv`, `modelo_grilla_bbg.csv` y `paper_p59n_numeros.csv` (la parte en niveles).
 
 **Calibración** (muestra de la prueba D4 × deuda, N = 719):
@@ -2226,7 +2226,7 @@ significancia con ambos.
 
 ## 36. Preregistro 7: señal de valor relativo (Q1) y cola de los cambios del spread (Q3) (2026-10-23)
 
-Preregistro: `4_Redaccion/preregistro_quant.md`, commit `d968986`, anterior a todo retorno. Código:
+Preregistro: `4_Redaccion/preregistro_quant.md`, commit `885962c`, anterior a todo retorno. Código:
 `p60_senal_dd.py` → `paper_p60_numeros.csv`, `fragilidad_mensual_lag_bbg.csv` (DD con el balance desde t+3;
 3 403 país-meses, 13 economías); `p62_cola_cambios.py` → `paper_p62_numeros.csv`. Evaluación desde 2015-01
 (139 meses; 10,8 países por mes en promedio). Retorno r = −7·Δs/1e4 + s/(12·1e4).
@@ -2279,7 +2279,7 @@ Desviaciones declaradas:
 
 ## 37. Preregistro 8: valor razonable (Q2), cobertura condicional (Q4), nowcast del GaR (Q6) y deuda × riesgo de cola en pb (Q5) (2026-10-23)
 
-Preregistro: `4_Redaccion/preregistro_quant2.md`, commit `fc920b3`, anterior a toda estimación. Código:
+Preregistro: `4_Redaccion/preregistro_quant2.md`, commit `d8532ce`, anterior a toda estimación. Código:
 `p61_valor_razonable.py`, `p63_cobertura.py`, `p64_nowcast_gar.py` (→ `gar_nowcast_mensual.csv`) y
 `p65_deuda_pb_mensual.py`; cifras en `paper_p61/p63/p64/p65_numeros.csv`. Evaluación desde 2015-01.
 

@@ -3,7 +3,7 @@ title: "Evaluación de la tesis desde los mercados financieros y la política ma
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, lente de un economista de estabilidad financiera"
 ---
 
-*Evaluación de la versión del commit `1560a4b` (tesis de 149 pp.). Usa la misma rúbrica de 8 criterios y
+*Evaluación de la versión del commit `0da8bb2` (tesis de 149 pp.). Usa la misma rúbrica de 8 criterios y
 pesos de `evaluacion_experta.md` (escala de 1,0 a 7,0). Las rondas anteriores preguntaban si la inferencia
 es correcta (econométrica), si la tesis dice algo creíble sobre el riesgo soberano (macro) y si el canal
 bancario tiene microfundamentos (micro). Esta pregunta **qué haría con la tesis un banco central o un
@@ -325,7 +325,7 @@ que también es una conclusión de política.
 
 # 5. Registro de aplicación (22 de octubre de 2026)
 
-Preregistro 4: `preregistro_umbrales.md`, commit `7ad3810`, anterior a toda estimación. Cifras en
+Preregistro 4: `preregistro_umbrales.md`, commit `a733687`, anterior a toda estimación. Cifras en
 `NUMEROS_CANONICOS_BBG.md`, §31; texto en la Sección `sec:umbrales-prereg` de la tesis y del paper, en las
 implicancias y en las conclusiones.
 

@@ -3,7 +3,7 @@ title: "Séptima evaluación: la tesis después de las correcciones de la sexta 
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, lectura integral"
 ---
 
-*Evaluación de la versión del commit `3ff5960` (empujado a `origin/master`), más la reescritura del párrafo
+*Evaluación de la versión del commit `eac2ee8` (empujado a `origin/master`), más la reescritura del párrafo
 de vulnerabilidad macroeconómica de la introducción hecha en esta ronda. La tesis tiene 167 pp. Usa la
 misma rúbrica de 8 criterios y pesos de `evaluacion_experta.md`, en la escala de 1,0 a 7,0.*
 
@@ -21,12 +21,12 @@ CEMLA). Todo son asociaciones.*
 
 | Cambio | Commit | Efecto |
 |---|---|---|
-| `p60`–`p66` en el comando único; 140 cifras canónicas (140 de 140 coinciden) | `247382d` | El comando único vuelve a cubrir todas las cifras de la tesis |
-| Holm, BH y BY sobre las 23 hipótesis primarias | `247382d` | Solo el signo de la réplica externa queda bajo 0,05 con Holm (0,046), sin cambiar el veredicto; con BY, ninguna |
-| Introducción con dos tipos de preregistro; Q3 en las conclusiones; Q1–Q6 en `preparacion_defensa.md` | `247382d` | Desaparece la promesa de una inferencia "sobre todos" sin respaldo |
-| Anexo G propio para las preguntas de portafolio; resumen de ~410 palabras | `247382d` | El Anexo F vuelve a reunir solo lo que extiende la tesis |
-| Lizarazo (2013) y Yue (2010) | `247382d` | Las extensiones del modelo quedan referenciadas |
-| `tesis_latex.zip` autocontenido; PDF de 167 pp. actualizado | `9780161`, `3ff5960` | Entrega lista |
+| `p60`–`p66` en el comando único; 140 cifras canónicas (140 de 140 coinciden) | `e147022` | El comando único vuelve a cubrir todas las cifras de la tesis |
+| Holm, BH y BY sobre las 23 hipótesis primarias | `e147022` | Solo el signo de la réplica externa queda bajo 0,05 con Holm (0,046), sin cambiar el veredicto; con BY, ninguna |
+| Introducción con dos tipos de preregistro; Q3 en las conclusiones; Q1–Q6 en `preparacion_defensa.md` | `e147022` | Desaparece la promesa de una inferencia "sobre todos" sin respaldo |
+| Anexo G propio para las preguntas de portafolio; resumen de ~410 palabras | `e147022` | El Anexo F vuelve a reunir solo lo que extiende la tesis |
+| Lizarazo (2013) y Yue (2010) | `e147022` | Las extensiones del modelo quedan referenciadas |
+| `tesis_latex.zip` autocontenido; PDF de 167 pp. actualizado | `bdd1775`, `eac2ee8` | Entrega lista |
 
 Verifiqué las cinco acciones en el texto y en el código. Están aplicadas como dice el registro de la sexta
 ronda.

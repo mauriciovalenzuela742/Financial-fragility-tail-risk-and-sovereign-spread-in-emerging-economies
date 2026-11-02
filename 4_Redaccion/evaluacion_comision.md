@@ -3,7 +3,7 @@ title: "Evaluación de la versión reencuadrada, leída como la leería la comis
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, quinta ronda"
 ---
 
-*Evaluación de la versión del commit `7f47e6b`: tesis de 162 pp., de las cuales 83 son de cuerpo
+*Evaluación de la versión del commit `96f0ed7`: tesis de 162 pp., de las cuales 83 son de cuerpo
 (capítulos 1–7, pp. 1–83; resultados, pp. 34–73). Usa la misma rúbrica de 8 criterios y pesos de
 `evaluacion_experta.md`, en la escala de 1,0 a 7,0.*
 
@@ -25,7 +25,7 @@ con la plataforma de CEMLA). Todo son asociaciones, no causalidad. Este document
 | 2 | ¿Cada resultado lleva en todas partes la etiqueta de la escala de evidencia que le corresponde? | Buscar en todo el texto cada afirmación sobre deuda × riesgo de cola, fragilidad y riesgo de cola |
 | 3 | ¿El orden del documento sigue el orden de firmeza que el propio documento declara? | Comparar el orden de las secciones del Capítulo 4 con el del resumen |
 | 4 | ¿Las cifras coinciden con las canónicas? | Cotejar con `NUMEROS_CANONICOS_BBG.md` |
-| 5 | ¿Qué cambió en los criterios desde la última nota (6,4 en `plan_nota7.md`)? | El reencuadre (`7f47e6b`) y la preparación de la defensa |
+| 5 | ¿Qué cambió en los criterios desde la última nota (6,4 en `plan_nota7.md`)? | El reencuadre (`96f0ed7`) y la preparación de la defensa |
 
 ---
 

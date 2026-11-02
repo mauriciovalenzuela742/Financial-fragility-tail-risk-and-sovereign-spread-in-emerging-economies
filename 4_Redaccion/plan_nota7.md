@@ -3,7 +3,7 @@ title: "Plan de investigación para llevar la evaluación a 7,0"
 subtitle: "Qué falta, criterio por criterio, en las cuatro evaluaciones con la misma rúbrica, y qué investigación lo cerraría"
 ---
 
-*Escrito el 22 de octubre de 2026, sobre la versión del commit posterior a `9d1bf28`, con las
+*Escrito el 22 de octubre de 2026, sobre la versión del commit posterior a `a266486`, con las
 extensiones ya movidas al Anexo E. Usa la rúbrica de 8 criterios y pesos de `evaluacion_experta.md`.
 Las métricas no son del autor (JLoss: Chari et al., 2024; GaR: Adrian, Boyarchenko y Giannone, 2019,
 con CEMLA). Todo lo que se propone sigue la regla del proyecto: preregistro antes de los datos y
@@ -237,7 +237,7 @@ inferencia conjunta le quitó, y la réplica externa debería preregistrar como 
 
 # 7. Registro de aplicación de N1 y N2 (22 de octubre de 2026)
 
-Preregistro 5: `preregistro_n1n2.md`, commit `7df0427`. Cifras en NUMEROS §33; texto en la Sección
+Preregistro 5: `preregistro_n1n2.md`, commit `6a9ba1f`. Cifras en NUMEROS §33; texto en la Sección
 `sec:n1n2` de la tesis y del paper.
 
 | # | Estado | Resultado |
@@ -264,7 +264,7 @@ confirmado fuera de la muestra, y este no lo está. Nota estimada: **6,3–6,4**
 
 # 8. Registro de aplicación de N3 (22 de octubre de 2026)
 
-Preregistro 6: `preregistro_modelo.md`, commit `90f0adf`. Cifras en NUMEROS §34. Texto: el modelo en el
+Preregistro 6: `preregistro_modelo.md`, commit `eaf698d`. Cifras en NUMEROS §34. Texto: el modelo en el
 marco teórico (`sec:modelo-limite`) y su contraste en el hallazgo central (`sec:modelo-resultados`).
 
 | Predicción | Modelo | Datos | Resultado |

@@ -117,7 +117,7 @@ diaria banca–spread se acerca a cero después de los eventos, pero igual en lo
 hay desacople atribuible al respaldo.
 
 **V16. ¿Qué aprendió de la deuda, las reservas y los controles?**
-**R.** Con una prueba preregistrada (commit `c492ca3`, anterior a los datos) y datos trimestrales hay
+**R.** Con una prueba preregistrada (commit `54bd070`, anterior a los datos) y datos trimestrales hay
 un resultado firme y dos nulos. Donde hay más deuda pública, el riesgo de cola pesa más en el spread:
 una d.e. más de deuda eleva la semielasticidad de 0,043 (deuda media) a 0,054 (Holm p = 0,029; 13 de 13 sin cada
 país). La adecuación de reservas no atenúa la transmisión de la fragilidad (Holm 0,29). Y el efecto

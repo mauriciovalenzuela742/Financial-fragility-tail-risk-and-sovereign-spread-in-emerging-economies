@@ -3,7 +3,7 @@ title: "Novena evaluación: la tesis con el texto oficial del autor, la pasada d
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, lectura integral"
 ---
 
-*Evaluación de la versión del commit `05b31bb` (en `origin/master`). La tesis tiene 165 pp. Usa la misma
+*Evaluación de la versión del commit `57e68fb` (en `origin/master`). La tesis tiene 165 pp. Usa la misma
 rúbrica de 8 criterios y pesos de `evaluacion_experta.md`, en la escala de 1,0 a 7,0.*
 
 *Esta ronda tiene tres preguntas:*
@@ -23,10 +23,10 @@ CEMLA). Todo son asociaciones.*
 
 | Cambio | Commit | Efecto |
 |---|---|---|
-| Portada, resumen e introducción oficiales del autor; la comisión pasa a ser solo A. Corvalán | `9e22a44` | El resumen dice ahora lo que muestran los datos. La introducción pierde el párrafo de datos y la Sección 1.3 (hallazgos y contribuciones) |
-| Capítulos 2 a 7 y anexos redactados con las pautas del humanizer | `e0dba9f` … `5200305` | Prosa más directa. Un script verificó que no cambiara ninguna cifra, cita, referencia ni término de la escala de evidencia |
-| `instituciones.csv`: el WGI real de 2018 reemplaza a la plantilla | `57c5d44` | El Anexo B ya no tiene datos marcados como provisionales. La triple interacción sigue sin ser significativa |
-| README al día | `05b31bb` | Transparencia |
+| Portada, resumen e introducción oficiales del autor; la comisión pasa a ser solo A. Corvalán | `4dd9bed` | El resumen dice ahora lo que muestran los datos. La introducción pierde el párrafo de datos y la Sección 1.3 (hallazgos y contribuciones) |
+| Capítulos 2 a 7 y anexos redactados con las pautas del humanizer | `c2501b7` … `ba8e3f1` | Prosa más directa. Un script verificó que no cambiara ninguna cifra, cita, referencia ni término de la escala de evidencia |
+| `instituciones.csv`: el WGI real de 2018 reemplaza a la plantilla | `1b38d50` | El Anexo B ya no tiene datos marcados como provisionales. La triple interacción sigue sin ser significativa |
+| README al día | `57e68fb` | Transparencia |
 
 ---
 
@@ -145,7 +145,7 @@ interacción institucional sigue sin ser significativa:
 Era el único dato del Anexo B sin fuente verificada.
 
 **Hallazgo lateral, sin efecto en la tesis:** `causal_bbg.csv` es anterior a la integración de Argentina al
-panel (`10f64ea`). Si se corre `p3_causal_fase5.py` completo, cambian las otras filas de esa batería. Ninguna
+panel (`df16461`). Si se corre `p3_causal_fase5.py` completo, cambian las otras filas de esa batería. Ninguna
 de esas cifras está en `verificar_canonicos.py` ni en el texto de la tesis, pero `NUMEROS_CANONICOS_BBG.md`
 las cita. Conviene anotar ahí la fecha y la muestra con que se generaron.
 

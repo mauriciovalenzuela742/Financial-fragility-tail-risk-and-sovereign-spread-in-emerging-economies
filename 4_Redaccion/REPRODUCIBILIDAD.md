@@ -53,7 +53,7 @@ arrancando *después* de estos tres pasos:
 | Bloqueador | Dónde se necesita | Mitigación ya en el repo |
 |---|---|---|
 | **Bloomberg Terminal + licencia `blpapi`/`xbbg`** | `1_Codigo/Bloomberg_extraction/` (balances, capitalización bursátil, macro de 20 países) | Los 40 CSV ya extraídos (`output/<pais>/balance_*.csv`, `mktcap_*.csv`) y `output_macro/` están commiteados. |
-| **Cluster NLHPC** | Primera etapa del bootstrap de regresor generado C1 (`1_Codigo/GaR/individuals/nlhpc_gar_all18/p10_boot_gar_nlhpc.py`, B=500, ~172 min) | `gar_replicas_nlhpc.csv` (700.000 filas) ya commiteado (commit `4a4ffec`). La segunda etapa (`p10_boot_gar.py segunda_etapa`) es local y trivial. |
+| **Cluster NLHPC** | Primera etapa del bootstrap de regresor generado C1 (`1_Codigo/GaR/individuals/nlhpc_gar_all18/p10_boot_gar_nlhpc.py`, B=500, ~172 min) | `gar_replicas_nlhpc.csv` (700.000 filas) ya commiteado (commit `6ccd17d`). La segunda etapa (`p10_boot_gar.py segunda_etapa`) es local y trivial. |
 | **R** (no instalado en este entorno) | `crisis_interaccion.R`, `bateria_regresiones.R`, `eda_panel_bloomberg.R` — validación cruzada de los scripts Python equivalentes | No bloquea nada: son de **registro**, no de cómputo primario. Python (`p9_crisis_interaccion.py`, `p8_bateria_regresiones.py`) es la cadena vigente y reproduce los mismos números a 4 decimales (verificado y documentado en `NUMEROS_CANONICOS_BBG.md`). |
 
 Adicionalmente, cuatro pasos del pipeline **llaman a APIs externas** (IMF Datamapper, World
@@ -196,17 +196,17 @@ python bbg/p38_panel_ampliado.py                  # EMBI imputado desde el CDS y
 python bbg/p39_eventos_respaldo.py                # estudio de eventos diario de las líneas de respaldo
 python bbg/p40_tabla_compacta.py                  # tabla compacta M1-M4 del cuerpo del capítulo
 python bbg/p41_datos_resiliencia.py               # datos trimestrales QPSD, QEDS y GEM (red; cachea resiliencia_trimestral_bbg.csv)
-python bbg/p42_resiliencia_preregistrada.py       # pruebas preregistradas (preregistro_resiliencia.md, commit c492ca3)
+python bbg/p42_resiliencia_preregistrada.py       # pruebas preregistradas (preregistro_resiliencia.md, commit 54bd070)
 python bbg/p43_revision_econometrica.py           # CCE, PMG, coeficientes aleatorios, VAR mensual (~15 min)
 python bbg/p44_datos_macro.py                     # deuda en moneda extranjera/local (QPSD) y régimen cambiario (IRR, 2_Datos/irr)
 (cd ../GaR/individuals/nlhpc_gar_all18 && python gar_insample_horizonte.py GaR_panel_all18.xlsx 4 && \
    python gar_insample_horizonte.py GaR_panel_all18.xlsx 8)   # GaR de mediano plazo (~3 min cada uno)
-python bbg/p45_macro_preregistrada.py             # pruebas del preregistro 2 (preregistro_macro.md, commit f820594)
+python bbg/p45_macro_preregistrada.py             # pruebas del preregistro 2 (preregistro_macro.md, commit 3d5380e)
 ```
 
 ### Paso 2f — Pruebas microeconómicas preregistradas (2026-10-22)
 
-Preregistro 3: `4_Redaccion/preregistro_micro.md` (commit `d73245f`). Desde `1_Codigo/Panel/`. Cifras en
+Preregistro 3: `4_Redaccion/preregistro_micro.md` (commit `5be4d21`). Desde `1_Codigo/Panel/`. Cifras en
 `bbg/NUMEROS_CANONICOS_BBG.md`, §30.
 
 ```bash
@@ -223,7 +223,7 @@ python bbg/p51_cobertura_sistema.py               # mu6 y Holm de la familia (re
 
 ### Paso 2g — Umbrales de vigilancia preregistrados (2026-10-22)
 
-Preregistro 4: `4_Redaccion/preregistro_umbrales.md` (commit `7ad3810`). Desde `1_Codigo/Panel/`. Cifras en
+Preregistro 4: `4_Redaccion/preregistro_umbrales.md` (commit `a733687`). Desde `1_Codigo/Panel/`. Cifras en
 `bbg/NUMEROS_CANONICOS_BBG.md`, §31. Todo corre en un equipo de escritorio (p52 ≈ 15 min; p53 y p55, minutos).
 
 ```bash
@@ -235,7 +235,7 @@ U5 (iMaPP) no se ejecutó: la base del FMI exige acceso registrado.
 
 ### Paso 2h — Preguntas de portafolio y corrección global (2026-10-23)
 
-Preregistros 7 (`preregistro_quant.md`, commit `d968986`) y 8 (`preregistro_quant2.md`, commit `fc920b3`).
+Preregistros 7 (`preregistro_quant.md`, commit `885962c`) y 8 (`preregistro_quant2.md`, commit `d8532ce`).
 Desde `1_Codigo/Panel/`. Cifras en `bbg/NUMEROS_CANONICOS_BBG.md`, §36–§38. Todo corre en un equipo de
 escritorio (p60 reconstruye la DD mensual con el rezago del balance la primera vez, unos minutos).
 
@@ -340,7 +340,7 @@ Todos los valores de referencia completos y trazables:
 | 2 | Ruta absoluta hardcodeada (`C:/Users/HOME/Claude/proyects/Jloss/...`) en la celda 1 de `EDA_Panel_Final_bbg.ipynb` — único caso en todo el repo; si se clona en otra máquina/ruta, rompe con `FileNotFoundError`. | Cambiada a `os.path.abspath(".")`, consistente con el patrón `os.path.dirname(__file__)` que ya usan todos los `.py`. Verificado re-ejecutando el notebook con `nbclient`: mismos resultados. |
 | 3 | `p4_figuras.py` no copiaba sus 7 figuras a `4_Redaccion/tesis/imagenes/` pese a que el README decía que sí — la sincronía era manual y ya se había roto (figuras de `imagenes/` con timestamp de 3 días antes que las de `bbg/figuras/`). Riesgo: re-ejecutar el pipeline con datos actualizados no actualizaba la tesis. | `_save()` ahora escribe el PDF también en `4_Redaccion/tesis/imagenes/` en el mismo paso (mismo patrón que ya usaba `p5_robustez_arbitro.py` para `fig_ventanas_theta.pdf`). Verificado: `p4_figuras.py` re-ejecutado, las 7 figuras se actualizaron en ambas carpetas, y `latexmk -pdf main.tex` recompiló limpio (94 pp, 0 errores) contra las figuras nuevas. |
 | 4 | README "Reproducir" no mencionaba `p7b`/`p7c` (IV commodity ToT), `p8_bateria_regresiones.py`, `p9_crisis_interaccion.py`, `p9_diag_ryr.py`, `p9_robustez_gar_nocdiff.py` — todos vigentes y citados en `CONTROL_DE_VERSIONES.md`. | Añadidos a la lista de comandos de `../README.md`, en el orden correcto de dependencia. |
-| 5 | El notebook de EDA se perdió una sección al guardarse mal en una sesión anterior (`eda_08_efecto_marginal_regimen` quedó desactualizada). | Resuelto en la sesión previa a esta auditoría (commit `03cd8f3`): sección restaurada, notebook re-ejecutado con `nbclient` y guardado in-place. |
+| 5 | El notebook de EDA se perdió una sección al guardarse mal en una sesión anterior (`eda_08_efecto_marginal_regimen` quedó desactualizada). | Resuelto en la sesión previa a esta auditoría (commit `a672446`): sección restaurada, notebook re-ejecutado con `nbclient` y guardado in-place. |
 | 6 *(2026-09-19)* | `4_Redaccion/envios/paper_empirico/figuras/` y `envios/paper_teorico/figuras/` — copias propias de las figuras, un tercer punto de sincronización manual (además de `tesis/imagenes/`) — estaban desactualizadas desde 2026-09-01, antes de varias re-ejecuciones del pipeline. | Recopiadas desde `tesis/imagenes/` ya actualizado; ambos `main.tex` recompilados limpios (`paper_empirico` 49 pp, `paper_teorico` 31 pp, 0 errores). Documentado como Paso 3b, sigue siendo manual — no se automatizó porque un envío ya presentado a revista no debería sobrescribirse solo. |
 
 Riesgos documentados pero **sin corregir** (decisión: no forman parte del resultado vigente o

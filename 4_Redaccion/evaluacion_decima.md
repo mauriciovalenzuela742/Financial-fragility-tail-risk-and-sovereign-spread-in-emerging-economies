@@ -3,7 +3,7 @@ title: "Décima evaluación: la tesis después de las correcciones de la novena 
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, lectura integral"
 ---
 
-*Evaluación de la versión del commit `84cedad` (en `origin/master`). La tesis tiene 165 pp., el paper 147 y las
+*Evaluación de la versión del commit `0e3db4f` (en `origin/master`). La tesis tiene 165 pp., el paper 147 y las
 láminas 65. Usa la misma rúbrica de 8 criterios y pesos de `evaluacion_experta.md`, en la escala de 1,0 a
 7,0.*
 
@@ -67,10 +67,10 @@ En la ronda anterior agregué dos frases:
 
 **Lo que muestra el historial:**
 - *Resumen:* el autor escribió el texto oficial (27 de octubre), pero la herramienta reemplazó sus dos últimas
-  oraciones por los hallazgos que respaldan los datos y agregó la muestra (`9e22a44`). En la novena ronda le
+  oraciones por los hallazgos que respaldan los datos y agregó la muestra (`4dd9bed`). En la novena ronda le
   agregó además la cifra de 4,7 % y el enlace entre vulnerabilidad y riesgo económico.
 - *Introducción:* el texto oficial es del autor, con erratas corregidas por la herramienta. El párrafo de
-  síntesis al final de 1.2 lo redactó la herramienta y el autor lo aprobó (`84cedad`).
+  síntesis al final de 1.2 lo redactó la herramienta y el autor lo aprobó (`0e3db4f`).
 - *Además:* la misma declaración dice, en la etapa (iv), que la herramienta se usó en la "redacción y edición
   de la introducción". Las dos frases se contradicen entre sí.
 

@@ -10,7 +10,7 @@
 ## Progreso — Bloque A + V9 standalones (2026-09-09) — HECHO Y PUSHEADO
 
 Commits en `master` (subidos a `origin/main`, fast-forward):
-`14d9982` (recap + salidas EDA bbg) · `1bcfc20` (Cap. 3: DAG, convención D, estimandos).
+`6f1ed44` (recap + salidas EDA bbg) · `f69fc62` (Cap. 3: DAG, convención D, estimandos).
 Upstream configurado: `master` → `origin/main`.
 
 - **Deliverable 0 — HECHO.** Artifact: https://claude.ai/code/artifact/274b9c7c-56da-440e-8063-c9a314e298ed

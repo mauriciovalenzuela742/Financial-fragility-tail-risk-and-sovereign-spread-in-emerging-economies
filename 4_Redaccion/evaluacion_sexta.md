@@ -3,7 +3,7 @@ title: "Sexta evaluación: la tesis después de las correcciones de la comisión
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, lectura integral"
 ---
 
-*Evaluación de la versión del commit `e2dc9ce` (empujado a `origin/master`). La tesis tiene 167 pp.:
+*Evaluación de la versión del commit `c24aae7` (empujado a `origin/master`). La tesis tiene 167 pp.:
 cuerpo en las pp. 1–90 (resultados, pp. 34–74) y anexos desde la p. 91 (Anexo F, extensiones, desde la
 p. 137). Usa la misma rúbrica de 8 criterios y pesos de `evaluacion_experta.md`, en la escala de 1,0 a 7,0.*
 
@@ -22,12 +22,12 @@ CEMLA). Todo son asociaciones. Este documento no modifica la tesis.*
 
 | Cambio | Commit | Efecto |
 |---|---|---|
-| La deuda × riesgo de cola dice "regularidad de la muestra" en la apertura del capítulo, la Tabla de veredictos, la síntesis y la discusión | `60797c0` | Desaparece la doble lectura del resultado |
-| La sección de la deuda pasa a ser la 4.4, después de la simultaneidad | `60797c0` | El capítulo sigue el orden de firmeza que declara el resumen |
-| Corrección del indicador de crisis en las columnas con solo efectos fijos de país | `60797c0` | Error de código corregido; la lectura no cambia |
-| Contribuciones unificadas (seis en las tres listas); resumen de 658 a 505 palabras | `60797c0` | Coherencia |
-| Versión corta de la predefensa | `cbbc1b1`, `9868ab7` | Mejor comunicación |
-| Preregistro 7 (Q1, Q3) y preregistro 8 (Q2, Q4, Q5, Q6), integrados en el Anexo F, la síntesis y la discusión | `d968986`–`e2dc9ce` | Ninguna hipótesis pasa; Q3 extiende "simultaneidad sin amplificación" a la cola de los cambios |
+| La deuda × riesgo de cola dice "regularidad de la muestra" en la apertura del capítulo, la Tabla de veredictos, la síntesis y la discusión | `2090a9b` | Desaparece la doble lectura del resultado |
+| La sección de la deuda pasa a ser la 4.4, después de la simultaneidad | `2090a9b` | El capítulo sigue el orden de firmeza que declara el resumen |
+| Corrección del indicador de crisis en las columnas con solo efectos fijos de país | `2090a9b` | Error de código corregido; la lectura no cambia |
+| Contribuciones unificadas (seis en las tres listas); resumen de 658 a 505 palabras | `2090a9b` | Coherencia |
+| Versión corta de la predefensa | `a7652c2`, `68654cc` | Mejor comunicación |
+| Preregistro 7 (Q1, Q3) y preregistro 8 (Q2, Q4, Q5, Q6), integrados en el Anexo F, la síntesis y la discusión | `885962c`–`c24aae7` | Ninguna hipótesis pasa; Q3 extiende "simultaneidad sin amplificación" a la cola de los cambios |
 
 ---
 

@@ -61,7 +61,7 @@ el pecado original (deuda en moneda extranjera) se confirman. Un modelo de lími
 `p59`) predice la interacción en puntos básicos, no en logaritmos, donde predice el signo contrario. Con la inferencia conjunta sobre los cuatro
 preregistros (`p56`), la interacción resiste una permutación de la deuda entre economías con el riesgo de cola
 del año siguiente (p = 0,009), pero no con el del trimestre siguiente (p = 0,17), que pasa a sugerente.
-Fuera de la muestra no se confirma (preregistro 5, `7df0427`): en Hungría y Corea el signo se repite, pero la
+Fuera de la muestra no se confirma (preregistro 5, `6a9ba1f`): en Hungría y Corea el signo se repite, pero la
 interacción es siete veces la original y la diferencia se rechaza (potencia 5 %); un instrumento de términos de
 intercambio es débil para la interacción (F 9,7) y la estima nula. Es un resultado de la muestra original.
 
@@ -82,10 +82,10 @@ Escala de evidencia:
 | **1. Los dos riesgos coinciden** más de lo esperado: hay 168 observaciones con ambos en su tercil alto, 1,2 veces lo esperado descontado el calendario común (p = 0,0002) y 1,9 veces lo esperado bajo independencia pura. Además, la fragilidad **antecede** al riesgo de cola (0,405; wild p = 0,024) y no al revés, sin depender de un país ni del bloque bursátil del FCI. | Firme (la precedencia, a un trimestre y no causal) |
 | **2. Cuando coinciden, no hay evidencia de amplificación**: β₃ = −0,011 (DK p = 0,11; wild p = 0,89). Una prueba de equivalencia descarta una amplificación de más de un 35 % de la suma de las dos asociaciones, pero no una menor. | No hay evidencia |
 | **3. El riesgo económico agrega poco, pero es un fundamento de largo plazo**: 0,037 sobre el modelo de Chari et al. No aparece en los cambios ni mejora el pronóstico. Con cargas heterogéneas sobre los factores comunes (CCE) resiste el wild bootstrap (p = 0,016) y la exclusión de cada país, y tiene una relación de largo plazo con el spread (PMG: 0,067; p = 0,006). | Firme como asociación de nivel |
-| **4. Deuda y riesgo de cola: regularidad de la muestra, sin confirmación externa** (prueba preregistrada, commit `c492ca3`, datos trimestrales): una d.e. más de deuda eleva la semielasticidad de 0,043 (deuda media) a 0,054 (Holm p = 0,029; 13 de 13 sin cada país). Ninguna otra condición la modifica: ni la adecuación de reservas (Holm 0,29), ni la participación extranjera, ni el respaldo externo. El efecto directo de la fragilidad no se separa del canal fiscal. | Deuda: firme dentro de la muestra, sin confirmación externa (regularidad de la muestra); resto: no hay evidencia |
+| **4. Deuda y riesgo de cola: regularidad de la muestra, sin confirmación externa** (prueba preregistrada, commit `54bd070`, datos trimestrales): una d.e. más de deuda eleva la semielasticidad de 0,043 (deuda media) a 0,054 (Holm p = 0,029; 13 de 13 sin cada país). Ninguna otra condición la modifica: ni la adecuación de reservas (Holm 0,29), ni la participación extranjera, ni el respaldo externo. El efecto directo de la fragilidad no se separa del canal fiscal. | Deuda: firme dentro de la muestra, sin confirmación externa (regularidad de la muestra); resto: no hay evidencia |
 | **Extensiones (no preespecificadas):** a frecuencia mensual la fragilidad antecede al spread un mes; el instrumento granular es débil (F < 4); con 189 observaciones de EMBI imputado desde el CDS y con Argentina homologada nada cambia; las líneas swap de la Fed de 2020 bajaron el spread 20–22 pp, pero ninguna línea cambió la transmisión. | Ver `NUMEROS_CANONICOS_BBG.md` §21–25 |
-| **Los bancos como unidad de análisis** (preregistro 3, commit `d73245f`): ninguna de las seis hipótesis pasa Holm (mínimo 0,88). La asociación se concentra en los dos bancos sistémicos de cada economía (0,062 frente a 0,022), sin significancia; las filiales pesan igual que los nacionales y más banca estatal va con menos transmisión. JLoss es robusto a tres calibraciones del motor (Spearman 0,92–0,97; β₁ > 0). | No hay evidencia de un canal bancario |
-| **Umbrales de vigilancia** (preregistro 4, commit `7ad3810`): no hay un umbral de tensión financiera (p = 0,13) ni de deuda (0,26), y ningún indicador anticipa episodios de estrés fuera de la muestra (AUROC 0,49). Por país, los umbrales de deuda y de riesgo de cola no son comunes ni transferibles. Con más tensión, los riesgos domésticos pesan menos en el spread. | No hay evidencia de un umbral; la regla es continua |
+| **Los bancos como unidad de análisis** (preregistro 3, commit `5be4d21`): ninguna de las seis hipótesis pasa Holm (mínimo 0,88). La asociación se concentra en los dos bancos sistémicos de cada economía (0,062 frente a 0,022), sin significancia; las filiales pesan igual que los nacionales y más banca estatal va con menos transmisión. JLoss es robusto a tres calibraciones del motor (Spearman 0,92–0,97; β₁ > 0). | No hay evidencia de un canal bancario |
+| **Umbrales de vigilancia** (preregistro 4, commit `a733687`): no hay un umbral de tensión financiera (p = 0,13) ni de deuda (0,26), y ningún indicador anticipa episodios de estrés fuera de la muestra (AUROC 0,49). Por país, los umbrales de deuda y de riesgo de cola no son comunes ni transferibles. Con más tensión, los riesgos domésticos pesan menos en el spread. | No hay evidencia de un umbral; la regla es continua |
 | **Réplica de Chari et al.**: elasticidad de 0,099 (DK p = 0,003; wild p = 0,33) y de 0,107–0,164 con sus controles. Desaparece con los seis controles domésticos, y Turquía aporta el 70 % del coeficiente. | Sugerente |
 
 Números canónicos completos y trazables:
@@ -190,7 +190,7 @@ python p70_lambda.py         # modelo lambda, E4-E5 y Holm -> paper_p70_numeros.
 
 El punto de partida es la tesis de Barneche, Grezzi y Panario (2024, ORT Uruguay), que relaciona un índice ESG
 soberano con el EMBI, junto con Tebaldi, Nguyen y Zuluaga (2018). Tiene preregistro propio
-([`preregistro_esg.md`](4_Redaccion/preregistro_esg.md), commit `81c2d9c`) y familia de Holm propia (E1–E5). No
+([`preregistro_esg.md`](4_Redaccion/preregistro_esg.md), commit `852f12a`) y familia de Holm propia (E1–E5). No
 entra en las 23 hipótesis de la tesis ni cambia sus cifras canónicas.
 
 | | Resultado | Veredicto |
@@ -305,5 +305,5 @@ use [`CITATION.cff`](CITATION.cff).
 | Evaluación experta (2026-10-21) | `p33`: simultaneidad con nula de calendario (1,2×), precedencia robusta a excluir países y al GaR sin bloque bursátil, prueba de equivalencia (se descarta amplificación > 35 % de la suma) |
 | Evaluaciones séptima y octava (oct-2026) | Párrafo de vulnerabilidad → GaR reescrito; horizonte h = 1 justificado (panel trimestral, regresor rezagado un trimestre); nota 6,5 |
 | `Deja oficiales la portada, el resumen y la introducción del autor` + pautas del *humanizer* (2026-10-27) | Texto oficial del autor con hallazgos corregidos; comisión: A. Corvalán; capítulos 2–7 y anexos redactados sin cambiar cifras ni citas |
-| Preregistro 9 (`81c2d9c` … `65e89a0`, 2026-10-28) | Análisis aparte de ESG, gobernanza y λ; ninguna hipótesis firme |
+| Preregistro 9 (`852f12a` … `785ae0c`, 2026-10-28) | Análisis aparte de ESG, gobernanza y λ; ninguna hipótesis firme |
 | `Reemplaza la plantilla instituciones.csv por el WGI real de 2018` | La triple interacción institucional sigue sin ser significativa (EMBI +0,20, t 0,95) |

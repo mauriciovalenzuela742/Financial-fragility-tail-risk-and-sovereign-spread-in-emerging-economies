@@ -5,7 +5,7 @@ subtitle: "Diagnóstico, lo ejecutado (preregistrado) y los pasos siguientes —
 
 *Todo lo que sigue son asociaciones, no efectos causales. Las cifras están en
 `1_Codigo/Panel/bbg/NUMEROS_CANONICOS_BBG.md`, §26. El preregistro es
-`4_Redaccion/preregistro_resiliencia.md` (commit `c492ca3`, anterior a los datos y a la estimación).*
+`4_Redaccion/preregistro_resiliencia.md` (commit `54bd070`, anterior a los datos y a la estimación).*
 
 # 1. Diagnóstico: por qué la evidencia anterior era débil
 
@@ -26,7 +26,7 @@ subtitle: "Diagnóstico, lo ejecutado (preregistrado) y los pasos siguientes —
 
 | Paso | Qué ataca | Resultado |
 |---|---|---|
-| Preregistro (commit `c492ca3`) | 3 | Hipótesis, inferencia y consecuencia fijadas antes de los datos |
+| Preregistro (commit `54bd070`) | 3 | Hipótesis, inferencia y consecuencia fijadas antes de los datos |
 | Datos trimestrales (QPSD, QEDS, GEM; `p41`) | 1, 4 | Deuda trimestral en 10 de 13 economías; adecuación de reservas en las 13 |
 | R-H1: efecto directo por g-estimación secuencial | 2 | Efecto directo ≈ 0 (0,002; IC [−0,19; 0,16]) frente a 0,101 total: la asociación pasa por el canal fiscal o comparte su fundamento |
 | R-H2: fragilidad × adecuación de reservas | 3, 4 | −0,063, wild p uni 0,29, Holm 0,29: no se sostiene; el término de reservas queda exploratorio |

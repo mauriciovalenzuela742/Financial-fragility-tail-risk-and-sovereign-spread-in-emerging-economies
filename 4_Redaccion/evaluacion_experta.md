@@ -4,7 +4,7 @@ subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano
 ---
 
 *Evaluación hecha como la haría un economista de la comisión, sobre la versión vigente de la tesis
-(`4_Redaccion/tesis/main.pdf`, 126 pp., compilada el 21-oct-2026; commit `c39d1c5`). Las métricas no
+(`4_Redaccion/tesis/main.pdf`, 126 pp., compilada el 21-oct-2026; commit `b97c78e`). Las métricas no
 son del autor: JLoss es de Chari et al. (2024) y el GaR, de Adrian, Boyarchenko y Giannone (2019) con la
 plataforma de CEMLA. Todo lo que se evalúa son asociaciones, no efectos causales. Las cifras nuevas de
 este informe se calcularon con scripts independientes del pipeline (sección 3) y no se han incorporado a
@@ -258,7 +258,7 @@ el paper y las láminas.
 |---|---|---|---|---|
 | B6 | **Fragilidad sin saturación:** reestimar la principal con (a) el JLoss de malla ancha (`_engine_wide.py` → `_robustez_widebounds.py`, hoy solo en niveles) en log-log y (b) la PD o DD media de Merton ponderada por activos; tratar el piso con un indicador "en piso" interactuado o con estimación censurada | 4.3 | nuevo `p33_fragilidad_alternativa.py`; `04_resultados.tex` (sección de robustez a la medición) | 3–4 días |
 | B7 | **Ascender la precedencia fragilidad→cola:** incorporar las dos pruebas de la sección 3 (exclusión de un país, GaR sin bloque bursátil) y agregar la prueba de fechas (JLoss de mitad de trimestre, o DD con precios del primer mes) y 2–4 rezagos | 4.1, 4.6 | `p32_aporte_riesgo_cola.py` (función `bloque_simultaneidad`), `04_resultados.tex:329` | 2 días |
-| B8 | **Amplificación en la cola del spread:** regresión cuantílica de panel del ln EMBI (Machado–Santos Silva, ya citado) con la interacción en τ = 0,75 y 0,9, que son los estados que predice la teoría. Revisar primero el experimento no lineal del commit `e98e42b` | 4.4 | nuevo script; `04_resultados.tex` | 2–3 días |
+| B8 | **Amplificación en la cola del spread:** regresión cuantílica de panel del ln EMBI (Machado–Santos Silva, ya citado) con la interacción en τ = 0,75 y 0,9, que son los estados que predice la teoría. Revisar primero el experimento no lineal del commit `ddb45ff` | 4.4 | nuevo script; `04_resultados.tex` | 2–3 días |
 
 ## C. Para el paper o una extensión posterior a la tesis — alto costo y alto impacto en la contribución
 

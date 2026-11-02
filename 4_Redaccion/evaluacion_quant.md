@@ -3,7 +3,7 @@ title: "Evaluación de la investigación desde un desk de crédito soberano emer
 subtitle: "Fragilidad bancaria, riesgo de cola del crecimiento y spread soberano — misma rúbrica, mirada de un quant (estilo JPMorgan), y plan para cada rama de investigación"
 ---
 
-*Evaluación de la versión del commit `9868ab7`. Usa la misma rúbrica de 8 criterios y pesos de
+*Evaluación de la versión del commit `68654cc`. Usa la misma rúbrica de 8 criterios y pesos de
 `evaluacion_experta.md`, en la escala de 1,0 a 7,0.*
 
 *Las rondas anteriores preguntaban:*
@@ -398,7 +398,7 @@ creíble que una que no lo intentó.
 
 # 7. Registro de aplicación de Q1 y Q3 (23 de octubre de 2026)
 
-Preregistro 7: `preregistro_quant.md`, commit `d968986`, anterior a todo retorno. Cifras en NUMEROS §36.
+Preregistro 7: `preregistro_quant.md`, commit `885962c`, anterior a todo retorno. Cifras en NUMEROS §36.
 
 | # | Estado | Resultado |
 |---|---|---|
@@ -419,7 +419,7 @@ preregistro con criterio de costos que se reporta negativo. Nota estimada: 6,3.
 
 # 8. Registro de aplicación de Q2, Q4, Q5 y Q6 (23 de octubre de 2026)
 
-Preregistro 8: `preregistro_quant2.md`, commit `fc920b3`, anterior a toda estimación. Cifras en NUMEROS §37;
+Preregistro 8: `preregistro_quant2.md`, commit `d8532ce`, anterior a toda estimación. Cifras en NUMEROS §37;
 texto en la Sección `sec:quant2-prereg` del Anexo F y del paper.
 
 | # | Estado | Resultado |
