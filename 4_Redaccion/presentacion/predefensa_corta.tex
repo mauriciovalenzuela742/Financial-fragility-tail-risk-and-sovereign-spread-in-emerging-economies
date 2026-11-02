@@ -353,12 +353,12 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad: son asocia
 Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \% de la exposición (Chari et al., 2024).
 \begin{enumerate}
 \item \textbf{Probabilidad de incumplimiento de cada banco} (Merton--KMV): $D^*=L_{ST}+\tfrac12L_{LT}$,\quad $EDF=\Phi(-DD)$.
-\item \textbf{Factor sistémico} país (Vasicek): $p_i(V)=\Phi\!\left(\frac{\Phi^{-1}(p_i)-\rho_iV}{\sqrt{1-\rho_i^2}}\right)$.
+\item \textbf{Factor sistémico} país (Vasicek): $p_i(V)=\Phi\!\left(\frac{\Phi^{-1}(p_i)-\rho V}{\sqrt{1-\rho^2}}\right)$.
 \item \textbf{Agregación por punto de silla} de la distribución de pérdidas del sistema.
 \item \textbf{Métrica}: $\JLoss=\dfrac{EL+UL}{\sum_j EAD_j}\times100$.
 \end{enumerate}
 \vspace{2pt}
-{\scriptsize \textbf{Donde:} $D^*$ punto de incumplimiento; $L_{ST}$, $L_{LT}$ pasivos de corto y largo plazo; $DD$ distancia al incumplimiento; $EDF$ frecuencia esperada de incumplimiento; $\Phi$ distribución normal estándar; $p_i$ PD del banco $i$; $V$ factor sistémico (retorno bursátil del país); $\rho_i$ correlación del banco con $V$; $EL$ pérdida esperada; $UL$ pérdida inesperada al 99\%; $EAD$ exposición; LGD $=45\%$. La cota de la malla es activa en el 98\% de los casos $\Rightarrow$ $\JLoss$ es \textbf{ordinal} y entra en logaritmos.\par}
+{\scriptsize \textbf{Donde:} $D^*$ punto de incumplimiento; $L_{LT}$ deuda de largo plazo emitida; $L_{ST}$ resto del pasivo; $DD$ distancia al incumplimiento; $EDF$ frecuencia esperada de incumplimiento; $\Phi$ distribución normal estándar; $p_i$ PD del banco $i$; $V$ factor sistémico del país, $N(0,1)$; $\rho=0{,}4$ carga común de todos los bancos; $EL$ pérdida esperada; $UL$ pérdida inesperada al 99\%; $EAD$ exposición; LGD $=45\%$. La cota de la malla es activa en el 98\% de los casos $\Rightarrow$ $\JLoss$ es \textbf{ordinal} y entra en logaritmos.\par}
 \end{frame}
 
 \begin{frame}{Respaldo: Construcción del $\GaR$: riesgo de cola del crecimiento}
