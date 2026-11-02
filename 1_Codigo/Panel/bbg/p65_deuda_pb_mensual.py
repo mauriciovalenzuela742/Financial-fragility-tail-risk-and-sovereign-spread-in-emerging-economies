@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p65_deuda_pb_mensual.py -- Q5 del preregistro 8 (4_Redaccion/preregistro_quant2.md, commit fc920b3): la
+p65_deuda_pb_mensual.py -- Q5 del preregistro 8 (4_Redaccion/preregistro_quant2.md, commit d8532ce): la
 interacción deuda x riesgo de cola en puntos básicos, con frecuencia mensual (la predicción del modelo de
 límite fiscal, p59: +91 pb por d.e. de deuda).
 

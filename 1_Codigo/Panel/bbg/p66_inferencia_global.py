@@ -3,10 +3,10 @@
 p66_inferencia_global.py -- corrección por comparaciones múltiples sobre las 23 hipótesis primarias de los
 ocho preregistros (acción 2 de 4_Redaccion/evaluacion_sexta.md). Extiende la familia conjunta de p56 (14
 hipótesis de los preregistros 1-4) con:
-    preregistro 5 (7df0427): N2-H1 réplica externa, N1-H1 instrumento            (paper_p58, familia5)
-    preregistro 6 (90f0adf): M6-H1 deuda x riesgo de cola en pb                   (paper_p59)
-    preregistro 7 (d968986): Q1-H1, Q3-H1, Q3-H2                                  (paper_p60, paper_p62)
-    preregistro 8 (fc920b3): Q2-H1, Q4-H1, Q5-H1                                  (paper_p61, p63, p65)
+    preregistro 5 (6a9ba1f): N2-H1 réplica externa, N1-H1 instrumento            (paper_p58, familia5)
+    preregistro 6 (eaf698d): M6-H1 deuda x riesgo de cola en pb                   (paper_p59)
+    preregistro 7 (885962c): Q1-H1, Q3-H1, Q3-H2                                  (paper_p60, paper_p62)
+    preregistro 8 (d8532ce): Q2-H1, Q4-H1, Q5-H1                                  (paper_p61, p63, p65)
 Holm (FWER) y Benjamini-Yekutieli (FDR), válidos con cualquier dependencia; Benjamini-Hochberg como
 referencia. Usa el p unilateral que reportó cada preregistro. No puede agregar hallazgos: solo quitarlos.
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p58_iv_choques.py -- N1 del preregistro 5 (4_Redaccion/preregistro_n1n2.md, commit 7df0427): choques de
+p58_iv_choques.py -- N1 del preregistro 5 (4_Redaccion/preregistro_n1n2.md, commit 6a9ba1f): choques de
 términos de intercambio de materias primas como instrumento del riesgo de cola de mediano plazo, y Holm de
 la familia {N2-H1, N1-H1}.
 

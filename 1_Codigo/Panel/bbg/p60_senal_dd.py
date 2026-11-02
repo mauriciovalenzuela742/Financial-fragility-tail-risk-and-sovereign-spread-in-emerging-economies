@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p60_senal_dd.py -- Q1 del preregistro 7 (4_Redaccion/preregistro_quant.md, commit d968986): una señal
+p60_senal_dd.py -- Q1 del preregistro 7 (4_Redaccion/preregistro_quant.md, commit 885962c): una señal
 de valor relativo con la fragilidad bancaria mensual.
 
 Cada mes se ordenan los países por el cambio de la distancia al incumplimiento del mes anterior

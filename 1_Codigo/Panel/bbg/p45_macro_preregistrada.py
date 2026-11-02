@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 p45_macro_preregistrada.py -- pruebas macro preregistradas (4_Redaccion/preregistro_macro.md, commit
-f820594, anterior a este script y a los datos).
+3d5380e, anterior a este script y a los datos).
 
   Familia primaria (p unilateral del wild bootstrap, Holm sobre tres; "firme" = Holm < 0,05 y mismo signo
   con p unilateral < 0,10 sin cada país):

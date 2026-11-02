@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p64_nowcast_gar.py -- Q6 del preregistro 8 (4_Redaccion/preregistro_quant2.md, commit fc920b3): un nowcast
+p64_nowcast_gar.py -- Q6 del preregistro 8 (4_Redaccion/preregistro_quant2.md, commit d8532ce): un nowcast
 mensual del riesgo de cola.
 
 Modelo trimestral (regresión cuantílica lineal, tau = 0,05, indicadoras de país), en ventana expansiva:

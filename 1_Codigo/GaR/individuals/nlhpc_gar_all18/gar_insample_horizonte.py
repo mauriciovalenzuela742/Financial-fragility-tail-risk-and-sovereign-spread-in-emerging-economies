@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 gar_insample_horizonte.py -- GaR dentro de la muestra a un horizonte de k trimestres (preregistro 2,
-4_Redaccion/preregistro_macro.md, commit f820594, mejora M3).
+4_Redaccion/preregistro_macro.md, commit 3d5380e, mejora M3).
 
 Igual que gar_insample_robustez.py (misma regresión cuantílica de panel con efectos fijos, FCI
 ortogonalizado respecto del VIX, 39 cuantiles, una sola estimación con toda la muestra), pero la variable

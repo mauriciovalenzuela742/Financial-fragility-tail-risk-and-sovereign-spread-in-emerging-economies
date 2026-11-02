@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p62_cola_cambios.py -- Q3 del preregistro 7 (4_Redaccion/preregistro_quant.md, commit d968986): ¿la
+p62_cola_cambios.py -- Q3 del preregistro 7 (4_Redaccion/preregistro_quant.md, commit 885962c): ¿la
 coincidencia de los dos riesgos ensancha la cola de los cambios del spread, aunque no suba su nivel?
 
 Indicadores sin anticipación (ventana expansiva por país):

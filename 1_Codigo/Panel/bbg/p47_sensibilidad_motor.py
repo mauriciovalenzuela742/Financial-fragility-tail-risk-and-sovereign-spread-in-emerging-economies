@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p47_sensibilidad_motor.py -- mu2 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit d73245f):
+p47_sensibilidad_motor.py -- mu2 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit 5be4d21):
 sensibilidad de JLoss a la calibración del motor. Tres variantes, todas con los mismos bancos e insumos:
 
   rho    : rho por banco y trimestre = correlación de sus retornos diarios con el índice de capitalización de

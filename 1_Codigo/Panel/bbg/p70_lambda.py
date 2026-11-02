@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 p70_lambda.py -- E4, E5 y la corrección de Holm sobre E1-E5 del preregistro 9
-(4_Redaccion/preregistro_esg.md, commit 81c2d9c, anterior a los datos y a este script).
+(4_Redaccion/preregistro_esg.md, commit 852f12a, anterior a los datos y a este script).
 
   ln EMBI_it = a_i + beta [ lambda G^_t + (1 - lambda) Dom^_it ] + e_it
   G_t = sum_k w_k z_k: ln VIX, UST10Y (log), US HY (log), USD NEER (log), todos en t-1.

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p53_alerta_temprana.py -- U4 del preregistro 4 (4_Redaccion/preregistro_umbrales.md, commit 7ad3810):
+p53_alerta_temprana.py -- U4 del preregistro 4 (4_Redaccion/preregistro_umbrales.md, commit a733687):
 alerta temprana de episodios de estrés soberano, umbrales de señal y semáforo; al final, Holm sobre la
 familia primaria {P1, P2, P3} (P1 y P2 desde paper_p52_numeros.csv).
 

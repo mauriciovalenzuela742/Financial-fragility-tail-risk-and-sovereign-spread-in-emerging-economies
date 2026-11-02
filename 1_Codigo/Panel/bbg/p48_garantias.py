@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p48_garantias.py -- mu3 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit d73245f): garantías
+p48_garantias.py -- mu3 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit 5be4d21): garantías
 implícitas y propiedad.
 
   mu3-H1: regresión principal con F_nacional (estatales y privados nacionales) y F_extranjero (filiales),

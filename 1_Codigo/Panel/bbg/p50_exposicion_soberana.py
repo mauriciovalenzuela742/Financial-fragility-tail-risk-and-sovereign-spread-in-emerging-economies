@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p50_exposicion_soberana.py -- mu5 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit d73245f): la
+p50_exposicion_soberana.py -- mu5 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit 5be4d21): la
 exposición de los bancos domésticos a la deuda soberana como moderador (el canal de home bias de
 Farhi-Tirole).
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p57_replica_externa.py -- N2 del preregistro 5 (4_Redaccion/preregistro_n1n2.md, commit 7df0427): réplica del
+p57_replica_externa.py -- N2 del preregistro 5 (4_Redaccion/preregistro_n1n2.md, commit 6a9ba1f): réplica del
 hallazgo central (D4 x deuda) fuera de la muestra, en Hungría y Corea del Sur.
 
   Datos: JLoss del motor de producción (jloss_bloomberg/Panel_JLoss_v9_bloomberg.csv; Hungría tiene una

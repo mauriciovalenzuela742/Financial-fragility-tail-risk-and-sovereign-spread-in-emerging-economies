@@ -5,10 +5,10 @@ preregistros y aleatorización del hallazgo central. Es una comprobación poster
 de cada preregistro: no puede agregar hallazgos, solo quitarlos.
 
   (a) Las 14 hipótesis primarias de los cuatro preregistros, con el p unilateral que cada uno reportó:
-        preregistro 1 (c492ca3): R-H2 reservas, R-H3 deuda x riesgo de cola           (paper_p42)
-        preregistro 2 (f820594): R2-H1 doom loop, R2-H2 pecado original, R2-H3 D4      (paper_p45)
-        preregistro 3 (d73245f): mu1-H1, mu1-H2, mu3-H1, mu3-H2, mu4-H1, mu5-H1         (paper_p51)
-        preregistro 4 (7ad3810): P1 tensión, P2 deuda, P3 alerta temprana               (paper_p53)
+        preregistro 1 (54bd070): R-H2 reservas, R-H3 deuda x riesgo de cola           (paper_p42)
+        preregistro 2 (3d5380e): R2-H1 doom loop, R2-H2 pecado original, R2-H3 D4      (paper_p45)
+        preregistro 3 (5be4d21): mu1-H1, mu1-H2, mu3-H1, mu3-H2, mu4-H1, mu5-H1         (paper_p51)
+        preregistro 4 (a733687): P1 tensión, P2 deuda, P3 alerta temprana               (paper_p53)
       Corrección de Holm sobre las 14 (FWER, válida con cualquier dependencia) y Benjamini-Yekutieli
       (FDR, válida con cualquier dependencia); Benjamini-Hochberg como referencia. Romano-Wolf no se
       aplica: cada familia usa su propio bootstrap y no hay una distribución conjunta común.

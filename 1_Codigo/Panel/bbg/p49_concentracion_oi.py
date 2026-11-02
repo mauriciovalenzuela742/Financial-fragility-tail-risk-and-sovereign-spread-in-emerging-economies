@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p49_concentracion_oi.py -- mu4 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit d73245f): la
+p49_concentracion_oi.py -- mu4 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit 5be4d21): la
 predicción distintiva del modelo de competencia bancaria à la Cournot que tuvo la tesis (4_Redaccion/modelo OI/):
 la fragilidad pesa más en el spread donde el sistema es más concentrado.
 

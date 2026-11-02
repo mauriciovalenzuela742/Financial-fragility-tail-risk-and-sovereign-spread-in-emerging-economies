@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 p42_resiliencia_preregistrada.py -- pruebas preregistradas de resiliencia
-(4_Redaccion/preregistro_resiliencia.md, commit c492ca3, anterior a este script y a los datos).
+(4_Redaccion/preregistro_resiliencia.md, commit 54bd070, anterior a este script y a los datos).
 
   R-H1: efecto directo controlado (EDC) de ln JLoss_{t-1}, neto del canal fiscal, por g-estimación
         secuencial (Acharya, Blackwell y Sen, 2016). Etapa 1: ln EMBI_t sobre ln JLoss_{t-1}, D_{t-1},

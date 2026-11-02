@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p46_panel_bancos.py -- mu1 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit d73245f): los bancos
+p46_panel_bancos.py -- mu1 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit 5be4d21): los bancos
 como unidad de análisis.
 
 Construye el panel banco-trimestre (bbg/banco_trimestral_bbg.csv) con el mismo motor de JLoss

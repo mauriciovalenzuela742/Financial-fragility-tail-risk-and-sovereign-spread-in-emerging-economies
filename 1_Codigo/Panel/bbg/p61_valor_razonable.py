@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p61_valor_razonable.py -- Q2 del preregistro 8 (4_Redaccion/preregistro_quant2.md, commit fc920b3): un
+p61_valor_razonable.py -- Q2 del preregistro 8 (4_Redaccion/preregistro_quant2.md, commit d8532ce): un
 valor razonable del spread con los fundamentos de la tesis y la reversión de su residuo.
 
 Cada mes m (desde 2015-01) se estima, con datos hasta m,

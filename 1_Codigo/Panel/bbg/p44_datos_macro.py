@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 p44_datos_macro.py -- datos de las pruebas macro preregistradas (4_Redaccion/preregistro_macro.md, commit
-f820594, anterior a este script):
+3d5380e, anterior a este script):
 
   - FXDEBT / LCDEBT: deuda bruta del gobierno general en moneda extranjera / local, % del PIB, trimestral
     (Banco Mundial QPSD, fuente 20: DP.DOD.DECF.CR.GG.Z1 y DP.DOD.DECN.CR.GG.Z1).

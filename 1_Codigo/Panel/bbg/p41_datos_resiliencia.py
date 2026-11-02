@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 p41_datos_resiliencia.py -- datos trimestrales de resiliencia según las reglas del preregistro
-(4_Redaccion/preregistro_resiliencia.md, commit c492ca3, anterior a este script).
+(4_Redaccion/preregistro_resiliencia.md, commit 54bd070, anterior a este script).
 
   - DEBT: deuda bruta del gobierno general, todos los instrumentos, valor nominal, % del PIB,
     trimestral (Banco Mundial, Quarterly Public Sector Debt, fuente 20, DP.DOD.DECT.CR.GG.Z1).

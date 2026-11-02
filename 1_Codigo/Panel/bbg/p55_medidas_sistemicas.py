@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p55_medidas_sistemicas.py -- U6 del preregistro 4 (4_Redaccion/preregistro_umbrales.md, commit 7ad3810):
+p55_medidas_sistemicas.py -- U6 del preregistro 4 (4_Redaccion/preregistro_umbrales.md, commit a733687):
 medidas de riesgo sistémico de mercado con los mismos bancos de JLoss.
 
   Retorno del sistema bancario: retorno logarítmico diario ponderado por la capitalización del día

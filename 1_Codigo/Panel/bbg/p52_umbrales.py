@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p52_umbrales.py -- U1-U3 del preregistro 4 (4_Redaccion/preregistro_umbrales.md, commit 7ad3810):
+p52_umbrales.py -- U1-U3 del preregistro 4 (4_Redaccion/preregistro_umbrales.md, commit a733687):
 umbrales de vigilancia agrupados y por país, comparación entre ambos (C1-C5) y simulación de potencia.
 
   Modelo agrupado: ln EMBI = sum_x (b_x x + d_x x*H) + L + delta*H + phi*q_s + EF país + EF tiempo,

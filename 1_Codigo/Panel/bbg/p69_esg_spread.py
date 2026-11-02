@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 p69_esg_spread.py -- E1-E3 y lo exploratorio del preregistro 9 (4_Redaccion/preregistro_esg.md,
-commit 81c2d9c, anterior a los datos y a este script).
+commit 852f12a, anterior a los datos y a este script).
 
   Base B: ln EMBI = a_i + d_t + b1 J_c + b2 T_c + b3 J_c T_c (muestra de la principal, p14.base, N = 765).
   E1: B + ESG_s (ESG_{t-1}); predicción < 0.      E2: B + G_s (G_{t-1}); predicción < 0.

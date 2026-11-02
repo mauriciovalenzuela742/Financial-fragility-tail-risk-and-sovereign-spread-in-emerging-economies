@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p63_cobertura.py -- Q4 del preregistro 8 (4_Redaccion/preregistro_quant2.md, commit fc920b3): una razón de
+p63_cobertura.py -- Q4 del preregistro 8 (4_Redaccion/preregistro_quant2.md, commit d8532ce): una razón de
 cobertura condicional a la fragilidad y la deuda.
 
 y = d ln s_{i,m}; F = d ln del promedio de s de las otras doce economías (aproxima el índice EMBI).

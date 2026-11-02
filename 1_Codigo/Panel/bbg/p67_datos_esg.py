@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p67_datos_esg.py -- datos del preregistro 9 (4_Redaccion/preregistro_esg.md, commit 81c2d9c, anterior a
+p67_datos_esg.py -- datos del preregistro 9 (4_Redaccion/preregistro_esg.md, commit 852f12a, anterior a
 este script y a los datos).
 
   - Las 18 variables del índice ESG de Barneche, Grezzi y Panario (2024) desde la API del Banco Mundial:

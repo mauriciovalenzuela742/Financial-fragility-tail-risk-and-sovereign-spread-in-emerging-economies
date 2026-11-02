@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p51_cobertura_sistema.py -- mu6 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit d73245f) y
+p51_cobertura_sistema.py -- mu6 del preregistro 3 (4_Redaccion/preregistro_micro.md, commit 5be4d21) y
 resumen de la familia primaria.
 
   mu6 (secundaria): (a) la regresión principal exigiendo al menos 3, 4 y 5 bancos cotizados por

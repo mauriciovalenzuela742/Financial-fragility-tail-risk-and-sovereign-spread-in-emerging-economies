@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-p59_modelo.py -- N3 del preregistro 6 (4_Redaccion/preregistro_modelo.md, commit 90f0adf): modelo de límite
+p59_modelo.py -- N3 del preregistro 6 (4_Redaccion/preregistro_modelo.md, commit eaf698d): modelo de límite
 fiscal de dos períodos para el hallazgo central (riesgo de cola x deuda), calibración y prueba en niveles.
 
   Modelo: incumplimiento si g < g*(b) = (r b - ps)/(b + ps); pi = F(g*); spread
