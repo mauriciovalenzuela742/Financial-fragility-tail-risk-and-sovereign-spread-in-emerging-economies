@@ -58,3 +58,7 @@ _ckpt_*.csv
 1_Codigo/Panel/Serie_Historica_Spread_del_EMBI.xlsx
 **/vlab-srisk-*.csv
 1_Codigo/Stata_Sov_Risk/**/*.dta
+
+# Notas y transcripciones de reuniones: solo local, contienen detalles personales
+*Recap.txt
+*Transcript.txt
