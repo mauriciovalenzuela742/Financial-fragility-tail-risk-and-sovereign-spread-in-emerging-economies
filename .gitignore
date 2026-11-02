@@ -62,3 +62,7 @@ _ckpt_*.csv
 # Notas y transcripciones de reuniones: solo local, contienen detalles personales
 *Recap.txt
 *Transcript.txt
+
+# Material de preparación de reuniones: solo local
+4_Redaccion/presentacion/preguntas_reunion_profesor_tesis.*
+4_Redaccion/presentacion/reunion_profesores.md
