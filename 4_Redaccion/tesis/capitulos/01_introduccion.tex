@@ -1,5 +1,5 @@
-% Capítulo 1 de la tesis. Texto oficial del autor ("resumen e intro oficial.pdf", 27-10-2026), con
-% erratas corregidas y las correcciones de las evaluaciones 7 y 8 (evaluacion_resumen_intro_oficial.md).
+% Capítulo 1 de la tesis. Texto oficial del autor ("Resumen,intro y marco teorico oficial.pdf", 2-11-2026),
+% con erratas corregidas, los cuatro moderadores y el párrafo de organización actualizado con el Capítulo de Datos.
 % Estructura según el modelo CARS (Swales, 1990 y 2004; Bunton, 2002); planificación en
 % "capitulos info/Introduccion/ficha_planificacion_introduccion.md".
 \chapter{Introducción}
@@ -9,11 +9,11 @@
 
 El spread soberano es el precio al que un Estado emergente se financia en los mercados
 internacionales y corresponde a la diferencia entre el rendimiento de su deuda en dólares y el de un
-bono del Tesoro estadounidense de plazo comparable. Cuando el spread del crédito soberano sube,
+bono del Tesoro estadounidense de plazo comparable. Cuando el spread del crédito soberano sube
 significa que los inversores perciben un mayor riesgo de impago (\textit{default}) en esa economía
-emergente. Como consecuencia, cuando un Estado pide dinero se le exige una tasa de interés más alta,
-lo que encarece el financiamiento para esa nación, estrecha el espacio fiscal y traslada el riesgo al
-costo de financiamiento de bancos y empresas. Debido a esto, los spreads soberanos se consideran una
+emergente. Como consecuencia, cuando un Estado pide dinero, se le exige una tasa de interés más alta,
+lo que encarece el financiamiento para esa nación, estrecha el espacio fiscal y el riesgo se traslada
+al costo de financiamiento de bancos y empresas. Debido a esto, los spreads soberanos se consideran una
 métrica de riesgo soberano. Las subidas más bruscas coinciden con las crisis, lo que implica un costo
 fiscal alto \citep{ReinhartRogoff2009}, siendo la crisis financiera global de 2008--2009 y la pandemia
 de 2020 los casos más recientes. Desde los primeros estudios sobre el riesgo de impago de las
@@ -21,7 +21,7 @@ economías en desarrollo \citep{Edwards1984}, entender los fundamentos doméstic
 ese precio es una pregunta central de la macroeconomía internacional.
 
 Primeramente, la salud del sistema financiero se considera un fundamento macroeconómico doméstico
-fundamental, y una de las lecciones de la crisis de la eurozona es que la solvencia del soberano y la
+fundamental y una de las lecciones de la crisis de la eurozona es que la solvencia del soberano y la
 de sus bancos están atadas. El Estado es quien previsiblemente rescata a un sistema bancario en
 problemas, por lo que la fragilidad de los bancos es un pasivo contingente del fisco que el mercado
 incorpora al precio de la deuda pública \citep{AcharyaDrechslerSchnabl2014b,ModySandri2012}. Los
@@ -29,12 +29,12 @@ bancos, por su lado, mantienen deuda soberana en su balance en forma de bonos de
 finanzas públicas se deterioran, el valor de esos bonos cae. Esto debilita a los bancos, frena el
 crédito y obliga al gobierno a rescatarlos, lo que eleva aún más la deuda pública. Esto se denomina
 bucle de fatalidad o \textit{doom loop}, una espiral negativa y autorreforzada en la que un problema
-económico genera un segundo problema que, a su vez, empeora el primero o desata un tercero, y que puede
+económico genera un segundo problema que, a su vez, empeora el primero o desata un tercero y que puede
 amplificarse a todo el sistema financiero \citep{FarhiTirole2018b,GennaioliMartinRossi2014}.
-\citet{Chari2024b} llevaron esta idea a las economías emergentes con una métrica semiparamétrica
+\citet{Chari2024b} llevan esta idea a las economías emergentes con una métrica semiparamétrica
 estructural de la fragilidad bancaria sistémica asociada al riesgo financiero, la denominada $JLoss$,
-la cual mide la pérdida conjunta esperada del sistema, y mostraron que se asocia con spreads
-soberanos más altos.
+la cual mide la pérdida conjunta esperada del sistema, y muestran que se asocia con spreads soberanos
+más altos.
 
 Por otro lado, la vulnerabilidad macroeconómica es otro fundamento doméstico que se refleja en el
 precio de la deuda. La literatura la define como la exposición de una economía a \textit{shocks}
@@ -44,48 +44,47 @@ años se midió con indicadores por separado, como el déficit, la deuda, las re
 se combinaban en sistemas de alerta temprana de crisis \citep{KaminskyLizondoReinhart1998}. Esos
 indicadores dicen cuán expuesta está una economía, pero no cuánto caería su actividad si el
 \textit{shock} llegara. La literatura de \textit{Growth-at-Risk} lleva la vulnerabilidad a la
-distribución del crecimiento futuro: una economía vulnerable no es la que espera crecer menos, sino
-aquella en la que un escenario muy adverso es más probable y más profundo. \citet{ABG2019b} estiman
-esa distribución condicional por regresión cuantílica y muestran que las condiciones financieras
-predicen sobre todo la cola izquierda de la distribución del crecimiento futuro. Cuando las
-condiciones financieras se endurecen, los cuantiles bajos del crecimiento caen con fuerza, mientras
-que la mediana y los cuantiles altos se mueven mucho menos. Ese cuantil bajo, el $GaR$, reúne en un
-solo número los dos elementos de la definición: por un lado, las condiciones financieras recogen la
-exposición acumulada y, por otro, la profundidad de la cola refleja cuánto logra amortiguar la
-economía el golpe. \citet{AdrianEtAl2022} agregan la dimensión temporal y muestran que las
-condiciones financieras laxas reducen el riesgo de cola en el corto plazo, pero lo elevan en el
-mediano plazo, porque la vulnerabilidad se acumula en los períodos de calma. Por estas propiedades,
-el $GaR$ es una herramienta de vigilancia del FMI \citep{PrasadEtAl2019} y de los bancos centrales de
-la región, que lo calculan con la plataforma abierta de CEMLA \citep{OssandonBusch2022}, que esta tesis
-adapta. Para el soberano, lo que importa es esa cola de la distribución, porque en un escenario
-adverso caen la recaudación y la capacidad de pago, y es exactamente en esos escenarios en que el
+distribución del crecimiento futuro definiendo que una economía vulnerable no es la que espera crecer
+menos, sino aquella en la que un escenario muy adverso es más probable y más profundo. En
+\citet{ABG2019b} se estima esa distribución condicional por regresión cuantílica y se muestra que las
+condiciones financieras predicen sobre todo la cola izquierda de la distribución del crecimiento
+futuro. Cuando las condiciones financieras se endurecen, los cuantiles bajos del crecimiento caen con
+fuerza, mientras que la mediana y los cuantiles altos se mueven mucho menos. Ese cuantil bajo, el
+$GaR$, reúne en un solo número los dos elementos de la definición: por un lado, las condiciones
+financieras recogen la exposición acumulada y, por otro, la profundidad de la cola refleja cuánto logra
+amortiguar la economía el golpe. En \citet{AdrianEtAl2022} se agrega la dimensión temporal y se muestra
+que las condiciones financieras laxas reducen el riesgo de cola en el corto plazo, pero lo elevan a dos
+o tres años, porque la vulnerabilidad se acumula en los períodos de calma. Por estas propiedades, el
+$GaR$ es una herramienta de vigilancia del FMI \citep{PrasadEtAl2019} y de los bancos centrales de la
+región, que lo calculan con la plataforma abierta de CEMLA \citep{OssandonBusch2022}, que esta tesis
+adapta. Para el soberano, lo que importa es esa cola de la distribución porque, en un escenario
+adverso, caen la recaudación y la capacidad de pago, y es exactamente en estos escenarios en que el
 incumplimiento se vuelve más probable.
 
-Sin embargo, estas dos literaturas casi no se han cruzado. La del nexo entre banco y soberano trata el
-crecimiento como un fundamento de fondo o como una variable de control, mientras que la de
+Sin embargo, estas dos literaturas no se han cruzado. La del nexo entre banco y soberano trata el
+crecimiento como un fundamento estructural o como una variable de control básica, mientras que la de
 vulnerabilidad macroeconómica caracteriza la cola del crecimiento pero no proyecta su análisis sobre
-la prima soberana. El trabajo más próximo, \citet{Chari2024b}, estudia cómo cambia la asociación
-entre fragilidad bancaria y spread con los factores financieros globales, como la volatilidad de los
+la prima soberana. El trabajo más próximo, \citet{Chari2024b}, estudia cómo cambia la asociación entre
+fragilidad bancaria y spread con los factores financieros globales, como la volatilidad de los
 mercados y las tasas de interés de Estados Unidos, no con un riesgo doméstico del crecimiento. Queda
 sin respuesta cómo se combinan en el precio de la deuda soberana el riesgo financiero (la fragilidad
 de los bancos) y el riesgo económico (la cola adversa del crecimiento) de una misma economía.
 
 La investigación tiene una dimensión práctica, puesto que los marcos de vigilancia siguen ambos
-indicadores por separado, pero los dos riesgos tienden a agravarse juntos: un sistema bancario frágil
-restringe el crédito y deprime la actividad (el acelerador financiero de
-\citealp{BernankeGertlerGilchrist1996}), y un crecimiento débil deteriora la cartera de los bancos. Es
-en esa coincidencia donde un problema bancario se convierte en uno fiscal \citep{LaevenValencia2013}.
-Si la coincidencia elevara el spread más que la suma de sus partes, mirar cada riesgo por separado
-subestimaría el riesgo soberano precisamente en los episodios que más importan; si no lo hiciera,
-bastaría con sumarlos.
+indicadores por separado, pero los dos riesgos tienden a agravarse juntos: según el acelerador
+financiero de \citet{BernankeGertlerGilchrist1996}, un sistema bancario frágil restringe el crédito y
+deprime la actividad, y un crecimiento débil deteriora la cartera de los bancos. Es en esa coincidencia
+donde un problema bancario se convierte en uno fiscal \citep{LaevenValencia2013}. Si la coincidencia
+elevara el spread más que la suma de sus partes, mirar cada riesgo por separado subestimaría el riesgo
+soberano precisamente en los episodios que más importan; si no lo hiciera, bastaría con sumarlos.
 
-La fragilidad bancaria se asocia con el spread soberano, y eso ya lo establecen \citet{Chari2024b}.
-Esta tesis parte de ese resultado y se pregunta: \textbf{¿el riesgo económico doméstico afecta al
-spread soberano?, y cuando ambos riesgos se agudizan en simultáneo, ¿el spread soberano se
-amplifica?}
+La fragilidad bancaria se asocia con el spread soberano, como lo establecen previamente
+\citet{Chari2024b}. Esta tesis parte de ese resultado y se pregunta: ¿el riesgo económico doméstico
+afecta al spread soberano?, y cuando ambos riesgos se agudizan en simultáneo, ¿el spread soberano se
+amplifica?
 
-Las hipótesis son tres: la fragilidad bancaria se asocia con un spread mayor (H1, canal bancario); un
-riesgo de cola del crecimiento mayor se asocia con un spread mayor (H2, canal del crecimiento); y su
+Las hipótesis son tres: la fragilidad bancaria se asocia con un spread mayor (H1, canal bancario), un
+riesgo de cola de crecimiento mayor se asocia con un spread mayor (H2, canal de crecimiento) y su
 coincidencia eleva el spread más que la suma de las dos asociaciones (H3, amplificación). H3 es la
 conjetura que motiva la investigación.
 
@@ -146,21 +145,11 @@ resiliencia de la política económica, el respaldo oficial externo y quién tie
 \label{fig:mecanismo}
 \end{figure}
 
-Para responder, se construyen con un mismo protocolo las series de $JLoss$ y del $GaR$ para trece
-economías emergentes, y se unen con el spread EMBI en un panel trimestral de 2004 a 2026 ($N=765$). Los
-dos riesgos coinciden más de lo que explicaría el azar, pero cuando coinciden no hay evidencia de que el
-spread se amplifique. El riesgo económico tiene una asociación modesta con el spread, y la deuda pública
-intensifica la transmisión del riesgo de cola solo dentro de esta muestra. La tesis aporta una
-construcción homogénea y reproducible de las dos métricas, una réplica independiente de
-\citet{Chari2024b} con su alcance delimitado, una réplica y ampliación del procedimiento de
-\citet{OssandonBusch2022}, el primer cruce de la fragilidad bancaria con el riesgo de cola doméstico del
-crecimiento en el estudio del spread, una evaluación preregistrada de las condiciones que podrían
-modificar la transmisión y un contraste entre la teoría del incumplimiento y los datos.
-
 El resto de la tesis se organiza de la siguiente manera. El Capítulo~\ref{sec:marco} desarrolla el
 marco conceptual y sitúa el trabajo en la literatura. El Capítulo~\ref{sec:metodologia} detalla el
-mecanismo, la construcción de $JLoss$ y del $GaR$ y la estrategia econométrica. El
-Capítulo~\ref{sec:resultados} reporta resultados junto con las pruebas de identificación y de
+enfoque, la construcción de $JLoss$ y del $GaR$ y la estrategia econométrica. El
+Capítulo~\ref{sec:datos} presenta los antecedentes de las economías estudiadas y el análisis de los
+datos. El Capítulo~\ref{sec:resultados} reporta resultados junto con las pruebas de identificación y de
 robustez. El Capítulo~\ref{sec:discusion} interpreta los resultados y sus implicancias. El
 Capítulo~\ref{sec:conclusiones} concluye y el Capítulo~\ref{sec:agenda-futura} propone los trabajos
 futuros.

@@ -1,104 +1,39 @@
-% Capítulo de la tesis (texto derivado de envios/paper_empirico/cuerpo.tex; se edita aquí).
+% Capítulo de la tesis. Estructura según la clase 6 y el Laboratorio 5 de EP7000: enfoque y alcances, muestra,
+% recolección y procedimiento, medición, estrategia econométrica y credibilidad. Los datos están en el Capítulo 4.
 \chapter{Metodología}
 \label{sec:metodologia}
 
-Las dos métricas se construyen por separado y se unen en un panel trimestral. La Sección~\ref{sec:datos} describe los datos; las Secciones~\ref{sec:jloss} y~\ref{sec:gar}, la construcción de $JLoss_{i,t}$ y del $GaR_{i,t}$; y la Sección~\ref{sec:estrategia}, la estrategia econométrica.
+Este capítulo expone cómo se realiza el estudio. La Sección~\ref{sec:enfoque} declara el enfoque y los alcances. La Sección~\ref{sec:muestra} define el universo, la muestra y los criterios de selección. La Sección~\ref{sec:procedimiento} ordena la recolección y el procesamiento de los datos. Las Secciones~\ref{sec:jloss} y~\ref{sec:gar} detallan la construcción de $JLoss_{i,t}$ y del $GaR_{i,t}$. La Sección~\ref{sec:estrategia} presenta la estrategia econométrica, y la Sección~\ref{sec:credibilidad} reúne el vocabulario, la escala de evidencia y la cronología de las decisiones. Los datos se describen en el Capítulo~\ref{sec:datos}.
 
-\section{Datos}
-\label{sec:datos}
+\section{Enfoque y alcances}
+\label{sec:enfoque}
 
-\subsection{El panel}
+La investigación es cuantitativa y correlacional. Mide dos riesgos, cuantifica su asociación con el spread soberano y contrasta las hipótesis H1 a H4 del Capítulo~\ref{sec:marco}. El diseño es no experimental y longitudinal: observa un panel de economías a lo largo del tiempo, sin intervenir sobre ellas. La lógica es deductiva. Las hipótesis salen de la teoría y se contrastan con los datos.
 
-El panel es trimestral y reúne las economías emergentes que tienen $JLoss$, $GaR$ y EMBI. Los insumos micro de $JLoss$ vienen de Bloomberg; los componentes reales del FCI (IPC, PIB, índice accionario, tipo de cambio real y rendimiento a diez años), de las estadísticas nacionales; el VIX, de Bloomberg. El Anexo~\ref{chap:anexoA} tabula la procedencia de cada serie.
+El estudio responde a los objetivos de la Sección~\ref{sec:objetivos}: construir las dos métricas y cuantificar la asociación de cada riesgo con el spread, su interacción y las condiciones que podrían modificarla. Examina esa asociación en distintas estructuras de efectos fijos, según el tipo de tenencia de la deuda, en crisis con y sin respaldo externo y a distintos horizontes del riesgo de cola.
 
-Una economía entra al panel si tiene $JLoss$, y solo se excluye cuando $JLoss$ no es una medida válida para el país. Corea del Sur queda fuera porque el valor de mercado de su banca está siempre cerca del 4\% del punto de incumplimiento (el \textit{Korea discount}), y el modelo de Merton lo lee como un incumplimiento inminente. Bulgaria y Hungría quedan fuera porque cotizan solo uno y dos de sus bancos, respectivamente, y la métrica no representaría un sistema bancario.
+Tres cosas quedan fuera. El estudio no identifica efectos causales: los coeficientes son asociaciones condicionales, y la Sección~\ref{sec:est-inferencia} detalla las pruebas que acotan esa limitación. Tampoco busca pronosticar el spread: las comparaciones fuera de la muestra son contrastes de las hipótesis, no un producto de la tesis. Y no analiza economías desarrolladas.
 
-La muestra de estimación de la especificación principal exige el EMBI del trimestre y $JLoss$ y $GaR$ del trimestre anterior, sin huecos. Son trece economías y 765 observaciones país-trimestre (2004Q2--2026Q2; Figura~\ref{fig:cobertura}). Diez economías aportan una historia larga, de entre 40 y 89 trimestres, limitada por el inicio del $GaR$ o del EMBI: Brasil, Chile, China, Colombia, India, Malasia, México, Perú, Polonia y Turquía. Filipinas aporta 12 trimestres; Indonesia y Sudáfrica, 32 cada una. Egipto, Pakistán y Rusia tienen $JLoss$ pero ninguna observación, porque les falta el EMBI, el $GaR$ o el solapamiento entre ambos. Argentina sí completa las tres series. Su $GaR$, sin embargo, se estimó con un índice de condiciones financieras sin el bloque de tasas y con una ventana de estandarización más corta, por la breve historia de su IPC oficial. Por esa desviación queda fuera de la muestra principal y entra como ejercicio de robustez (34 observaciones, spread de 2017Q3 a 2025Q4; Sección~\ref{sec:robustez-argentina}).
+\section{Universo, muestra y criterios de selección}
+\label{sec:muestra}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{fig_cobertura_embiext.pdf}
-\caption[Cobertura del panel]{Cobertura del panel, por país. Gris: trimestres con $JLoss$. Celeste: además con EMBI. Azul: muestra de estimación de la especificación principal. Triángulos: trimestres en que el EMBI proviene de la serie del FMI (GFSR). Entre paréntesis, trimestres de estimación por país.}
-\label{fig:cobertura}
-\end{figure}
+El universo son las economías emergentes con deuda soberana en los mercados internacionales. El universo objetivo de la extracción son veinte economías, con 113 bancos cotizados. Una economía entra a la muestra si cumple cuatro criterios: tiene un índice bursátil local, sus bancos cotizan en bolsa, su gobierno emite bonos y tiene un valor del EMBI de J.P.\ Morgan. La Sección~\ref{sec:panel} aplica estos criterios y detalla las exclusiones. El resultado son trece economías con distinta cantidad de bancos.
 
-\subsection{Variable dependiente: el EMBI}
+Las observaciones se agrupan de tres maneras para comparar: por régimen de crisis, con y sin respaldo externo (Sección~\ref{sec:est-crisis}); por tipo de economía y participación extranjera en la deuda (Sección~\ref{sec:est-het}); y por condición de la política económica (Sección~\ref{sec:est-resiliencia}).
 
-El spread soberano se mide con el EMBI Global Diversified de J.P.\ Morgan, como en \citet{Chari2024b}. El valor trimestral del panel es el \emph{promedio} de los días del trimestre, no su cierre, y eso importa para el orden temporal. $JLoss_{t-1}$ usa la capitalización bursátil del cierre de $t-1$, así que el cambio del spread promedio entre $t-1$ y $t$ contiene movimientos ocurridos dentro de $t-1$. Por eso se construyeron también, desde la serie diaria, el spread de cierre (los últimos cinco días hábiles del trimestre) y el promedio del primer mes, que usa la Sección~\ref{sec:estacionariedad}. La serie de J.P.\ Morgan disponible para Indonesia y Sudáfrica empieza en 2023Q3; para ellas, el período 2010Q1--2014Q4 se completa con la serie trimestral de spreads soberanos del FMI (\textit{Global Financial Stability Report}), que trae un solo valor por trimestre. El empalme se valida en las economías que tienen ambas series: en 80 trimestres de solapamiento (China, Hungría, Polonia y Turquía) correlacionan 0,94, con una razón mediana de 1,02, y por eso se usan sin reescalar. La serie del FMI solo llena trimestres sin dato de J.P.\ Morgan, y la Sección~\ref{sec:robustez} verifica que excluir esos 40 trimestres no cambia los resultados.
+\section{Recolección y procedimiento}
+\label{sec:procedimiento}
 
-\subsection{Controles}
+Los datos provienen de fuentes estadísticas y de un mismo proveedor de mercado, con un protocolo igual para todas las economías. Los balances bancarios, los precios de mercado y el EMBI se extraen de la terminal Bloomberg y de J.P.\ Morgan. Las series macroeconómicas se obtienen del FMI, del Banco Mundial y de los bancos centrales y estadísticas nacionales. Como son muchas series y de formatos distintos, la extracción y la consolidación se hacen con programas disponibles en el repositorio. El Anexo~\ref{chap:anexoA} tabula la procedencia de cada una.
 
-Los controles domésticos son la deuda del gobierno general/PIB y el balance fiscal/PIB (FMI), las reservas/PIB y la cuenta corriente/PIB (Banco Mundial), la inflación interanual y el tipo de cambio real efectivo. Son series anuales interpoladas a frecuencia trimestral y cubren 649 de las 765 observaciones de la muestra principal.
-
-\subsection{Estadística descriptiva}
-
-La Tabla~\ref{tab:descriptivos} resume la muestra de estimación. El spread promedia 198 puntos básicos, con una mediana de 177 y un máximo de 661. $JLoss_{t-1}$ tiene una media de 4,65 y una mediana de 2,67: la fragilidad sistémica se concentra en pocos episodios y países. La métrica tiene además un piso. Se amontona en $2{,}16$, el techo de la malla de pérdidas del motor en sus unidades ($0{,}048\times0{,}45\times100$), y el 23,7\% de las observaciones está a menos de un 2\% de ese valor. Turquía (9,6), India (8,4) y China (6,8) están en el extremo superior (Tabla~\ref{tab:mediaspais}); Malasia, Perú, Indonesia y Sudáfrica tienen una fragilidad media cercana al piso. En el piso la variable no informa, y por eso las magnitudes se leen por desviación estándar dentro del país, no por unidad ni por cambio porcentual de $JLoss$ (Sección~\ref{sec:magnitud}). $D_{t-1}$ promedia $-1{,}5$ puntos porcentuales ---en el trimestre típico, el cuantil 5\% del crecimiento es positivo---, con una cola que llega a $+17{,}7$ en los episodios de estrés. Su desviación estándar es de 3,7 puntos en el panel completo y de 3,1 dentro del país, la unidad que se usa en adelante.
-
-La descomposición de la varianza (Tabla~\ref{tab:varianza}) importa para identificar con efectos fijos de país. El 82\% de la desviación de $\ln JLoss_{t-1}$, el 84\% de la de $D_{t-1}$ y el 67\% de la de $\ln$ EMBI es variación \textit{within}: dentro de cada país, a lo largo del tiempo. Deuda/PIB y reservas/PIB, en cambio, son sobre todo transversales (53\% y 52\% \textit{within}).
-
-\input{\tablasdir/tabla_descriptivos_embiext}
-
-La Figura~\ref{fig:distribuciones} muestra las distribuciones univariadas. El logaritmo reduce la asimetría de $JLoss$ de 2,79 a 1,34 y la del EMBI de 1,20 a $-0{,}74$. La matriz de correlaciones está en la Figura~\ref{fig:correlaciones}. $D$ y el \textit{Expected Shortfall} correlacionan $-0{,}98$: son la misma información sobre la cola. $\ln JLoss_{t-1}$ correlaciona $-0{,}48$ con el balance fiscal, $+0{,}41$ con la inflación y $+0{,}31$ con la deuda, lo que anticipa por qué los controles la absorben en la Sección~\ref{sec:bateria}. La correlación lineal entre $\ln JLoss_{t-1}$ y $D_{t-1}$ es moderada (0,16 en el panel; 0,26 descontados los efectos fijos de país y de tiempo), pero sus valores altos coinciden mucho más a menudo de lo que esa correlación sugiere (Sección~\ref{sec:simultaneidad}).
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{fig_distribuciones_embiext.pdf}
-\caption[Distribuciones univariadas]{Distribuciones univariadas de la muestra de estimación (línea roja: media). La transformación logarítmica comprime la asimetría del spread y de $JLoss$.}
-\label{fig:distribuciones}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.82\textwidth]{fig_correlaciones_embiext.pdf}
-\caption[Matriz de correlaciones]{Matriz de correlaciones de la muestra de estimación. $JLoss$, $D$, ES y $P(\text{crec.}<0)$ rezagados un trimestre; controles contemporáneos.}
-\label{fig:correlaciones}
-\end{figure}
-
-Las Figuras~\ref{fig:jlosspaises} y~\ref{fig:garpaises} trazan $JLoss$ y $D$ por país. Las dos series son moderadas y estables en los períodos normales y se disparan en episodios puntuales, no siempre simultáneos entre países; esa es la variación que identifica la interacción. La Figura~\ref{fig:series} superpone, por país, la fragilidad, el riesgo de cola y el spread, con el vector de crisis sombreado. En Brasil, Colombia, México y Polonia los tres se mueven juntos en 2008--09 y en 2020; en Brasil también en 2015--16, y en Turquía entre 2018 y 2021.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{fig_jloss_paises_embiext.pdf}
-\caption[JLoss por país]{$JLoss$ trimestral por país (motor de punto de silla sobre datos Bloomberg). Sombreado: ventana de estimación.}
-\label{fig:jlosspaises}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{fig_gar_paises_embiext.pdf}
-\caption[Riesgo de cola por país]{$D=-GaR$ trimestral por país (puntos porcentuales; más alto indica una cola más adversa). Sombreado: ventana de estimación.}
-\label{fig:garpaises}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{fig_series_pais_embiext.pdf}
-\caption[Fragilidad, riesgo de cola y spread por país]{$JLoss$ (eje izquierdo), $D=-GaR$ (eje derecho interior) y EMBI (eje derecho exterior) por país. Sombreado: crisis financiera global (2008Q4--2009Q4), estrés emergente (2015Q3--2016Q1) y pandemia (2020Q1--2021Q4).}
-\label{fig:series}
-\end{figure}
-
-La Figura~\ref{fig:comovimiento} agrega las tres series por la mediana transversal de cada trimestre, estandarizadas. $\ln JLoss_{t-1}$ y $D_{t-1}$ se mueven juntos con fuerza (correlación de 0,64 entre medianas), y cada una correlaciona 0,31 con $\ln$ EMBI. La Figura~\ref{fig:comovpais} repite el ejercicio dentro de cada país: el co-movimiento es nítido en los episodios de estrés y débil en los períodos normales. La Figura~\ref{fig:skewt} muestra qué mide el $GaR$ con la densidad condicional del crecimiento chileno en un trimestre benigno (2025Q3) y en el de mayor estrés (2020Q2). En el segundo, la distribución se desplaza y su cuantil 5\% cae a $-13{,}4$ puntos porcentuales.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.9\textwidth]{fig_comovimiento_embiext.pdf}
-\caption[Co-movimiento agregado]{Co-movimiento de $D_{t-1}$, $\ln JLoss_{t-1}$ y $\ln$ EMBI, estandarizados y agregados por la mediana transversal de cada trimestre. Sombreado: vector de crisis.}
-\label{fig:comovimiento}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{fig_comov_pais_embiext.pdf}
-\caption[Co-movimiento por país]{Co-movimiento estandarizado por país ($z$-score dentro de cada país). Las líneas se cortan en los trimestres sin dato.}
-\label{fig:comovpais}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.85\textwidth]{fig_skewt_chile_embiext.pdf}
-\caption[Densidad condicional del crecimiento]{Densidad condicional \textit{skew-t} del crecimiento de Chile en un trimestre benigno y en el de mayor estrés. Línea discontinua: $GaR$ (cuantil 5\%); punteada: \textit{Expected Shortfall}; área: 5\% de cola.}
-\label{fig:skewt}
-\end{figure}
+El procedimiento tiene cuatro pasos, en este orden:
+\begin{enumerate}
+    \item \textbf{Extraer} los datos bancarios, de mercado y macroeconómicos.
+    \item \textbf{Construir} las métricas $JLoss$ (Sección~\ref{sec:jloss}) y $GaR$ (Sección~\ref{sec:gar}) para cada economía.
+    \item \textbf{Unir} las series en un panel trimestral, con unidades comunes: porcentajes y puntos básicos (Capítulo~\ref{sec:datos}).
+    \item \textbf{Estimar} las regresiones de panel y sus pruebas (Sección~\ref{sec:estrategia}).
+\end{enumerate}
+Los resultados se representan en tablas de regresión, series de tiempo por país y gráficos de elasticidades y de efectos marginales.
 
 \section{Medición de la fragilidad bancaria: la métrica \texorpdfstring{$JLoss$}{JLoss}}
 \label{sec:jloss}
@@ -121,7 +56,7 @@ La integración sobre $V\sim N(0,\sigma_V^2)$ se resuelve por cuadratura de Gaus
 
 La contribución del banco $n$ al riesgo del sistema en el percentil 99 es $C_n=e_n\sum_k\nu_k\tilde p_n(\hat t_k)/\sum_k\nu_k$, con $\tilde p_n(\hat t)=p_ne^{\hat ta_n}/(1-p_n+p_ne^{\hat ta_n})$ la probabilidad inclinada por el punto de silla. La suma de las contribuciones es la pérdida inesperada ($UL$); la esperada es $EL=\sum_ie_ip_i$. Finalmente,
 \[ JLoss_{i,t}=\frac{EL_{i,t}+UL_{i,t}}{\sum_jEAD_{j,t}}\times100, \qquad e_j=EAD_j\cdot LGD, \]
-con una pérdida en caso de incumplimiento $LGD=45\%$ \citep{BIS2006}. La parametrización es la de \citet{Chari2024b} (Tabla~\ref{tab:params}). El cálculo se reimplementó en Python y se validó contra el código original en MATLAB. Para buscar el punto de silla se usa el algoritmo de Brent, que no falla ante curvaturas extremas.
+con una pérdida en caso de incumplimiento $LGD=45\%$ \citep{BIS2006}. La parametrización es la de \citet{Chari2024b} (Tabla~\ref{tab:params}). El cálculo se reimplementa en Python y se valida contra el código original en MATLAB. Para buscar el punto de silla se usa el algoritmo de Brent, que no falla ante curvaturas extremas.
 
 \begin{table}[htbp]
 \centering
@@ -159,7 +94,7 @@ El FCI resume por país tres bloques de tensión ---accionario, de tasa de inter
 
 Para el cuantil $\tau$ y el horizonte $h=1$,
 \[ Q\!\left(\Delta GDP_{i,t+1}\mid\cdot;\tau\right)=\alpha(\tau)+\beta_1(\tau)\Delta GDP_{i,t}+\beta_2(\tau)FCI^{\perp VIX}_{i,t}+\beta_3(\tau)VIX_t+\mu_i(\tau), \]
-con efectos fijos de país \citep{Koenker2004} y el FCI ortogonalizado respecto del VIX, para que el condicionante financiero sea la tensión propiamente doméstica. El problema se resuelve como un único programa lineal (HiGHS), sobre una grilla de 39 cuantiles y con el reordenamiento de \citet{ChernozhukovEtAl2010}; $GaR_{i,t}\equiv Q(\Delta GDP_{i,t+1}\mid\cdot;0{,}05)$. Para evitar el sesgo de anticipación, los parámetros se reestiman en cada fecha con la información disponible hasta ella (ventana expansiva). Como verificación, se ajusta además la densidad \textit{skew-t} de \citet{ABG2019b} a los cuantiles condicionales (Figura~\ref{fig:skewt}). El horizonte de un trimestre, el de la especificación principal, se eligió porque el panel es trimestral y el riesgo de cola entra en la regresión del spread con un trimestre de rezago: $D_{t-1}$ es entonces el cuantil del crecimiento del mismo trimestre $t$ en que se mide el spread. La literatura sobre la estructura temporal del riesgo de cola \citep{AdrianEtAl2022} indica que el horizonte importa, y por eso el riesgo de cola del crecimiento promedio de los cuatro trimestres siguientes ($D4$) se contrastó después en un preregistro (Sección~\ref{sec:macro-prereg}).
+con efectos fijos de país \citep{Koenker2004} y el FCI ortogonalizado respecto del VIX, para que el condicionante financiero sea la tensión propiamente doméstica. El problema se resuelve como un único programa lineal (HiGHS), sobre una grilla de 39 cuantiles y con el reordenamiento de \citet{ChernozhukovEtAl2010}; $GaR_{i,t}\equiv Q(\Delta GDP_{i,t+1}\mid\cdot;0{,}05)$. Para evitar el sesgo de anticipación, los parámetros se reestiman en cada fecha con la información disponible hasta ella (ventana expansiva). Como verificación, se ajusta además la densidad \textit{skew-t} de \citet{ABG2019b} a los cuantiles condicionales (Figura~\ref{fig:skewt}). El horizonte de un trimestre, el de la especificación principal, se elige porque el panel es trimestral y el riesgo de cola entra en la regresión del spread con un trimestre de rezago: $D_{t-1}$ es entonces el cuantil del crecimiento del mismo trimestre $t$ en que se mide el spread. La literatura sobre la estructura temporal del riesgo de cola \citep{AdrianEtAl2022} indica que el horizonte importa, y por eso el riesgo de cola del crecimiento promedio de los cuatro trimestres siguientes ($D4$) se contrasta después en un preregistro (Sección~\ref{sec:macro-prereg}).
 
 \subsection{¿Es el \texorpdfstring{$GaR$}{GaR} circular respecto del EMBI?}
 \label{sec:ryr-endogeneidad}
@@ -169,7 +104,7 @@ El FCI usa el rendimiento soberano local y la variable dependiente es un spread 
 \section{Estrategia econométrica}
 \label{sec:estrategia}
 
-Todas las regresiones son modelos lineales de panel estimados por mínimos cuadrados ordinarios sobre los datos transformados \textit{within} (el estimador de efectos fijos), con el trimestre como unidad de tiempo y la economía como unidad transversal. Las subsecciones cubren la especificación principal y su versión en niveles (Sección~\ref{sec:est-principal}), los efectos fijos y la batería (Sección~\ref{sec:est-ef}), las extensiones por régimen de crisis y por tipo de economía (Secciones~\ref{sec:est-crisis} y~\ref{sec:est-het}), el efecto marginal (Sección~\ref{sec:est-marginal}) y la inferencia y las pruebas de identificación (Sección~\ref{sec:est-inferencia}). La Tabla~\ref{tab:objetivos-especificaciones} vincula cada objetivo específico con la especificación y el coeficiente que lo responde.
+Todas las regresiones son modelos lineales de panel estimados por mínimos cuadrados ordinarios sobre los datos transformados \textit{within} (el estimador de efectos fijos), con el trimestre como unidad de tiempo y la economía como unidad transversal. Las subsecciones cubren la especificación principal y su versión en niveles (Sección~\ref{sec:est-principal}), los efectos fijos y la batería (Sección~\ref{sec:est-ef}), las extensiones por régimen de crisis y por tipo de economía (Secciones~\ref{sec:est-crisis} y~\ref{sec:est-het}), el efecto marginal (Sección~\ref{sec:est-marginal}) y la inferencia y las pruebas de identificación (Sección~\ref{sec:est-inferencia}). Al final de la sección, la Tabla~\ref{tab:objetivos-especificaciones} vincula cada objetivo específico con la especificación y el coeficiente que lo responde.
 
 \subsection{Especificación principal}
 \label{sec:est-principal}
@@ -192,23 +127,13 @@ donde $\alpha_i$ y $\delta_t$ son efectos fijos de país y de tiempo y $X_{i,t}$
 \end{equation}
 $\gamma_1$ son puntos básicos por unidad de $JLoss$; $\gamma_2$, puntos básicos por punto porcentual de $D$; y $\gamma_3$, puntos básicos por unidad de $JLoss$ y punto porcentual de $D$. Como en la ecuación~\eqref{eq:principal}, $JLoss_{t-1}$ y $D_{t-1}$ se centran en su media muestral antes de formar el producto, de modo que $\gamma_1$ se evalúa en el riesgo de cola medio y $\gamma_2$ en la fragilidad media. Sin centrar, serían los efectos en $D=0$ y en $JLoss=0$, un valor que la métrica no toma. La forma logarítmica es la principal porque la prueba PE la prefiere (Sección~\ref{sec:niveles-logs}); la de niveles se reporta en paralelo en todas las pruebas (Sección~\ref{sec:robustez-niveles}).
 
-\begin{mdframed}[linewidth=0.6pt,innertopmargin=6pt,innerbottommargin=6pt,innerleftmargin=8pt,innerrightmargin=8pt]
-\small\textbf{Cronología de las decisiones de especificación.} Varias decisiones se tomaron con resultados anteriores a la vista. Van en orden, con la fecha del repositorio, para que el lector juzgue cuánto pesan:
-\begin{itemize}\setlength\itemsep{1pt}
-    \item \emph{31 de agosto--1 de septiembre de 2026.} El panel pasa a datos de Bloomberg. La variable dependiente cambia del CDS al EMBI, siguiendo a \citet{Chari2024b}, y Hungría sale por el mismo criterio de bancos mínimos que Bulgaria. En la especificación de entonces (niveles, regresores contemporáneos), la interacción solo era significativa en un grupo de once economías.
-    \item \emph{25--29 de septiembre.} Se adopta la especificación log-log con regresores rezagados un trimestre, la de la Tabla 4 de \citet{Chari2024b}. Argentina entra como robustez. El cambio de forma funcional se tomó conociendo el resultado en niveles, y la prueba PE que lo respalda (Sección~\ref{sec:niveles-logs}) se corrió después, el 3 de octubre; por eso se reportan las cuatro combinaciones de forma y rezago.
-    \item \emph{30 de septiembre--7 de octubre.} Primera batería de identificación. La agrupación de once economías se declara \emph{ex post} y exploratoria.
-    \item \emph{12--13 de octubre.} Dos rondas de arbitraje y la prueba con la participación extranjera, cuyas hipótesis y consecuencia el autor fijó en el encabezado del código antes de estimar. El repositorio no lo acredita: el archivo se registró por primera vez el 21 de octubre, junto con sus resultados (Sección~\ref{sec:discusion}, limitaciones).
-    \item \emph{21 de octubre.} Una evaluación externa pide las cuatro pruebas descritas al final de la Sección~\ref{sec:est-inferencia}; se reportan aparte, como no preespecificadas.
-\end{itemize}
-\end{mdframed}
 
 \textbf{De las versiones anteriores a esta.} El Informe de Taller de Tesis I y una versión previa de este trabajo estimaban la ecuación en niveles con regresores contemporáneos. Esta versión cambia las dos cosas a la vez. Hay que separarlas, porque el resultado de la interacción depende de una de ellas: la Sección~\ref{sec:niveles-logs} reporta las cuatro combinaciones sobre el mismo panel.
 
 \subsection{Efectos fijos, controles y batería}
 \label{sec:est-ef}
 
-\textbf{Efectos fijos.} Se usan tres estructuras. Los efectos fijos de \emph{país} ($\alpha_i$) absorben todo rasgo permanente de cada economía ---su calificación media, sus instituciones, la profundidad de su mercado de deuda---, y los coeficientes se identifican con la variación de cada país en el tiempo. Esa variación abunda: el 82\% de la varianza de $\ln JLoss_{t-1}$ y el 84\% de la de $D_{t-1}$ son \textit{within} (Sección~\ref{sec:datos}). Los efectos fijos de \emph{tiempo} ($\delta_t$) absorben todo choque común a las economías en cada trimestre: el apetito global por riesgo, la tasa del Tesoro estadounidense, los spreads de alto rendimiento. La literatura los identifica como el principal determinante de los spreads emergentes. La especificación principal usa ambos; las columnas con solo uno muestran cuánto de la asociación es transversal o común.
+\textbf{Efectos fijos.} Se usan tres estructuras. Los efectos fijos de \emph{país} ($\alpha_i$) absorben todo rasgo permanente de cada economía ---su calificación media, sus instituciones, la profundidad de su mercado de deuda---, y los coeficientes se identifican con la variación de cada país en el tiempo. Esa variación abunda: el 82\% de la varianza de $\ln JLoss_{t-1}$ y el 84\% de la de $D_{t-1}$ son \textit{within} (Sección~\ref{sec:descriptiva}). Los efectos fijos de \emph{tiempo} ($\delta_t$) absorben todo choque común a las economías en cada trimestre: el apetito global por riesgo, la tasa del Tesoro estadounidense, los spreads de alto rendimiento. La literatura los identifica como el principal determinante de los spreads emergentes. La especificación principal usa ambos; las columnas con solo uno muestran cuánto de la asociación es transversal o común.
 
 \textbf{Controles.} La regresión principal no incluye controles ($\omega=0$). La Tabla~\ref{tab:bateria-lnlag-embiext} la reestima con los seis controles domésticos (deuda/PIB, balance fiscal/PIB, reservas/PIB, cuenta corriente/PIB, inflación y tipo de cambio real efectivo) como robustez. La razón es que varios de esos controles son, plausiblemente, canales del propio mecanismo: el costo esperado del rescate bancario deteriora el balance fiscal, y la tensión bancaria se transmite al tipo de cambio y a la inflación. Condicionar en ellos mide el efecto de la fragilidad \emph{neto} de los canales por los que opera, el problema del ``mal control''. Además, los controles son series anuales interpoladas, con poca variación dentro del año bajo efectos fijos. Los factores globales (VIX, tasa del Tesoro, spreads de alto rendimiento) no se incluyen porque los efectos fijos de tiempo ya los absorben.
 
@@ -236,7 +161,7 @@ Una conjetura es que el mecanismo opera a través del precio que fija el inversi
 \end{equation}
 donde $\beta_3$ es la interacción en el grupo de once economías y $\beta_3+\theta_3$ en el de Polonia e India, y (ii) solo sobre el primer grupo. La división no es ex ante. Viene de una versión anterior del análisis, en la que la interacción se diluía al agregar esas dos economías, y no mide quién tiene la deuda. Sus resultados son, por construcción, exploratorios.
 
-La segunda forma es una \emph{prueba preespecificada} con un moderador continuo y medido de forma independiente: la participación de no residentes en la deuda del gobierno general, de la base de \citet{ArslanalpTsuda2014} (versión de mayo de 2026). Las hipótesis se escribieron el 13 de octubre de 2026, antes de estimar. El moderador primario, $F_{i,t-4}$, es la participación de los tenedores extranjeros no bancarios en la deuda total, rezagada cuatro trimestres y estandarizada. La especificación es la ecuación~\eqref{eq:participacion}, que agrega a la principal $F$ y sus productos con la fragilidad ($h_1$), con el riesgo de cola ($h_2$) y con la interacción ($h_3$). La familia primaria son esos tres coeficientes, con signo predicho positivo, corrección de \citet{Holm1979} sobre los tres y veredicto por \textit{wild cluster bootstrap} por país. Las variantes se declararon secundarias: la participación total, una versión \textit{ex ante} con la media de 2004--2007, el rezago de ocho trimestres, la muestra sin crisis y la descomposición entre y dentro de países. La consecuencia también se fijó de antemano: si $h_3$ no resulta significativo en la prueba primaria, los resultados de la agrupación \textit{ex post} se tratan como exploratorios (Sección~\ref{sec:participacion-extranjera}).
+La segunda forma es una \emph{prueba preespecificada} con un moderador continuo y medido de forma independiente: la participación de no residentes en la deuda del gobierno general, de la base de \citet{ArslanalpTsuda2014} (versión de mayo de 2026). Las hipótesis se escriben el 13 de octubre de 2026, antes de estimar. El moderador primario, $F_{i,t-4}$, es la participación de los tenedores extranjeros no bancarios en la deuda total, rezagada cuatro trimestres y estandarizada. La especificación es la ecuación~\eqref{eq:participacion}, que agrega a la principal $F$ y sus productos con la fragilidad ($h_1$), con el riesgo de cola ($h_2$) y con la interacción ($h_3$). La familia primaria son esos tres coeficientes, con signo predicho positivo, corrección de \citet{Holm1979} sobre los tres y veredicto por \textit{wild cluster bootstrap} por país. Las variantes se declaran secundarias: la participación total, una versión \textit{ex ante} con la media de 2004--2007, el rezago de ocho trimestres, la muestra sin crisis y la descomposición entre y dentro de países. La consecuencia también se fija de antemano: si $h_3$ no resulta significativo en la prueba primaria, los resultados de la agrupación \textit{ex post} se tratan como exploratorios (Sección~\ref{sec:participacion-extranjera}).
 
 \subsection{Solapamiento con las variables financieras: regresión en dos etapas}
 \label{sec:est-solapamiento}
@@ -266,15 +191,38 @@ que se reporta a lo largo de la distribución de $D$. Como contraste no lineal q
 
 \textbf{Errores estándar.} Los residuos de un panel de spreads soberanos tienen tres rasgos que invalidan los errores convencionales: heterocedasticidad entre países, autocorrelación dentro de cada país (el spread es muy persistente) y dependencia transversal (un choque global mueve a todos los países a la vez, más allá de lo que absorben los efectos fijos de tiempo). Las tablas reportan errores de \citet{DriscollKraay1998}. Promedian los momentos entre países en cada trimestre, aplican un núcleo de Bartlett a sus autocovarianzas y son robustos a los tres rasgos cuando la dimensión temporal es larga ($T\approx88$ trimestres). Su sensibilidad al ancho de banda se verifica con 2, 4 y 8 rezagos, y con un ancho de banda largo y valores críticos \textit{fixed-b} \citep{KieferVogelsang2005}. Se reportan además errores agrupados (\textit{cluster}) por país, con valores críticos de una $t$ con doce grados de libertad. El agrupamiento por trimestre no se usa en niveles: supone errores independientes entre trimestres, y el spread es persistente.
 
-\textbf{Pocos \textit{clusters}.} Con trece países, ni los errores agrupados por país ni la aproximación asintótica de Driscoll--Kraay están garantizados \citep{CameronGelbachMiller2008}. Por eso cada coeficiente central se contrasta también con un \textit{wild cluster bootstrap} restringido. Se impone la hipótesis nula, se remuestrean los residuos multiplicándolos por un peso común a todas las observaciones de un país (pesos de Webb, de seis puntos, adecuados con menos de quince \textit{clusters}) y se compara el estadístico $t$ observado con su distribución en 1\,999 réplicas (999 en las familias con muchos contrastes). Qué método merece confianza en este panel lo decide una simulación (Sección~\ref{sec:inferencia-potencia}) con tres procesos generadores. A multiplica los residuos por un signo común a cada país con los regresores fijos; es el diseño de una versión anterior, y coincide con el esquema de remuestreo del propio \textit{bootstrap}. B impone la hipótesis nula, ajusta un autorregresivo de orden dos por país y remuestrea por fecha vectores completos de innovaciones, con lo que conserva la dependencia entre países. C es un vector autorregresivo de panel con retroalimentación del spread hacia la fragilidad y el riesgo de cola, que regenera también los regresores. Son 1\,000 muestras por proceso, en niveles y en primeras diferencias, y se mide el tamaño y la potencia de cada método. El resultado fija la regla de lectura. En niveles, Driscoll--Kraay rechaza una hipótesis nula cierta entre el 20\% y el 30\% de las veces y el \textit{wild bootstrap} por país está bien calibrado, de modo que el criterio es que un resultado resista el \textit{wild bootstrap}. Ese criterio ordena la inferencia, no la identificación: en el proceso C, donde ningún riesgo tiene efecto directo, el propio \textit{wild bootstrap} rechaza un coeficiente nulo el 24\% de las veces, porque la retroalimentación sesga el estimador. De ahí sale la escala de evidencia del Capítulo~\ref{sec:resultados}: \emph{firme}, si resiste el \textit{wild bootstrap} o una permutación y no depende de un país; \emph{sugerente}, si es significativo solo con Driscoll--Kraay o depende de un país; \emph{exploratorio}, si no estaba preespecificado y no pasa la corrección por comparaciones múltiples.
+\textbf{Pocos \textit{clusters}.} Con trece países, ni los errores agrupados por país ni la aproximación asintótica de Driscoll--Kraay están garantizados \citep{CameronGelbachMiller2008}. Por eso cada coeficiente central se contrasta también con un \textit{wild cluster bootstrap} restringido. Se impone la hipótesis nula, se remuestrean los residuos multiplicándolos por un peso común a todas las observaciones de un país (pesos de Webb, de seis puntos, adecuados con menos de quince \textit{clusters}) y se compara el estadístico $t$ observado con su distribución en 1\,999 réplicas (999 en las familias con muchos contrastes). 
+
+Qué método merece confianza en este panel lo decide una simulación (Sección~\ref{sec:inferencia-potencia}) con tres procesos generadores. A multiplica los residuos por un signo común a cada país con los regresores fijos; es el diseño de una versión anterior, y coincide con el esquema de remuestreo del propio \textit{bootstrap}. B impone la hipótesis nula, ajusta un autorregresivo de orden dos por país y remuestrea por fecha vectores completos de innovaciones, con lo que conserva la dependencia entre países. C es un vector autorregresivo de panel con retroalimentación del spread hacia la fragilidad y el riesgo de cola, que regenera también los regresores. Son 1\,000 muestras por proceso, en niveles y en primeras diferencias, y se mide el tamaño y la potencia de cada método.
+
+El resultado fija la regla de lectura. En niveles, Driscoll--Kraay rechaza una hipótesis nula cierta entre el 20\% y el 30\% de las veces y el \textit{wild bootstrap} por país está bien calibrado, de modo que el criterio es que un resultado resista el \textit{wild bootstrap}. Ese criterio ordena la inferencia, no la identificación: en el proceso C, donde ningún riesgo tiene efecto directo, el propio \textit{wild bootstrap} rechaza un coeficiente nulo el 24\% de las veces, porque la retroalimentación sesga el estimador. De ahí sale la escala de evidencia del Capítulo~\ref{sec:resultados}: \emph{firme}, si resiste el \textit{wild bootstrap} o una permutación y no depende de un país; \emph{sugerente}, si es significativo solo con Driscoll--Kraay o depende de un país; \emph{exploratorio}, si no estaba preespecificado y no pasa la corrección por comparaciones múltiples.
 
 \textbf{Comparaciones múltiples.} Se reportan los $p$-valores corregidos por el procedimiento de \citet{Holm1979} para tres familias de contrastes: la interacción en varias muestras y regímenes de crisis, los tres componentes de la resiliencia por los dos riesgos, y la familia preespecificada de la participación extranjera.
 
 \textbf{Regresores generados.} El $GaR$ es, a su vez, una estimación. Para propagar su error a la segunda etapa \citep{Pagan1984}, la regresión principal se reestima sobre 500 réplicas \textit{bootstrap} de la regresión cuantílica y los errores se combinan.
 
-\textbf{Pruebas de identificación.} El rezago hace que los regresores sean predeterminados, no exógenos. La Sección~\ref{sec:identificacion} aplica nueve pruebas: (i) el canal inverso, regresando $\ln JLoss_t$ sobre $\ln\mathrm{EMBI}_{t-1}$, y una simulación del sesgo que esa retroalimentación induce en los coeficientes de nivel cuando la fragilidad no tiene efecto directo (proceso C); (ii) la dinámica, agregando el spread rezagado o la fragilidad adelantada; (iii) proyecciones locales \citep{Jorda2005} de $\ln\mathrm{EMBI}_{t+h}$, $h=0,\dots,6$; (iv) variables instrumentales \textit{shift-share} con exposiciones pre-muestrales \citep{GoldsmithPinkhamSorkinSwift2020}, con la prueba de Sargan; (v) una prueba de permutación para el episodio \textit{EMstress}, que lo reemplaza por cada ventana de tres trimestres consecutivos fuera de \textit{Backstop}; (vi) pruebas de raíz unitaria de panel \citep{MaddalaWu1999} y de dependencia transversal de los residuos \citep{Pesaran2004}; (vii) el \emph{fechado del spread}: como el EMBI del panel es un promedio trimestral, la diferencia de promedios contiene mecánicamente movimientos del trimestre anterior \citep{Working1960}, de modo que la especificación en primeras diferencias se reestima con el spread de cierre ---el cambio entre el cierre de $t-1$ y el de $t$ sobre el cambio de la fragilidad en $t-1$ es la prueba limpia de precedencia---, con el promedio del primer mes y con el cambio dentro del mismo trimestre; (viii) la forma de \emph{corrección de errores} de la ecuación~\eqref{eq:ecm}, que estima el multiplicador de largo plazo de cada riesgo con su intervalo (método delta y conjunto de Fieller) y corrige el sesgo de \citet{Nickell1981} por \textit{jackknife} de medio panel, para saber si los datos distinguen una asociación de nivel de una transitoria; y (ix) \emph{proyecciones locales acumuladas} de $\ln\mathrm{EMBI}_{t+h}-\ln\mathrm{EMBI}_{t-1}$ sobre el cambio de cada riesgo, $h=0,\dots,8$, con el spread promedio y con el de cierre.
+\textbf{Pruebas de identificación.} El rezago hace que los regresores sean predeterminados, no exógenos. La Sección~\ref{sec:identificacion} aplica nueve pruebas:
+\begin{enumerate}\renewcommand{\labelenumi}{(\roman{enumi})}
+    \item el canal inverso, regresando $\ln JLoss_t$ sobre $\ln\mathrm{EMBI}_{t-1}$, y una simulación del sesgo que esa retroalimentación induce en los coeficientes de nivel cuando la fragilidad no tiene efecto directo (proceso C);
+    \item la dinámica, agregando el spread rezagado o la fragilidad adelantada;
+    \item proyecciones locales \citep{Jorda2005} de $\ln\mathrm{EMBI}_{t+h}$, $h=0,\dots,6$;
+    \item variables instrumentales \textit{shift-share} con exposiciones pre-muestrales \citep{GoldsmithPinkhamSorkinSwift2020}, con la prueba de Sargan;
+    \item una prueba de permutación para el episodio \textit{EMstress}, que lo reemplaza por cada ventana de tres trimestres consecutivos fuera de \textit{Backstop};
+    \item pruebas de raíz unitaria de panel \citep{MaddalaWu1999} y de dependencia transversal de los residuos \citep{Pesaran2004};
+    \item el \emph{fechado del spread}: como el EMBI del panel es un promedio trimestral, la diferencia de promedios contiene mecánicamente movimientos del trimestre anterior \citep{Working1960}, de modo que la especificación en primeras diferencias se reestima con el spread de cierre ---el cambio entre el cierre de $t-1$ y el de $t$ sobre el cambio de la fragilidad en $t-1$ es la prueba limpia de precedencia---, con el promedio del primer mes y con el cambio dentro del mismo trimestre;
+    \item la forma de \emph{corrección de errores} de la ecuación~\eqref{eq:ecm}, que estima el multiplicador de largo plazo de cada riesgo con su intervalo (método delta y conjunto de Fieller) y corrige el sesgo de \citet{Nickell1981} por \textit{jackknife} de medio panel, para saber si los datos distinguen una asociación de nivel de una transitoria; y
+    \item \emph{proyecciones locales acumuladas} de $\ln\mathrm{EMBI}_{t+h}-\ln\mathrm{EMBI}_{t-1}$ sobre el cambio de cada riesgo, $h=0,\dots,8$, con el spread promedio y con el de cierre.
+\end{enumerate}
 
-\textbf{Contrastes de la pregunta propia.} Tres familias de contrastes, fijadas antes de estimar, responden qué agrega el riesgo de cola y qué ocurre cuando los riesgos coinciden. \emph{Información incremental} (Sección~\ref{sec:aporte-cola}): se parte de la especificación al estilo de \citet{Chari2024b} ---la fragilidad rezagada y sus controles---, se agrega $D_{t-1}$ y luego la interacción, y se reportan los coeficientes, la prueba conjunta $\beta_2=\beta_3=0$ y el $R^2$ parcial; fuera de la muestra, se generan pronósticos a un trimestre con ventana expansiva y se comparan los modelos anidados con el contraste de \citet{ClarkWest2007}. Como el riesgo de cola se mueve lento, se le aplican además pruebas que no descansan en el nivel: cambios a cuatro trimestres, proyecciones locales y la regresión entre las medias por país. \emph{Simultaneidad} (Sección~\ref{sec:simultaneidad}): se cuenta la frecuencia con que ambos riesgos están en su tercil alto dentro de cada país y se compara con la esperada bajo independencia mediante una permutación por bloques, que desplaza circularmente una de las dos series dentro de cada país (999 réplicas) y conserva así su persistencia; se comparan del mismo modo la duración de los episodios conjuntos y, con regresiones cruzadas, qué riesgo antecede al otro. \emph{Aditividad con bandas} (Sección~\ref{sec:bandas-aditividad}): el intervalo de confianza de $\beta_3$ ---con Driscoll--Kraay, con errores agrupados y por inversión del \textit{wild bootstrap}--- se traduce a la mayor amplificación que los datos no permiten descartar cuando ambos riesgos están una desviación estándar dentro del país sobre su media; a ello se suman los indicadores de estrés conjunto de la ecuación~\eqref{eq:estres}. Después de estimar, una revisión externa pidió cuatro pruebas que no estaban fijadas; por eso se reportan aparte: una permutación de la simultaneidad que conserva el calendario común ---el indicador del riesgo de cola se permuta entre las economías dentro de cada trimestre---; la exclusión de un país a la vez, el $GaR$ sin el bloque bursátil y dos a cuatro rezagos para la precedencia de un riesgo sobre el otro; y una prueba de equivalencia \citep{Schuirmann1987} que traduce el intervalo al 90\% de $\beta_3$ a la menor amplificación que los datos rechazan; y la regresión principal con medidas de fragilidad que no saturan (la probabilidad de incumplimiento y la distancia al incumplimiento de Merton medias, con los mismos bancos).
+\textbf{Contrastes de la pregunta propia.} Tres familias de contrastes, fijadas antes de estimar, responden qué agrega el riesgo de cola y qué ocurre cuando los riesgos coinciden.
+
+\emph{Información incremental} (Sección~\ref{sec:aporte-cola}): se parte de la especificación al estilo de \citet{Chari2024b} ---la fragilidad rezagada y sus controles---, se agrega $D_{t-1}$ y luego la interacción, y se reportan los coeficientes, la prueba conjunta $\beta_2=\beta_3=0$ y el $R^2$ parcial; fuera de la muestra, se generan pronósticos a un trimestre con ventana expansiva y se comparan los modelos anidados con el contraste de \citet{ClarkWest2007}. Como el riesgo de cola se mueve lento, se le aplican además pruebas que no descansan en el nivel: cambios a cuatro trimestres, proyecciones locales y la regresión entre las medias por país.
+
+\emph{Simultaneidad} (Sección~\ref{sec:simultaneidad}): se cuenta la frecuencia con que ambos riesgos están en su tercil alto dentro de cada país y se compara con la esperada bajo independencia mediante una permutación por bloques, que desplaza circularmente una de las dos series dentro de cada país (999 réplicas) y conserva así su persistencia; se comparan del mismo modo la duración de los episodios conjuntos y, con regresiones cruzadas, qué riesgo antecede al otro.
+
+\emph{Aditividad con bandas} (Sección~\ref{sec:bandas-aditividad}): el intervalo de confianza de $\beta_3$ ---con Driscoll--Kraay, con errores agrupados y por inversión del \textit{wild bootstrap}--- se traduce a la mayor amplificación que los datos no permiten descartar cuando ambos riesgos están una desviación estándar dentro del país sobre su media; a ello se suman los indicadores de estrés conjunto de la ecuación~\eqref{eq:estres}.
+
+Después de estimar, una revisión externa pidió cuatro pruebas que no estaban fijadas; por eso se reportan aparte: una permutación de la simultaneidad que conserva el calendario común ---el indicador del riesgo de cola se permuta entre las economías dentro de cada trimestre---; la exclusión de un país a la vez, el $GaR$ sin el bloque bursátil y dos a cuatro rezagos para la precedencia de un riesgo sobre el otro; y una prueba de equivalencia \citep{Schuirmann1987} que traduce el intervalo al 90\% de $\beta_3$ a la menor amplificación que los datos rechazan; y la regresión principal con medidas de fragilidad que no saturan (la probabilidad de incumplimiento y la distancia al incumplimiento de Merton medias, con los mismos bancos).
 
 \textbf{Contrastes sobre el alcance de la réplica.} La magnitud económica se mide por desviación estándar dentro del país y por $R^2$ parcial (Sección~\ref{sec:magnitud}). La dependencia de cada país se mide con el \textit{leave-one-country-out}, con las pendientes estimadas país por país y su promedio de grupo (\textit{mean-group}), con la prueba de homogeneidad de pendientes de \citet{PesaranYamagata2008} y con la descomposición exacta del coeficiente agrupado en el aporte de cada economía (Sección~\ref{sec:loo-efectos}). Se agregan el CDS soberano a cinco años como variable dependiente (Sección~\ref{sec:cds}) y el respaldo externo medido por país y fecha en la ecuación~\eqref{eq:respaldo}.
 
@@ -287,10 +235,40 @@ que se reporta a lo largo de la distribución de $D$. Como contraste no lineal q
 \toprule
 Objetivo específico & Especificación & Coeficiente \\
 \midrule
-1. Construir $JLoss$ y $GaR$ & Secciones~\ref{sec:jloss} y~\ref{sec:gar}; panel de la Sección~\ref{sec:datos} & --- \\
+1. Construir $JLoss$ y $GaR$ & Secciones~\ref{sec:jloss} y~\ref{sec:gar}; panel del Capítulo~\ref{sec:datos} & --- \\
 2. Fragilidad bancaria (réplica) & ecuaciones~\eqref{eq:principal} y~\eqref{eq:niveles}, M1--M4; pendientes por país; fechado del spread; corrección de errores~\eqref{eq:ecm} & $\beta_1$ (elasticidad), $\gamma_1$ (pb), $\theta$ \\
 3. Riesgo de cola & ecuaciones~\eqref{eq:principal} y~\eqref{eq:niveles}, M2--M4; información incremental dentro y fuera de la muestra & $\beta_2$ (semielasticidad), $\gamma_2$ (pb), $R^2$ parcial \\
 4. Complementariedad & M4; simultaneidad (permutación); estrés conjunto~\eqref{eq:estres}; bandas de aditividad; vector de crisis~\eqref{eq:crisisint}; respaldo por país~\eqref{eq:respaldo}; participación extranjera~\eqref{eq:participacion} & $\beta_3$, $a_3$, $\beta_3+\beta_4$, $c_3$, $h_3$, $\gamma_3$ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\section{Credibilidad de la evidencia}
+\label{sec:credibilidad}
+
+Esta sección fija el vocabulario y los criterios con que se juzga la evidencia, y declara en qué orden se tomaron las decisiones de especificación.
+
+\begin{mdframed}[linewidth=0.6pt,innertopmargin=6pt,innerbottommargin=6pt,innerleftmargin=8pt,innerrightmargin=8pt]
+\small\textbf{Vocabulario.} A lo largo del texto:
+\begin{itemize}\setlength\itemsep{1pt}
+    \item \emph{Riesgo financiero} es la fragilidad bancaria ($JLoss$); \emph{riesgo económico}, el riesgo de cola del crecimiento ($D\equiv-GaR$). Su alcance es preciso: el $GaR$ es el cuantil 5\% del crecimiento del trimestre siguiente, condicionado en un índice de condiciones financieras, de modo que mide el riesgo de crecimiento de corto plazo asociado a la tensión financiera, no la capacidad de pago de mediano plazo; la Sección~\ref{sec:macro-prereg} lo contrasta con un $GaR$ de cuatro trimestres.
+    \item \emph{Simultaneidad} es que los dos riesgos estén altos a la vez.
+    \item Los efectos son \emph{aditivos} si la simultaneidad eleva el spread tanto como la suma de los efectos de cada riesgo. En la especificación en logaritmos eso es $\beta_3=0$.
+    \item Aditivo en logaritmos equivale a \emph{proporcional} en puntos básicos: como cada riesgo eleva el spread en un porcentaje, el efecto de uno en puntos básicos es mayor cuando el otro ya elevó el spread. Esa complementariedad en puntos básicos es mecánica, y no es amplificación.
+    \item Hay \emph{amplificación} solo si la simultaneidad eleva el spread más que eso: $\beta_3>0$ en logaritmos.
+    \item Los coeficientes son \emph{asociaciones} condicionales, no efectos causales. La evidencia se clasifica en una misma escala: \emph{firme}, si resiste la inferencia exigente (\textit{wild cluster bootstrap} por país o permutación) y no depende de un país; \emph{sugerente}, si es significativa solo con Driscoll--Kraay o depende de un país; \emph{exploratoria}, si no estaba preespecificada y no pasa la corrección por comparaciones múltiples; o \emph{no hay evidencia}.
+\end{itemize}
+\end{mdframed}
+
+\textbf{Preregistros.} H4 no estaba en el plan original de la investigación. Se contrasta después, con un preregistro anterior a los datos (Secciones~\ref{sec:resiliencia-prereg} y~\ref{sec:macro-prereg}). Cada preregistro fija las hipótesis, las especificaciones, la inferencia y la consecuencia de cada resultado, y se registra en el repositorio antes de estimar. Cada prueba se reporta cualquiera sea su resultado.
+
+\begin{mdframed}[linewidth=0.6pt,innertopmargin=6pt,innerbottommargin=6pt,innerleftmargin=8pt,innerrightmargin=8pt]
+\small\textbf{Cronología de las decisiones de especificación.} Varias decisiones se tomaron con resultados anteriores a la vista. Van en orden, con la fecha del repositorio, para que el lector juzgue cuánto pesan:
+\begin{itemize}\setlength\itemsep{1pt}
+    \item \emph{31 de agosto--1 de septiembre de 2026.} El panel pasa a datos de Bloomberg. La variable dependiente cambia del CDS al EMBI, siguiendo a \citet{Chari2024b}, y Hungría sale por el mismo criterio de bancos mínimos que Bulgaria. En la especificación de entonces (niveles, regresores contemporáneos), la interacción solo era significativa en un grupo de once economías.
+    \item \emph{25--29 de septiembre.} Se adopta la especificación log-log con regresores rezagados un trimestre, la de la Tabla 4 de \citet{Chari2024b}. Argentina entra como robustez. El cambio de forma funcional se tomó conociendo el resultado en niveles, y la prueba PE que lo respalda (Sección~\ref{sec:niveles-logs}) se corrió después, el 3 de octubre; por eso se reportan las cuatro combinaciones de forma y rezago.
+    \item \emph{30 de septiembre--7 de octubre.} Primera batería de identificación. La agrupación de once economías se declara \emph{ex post} y exploratoria.
+    \item \emph{12--13 de octubre.} Dos rondas de arbitraje y la prueba con la participación extranjera, cuyas hipótesis y consecuencia el autor fijó en el encabezado del código antes de estimar. El repositorio no lo acredita: el archivo se registró por primera vez el 21 de octubre, junto con sus resultados (Sección~\ref{sec:discusion}, limitaciones).
+    \item \emph{21 de octubre.} Una evaluación externa pide las cuatro pruebas descritas al final de la Sección~\ref{sec:est-inferencia}; se reportan aparte, como no preespecificadas.
+\end{itemize}
+\end{mdframed}
