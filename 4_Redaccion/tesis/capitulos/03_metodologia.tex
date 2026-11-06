@@ -1,11 +1,16 @@
-% Capítulo de la tesis. Estructura según la clase 6 y el Laboratorio 5 de EP7000: enfoque y alcances, muestra,
-% recolección y procedimiento, medición, estrategia econométrica y credibilidad. Los datos están en el Capítulo 4.
+% Capítulo de la tesis. Estructura según la clase 6 y el Laboratorio 5 de EP7000: diseño metodológico (enfoque y
+% alcances, muestra, recolección y procedimiento), medición, estrategia econométrica y credibilidad. Los datos están en el Capítulo 4.
 \chapter{Metodología}
 \label{sec:metodologia}
 
-Este capítulo expone cómo se realiza el estudio. La Sección~\ref{sec:enfoque} declara el enfoque y los alcances. La Sección~\ref{sec:muestra} define el universo, la muestra y los criterios de selección. La Sección~\ref{sec:procedimiento} ordena la recolección y el procesamiento de los datos. Las Secciones~\ref{sec:jloss} y~\ref{sec:gar} detallan la construcción de $JLoss_{i,t}$ y del $GaR_{i,t}$. La Sección~\ref{sec:estrategia} presenta la estrategia econométrica, y la Sección~\ref{sec:credibilidad} reúne el vocabulario, la escala de evidencia y la cronología de las decisiones. Los datos se describen en el Capítulo~\ref{sec:datos}.
+Este capítulo expone cómo se realiza el estudio. La Sección~\ref{sec:diseno} presenta el diseño metodológico: el enfoque y los alcances, el universo y la muestra, y la recolección y el procesamiento de los datos. Las Secciones~\ref{sec:jloss} y~\ref{sec:gar} detallan la construcción de $JLoss_{i,t}$ y del $GaR_{i,t}$. La Sección~\ref{sec:estrategia} presenta la estrategia econométrica, y la Sección~\ref{sec:credibilidad} reúne el vocabulario, la escala de evidencia y la cronología de las decisiones. Los datos se describen en el Capítulo~\ref{sec:datos}.
 
-\section{Enfoque y alcances}
+\section{Diseño metodológico}
+\label{sec:diseno}
+
+Esta sección declara qué tipo de estudio es la investigación, sobre qué economías y bancos trabaja y con qué pasos se obtienen y procesan los datos.
+
+\subsection{Enfoque y alcances}
 \label{sec:enfoque}
 
 La investigación es cuantitativa y correlacional. Mide dos riesgos, cuantifica su asociación con el spread soberano y contrasta las hipótesis H1 a H4 del Capítulo~\ref{sec:marco}. La unidad de análisis es la economía-trimestre, en un panel de 2004 a 2026. El diseño es no experimental y longitudinal: observa las economías a lo largo del tiempo, sin intervenir sobre ellas. La lógica es deductiva. Las hipótesis salen de la teoría y se contrastan con los datos, y ocho preregistros fijan de antemano buena parte de las pruebas (Sección~\ref{sec:credibilidad}).
@@ -14,7 +19,7 @@ El estudio responde a los objetivos de la Sección~\ref{sec:objetivos}: construi
 
 Cuatro cosas quedan fuera. Primero, el estudio no identifica efectos causales. Usa rezagos, variables instrumentales, g-estimación secuencial y un estudio de eventos para acotar esa limitación (Sección~\ref{sec:est-inferencia}), pero los coeficientes se leen como asociaciones condicionales. Segundo, no busca pronosticar el spread: las comparaciones fuera de la muestra son contrastes de las hipótesis, no un producto de la tesis. Tercero, no analiza economías desarrolladas. Cuarto, no estudia los determinantes globales del spread, que los efectos fijos de tiempo absorben, ni los bancos que no cotizan en bolsa, porque $JLoss$ requiere precios de mercado.
 
-\section{Universo, muestra y criterios de selección}
+\subsection{Universo, muestra y criterios de selección}
 \label{sec:muestra}
 
 El universo son las economías emergentes con deuda soberana en los mercados internacionales. La extracción parte de un universo objetivo de veinte economías y 113 bancos cotizados. Diecisiete de esas economías están en la muestra de \citet{Chari2024b}; India, Hungría y Corea del Sur se agregan. Un banco entra si cotiza en bolsa, con su cotización local y no su ADR, y si Bloomberg entrega su balance y su capitalización. La muestra no es probabilística: reúne las economías con datos disponibles, y por eso sus resultados no se generalizan sin más a todas las economías emergentes.
@@ -31,7 +36,7 @@ El resultado son trece economías, 87 bancos y 765 observaciones. La Sección~\r
 
 Las observaciones se agrupan de tres maneras para comparar: por régimen de crisis, con y sin respaldo externo (Sección~\ref{sec:est-crisis}); por tipo de economía y participación extranjera en la deuda (Sección~\ref{sec:est-het}); y por condición de la política económica (Sección~\ref{sec:est-resiliencia}).
 
-\section{Recolección y procedimiento}
+\subsection{Recolección y procedimiento}
 \label{sec:procedimiento}
 
 Los datos provienen de fuentes estadísticas y de un mismo proveedor de mercado, con un protocolo igual para todas las economías. Los balances bancarios, los precios de mercado y el EMBI se extraen de la terminal Bloomberg y de J.P.\ Morgan. Las series macroeconómicas se obtienen del FMI, del Banco Mundial y de los bancos centrales y estadísticas nacionales. Como son muchas series y de formatos distintos, la extracción y la consolidación se hacen con programas disponibles en el repositorio. El Anexo~\ref{chap:anexoA} tabula la procedencia de cada una.
@@ -48,38 +53,47 @@ Los resultados se representan en tablas de regresión, series de tiempo por paí
 \section{Medición de la fragilidad bancaria: la métrica \texorpdfstring{$JLoss$}{JLoss}}
 \label{sec:jloss}
 
-$JLoss_{i,t}$ es una métrica semiparamétrica, a nivel de país, de la pérdida conjunta esperada del sistema bancario condicional a un evento sistémico, como porcentaje de la exposición total. Su construcción sigue a \citet{Chari2024b} en cuatro etapas: (i) probabilidades individuales de incumplimiento con un modelo estructural de tipo Merton; (ii) su condicionalización a un factor sistémico del país; (iii) la agregación de la distribución de pérdidas por el método de punto de silla; y (iv) las contribuciones marginales que definen la métrica. Los insumos ---balances bancarios trimestrales y capitalización bursátil diaria--- se extraen de la terminal Bloomberg con un mismo protocolo para los 113 bancos cotizados de las veinte economías del universo objetivo. Así se evita que las definiciones contables cambien de un supervisor nacional a otro. La moneda de la capitalización se verifica contra la del balance de cada banco.
+$JLoss_{i,t}$ es una métrica semiparamétrica, a nivel de país, de la pérdida conjunta del sistema bancario en un escenario de estrés sistémico, expresada como porcentaje de su pasivo total. Su construcción sigue a \citet{Chari2024b} y a su código original en MATLAB, en cuatro etapas: (i) la probabilidad de incumplimiento de cada banco, con un modelo estructural de tipo Merton; (ii) su condicionalización a un factor sistémico del país; (iii) la distribución de pérdidas del sistema, por el método de punto de silla; y (iv) las contribuciones marginales de cada banco, que definen la métrica. Esta sección describe cada etapa tal como se implementa y señala dónde la implementación se aparta del artículo. Los insumos, que son los balances bancarios trimestrales y la capitalización bursátil diaria, se extraen de la terminal Bloomberg con un mismo protocolo para los 113 bancos cotizados de las veinte economías del universo objetivo. Así se evita que las definiciones contables cambien de un supervisor nacional a otro. La moneda de la capitalización se verifica contra la del balance de cada banco.
 
 \subsection{Insumos por banco y trimestre}
 \label{sec:jloss-insumos}
 
-El balance entrega tres magnitudes. El pasivo total es la diferencia entre los activos y el patrimonio contable, y aproxima la exposición al incumplimiento ($EAD$), como en \citet{Chari2024b}. El pasivo de largo plazo, $L_{LT}$, es la deuda de largo plazo emitida (el campo \texttt{BS\_LT\_BORROW}), y el de corto plazo, $L_{ST}$, es todo el resto del pasivo. Si a un banco le falta el balance de un trimestre, se arrastra el anterior por un máximo de un trimestre. Eso cubre, por ejemplo, a los bancos de Sudáfrica, que reportan de forma semestral.
+El balance entrega tres magnitudes: los activos totales, el patrimonio contable y la deuda de largo plazo emitida (el campo \texttt{BS\_LT\_BORROW}). El pasivo total es la diferencia entre los activos y el patrimonio. Aproxima la exposición al incumplimiento ($EAD$), como en \citet{Chari2024b}, que miden la exposición por el pasivo del banco. El pasivo de largo plazo, $L_{LT}$, es la deuda de largo plazo emitida, y el de corto plazo, $L_{ST}$, es todo el resto del pasivo. El artículo enumera también los activos de corto plazo entre los insumos, pero no entran en ninguna de sus ecuaciones, y la tesis no los usa. Si a un banco le falta el balance de un trimestre, se arrastra el anterior por un máximo de un trimestre. Eso cubre, por ejemplo, a los bancos de Sudáfrica, que reportan de forma semestral.
 
-El valor de mercado del patrimonio, $E$, es la capitalización bursátil del último día del trimestre. La volatilidad trimestral se estima por varianza realizada \citep{BarndorffNielsenShephard2002}, $\sigma_{E,q}=\sqrt{\sum_d r_d^2}$, con $r_d$ la variación diaria de la capitalización, y exige al menos cinco retornos en el trimestre. Se anualiza como $\sigma_E=\sigma_{E,q}\sqrt4$.
+El valor de mercado del patrimonio, $E$, es la capitalización bursátil del último día hábil del trimestre. Se toma del campo de capitalización diaria de Bloomberg y, si falta, se calcula como el precio por las acciones en circulación. La volatilidad trimestral se estima por varianza realizada \citep{BarndorffNielsenShephard2002}, como en el artículo: $\sigma_{E,q}=\sqrt{\sum_d r_d^2}$, con al menos cinco retornos en el trimestre. \citet{Chari2024b} usan los retornos logarítmicos diarios del precio. La tesis usa la variación diaria de la capitalización, que coincide con el retorno del precio salvo en los días en que cambia el número de acciones. La volatilidad se anualiza como $\sigma_E=\sigma_{E,q}\sqrt4$, igual que en el código original.
 
 \subsection{Probabilidades individuales de incumplimiento}
 
-Para cada banco se sigue la modificación de \citet{Kealhofer2000} del modelo de \citet{Merton1974b}. El punto de incumplimiento es $D^{*}=L_{ST}+\tfrac12 L_{LT}$. Dados $E$, $\sigma_E$, la tasa libre de riesgo $r$ y el horizonte $T$, se resuelve el sistema
+Para cada banco se sigue la modificación de \citet{Kealhofer2000} del modelo de \citet{Merton1974b}. El punto de incumplimiento es $D^{*}=L_{ST}+\tfrac12 L_{LT}$, el peso de la deuda de largo plazo que propone el enfoque KMV.\footnote{En la función \texttt{indivpds.m} del código original, ese peso aparece escrito como \texttt{05*LD}, que MATLAB evalúa como 5. La tesis usa 0,5, que es el valor que declara el artículo y el que usan las demás funciones del mismo código (\texttt{metric\_calcs.m} y \texttt{KMVcompute\_jf.m}).} Dados $E$, $\sigma_E$, la tasa libre de riesgo $r$ y el horizonte $T$, se resuelve el sistema
 \[ E=\hat V_A\,\Phi(d_1)-D^{*}e^{-rT}\Phi(d_2), \qquad \sigma_E E=\Phi(d_1)\,\hat\sigma_A\hat V_A, \]
-con $d_1=\bigl[\ln(\hat V_A/D^{*})+(r+\tfrac12\hat\sigma_A^2)T\bigr]/(\hat\sigma_A\sqrt T)$ y $d_2=d_1-\hat\sigma_A\sqrt T$. Se usan $r=4\%$ y $T=1$ año, los valores de la corrida original. La distancia al incumplimiento y la frecuencia esperada de incumplimiento son $DD=(\hat V_A-D^{*})/(\hat V_A\hat\sigma_A)$ y $EDF=\Phi(-DD)$, que es la probabilidad incondicional $p_i$ del banco. Esta $DD$ es la forma lineal del enfoque KMV, no el $d_2$ de Black--Scholes.
+con $d_1=\bigl[\ln(\hat V_A/D^{*})+(r+\tfrac12\hat\sigma_A^2)T\bigr]/(\hat\sigma_A\sqrt T)$ y $d_2=d_1-\hat\sigma_A\sqrt T$. Es el sistema del código original (\texttt{KMVfun.m}). La versión impresa del artículo escribe $d_1$ y $d_2$ con $\sigma_E$ y sin $r$, pero el modelo de Merton y el código usan $\hat\sigma_A$ y $r$.
 
-El sistema se resuelve numéricamente con varios puntos de partida. El primero es la aproximación $\hat V_A\approx E+D^{*}$, y se acepta la primera solución con un residuo de a lo sumo $10^{-3}$. Con un solo punto de partida, las fallas de convergencia se concentrarían en los bancos más apalancados, justo los que más aportan al riesgo sistémico. Con Bloomberg, el sistema converge en el 99,8\% de las 8\,469 combinaciones de banco y trimestre con insumos completos, y en el 99,9\% de las 6\,689 de las trece economías de la muestra. Las que no convergen quedan fuera de la agregación de ese trimestre.
+Dos parámetros fijan el cálculo. El horizonte es $T=1$ año, como en el código original. La probabilidad de cada banco es, por lo tanto, una probabilidad de incumplimiento a un año, aunque se calcule cada trimestre. La tasa es $r=4\%$, constante para todos los bancos y trimestres. En esto la tesis se aparta del artículo. \citet{Chari2024b} usan las tasas de interés promedio de cada banco, y su código lee una tasa por banco y trimestre. La tesis no tiene esa serie con el mismo protocolo para todos los bancos y fija un valor común.
+
+La distancia al incumplimiento y la frecuencia esperada de incumplimiento son $DD=(\hat V_A-D^{*})/(\hat V_A\hat\sigma_A)$ y $EDF=\Phi(-DD)$, que es la probabilidad incondicional $p_i$ del banco. Esta $DD$ es la forma lineal del enfoque KMV, la misma del artículo y del código, y no el $d_2$ de Black--Scholes.
+
+El sistema se resuelve numéricamente con varios puntos de partida. El primero es la aproximación $\hat V_A\approx E+D^{*}$, y se acepta la primera solución con un residuo de a lo sumo $10^{-3}$. El código original parte de un único punto. Con un solo punto de partida, las fallas de convergencia se concentrarían en los bancos más apalancados, justo los que más aportan al riesgo sistémico. Con Bloomberg, el sistema converge en el 99,8\% de las 8\,469 combinaciones de banco y trimestre con insumos completos, y en el 99,9\% de las 6\,689 de las trece economías de la muestra. Las que no convergen quedan fuera de la agregación de ese trimestre.
 
 \subsection{Factor sistémico y agregación}
 
-El supuesto que identifica el modelo es que los incumplimientos son independientes condicionales a un único factor sistémico del país, $V$. \citet{Chari2024b} lo interpretan como el retorno del índice bursátil. Siguiendo a \citet{Vasicek1997}, $p_i(V)=\Phi\!\left(\frac{\Phi^{-1}(p_i)-\rho V}{\sqrt{1-\rho^2}}\right)$, con $\rho$ la carga sobre el factor.
+El supuesto que identifica el modelo es que los incumplimientos son independientes condicionales a un único factor sistémico del país, $V$. \citet{Chari2024b} lo interpretan como el retorno del índice bursátil. Siguiendo a \citet{Vasicek1997}, la probabilidad condicional de incumplimiento es
+\[ p_i(V)=\Phi\!\left(\frac{\Phi^{-1}(p_i)-\rho V}{\sqrt{1-\rho^2}}\right), \]
+donde $\rho$ es la carga del banco sobre el factor.
 
-Dos rasgos de la implementación importan. Primero, $\rho=0{,}4$ para todos los bancos y trimestres, el valor constante de la corrida original en MATLAB. No se estima una correlación por banco, y el índice bursátil no entra en el cálculo de $JLoss$. Segundo, la cuadratura integra sobre un factor normal estándar, de modo que la varianza sistemática es $\rho^2=0{,}16$. \citet{Chari2024b} reportan el factor como $N(0;\,0{,}16\%)$ en su Tabla 1. La Sección~\ref{sec:micro-prereg} contrasta el primer rasgo: con un $\rho$ estimado por banco y trimestre, como la correlación de sus retornos con un índice de capitalización de los demás bancos del país en los ocho trimestres previos (media de $0{,}50$), la métrica conserva el ordenamiento (correlación de rangos de $0{,}97$). La elasticidad de la fragilidad es $0{,}087$ y la interacción, $-0{,}010$.
+Dos rasgos de la implementación importan. Primero, $\rho=0{,}4$ para todos los bancos y trimestres. En el artículo, $\rho$ es la correlación entre los retornos del banco y los del índice bursátil del país. El código original calcula esa correlación y la reemplaza por $0{,}4$ cuando no puede calcularla, y en la corrida original todos los valores quedan en $0{,}4$. La tesis adopta ese valor común, de modo que el índice bursátil no entra en el cálculo de $JLoss$. Segundo, la cuadratura integra sobre un factor normal estándar. Como $\rho$ es una carga, la correlación entre las variables latentes de dos bancos es $\rho^2=0{,}16$. \citet{Chari2024b} reportan en su Tabla~1 un factor $N(0;\,0{,}16\%)$, y su texto, variaciones del factor entre $-4$ y $4$ por ciento. Esas cifras se leen como la varianza sistemática $\rho^2$ y como el rango de los nodos de la cuadratura, que con siete nodos va de $-3{,}75$ a $3{,}75$. La Sección~\ref{sec:micro-prereg} contrasta el primer rasgo: con un $\rho$ estimado por banco y trimestre, como la correlación de sus retornos con un índice de capitalización de los demás bancos del país en los ocho trimestres previos (media de $0{,}50$), la métrica conserva el ordenamiento (correlación de rangos de $0{,}97$). La elasticidad de la fragilidad es $0{,}087$ y la interacción, $-0{,}010$.
 
-La pérdida del sistema es $P=\sum_i e_i\mathbf 1_{D_i}$, con $e_i$ la exposición al incumplimiento y $a_i=e_i/\sum_j e_j$ su participación. El método de punto de silla \citep{MartinThompsonBrowne2001} trabaja con la función generadora de cumulantes condicional, $K(s\mid V)=\sum_i\ln\!\left(1-p_i(V)+p_i(V)e^{s a_i}\right)$. El punto de silla $\hat t$ resuelve $K'(\hat t)=x$, donde $x$ es la pérdida como fracción de la exposición. Con $A=\exp\!\left(K(\hat t\mid V)-\hat t x+\tfrac12\hat t^2K''(\hat t)\right)\Phi\!\left(-|\hat t|\sqrt{K''(\hat t)}\right)$, la función de distribución se aproxima por
+La pérdida del sistema es $P=\sum_i e_i\mathbf 1_{D_i}$. Aquí $e_i=LGD\cdot EAD_i$ es la exposición neta de recuperación, con una pérdida en caso de incumplimiento $LGD=45\%$ \citep{BIS2006}, y $a_i=e_i/\sum_j e_j$ es su participación. El método de punto de silla \citep{MartinThompsonBrowne2001} trabaja con la función generadora de cumulantes condicional,
+\[ K(s\mid V)=\sum_i\ln\!\left(1-p_i(V)+p_i(V)e^{s a_i}\right). \]
+Sea $x$ la pérdida como fracción de la exposición total, $\sum_j e_j$. El punto de silla $\hat t$ resuelve $K'(\hat t\mid V)=x$ y se busca con el algoritmo de Brent en el intervalo $[-200,\,200]$. Con $A=\exp\!\left(K(\hat t\mid V)-\hat t x+\tfrac12\hat t^2K''(\hat t\mid V)\right)\Phi\!\left(-|\hat t|\sqrt{K''(\hat t\mid V)}\right)$, la función de distribución condicional se aproxima, como en el código original, por
 \[ P(L\le x\mid V)\approx\begin{cases}1-A, & \hat t>0,\\ A, & \hat t\le 0.\end{cases} \]
-La integración sobre $V$ se resuelve por cuadratura de Gauss--Hermite con siete nodos $V_k$ y pesos $w_k$, sobre una grilla de 500 pasos entre el 1\% y el 4,8\% de la exposición. El valor en riesgo al 99\% se obtiene por interpolación lineal, y si la distribución no alcanza ese percentil dentro de la grilla, toma el valor de la cota superior.
+La integración sobre $V$ se resuelve por cuadratura de Gauss--Hermite con siete nodos $V_k$ y pesos $w_k$: $P(L\le x)\approx\sum_k w_k\,P(L\le x\mid V_k)$. La distribución se evalúa en una grilla de 500 pasos entre el 1\% y el 4,8\% de la exposición total. Antes de interpolar, la función de distribución se hace monótona. La pérdida del percentil 99, $x_{99}$, se obtiene por interpolación lineal. Si la distribución no alcanza el 99\% dentro de la grilla, $x_{99}$ toma el valor de la cota superior, y si lo supera ya en la cota inferior, el de esa cota.
 
 \subsection{Contribuciones marginales y definición de \texorpdfstring{$JLoss$}{JLoss}}
 
-La contribución del banco $n$ al riesgo del sistema en el percentil 99 es $C_n=e_n\sum_k\nu_k\tilde p_n(\hat t_k)/\sum_k\nu_k$. Aquí $\tilde p_n(\hat t_k)=p_n(V_k)e^{\hat t_k a_n}/\bigl(1-p_n(V_k)+p_n(V_k)e^{\hat t_k a_n}\bigr)$ es la probabilidad inclinada por el punto de silla, y $\nu_k=w_k\exp\!\bigl(K(\hat t_k\mid V_k)-\hat t_kK'(\hat t_k)\bigr)/\sqrt{K''(\hat t_k)}$. La suma de las contribuciones es la pérdida inesperada ($UL$); la esperada es $EL=\sum_ie_ip_i$. Finalmente,
-\[ JLoss_{i,t}=\frac{EL_{i,t}+UL_{i,t}}{\sum_jEAD_{j,t}}\times100, \qquad e_j=EAD_j\cdot LGD, \]
-con una pérdida en caso de incumplimiento $LGD=45\%$ \citep{BIS2006}. La parametrización es la de \citet{Chari2024b} y la de su código original (Tabla~\ref{tab:params}). El cálculo se reimplementa en Python y se valida contra ese código en MATLAB: la métrica coincide con una tolerancia menor que $10^{-6}$ cuando el conjunto de bancos de cada trimestre es el mismo. Para buscar el punto de silla se usa el algoritmo de Brent, que no falla ante curvaturas extremas.
+La contribución del banco $n$ a la pérdida del percentil 99 es $C_n=e_n\sum_k\nu_k\tilde p_n(\hat t_k)/\sum_k\nu_k$, donde $\hat t_k$ es el punto de silla de $x_{99}$ en el nodo $V_k$. Aquí $\tilde p_n(\hat t_k)=p_n(V_k)e^{\hat t_k a_n}/\bigl(1-p_n(V_k)+p_n(V_k)e^{\hat t_k a_n}\bigr)$ es la probabilidad inclinada por el punto de silla, y $\nu_k=w_k\exp\!\bigl(K(\hat t_k\mid V_k)-\hat t_kK'(\hat t_k\mid V_k)\bigr)/\sqrt{K''(\hat t_k\mid V_k)}$. En cada nodo, $\sum_n a_n\tilde p_n(\hat t_k)=K'(\hat t_k\mid V_k)=x_{99}$, así que las contribuciones suman exactamente la pérdida del percentil: $\sum_nC_n=x_{99}\sum_je_j$. El código original llama a esa suma \emph{pérdida inesperada}, pero es la pérdida total del percentil 99 y no su exceso sobre la pérdida esperada. La pérdida esperada es $EL=\sum_ie_ip_i$. La métrica suma las dos, como en la Figura~1 del artículo y en el código original:
+\[ JLoss_{i,t}=\frac{EL_{i,t}+\sum_nC_{n,t}}{\sum_jEAD_{j,t}}\times100. \]
+
+La parametrización es la del código original, salvo la tasa $r$ (Tabla~\ref{tab:params}). El cálculo se reimplementa en Python. Las etapas de agregación y de contribuciones se validan contra el código en MATLAB: a partir de las mismas probabilidades de incumplimiento y del mismo conjunto de bancos, la métrica coincide con una tolerancia menor que $10^{-6}$. La etapa de Merton no se valida de la misma forma, porque la tesis usa la tasa constante, el peso de 0,5 y varios puntos de partida.
 
 La métrica se calcula con los bancos disponibles en cada trimestre, de modo que la composición del sistema puede cambiar en el tiempo. Los trimestres con menos de tres bancos quedan marcados (Sección~\ref{sec:muestra}).
 
@@ -88,47 +102,71 @@ La métrica se calcula con los bancos disponibles en cada trimestre, de modo que
 \small
 \caption{Parámetros del cálculo de $JLoss$}
 \label{tab:params}
-\begin{tabular}{lr}
+\begin{tabular}{lll}
 \toprule
-Parámetro & Valor \\
+Parámetro & Tesis & \citet{Chari2024b} \\
 \midrule
-Frecuencia y horizonte de la métrica & 1 trimestre \\
-Horizonte del modelo de Merton ($T$) & 1 año \\
-Tasa libre de riesgo ($r$) & 4\% \\
-LGD & 45\% \\
-Carga sobre el factor sistémico ($\rho$) & 0,4 \\
-Nodos de cuadratura Gauss--Hermite & 7 \\
-Factores sistémicos & 1 \\
-Cota de pérdidas (fracción de la exposición) & $[0{,}010;\ 0{,}048]$ \\
-Pasos de discretización & 500 \\
-Percentil del valor en riesgo & 99\% \\
-Factor sistémico en la cuadratura & $N(0,1)$ \\
-Varianza sistemática ($\rho^2$) & $0{,}16$ \\
+Frecuencia de cálculo & Trimestral & Trimestral \\
+Horizonte del modelo de Merton ($T$) & 1 año & 1 año (código) \\
+Tasa libre de riesgo ($r$) & 4\%, común & Tasa promedio de cada banco \\
+Peso de $L_{LT}$ en el punto de incumplimiento & 0,5 & 0,5 \\
+LGD & 45\% & 45\% \\
+Carga sobre el factor sistémico ($\rho$) & 0,4, común & Correlación con el índice; 0,4 en el código \\
+Factores sistémicos & 1 & 1 \\
+Factor sistémico en la cuadratura & $N(0,1)$ & Reportado como $N(0;\,0{,}16\%)$ \\
+Nodos de cuadratura Gauss--Hermite & 7 & 7 \\
+Cota de pérdidas (fracción de $\sum_j e_j$) & $[0{,}010;\ 0{,}048]$ & $[0{,}010;\ 0{,}048]$ \\
+Pasos de discretización & 500 & 500 \\
+Percentil & 99\% & 99\% \\
 \bottomrule
 \end{tabular}
+\par\smallskip
+\begin{minipage}{0.92\linewidth}\footnotesize
+\textit{Nota:} la columna del artículo resume su Tabla~1, su Tabla~A.2 y su Apéndice~A.1; ``código'' indica que el valor proviene de su código original y no del texto. La Tabla~1 del artículo reporta un horizonte de un trimestre, que corresponde a la frecuencia de cálculo; las probabilidades de incumplimiento son a un año.
+\end{minipage}
 \end{table}
 
-\noindent\textbf{Dos consecuencias de la calibración.} La cota superior de la malla (4,8\% de la exposición) es activa en el 98\% de los país-trimestre: la pérdida del percentil 99 casi siempre la supera, así que la componente inesperada de $JLoss$ se evalúa en un nivel de estrés fijo. La primera consecuencia es que la variación de $JLoss$ la gobierna la pérdida esperada ---las probabilidades de incumplimiento--- y su nivel queda comprimido: con una malla más ancha, la métrica escala varias veces y conserva el ordenamiento (correlación $\approx0{,}9$). $JLoss$ debe leerse de forma ordinal. La segunda es que la métrica tiene un \emph{piso}. Cuando las probabilidades de incumplimiento son bajas, $JLoss$ toma el valor de la cota por la pérdida en caso de incumplimiento, $0{,}048\times0{,}45\times100=2{,}16$, y deja de moverse. El 23,7\% de las observaciones de la muestra está a menos de un 2\% de ese valor, y en algunas economías, más de la mitad (Sección~\ref{sec:magnitud}). En el piso la variable no informa: los coeficientes de la fragilidad describen los episodios en que está fuera de él, y su magnitud se lee por desviación estándar dentro del país. Los logaritmos son coherentes con la lectura ordinal, porque el coeficiente no cambia si se reescala la métrica, pero no resuelven el piso.
+\noindent\textbf{Dos consecuencias de la calibración.} La cota superior de la grilla (4,8\% de la exposición) es activa en el 98\% de los país-trimestre: la pérdida del percentil 99 casi siempre la supera. Cuando la cota es activa, $\sum_nC_n=0{,}048\sum_je_j$, y la métrica se reduce a
+\[ JLoss_{i,t}=0{,}048\times0{,}45\times100+45\sum_j s_{j,t}\,p_{j,t}=2{,}16+45\sum_j s_{j,t}\,p_{j,t}, \]
+con $s_j=EAD_j/\sum_kEAD_k$ la participación del banco en el pasivo del sistema. La primera consecuencia es que la variación de $JLoss$ la gobierna la pérdida esperada, es decir, la probabilidad de incumplimiento media ponderada por pasivo, y que su nivel queda comprimido: con una grilla más ancha, la métrica escala varias veces y conserva el ordenamiento (correlación $\approx0{,}9$). $JLoss$ debe leerse de forma ordinal. La segunda es que la métrica tiene un \emph{piso}. Cuando las probabilidades de incumplimiento son bajas, $JLoss$ queda cerca de $2{,}16$ y deja de moverse. El 23,7\% de las observaciones de la muestra está a menos de un 2\% de ese valor, y en algunas economías, más de la mitad (Sección~\ref{sec:magnitud}). En el piso la variable no informa: los coeficientes de la fragilidad describen los episodios en que está fuera de él, y su magnitud se lee por desviación estándar dentro del país. Los logaritmos son coherentes con la lectura ordinal, porque el coeficiente no cambia si se reescala la métrica, pero no resuelven el piso.
 
 \section{Medición del riesgo a la baja del crecimiento: la métrica \texorpdfstring{$GaR$}{GaR}}
 \label{sec:gar}
 
-$GaR_{i,t}$ es el cuantil 5\% de la distribución condicional del crecimiento del producto un trimestre adelante. Su construcción adapta \citet{ABG2019b} y la plataforma de CEMLA \citep{OssandonBusch2022} con tres cambios: se estima con un único programa lineal global, el cuantil se lee directamente, sin densidad kernel, y la estimación es en pseudo--tiempo real.
+$GaR_{i,t}$ es el cuantil 5\% de la distribución del crecimiento interanual del PIB real del trimestre siguiente, condicional a la información disponible en el trimestre $t$. Su construcción sigue a \citet{ABG2019b} y a la plataforma C-GARP del CEMLA \citep{OssandonBusch2022}, en cuatro pasos: (i) un índice de condiciones financieras (FCI) por país; (ii) una regresión cuantílica de panel del crecimiento futuro sobre el FCI, el VIX y el crecimiento actual; (iii) la lectura del cuantil 5\% de la distribución estimada; y (iv) la repetición de la estimación en cada trimestre. El código del CEMLA, escrito en R, se traduce a Python. La traducción reproduce de forma exacta la preparación de los datos del CEMLA y sus coeficientes con diferencias menores que $10^{-3}$. La implementación se aparta de la plataforma en dos puntos, que se explican abajo: lee el cuantil directamente, sin ajustar una densidad, y estima el modelo en ventana expansiva.
 
 \subsection{Índice de condiciones financieras}
 
-El FCI resume por país tres bloques de tensión ---accionario, de tasa de interés y cambiario---, cada uno con un indicador de volatilidad y uno de nivel. El bloque de tasa usa el rendimiento soberano a diez años en moneda local ($Ryr$). Cada indicador se estandariza con una transformación expansiva; las correlaciones entre bloques se suavizan con un EWMA ($\lambda=0{,}85$), y el índice se agrega como una forma cuadrática, siguiendo el CISS de \citet{HolloKremerLoDuca2012}: $FCI_t=\sqrt{(w\circ s_t)'C_t(w\circ s_t)}$. La implementación reproduce la salida de referencia de CEMLA (correlación de 0,9995 en 212 meses para México).
+El FCI adapta el CLIFS de \citet{Duprey2017}, que a su vez se basa en el CISS de \citet{HolloKremerLoDuca2012}, tal como lo implementa el CEMLA. Resume tres segmentos de mercado: el accionario (el índice bursátil del país), el de bonos (el rendimiento soberano a diez años en moneda local, $Ryr$) y el cambiario (el tipo de cambio real efectivo). Las series se llevan a términos reales. El índice bursátil se divide por el índice de precios al consumidor, interpolado a frecuencia diaria. Al rendimiento se le resta la inflación de los últimos doce meses. La referencia externa es el rendimiento real del bono del Tesoro de Estados Unidos a diez años.
+
+Cada segmento tiene dos indicadores: uno de volatilidad y otro de deterioro acumulado.
+\begin{itemize}
+    \item \textbf{Accionario.} La volatilidad es el promedio, en 20 días hábiles, del valor absoluto del retorno real diario dividido por su desviación estándar de los diez años previos. El deterioro es la caída respecto del máximo de los dos años previos: $CMAX_t=1-rSTX_t/\max_{2\text{ años}} rSTX$.
+    \item \textbf{Bonos.} La volatilidad se calcula igual, sobre los cambios diarios del rendimiento real. El deterioro, $CDIFF$, es el diferencial del rendimiento real frente a Estados Unidos menos su mínimo de los dos años previos.
+    \item \textbf{Cambiario} (mensual). La volatilidad es el valor absoluto del cambio logarítmico mensual, dividido por su desviación estándar de los diez años previos. El deterioro es el valor absoluto del cambio en seis meses.
+\end{itemize}
+Los indicadores diarios se toman al cierre de cada mes. Cada indicador se lleva al intervalo $[0,1]$ con el ``método B'' de \citet{OssandonBusch2022}, el que usa por defecto su código: se divide por su máximo histórico, en una ventana expansiva cuyos primeros 120 meses usan el máximo de esa ventana inicial. \citet{Duprey2017} usan en cambio la función de distribución empírica, el ``método A''. El subíndice de cada segmento, $I_{k,t}$, es el promedio de sus dos indicadores. Las correlaciones entre subíndices, $\rho_{kl,t}$, se suavizan con un promedio móvil exponencial ($\lambda=0{,}85$) de las desviaciones respecto de 0,5, que se inicia con la covarianza de los primeros 120 meses. El índice es la forma cuadrática
+\[ FCI_t=I_t\,C_t\,I_t', \qquad I_t=(I_{STX,t},\,I_{Ryr,t},\,I_{EER,t}), \]
+donde $C_t$ es la matriz de correlaciones $\rho_{kl,t}$. Los tres segmentos pesan lo mismo y el índice no lleva raíz cuadrada, así que toma valores entre 0 y 9. El valor trimestral es el del último mes del trimestre. La implementación reproduce la salida de referencia del CEMLA (correlación de 0,9995 en 212 meses para México).
 
 \subsection{Regresión cuantílica de panel}
 
-Para el cuantil $\tau$ y el horizonte $h=1$,
-\[ Q\!\left(\Delta GDP_{i,t+1}\mid\cdot;\tau\right)=\alpha(\tau)+\beta_1(\tau)\Delta GDP_{i,t}+\beta_2(\tau)FCI^{\perp VIX}_{i,t}+\beta_3(\tau)VIX_t+\mu_i(\tau), \]
-con efectos fijos de país \citep{Koenker2004} y el FCI ortogonalizado respecto del VIX, para que el condicionante financiero sea la tensión propiamente doméstica. El problema se resuelve como un único programa lineal (HiGHS), sobre una grilla de 39 cuantiles y con el reordenamiento de \citet{ChernozhukovEtAl2010}; $GaR_{i,t}\equiv Q(\Delta GDP_{i,t+1}\mid\cdot;0{,}05)$. Para evitar el sesgo de anticipación, los parámetros se reestiman en cada fecha con la información disponible hasta ella (ventana expansiva). Como verificación, se ajusta además la densidad \textit{skew-t} de \citet{ABG2019b} a los cuantiles condicionales (Figura~\ref{fig:skewt}). El horizonte de un trimestre, el de la especificación principal, se elige porque el panel es trimestral y el riesgo de cola entra en la regresión del spread con un trimestre de rezago: $D_{t-1}$ es entonces el cuantil del crecimiento del mismo trimestre $t$ en que se mide el spread. La literatura sobre la estructura temporal del riesgo de cola \citep{AdrianEtAl2022} indica que el horizonte importa, y por eso el riesgo de cola del crecimiento promedio de los cuatro trimestres siguientes ($D4$) se contrasta después en un preregistro (Sección~\ref{sec:macro-prereg}).
+La variable dependiente es el crecimiento interanual del PIB real, $g_{i,t}=GDP_{i,t}/GDP_{i,t-4}-1$, un trimestre adelante. Para cada cuantil $\tau$,
+\[ Q_\tau\!\left(g_{i,t+1}\mid\cdot\right)=\alpha(\tau)+\beta_1(\tau)\,\tilde g_{i,t}+\beta_2(\tau)\,\widetilde{FCI}^{\perp}_{i,t}+\beta_3(\tau)\,\widetilde{VIX}_t+\eta_i, \]
+que es la especificación de la ecuación (7) de \citet{OssandonBusch2022}. $FCI^{\perp}$ es el residuo de una regresión del FCI sobre el VIX, país por país, de modo que el condicionante financiero es la tensión propiamente doméstica. El VIX es el cierre del último día del trimestre. Las tres variables explicativas se estandarizan dentro de cada país (la tilde indica la variable estandarizada).
+
+El efecto fijo de país, $\eta_i$, es común a todos los cuantiles: desplaza la distribución sin cambiar su forma. Es el estimador de \citet{Koenker2004}, que la plataforma del CEMLA estima con el paquete \texttt{rqpd}. La tesis lo resuelve sin el término que penaliza los efectos fijos. Como el efecto es común, los cuantiles no se estiman por separado. Las 39 regresiones, con $\tau=k/40$ para $k=1,\dots,39$, se resuelven con igual peso en un único programa lineal (HiGHS). La plataforma usa por defecto 19 cuantiles, de 0,05 a 0,95; la tesis usa una grilla más fina, de 39.
+
+Para cada economía y trimestre, el modelo entrega 39 cuantiles. Se ordenan de menor a mayor para corregir los cruces, con el reordenamiento de \citet{ChernozhukovEtAl2010}, y $GaR_{i,t}\equiv\hat Q_{0{,}05}(g_{i,t+1}\mid\cdot)$. Como $0{,}05=2/40$ es uno de los cuantiles estimados, el $GaR$ se lee directamente, sin interpolar ni ajustar una densidad. Este es el primer punto en que la tesis se aparta del CEMLA: su plataforma ajusta una densidad no paramétrica con kernel triponderado, cuyo resultado depende del ancho de banda. \citet{OssandonBusch2022} reportan que los ajustes paramétrico y no paramétrico dan distribuciones similares. Como verificación, se ajusta además la densidad \textit{skew-t} de \citet{ABG2019b} a los cuantiles 5\%, 25\%, 75\% y 95\%, minimizando la distancia cuadrática (Figura~\ref{fig:skewt}).
+
+El segundo punto es la ventana expansiva. El código del CEMLA estima el modelo en una fecha. La tesis lo reestima en cada trimestre $t$ con la información disponible hasta ese trimestre, como en el ejercicio recursivo de la Figura~7 de \citet{OssandonBusch2022}. En cada fecha se recalculan la ortogonalización, la estandarización y la regresión, y se exige un mínimo de 40 observaciones de entrenamiento. Así el $GaR$ de un trimestre no usa información posterior. Es una estimación en pseudo--tiempo real: los datos son las series vigentes, no las que se conocían en cada fecha.
+
+El horizonte de un trimestre, el de la especificación principal, se elige porque el panel es trimestral y el riesgo de cola entra en la regresión del spread con un trimestre de rezago: $D_{t-1}$ es entonces el cuantil del crecimiento interanual del mismo trimestre $t$ en que se mide el spread. La literatura sobre la estructura temporal del riesgo de cola \citep{AdrianEtAl2022} indica que el horizonte importa. Por eso, el riesgo de cola del crecimiento promedio de los cuatro trimestres siguientes ($D4$) se contrasta después en un preregistro (Sección~\ref{sec:macro-prereg}).
 
 \subsection{¿Es el \texorpdfstring{$GaR$}{GaR} circular respecto del EMBI?}
 \label{sec:ryr-endogeneidad}
 
-El FCI usa el rendimiento soberano local y la variable dependiente es un spread soberano. ¿Está el $GaR$ ligado mecánicamente al EMBI? El único componente del FCI con forma de spread es el diferencial de rendimientos reales frente a Estados Unidos respecto de su mínimo móvil ($CDIFF$). Un diagnóstico por etapas muestra que el vínculo se pierde en la construcción: el diferencial crudo correlaciona 0,68 con el EMBI, pero su contribución estandarizada al FCI, apenas 0,07. Si se reconstruye el $GaR$ sin $CDIFF$, la serie correlaciona 0,985 con la oficial, y ninguna conclusión de la especificación en niveles cambia. El EMBI no entra en ningún punto del cálculo del FCI ni del $GaR$. En la especificación principal, además, $D$ entra rezagado un trimestre.
+El FCI usa el rendimiento soberano local y la variable dependiente es un spread soberano. ¿Está el $GaR$ ligado mecánicamente al EMBI? El único componente del FCI con forma de spread es $CDIFF$, el diferencial de rendimientos reales frente a Estados Unidos respecto de su mínimo de dos años. Un diagnóstico por etapas muestra que el vínculo se pierde en la construcción: el diferencial crudo correlaciona 0,68 con el EMBI, pero su contribución estandarizada al FCI, apenas 0,07. Si se reconstruye el $GaR$ sin $CDIFF$, la serie correlaciona 0,985 con la oficial, y ninguna conclusión de la especificación en niveles cambia. El EMBI no entra en ningún punto del cálculo del FCI ni del $GaR$. En la especificación principal, además, $D$ entra rezagado un trimestre.
 
 \section{Estrategia econométrica}
 \label{sec:estrategia}

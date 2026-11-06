@@ -350,15 +350,15 @@ Cuantificar cuánto bajaría el \textit{spread} si cae la fragilidad: son asocia
 
 \begin{frame}{Respaldo: Construcción de $\JLoss$: fragilidad bancaria sistémica}
 \small
-Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \% de la exposición (Chari et al., 2024).
+Pérdida conjunta del sistema bancario en un escenario de estrés sistémico, en \% de su pasivo total (Chari et al., 2024).
 \begin{enumerate}
-\item \textbf{Probabilidad de incumplimiento de cada banco} (Merton--KMV): $D^*=L_{ST}+\tfrac12L_{LT}$,\quad $EDF=\Phi(-DD)$.
+\item \textbf{Probabilidad de incumplimiento de cada banco} (Merton--KMV, a un año): $D^*=L_{ST}+\tfrac12L_{LT}$,\quad $EDF=\Phi(-DD)$.
 \item \textbf{Factor sistémico} país (Vasicek): $p_i(V)=\Phi\!\left(\frac{\Phi^{-1}(p_i)-\rho V}{\sqrt{1-\rho^2}}\right)$.
 \item \textbf{Agregación por punto de silla} de la distribución de pérdidas del sistema.
-\item \textbf{Métrica}: $\JLoss=\dfrac{EL+UL}{\sum_j EAD_j}\times100$.
+\item \textbf{Métrica}: $\JLoss=\dfrac{EL+VaR_{99}}{\sum_j EAD_j}\times100$.
 \end{enumerate}
 \vspace{2pt}
-{\scriptsize \textbf{Donde:} $D^*$ punto de incumplimiento; $L_{LT}$ deuda de largo plazo emitida; $L_{ST}$ resto del pasivo; $DD$ distancia al incumplimiento; $EDF$ frecuencia esperada de incumplimiento; $\Phi$ distribución normal estándar; $p_i$ PD del banco $i$; $V$ factor sistémico del país, $N(0,1)$; $\rho=0{,}4$ carga común de todos los bancos; $EL$ pérdida esperada; $UL$ pérdida inesperada al 99\%; $EAD$ exposición; LGD $=45\%$. La cota de la malla es activa en el 98\% de los casos $\Rightarrow$ $\JLoss$ es \textbf{ordinal} y entra en logaritmos.\par}
+{\scriptsize \textbf{Donde:} $D^*$ punto de incumplimiento; $L_{LT}$ deuda de largo plazo emitida; $L_{ST}$ resto del pasivo; $DD$ distancia al incumplimiento; $EDF$ frecuencia esperada de incumplimiento; $\Phi$ distribución normal estándar; $p_i$ PD del banco $i$; $V$ factor sistémico del país, $N(0,1)$; $\rho=0{,}4$ carga común de todos los bancos; $EL$ pérdida esperada; $VaR_{99}$ pérdida del percentil 99 (suma de las contribuciones de los bancos); $EAD$ exposición (pasivo total); LGD $=45\%$; $r=4\%$. La cota es activa en el 98\% de los casos: $\JLoss=2{,}16+45\times$ PD media ponderada por pasivo $\Rightarrow$ \textbf{ordinal}, en logaritmos.\par}
 \end{frame}
 
 \begin{frame}{Respaldo: Construcción del $\GaR$: riesgo de cola del crecimiento}
@@ -366,13 +366,13 @@ Pérdida conjunta esperada del sistema bancario ante un evento sistémico, en \%
 \column{0.52\textwidth}
 \footnotesize
 \begin{enumerate}
-\item \textbf{Índice de condiciones financieras} (FCI tipo CISS): tensión accionaria, de tasas y cambiaria, en términos reales (deflactadas por la inflación).
+\item \textbf{Índice de condiciones financieras} (FCI del CEMLA, tipo CLIFS): tensión accionaria, de bonos y cambiaria en términos reales; $FCI_t=I_tC_tI_t'$.
 \item \textbf{Regresión cuantílica de panel}, un trimestre adelante:\\
-{\footnotesize $Q(\Delta y_{i,t+1}\mid\cdot;\tau)=\alpha+\beta_1\Delta y_{i,t}+\beta_2FCI^{\perp}_{i,t}+\beta_3VIX_t+\mu_i$}
-\item $\GaR_{i,t}$ = cuantil $\tau=5\%$; ventana expansiva (pseudo--tiempo real).
+{\footnotesize $Q(g_{i,t+1}\mid\cdot;\tau)=\alpha(\tau)+\beta_1(\tau)g_{i,t}+\beta_2(\tau)FCI^{\perp}_{i,t}+\beta_3(\tau)VIX_t+\eta_i$}
+\item $\GaR_{i,t}$ = cuantil $\tau=5\%$ (39 cuantiles en un solo programa lineal); ventana expansiva.
 \end{enumerate}
 \vspace{2pt}
-{\scriptsize \textbf{Donde:} $Q(\cdot;\tau)$ cuantil $\tau$ del crecimiento; $\Delta y$ crecimiento del PIB; $FCI^{\perp}$ FCI sin el componente del VIX; $\mu_i$ efecto fijo de país. En la tesis $D\equiv-\GaR$: mayor $D$, cola más adversa. No es circular con el EMBI (corr.\ 0,985 sin el componente tipo \textit{spread}).\par}
+{\scriptsize \textbf{Donde:} $Q(\cdot;\tau)$ cuantil $\tau$ del crecimiento; $g$ crecimiento interanual del PIB real; $I_t$ subíndices; $C_t$ sus correlaciones; $FCI^{\perp}$ FCI sin el componente del VIX; $\eta_i$ efecto fijo de país, común a todos los cuantiles. En la tesis $D\equiv-\GaR$: mayor $D$, cola más adversa. No es circular con el EMBI (corr.\ 0,985 sin el componente tipo \textit{spread}).\par}
 \column{0.46\textwidth}
 \centering
 \includegraphics[width=\textwidth]{fig_skewt_chile_embiext.pdf}\\

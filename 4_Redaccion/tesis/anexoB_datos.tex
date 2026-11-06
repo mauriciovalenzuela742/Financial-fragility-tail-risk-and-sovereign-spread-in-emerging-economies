@@ -57,16 +57,16 @@ Capital. bursátil & Valor de mercado del patrimonio, cotización local (nunca A
 Retornos accionarios & Variación diaria de la capitalización bursátil & Bloomberg & Serie de capitalización & Diaria & $\sigma_{E,q}=\sqrt{\sum_d r_d^2}$ por banco-trimestre (varianza realizada), con al menos 5 retornos; se anualiza por $\sqrt4$ \\
 Índice bursátil país & Interpretación del factor sistémico en \citealp{Chari2024b}; no entra en el cálculo de $JLoss$, que usa $\rho=0{,}4$ común & Bloomberg & índice de referencia por país (\texttt{COUNTRY\_INDEX}) & Diaria & No se usa; la variante de sensibilidad con $\rho$ por banco usa un índice de capitalización de los demás bancos del país \\
 \addlinespace
-\multicolumn{6}{@{}l@{}}{\parbox{13.6cm}{\footnotesize\itshape Parámetros del motor (Tabla~\ref{tab:params}): LGD $=0{,}45$; $\rho=0{,}4$; 7 nodos de cuadratura Gauss--Hermite sobre un factor $N(0,1)$; percentil 99; cota de pérdidas $[0{,}010,\,0{,}048]$; frecuencia trimestral; Merton con $T=1$ año y $r=4\%$. \citealp{Chari2024b} reportan el factor como $N(0,\,0{,}16\%)$.}}\\
+\multicolumn{6}{@{}l@{}}{\parbox{13.6cm}{\footnotesize\itshape Parámetros del motor (Tabla~\ref{tab:params}): LGD $=0{,}45$; $\rho=0{,}4$; 7 nodos de cuadratura Gauss--Hermite sobre un factor $N(0,1)$; percentil 99; cota de pérdidas $[0{,}010,\,0{,}048]$ de la exposición; frecuencia trimestral; Merton con $T=1$ año, $r=4\%$ común y $D^{*}=L_{ST}+0{,}5\,L_{LT}$. \citealp{Chari2024b} reportan el factor como $N(0,\,0{,}16\%)$ y usan la tasa de interés promedio de cada banco.}}\\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Riesgo de cola --- $GaR$}} (regresión cuantílica de panel; motor \texttt{gar\_engine.py}, \texttt{fci\_engine.py})}\\
 \addlinespace
-PIB real & Crecimiento trimestral del producto (variable dependiente de la regresión cuantílica) & Estadística nacional (banco central) & \texttt{GDP\_*} & Trimestral & Tasa de variación \\
-IPC & Componente del FCI (bloque de deuda / expectativas) & Estadística nacional & \texttt{CPI\_*} & Mensual & Estand.\ expansiva \\
-Índice accionario & Componente del FCI (bloque accionario) & Bolsa nacional & \texttt{STX\_*} & Mensual & Estand.\ expansiva \\
-Tipo de cambio real ef. & Componente del FCI (bloque cambiario) & BIS / fuentes nacionales & \texttt{rEER\_*} & Mensual & Estand.\ expansiva \\
-Rendimiento soberano 10Y & Componente del FCI (bloque de deuda soberana) & Mercado / estadística nacional & \texttt{Ryr\_*} & Mensual & Estand.\ expansiva \\
-VIX (ortogonalizado) & Condiciones financieras globales en la regresión cuantílica & Bloomberg & \texttt{VIX Index} & Diaria & Ortogonalizado respecto de las condiciones locales; trimestral \\
+PIB real & Crecimiento interanual del producto (variable dependiente de la regresión cuantílica, un trimestre adelante) & Estadística nacional (banco central) & \texttt{GDP\_*} & Trimestral & $GDP_t/GDP_{t-4}-1$ \\
+IPC & Deflactor del índice accionario y del rendimiento soberano en el FCI & Estadística nacional & \texttt{CPI\_*} & Mensual & Interpolado a frecuencia diaria \\
+Índice accionario & Componente del FCI (bloque accionario) & Bolsa nacional & \texttt{STX\_*} & Diaria & Volatilidad y caída desde el máximo de dos años; método B \\
+Tipo de cambio real ef. & Componente del FCI (bloque cambiario) & BIS / fuentes nacionales & \texttt{rEER\_*} & Mensual & Volatilidad y cambio en seis meses; método B \\
+Rendimiento soberano 10Y & Componente del FCI (bloque de bonos), en términos reales & Mercado / estadística nacional & \texttt{Ryr\_*} & Diaria o mensual (interpolada a diaria) & Volatilidad y diferencial frente a EE.\ UU.\ sobre su mínimo de dos años; método B \\
+VIX & Condiciones financieras globales en la regresión cuantílica; el FCI se ortogonaliza respecto de él & Bloomberg & \texttt{VIX Index} & Diaria & Cierre del último día del trimestre; estandarizado por país \\
 \addlinespace
 \multicolumn{6}{l}{\textbf{\textit{Factores financieros globales}}}\\
 \addlinespace
