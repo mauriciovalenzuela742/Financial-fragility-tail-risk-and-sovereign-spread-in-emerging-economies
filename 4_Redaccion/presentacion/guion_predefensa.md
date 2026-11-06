@@ -1,25 +1,40 @@
 ---
 title: "Predefensa con el profesor guía"
-subtitle: "Guion lámina por lámina: ecuación, panel y conclusión"
+subtitle: "Guion lámina por lámina: pregunta, resultado e interpretación"
 ---
 
-*La exposición tiene 18 láminas y dura unos 30–35 minutos. El resto de la hora es para preguntas. El
-anexo (29 láminas) no se expone: se abre cuando una pregunta lo pide.*
+*La exposición tiene 14 láminas y dura unos 25–30 minutos. El resto de la hora es para preguntas. El
+anexo (31 láminas) no se expone: se abre cuando una pregunta lo pide. Versión ajustada tras la reunión
+del 6 de noviembre de 2026 con el profesor guía.*
+
+**Lo que pidió el profesor el 6-11 y dónde quedó**
+
+| Pedido | Dónde quedó |
+|---|---|
+| Efecto del riesgo de cola en pb por una d.e. de la métrica | Láminas 8, 9, 13 y 14: una d.e. ≈ +10 %, unos 17 pb (15 pb con controles); con deuda, de 23 a 29 pb |
+| Sacar al anexo lo que no es resultado ("no hay evidencia de otros canales") | Otros moderadores y el Panel B (sin crisis) pasaron al anexo |
+| Resultados más claros, "en cajitas", con su interpretación | Cada lámina de resultados: arriba la pregunta, abajo una caja *Resultado* y una *Interpretación* |
+| Conclusiones, política e investigación futura en una sola lámina | Lámina 14, con 5 resultados, 3 implicancias y 3 líneas futuras |
+| Ordenar con puntos 1, 2… | Las hipótesis llevan la ecuación que las contrasta |
+| Revisar las pruebas empíricas | Ver "Revisión de las pruebas" al final |
+| 12–14 láminas | 14 |
 
 **Antes de entrar**
 
 - [ ] La presentación en PDF, en el computador y en un pendrive.
 - [ ] La tesis en PDF abierta, por si pide una tabla completa.
-- [ ] Cronómetro visible. Ensayar una vez en voz alta.
+- [ ] Cronómetro visible. Ensayar una vez en voz alta, explicando cada lámina en unos 30 segundos
+      cuando el profesor lo pida ("más cortito").
 - [ ] Saber de memoria la sección 1.
 
-**Cómo está armado.** Primero numero las cinco ecuaciones. Después cada lámina de resultados tiene
-una franja arriba con tres cosas: la ecuación que uso, el panel que muestro y lo que concluyo de ese
-panel. Debajo va la tabla y una línea con la razón. El relato avanza de una conclusión a la pregunta
-siguiente:
+**Cómo está armado.** Primero numero las cinco ecuaciones y amarro cada hipótesis a una. Después
+cada lámina de resultados tiene una franja arriba con la ecuación, el panel y **la pregunta** que
+responde. Debajo va la tabla y, al pie, dos cajas: **Resultado** (qué encontré, con su $p$) e
+**Interpretación** (qué significa, en puntos básicos cuando corresponde). El relato avanza de una
+respuesta a la pregunta siguiente:
 
-> ¿Cada riesgo se asocia con el spread? → ¿Qué agrega el riesgo económico? → ¿Coinciden? → Si
-> coinciden, ¿se amplifican? → ¿Qué cambia la transmisión: la deuda, otra cosa?
+> ¿Cada riesgo se asocia con el spread? → ¿Resiste los controles? → ¿Qué agrega el riesgo económico? →
+> ¿Coinciden? → Si coinciden, ¿se amplifican? → ¿La deuda cambia el peso del riesgo de cola?
 
 **Cada lámina tiene:**
 
@@ -44,21 +59,46 @@ riesgo económico doméstico, y qué pasa cuando los dos riesgos se dan a la vez
 | (2) | D sobre su rezago y ln JLoss rezagado (y la inversa) | precedencia | φ |
 | (3) | ln EMBI sobre indicadores de tercil alto y su producto | H3 directa | a3 |
 | (4) | (1) más deuda en t−4 y D × deuda | H4 | ψ |
-| (5) | (1) más un moderador M y sus productos | otros moderadores | λ1, λ2, λ3 |
+| (5) | (1) más un moderador M y sus productos (anexo) | otros moderadores | λ1, λ2, λ3 |
 
-**La historia en seis conclusiones**
+**La magnitud, en puntos básicos (lo que pidió el profesor)**
 
-1. **Cada riesgo se asocia con un spread mayor** (1). La fragilidad replica a Chari et al. con sus
-   controles. La evidencia es sugerente: con el wild bootstrap, p = 0,33 y 0,20.
-2. **El riesgo económico agrega poco:** 2–3 % de spread por punto, en niveles. No aparece en cambios
-   ni mejora el pronóstico.
-3. **Los dos riesgos coinciden** 1,2 veces lo esperado con el calendario común descontado, y la
+El modelo está en logaritmos, así que el coeficiente es una semielasticidad: no se lee como puntos
+básicos. La traducción es: coeficiente × una desviación estándar del riesgo de cola dentro del país
+= cambio porcentual del spread; ese porcentaje × el spread medio (173 pb, media geométrica) = puntos
+básicos.
+
+| Especificación | Coeficiente | 1 d.e. de riesgo de cola | % del spread | pb |
+|---|---|---|---|---|
+| Panel A, referencia (N = 765) | 0,032 | 3,10 pp | +10 % | ≈ 17 |
+| Panel C, seis controles (N = 649) | 0,028 | 3,17 pp | +9 % | ≈ 15 |
+| H4 a un trimestre, deuda media | 0,043 | 3,13 pp | +13,5 % | ≈ 23 |
+| H4 a un trimestre, una d.e. más de deuda | 0,054 | 3,13 pp | +17 % | ≈ 29 |
+| H4 a un año, deuda media | 0,047 | 1,80 pp | +8,5 % | ≈ 15 |
+| H4 a un año, una d.e. más de deuda | 0,080 | 1,80 pp | +14 % | ≈ 25 |
+
+- Por punto porcentual de riesgo de cola: un 3,2 % del spread, unos 5,6 pb. Por eso antes decía
+  "2–3 % por punto" y sonaba chico: el profesor tiene razón en que la unidad correcta es una d.e.
+- Una d.e. de riesgo de cola equivale a 0,27 d.e. del logaritmo del spread dentro del país.
+- Con el modelo en niveles (pb), una d.e. da 10 pb, pero no es significativo ($p=0{,}27$). Si me
+  pregunta por qué difiere: los logaritmos pesan igual los cambios relativos de spreads bajos y altos;
+  los niveles los dominan los países de spread alto. La prueba PE prefiere logaritmos.
+- Fragilidad: una d.e. dentro del país, +5 % del spread (unos 9 pb).
+- Riesgo de cola a un año: 4,7 % por punto, más que a un trimestre (3,2 %), pero por d.e. es un 8 %
+  (unos 15 pb), algo menos, porque ese riesgo varía menos (d.e. 1,8 pp contra 3,1). No decir que "a
+  un año pesa más" sin aclarar que es por punto.
+
+**La historia en cinco resultados**
+
+1. **Cada riesgo se asocia con un spread mayor** (1). Con los controles domésticos solo resiste el
+   riesgo de cola: una d.e., unos 15–17 pb. La evidencia es sugerente (wild 0,33 y 0,20).
+2. **Los dos riesgos coinciden** 1,2 veces lo esperado con el calendario común descontado, y la
    fragilidad antecede al riesgo de cola (2). Es el resultado firme.
-4. **Cuando coinciden, no hay evidencia de que se amplifiquen** (1, 3). Es un no rechazo: se descarta
-   más de un 35 % de la suma, no menos.
-5. **Con más deuda, el riesgo de cola pesa más** (4). Es una regularidad de la muestra: ni la réplica
-   externa, ni el instrumento, ni el modelo la confirman.
-6. **Ninguna otra condición cambia la transmisión** (5).
+3. **Cuando coinciden, no hay evidencia de que se amplifiquen** (1, 3). Es un no rechazo: se descarta
+   más de un 35 % de la suma (unos 28 pb con los dos riesgos una d.e. arriba), no menos.
+4. **Con más deuda, el riesgo de cola pesa más** (4): de unos 23 a unos 29 pb por d.e. Es una
+   regularidad de la muestra: ni la réplica externa, ni el instrumento, ni el modelo la confirman.
+5. **Reservas, respaldo externo y tenencia de la deuda no cambian la transmisión** (5; anexo).
 
 **La frase que tiene que quedar:** *los dos riesgos llegan juntos, pero no se potencian. Vigilarlos
 juntos se justifica; una exigencia adicional por su simultaneidad, no.*
@@ -73,8 +113,9 @@ no pasa Holm; *no hay evidencia*.
 |---|---|
 | Muestra | 13 economías, 2004–2026, N = 765 (sin crisis 656; con controles 649) |
 | Panel A, referencia | β1 0,099; β2 0,032; β3 −0,011; wild 0,33 / 0,20 / 0,89 |
-| Panel B, sin crisis | β1 0,087; β2 0,050; β3 0,005 |
+| Panel B, sin crisis (anexo) | β1 0,087; β2 0,050; β3 0,005 |
 | Panel C, seis controles | β1 −0,008 (p = 0,86); β2 0,028 (p = 0,046); mismas 649 obs. sin controles: 0,107 |
+| Panel C, control por control | con un solo control la fragilidad sigue (solo deuda 0,077, p = 0,03; solo reservas 0,099); sin el tipo de cambio real, 0,064 (p = 0,13); solo los seis juntos la eliminan |
 | Información incremental (N = 662) | β2 0,037; conjunta wild 0,041; R² 0,153 → 0,185 → 0,194 |
 | Lo que no pasa | cambios a 4 trimestres 0,004 (0,13); proyecciones locales 0 de 9; fuera de muestra +3 % de error |
 | Simultaneidad | 168 obs. (22,0 %); 87 bajo independencia (1,9 veces); 140,9 con el calendario común (1,2 veces; p = 0,0002); 13 de 13 |
@@ -84,7 +125,7 @@ no pasa Holm; *no hay evidencia*.
 | H4, preregistro 1 | ψ = +0,011 por d.e. de deuda (0,043 → 0,054); Holm 0,029; 13 de 13 |
 | H4, preregistro 2 | riesgo de cola a un año 0,047 (Holm 0,018); ψ = +0,033 (+70 %) |
 | H4, en contra | 23 hipótesis: Holm 0,13 y 0,31; Hungría y Corea 0,22 (potencia 5 %); instrumento F 9,7 |
-| Moderadores | participación extranjera Holm 1,00; respaldo −0,004 (wild 0,90); reservas −0,247 (wild 0,08; preregistrada Holm 0,29); doom loop −0,053 |
+| Moderadores (anexo) | participación extranjera Holm 1,00; respaldo −0,004 (wild 0,90); reservas −0,247 (wild 0,08; preregistrada Holm 0,29); doom loop −0,053 |
 
 **Vocabulario:** *amplificación* o *simultaneidad*, nunca "multiplicidad"; efectos *aditivos*;
 *riesgo financiero* (JLoss) y *riesgo económico* (GaR). Son asociaciones: evito "reduce", "protege"
@@ -97,10 +138,12 @@ y "efecto de".
 - Que la amplificación "está descartada". No la encuentro, y se descarta solo una grande.
 - Que la deuda "explica" la transmisión. Es una regularidad de la muestra.
 - Que las reservas "atenúan" o "protegen".
+- Que la deuda sola "absorbe" a la fragilidad: con la deuda como único control, la fragilidad sigue
+  significativa. La absorben los seis controles juntos.
 
 \newpage
 
-# 2. Guion lámina por lámina (≈ 32 min)
+# 2. Guion lámina por lámina (≈ 27 min)
 
 ## Apertura (≈ 6 min)
 
@@ -136,8 +179,9 @@ de nivel; lo mido con una simulación (anexo, retroalimentación)."
 
 ### 4. Hipótesis (1 min)
 
-**Qué digo:** "Cuatro hipótesis. H1 y H2: cada riesgo eleva el spread. H3: juntos lo elevan más que
-la suma. H4: con más deuda, el riesgo de cola pesa más."
+**Qué digo:** "Cuatro hipótesis, cada una con su ecuación. Uno: la fragilidad eleva el spread. Dos:
+el riesgo de cola también. Tres: juntos lo elevan más que la suma. Cuatro: con más deuda, el riesgo
+de cola pesa más. Las otras condiciones van con la ecuación (5) y quedan en el anexo."
 
 **Transición:** "Antes de las ecuaciones, las dos series."
 
@@ -149,6 +193,9 @@ financiera global, el estrés emergente de 2015–16 y la pandemia."
 **Cómo leer:** las tres franjas grises. No comento nada más: la simultaneidad la muestro con la
 ecuación (2).
 
+**Si me pregunta** *¿y por país?*: los gráficos por país están en la tesis y en el visualizador; se
+revisan con el profesor el viernes.
+
 ## Especificaciones (≈ 4 min)
 
 ### 6. Especificaciones (1)–(3) (2 min)
@@ -157,9 +204,8 @@ ecuación (2).
 
 **Qué digo:** "La ecuación (1) es la principal: el logaritmo del spread sobre la fragilidad, el
 riesgo de cola y su producto, todos rezagados un trimestre, con efectos fijos de país y de tiempo.
-β1 es H1, β2 es H2 y β3 es H3. La estimo en tres paneles: completa, sin crisis y con controles. La
-(2) pregunta qué riesgo antecede al otro. La (3) contrasta H3 de forma directa: indicadores de
-riesgo alto y su producto."
+β1 es H1, β2 es H2 y β3 es H3. La (2) pregunta qué riesgo antecede al otro. La (3) contrasta H3 de
+forma directa: indicadores de riesgo alto y su producto."
 
 **Si me pregunta** *¿por qué logaritmos?*: "La prueba PE los prefiere, y JLoss es ordinal (anexo,
 logaritmos vs. niveles)."
@@ -168,66 +214,70 @@ logaritmos vs. niveles)."
 
 **Qué digo:** "La (4) es H4: la principal más la deuda de cuatro trimestres antes y su producto con
 el riesgo de cola. Está preregistrada dos veces, con el riesgo de cola a un trimestre y a un año. La
-(5) agrega otro moderador: participación extranjera, respaldo, reservas o deuda en moneda
-extranjera. Con 13 países, el criterio es el wild bootstrap por país; la escala de abajo ordena
-todo lo que viene."
+(5) agrega otros moderadores; sus resultados van al anexo. Con 13 países, el criterio es el wild
+bootstrap por país; la escala de abajo ordena todo lo que viene."
 
 **Transición:** "Parto por la ecuación (1)."
 
-## Resultados (≈ 17 min)
+## Resultados (≈ 13 min)
 
 ### 8. Ecuación (1) · Panel A (2 min 30 s)
 
-**Propósito:** H1 y H2 tienen signo positivo, pero la evidencia es sugerente.
+**Propósito:** H1 y H2 tienen signo positivo; dar la magnitud en pb.
 
 **Qué digo:** "En la muestra completa, la fragilidad y el riesgo de cola son positivos en todas las
 columnas. La interacción es −0,011. Con el wild bootstrap, ninguno resiste: 0,33, 0,20 y 0,89. Por
-eso digo 'sugerente'."
+eso digo 'sugerente'. ¿Cuánto es? Una desviación estándar de riesgo de cola dentro del país, unos
+3 puntos de crecimiento en la cola, se asocia con un spread un 10 % mayor: unos 17 puntos básicos
+sobre un spread medio de 173."
 
-**Cómo leer:** la columna Ref., después la fila de la interacción.
+**Cómo leer:** la columna Ref., después la caja de interpretación.
 
 **Si me pregunta** *¿depende de un país?*: "Sí: Turquía en la fragilidad y Polonia en el riesgo de
 cola (anexo, pendientes por país y Polonia)."
 
-### 9. Ecuación (1) · Panel B (1 min)
+**Si me pregunta** *¿y sin las crisis?*: "El mismo patrón: 0,087, 0,050 y una interacción de 0,005
+(anexo, Panel B)."
 
-**Qué digo:** "Sin los trimestres de crisis, el patrón es el mismo: 0,087, 0,050 y una interacción
-de 0,005. No son las crisis las que lo producen."
+### 9. Ecuación (1) · Panel C (2 min)
 
-### 10. Ecuación (1) · Panel C (1 min 30 s)
-
-**Qué digo:** "Con los seis controles domésticos, la fragilidad cae a −0,008 y el riesgo de cola
-se mantiene en 0,028. No es la muestra: con las mismas 649 observaciones y sin controles, la
-fragilidad da 0,107."
+**Qué digo:** "Con los seis controles domésticos, la fragilidad cae a −0,008 y el riesgo de cola se
+mantiene en 0,028: una d.e., unos 15 pb. No es la muestra: con las mismas 649 observaciones y sin
+controles, la fragilidad da 0,107. Y no es un control en particular: con cualquiera de ellos solo,
+la fragilidad sigue; la eliminan los seis juntos. El riesgo de cola, en cambio, trae información que
+los fundamentos no tienen."
 
 **Si me pregunta** *¿entonces no replicas a Chari?*: "Con sus controles sí: entre 0,107 y 0,164. Con
 los míos no. Varios de esos controles son canales del propio mecanismo."
 
+**Si dice** *los canales real y financiero quedan capturados por el GaR y la deuda*: "Es una lectura
+posible para el conjunto, pero con la deuda como único control la fragilidad sigue significativa
+(0,077); la absorben los seis juntos."
+
 **Transición:** "Ahora, sobre el modelo de Chari, ¿qué agrega el riesgo económico?"
 
-### 11. Ecuación (1) con controles de Chari · Información incremental (2 min)
+### 10. Ecuación (1) con controles de Chari · Información incremental (2 min)
 
 **Propósito:** responder la primera parte de la pregunta.
 
 **Qué digo:** "Parto del modelo de Chari et al. La fragilidad se mantiene en 0,137. Agregar el
 riesgo de cola sube el R² dentro del país de 0,153 a 0,185, y la prueba conjunta resiste el wild
 bootstrap: 0,041. Pero en cambios, en proyecciones locales y fuera de la muestra, no aparece. Agrega
-en niveles; no mejora el pronóstico."
+en niveles; no anticipa los cambios."
 
-**Cómo leer:** la fila del R², después la tabla de la derecha.
+**Cómo leer:** la fila del R², después la tabla de la derecha y las cajas.
 
 **Transición:** "La segunda parte de la pregunta es qué pasa cuando los dos riesgos se dan a la vez.
 Primero hay que ver si se dan a la vez."
 
-### 12. Ecuación (2) · Coincidencia y precedencia (2 min 30 s)
+### 11. Ecuación (2) · Coincidencia y precedencia (2 min 30 s)
 
 **Propósito:** el resultado firme de la tesis.
 
 **Qué digo:** "Ambos riesgos están en su tercil alto en 168 trimestres-país. Por azar esperaría 87.
 Si descuento el calendario común, permutando entre países dentro de cada trimestre, espero 141: es
 1,2 veces, con p = 0,0002. Pasa en los 13 países. Y la ecuación (2) dice que la fragilidad antecede
-al riesgo de cola: 0,405, resiste el wild bootstrap y la exclusión de cada país. Al revés, nada. Un
-dato más: 129 de las 168 coincidencias son de 2020 en adelante."
+al riesgo de cola: 0,405, resiste el wild bootstrap y la exclusión de cada país. Al revés, nada."
 
 **Cómo leer:** la fila de la permutación entre países, luego φ.
 
@@ -236,15 +286,15 @@ exceso viene de 2015–19 y de 2023–26."
 
 **Transición:** "Coinciden. Entonces, cuando coinciden, ¿el spread sube más que la suma?"
 
-### 13. Ecuaciones (1) y (3) · Amplificación (2 min 30 s)
+### 12. Ecuaciones (1) y (3) · Amplificación (2 min)
 
 **Propósito:** H3 sin evidencia, dicho con precisión.
 
 **Qué digo:** "La interacción de la (1) es −0,011, con p = 0,89. La prueba directa, la (3), da un
 extra de −0,077 cuando los dos riesgos están altos. Lo mismo uno a cuatro trimestres adelante, con
-cuartiles y con una forma funcional intermedia. Ninguna es positiva. Es un no rechazo: descarto una
-amplificación de más de un 35 % de la suma, no una menor. Abajo dejo las dos señales en contra.
-Ninguna resiste en logaritmos."
+cuartiles y con una forma funcional intermedia. Ninguna es positiva. Es un no rechazo: con los dos
+riesgos una d.e. arriba la suma es de unos 28 pb, y descarto un extra de más de un 35 % de eso, no
+uno menor."
 
 **Si me pregunta** *¿y el signo negativo?*: "Es de Polonia; sin ella, +0,008. No lo leo como
 atenuación (anexo, efecto marginal)."
@@ -252,60 +302,42 @@ atenuación (anexo, efecto marginal)."
 **Transición:** "Si no se amplifican, ¿hay algo que cambie cuánto pesa cada riesgo? La teoría apunta
 a la deuda."
 
-### 14. Ecuación (4) · H4 (2 min 30 s)
+### 13. Ecuación (4) · H4 (2 min)
 
-**Propósito:** la regularidad más clara de la muestra, con sus límites a la vista.
+**Propósito:** la regularidad más clara de la muestra, con sus límites a la vista y en pb.
 
-**Qué digo:** "Con una desviación estándar más de deuda, el peso del riesgo de cola sube de 0,043 a
-0,054. Pasa Holm en su familia y se mantiene sin cada país. Con el riesgo de cola a un año es más
-fuerte: +0,033, un 70 % más. Ahora lo que no resiste: la corrección sobre los ocho preregistros, la
+**Qué digo:** "Con una desviación estándar más de deuda, unos 20 puntos del PIB, el peso del riesgo
+de cola sube de 0,043 a 0,054. En puntos básicos: una d.e. de riesgo de cola pasa de unos 23 a unos
+29 pb. Pasa Holm en su familia y se mantiene sin cada país. Con el riesgo de cola a un año es más
+fuerte: un 70 % más, de 15 a 25 pb. Lo que no resiste: la corrección sobre los ocho preregistros, la
 réplica en Hungría y Corea, el instrumento y el modelo de límite fiscal. Por eso digo 'en la
 muestra'."
 
-**Cómo leer:** las dos primeras filas, después las tres últimas.
+**Cómo leer:** las dos primeras filas, después la caja de interpretación.
 
-**Transición:** "¿Y las otras condiciones?"
+**Transición:** "Junto todo en una lámina."
 
-### 15. Ecuación (5) · Otros moderadores (1 min 30 s)
+## Cierre (≈ 3 min)
 
-**Qué digo:** "Participación extranjera, respaldo externo, reservas, doom loop, deuda en moneda
-extranjera. Ninguna pasa el criterio exigente. Las reservas son exploratorias: dependen de Polonia y
-la versión preregistrada no las confirma. Con 13 países es ausencia de evidencia, no evidencia de un
-cero."
+### 14. Conclusiones, política e investigación futura (3 min)
 
-**Transición:** "Junto todo."
+**Propósito:** resultados, implicancias de política y líneas futuras en una sola lámina.
 
-## Cierre (≈ 4 min)
+**Qué digo:** "Arriba a la izquierda, los cinco resultados, cada uno con su ecuación. Cada riesgo se
+asocia con el spread; con controles solo resiste el riesgo de cola, unos 15 a 17 pb por d.e. Los dos
+riesgos coinciden más que por azar y la fragilidad va primero: es lo firme. Cuando coinciden no se
+amplifican. Con más deuda el riesgo de cola pesa más, solo en la muestra. Y las otras condiciones no
+cambian la transmisión.
 
-### 16. Conclusiones (2 min 30 s)
+Para la política: los dos riesgos tienden a agravarse a la vez, así que vigilarlos en el mismo
+tablero se justifica. Pero los datos no muestran que juntos cuesten más que la suma: una exigencia
+adicional por la simultaneidad no tiene base aquí. Donde la deuda es alta, el riesgo de cola merece
+más atención.
 
-**Propósito:** que el resumen siga el mismo hilo de los resultados.
+Lo que falta: más economías con EMBI directo y un GaR mensual, variación exógena en los bancos y más
+eventos de respaldo externo."
 
-**Qué digo:** "Seis conclusiones, cada una con su ecuación. Cada riesgo se asocia con el spread,
-aunque la evidencia es sugerente. El riesgo económico agrega poco, y solo en niveles. Los dos riesgos
-coinciden más que por azar, y la fragilidad va primero: es lo firme. Cuando coinciden no se
-amplifican. Con más deuda el riesgo de cola pesa más, solo en la muestra. Y ninguna otra condición
-cambia la transmisión."
-
-**Lo que tengo que subrayar:** por qué importa. "Esto le sirve a quien vigila la estabilidad
-financiera y la deuda. Los dos riesgos tienden a agravarse a la vez, así que mirarlos por separado
-subestima cuándo llegan juntos. Pero los datos no muestran que juntos cuesten más que la suma. Una
-regla que pida más capital o más reservas por la simultaneidad no tiene base aquí. Lo que sí tiene
-base es vigilarlos en el mismo tablero, con más atención donde hay más deuda."
-
-### 17. La frase (30 s)
-
-**Qué digo:** la leo y hago una pausa. "Los dos riesgos llegan juntos, pero no se potencian. Vigilarlos
-juntos se justifica; una exigencia adicional por su simultaneidad, no."
-
-**Lo que tengo que subrayar:** es la respuesta a la pregunta de la lámina 2. La primera mitad viene de
-la ecuación (2); la segunda, de la (1) y la (3).
-
-### 18. Trabajos futuros (1 min)
-
-**Qué digo:** "Lo que falta: más economías con EMBI directo, frecuencia diaria y un GaR mensual, la
-distancia al incumplimiento como medida principal, variación exógena en los bancos y más eventos de
-respaldo."
+**Cierre:** "Los dos riesgos llegan juntos, pero no se potencian."
 
 \newpage
 
@@ -313,6 +345,8 @@ respaldo."
 
 | Si pregunta por… | Abro |
 |---|---|
+| Sin los trimestres de crisis | H1 y H2 sin los trimestres de crisis (Panel B) |
+| Reservas, respaldo, participación extranjera, doom loop | Otros moderadores (ecuación 5) |
 | Cómo se construye JLoss / el GaR | Construcción de JLoss; Construcción del GaR |
 | Errores estándar y escala de evidencia | Inferencia; Inferencia calibrada por simulación |
 | Por qué no es una elasticidad común | La réplica y sus límites |
@@ -330,3 +364,16 @@ respaldo."
 | Preregistros | Pruebas preregistradas; Preguntas de portafolio |
 | Muestra, CDS, Argentina, logaritmos | Robustez; Logaritmos vs. niveles; Argentina |
 | Limitaciones | Limitaciones |
+
+# 4. Revisión de las pruebas (pedido del 6-11)
+
+- **Magnitudes recalculadas** a partir del panel (`Panel_bloomberg_embiext.csv`) con la misma función
+  de estimación de `p13_figuras_paper.py`: β2 = 0,0324 (N = 765) y 0,0281 con seis controles
+  (N = 649), d.e. dentro del país del riesgo de cola 3,10 y 3,17 pp, spread medio geométrico 172–173
+  pb, mediana 177 pb. Coinciden con las cifras canónicas (sección 17.4 de `NUMEROS_CANONICOS_BBG.md`).
+- **Panel C, control por control:** ningún control solo elimina la fragilidad (solo deuda 0,077,
+  p = 0,029; solo saldo fiscal 0,056, p = 0,12; solo tipo de cambio real 0,059, p = 0,18). Al quitar
+  un control de los seis, la fragilidad solo se recupera en parte sin el tipo de cambio real (0,064,
+  p = 0,13). El riesgo de cola se mantiene en casi todas las variantes (0,026–0,041).
+- **Pendiente:** hablar con R. Fischer sobre la presentación antes del viernes, y llevar el
+  visualizador para revisarlo con el profesor.

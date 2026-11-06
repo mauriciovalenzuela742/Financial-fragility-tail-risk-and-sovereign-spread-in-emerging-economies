@@ -65,7 +65,7 @@ Si la comisión recuerda una sola cosa, que sea esa. Todo el discurso la desarro
 | 9 | Inferencia | 1:30 | Wild por país y escala de evidencia |
 | 10 | Los dos riesgos coinciden | 2:00 | 1,2 veces con calendario; 1,9 bajo independencia |
 | 11–12 | No hay amplificación; las bandas | 3:30 | −0,011; equivalencia: se descarta más de un 35 % |
-| 13 | Qué agrega el riesgo económico | 1:30 | 2–3 %; largo plazo; CCE firme |
+| 13 | Qué agrega el riesgo económico | 1:30 | una d.e., +10 %, unos 17 pb; largo plazo; CCE firme |
 | 14 | **Deuda y riesgo de cola: lo que resiste y lo que no** | 2:30 | La cadena de seis pruebas |
 | 15 | **Un modelo de límite fiscal** | 2:00 | Logaritmos frente a puntos básicos |
 | 16 | Hallazgos y su grado de evidencia | 2:00 | La escala aplicada a todo |
@@ -95,7 +95,7 @@ Respuestas de menos de un minuto. Primero el resultado, después la cifra y al f
 | 9 | ¿Qué haría con un año más? | Ampliar a 20–25 economías con Refinitiv para la réplica, buscar choques a la deuda (reestructuraciones, reglas fiscales) y agregar aversión al riesgo al modelo. | V28 |
 | 10 | ¿Qué le diría a un banco central? | Vigilar la fragilidad bancaria y la cola del crecimiento juntas, con más atención cuanto mayor es la deuda; no hay un umbral a partir del cual actuar. | V21 |
 | 11 | ¿Sirve para algo práctico? | Probé seis preguntas de portafolio con preregistro (señal, valor razonable, cobertura, VaR) y ninguna pasó. La fragilidad alta ensancha la distribución de los cambios del spread: sirve para medir el riesgo, no para pronosticarlo. | Anexo G |
-| 12 | Si el horizonte que importa es el año, ¿por qué la especificación principal usa un trimestre? | El trimestre se eligió porque el panel es trimestral y el riesgo de cola entra con un trimestre de rezago: mide la cola del mismo trimestre en que se mide el spread. La literatura de estructura temporal del GaR (Adrian et al., 2022) dice que el horizonte importa, así que preregistré el de un año: 4,7 % por punto porcentual, firme dentro de su preregistro, 13 de 13. Pero no sobrevive a la corrección sobre las 23 hipótesis (Holm 0,13), así que lo presento como un matiz del horizonte y no como hallazgo central. | Sec. 4.4.2, R2-H3 |
+| 12 | Si el horizonte que importa es el año, ¿por qué la especificación principal usa un trimestre? | El trimestre se eligió porque el panel es trimestral y el riesgo de cola entra con un trimestre de rezago: mide la cola del mismo trimestre en que se mide el spread. La literatura de estructura temporal del GaR (Adrian et al., 2022) dice que el horizonte importa, así que preregistré el de un año: 4,7 % por punto porcentual (por d.e., un 8 %, unos 15 pb: parecido al de un trimestre, porque ese riesgo varía menos), firme dentro de su preregistro, 13 de 13. Pero no sobrevive a la corrección sobre las 23 hipótesis (Holm 0,13), así que lo presento como un matiz del horizonte y no como hallazgo central. | Sec. 4.4.2, R2-H3 |
 
 ---
 
@@ -107,8 +107,8 @@ Respuestas de menos de un minuto. Primero el resultado, después la cifra y al f
 | Simultaneidad | 168 observaciones con ambos riesgos altos: 1,2 veces lo esperado con calendario (p = 0,0002) y 1,9 veces bajo independencia |
 | Interacción principal | −0,011 (wild p = 0,89) |
 | Equivalencia | se descarta una amplificación mayor que un 35 % de la suma |
-| Riesgo de cola | 0,032 por punto (2–3 % de spread); CCE wild p = 0,016; largo plazo 0,067 |
-| Riesgo de cola a un año (R2-H3) | 0,047 por punto (4,7 %); wild p = 0,006; Holm en su familia 0,018; conjunta 0,08 (14 hipótesis) y 0,13 (23) |
+| Riesgo de cola | 0,032 por punto; una d.e. dentro del país, +10 % de spread, unos 17 pb; CCE wild p = 0,016; largo plazo 0,067 |
+| Riesgo de cola a un año (R2-H3) | 0,047 por punto (4,7 %; una d.e., +8 %, unos 15 pb); wild p = 0,006; Holm en su familia 0,018; conjunta 0,08 (14 hipótesis) y 0,13 (23) |
 | Fragilidad (réplica) | 0,099; 70 % del coeficiente es Turquía |
 | Deuda × riesgo de cola a un año | +0,033 por d.e. de deuda; permutación p = 0,009 |
 | Inferencia conjunta | ninguna de 14 hipótesis bajo 0,05 con Holm |

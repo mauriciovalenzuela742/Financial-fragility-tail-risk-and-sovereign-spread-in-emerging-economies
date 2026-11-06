@@ -28,12 +28,20 @@
 \textbf{Cómo leer:} variable dependiente $\ln\EMBI_{i,t}$. #1
 Efectos fijos: P = país, T = tiempo (trimestre), PT = ambos. Ref.\ = especificación de referencia con EF país + tiempo.
 Errores Driscoll--Kraay; *** $p<0{,}01$, ** $p<0{,}05$, * $p<0{,}10$. Celda vacía: la variable no está en ese modelo.\par}}
-% Franja de las láminas de resultados: ecuación | panel | conclusión del panel
+% Franja de las láminas de resultados: ecuación | panel | pregunta que responde
 \newcommand{\franja}[3]{\par\vspace{-6pt}\noindent
 \colorbox{tesisblue!10}{\begin{minipage}{\dimexpr\textwidth-2\fboxsep\relax}\scriptsize
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.13\textwidth}@{\hspace{8pt}}>{\raggedright\arraybackslash}p{0.25\textwidth}@{\hspace{8pt}}>{\raggedright\arraybackslash}p{0.52\textwidth}@{}}
-{\color{tesisblue}\bfseries Ecuación #1} & \textbf{Panel:} #2 & \textbf{Conclusión:} #3
+{\color{tesisblue}\bfseries Ecuación #1} & \textbf{Panel:} #2 & \textbf{Pregunta:} #3
 \end{tabular}\end{minipage}}\par\vspace{4pt}}
+% Cajas al pie de cada lámina de resultados: qué se encontró | qué significa (con magnitudes)
+\newcommand{\cajas}[2]{\par\vspace{4pt}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\begin{block}{Resultado}\scriptsize\raggedright #1\end{block}
+\column{0.49\textwidth}
+\begin{exampleblock}{Interpretación}\scriptsize\raggedright #2\end{exampleblock}
+\end{columns}}
 % Leyenda corta de las baterías del cuerpo
 \newcommand{\notacorta}{\par\vspace{2pt}{\scriptsize\raggedright
 M1 fragilidad; M2 riesgo de cola; M3 ambos; M4 ambos e interacción. EF: P país, T tiempo, PT ambos; Ref.\ = M4 con PT.
@@ -132,16 +140,16 @@ Profesor coguía: Ronald Fischer
 % 4
 \begin{frame}{Hipótesis de trabajo}
 \begin{enumerate}
-\item \textbf{H1 (canal bancario).} La fragilidad bancaria sistémica eleva el \textit{spread} soberano.
+\item \textbf{H1 (canal bancario).} La fragilidad bancaria sistémica eleva el \textit{spread} soberano. {\color{tesisblue}\footnotesize[ec.\ (1)]}
 \vspace{4pt}
-\item \textbf{H2 (canal de crecimiento).} Un mayor riesgo de cola del crecimiento eleva el \textit{spread} soberano.
+\item \textbf{H2 (canal de crecimiento).} Un mayor riesgo de cola del crecimiento eleva el \textit{spread} soberano. {\color{tesisblue}\footnotesize[ec.\ (1)]}
 \vspace{4pt}
-\item \textbf{H3 (amplificación).} La coincidencia de ambos riesgos eleva el \textit{spread} más que la suma de las dos asociaciones.
+\item \textbf{H3 (amplificación).} La coincidencia de ambos riesgos eleva el \textit{spread} más que la suma de las dos asociaciones. {\color{tesisblue}\footnotesize[ec.\ (1), (2) y (3)]}
 \vspace{4pt}
-\item \textbf{H4 (deuda y riesgo de cola).} Con más deuda pública, el riesgo de cola del crecimiento pesa más en el \textit{spread}.
+\item \textbf{H4 (deuda y riesgo de cola).} Con más deuda pública, el riesgo de cola del crecimiento pesa más en el \textit{spread}. {\color{tesisblue}\footnotesize[ec.\ (4)]}
 \end{enumerate}
 \vspace{4pt}
-Se contrastan además las reservas, el respaldo externo y quién tiene la deuda.
+\footnotesize Las reservas, el respaldo externo y quién tiene la deuda se contrastan con la ecuación (5); sus resultados van en el anexo.
 \end{frame}
 
 % 5
@@ -177,7 +185,7 @@ Se contrastan además las reservas, el respaldo externo y quién tiene la deuda.
 \vspace{5pt}
 \textbf{(5) Otros moderadores} \hfill $\lambda\neq0$: $M$ cambia la transmisión
 \ecu{\ln\EMBI_{i,t}=\text{(1)}+\kappa M_{i,t}+\lambda_1(\ln\JLoss\times M)_{i,t}+\lambda_2(D\times M)_{i,t}+\lambda_3(\ln\JLoss\times D\times M)_{i,t}}
-{\scriptsize $M$: participación extranjera en la deuda, acceso a respaldo externo, reservas, deuda (\textit{doom loop}) y deuda en moneda extranjera.\par}
+{\scriptsize $M$: participación extranjera en la deuda, acceso a respaldo externo, reservas, deuda (\textit{doom loop}) y deuda en moneda extranjera. Resultados en el anexo.\par}
 \vspace{6pt}
 \begin{block}{Datos e inferencia}
 \scriptsize Panel trimestral: 13 economías, 2004--2026, $N=765$. Regresores rezagados un trimestre. Criterio: \textit{wild cluster bootstrap} por país; corrección de Holm por familia.
@@ -191,37 +199,35 @@ Se contrastan además las reservas, el respaldo externo y quién tiene la deuda.
 % 8
 \section{Resultados}
 \begin{frame}{H1 y H2: cada riesgo y el \textit{spread}}
-\franja{(1)}{A, muestra completa}{Ambos riesgos se asocian con un \textit{spread} mayor (evidencia sugerente). La interacción es nula.}
+\franja{(1)}{A, muestra completa}{¿Se asocia cada riesgo con un \textit{spread} mayor? ¿Se potencian?}
 \centering
 \small
+\begin{adjustbox}{max totalheight=0.37\textheight}
 \input{tablas/bat_A.tex}
+\end{adjustbox}
 \notacorta
-\porque{$\beta_1$ y $\beta_2$ son positivos en todas las columnas; $\beta_3=-0{,}011$. Con el \textit{wild bootstrap}, $p=0{,}33$, $0{,}20$ y $0{,}89$: la asociación no resiste el criterio exigente.}
+\vspace{-12pt}
+\cajas{$\beta_1$ y $\beta_2$ son positivos en todas las columnas; la interacción es nula ($\beta_3=-0{,}011$). Con el \textit{wild bootstrap}, $p=0{,}33$, $0{,}20$ y $0{,}89$: evidencia \textbf{sugerente}.}
+{Una d.e.\ de riesgo de cola dentro del país (3,1 pp): \textbf{+10\% de \textit{spread}, unos 17 pb} sobre un \textit{spread} medio de 173 pb. Una d.e.\ de fragilidad: +5\%.}
 \end{frame}
 
 % 9
-\begin{frame}{H1 y H2: sin los trimestres de crisis}
-\franja{(1)}{B, sin trimestres de crisis}{Fuera de las crisis, los dos riesgos siguen asociados con el \textit{spread} y la interacción sigue nula.}
+\begin{frame}{H1 y H2: con seis controles domésticos}
+\franja{(1)}{C, con seis controles}{¿Sobreviven las asociaciones a los fundamentos domésticos?}
 \centering
 \small
-\input{tablas/bat_B.tex}
+\begin{adjustbox}{max totalheight=0.37\textheight}
+\input{tablas/bat_C.tex}
+\end{adjustbox}
 \notacorta
-\porque{En la referencia, $\beta_1=0{,}087$, $\beta_2=0{,}050$ y $\beta_3=0{,}005$ ($N=656$; excluye 2008Q4--2009Q4 y 2020Q1--2021Q4).}
+\vspace{-12pt}
+\cajas{Fragilidad: $-0{,}008$ ($p=0{,}86$); sin controles, en las mismas 649 obs., $0{,}107$ ($p=0{,}008$). Ningún control solo la elimina (solo deuda: $0{,}077$); los seis juntos, sí. Riesgo de cola: $0{,}028$ ($p=0{,}046$).}
+{El riesgo de cola aporta información propia: \textbf{una d.e., +9\%, unos 15 pb}. Lo que la fragilidad tenía en común con el \textit{spread} lo recogen, en conjunto, los fundamentos domésticos.}
 \end{frame}
 
 % 10
-\begin{frame}{H1 y H2: con seis controles domésticos}
-\franja{(1)}{C, con seis controles}{Con los controles domésticos la fragilidad pierde la asociación; el riesgo de cola la mantiene.}
-\centering
-\small
-\input{tablas/bat_C.tex}
-\notacorta
-\porque{En la referencia, $\beta_1=-0{,}008$ ($p=0{,}86$) y $\beta_2=0{,}028$ ($p=0{,}046$). Sobre las mismas 649 observaciones sin controles, $\beta_1=0{,}107$ ($p=0{,}008$): la caída la producen los controles, no la muestra.}
-\end{frame}
-
-% 11
 \begin{frame}{H2: qué agrega el riesgo económico a la fragilidad}
-\franja{(1) con controles de Chari}{Información incremental}{La fragilidad se mantiene con los controles de Chari et al. El riesgo de cola agrega en niveles, no en cambios ni fuera de muestra.}
+\franja{(1) con controles de Chari}{Información incremental}{Sobre la fragilidad, ¿cuánto agrega el riesgo de cola?}
 \begin{columns}[T]
 \column{0.56\textwidth}
 \centering
@@ -242,7 +248,7 @@ $R^2$ dentro del país & $0{,}153$ & $0{,}185$ & $0{,}194$ \\
 \end{adjustbox}
 
 \vspace{2pt}
-{\scriptsize\raggedright EF de país y de tiempo. *** $p<0{,}01$, ** $p<0{,}05$ (Driscoll--Kraay).\par}
+{\scriptsize\raggedright EF país y tiempo; *** $p<0{,}01$, ** $p<0{,}05$ (DK).\par}
 \column{0.42\textwidth}
 \footnotesize
 \begin{tabular}{@{}lr@{}}
@@ -256,15 +262,16 @@ Fuera de muestra & error $+3\%$ \\
 \bottomrule
 \end{tabular}
 \end{columns}
-\porque{agregar el riesgo de cola sube el $R^2$ de $0{,}153$ a $0{,}185$ y la prueba conjunta resiste el \textit{wild bootstrap}; en cambios, en proyecciones locales y fuera de muestra no aparece.}
+\cajas{Con los controles de Chari et al.\ la fragilidad se mantiene. El riesgo de cola sube el $R^2$ de $0{,}153$ a $0{,}185$; la prueba conjunta resiste el \textit{wild bootstrap}.}
+{El riesgo de cola agrega \textbf{en niveles}: describe dónde está el \textit{spread}, no anticipa sus cambios. En cambios, en proyecciones locales y fuera de muestra no aparece.}
 \end{frame}
 
-% 12
+% 11
 \begin{frame}{Simultaneidad: los dos riesgos coinciden}
-\franja{(2)}{Coincidencia y precedencia}{Los dos riesgos coinciden más de lo que explicaría el azar, y la fragilidad antecede al riesgo de cola.}
+\franja{(2)}{Coincidencia y precedencia}{¿Llegan juntos los dos riesgos? ¿Cuál va primero?}
 \centering
 \footnotesize
-\begin{adjustbox}{max width=\textwidth}
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.42\textheight}
 \begin{tabular}{l ccc}
 \toprule
 \textit{Ambos riesgos en su tercil alto (definido dentro de cada país)} & Observado & Por azar & $p$ \\
@@ -284,12 +291,13 @@ Riesgo de cola en $t-1$ $\to$ fragilidad en $t$ & $-0{,}006$ & & $0{,}48$ \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\porque{con el calendario común descontado, 1,2 veces lo esperado ($p=0{,}0002$), en los 13 países. $\phi$ resiste el \textit{wild bootstrap} y la exclusión de cada país; la inversa es nula. De las 168 coincidencias, 129 son de 2020 en adelante.}
+\cajas{Con el calendario común descontado, 1,2 veces lo esperado ($p=0{,}0002$), en los 13 países. $\phi$ resiste el \textit{wild bootstrap} y la exclusión de cada país; la inversa es nula.}
+{Es el resultado \textbf{firme}: los dos riesgos tienden a agravarse a la vez, y la fragilidad antecede al riesgo de cola, como en el acelerador financiero. De las 168 coincidencias, 129 son de 2020 en adelante.}
 \end{frame}
 
-% 13
+% 12
 \begin{frame}{H3: cuando coinciden, ¿se amplifican?}
-\franja{(1) M4 y (3)}{Amplificación}{Cuando coinciden, no hay evidencia de que se amplifiquen.}
+\franja{(1) M4 y (3)}{Amplificación}{Cuando coinciden, ¿suben el \textit{spread} más que la suma?}
 \centering
 \footnotesize
 \begin{adjustbox}{max width=\textwidth}
@@ -305,40 +313,83 @@ Forma funcional intermedia (Box--Cox, $\lambda=0{,}44$): interacción & $t=-0{,}
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\porque{ninguna estimación es positiva ni significativa. Es un no rechazo: la prueba de equivalencia descarta una amplificación de más de un 35\% de la suma, no una menor.}
-\vspace{2pt}
-{\scriptsize\raggedright\textbf{Señales en contra:} fuera del piso de $\JLoss$, $+7{,}5$ pb ($p$ \textit{wild} $0{,}036$), pero en logaritmos no ($0{,}11$); en cambios a cuatro trimestres en pb, $+0{,}358$ ($0{,}011$), ausente en logaritmos.\par}
+\cajas{Ninguna estimación es positiva ni significativa. Señales en contra, sin robustez: fuera del piso de $\JLoss$, $+7{,}5$ pb ($p$ \textit{wild} $0{,}036$), pero en logaritmos no ($0{,}11$).}
+{\textbf{No hay evidencia de amplificación.} Es un no rechazo: con los dos riesgos una d.e.\ arriba (suma: unos 28 pb), se descarta un extra de más de un 35\% de la suma, no uno menor.}
 \end{frame}
 
-% 14
+% 13
 \begin{frame}{H4: deuda y riesgo de cola}
-\franja{(4)}{Preregistros 1 y 2 y sus contrastes}{Con más deuda, el riesgo de cola pesa más en el \textit{spread} dentro de la muestra. Fuera de ella, nada lo confirma.}
+\franja{(4)}{Preregistros 1 y 2 y sus contrastes}{Con más deuda, ¿pesa más el riesgo de cola en el \textit{spread}?}
 \centering
 \footnotesize
-\scriptsize
-\begin{adjustbox}{max width=\textwidth, max totalheight=0.50\textheight}
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.36\textwidth}>{\raggedright\arraybackslash}p{0.56\textwidth}}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{ll}
 \toprule
 Prueba & Resultado \\
 \midrule
 Preregistro 1: riesgo de cola a un trimestre $\times$ deuda & $\psi=+0{,}011$ por d.e.\ de deuda (de $0{,}043$ a $0{,}054$); Holm $0{,}029$; 13 de 13 \\
-Preregistro 2: riesgo de cola a un año & $0{,}047$ (Holm $0{,}018$); $\psi=+0{,}033$: una d.e.\ más de deuda, $+70\%$ \\
-\addlinespace
-Inferencia conjunta (14 hipótesis, 4 preregistros) & ninguna bajo $0{,}05$; permutación de la deuda: a un trimestre $0{,}17$, a un año $0{,}009$ \\
-Corrección sobre los 8 preregistros (23 hipótesis) & riesgo de cola a un año: Holm $0{,}13$; deuda $\times$ cola: $0{,}31$ \\
-\addlinespace
-Réplica externa: Hungría y Corea & $0{,}22$ frente a $0{,}033$; diferencia rechazada; potencia 5\% \\
-Instrumento: términos de intercambio & F $20$ para el riesgo de cola, $9{,}7$ para la interacción; $\psi\approx0$ \\
-Modelo de límite fiscal calibrado & logaritmos: $-0{,}43$; puntos básicos: $+91$ (dato $+3{,}1$) \\
+Preregistro 2: riesgo de cola a un año $\times$ deuda & $\psi=+0{,}033$ sobre $0{,}047$: una d.e.\ más de deuda, $+70\%$ \\
+Permutación de la deuda entre países & a un trimestre $p=0{,}17$; a un año $p=0{,}009$ \\
+Corrección sobre los 8 preregistros (23 hipótesis) & deuda $\times$ cola: Holm $0{,}31$; riesgo de cola a un año: $0{,}13$ \\
+Réplica externa (Hungría y Corea) / instrumento & $0{,}22$ frente a $0{,}033$, potencia 5\% / F $9{,}7$, $\psi\approx0$ \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\porque{$\psi>0$ pasa Holm en su familia, sin depender de un país, y a un año resiste la permutación. No sobrevive a la corrección sobre los ocho preregistros; la réplica externa no lo reproduce y el instrumento es débil.}
+{\scriptsize\raggedright Modelo de límite fiscal calibrado: predice $-0{,}43$ en logaritmos y $+91$ pb (dato: $+3{,}1$). Detalle en el anexo.\par}
+\cajas{$\psi>0$ pasa Holm en su familia sin depender de un país, y a un año resiste la permutación. No sobrevive a la corrección sobre los ocho preregistros; la réplica externa no lo reproduce y el instrumento es débil.}
+{Una d.e.\ de riesgo de cola (a un trimestre) se asocia con \textbf{unos 23 pb con la deuda media y unos 29 pb con una d.e.\ más de deuda} (unos 20 puntos del PIB); a un año, de 15 a 25 pb. Es una regularidad de la muestra.}
 \end{frame}
 
-% 15
-\begin{frame}{Otros moderadores}
-\franja{(5)}{Participación extranjera, respaldo, reservas, deuda}{Ninguna otra condición cambia la transmisión de los dos riesgos.}
+% 14
+\section{Conclusiones}
+\begin{frame}{Conclusiones: los dos riesgos llegan juntos, pero no se potencian}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{block}{Resultados}
+\scriptsize
+\begin{enumerate}\setlength\itemsep{1pt}
+\item \textbf{Cada riesgo se asocia con un \textit{spread} mayor} (1); con los controles domésticos solo resiste el riesgo de cola: una d.e., unos 15--17 pb. Evidencia sugerente.
+\item \textbf{Los dos riesgos coinciden} 1,2 veces lo esperado y la fragilidad antecede al riesgo de cola (2). Es el resultado firme.
+\item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen} (1, 3); se descarta más de un 35\% de la suma.
+\item \textbf{Con más deuda, el riesgo de cola pesa más} (4): de unos 23 a unos 29 pb por d.e.; regularidad de la muestra.
+\item \textbf{Reservas, respaldo externo y tenencia de la deuda} no cambian la transmisión (5; anexo).
+\end{enumerate}
+\end{block}
+\column{0.43\textwidth}
+\begin{exampleblock}{Implicancias de política}
+\scriptsize
+\begin{itemize}\setlength\itemsep{1pt}
+\item Vigilar los dos riesgos juntos se justifica: tienden a agravarse a la vez.
+\item No hay base para una exigencia adicional por su simultaneidad.
+\item Donde la deuda es alta, el riesgo de cola merece más atención.
+\end{itemize}
+\end{exampleblock}
+\begin{block}{Investigación futura}
+\scriptsize
+\begin{itemize}\setlength\itemsep{1pt}
+\item Más economías, con EMBI directo, y un $\GaR$ mensual.
+\item Variación exógena en los bancos: el instrumento granular fue débil.
+\item Más eventos de respaldo externo.
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================================
+\appendix
+\section{Anexos}
+
+\begin{frame}{Anexo: H1 y H2 sin los trimestres de crisis}
+\franja{(1)}{B, sin trimestres de crisis}{¿Dependen las asociaciones de los trimestres de crisis?}
+\centering
+\small
+\input{tablas/bat_B.tex}
+\notacorta
+\porque{Fuera de las crisis, los dos riesgos siguen asociados con el \textit{spread} y la interacción sigue nula. En la referencia, $\beta_1=0{,}087$, $\beta_2=0{,}050$ y $\beta_3=0{,}005$ ($N=656$; excluye 2008Q4--2009Q4 y 2020Q1--2021Q4).}
+\end{frame}
+
+\begin{frame}{Anexo: Otros moderadores (ecuación 5)}
+\franja{(5)}{Participación extranjera, respaldo, reservas, deuda}{¿Cambia alguna otra condición la transmisión de los dos riesgos?}
 \centering
 \footnotesize
 \begin{adjustbox}{max width=\textwidth}
@@ -356,52 +407,10 @@ Umbral de panel (preregistrada, no es la ecuación 5): tensión / deuda & & $0{,
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\porque{ningún término pasa el criterio exigente; las reservas dependen de Polonia y la versión preregistrada no las confirma. El \textit{swap} de la Fed de 2020 bajó el nivel del \textit{spread} ($-20$ a $-22$ pp), no la transmisión. La alerta temprana fuera de muestra da un AUROC de $0{,}49$.}
+\porque{ninguna otra condición cambia la transmisión: ningún término pasa el criterio exigente; las reservas dependen de Polonia y la versión preregistrada no las confirma. El \textit{swap} de la Fed de 2020 bajó el nivel del \textit{spread} ($-20$ a $-22$ pp), no la transmisión. La alerta temprana fuera de muestra da un AUROC de $0{,}49$.}
 \vspace{2pt}
 {\scriptsize\raggedright Con 13 países la potencia es limitada: ausencia de evidencia, no evidencia de un cero.\par}
 \end{frame}
-
-% 16
-\section{Conclusiones}
-\begin{frame}{Conclusiones}
-\footnotesize
-\begin{enumerate}\setlength\itemsep{1pt}
-\item \textbf{Cada riesgo se asocia con un \textit{spread} mayor} (1). La fragilidad replica a Chari et al.\ con sus controles; la evidencia es sugerente.
-\item \textbf{El riesgo económico agrega poco}: un 2--3\,\% de \textit{spread} por punto, en niveles; no en cambios ni fuera de muestra (1).
-\item \textbf{Los dos riesgos coinciden} 1,2 veces lo esperado, y la fragilidad antecede al riesgo de cola (2). Es el resultado firme.
-\item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen} (1, 3); se descarta más de un 35\% de la suma, no menos.
-\item \textbf{Con más deuda, el riesgo de cola pesa más} (4), pero es una regularidad de la muestra: nada externo la confirma.
-\item \textbf{Ninguna otra condición cambia la transmisión} (5).
-\end{enumerate}
-\vspace{-4pt}
-\begin{block}{Implicancia}
-\footnotesize Vigilar los dos riesgos juntos se justifica, porque tienden a agravarse a la vez. No hay base para una exigencia adicional por su simultaneidad.
-\end{block}
-\end{frame}
-
-% 17
-\begin{frame}
-\vfill
-\centering
-{\Large\bfseries\color{tesisblue} Los dos riesgos llegan juntos, pero no se potencian.}\\[14pt]
-{\large Vigilarlos juntos se justifica; una exigencia adicional por su simultaneidad, no.}
-\vfill
-\end{frame}
-
-% 18
-\begin{frame}{Trabajos futuros}
-\begin{itemize}\setlength\itemsep{6pt}
-\item Más economías, con EMBI directo y no imputado.
-\item Frecuencia diaria y un $\GaR$ mensual.
-\item La distancia al incumplimiento como medida principal, con la batería completa.
-\item Variación exógena en los bancos: el instrumento granular fue débil.
-\item Más eventos de respaldo externo.
-\end{itemize}
-\end{frame}
-
-% =====================================================================
-\appendix
-\section{Anexos}
 
 \begin{frame}{Anexo: Construcción de $\JLoss$: fragilidad bancaria sistémica}
 \small
@@ -694,7 +703,7 @@ Dentro de las crisis globales & $0{,}063$ & $-0{,}018$ & $0{,}045^{**}$ & 54 de 
 \begin{frame}{Anexo: Heterogeneidad por economía: agrupación \textit{ex post}, exploratoria}
 \centering
 \footnotesize
-\begin{adjustbox}{max width=\textwidth, max totalheight=0.44\textheight}
+\begin{adjustbox}{max width=\textwidth, max totalheight=0.38\textheight}
 \begin{tabular}{l cc cc}
 \toprule
  & \multicolumn{2}{c}{Log-log ($\beta_3$)} & \multicolumn{2}{c}{Niveles (pb)} \\
