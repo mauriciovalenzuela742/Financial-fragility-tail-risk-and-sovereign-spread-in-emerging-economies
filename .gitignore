@@ -66,3 +66,6 @@ _ckpt_*.csv
 # Material de preparación de reuniones: solo local
 4_Redaccion/presentacion/preguntas_reunion_profesor_tesis.*
 4_Redaccion/presentacion/reunion_profesores.md
+
+# Versiones publicadas en revistas: solo en copia local (el repositorio es público)
+3_Marco_teorico/*\[revista\]*.pdf
