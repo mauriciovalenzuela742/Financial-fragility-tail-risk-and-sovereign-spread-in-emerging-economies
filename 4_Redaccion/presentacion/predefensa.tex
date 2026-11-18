@@ -177,23 +177,28 @@ Profesor coguía: Ronald Fischer
 \end{frame}
 
 % 7
-\begin{frame}{Especificaciones (4)--(5) e inferencia}
+\begin{frame}{Especificación (4): deuda y riesgo de cola}
 \footnotesize
 \textbf{(4) Deuda y riesgo de cola} \hfill H4: $\psi>0$
-\ecu{\ln\EMBI_{i,t}=\text{(1)}+\kappa\,\Deuda_{i,t-4}+\psi\,(D_{i,t-1}\times\Deuda_{i,t-4})}
-{\scriptsize Preregistro 1: riesgo de cola a un trimestre. Preregistro 2: a un año. Deuda estandarizada.\par}
-\vspace{5pt}
-\textbf{(5) Otros moderadores} \hfill $\lambda\neq0$: $M$ cambia la transmisión
-\ecu{\ln\EMBI_{i,t}=\text{(1)}+\kappa M_{i,t}+\lambda_1(\ln\JLoss\times M)_{i,t}+\lambda_2(D\times M)_{i,t}+\lambda_3(\ln\JLoss\times D\times M)_{i,t}}
-{\scriptsize $M$: participación extranjera en la deuda, acceso a respaldo externo, reservas, deuda (\textit{doom loop}) y deuda en moneda extranjera. Resultados en el anexo.\par}
-\vspace{6pt}
-\begin{block}{Datos e inferencia}
-\scriptsize Panel trimestral: 13 economías, 2004--2026, $N=765$. Regresores rezagados un trimestre. Criterio: \textit{wild cluster bootstrap} por país; corrección de Holm por familia.
+\ecu{\ln\EMBI_{i,t}=\alpha_i+\delta_t+\beta\,D_{i,t-1}+\kappa\,\Deuda_{i,t-4}+\psi\,(D_{i,t-1}\times\Deuda_{i,t-4})+\varepsilon_{i,t}}
+{\scriptsize $D=-\GaR$. Se agregan por pasos: primero $D$, luego la deuda como sumando y al final el producto. La versión preregistrada suma además $\ln\JLoss$ y su producto con $D$, como en la (1).\par}
+\vspace{2pt}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\begin{block}{Qué deuda}
+\scriptsize Deuda bruta del gobierno general \textbf{sobre el PIB} (Banco Mundial, QPSD), estandarizada: una d.e.\ son unos 20 puntos del PIB. El cociente mide la carga frente a lo que la paga: la recaudación crece con el PIB. Contraste: el \textbf{nivel} de la deuda en dólares.
 \end{block}
-\vspace{-4pt}
-\begin{exampleblock}{Escala de evidencia}
-\scriptsize \textbf{Firme}: resiste el \textit{wild bootstrap} o la permutación y no depende de un país. \textbf{Sugerente}: solo Driscoll--Kraay, o depende de un país. \textbf{Exploratorio}: no preespecificado y no pasa Holm.
-\end{exampleblock}
+\column{0.49\textwidth}
+\begin{block}{Por qué en $t-4$}
+\scriptsize
+\begin{itemize}\setlength\itemsep{0pt}
+\item La del trimestre se mueve con el mismo choque: si el PIB cae, el cociente sube cuando sube el riesgo de cola; si sube el \textit{spread}, suben los intereses.
+\item Un año antes está \textbf{predeterminada}: el mercado ya la conoce.
+\item Fijado en el preregistro, como los seis controles.
+\end{itemize}
+\end{block}
+\end{columns}
+{\scriptsize 13 economías, 2004--2026. \textbf{Firme}: resiste el \textit{wild cluster bootstrap} por país y no depende de un país; \textbf{sugerente}: no lo resiste.\par}
 \end{frame}
 
 % 8
@@ -257,13 +262,11 @@ Prueba & Riesgo de cola \\
 \midrule
 Conjunta $\beta_2=\beta_3=0$ & \textit{wild} $\mathbf{0{,}041}$ \\
 Cambios a 4 trimestres & $0{,}004$ ($0{,}13$) \\
-Proyecciones locales & 0 de 9 horizontes \\
-Fuera de muestra & error $+3\%$ \\
 \bottomrule
 \end{tabular}
 \end{columns}
 \cajas{Con los controles de Chari et al.\ la fragilidad se mantiene. El riesgo de cola sube el $R^2$ de $0{,}153$ a $0{,}185$; la prueba conjunta resiste el \textit{wild bootstrap}.}
-{El riesgo de cola agrega \textbf{en niveles}: describe dónde está el \textit{spread}, no anticipa sus cambios. En cambios, en proyecciones locales y fuera de muestra no aparece.}
+{El riesgo de cola agrega \textbf{en niveles}: describe dónde está el \textit{spread}, no anticipa sus cambios.}
 \end{frame}
 
 % 11
@@ -276,17 +279,13 @@ Fuera de muestra & error $+3\%$ \\
 \toprule
 \textit{Ambos riesgos en su tercil alto (definido dentro de cada país)} & Observado & Por azar & $p$ \\
 \midrule
-Observaciones conjuntas ($22{,}0\%$ de 765) & \textbf{168} & 87 (independencia) & 1,9 veces \\
+Observaciones conjuntas (de 765) & \textbf{168} & & \\
 Permutación entre países dentro de cada trimestre (calendario común) & 168 & $140{,}9$ & \textbf{1,2 veces}; $0{,}0002$ \\
-Permutación por bloques dentro de cada país (999 réplicas) & 168 & $85{,}7$ & $0{,}001$ \\
-Fuera de los trimestres de crisis & 108 & $59{,}3$ & $0{,}001$ \\
-Duración media de los 62 episodios conjuntos (trimestres) & $2{,}71$ & $1{,}85$ & $0{,}003$ \\
 Países con más coincidencias que las esperadas & \textbf{13 de 13} & & \\
 \midrule
 \textit{Ecuación (2): rezago cruzado} & Coeficiente & & $p$ \textit{wild} \\
 \midrule
-Fragilidad en $t-1$ $\to$ riesgo de cola en $t$ ($\phi$) & $\mathbf{0{,}405^{***}}$ & & $0{,}024$ \\
-\quad sin cada país (rango) / con el $GaR$ sin bloque bursátil & $[0{,}32;\,0{,}47]$ / $0{,}388$ & & DK $<0{,}07$ / $0{,}002$ \\
+Fragilidad en $t-1$ $\to$ riesgo de cola en $t$ ($\phi$); sin cada país, $[0{,}32;\,0{,}47]$ & $\mathbf{0{,}405^{***}}$ & & $0{,}024$ \\
 Riesgo de cola en $t-1$ $\to$ fragilidad en $t$ & $-0{,}006$ & & $0{,}48$ \\
 \bottomrule
 \end{tabular}
@@ -308,36 +307,61 @@ Prueba & Estimación & $p$ \textit{wild bootstrap} \\
 Ecuación (1): interacción $\beta_3$ & $-0{,}011$ & $0{,}89$ \\
 Ecuación (3): extra con los dos riesgos altos, $a_3$ (fragilidad alta $+0{,}091$; cola alta $+0{,}186$) & $-0{,}077$ & $0{,}23$ \\
 Ecuación (3), uno a cuatro trimestres adelante & $-0{,}097$ a $-0{,}046$ & $0{,}17$ a $0{,}37$ \\
-Ecuación (3) con cuartiles en vez de terciles & $-0{,}122$ & $0{,}23$ \\
-Forma funcional intermedia (Box--Cox, $\lambda=0{,}44$): interacción & $t=-0{,}19$ & $0{,}97$ \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\cajas{Ninguna estimación es positiva ni significativa. Señales en contra, sin robustez: fuera del piso de $\JLoss$, $+7{,}5$ pb ($p$ \textit{wild} $0{,}036$), pero en logaritmos no ($0{,}11$).}
+\cajas{Ninguna estimación es positiva ni significativa, tampoco adelantando el \textit{spread} hasta un año.}
 {\textbf{No hay evidencia de amplificación.} Es un no rechazo: con los dos riesgos una d.e.\ arriba (suma: unos 28 pb), se descarta un extra de más de un 35\% de la suma, no uno menor.}
 \end{frame}
 
 % 13
 \begin{frame}{H4: deuda y riesgo de cola}
-\franja{(4)}{Preregistros 1 y 2 y sus contrastes}{Con más deuda, ¿pesa más el riesgo de cola en el \textit{spread}?}
+\franja{(4)}{Deuda en $t-4$, $N=719$, 13 economías}{Con más deuda, ¿pesa más el riesgo de cola en el \textit{spread}?}
 \centering
 \footnotesize
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{ll}
+\begin{tabular}{l ccc}
 \toprule
-Prueba & Resultado \\
+$\ln\EMBI_{i,t}$ & (a) & (b) & (c) \\
 \midrule
-Preregistro 1: riesgo de cola a un trimestre $\times$ deuda & $\psi=+0{,}011$ por d.e.\ de deuda (de $0{,}043$ a $0{,}054$); Holm $0{,}029$; 13 de 13 \\
-Preregistro 2: riesgo de cola a un año $\times$ deuda & $\psi=+0{,}033$ sobre $0{,}047$: una d.e.\ más de deuda, $+70\%$ \\
-Permutación de la deuda entre países & a un trimestre $p=0{,}17$; a un año $p=0{,}009$ \\
-Corrección sobre los 8 preregistros (23 hipótesis) & deuda $\times$ cola: Holm $0{,}31$; riesgo de cola a un año: $0{,}13$ \\
-Réplica externa (Hungría y Corea) / instrumento & $0{,}22$ frente a $0{,}033$, potencia 5\% / F $9{,}7$, $\psi\approx0$ \\
+Riesgo de cola $D_{t-1}$, $\beta$ & $0{,}040$ \;($0{,}050$) & $0{,}044$ \;($0{,}028$) & $\mathbf{0{,}045}$ \;($\mathbf{0{,}017}$) \\
+Deuda/PIB$_{t-4}$, $\kappa$ (por d.e.) & & $0{,}096$ \;($0{,}34$) & $0{,}093$ \;($0{,}31$) \\
+$D_{t-1}\times$ Deuda/PIB$_{t-4}$, $\psi$ & & & $0{,}008$ \;($0{,}15$) \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-{\scriptsize\raggedright Modelo de límite fiscal calibrado: predice $-0{,}43$ en logaritmos y $+91$ pb (dato: $+3{,}1$). Detalle en el anexo.\par}
-\cajas{$\psi>0$ pasa Holm en su familia sin depender de un país, y a un año resiste la permutación. No sobrevive a la corrección sobre los ocho preregistros; la réplica externa no lo reproduce y el instrumento es débil.}
-{Una d.e.\ de riesgo de cola (a un trimestre) se asocia con \textbf{unos 23 pb con la deuda media y unos 29 pb con una d.e.\ más de deuda} (unos 20 puntos del PIB); a un año, de 15 a 25 pb. Es una regularidad de la muestra.}
+
+{\scriptsize\raggedright EF país y tiempo; entre paréntesis, $p$ del \textit{wild bootstrap} (bilateral). Con $\ln\JLoss$ y su producto con $D$ (preregistrada): $\psi=0{,}011$ ($p=0{,}029$). Con la deuda en USD: $\psi=0{,}006$ ($p=0{,}36$).\par}
+\vspace{-6pt}
+\cajas{El riesgo de cola se mantiene en las tres columnas y resiste el \textit{wild}. La deuda y el producto son positivos, pero no lo resisten; $\psi$ es positivo sin cada uno de los 13 países ($0{,}005$ a $0{,}012$).}
+{Una d.e.\ de riesgo de cola: \textbf{+15\%, unos 25 pb}. Que la deuda/PIB intensifique ese peso es \textbf{sugerente}: solo es significativo con la fragilidad en la regresión.}
+\end{frame}
+
+% 13b
+\begin{frame}{H4: con la deuda en la (1), el riesgo de cola pesa más}
+\franja{(1) + (4)}{Deuda en $t-4$, 13 economías}{Si a la (1) se suma la deuda, ¿gana peso el riesgo de cola?}
+\centering
+\footnotesize
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{l ccc cc}
+\toprule
+& \multicolumn{3}{c}{Sin controles ($N=719$)} & \multicolumn{2}{c}{Seis controles ($N=633$)} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-6}
+$\ln\EMBI_{i,t}$ & (1) & + deuda & + $D\times$deuda & (1) & + deuda y $D\times$deuda \\
+\midrule
+Riesgo de cola $D_{t-1}$ & $0{,}036$ \;($0{,}15$) & $0{,}041$ \;($0{,}075$) & $\mathbf{0{,}043}$ \;($\mathbf{0{,}045}$) & $\mathbf{0{,}028}$ \;($\mathbf{0{,}016}$) & $\mathbf{0{,}030}$ \;($\mathbf{0{,}016}$) \\
+Fragilidad $\ln\JLoss_{t-1}$ & $0{,}100$ \;($0{,}32$) & $0{,}126$ \;($0{,}24$) & $0{,}123$ \;($0{,}26$) & $-0{,}009$ \;($0{,}92$) & $-0{,}005$ \;($0{,}95$) \\
+$\ln\JLoss\times D$ & $-0{,}012$ \;($0{,}91$) & $-0{,}016$ \;($0{,}73$) & $-0{,}019$ \;($0{,}41$) & $-0{,}006$ \;($0{,}73$) & $-0{,}011$ \;($0{,}42$) \\
+Deuda/PIB$_{t-4}$ (por d.e.) & & $0{,}144$ \;($0{,}17$) & $0{,}144$ \;($0{,}14$) & & $0{,}072$ \;($0{,}17$) \\
+$D_{t-1}\times$ Deuda/PIB$_{t-4}$, $\psi$ & & & $\mathbf{0{,}011}$ \;($\mathbf{0{,}029}$) & & $0{,}009$ \;($0{,}19$) \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+{\scriptsize\raggedright EF país y tiempo; $p$ del \textit{wild bootstrap} por país entre paréntesis. La 3.ª columna es la (4) preregistrada; $\psi>0$ sin cada uno de los 13 países. Controles en $t-4$: $D$ $0{,}024$ ($p=0{,}003$), $\psi$ $0{,}012$ ($p=0{,}085$).\par}
+\vspace{-8pt}
+\cajas{Sin controles, con la deuda el riesgo de cola sube de $0{,}036$ a $0{,}043$ y pasa de $p=0{,}15$ a $0{,}045$. Con controles ya era firme y se mantiene.}
+{Una d.e.\ de riesgo de cola: de unos 20 a \textbf{unos 25 pb}; con deuda una d.e.\ más alta, \textbf{unos 31 pb}. $\psi$: firme sin controles; positivo, no significativo, con ellos.}
 \end{frame}
 
 % 14
@@ -351,7 +375,7 @@ Réplica externa (Hungría y Corea) / instrumento & $0{,}22$ frente a $0{,}033$,
 \item \textbf{Cada riesgo se asocia con un \textit{spread} mayor} (1); con los controles domésticos solo resiste el riesgo de cola: una d.e., unos 15--17 pb. Evidencia sugerente.
 \item \textbf{Los dos riesgos coinciden} 1,2 veces lo esperado y la fragilidad antecede al riesgo de cola (2). Es el resultado firme.
 \item \textbf{Cuando coinciden, no hay evidencia de que se amplifiquen} (1, 3); se descarta más de un 35\% de la suma.
-\item \textbf{Con más deuda, el riesgo de cola pesa más} (4): de unos 23 a unos 29 pb por d.e.; regularidad de la muestra.
+\item \textbf{El riesgo de cola resiste junto a la deuda} (4): una d.e., unos 25 pb. Que pese más con más deuda/PIB es sugerente: solo aparece con la fragilidad en la regresión.
 \item \textbf{Reservas, respaldo externo y tenencia de la deuda} no cambian la transmisión (5; anexo).
 \end{enumerate}
 \end{block}
@@ -361,7 +385,7 @@ Réplica externa (Hungría y Corea) / instrumento & $0{,}22$ frente a $0{,}033$,
 \begin{itemize}\setlength\itemsep{1pt}
 \item Vigilar los dos riesgos juntos se justifica: tienden a agravarse a la vez.
 \item No hay base para una exigencia adicional por su simultaneidad.
-\item Donde la deuda es alta, el riesgo de cola merece más atención.
+\item Donde la deuda/PIB es alta, el riesgo de cola merece más atención.
 \end{itemize}
 \end{exampleblock}
 \begin{block}{Investigación futura}
@@ -390,6 +414,7 @@ Réplica externa (Hungría y Corea) / instrumento & $0{,}22$ frente a $0{,}033$,
 
 \begin{frame}{Anexo: Otros moderadores (ecuación 5)}
 \franja{(5)}{Participación extranjera, respaldo, reservas, deuda}{¿Cambia alguna otra condición la transmisión de los dos riesgos?}
+\ecu{\ln\EMBI_{i,t}=\text{(1)}+\kappa M_{i,t}+\lambda_1(\ln\JLoss\times M)_{i,t}+\lambda_2(D\times M)_{i,t}+\lambda_3(\ln\JLoss\times D\times M)_{i,t}}
 \centering
 \footnotesize
 \begin{adjustbox}{max width=\textwidth}

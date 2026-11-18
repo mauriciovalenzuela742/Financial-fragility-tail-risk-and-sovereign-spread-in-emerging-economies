@@ -58,7 +58,7 @@ riesgo económico doméstico, y qué pasa cuando los dos riesgos se dan a la vez
 | (1) | ln EMBI sobre ln JLoss, D y su producto, rezagados; EF país y tiempo | H1, H2, H3 | β1, β2, β3 |
 | (2) | D sobre su rezago y ln JLoss rezagado (y la inversa) | precedencia | φ |
 | (3) | ln EMBI sobre indicadores de tercil alto y su producto | H3 directa | a3 |
-| (4) | (1) más deuda en t−4 y D × deuda | H4 | ψ |
+| (4) | (1) más deuda/PIB en t−4 como sumando (κ) y D × deuda (ψ) | H4 | κ, ψ |
 | (5) | (1) más un moderador M y sus productos (anexo) | otros moderadores | λ1, λ2, λ3 |
 
 **La magnitud, en puntos básicos (lo que pidió el profesor)**
@@ -96,8 +96,9 @@ básicos.
    fragilidad antecede al riesgo de cola (2). Es el resultado firme.
 3. **Cuando coinciden, no hay evidencia de que se amplifiquen** (1, 3). Es un no rechazo: se descarta
    más de un 35 % de la suma (unos 28 pb con los dos riesgos una d.e. arriba), no menos.
-4. **Con más deuda, el riesgo de cola pesa más** (4): de unos 23 a unos 29 pb por d.e. Es una
-   regularidad de la muestra: ni la réplica externa, ni el instrumento, ni el modelo la confirman.
+4. **El riesgo de cola resiste junto a la deuda** (4): una d.e., unos 25 pb. Que pese más con más
+   deuda/PIB es sugerente: ψ = 0,008 (wild 0,15) en la regresión simple y 0,011 (0,029) solo con la
+   fragilidad en la regresión; ni la réplica externa, ni el instrumento, ni el modelo lo confirman.
 5. **Reservas, respaldo externo y tenencia de la deuda no cambian la transmisión** (5; anexo).
 
 **La frase que tiene que quedar:** *los dos riesgos llegan juntos, pero no se potencian. Vigilarlos
@@ -123,6 +124,8 @@ no pasa Holm; *no hay evidencia*.
 | Concentración | 129 de las 168 coincidencias desde 2020 |
 | Amplificación | β3 −0,011 (wild 0,89); a3 −0,077 (wild 0,23); TOST descarta > 35 % |
 | H4, preregistro 1 | ψ = +0,011 por d.e. de deuda (0,043 → 0,054); Holm 0,029; 13 de 13 |
+| H4, regresión simple (p71, N = 719) | ln spread sobre D, deuda/PIB y D × deuda: β 0,040 → 0,044 → 0,045 (wild 0,050 / 0,028 / 0,017); κ 0,093 (0,31); ψ 0,008 (0,15; positivo sin cada país); con deuda en USD ψ 0,006 (0,36) |
+| H4, rezago de la deuda | ψ en t−1 0,008 (wild 0,15); t−4 0,011 (0,029); t−8 0,008 (0,16) |
 | H4, preregistro 2 | riesgo de cola a un año 0,047 (Holm 0,018); ψ = +0,033 (+70 %) |
 | H4, en contra | 23 hipótesis: Holm 0,13 y 0,31; Hungría y Corea 0,22 (potencia 5 %); instrumento F 9,7 |
 | Moderadores (anexo) | participación extranjera Holm 1,00; respaldo −0,004 (wild 0,90); reservas −0,247 (wild 0,08; preregistrada Holm 0,29); doom loop −0,053 |
@@ -210,12 +213,23 @@ forma directa: indicadores de riesgo alto y su producto."
 **Si me pregunta** *¿por qué logaritmos?*: "La prueba PE los prefiere, y JLoss es ordinal (anexo,
 logaritmos vs. niveles)."
 
-### 7. Especificaciones (4)–(5) e inferencia (2 min)
+### 7. Especificación (4): deuda y riesgo de cola (2 min)
 
-**Qué digo:** "La (4) es H4: la principal más la deuda de cuatro trimestres antes y su producto con
-el riesgo de cola. Está preregistrada dos veces, con el riesgo de cola a un trimestre y a un año. La
-(5) agrega otros moderadores; sus resultados van al anexo. Con 13 países, el criterio es el wild
-bootstrap por país; la escala de abajo ordena todo lo que viene."
+**Qué digo:** "La (4) es H4, escrita entera: la (1), con el riesgo de cola D = −GaR como sumando,
+más la deuda como otro sumando, κ, y su producto con el riesgo de cola, ψ. Primero la estimo sin el
+producto, con D y la deuda sumando, y después agrego ψ.
+
+¿Qué deuda? La bruta del gobierno general sobre el PIB, del Banco Mundial. Uso el cociente porque la
+capacidad de pago depende de cuánto se debe frente a lo que lo paga: la recaudación crece con el PIB.
+Como contraste corro también el nivel de la deuda en dólares.
+
+¿Por qué cuatro trimestres antes? Porque la deuda/PIB del mismo trimestre se mueve con el mismo
+choque: si el PIB cae, el cociente sube justo cuando sube el riesgo de cola, y si sube el spread,
+suben los intereses. Un año antes la deuda está predeterminada; es la que el mercado ya conoce. Y lo
+fijé en el preregistro, antes de ver los datos, igual que los seis controles."
+
+**Si me pregunta** *¿y la (5)?*: "Agrega otros moderadores —reservas, respaldo, tenencia de la
+deuda—; ninguno cambia la transmisión. Está en el anexo."
 
 **Transición:** "Parto por la ecuación (1)."
 
@@ -262,8 +276,11 @@ posible para el conjunto, pero con la deuda como único control la fragilidad si
 
 **Qué digo:** "Parto del modelo de Chari et al. La fragilidad se mantiene en 0,137. Agregar el
 riesgo de cola sube el R² dentro del país de 0,153 a 0,185, y la prueba conjunta resiste el wild
-bootstrap: 0,041. Pero en cambios, en proyecciones locales y fuera de la muestra, no aparece. Agrega
-en niveles; no anticipa los cambios."
+bootstrap: 0,041. Pero en cambios a cuatro trimestres no aparece. Agrega en niveles; no anticipa
+los cambios."
+
+**Si me pregunta** *¿y fuera de muestra?*: "Tampoco: el error sube un 3 %, y en proyecciones locales
+no aparece en ninguno de los nueve horizontes."
 
 **Cómo leer:** la fila del R², después la tabla de la derecha y las cajas.
 
@@ -274,9 +291,9 @@ Primero hay que ver si se dan a la vez."
 
 **Propósito:** el resultado firme de la tesis.
 
-**Qué digo:** "Ambos riesgos están en su tercil alto en 168 trimestres-país. Por azar esperaría 87.
-Si descuento el calendario común, permutando entre países dentro de cada trimestre, espero 141: es
-1,2 veces, con p = 0,0002. Pasa en los 13 países. Y la ecuación (2) dice que la fragilidad antecede
+**Qué digo:** "Ambos riesgos están en su tercil alto en 168 trimestres-país. Si descuento el
+calendario común, permutando entre países dentro de cada trimestre, espero 141: es 1,2 veces, con
+p = 0,0002. Pasa en los 13 países. Y la ecuación (2) dice que la fragilidad antecede
 al riesgo de cola: 0,405, resiste el wild bootstrap y la exclusión de cada país. Al revés, nada."
 
 **Cómo leer:** la fila de la permutación entre países, luego φ.
@@ -291,8 +308,8 @@ exceso viene de 2015–19 y de 2023–26."
 **Propósito:** H3 sin evidencia, dicho con precisión.
 
 **Qué digo:** "La interacción de la (1) es −0,011, con p = 0,89. La prueba directa, la (3), da un
-extra de −0,077 cuando los dos riesgos están altos. Lo mismo uno a cuatro trimestres adelante, con
-cuartiles y con una forma funcional intermedia. Ninguna es positiva. Es un no rechazo: con los dos
+extra de −0,077 cuando los dos riesgos están altos. Lo mismo uno a cuatro trimestres adelante.
+Ninguna es positiva. Es un no rechazo: con los dos
 riesgos una d.e. arriba la suma es de unos 28 pb, y descarto un extra de más de un 35 % de eso, no
 uno menor."
 
@@ -306,14 +323,54 @@ a la deuda."
 
 **Propósito:** la regularidad más clara de la muestra, con sus límites a la vista y en pb.
 
-**Qué digo:** "Con una desviación estándar más de deuda, unos 20 puntos del PIB, el peso del riesgo
-de cola sube de 0,043 a 0,054. En puntos básicos: una d.e. de riesgo de cola pasa de unos 23 a unos
-29 pb. Pasa Holm en su familia y se mantiene sin cada país. Con el riesgo de cola a un año es más
-fuerte: un 70 % más, de 15 a 25 pb. Lo que no resiste: la corrección sobre los ocho preregistros, la
-réplica en Hungría y Corea, el instrumento y el modelo de límite fiscal. Por eso digo 'en la
-muestra'."
+**Qué digo:** "Regreso el logaritmo del spread sobre el riesgo de cola, la deuda/PIB y su producto,
+por pasos. Solo, el riesgo de cola da 0,040. Al sumar la deuda sube a 0,044, y con el producto a
+0,045; resiste el wild bootstrap en las tres columnas. Una d.e. de riesgo de cola son unos 25 pb.
+La deuda suma al spread, 0,093 por d.e., pero no resiste el wild. El producto es positivo, 0,008, y
+lo es sin cada uno de los 13 países, pero no es significativo (p = 0,15). Solo cuando agrego la
+fragilidad y su interacción, la versión preregistrada, llega a 0,011 con p = 0,029. Por eso lo
+llamo sugerente, no firme."
 
-**Cómo leer:** las dos primeras filas, después la caja de interpretación.
+**Cómo leer:** la fila del riesgo de cola de izquierda a derecha, luego la fila de ψ y la nota.
+
+**Si me pregunta** *¿deuda/PIB o deuda total?*: "Con la deuda en dólares el producto es 0,006
+(p = 0,36). Con efectos fijos de país, más deuda en dólares con el cociente fijo es una economía más
+grande. Lo que pesa es la deuda frente a la capacidad de pago."
+
+**Si me pregunta** *¿y el rezago?*: "Con la deuda/PIB de uno u ocho trimestres antes el signo se
+mantiene, pero no es significativo."
+
+**Si me pregunta** *¿y a un año, la réplica, el instrumento?*: "Con el riesgo de cola a un año ψ es
+mayor (de 15 a 25 pb). Pero no sobrevive a la corrección sobre los ocho preregistros (Holm 0,31), ni
+la réplica en Hungría y Corea ni el instrumento lo confirman (anexo, hallazgos y su grado de
+evidencia)."
+
+**Si me pregunta** *¿por qué el nivel tiene signo negativo?*: "Con el cociente y el nivel juntos, el
+nivel neto del cociente es el tamaño de la economía en dólares; ahí el signo negativo es de esperar:
+economías más grandes pagan menos spread. El nivel no modera nada (ψ = 0,008, wild 0,48)."
+
+**Transición:** "¿Y si a la ecuación (1) completa le sumo la deuda?"
+
+### 13b. La (1) más la deuda: el riesgo de cola pesa más (1 min)
+
+**Propósito:** mostrar que el riesgo de cola gana peso y significancia al sumar la deuda a la (1).
+
+**Qué digo:** "Tomo la (1) completa, con la fragilidad, el riesgo de cola y su interacción, y le
+sumo la deuda/PIB y su producto con el riesgo de cola. Sin controles, el riesgo de cola sube de
+0,036 a 0,043 y pasa de p = 0,15 a p = 0,045 con el wild bootstrap: una d.e. pasa de unos 20 a unos
+25 pb, y unos 31 pb con la deuda una d.e. más alta. Esa tercera columna es la (4) preregistrada:
+ψ = 0,011, p = 0,029. Con los seis controles el riesgo de cola ya era firme (0,028, p = 0,016) y
+queda en 0,030; ψ sigue positivo, 0,009, pero no es significativo (p = 0,19). La fragilidad no gana
+peso en ninguna columna."
+
+**Cómo leer:** la fila del riesgo de cola de izquierda a derecha en el bloque sin controles; luego la
+fila de ψ en las dos columnas finales de cada bloque.
+
+**Si me pregunta** *¿no es búsqueda de especificaciones?*: "La tercera columna es la ecuación (4)
+preregistrada; las demás son sus pasos intermedios y su versión con controles."
+
+**Si me pregunta** *¿con los controles en t−4?*: "El riesgo de cola queda en 0,024 (p = 0,003) y ψ
+en 0,012 (p = 0,085)."
 
 **Transición:** "Junto todo en una lámina."
 
@@ -326,7 +383,7 @@ muestra'."
 **Qué digo:** "Arriba a la izquierda, los cinco resultados, cada uno con su ecuación. Cada riesgo se
 asocia con el spread; con controles solo resiste el riesgo de cola, unos 15 a 17 pb por d.e. Los dos
 riesgos coinciden más que por azar y la fragilidad va primero: es lo firme. Cuando coinciden no se
-amplifican. Con más deuda el riesgo de cola pesa más, solo en la muestra. Y las otras condiciones no
+amplifican. El riesgo de cola resiste junto a la deuda; que pese más con más deuda es sugerente. Y las otras condiciones no
 cambian la transmisión.
 
 Para la política: los dos riesgos tienden a agravarse a la vez, así que vigilarlos en el mismo
